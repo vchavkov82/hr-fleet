@@ -1,7 +1,8 @@
 [project]
 name = "odoo-addons-oca-fleet"
-version = "18.0.20250408.4"
+version = "18.0.20250409.0"
 dependencies = [
+    "odoo-addon-fleet_vehicle_calendar_year==18.0.*",
     "odoo-addon-fleet_vehicle_category==18.0.*",
     "odoo-addon-fleet_vehicle_configuration==18.0.*",
     "odoo-addon-fleet_vehicle_fuel_capacity==18.0.*",

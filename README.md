@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[fleet_vehicle_calendar_year](fleet_vehicle_calendar_year/) | 18.0.1.0.0 | [![marcelsavegnago](https://github.com/marcelsavegnago.png?size=30px)](https://github.com/marcelsavegnago) | This module extends the fleet management functionality. Allows the registration of the vehicle's calendar year.
 [fleet_vehicle_category](fleet_vehicle_category/) | 18.0.1.0.0 |  | Add category definition for vehicles.
 [fleet_vehicle_configuration](fleet_vehicle_configuration/) | 18.0.1.0.0 |  | add vehicle configuration capacity
 [fleet_vehicle_fuel_capacity](fleet_vehicle_fuel_capacity/) | 18.0.1.0.0 | [![marcelsavegnago](https://github.com/marcelsavegnago.png?size=30px)](https://github.com/marcelsavegnago) | This module extends the functionality of fleet management. It allows the registration of a vehicle's fuel capacity.
