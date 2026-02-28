@@ -1,0 +1,186 @@
+---
+import IconMoon from "@/assets/icons/IconMoon.svg";
+import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
+import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
+import IconX from "@/assets/icons/IconX.svg";
+import { SITE } from "@/config";
+
+const { pathname } = Astro.url;
+const currentPath = pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+
+const isActive = (path: string) => {
+  return currentPath === path || currentPath.startsWith(path + "/");
+};
+---
+
+<a
+  id="skip-to-content"
+  href="#main-content"
+  class="absolute start-16 -top-full z-50 bg-white px-4 py-2 text-primary backdrop-blur-lg transition-all focus:top-4 rounded-lg shadow-lg"
+>
+  Skip to content
+</a>
+
+<header class="sticky top-0 z-50 border-b border-border bg-[var(--surface)] dark:bg-[var(--surface)] bg-opacity-90 backdrop-blur-lg supports-[backdrop-filter]:bg-[var(--surface)] shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="https://hr.svc.chavkov.com/bg" class="flex items-center gap-2.5 font-bold text-xl">
+        <span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" style="background: linear-gradient(135deg, #1B4DDB 0%, #3B6EF0 100%);">
+          HR
+        </span>
+        <span class="text-navy">HR</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a
+          href="https://hr.svc.chavkov.com/bg"
+          class="text-gray-600 dark:text-gray-200 hover:text-primary transition-colors"
+        >
+          Начало
+        </a>
+        <a
+          href="https://hr.svc.chavkov.com/bg/features"
+          class="text-gray-600 dark:text-gray-200 hover:text-primary transition-colors"
+        >
+          Функции
+        </a>
+        <a
+          href="https://hr.svc.chavkov.com/bg/pricing"
+          class="text-gray-600 dark:text-gray-200 hover:text-primary transition-colors"
+        >
+          Цени
+        </a>
+        <a
+          href="/bg"
+          class:list={["transition-colors", isActive("/bg") ? "text-primary" : "text-gray-600 dark:text-gray-200 hover:text-primary"]}
+        >
+          Блог
+        </a>
+        <a
+          href="https://hr.svc.chavkov.com/bg/contact"
+          class="text-gray-600 dark:text-gray-200 hover:text-primary transition-colors"
+        >
+          Контакти
+        </a>
+      </nav>
+
+      <!-- Right side actions -->
+      <div class="flex items-center gap-3">
+        {SITE.lightAndDarkMode && (
+          <button
+            id="theme-btn"
+            class="hidden md:flex items-center justify-center w-10 h-10 rounded-xl border border-border bg-[var(--surface-strong)] dark:bg-[var(--surface)] bg-opacity-90 text-foreground/80 hover:text-primary hover:border-primary/50 shadow-[0_6px_20px_-12px_rgba(0,0,0,0.45)] transition-all"
+            title="Превключване светъл/тъмен режим"
+            aria-label="auto"
+            aria-live="polite"
+          >
+            <IconSunHigh class="w-5 h-5 hidden dark:block text-current" />
+            <IconMoon class="w-5 h-5 block dark:hidden text-current" />
+          </button>
+        )}
+        <a
+          href="https://hr.svc.chavkov.com/bg/auth/sign-in"
+          class="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
+        >
+          Вход
+        </a>
+        <a
+          href="https://hr.svc.chavkov.com/bg/auth/sign-up"
+          class="hidden md:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all shadow-[0_14px_30px_-16px_rgba(27,77,219,0.75)] hover:shadow-[0_16px_40px_-18px_rgba(27,77,219,0.85)]"
+          style="background: linear-gradient(135deg, #1B4DDB 0%, #3B6EF0 100%);"
+        >
+          Започнете безплатно
+        </a>
+
+        <!-- Mobile menu button -->
+        <button
+          id="menu-btn"
+          class="md:hidden flex items-center justify-center w-10 h-10 rounded-xl border border-border bg-[var(--surface-strong)] dark:bg-[var(--surface)] bg-opacity-90 text-foreground/80 hover:text-primary hover:border-primary/50 transition-all"
+          aria-label="Отвори меню"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <IconMenuDeep id="menu-icon" class="w-6 h-6" />
+          <IconX id="close-icon" class="w-6 h-6 hidden" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-border py-4 bg-[var(--surface)] dark:bg-[var(--surface)] bg-opacity-95 backdrop-blur-md rounded-b-2xl shadow-lg">
+      <div class="flex flex-col gap-2 text-sm font-medium">
+        <a
+          href="https://hr.svc.chavkov.com/bg"
+          class="block px-4 py-2 text-gray-600 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-white/5 rounded-lg transition-colors"
+        >
+          Начало
+        </a>
+        <a
+          href="https://hr.svc.chavkov.com/bg/features"
+          class="block px-4 py-2 text-gray-600 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-white/5 rounded-lg transition-colors"
+        >
+          Функции
+        </a>
+        <a
+          href="https://hr.svc.chavkov.com/bg/pricing"
+          class="block px-4 py-2 text-gray-600 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-white/5 rounded-lg transition-colors"
+        >
+          Цени
+        </a>
+        <a
+          href="/bg"
+          class:list={["block px-4 py-2 rounded-lg transition-colors", isActive("/bg") ? "text-primary bg-primary/10" : "text-gray-600 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-white/5"]}
+        >
+          Блог
+        </a>
+        <a
+          href="https://hr.svc.chavkov.com/bg/contact"
+          class="block px-4 py-2 text-gray-600 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-white/5 rounded-lg transition-colors"
+        >
+          Контакти
+        </a>
+        <div class="border-t border-border my-2"></div>
+        <a
+          href="https://hr.svc.chavkov.com/bg/auth/sign-in"
+          class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-primary/5 dark:hover:bg-white/5 rounded-lg transition-colors"
+        >
+          Вход
+        </a>
+        <a
+          href="https://hr.svc.chavkov.com/bg/auth/sign-up"
+          class="block px-4 py-2 text-center rounded-xl text-sm font-semibold text-white transition-all shadow-[0_14px_30px_-16px_rgba(27,77,219,0.75)] hover:shadow-[0_16px_40px_-18px_rgba(27,77,219,0.85)]"
+          style="background: linear-gradient(135deg, #1B4DDB 0%, #3B6EF0 100%);"
+        >
+          Започнете безплатно
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  function setupMobileMenu() {
+    const menuBtn = document.querySelector("#menu-btn");
+    const mobileMenu = document.querySelector("#mobile-menu");
+    const menuIcon = document.querySelector("#menu-icon");
+    const closeIcon = document.querySelector("#close-icon");
+
+    if (!menuBtn || !mobileMenu || !menuIcon || !closeIcon) return;
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = menuBtn.getAttribute("aria-expanded") === "true";
+
+      menuBtn.setAttribute("aria-expanded", isOpen ? "false" : "true");
+      menuBtn.setAttribute("aria-label", isOpen ? "Отвори меню" : "Затвори меню");
+
+      mobileMenu.classList.toggle("hidden");
+      menuIcon.classList.toggle("hidden");
+      closeIcon.classList.toggle("hidden");
+    });
+  }
+
+  setupMobileMenu();
+  document.addEventListener("astro:after-swap", setupMobileMenu);
+</script>

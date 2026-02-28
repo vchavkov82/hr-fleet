@@ -1,0 +1,110 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { slugifyStr } from "@/utils/slugify";
+import { getPath } from "@/utils/getPath";
+import Datetime from "./Datetime.astro";
+
+type Props = {
+  variant?: "h2" | "h3";
+  display?: "minimal" | "card" | "featured";
+} & CollectionEntry<"blog">;
+
+const {
+  variant: Heading = "h2",
+  display = "minimal",
+  id,
+  data,
+  filePath,
+} = Astro.props;
+
+const { title, description, tags, ...props } = data;
+
+const href = getPath(id, filePath);
+const firstTag = tags?.[0];
+---
+
+<li class:list={[display === "minimal" ? "my-6" : ""]}>
+  {
+    display === "minimal" ? (
+      <>
+        <a
+          href={href}
+          class:list=[
+            "inline-block text-lg font-semibold text-accent",
+            "decoration-dashed underline-offset-4 hover:underline",
+            "focus-visible:no-underline focus-visible:underline-offset-0",
+          ]
+        >
+          <Heading
+            style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+          >
+            {title}
+          </Heading>
+        </a>
+        <Datetime {...props} class="text-gray-600 dark:text-gray-300" />
+        <p class="mt-2 text-sm leading-relaxed text-gray-700 dark:text-gray-300">{description}</p>
+      </>
+    ) : (
+      <article
+        class:list=[
+          "group h-full overflow-hidden rounded-2xl border border-border bg-[var(--surface)] dark:bg-[var(--surface)]",
+          "bg-opacity-95 backdrop-blur supports-[backdrop-filter]:bg-[var(--surface)]",
+          "shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40",
+          display === "featured" ? "md:grid md:grid-cols-2" : "",
+        ]
+      >
+        <a href={href} class="block h-full">
+          <div
+            class:list=[
+              "aspect-[16/9] w-full border-b border-border bg-gradient-to-br from-primary/10 via-[var(--surface)] to-primary/5",
+              display === "featured" ? "md:aspect-auto md:h-full md:min-h-[18rem] md:border-b-0 md:border-e" : "",
+            ]
+          />
+          <div
+            class:list=[
+              "flex h-full flex-col gap-3 p-6",
+              display === "featured" ? "md:p-8" : "",
+            ]
+          >
+            <div class="flex items-center gap-2">
+              {firstTag && (
+                <span class="inline-flex items-center rounded-full bg-[color:rgba(27,77,219,0.12)] dark:bg-[color:rgba(27,77,219,0.18)] px-3 py-1 text-xs font-semibold text-primary shadow-[0_8px_20px_-14px_rgba(27,77,219,0.6)]">
+                  {firstTag}
+                </span>
+              )}
+              <Datetime {...props} class="text-gray-600 dark:text-gray-300" />
+            </div>
+
+            <Heading
+              class:list=[
+                "text-balance font-semibold text-navy dark:text-gray-50 group-hover:text-primary transition-colors",
+                display === "featured" ? "text-2xl sm:text-3xl" : "text-lg",
+              ]
+              style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+            >
+              {title}
+            </Heading>
+
+            <p
+              class:list=[
+                "text-sm leading-relaxed text-gray-700 dark:text-gray-300",
+                display === "featured" ? "text-base" : "",
+              ]
+            >
+              {description}
+            </p>
+
+            <div class="mt-auto pt-2">
+              <span class="inline-flex items-center text-sm font-semibold text-primary gap-1">
+                Прочети
+                <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">
+                  →
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+    )
+  }
+</li>

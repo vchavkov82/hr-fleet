@@ -1,0 +1,1605 @@
+{
+  "service": "timestream-write",
+  "pro_support": true,
+  "operations": [
+    {
+      "CreateBatchLoadTask": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateDatabase": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "CreateTable": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteDatabase": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteTable": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DescribeBatchLoadTask": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeDatabase": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DescribeEndpoints": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeTable": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListBatchLoadTasks": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListDatabases": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListTables": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListTagsForResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ResumeBatchLoadTask": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "TagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UntagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateDatabase": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateTable": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "WriteRecords": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    }
+  ],
+  "details": {
+    "CreateDatabase": {
+      "DatabaseName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/cloudformation/resources/test_timestream.py::test_create_db_tables",
+            "test": "test_create_db_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..RetentionProperties', '$..MagneticStoreWriteProperties', '$..Schema', '$..KmsKeyId', '$..Table1Ref', '$..Table2Ref']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_write_records_multiple_tables",
+            "test": "test_write_records_multiple_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "test": "test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "test": "test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "DatabaseName, Tags": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_describe_endpoints",
+            "test": "test_describe_endpoints",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..Address']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_list_tags_for_resource",
+            "test": "test_list_tags_for_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_duplication_multi_values",
+            "test": "test_duplication_multi_values",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_forward_versioning",
+            "test": "test_forward_versioning",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_insert_different_data_types",
+            "test": "test_insert_different_data_types",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[False]",
+            "test": "test_interpolation_function[False]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[True]",
+            "test": "test_interpolation_function[True]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_multi_records",
+            "test": "test_multi_records",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_process_multiple_records_rejection",
+            "test": "test_process_multiple_records_rejection",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_query_pagination",
+            "test": "test_query_pagination",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_sum_by_reference",
+            "test": "test_sum_by_reference",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_unnest_function",
+            "test": "test_unnest_function",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_changing_dimensions_and_measure_name",
+            "test": "test_write_changing_dimensions_and_measure_name",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_duplicate_rejected",
+            "test": "test_write_duplicate_rejected",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_idempotency",
+            "test": "test_write_idempotency",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_different_partition_rejected",
+            "test": "test_write_record_with_different_partition_rejected",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_optional_partition",
+            "test": "test_write_record_with_optional_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_required_partition",
+            "test": "test_write_record_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_records_with_required_partition",
+            "test": "test_write_records_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "CreateTable": {
+      "DatabaseName, RetentionProperties, TableName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_write_records_multiple_tables",
+            "test": "test_write_records_multiple_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "DatabaseName, Schema, TableName, Tags": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_describe_endpoints",
+            "test": "test_describe_endpoints",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..Address']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_list_tags_for_resource",
+            "test": "test_list_tags_for_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_duplication_multi_values",
+            "test": "test_duplication_multi_values",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_forward_versioning",
+            "test": "test_forward_versioning",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_insert_different_data_types",
+            "test": "test_insert_different_data_types",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[False]",
+            "test": "test_interpolation_function[False]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[True]",
+            "test": "test_interpolation_function[True]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_multi_records",
+            "test": "test_multi_records",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_process_multiple_records_rejection",
+            "test": "test_process_multiple_records_rejection",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_query_pagination",
+            "test": "test_query_pagination",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_sum_by_reference",
+            "test": "test_sum_by_reference",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_unnest_function",
+            "test": "test_unnest_function",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_changing_dimensions_and_measure_name",
+            "test": "test_write_changing_dimensions_and_measure_name",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_duplicate_rejected",
+            "test": "test_write_duplicate_rejected",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_idempotency",
+            "test": "test_write_idempotency",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_different_partition_rejected",
+            "test": "test_write_record_with_different_partition_rejected",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_optional_partition",
+            "test": "test_write_record_with_optional_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_required_partition",
+            "test": "test_write_record_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_records_with_required_partition",
+            "test": "test_write_records_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "DatabaseName, TableName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/cloudformation/resources/test_timestream.py::test_create_db_tables",
+            "test": "test_create_db_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..RetentionProperties', '$..MagneticStoreWriteProperties', '$..Schema', '$..KmsKeyId', '$..Table1Ref', '$..Table2Ref']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "test": "test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "test": "test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteDatabase": {
+      "DatabaseName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/cloudformation/resources/test_timestream.py::test_create_db_tables",
+            "test": "test_create_db_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..RetentionProperties', '$..MagneticStoreWriteProperties', '$..Schema', '$..KmsKeyId', '$..Table1Ref', '$..Table2Ref']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_describe_endpoints",
+            "test": "test_describe_endpoints",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..Address']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_list_tags_for_resource",
+            "test": "test_list_tags_for_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_write_records_multiple_tables",
+            "test": "test_write_records_multiple_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_duplication_multi_values",
+            "test": "test_duplication_multi_values",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_forward_versioning",
+            "test": "test_forward_versioning",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_insert_different_data_types",
+            "test": "test_insert_different_data_types",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[False]",
+            "test": "test_interpolation_function[False]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[True]",
+            "test": "test_interpolation_function[True]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_multi_records",
+            "test": "test_multi_records",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_process_multiple_records_rejection",
+            "test": "test_process_multiple_records_rejection",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_query_pagination",
+            "test": "test_query_pagination",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_sum_by_reference",
+            "test": "test_sum_by_reference",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "test": "test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "test": "test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_unnest_function",
+            "test": "test_unnest_function",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_changing_dimensions_and_measure_name",
+            "test": "test_write_changing_dimensions_and_measure_name",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_duplicate_rejected",
+            "test": "test_write_duplicate_rejected",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_idempotency",
+            "test": "test_write_idempotency",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_different_partition_rejected",
+            "test": "test_write_record_with_different_partition_rejected",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_optional_partition",
+            "test": "test_write_record_with_optional_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_required_partition",
+            "test": "test_write_record_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_records_with_required_partition",
+            "test": "test_write_records_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_describe_endpoints",
+            "test": "test_describe_endpoints",
+            "response": "400",
+            "error": "ResourceNotFoundException",
+            "snapshot_skipped": "['$..Address']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteTable": {
+      "DatabaseName, TableName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/cloudformation/resources/test_timestream.py::test_create_db_tables",
+            "test": "test_create_db_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..RetentionProperties', '$..MagneticStoreWriteProperties', '$..Schema', '$..KmsKeyId', '$..Table1Ref', '$..Table2Ref']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_describe_endpoints",
+            "test": "test_describe_endpoints",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..Address']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_list_tags_for_resource",
+            "test": "test_list_tags_for_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_write_records_multiple_tables",
+            "test": "test_write_records_multiple_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_duplication_multi_values",
+            "test": "test_duplication_multi_values",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_forward_versioning",
+            "test": "test_forward_versioning",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_insert_different_data_types",
+            "test": "test_insert_different_data_types",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[False]",
+            "test": "test_interpolation_function[False]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[True]",
+            "test": "test_interpolation_function[True]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_multi_records",
+            "test": "test_multi_records",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_process_multiple_records_rejection",
+            "test": "test_process_multiple_records_rejection",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_query_pagination",
+            "test": "test_query_pagination",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_sum_by_reference",
+            "test": "test_sum_by_reference",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_unnest_function",
+            "test": "test_unnest_function",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_changing_dimensions_and_measure_name",
+            "test": "test_write_changing_dimensions_and_measure_name",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_duplicate_rejected",
+            "test": "test_write_duplicate_rejected",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_idempotency",
+            "test": "test_write_idempotency",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_different_partition_rejected",
+            "test": "test_write_record_with_different_partition_rejected",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_optional_partition",
+            "test": "test_write_record_with_optional_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_required_partition",
+            "test": "test_write_record_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_records_with_required_partition",
+            "test": "test_write_records_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_describe_endpoints",
+            "test": "test_describe_endpoints",
+            "response": "400",
+            "error": "ResourceNotFoundException",
+            "snapshot_skipped": "['$..Address']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DescribeDatabase": {
+      "DatabaseName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/cloudformation/resources/test_timestream.py::test_create_db_tables",
+            "test": "test_create_db_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..RetentionProperties', '$..MagneticStoreWriteProperties', '$..Schema', '$..KmsKeyId', '$..Table1Ref', '$..Table2Ref']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_list_tags_for_resource",
+            "test": "test_list_tags_for_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "test": "test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "test": "test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DescribeTable": {
+      "DatabaseName, TableName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_list_tags_for_resource",
+            "test": "test_list_tags_for_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListDatabases": {
+      "- (without any parameters)": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "test": "test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "test": "test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListTables": {
+      "DatabaseName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/cloudformation/resources/test_timestream.py::test_create_db_tables",
+            "test": "test_create_db_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..RetentionProperties', '$..MagneticStoreWriteProperties', '$..Schema', '$..KmsKeyId', '$..Table1Ref', '$..Table2Ref']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_write_records_multiple_tables",
+            "test": "test_write_records_multiple_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "test": "test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "test": "test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "WriteRecords": {
+      "CommonAttributes, DatabaseName, Records, TableName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_describe_endpoints",
+            "test": "test_describe_endpoints",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..Address']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamBasic::test_write_records_multiple_tables",
+            "test": "test_write_records_multiple_tables",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_insert_different_data_types",
+            "test": "test_insert_different_data_types",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[False]",
+            "test": "test_interpolation_function[False]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_interpolation_function[True]",
+            "test": "test_interpolation_function[True]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_query_pagination",
+            "test": "test_query_pagination",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "test": "test_timestream_query[DB_TEST-MY_TABLE_NAME]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "test": "test_timestream_query[db-{short_uid}-table{short_uid}]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_unnest_function",
+            "test": "test_unnest_function",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..ColumnInfo..Name']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "DatabaseName, Records, TableName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_duplication_multi_values",
+            "test": "test_duplication_multi_values",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_forward_versioning",
+            "test": "test_forward_versioning",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_multi_records",
+            "test": "test_multi_records",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_process_multiple_records_rejection",
+            "test": "test_process_multiple_records_rejection",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_sum_by_reference",
+            "test": "test_sum_by_reference",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_changing_dimensions_and_measure_name",
+            "test": "test_write_changing_dimensions_and_measure_name",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_duplicate_rejected",
+            "test": "test_write_duplicate_rejected",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_idempotency",
+            "test": "test_write_idempotency",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_optional_partition",
+            "test": "test_write_record_with_optional_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_required_partition",
+            "test": "test_write_record_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_records_with_required_partition",
+            "test": "test_write_records_with_required_partition",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_duplication_multi_values",
+            "test": "test_duplication_multi_values",
+            "response": "419",
+            "error": "RejectedRecordsException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_forward_versioning",
+            "test": "test_forward_versioning",
+            "response": "419",
+            "error": "RejectedRecordsException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_process_multiple_records_rejection",
+            "test": "test_process_multiple_records_rejection",
+            "response": "419",
+            "error": "RejectedRecordsException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_duplicate_rejected",
+            "test": "test_write_duplicate_rejected",
+            "response": "419",
+            "error": "RejectedRecordsException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/timestream/test_timestream.py::TestTimestreamQueries::test_write_record_with_different_partition_rejected",
+            "test": "test_write_record_with_different_partition_rejected",
+            "response": "419",
+            "error": "RejectedRecordsException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    }
+  }
+}

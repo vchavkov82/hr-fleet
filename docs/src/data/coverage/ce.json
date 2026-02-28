@@ -1,0 +1,837 @@
+{
+  "service": "ce",
+  "pro_support": true,
+  "operations": [
+    {
+      "CreateAnomalyMonitor": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "CreateAnomalySubscription": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "CreateCostCategoryDefinition": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteAnomalyMonitor": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteAnomalySubscription": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteCostCategoryDefinition": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DescribeCostCategoryDefinition": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetAnomalies": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetAnomalyMonitors": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetAnomalySubscriptions": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetApproximateUsageRecords": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetCommitmentPurchaseAnalysis": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetCostAndUsage": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetCostAndUsageComparisons": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetCostAndUsageWithResources": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetCostCategories": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetCostComparisonDrivers": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetCostForecast": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetDimensionValues": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetReservationCoverage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetReservationPurchaseRecommendation": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetReservationUtilization": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetRightsizingRecommendation": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetSavingsPlanPurchaseRecommendationDetails": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetSavingsPlansCoverage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetSavingsPlansPurchaseRecommendation": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetSavingsPlansUtilization": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetSavingsPlansUtilizationDetails": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetTags": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetUsageForecast": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListCommitmentPurchaseAnalyses": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListCostAllocationTagBackfillHistory": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListCostAllocationTags": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListCostCategoryDefinitions": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListCostCategoryResourceAssociations": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListSavingsPlansPurchaseRecommendationGeneration": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListTagsForResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ProvideAnomalyFeedback": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartCommitmentPurchaseAnalysis": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartCostAllocationTagBackfill": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartSavingsPlansPurchaseRecommendationGeneration": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "TagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UntagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateAnomalyMonitor": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "UpdateAnomalySubscription": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "UpdateCostAllocationTagsStatus": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateCostCategoryDefinition": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    }
+  ],
+  "details": {
+    "CreateAnomalyMonitor": {
+      "AnomalyMonitor": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_anomaly_monitors",
+            "test": "test_anomaly_monitors",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "CreateAnomalySubscription": {
+      "AnomalySubscription": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_anomaly_subscriptions",
+            "test": "test_anomaly_subscriptions",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "CreateCostCategoryDefinition": {
+      "Name, RuleVersion, Rules": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_cost_categories",
+            "test": "test_cost_categories",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteAnomalyMonitor": {
+      "MonitorArn": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_anomaly_monitors",
+            "test": "test_anomaly_monitors",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteAnomalySubscription": {
+      "SubscriptionArn": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_anomaly_subscriptions",
+            "test": "test_anomaly_subscriptions",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteCostCategoryDefinition": {
+      "CostCategoryArn": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_cost_categories",
+            "test": "test_cost_categories",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DescribeCostCategoryDefinition": {
+      "CostCategoryArn": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_cost_categories",
+            "test": "test_cost_categories",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_cost_categories",
+            "test": "test_cost_categories",
+            "response": "400",
+            "error": "ResourceNotFoundException",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "GetAnomalyMonitors": {
+      "- (without any parameters)": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_anomaly_monitors",
+            "test": "test_anomaly_monitors",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "GetAnomalySubscriptions": {
+      "- (without any parameters)": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_anomaly_subscriptions",
+            "test": "test_anomaly_subscriptions",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListCostCategoryDefinitions": {
+      "- (without any parameters)": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_cost_categories",
+            "test": "test_cost_categories",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "UpdateAnomalyMonitor": {
+      "MonitorArn, MonitorName": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_anomaly_monitors",
+            "test": "test_anomaly_monitors",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "UpdateAnomalySubscription": {
+      "Frequency, SubscriptionArn, Threshold": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_anomaly_subscriptions",
+            "test": "test_anomaly_subscriptions",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "UpdateCostCategoryDefinition": {
+      "CostCategoryArn, RuleVersion, Rules": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/ce/test_costexplorer.py::TestCostExplorer::test_cost_categories",
+            "test": "test_cost_categories",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    }
+  }
+}

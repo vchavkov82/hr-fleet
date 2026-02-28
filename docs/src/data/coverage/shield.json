@@ -1,0 +1,534 @@
+{
+  "service": "shield",
+  "pro_support": true,
+  "operations": [
+    {
+      "AssociateDRTLogBucket": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "AssociateDRTRole": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "AssociateHealthCheck": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "AssociateProactiveEngagementDetails": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateProtection": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "CreateProtectionGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateSubscription": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteProtection": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteProtectionGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteSubscription": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeAttack": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeAttackStatistics": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeDRTAccess": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeEmergencyContactSettings": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeProtection": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeProtectionGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeSubscription": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DisableApplicationLayerAutomaticResponse": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DisableProactiveEngagement": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DisassociateDRTLogBucket": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DisassociateDRTRole": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DisassociateHealthCheck": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "EnableApplicationLayerAutomaticResponse": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "EnableProactiveEngagement": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetSubscriptionState": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListAttacks": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListProtectionGroups": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListProtections": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListResourcesInProtectionGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListTagsForResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "TagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UntagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateApplicationLayerAutomaticResponse": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateEmergencyContactSettings": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateProtectionGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateSubscription": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    }
+  ],
+  "details": {
+    "CreateProtection": {
+      "Name, ResourceArn, Tags": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/shield/test_shield.py::TestShield::test_create_and_delete_protection",
+            "test": "test_create_and_delete_protection",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteProtection": {
+      "ProtectionId": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/shield/test_shield.py::TestShield::test_create_and_delete_protection",
+            "test": "test_create_and_delete_protection",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListProtections": {
+      "- (without any parameters)": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/shield/test_shield.py::TestShield::test_create_and_delete_protection",
+            "test": "test_create_and_delete_protection",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/shield/test_shield.py::TestShield::test_list_protections_returns_empty_when_none_exists",
+            "test": "test_list_protections_returns_empty_when_none_exists",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    }
+  }
+}

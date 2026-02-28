@@ -1,0 +1,54 @@
+---
+// Hero section component for blog homepage
+import { SITE } from "@/config";
+---
+
+<section class="relative overflow-hidden py-14 sm:py-20 lg:py-28">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(27,77,219,0.16),transparent_32%)]" />
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(12,18,32,0.22),transparent_34%)]" />
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0))] dark:bg-[linear-gradient(180deg,rgba(12,18,32,0.7),rgba(12,18,32,0))]" />
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="max-w-2xl space-y-6">
+        <span class="inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)]/90 px-4 py-2 text-sm font-semibold text-primary border border-primary/15 shadow-[0_10px_30px_-18px_rgba(27,77,219,0.9)] backdrop-blur-sm">
+          Global HR Platform
+        </span>
+
+        <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-navy dark:text-gray-50 leading-tight drop-shadow-[0_14px_40px_rgba(0,0,0,0.08)]">
+          Hire and Manage Global Teams
+        </h1>
+
+        <p class="text-xl text-gray-700 dark:text-gray-200 leading-relaxed max-w-2xl">
+          An all-in-one platform to onboard, manage, and pay contractors, EOR employees, and direct employees in 150+ countries.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-2">
+          <a
+            href="https://hr.svc.chavkov.com/bg/auth/sign-up"
+            class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl text-white font-semibold shadow-[0_16px_40px_-18px_rgba(27,77,219,0.9)] hover:shadow-[0_18px_44px_-16px_rgba(27,77,219,1)] transition-all bg-brand-gradient"
+          >
+            Start Free Trial
+          </a>
+          <a
+            href="https://hr.svc.chavkov.com/bg/features"
+            class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl text-foreground font-semibold border border-border bg-[var(--surface)]/80 hover:border-primary/50 hover:text-primary transition-all"
+          >
+            Learn More
+          </a>
+        </div>
+      </div>
+
+      <div class="relative h-96 sm:h-full min-h-96">
+        <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/18 via-[var(--surface)] to-accent/14 blur-sm" />
+        <div class="absolute inset-4 rounded-2xl border border-border bg-[var(--surface)]/90 backdrop-blur flex items-center justify-center text-primary shadow-[0_40px_100px_-50px_rgba(27,77,219,0.9)]">
+          <svg class="w-24 h-24 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5h.01" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,215 @@
+{
+  "service": "emr-serverless",
+  "pro_support": true,
+  "operations": [
+    {
+      "CancelJobRun": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateApplication": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteApplication": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetApplication": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetDashboardForJobRun": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetJobRun": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListApplications": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListJobRunAttempts": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListJobRuns": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListTagsForResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartApplication": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartJobRun": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StopApplication": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "TagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UntagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateApplication": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    }
+  ],
+  "details": {}
+}

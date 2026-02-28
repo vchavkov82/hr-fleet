@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+# Commit message format validation
+commit_msg=$(cat "$1")
+commit_regex='^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\([a-z]+\))?: .{1,100}'
+
+if ! echo "$commit_msg" | grep -qE "$commit_regex"; then
+    echo "Invalid commit message format!"
+    echo ""
+    echo "Format: type(scope): subject"
+    echo ""
+    echo "Examples:"
+    echo "  feat(www): add pricing page animation"
+    echo "  fix(blog): resolve image loading issue"
+    echo "  docs: update deployment guide"
+    echo ""
+    exit 1
+fi

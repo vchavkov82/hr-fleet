@@ -1,0 +1,97 @@
+---
+// Get the current page route
+const route = Astro.locals.starlightRoute;
+const isAwsServicePage =
+  route.id.startsWith('aws/services/') && !route.id.includes('/index');
+const persistence = route.entry?.data?.persistence || null;
+
+// Determine persistence status and display text
+const getPersistenceInfo = (persistenceValue: string | null | undefined) => {
+  if (!persistenceValue) {
+    return { status: 'not-supported', text: 'Not Supported' };
+  } else if (persistenceValue === 'supported') {
+    return { status: 'supported', text: 'Supported' };
+  } else if (persistenceValue === 'supported with limitations') {
+    return { status: 'limited', text: 'Limited Support' };
+  } else {
+    return { status: 'not-supported', text: 'Not Supported' };
+  }
+};
+
+const persistenceInfo = getPersistenceInfo(persistence);
+---
+
+{
+  isAwsServicePage && (
+    <div class="persistence-badges">
+      <span class="badge-label">Persistence</span>
+      <span
+        class={`persistence-badge persistence-badge-${persistenceInfo.status}`}
+      >
+        {persistenceInfo.text}
+      </span>
+    </div>
+  )
+}
+
+<style>
+  .persistence-badges {
+    padding: 0 0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .badge-label {
+    color: #707385;
+    font-family: 'AeonikFono';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+
+  .badge-label::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('/src/assets/images/persistence.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .persistence-badge {
+    display: block;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 2px;
+    font-family: 'AeonikFono';
+    font-size: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+  }
+
+  /* Persistence badge styles */
+  .persistence-badge-supported {
+    background-color: #adfffb;
+    color: #006d65;
+  }
+
+  .persistence-badge-limited {
+    background-color: #e1e3eb;
+    color: #3a3c47;
+  }
+
+  .persistence-badge-not-supported {
+    background-color: #f5a89f;
+    color: #690c01;
+  }
+</style>

@@ -1,0 +1,349 @@
+{
+  "service": "textract",
+  "pro_support": true,
+  "operations": [
+    {
+      "AnalyzeDocument": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "AnalyzeExpense": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "AnalyzeID": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateAdapter": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateAdapterVersion": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteAdapter": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteAdapterVersion": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DetectDocumentText": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetAdapter": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetAdapterVersion": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetDocumentAnalysis": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetDocumentTextDetection": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetExpenseAnalysis": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetLendingAnalysis": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetLendingAnalysisSummary": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListAdapterVersions": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListAdapters": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListTagsForResource": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartDocumentAnalysis": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartDocumentTextDetection": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartExpenseAnalysis": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartLendingAnalysis": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "TagResource": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UntagResource": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateAdapter": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    }
+  ],
+  "details": {
+    "DetectDocumentText": {
+      "Document": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/textract/test_textract.py::TestTextract::test_detect_document_text",
+            "test": "test_detect_document_text",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    }
+  }
+}

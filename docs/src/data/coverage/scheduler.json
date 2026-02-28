@@ -1,0 +1,556 @@
+{
+  "service": "scheduler",
+  "community_support": true,
+  "operations": [
+    {
+      "CreateSchedule": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "CreateScheduleGroup": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteSchedule": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteScheduleGroup": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetSchedule": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetScheduleGroup": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListScheduleGroups": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListSchedules": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListTagsForResource": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "TagResource": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "UntagResource": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "UpdateSchedule": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    }
+  ],
+  "details": {
+    "CreateSchedule": {
+      "ClientToken, FlexibleTimeWindow, GroupName, Name, ScheduleExpression, Target": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resource_providers/scheduler/test_scheduler.py::test_schedule_and_group",
+            "test": "test_schedule_and_group",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DriftInformation', '$..Metadata', '$..ActionAfterCompletion', '$..ScheduleExpressionTimezone']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          }
+        ]
+      },
+      "ClientToken, FlexibleTimeWindow, Name, ScheduleExpression, Target": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_valid_schedule_expression",
+            "test": "tests_create_schedule_with_valid_schedule_expression",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[ rate(10 minutes)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[ rate(10 minutes)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[at(2021-12-31)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[at(2021-12-31)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[at(2021-12-31T23:59:59Z)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[at(2021-12-31T23:59:59Z)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[cron()]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[cron()]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[cron(0 1 * * * *)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[cron(0 1 * * * *)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[cron(0 dummy ? * MON-FRI *)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[cron(0 dummy ? * MON-FRI *)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[cron(7 20 * * NOT *)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[cron(7 20 * * NOT *)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[cron(71 8 1 * ? *)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[cron(71 8 1 * ? *)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[cron(INVALID)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[cron(INVALID)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[rate( 10 minutes )]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[rate( 10 minutes )]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[rate()]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[rate()]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[rate(-10 minutes)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[rate(-10 minutes)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[rate(10 minutess)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[rate(10 minutess)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[rate(10 seconds)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[rate(10 seconds)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[rate(10 years)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[rate(10 years)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[rate(10)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[rate(10)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_invalid_schedule_expression[rate(foo minutes)]",
+            "test": "tests_create_schedule_with_invalid_schedule_expression[rate(foo minutes)]",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "CreateScheduleGroup": {
+      "ClientToken, Name": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resource_providers/scheduler/test_scheduler.py::test_schedule_and_group",
+            "test": "test_schedule_and_group",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DriftInformation', '$..Metadata', '$..ActionAfterCompletion', '$..ScheduleExpressionTimezone']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::test_tag_resource",
+            "test": "test_tag_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "ClientToken, Name, Tags": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::test_untag_resource",
+            "test": "test_untag_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteSchedule": {
+      "ClientToken, GroupName, Name": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resource_providers/scheduler/test_scheduler.py::test_schedule_and_group",
+            "test": "test_schedule_and_group",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DriftInformation', '$..Metadata', '$..ActionAfterCompletion', '$..ScheduleExpressionTimezone']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          }
+        ]
+      },
+      "ClientToken, Name": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::tests_create_schedule_with_valid_schedule_expression",
+            "test": "tests_create_schedule_with_valid_schedule_expression",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteScheduleGroup": {
+      "ClientToken, Name": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resource_providers/scheduler/test_scheduler.py::test_schedule_and_group",
+            "test": "test_schedule_and_group",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DriftInformation', '$..Metadata', '$..ActionAfterCompletion', '$..ScheduleExpressionTimezone']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          }
+        ]
+      }
+    },
+    "GetSchedule": {
+      "GroupName, Name": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resource_providers/scheduler/test_scheduler.py::test_schedule_and_group",
+            "test": "test_schedule_and_group",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DriftInformation', '$..Metadata', '$..ActionAfterCompletion', '$..ScheduleExpressionTimezone']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "GetScheduleGroup": {
+      "Name": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resource_providers/scheduler/test_scheduler.py::test_schedule_and_group",
+            "test": "test_schedule_and_group",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DriftInformation', '$..Metadata', '$..ActionAfterCompletion', '$..ScheduleExpressionTimezone']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListSchedules": {
+      "- (without any parameters)": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::test_list_schedules",
+            "test": "test_list_schedules",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListTagsForResource": {
+      "ResourceArn": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::test_tag_resource",
+            "test": "test_tag_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::test_untag_resource",
+            "test": "test_untag_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "TagResource": {
+      "ResourceArn, Tags": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::test_tag_resource",
+            "test": "test_tag_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "UntagResource": {
+      "ResourceArn, TagKeys": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/scheduler/test_scheduler.py::test_untag_resource",
+            "test": "test_untag_resource",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    }
+  }
+}

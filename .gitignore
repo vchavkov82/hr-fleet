@@ -1,0 +1,41 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# TurboRepo
+.turbo/
+
+# Next.js
+www/.next/
+
+# Astro
+blog/dist/
+blog/.astro/
+docs/dist/
+docs/.astro/
+
+# Logs
+*.log
+logs/
+
+# Core dumps
+core

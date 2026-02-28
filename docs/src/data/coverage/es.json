@@ -1,0 +1,817 @@
+{
+  "service": "es",
+  "community_support": true,
+  "operations": [
+    {
+      "AcceptInboundCrossClusterSearchConnection": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "AddTags": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "AssociatePackage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "AuthorizeVpcEndpointAccess": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CancelDomainConfigChange": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CancelElasticsearchServiceSoftwareUpdate": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateElasticsearchDomain": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": true,
+        "terraform_test_suite": true,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "CreateOutboundCrossClusterSearchConnection": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreatePackage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateVpcEndpoint": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteElasticsearchDomain": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteElasticsearchServiceRole": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteInboundCrossClusterSearchConnection": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteOutboundCrossClusterSearchConnection": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeletePackage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteVpcEndpoint": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeDomainAutoTunes": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeDomainChangeProgress": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeElasticsearchDomain": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": true,
+        "terraform_test_suite": true,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DescribeElasticsearchDomainConfig": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeElasticsearchDomains": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeElasticsearchInstanceTypeLimits": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeInboundCrossClusterSearchConnections": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeOutboundCrossClusterSearchConnections": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribePackages": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeReservedElasticsearchInstanceOfferings": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeReservedElasticsearchInstances": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeVpcEndpoints": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DissociatePackage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetCompatibleElasticsearchVersions": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": false,
+        "external_test_suite": true,
+        "terraform_test_suite": true,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetPackageVersionHistory": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetUpgradeHistory": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetUpgradeStatus": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListDomainNames": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListDomainsForPackage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListElasticsearchInstanceTypes": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListElasticsearchVersions": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListPackagesForDomain": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListTags": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListVpcEndpointAccess": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListVpcEndpoints": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListVpcEndpointsForDomain": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "PurchaseReservedElasticsearchInstanceOffering": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "RejectInboundCrossClusterSearchConnection": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "RemoveTags": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "RevokeVpcEndpointAccess": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "StartElasticsearchServiceSoftwareUpdate": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateElasticsearchDomainConfig": {
+        "implemented": true,
+        "availability": "community",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdatePackage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateVpcEndpoint": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpgradeElasticsearchDomain": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    }
+  ],
+  "details": {
+    "AddTags": {
+      "ARN, TagList": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resources/test_elasticsearch.py::test_cfn_handle_elasticsearch_domain",
+            "test": "test_cfn_handle_elasticsearch_domain",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DomainStatus.AdvancedSecurityOptions.AnonymousAuthEnabled', '$..DomainStatus.AutoTuneOptions.State', '$..DomainStatus.ChangeProgressDetails', '$..DomainStatus.DomainProcessingStatus', '$..DomainStatus.EBSOptions.VolumeSize', '$..DomainStatus.ElasticsearchClusterConfig.DedicatedMasterCount', '$..DomainStatus.ElasticsearchClusterConfig.InstanceCount', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessConfig', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessEnabled', '$..DomainStatus.Endpoint', '$..DomainStatus.ModifyingProperties', '$..DomainStatus.Processing', '$..DomainStatus.ServiceSoftwareOptions.CurrentVersion']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          }
+        ]
+      }
+    },
+    "CreateElasticsearchDomain": {
+      "DomainName, EBSOptions, ElasticsearchClusterConfig, ElasticsearchVersion": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resources/test_elasticsearch.py::test_cfn_handle_elasticsearch_domain",
+            "test": "test_cfn_handle_elasticsearch_domain",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DomainStatus.AdvancedSecurityOptions.AnonymousAuthEnabled', '$..DomainStatus.AutoTuneOptions.State', '$..DomainStatus.ChangeProgressDetails', '$..DomainStatus.DomainProcessingStatus', '$..DomainStatus.EBSOptions.VolumeSize', '$..DomainStatus.ElasticsearchClusterConfig.DedicatedMasterCount', '$..DomainStatus.ElasticsearchClusterConfig.InstanceCount', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessConfig', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessEnabled', '$..DomainStatus.Endpoint', '$..DomainStatus.ModifyingProperties', '$..DomainStatus.Processing', '$..DomainStatus.ServiceSoftwareOptions.CurrentVersion']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          }
+        ]
+      }
+    },
+    "DeleteElasticsearchDomain": {
+      "DomainName": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resources/test_elasticsearch.py::test_cfn_handle_elasticsearch_domain",
+            "test": "test_cfn_handle_elasticsearch_domain",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DomainStatus.AdvancedSecurityOptions.AnonymousAuthEnabled', '$..DomainStatus.AutoTuneOptions.State', '$..DomainStatus.ChangeProgressDetails', '$..DomainStatus.DomainProcessingStatus', '$..DomainStatus.EBSOptions.VolumeSize', '$..DomainStatus.ElasticsearchClusterConfig.DedicatedMasterCount', '$..DomainStatus.ElasticsearchClusterConfig.InstanceCount', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessConfig', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessEnabled', '$..DomainStatus.Endpoint', '$..DomainStatus.ModifyingProperties', '$..DomainStatus.Processing', '$..DomainStatus.ServiceSoftwareOptions.CurrentVersion']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          }
+        ]
+      }
+    },
+    "DescribeElasticsearchDomain": {
+      "DomainName": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resources/test_elasticsearch.py::test_cfn_handle_elasticsearch_domain",
+            "test": "test_cfn_handle_elasticsearch_domain",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DomainStatus.AdvancedSecurityOptions.AnonymousAuthEnabled', '$..DomainStatus.AutoTuneOptions.State', '$..DomainStatus.ChangeProgressDetails', '$..DomainStatus.DomainProcessingStatus', '$..DomainStatus.EBSOptions.VolumeSize', '$..DomainStatus.ElasticsearchClusterConfig.DedicatedMasterCount', '$..DomainStatus.ElasticsearchClusterConfig.InstanceCount', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessConfig', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessEnabled', '$..DomainStatus.Endpoint', '$..DomainStatus.ModifyingProperties', '$..DomainStatus.Processing', '$..DomainStatus.ServiceSoftwareOptions.CurrentVersion']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          },
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resources/test_elasticsearch.py::test_cfn_handle_elasticsearch_domain",
+            "test": "test_cfn_handle_elasticsearch_domain",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DomainStatus.AdvancedSecurityOptions.AnonymousAuthEnabled', '$..DomainStatus.AutoTuneOptions.State', '$..DomainStatus.ChangeProgressDetails', '$..DomainStatus.DomainProcessingStatus', '$..DomainStatus.EBSOptions.VolumeSize', '$..DomainStatus.ElasticsearchClusterConfig.DedicatedMasterCount', '$..DomainStatus.ElasticsearchClusterConfig.InstanceCount', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessConfig', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessEnabled', '$..DomainStatus.Endpoint', '$..DomainStatus.ModifyingProperties', '$..DomainStatus.Processing', '$..DomainStatus.ServiceSoftwareOptions.CurrentVersion']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DescribeElasticsearchDomains": {
+      "DomainNames": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/iam/test_iam_enforcement.py::TestIAMEnforcementIdentityBasedPolicies::test_enforce_policy_elasticsearch",
+            "test": "test_enforce_policy_elasticsearch",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/iam/test_iam_enforcement.py::TestIAMEnforcementIdentityBasedPolicies::test_enforce_policy_elasticsearch_two_domains",
+            "test": "test_enforce_policy_elasticsearch_two_domains",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/iam/test_iam_enforcement.py::TestIAMEnforcementIdentityBasedPolicies::test_enforce_policy_elasticsearch_two_domains_two_policies",
+            "test": "test_enforce_policy_elasticsearch_two_domains_two_policies",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/iam/test_iam_enforcement.py::TestIAMEnforcementIdentityBasedPolicies::test_enforce_policy_elasticsearch",
+            "test": "test_enforce_policy_elasticsearch",
+            "response": "400",
+            "error": "AccessDeniedException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/iam/test_iam_enforcement.py::TestIAMEnforcementIdentityBasedPolicies::test_enforce_policy_elasticsearch_two_domains",
+            "test": "test_enforce_policy_elasticsearch_two_domains",
+            "response": "400",
+            "error": "AccessDeniedException",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListTags": {
+      "ARN": {
+        "ls_community": [
+          {
+            "node_id": "LocalStack Community: tests/aws/services/cloudformation/resources/test_elasticsearch.py::test_cfn_handle_elasticsearch_domain",
+            "test": "test_cfn_handle_elasticsearch_domain",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..DomainStatus.AdvancedSecurityOptions.AnonymousAuthEnabled', '$..DomainStatus.AutoTuneOptions.State', '$..DomainStatus.ChangeProgressDetails', '$..DomainStatus.DomainProcessingStatus', '$..DomainStatus.EBSOptions.VolumeSize', '$..DomainStatus.ElasticsearchClusterConfig.DedicatedMasterCount', '$..DomainStatus.ElasticsearchClusterConfig.InstanceCount', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessConfig', '$..DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessEnabled', '$..DomainStatus.Endpoint', '$..DomainStatus.ModifyingProperties', '$..DomainStatus.Processing', '$..DomainStatus.ServiceSoftwareOptions.CurrentVersion']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "@hr/workspace",
+  "private": true,
+  "packageManager": "bun@1.3.6",
+  "workspaces": [
+    "packages/design-system",
+    "www"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "dev": "cd www && PORT=3010 bun dev",
+    "dev:www": "cd www && PORT=3010 bun dev",
+    "dev:blog": "cd blog && bun dev",
+    "dev:docs": "cd docs && bun dev",
+    "build": "node_modules/.bin/turbo run build",
+    "build:www": "node_modules/.bin/turbo run build --filter=@hr/www",
+    "build:blog": "node_modules/.bin/turbo run build --filter=@hr/blog",
+    "build:docs": "node_modules/.bin/turbo run build --filter=@hr/docs",
+    "lint": "node_modules/.bin/turbo run lint",
+    "typecheck": "node_modules/.bin/turbo run typecheck",
+    "test": "cd www && bun run test",
+    "test:watch": "cd www && bun run test:watch",
+    "test:ui": "cd www && bun run test:ui",
+    "test:e2e": "cd www && bun run test:e2e",
+    "test:e2e:debug": "cd www && bun run test:e2e:debug",
+    "test:e2e:ui": "cd www && bun run test:e2e:ui",
+    "test:all": "cd www && bun run test",
+    "clean": "rm -rf node_modules www/node_modules blog/node_modules docs/node_modules",
+    "clean:cache": "rm -rf www/.next && echo 'Cache cleaned'"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "turbo": "^2.8.12"
+  },
+  "lint-staged": {
+    "www/**/*.{ts,tsx}": [
+      "cd www && bun lint:fix",
+      "cd www && bunx prettier --write"
+    ],
+    "www/**/*.{json,md}": [
+      "cd www && bunx prettier --write"
+    ]
+  },
+  "overrides": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "bun": ">=1.3.0"
+  }
+}

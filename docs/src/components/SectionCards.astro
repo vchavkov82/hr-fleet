@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import { SectionCards as SectionCardsReact } from './SectionCards.tsx';
+
+interface Props {
+  basePath: string;
+  title?: string;
+  customTitles?: Record<string, string>;
+  useDirectFiles?: boolean;
+}
+
+const { basePath, title, customTitles = {}, useDirectFiles = false } = Astro.props;
+
+// Get sections - either index files from subdirectories or direct files
+const allSections = await getCollection('docs', ({ id }) => {
+  // Must start with the base path
+  if (!id.startsWith(basePath)) {
+    return false;
+  }
+  
+  // Get the path after the base path
+  const relativePath = id.substring(basePath.length);
+  
+  // Split into parts and filter out empty strings
+  const pathParts = relativePath.split('/').filter(part => part !== '');
+  
+  if (useDirectFiles) {
+    // For direct files, we should have exactly 1 part: [filename]
+    // and it should not be an index file
+    if (pathParts.length === 1) {
+      const filename = pathParts[0];
+      return !filename.startsWith('index');
+    }
+  } else {
+    // For index files, we should have exactly 1 part: [subdirectory]
+    // because index files get the ID of their parent directory in Astro
+    if (pathParts.length === 1) {
+      // Accept any single-level subdirectory - let the content collection handle validation
+      return true;
+    }
+  }
+  
+  return false;
+});
+
+const sortedSections = allSections.sort((a, b) => {
+  const titleA = a.data.title || a.data.linkTitle || '';
+  const titleB = b.data.title || b.data.linkTitle || '';
+  return titleA.localeCompare(titleB);
+});
+
+const sectionData = sortedSections.map(section => {
+  // Extract the key name from the section ID
+  const relativePath = section.id.substring(basePath.length);
+  const keyName = relativePath.split('/').filter(part => part !== '')[0];
+  
+  // For direct files, we need to remove the file extension from the key
+  const cleanKey = useDirectFiles ? keyName.replace(/\.(md|mdx)$/, '') : keyName;
+  
+  // Use custom title if provided, otherwise fall back to the section title
+  const sectionTitle = customTitles[cleanKey] || section.data.title || section.data.linkTitle || 'Unknown Section';
+  const description = section.data.description || `Learn more about ${sectionTitle}`;
+  
+  const href = `/${section.id}`;
+  
+  return {
+    title: sectionTitle,
+    description,
+    href
+  };
+});
+
+
+---
+
+<SectionCardsReact 
+  sections={sectionData} 
+  title={title}
+  client:load 
+/> 

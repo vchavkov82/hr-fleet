@@ -1,0 +1,16 @@
+{
+  "name": "@hr/design-system",
+  "version": "0.0.1",
+  "description": "Shared design tokens and components for HR platform",
+  "type": "module",
+  "exports": {
+    "./tailwind": "./tailwind.config.ts",
+    "./colors": "./tokens/colors.ts",
+    "./typography": "./tokens/typography.ts"
+  },
+  "dependencies": {
+    "tailwindcss": "^4.1.18",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/forms": "^0.5.9"
+  }
+}

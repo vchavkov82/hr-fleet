@@ -1,0 +1,17 @@
+{
+  "terraform": "Terraform",
+  "awscli": "AWS CLI",
+  "cloudformation": "CloudFormation",
+  "cdk": "CDK",
+  "sam": "SAM",
+  "serverless": "Serverless",
+  "boto3": "AWS SDK for Python (boto3)",
+  "aws-java-sdk": "AWS Java SDK",
+  "aws-sdk-js": "AWS SDK for JavaScript",
+  "maven": "Maven",
+  "docker-compose": "Docker Compose",
+  "testcontainers": "Testcontainers",
+  "helm-charts": "Helm Charts",
+  "pulumi": "Pulumi",
+  "snowcli": "Snowflake CLI"
+}

@@ -1,0 +1,39 @@
+# HR Product — Development Overrides
+# Source mounts for hot-reload, dev commands, and dev-only env vars.
+
+services:
+
+  hr:
+    volumes:
+      - ../www:/app
+      - hr_node_modules:/app/node_modules
+    working_dir: /app
+    environment:
+      - PORT=3010
+      - HR_BLOG_URL=http://hr-blog:3013
+    entrypoint: ["/app/docker-entrypoint.sh"]
+    command: []
+
+  hr-blog:
+    volumes:
+      - ../blog:/app
+      - hr_blog_node_modules:/app/node_modules
+    working_dir: /app
+    environment:
+      - ASTRO_TELEMETRY_DISABLED=1
+      - HOST=0.0.0.0
+    entrypoint: sh
+    command: ["-c", "bun install && bun run build && bunx serve -l 3013 dist"]
+
+  hr-docs:
+    volumes:
+      - ../docs:/app
+      - hr_docs_node_modules:/app/node_modules
+    working_dir: /app
+    entrypoint: sh
+    command: ["-c", "bun install && bun dev"]
+
+volumes:
+  hr_node_modules:
+  hr_blog_node_modules:
+  hr_docs_node_modules:

@@ -1,0 +1,118 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Socials from "@/components/Socials.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import Card from "@/components/Card.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import IconRss from "@/assets/icons/IconRss.svg";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import { SITE } from "@/config";
+import { SOCIALS } from "@/constants";
+import HeroSection from "@/components/HeroSection.astro";
+import FeaturesSection from "@/components/FeaturesSection.astro";
+import StatsSection from "@/components/StatsSection.astro";
+import CTASection from "@/components/CTASection.astro";
+
+const posts = await getCollection("blog");
+
+const sortedPosts = getSortedPosts(posts);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+---
+
+<Layout>
+  <Header />
+
+  {/* Main Homepage Sections */}
+  <HeroSection />
+  <FeaturesSection />
+  <StatsSection />
+
+  {/* Blog Content Section */}
+  <main id="main-content" data-layout="index" class="app-layout-wide py-20 sm:py-28 bg-white">
+    <section id="hero" class="max-w-4xl mx-auto">
+      <div class="mb-16">
+        <span class="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-primary border border-blue-200">
+          Latest Insights
+        </span>
+
+        <h2 class="mt-4 text-4xl font-bold text-navy sm:text-5xl tracking-tight">
+          HR Tips & Resources
+        </h2>
+
+        <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+          Practical advice, trends, and insights for HR professionals.
+          Learn how to optimize recruitment, hiring, and employee management with HR.
+        </p>
+
+        {
+          SOCIALS.length > 0 && (
+            <div class="mt-6 flex max-sm:flex-col sm:items-center text-sm text-gray-600">
+              <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Follow us:</div>
+              <Socials />
+            </div>
+          )
+        }
+      </div>
+    </section>
+
+    {
+      featuredPosts.length > 0 && (
+        <section id="featured" class="pt-12">
+          <div class="flex items-center justify-between gap-4">
+            <h3 class="text-2xl font-semibold tracking-tight text-navy">Featured Articles</h3>
+            <a href="/posts/" class="text-sm font-semibold text-primary hover:underline">
+              View all
+            </a>
+          </div>
+
+          <ul class="mt-6 grid grid-cols-1 gap-8">
+            {featuredPosts.slice(0, 1).map(data => (
+              <Card display="featured" variant="h2" {...data} />
+            ))}
+          </ul>
+
+          {featuredPosts.length > 1 && (
+            <ul class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {featuredPosts.slice(1, 4).map(data => (
+                <Card display="card" variant="h3" {...data} />
+              ))}
+            </ul>
+          )}
+        </section>
+      )
+    }
+
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pt-14 pb-10">
+          <h3 class="text-2xl font-semibold tracking-tight text-navy">Recent Articles</h3>
+          <ul class="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {recentPosts.map(
+              (data, index) =>
+                index < SITE.postPerIndex && <Card display="card" variant="h3" {...data} />
+            )}
+          </ul>
+        </section>
+      )
+    }
+  </main>
+
+  {/* CTA Section */}
+  <CTASection />
+
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset?.layout;
+    if (indexLayout) {
+      sessionStorage.setItem("backUrl", "/");
+    }
+  });
+</script>

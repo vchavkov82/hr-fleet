@@ -1,0 +1,71 @@
+---
+// Features section component
+---
+
+<section class="py-20 sm:py-28 bg-[var(--surface)]/70 dark:bg-[var(--surface)]/60 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute inset-x-0 -top-24 h-64 bg-gradient-to-b from-primary/10 via-transparent to-transparent blur-3xl" />
+    <div class="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-primary/10 to-transparent blur-2xl" />
+  </div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide bg-primary/15 dark:bg-primary/20 text-primary border border-primary/20">
+        Platform Pillars
+      </span>
+      <h2 class="mt-4 text-4xl sm:text-5xl font-bold text-navy dark:text-gray-50 mb-4">
+        AI-powered HR that works for you
+      </h2>
+      <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-200 max-w-3xl mx-auto">
+        Do more with less. Our intelligent automation takes over repetitive scheduling and admin work, speeds up hiring, and helps you build strong teams faster.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {[
+        {
+          icon: "🎯",
+          title: "ATS & Recruitment",
+          desc: "Streamlined hiring with guided scorecards, candidate messaging, and approvals."
+        },
+        {
+          icon: "👥",
+          title: "Employee Management",
+          desc: "Single source of truth with documents, contracts, and lifecycle automation."
+        },
+        {
+          icon: "📋",
+          title: "Leave & Attendance",
+          desc: "Balance tracking, approvals, and calendars that sync across teams."
+        },
+        {
+          icon: "💰",
+          title: "Global Payroll",
+          desc: "Compliant payouts in 150+ countries with transparent FX and controls."
+        },
+        {
+          icon: "📊",
+          title: "Performance Reviews",
+          desc: "Objectives, 360s, and calibrations with AI summaries for managers."
+        },
+        {
+          icon: "📑",
+          title: "Compliance",
+          desc: "Localized policies, document checks, and audit trails by default."
+        }
+      ].map(feature => (
+        <div class="p-6 rounded-2xl border border-border bg-[var(--surface)]/90 backdrop-blur shadow-[0_12px_40px_-24px_rgba(0,0,0,0.25)] hover:shadow-[0_16px_48px_-18px_rgba(27,77,219,0.35)] hover:border-primary/35 transition-all group">
+          <div class="flex items-center justify-between mb-4">
+            <div class="text-3xl drop-shadow-sm">{feature.icon}</div>
+            <span class="h-10 w-10 inline-flex items-center justify-center rounded-full bg-primary/12 text-primary text-sm font-semibold border border-primary/15">
+              AI
+            </span>
+          </div>
+          <h3 class="text-xl font-bold text-navy dark:text-gray-50 mb-2 group-hover:text-primary transition-colors">{feature.title}</h3>
+          <p class="text-gray-700 dark:text-gray-200 leading-relaxed text-sm">
+            {feature.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

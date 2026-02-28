@@ -1,0 +1,68 @@
+# HR Product — Base Service Definitions
+# Usage: podman-compose -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml up -d
+
+services:
+
+  # ── Reverse proxy ──────────────────────────────────────────────────────────
+  caddy:
+    image: caddy:2-alpine
+    container_name: hr-caddy
+    hostname: hr-caddy
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+      - "0.0.0.0:443:443/udp"   # HTTP/3 (QUIC)
+    env_file:
+      - ../.env
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - hr
+      - hr-blog
+      - hr-docs
+    networks:
+      - hr
+    restart: unless-stopped
+
+  # ── Frontend apps ──────────────────────────────────────────────────────────
+  hr:
+    image: oven/bun:1-alpine
+    container_name: hr-www
+    hostname: hr-www
+    ports:
+      - "0.0.0.0:3010:3010"
+    env_file:
+      - ../.env
+    networks:
+      - hr
+    restart: unless-stopped
+
+  hr-blog:
+    image: oven/bun:1-alpine
+    container_name: hr-blog
+    hostname: hr-blog
+    ports:
+      - "127.0.0.1:3013:3013"
+    networks:
+      - hr
+    restart: unless-stopped
+
+  hr-docs:
+    image: oven/bun:1-alpine
+    container_name: hr-docs
+    hostname: hr-docs
+    ports:
+      - "127.0.0.1:3011:3011"
+    networks:
+      - hr
+    restart: unless-stopped
+
+networks:
+  hr:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

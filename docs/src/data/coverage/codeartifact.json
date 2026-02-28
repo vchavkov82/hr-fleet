@@ -1,0 +1,3136 @@
+{
+  "service": "codeartifact",
+  "pro_support": true,
+  "operations": [
+    {
+      "AssociateExternalConnection": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "CopyPackageVersions": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateDomain": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "CreatePackageGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CreateRepository": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteDomain": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteDomainPermissionsPolicy": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeletePackage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeletePackageGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeletePackageVersions": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DeleteRepository": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DeleteRepositoryPermissionsPolicy": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeDomain": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DescribePackage": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribePackageGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribePackageVersion": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeRepository": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DisassociateExternalConnection": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DisposePackageVersions": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetAssociatedPackageGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetAuthorizationToken": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetDomainPermissionsPolicy": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetPackageVersionAsset": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetPackageVersionReadme": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "GetRepositoryEndpoint": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetRepositoryPermissionsPolicy": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListAllowedRepositoriesForGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListAssociatedPackages": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListDomains": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListPackageGroups": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListPackageVersionAssets": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListPackageVersionDependencies": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListPackageVersions": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListPackages": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListRepositories": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListRepositoriesInDomain": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListSubPackageGroups": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListTagsForResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "PublishPackageVersion": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "PutDomainPermissionsPolicy": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "PutPackageOriginConfiguration": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "PutRepositoryPermissionsPolicy": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "TagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "UntagResource": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "UpdatePackageGroup": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdatePackageGroupOriginConfiguration": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdatePackageVersionsStatus": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "UpdateRepository": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    }
+  ],
+  "details": {
+    "AssociateExternalConnection": {
+      "domain, externalConnection, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate_package_not_in_repository_but_external",
+            "test": "test_deprecate_package_not_in_repository_but_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_external_connections",
+            "test": "test_external_connections",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_external",
+            "test": "test_view_dist_tags_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_upstream",
+            "test": "test_view_dist_tags_upstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "404",
+            "error": "DomainNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "CreateDomain": {
+      "domain": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_describe_domain_repository_count",
+            "test": "test_describe_domain_repository_count",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_domain_crud_operations",
+            "test": "test_domain_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_error_deleting_domains_with_repositories",
+            "test": "test_error_deleting_domains_with_repositories",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_authorization_token",
+            "test": "test_get_authorization_token",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_repository_endpoint",
+            "test": "test_get_repository_endpoint",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_and_domain_tagging",
+            "test": "test_repository_and_domain_tagging",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[@acme/dummy]",
+            "test": "test_deprecate[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[dummy]",
+            "test": "test_deprecate[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate_package_not_in_repository_but_external",
+            "test": "test_deprecate_package_not_in_repository_but_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[@acme/dummy]",
+            "test": "test_dist_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[dummy]",
+            "test": "test_dist_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_external_connections",
+            "test": "test_external_connections",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "test": "test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[dummy]",
+            "test": "test_forbids_publishing_blocked_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[@acme/dummy]",
+            "test": "test_install_copies_tarballs_downstream[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[dummy]",
+            "test": "test_install_copies_tarballs_downstream[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_unexisting_package",
+            "test": "test_install_unexisting_package",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[@acme/dummy]",
+            "test": "test_list_package_version_assets[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[dummy]",
+            "test": "test_list_package_version_assets[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[@acme/dummy]",
+            "test": "test_list_package_versions[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[dummy]",
+            "test": "test_list_package_versions[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[@acme/dummy]",
+            "test": "test_list_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[dummy]",
+            "test": "test_list_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[@acme/dummy]",
+            "test": "test_package_publish[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[dummy]",
+            "test": "test_package_publish[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[@acme/dummy]",
+            "test": "test_package_publish_with_custom_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[dummy]",
+            "test": "test_package_publish_with_custom_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_ping",
+            "test": "test_ping",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_external",
+            "test": "test_view_dist_tags_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_upstream",
+            "test": "test_view_dist_tags_upstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_domain_crud_operations",
+            "test": "test_domain_crud_operations",
+            "response": "400",
+            "error": "RegexValidationException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_domain_crud_operations",
+            "test": "test_domain_crud_operations",
+            "response": "409",
+            "error": "ConflictException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "CreateRepository": {
+      "domain, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_describe_domain_repository_count",
+            "test": "test_describe_domain_repository_count",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_error_deleting_domains_with_repositories",
+            "test": "test_error_deleting_domains_with_repositories",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_repository_endpoint",
+            "test": "test_get_repository_endpoint",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_and_domain_tagging",
+            "test": "test_repository_and_domain_tagging",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[@acme/dummy]",
+            "test": "test_deprecate[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[dummy]",
+            "test": "test_deprecate[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate_package_not_in_repository_but_external",
+            "test": "test_deprecate_package_not_in_repository_but_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[@acme/dummy]",
+            "test": "test_dist_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[dummy]",
+            "test": "test_dist_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_external_connections",
+            "test": "test_external_connections",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "test": "test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[dummy]",
+            "test": "test_forbids_publishing_blocked_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[@acme/dummy]",
+            "test": "test_install_copies_tarballs_downstream[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[dummy]",
+            "test": "test_install_copies_tarballs_downstream[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_unexisting_package",
+            "test": "test_install_unexisting_package",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[@acme/dummy]",
+            "test": "test_list_package_version_assets[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[dummy]",
+            "test": "test_list_package_version_assets[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[@acme/dummy]",
+            "test": "test_list_package_versions[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[dummy]",
+            "test": "test_list_package_versions[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[@acme/dummy]",
+            "test": "test_list_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[dummy]",
+            "test": "test_list_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[@acme/dummy]",
+            "test": "test_package_publish[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[dummy]",
+            "test": "test_package_publish[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[@acme/dummy]",
+            "test": "test_package_publish_with_custom_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[dummy]",
+            "test": "test_package_publish_with_custom_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_ping",
+            "test": "test_ping",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_external",
+            "test": "test_view_dist_tags_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_upstream",
+            "test": "test_view_dist_tags_upstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "400",
+            "error": "RegexValidationException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "domain, repository, upstreams": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[@acme/dummy]",
+            "test": "test_install_copies_tarballs_downstream[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[dummy]",
+            "test": "test_install_copies_tarballs_downstream[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_upstream",
+            "test": "test_view_dist_tags_upstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "404",
+            "error": "RepositoryNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteDomain": {
+      "domain": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_describe_domain_repository_count",
+            "test": "test_describe_domain_repository_count",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_domain_crud_operations",
+            "test": "test_domain_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_error_deleting_domains_with_repositories",
+            "test": "test_error_deleting_domains_with_repositories",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_authorization_token",
+            "test": "test_get_authorization_token",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_repository_endpoint",
+            "test": "test_get_repository_endpoint",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_and_domain_tagging",
+            "test": "test_repository_and_domain_tagging",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[@acme/dummy]",
+            "test": "test_deprecate[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[dummy]",
+            "test": "test_deprecate[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate_package_not_in_repository_but_external",
+            "test": "test_deprecate_package_not_in_repository_but_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[@acme/dummy]",
+            "test": "test_dist_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[dummy]",
+            "test": "test_dist_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_external_connections",
+            "test": "test_external_connections",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "test": "test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[dummy]",
+            "test": "test_forbids_publishing_blocked_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[@acme/dummy]",
+            "test": "test_install_copies_tarballs_downstream[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[dummy]",
+            "test": "test_install_copies_tarballs_downstream[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_unexisting_package",
+            "test": "test_install_unexisting_package",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[@acme/dummy]",
+            "test": "test_list_package_version_assets[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[dummy]",
+            "test": "test_list_package_version_assets[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[@acme/dummy]",
+            "test": "test_list_package_versions[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[dummy]",
+            "test": "test_list_package_versions[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[@acme/dummy]",
+            "test": "test_list_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[dummy]",
+            "test": "test_list_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[@acme/dummy]",
+            "test": "test_package_publish[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[dummy]",
+            "test": "test_package_publish[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[@acme/dummy]",
+            "test": "test_package_publish_with_custom_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[dummy]",
+            "test": "test_package_publish_with_custom_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_ping",
+            "test": "test_ping",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_external",
+            "test": "test_view_dist_tags_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_upstream",
+            "test": "test_view_dist_tags_upstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_error_deleting_domains_with_repositories",
+            "test": "test_error_deleting_domains_with_repositories",
+            "response": "409",
+            "error": "ConflictException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DeleteRepository": {
+      "domain, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_describe_domain_repository_count",
+            "test": "test_describe_domain_repository_count",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_error_deleting_domains_with_repositories",
+            "test": "test_error_deleting_domains_with_repositories",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_repository_endpoint",
+            "test": "test_get_repository_endpoint",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_and_domain_tagging",
+            "test": "test_repository_and_domain_tagging",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[@acme/dummy]",
+            "test": "test_deprecate[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[dummy]",
+            "test": "test_deprecate[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate_package_not_in_repository_but_external",
+            "test": "test_deprecate_package_not_in_repository_but_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[@acme/dummy]",
+            "test": "test_dist_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[dummy]",
+            "test": "test_dist_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_external_connections",
+            "test": "test_external_connections",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "test": "test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[dummy]",
+            "test": "test_forbids_publishing_blocked_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[@acme/dummy]",
+            "test": "test_install_copies_tarballs_downstream[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[dummy]",
+            "test": "test_install_copies_tarballs_downstream[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_unexisting_package",
+            "test": "test_install_unexisting_package",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[@acme/dummy]",
+            "test": "test_list_package_version_assets[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[dummy]",
+            "test": "test_list_package_version_assets[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[@acme/dummy]",
+            "test": "test_list_package_versions[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[dummy]",
+            "test": "test_list_package_versions[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[@acme/dummy]",
+            "test": "test_list_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[dummy]",
+            "test": "test_list_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[@acme/dummy]",
+            "test": "test_package_publish[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[dummy]",
+            "test": "test_package_publish[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[@acme/dummy]",
+            "test": "test_package_publish_with_custom_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[dummy]",
+            "test": "test_package_publish_with_custom_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_ping",
+            "test": "test_ping",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_external",
+            "test": "test_view_dist_tags_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_upstream",
+            "test": "test_view_dist_tags_upstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "404",
+            "error": "DomainNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DescribeDomain": {
+      "domain": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_describe_domain_repository_count",
+            "test": "test_describe_domain_repository_count",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_domain_crud_operations",
+            "test": "test_domain_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_domain_crud_operations",
+            "test": "test_domain_crud_operations",
+            "response": "404",
+            "error": "DomainNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DescribeRepository": {
+      "domain, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "404",
+            "error": "RepositoryNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "404",
+            "error": "DomainNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DisassociateExternalConnection": {
+      "domain, externalConnection, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "404",
+            "error": "ResourceNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "404",
+            "error": "DomainNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "GetAuthorizationToken": {
+      "domain": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_authorization_token",
+            "test": "test_get_authorization_token",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_authorization_token",
+            "test": "test_get_authorization_token",
+            "response": "404",
+            "error": "DomainNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "domain, durationSeconds": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_authorization_token",
+            "test": "test_get_authorization_token",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[@acme/dummy]",
+            "test": "test_deprecate[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[dummy]",
+            "test": "test_deprecate[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate_package_not_in_repository_but_external",
+            "test": "test_deprecate_package_not_in_repository_but_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[@acme/dummy]",
+            "test": "test_dist_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[dummy]",
+            "test": "test_dist_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_external_connections",
+            "test": "test_external_connections",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "test": "test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[dummy]",
+            "test": "test_forbids_publishing_blocked_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[@acme/dummy]",
+            "test": "test_install_copies_tarballs_downstream[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[dummy]",
+            "test": "test_install_copies_tarballs_downstream[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_unexisting_package",
+            "test": "test_install_unexisting_package",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[@acme/dummy]",
+            "test": "test_list_package_version_assets[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[dummy]",
+            "test": "test_list_package_version_assets[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[@acme/dummy]",
+            "test": "test_list_package_versions[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[dummy]",
+            "test": "test_list_package_versions[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[@acme/dummy]",
+            "test": "test_list_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[dummy]",
+            "test": "test_list_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[@acme/dummy]",
+            "test": "test_package_publish[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[dummy]",
+            "test": "test_package_publish[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[@acme/dummy]",
+            "test": "test_package_publish_with_custom_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[dummy]",
+            "test": "test_package_publish_with_custom_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_ping",
+            "test": "test_ping",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_external",
+            "test": "test_view_dist_tags_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_upstream",
+            "test": "test_view_dist_tags_upstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_authorization_token",
+            "test": "test_get_authorization_token",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "GetRepositoryEndpoint": {
+      "domain, format, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_get_repository_endpoint",
+            "test": "test_get_repository_endpoint",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[@acme/dummy]",
+            "test": "test_deprecate[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate[dummy]",
+            "test": "test_deprecate[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_deprecate_package_not_in_repository_but_external",
+            "test": "test_deprecate_package_not_in_repository_but_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[@acme/dummy]",
+            "test": "test_dist_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_dist_tag[dummy]",
+            "test": "test_dist_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_external_connections",
+            "test": "test_external_connections",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "test": "test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[dummy]",
+            "test": "test_forbids_publishing_blocked_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[@acme/dummy]",
+            "test": "test_install_copies_tarballs_downstream[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[dummy]",
+            "test": "test_install_copies_tarballs_downstream[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_unexisting_package",
+            "test": "test_install_unexisting_package",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[@acme/dummy]",
+            "test": "test_list_package_version_assets[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[dummy]",
+            "test": "test_list_package_version_assets[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[@acme/dummy]",
+            "test": "test_list_package_versions[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[dummy]",
+            "test": "test_list_package_versions[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[@acme/dummy]",
+            "test": "test_list_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[dummy]",
+            "test": "test_list_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[@acme/dummy]",
+            "test": "test_package_publish[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish[dummy]",
+            "test": "test_package_publish[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[@acme/dummy]",
+            "test": "test_package_publish_with_custom_tag[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_package_publish_with_custom_tag[dummy]",
+            "test": "test_package_publish_with_custom_tag[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_ping",
+            "test": "test_ping",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_external",
+            "test": "test_view_dist_tags_external",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_view_dist_tags_upstream",
+            "test": "test_view_dist_tags_upstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListDomains": {
+      "- (without any parameters)": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_domain_crud_operations",
+            "test": "test_domain_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListPackageVersionAssets": {
+      "domain, format, namespace, package, packageVersion, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[@acme/dummy]",
+            "test": "test_install_copies_tarballs_downstream[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[@acme/dummy]",
+            "test": "test_list_package_version_assets[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[@acme/dummy]",
+            "test": "test_install_copies_tarballs_downstream[@acme/dummy]",
+            "response": "404",
+            "error": "ResourceNotFoundException",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "domain, format, package, packageVersion, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[dummy]",
+            "test": "test_install_copies_tarballs_downstream[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_version_assets[dummy]",
+            "test": "test_list_package_version_assets[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_external_tarballs_downstream",
+            "test": "test_install_copies_external_tarballs_downstream",
+            "response": "404",
+            "error": "ResourceNotFoundException",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_install_copies_tarballs_downstream[dummy]",
+            "test": "test_install_copies_tarballs_downstream[dummy]",
+            "response": "404",
+            "error": "ResourceNotFoundException",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListPackageVersions": {
+      "domain, format, namespace, package, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[@acme/dummy]",
+            "test": "test_list_package_versions[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "domain, format, package, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_package_versions[dummy]",
+            "test": "test_list_package_versions[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListPackages": {
+      "domain, format, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[@acme/dummy]",
+            "test": "test_list_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_list_packages[dummy]",
+            "test": "test_list_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListRepositories": {
+      "- (without any parameters)": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListRepositoriesInDomain": {
+      "domain": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListTagsForResource": {
+      "resourceArn": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_and_domain_tagging",
+            "test": "test_repository_and_domain_tagging",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "PutPackageOriginConfiguration": {
+      "domain, format, namespace, package, repository, restrictions": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "test": "test_forbids_publishing_blocked_packages[@acme/dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "domain, format, package, repository, restrictions": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_registry_npm.py::TestRegistryNpm::test_forbids_publishing_blocked_packages[dummy]",
+            "test": "test_forbids_publishing_blocked_packages[dummy]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..access', '$..time', '$..gitHead', '$..size', '$..assets..hashes.MD5', '$..assets..hashes.SHA-1', '$..assets..hashes.SHA-256', '$..assets..hashes.SHA-512']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "TagResource": {
+      "resourceArn, tags": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_and_domain_tagging",
+            "test": "test_repository_and_domain_tagging",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "UntagResource": {
+      "resourceArn, tagKeys": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_and_domain_tagging",
+            "test": "test_repository_and_domain_tagging",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "UpdateRepository": {
+      "description, domain, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "domain, repository": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      },
+      "domain, repository, upstreams": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_external_connection_and_upstreams",
+            "test": "test_repository_external_connection_and_upstreams",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/codeartifact/test_codeartifact.py::TestCodeArtifact::test_repository_crud_operations",
+            "test": "test_repository_crud_operations",
+            "response": "404",
+            "error": "RepositoryNotFoundException",
+            "snapshot_skipped": "['$..domain.encryptionKey', '$..domain.s3BucketArn', '$..domains..encryptionKey', '$..repositoryEndpoint']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    }
+  }
+}

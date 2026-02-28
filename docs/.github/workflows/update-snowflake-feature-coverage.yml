@@ -1,0 +1,69 @@
+name: Update function coverage docs
+
+on:
+  schedule:
+    # “At 00:00 on Sunday.”
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
+
+jobs:
+  update-function-coverage:
+    name: Update function coverage docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: localstack-docs
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Checkout private tools
+        uses: actions/checkout@v4
+        with:
+          repository: localstack/snowflake
+          path: snowflake
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Run the script
+        working-directory: snowflake
+        env:
+          PYTHONPATH: ${{ github.workspace }}/snowflake
+        run: |
+          pip install localstack lxml requests
+          python ./etc/coverage.py
+
+      - name: Move the generated files
+        run: |
+          cd localstack-docs
+          mv ../snowflake/coverage-features.md src/content/docs/snowflake/features/index.md
+          mv ../snowflake/coverage-functions.md src/content/docs/snowflake/sql-functions.md
+          mv ../snowflake/coverage-restapi.md src/content/docs/snowflake/features/rest-api-endpoints.md
+
+      - name: Check for changes
+        id: check-for-changes
+        working-directory: localstack-docs
+        run: |
+          git add .
+          if git diff --staged --quiet; then
+            echo "diff-count=0" >> $GITHUB_OUTPUT
+          else
+            echo "diff-count=1" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v7
+        if: ${{ success() && steps.check-for-changes.outputs.diff-count != '0' && steps.check-for-changes.outputs.diff-count != '' }}
+        with:
+          path: localstack-docs
+          title: "Update function coverage documentation"
+          body: "Automated update of snowflake feature coverage docs"
+          branch: "snowflake-feature-coverage-updates"
+          author: "LocalStack Bot <localstack-bot@users.noreply.github.com>"
+          committer: "LocalStack Bot <localstack-bot@users.noreply.github.com>"
+          commit-message: "automated update of snowflake feature coverage docs"
+          token: ${{ secrets.PRO_ACCESS_TOKEN }}
+          reviewers: hovaesco, quetzalliwrites

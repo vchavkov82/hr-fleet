@@ -1,0 +1,1221 @@
+{
+  "service": "redshift-data",
+  "pro_support": true,
+  "operations": [
+    {
+      "BatchExecuteStatement": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "CancelStatement": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "DescribeStatement": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "DescribeTable": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ExecuteStatement": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetStatementResult": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": true,
+        "snapshot_tested": true,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "GetStatementResultV2": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListDatabases": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    },
+    {
+      "ListSchemas": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListStatements": {
+        "implemented": false,
+        "availability": "",
+        "internal_test_suite": false,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": false
+      }
+    },
+    {
+      "ListTables": {
+        "implemented": true,
+        "availability": "pro",
+        "internal_test_suite": true,
+        "external_test_suite": false,
+        "terraform_test_suite": false,
+        "aws_validated": false,
+        "snapshot_tested": false,
+        "snapshot_skipped": "",
+        "k8s_test_suite": true
+      }
+    }
+  ],
+  "details": {
+    "DescribeStatement": {
+      "Id": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/firehose/test_firehose.py::TestFirehoseIntegration::test_firehose_redshift_as_target",
+            "test": "test_firehose_redshift_as_target",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_create_cluster",
+            "test": "test_create_cluster",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[array]",
+            "test": "test_data_api_data_types[array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[bigint]",
+            "test": "test_data_api_data_types[bigint]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[boolean]",
+            "test": "test_data_api_data_types[boolean]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[boolean_array]",
+            "test": "test_data_api_data_types[boolean_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[bpchar]",
+            "test": "test_data_api_data_types[bpchar]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[char]",
+            "test": "test_data_api_data_types[char]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[char_array]",
+            "test": "test_data_api_data_types[char_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[character varying]",
+            "test": "test_data_api_data_types[character varying]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[character]",
+            "test": "test_data_api_data_types[character]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[date]",
+            "test": "test_data_api_data_types[date]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[date_array]",
+            "test": "test_data_api_data_types[date_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[decimal]",
+            "test": "test_data_api_data_types[decimal]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[decimal_array]",
+            "test": "test_data_api_data_types[decimal_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[float4_array]",
+            "test": "test_data_api_data_types[float4_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[float8_array]",
+            "test": "test_data_api_data_types[float8_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[float]",
+            "test": "test_data_api_data_types[float]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int2_array]",
+            "test": "test_data_api_data_types[int2_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int4_array]",
+            "test": "test_data_api_data_types[int4_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int8_array]",
+            "test": "test_data_api_data_types[int8_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int]",
+            "test": "test_data_api_data_types[int]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[numeric_array]",
+            "test": "test_data_api_data_types[numeric_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[text_array]",
+            "test": "test_data_api_data_types[text_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[text_array_explicit]",
+            "test": "test_data_api_data_types[text_array_explicit]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[text_array_explicit_with_space]",
+            "test": "test_data_api_data_types[text_array_explicit_with_space]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[time]",
+            "test": "test_data_api_data_types[time]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[time_array]",
+            "test": "test_data_api_data_types[time_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[timestamp]",
+            "test": "test_data_api_data_types[timestamp]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[timestamp_array]",
+            "test": "test_data_api_data_types[timestamp_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[varchar]",
+            "test": "test_data_api_data_types[varchar]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[varchar_array]",
+            "test": "test_data_api_data_types[varchar_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "DescribeTable": {
+      "ClusterIdentifier, Database, Table": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_create_cluster",
+            "test": "test_create_cluster",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ExecuteStatement": {
+      "ClientToken, ClusterIdentifier, Database, Parameters, Sql": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/scenario/kinesis_firehose_redshift/test_kinesis_firehose_redshift.py::TestKinesisFirehoseScenario::test_kinesis_firehose_redshift",
+            "test": "test_kinesis_firehose_redshift",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "internal"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/firehose/test_firehose.py::TestFirehoseIntegration::test_firehose_redshift_as_target",
+            "test": "test_firehose_redshift_as_target",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "internal"
+          }
+        ]
+      },
+      "ClientToken, ClusterIdentifier, Database, Sql": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/firehose/test_firehose.py::TestFirehoseIntegration::test_firehose_redshift_as_target",
+            "test": "test_firehose_redshift_as_target",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_create_cluster",
+            "test": "test_create_cluster",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[array]",
+            "test": "test_data_api_data_types[array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[bigint]",
+            "test": "test_data_api_data_types[bigint]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[boolean]",
+            "test": "test_data_api_data_types[boolean]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[boolean_array]",
+            "test": "test_data_api_data_types[boolean_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[bpchar]",
+            "test": "test_data_api_data_types[bpchar]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[char]",
+            "test": "test_data_api_data_types[char]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[char_array]",
+            "test": "test_data_api_data_types[char_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[character varying]",
+            "test": "test_data_api_data_types[character varying]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[character]",
+            "test": "test_data_api_data_types[character]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[date]",
+            "test": "test_data_api_data_types[date]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[date_array]",
+            "test": "test_data_api_data_types[date_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[decimal]",
+            "test": "test_data_api_data_types[decimal]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[decimal_array]",
+            "test": "test_data_api_data_types[decimal_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[float4_array]",
+            "test": "test_data_api_data_types[float4_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[float8_array]",
+            "test": "test_data_api_data_types[float8_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[float]",
+            "test": "test_data_api_data_types[float]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int2_array]",
+            "test": "test_data_api_data_types[int2_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int4_array]",
+            "test": "test_data_api_data_types[int4_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int8_array]",
+            "test": "test_data_api_data_types[int8_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int]",
+            "test": "test_data_api_data_types[int]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[numeric_array]",
+            "test": "test_data_api_data_types[numeric_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[text_array]",
+            "test": "test_data_api_data_types[text_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[text_array_explicit]",
+            "test": "test_data_api_data_types[text_array_explicit]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[text_array_explicit_with_space]",
+            "test": "test_data_api_data_types[text_array_explicit_with_space]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[time]",
+            "test": "test_data_api_data_types[time]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[time_array]",
+            "test": "test_data_api_data_types[time_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[timestamp]",
+            "test": "test_data_api_data_types[timestamp]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[timestamp_array]",
+            "test": "test_data_api_data_types[timestamp_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[varchar]",
+            "test": "test_data_api_data_types[varchar]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[varchar_array]",
+            "test": "test_data_api_data_types[varchar_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "GetStatementResult": {
+      "Id": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/firehose/test_firehose.py::TestFirehoseIntegration::test_firehose_redshift_as_target",
+            "test": "test_firehose_redshift_as_target",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_create_cluster",
+            "test": "test_create_cluster",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[array]",
+            "test": "test_data_api_data_types[array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[bigint]",
+            "test": "test_data_api_data_types[bigint]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[boolean]",
+            "test": "test_data_api_data_types[boolean]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[boolean_array]",
+            "test": "test_data_api_data_types[boolean_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[bpchar]",
+            "test": "test_data_api_data_types[bpchar]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[char]",
+            "test": "test_data_api_data_types[char]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[char_array]",
+            "test": "test_data_api_data_types[char_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[character varying]",
+            "test": "test_data_api_data_types[character varying]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[character]",
+            "test": "test_data_api_data_types[character]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[date]",
+            "test": "test_data_api_data_types[date]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[date_array]",
+            "test": "test_data_api_data_types[date_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[decimal]",
+            "test": "test_data_api_data_types[decimal]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[decimal_array]",
+            "test": "test_data_api_data_types[decimal_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[float4_array]",
+            "test": "test_data_api_data_types[float4_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[float8_array]",
+            "test": "test_data_api_data_types[float8_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[float]",
+            "test": "test_data_api_data_types[float]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int2_array]",
+            "test": "test_data_api_data_types[int2_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int4_array]",
+            "test": "test_data_api_data_types[int4_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int8_array]",
+            "test": "test_data_api_data_types[int8_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[int]",
+            "test": "test_data_api_data_types[int]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[numeric_array]",
+            "test": "test_data_api_data_types[numeric_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[text_array]",
+            "test": "test_data_api_data_types[text_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[text_array_explicit]",
+            "test": "test_data_api_data_types[text_array_explicit]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[text_array_explicit_with_space]",
+            "test": "test_data_api_data_types[text_array_explicit_with_space]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[time]",
+            "test": "test_data_api_data_types[time]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[time_array]",
+            "test": "test_data_api_data_types[time_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[timestamp]",
+            "test": "test_data_api_data_types[timestamp]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[timestamp_array]",
+            "test": "test_data_api_data_types[timestamp_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[varchar]",
+            "test": "test_data_api_data_types[varchar]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_data_api_data_types[varchar_array]",
+            "test": "test_data_api_data_types[varchar_array]",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "['$..CreatedAt', '$..DbUser', '$..ColumnMetadata']",
+            "aws_validated": true,
+            "snapshot_tested": true,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListDatabases": {
+      "ClusterIdentifier, Database": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_create_cluster",
+            "test": "test_create_cluster",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/iam/test_iam_enforcement.py::TestIAMEnforcementIdentityBasedPolicies::test_enforce_policy_redshift",
+            "test": "test_enforce_policy_redshift",
+            "response": "400",
+            "error": "ValidationException",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          },
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/iam/test_iam_enforcement.py::TestIAMEnforcementIdentityBasedPolicies::test_enforce_policy_redshift",
+            "test": "test_enforce_policy_redshift",
+            "response": "400",
+            "error": "AccessDeniedException",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    },
+    "ListTables": {
+      "ClusterIdentifier, Database": {
+        "ls_pro": [
+          {
+            "node_id": "LocalStack Pro: tests/aws/services/redshift/test_redshift.py::TestRedshift::test_create_cluster",
+            "test": "test_create_cluster",
+            "response": "200",
+            "error": "",
+            "snapshot_skipped": "",
+            "aws_validated": false,
+            "snapshot_tested": false,
+            "origin": "external"
+          }
+        ]
+      }
+    }
+  }
+}
