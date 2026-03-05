@@ -19,3 +19,8 @@ root = "www"
 [modules]
 # Configure root module resolution
 auto = true
+
+[test]
+# Exclude e2e tests and only run unit tests with vitest
+root = "www"
+preload = ["www/tests/setup.ts"]

@@ -1,5 +1,11 @@
 ---
-import { redirect } from "astro";
-
-redirect("/posts/1");
+// Redirect to blog posts listing
+const redirect_url = "/posts/";
 ---
+
+<html>
+  <head>
+    <meta http-equiv="refresh" content={`0; url=${redirect_url}`} />
+  </head>
+  <body>Redirecting...</body>
+</html>

@@ -12,7 +12,7 @@ const partnerSchema = z.object({
   email: z.string().email('Invalid email address'),
   partnerType: z.string().min(1, 'Please select a partner type'),
   companySize: z.string().min(1, 'Please select a company size'),
-  agreement: z.literal(true, { errorMap: () => ({ message: 'You must agree to the terms' }) }),
+  agreement: z.boolean().refine(v => v === true, 'You must agree to the terms'),
 })
 
 type PartnerFormData = z.infer<typeof partnerSchema>

@@ -14,7 +14,7 @@ const contactSchema = z.object({
   companySize: z.string().optional(),
   subject: z.string().min(1, 'Please select a subject'),
   message: z.string().min(20, 'Message must be at least 20 characters'),
-  privacy: z.literal(true, { errorMap: () => ({ message: 'You must agree to the privacy policy' }) }),
+  privacy: z.boolean().refine(v => v === true, 'You must agree to the privacy policy'),
 })
 
 type ContactFormData = z.infer<typeof contactSchema>

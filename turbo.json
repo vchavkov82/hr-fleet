@@ -1,7 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "stream",
-  "globalDotEnv": [".env", ".env.local"],
   "remoteCache": {
     "enabled": true
   },

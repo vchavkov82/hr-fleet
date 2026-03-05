@@ -100,9 +100,4 @@ export default defineConfig({
     },
   },
 
-  env: {
-    schema: {
-      LOCALSTACK_VERSION: envField.string({ context: 'server', access: 'public', default: '3.0.0' }),
-    },
-  },
 });

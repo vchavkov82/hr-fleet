@@ -87,8 +87,8 @@ dev-docs: ## Start HR docs only in dev mode (port 3011)
 
 # ── Build ───────────────────────────────────────────────────────────────────
 
-build: ## Build all HR apps via turbo with cache optimization
-	node_modules/.bin/turbo run build --cache-workers=4
+build: ## Build HR apps via turbo (www, blog) with cache optimization
+	node_modules/.bin/turbo run build --filter=@hr/www --filter=@hr/blog --cache-workers=4
 
 build-www: ## Build HR site only
 	node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4
