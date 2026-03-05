@@ -5,7 +5,7 @@
 # Use global cache for node_modules (.bun/install/cache)
 optional = false
 # Prefer link mode for workspaces (faster)
-production = true
+production = false
 
 [bundle]
 # Optimize bundles with tree-shaking
