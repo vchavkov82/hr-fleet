@@ -14,10 +14,10 @@
     "dev:www": "cd www && PORT=3010 bun dev",
     "dev:blog": "cd blog && bun dev",
     "dev:docs": "cd docs && bun dev",
-    "build": "node_modules/.bin/turbo run build",
-    "build:www": "node_modules/.bin/turbo run build --filter=@hr/www",
-    "build:blog": "node_modules/.bin/turbo run build --filter=@hr/blog",
-    "build:docs": "node_modules/.bin/turbo run build --filter=@hr/docs",
+    "build": "node_modules/.bin/turbo run build --cache-workers=4",
+    "build:www": "node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4",
+    "build:blog": "node_modules/.bin/turbo run build --filter=@hr/blog --cache-workers=4",
+    "build:docs": "node_modules/.bin/turbo run build --filter=@hr/docs --cache-workers=4",
     "lint": "node_modules/.bin/turbo run lint",
     "typecheck": "node_modules/.bin/turbo run typecheck",
     "test": "cd www && bun run test",
@@ -27,8 +27,9 @@
     "test:e2e:debug": "cd www && bun run test:e2e:debug",
     "test:e2e:ui": "cd www && bun run test:e2e:ui",
     "test:all": "cd www && bun run test",
-    "clean": "rm -rf node_modules www/node_modules blog/node_modules docs/node_modules",
-    "clean:cache": "rm -rf www/.next && echo 'Cache cleaned'"
+    "clean": "rm -rf node_modules www/node_modules blog/node_modules docs/node_modules && echo 'node_modules cleaned'",
+    "clean:cache": "rm -rf www/.next www/.next/cache www/node_modules/.cache .turbo && echo 'Build cache cleaned'",
+    "prebuild": "bun run typecheck"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

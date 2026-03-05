@@ -1,0 +1,93 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: HR App MVP Marketing & Launch
+status: executing
+last_updated: "2026-03-05"
+progress:
+  total_phases: 1
+  total_plans: 10
+  completed_plans: 10
+  completed_phases: 1
+---
+
+# Project State
+
+## Project Reference
+
+See: .planning/PROJECT.md (updated 2026-03-05)
+
+**Core value:** Bulgarian SMBs can manage all their HR operations in one unified platform with built-in Bulgarian compliance.
+**Current focus:** Phase 1 - HR App Marketing Site & MVP
+
+## Current Position
+
+Phase: 1 of 1+ (HR App Marketing Site & MVP)
+Plan: 10 of 10 (All plans complete)
+Status: Executing
+Last activity: 2026-03-05 -- Separated HR platform from Jobs project, integrated 21st Agents AI assistant
+
+Progress: [##########] 100% (Phase 1 Marketing Site)
+
+## Performance Metrics
+
+**Phase 1 Completion:**
+- All 10 plans completed
+- Marketing site: 100% (homepage, features, pricing, hr-tools, blog integration, auth flows)
+- AI Assistant: Integrated (Claude Sonnet 4.6 via 21st Agents)
+- Design system: Corporate blue palette (BambooHR/Personio inspired)
+
+## Accumulated Context
+
+### Completed Features (Phase 1)
+
+- ✓ Marketing homepage with product hero and social proof
+- ✓ Features page with alternating screenshot rows
+- ✓ Pricing page with module-based "Get a quote" model
+- ✓ HR Tools section with Bulgarian tax calculators
+- ✓ Email-gated document templates (contracts, policies, forms)
+- ✓ Blog integration via Astro subpath proxy
+- ✓ Free trial sign-up flow
+- ✓ AI Assistant (Claude Sonnet 4.6) integrated into HR Tools page
+- ✓ All supporting pages (about, contact, partners, careers, api-docs, help-center, legal)
+- ✓ Framer Motion scroll animations
+
+### Architecture
+
+- **Frontend**: Next.js 15.2, React 19, Tailwind CSS
+- **Backend**: Go 1.25 (shared with Jobs platform initially, can be separated)
+- **AI**: Claude Sonnet 4.6 via @an-sdk (21st Agents)
+- **Authentication**: JWT-based
+- **Design**: Corporate blue palette (#1e3a8a primary, enterprise-feeling)
+
+### Decisions
+
+- Separated HR platform from Jobs platform (independent repository)
+- Module-based pricing (base + add-on modules)
+- Free trial with instant sign-up (no credit card required)
+- Bulgarian-first design (English secondary)
+- AI assistant for HR policy/calculation queries
+- Email-gated templates for lead capture
+
+### Setup Requirements (User Responsibilities)
+
+1. Get API key from https://21st.dev
+2. Add to `.env`: `AN_API_KEY=<key>`
+3. Deploy agent: `cd www && npx @an-sdk/cli login && npx @an-sdk/cli deploy`
+4. Update agent name in page.tsx if different from 'hr-assistant'
+5. Run `bun run dev` and test at http://localhost:3010/en/hr-tools
+
+## Next Phases (To Be Planned)
+
+- Phase 2: Employee Management (CRUD, directory, onboarding)
+- Phase 3: Leave Management (tracking, approval workflows)
+- Phase 4: ATS (job posting, applications, candidate pipeline)
+- Phase 5: Performance Reviews & Workflows
+- Phase 6: Payroll Integration Foundation
+
+## Session Continuity
+
+Last session: 2026-03-05
+Stopped at: Cleaned up job-related GSD plans, updated documentation to HR-only focus
+Resume file: None
+Next up: Plan Phase 2 (Employee Management) or address immediate HR feature gaps

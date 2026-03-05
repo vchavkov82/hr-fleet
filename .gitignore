@@ -26,6 +26,7 @@ yarn-error.log*
 
 # Next.js
 www/.next/
+www/node_modules/.cache/
 
 # Astro
 blog/dist/

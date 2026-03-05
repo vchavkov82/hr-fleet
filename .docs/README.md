@@ -1,22 +1,27 @@
-# Copilot Documentation Context
+# Documentation
 
-This directory contains documentation and context files for GitHub Copilot to improve code generation and assistance.
+This directory contains all documentation for the HR platform.
 
-## Structure
+## Key Documents
 
-- `/architecture` - System architecture and design patterns
-- `/api` - API documentation and schemas
-- `/components` - Component documentation and usage examples
-- `/workflow` - Development workflows and processes
-- `/conventions` - Code style and naming conventions
+- **QUICK_START.md** - Quick start guide for setting up the unified design system
+- **DESIGN_SYSTEM.md** - Complete design system documentation (colors, typography, components)
+- **IMPLEMENTATION_SUMMARY.md** - Summary of what was implemented and file structure
+- **REFACTORING_SUMMARY.md** - Summary of refactoring changes
+- **AGENT_SETUP.md** - AI Assistant (21st Agents) configuration and setup
+
+## Related Documentation
+
+- **../../DEVELOPER.md** - Make commands and development workflow
+- **../../.planning/** - Project planning and requirements
+- **../../blog/** - Blog project (Astro)
+- **../../docs/** - Documentation site (Astro Starlight)
+- **../../www/** - HR platform website (Next.js)
 
 ## Usage
 
-Files in this directory are automatically loaded by GitHub Copilot when generating code or providing assistance. Keep documentation concise, accurate, and up-to-date.
-
-## Best Practices
-
-- Use Markdown format
-- Keep files focused on specific topics
-- Include code examples where relevant
-- Update when significant changes are made to the codebase
+These files serve as:
+- Development reference for team members
+- Context for GitHub Copilot code generation
+- Setup guides for new developers
+- Architecture and design documentation

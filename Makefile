@@ -2,8 +2,8 @@
 
 COMPOSE := podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml
 
-.PHONY: help up down restart logs ps clean clean-all clean-cache clean-www clean-blog clean-docs \
-	dev dev-all dev-apps dev-www dev-blog dev-docs \
+.PHONY: help up down restart logs ps clean clean-all clean-cache clean-webpack clean-www clean-blog clean-docs \
+	dev infra infra-down infra-logs dev-www dev-blog dev-docs \
 	build build-www build-blog build-docs build-all \
 	test test-watch test-e2e lint typecheck \
 	install bootstrap nuke
@@ -37,6 +37,9 @@ clean-all: ## Remove containers, networks, and volumes (WARNING: deletes data)
 clean-cache: ## Clear all build caches (.next, .astro, dist, .turbo)
 	rm -rf www/.next www/.next/cache blog/dist blog/.astro docs/dist docs/.astro .turbo
 
+clean-webpack: ## Clear webpack dev cache only (faster than full clean)
+	rm -rf www/.next/cache/webpack
+
 clean-www: ## Clear www build cache and restart container
 	rm -rf www/.next
 	-podman restart hr-www 2>/dev/null || true
@@ -55,15 +58,19 @@ nuke: ## Full clean: containers, volumes, caches, node_modules
 
 # ── Development ─────────────────────────────────────────────────────────────
 
-dev: ## Start full dev environment (infra via podman)
+dev: ## Start everything (infra + frontend dev servers)
+	@echo "Starting infrastructure..." && \
+	scripts/dev.sh up && \
+	scripts/dev-apps.sh
+
+infra: ## Start infrastructure only (containers: Caddy, etc.)
 	scripts/dev.sh
 
-dev-apps: ## Start all frontend dev servers in parallel (colored output)
-	scripts/dev-apps.sh
+infra-down: ## Stop infrastructure
+	scripts/dev.sh stop
 
-dev-all: ## Start infra (podman) + all frontend dev servers
-	scripts/dev.sh up
-	scripts/dev-apps.sh
+infra-logs: ## Follow infrastructure logs
+	scripts/dev.sh logs
 
 dev-www: ## Start HR site in dev mode (port 3010)
 	cd www && PORT=3010 bun dev
@@ -76,17 +83,17 @@ dev-docs: ## Start HR docs in dev mode (port 3011)
 
 # ── Build ───────────────────────────────────────────────────────────────────
 
-build: ## Build all HR apps via turbo
-	node_modules/.bin/turbo run build
+build: ## Build all HR apps via turbo with cache optimization
+	node_modules/.bin/turbo run build --cache-workers=4
 
 build-www: ## Build HR site only
-	node_modules/.bin/turbo run build --filter=@hr/www
+	node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4
 
 build-blog: ## Build HR blog only
-	node_modules/.bin/turbo run build --filter=@hr/blog
+	node_modules/.bin/turbo run build --filter=@hr/blog --cache-workers=4
 
 build-docs: ## Build HR docs only
-	node_modules/.bin/turbo run build --filter=@hr/docs
+	node_modules/.bin/turbo run build --filter=@hr/docs --cache-workers=4
 
 build-all: build ## Build everything (alias for build)
 

@@ -1,0 +1,21 @@
+# Bun configuration for workspace optimization
+# https://bun.sh/docs/runtime/bunfig
+
+[install]
+# Use global cache for node_modules (.bun/install/cache)
+optional = false
+# Prefer link mode for workspaces (faster)
+production = true
+
+[bundle]
+# Optimize bundles with tree-shaking
+root = "www"
+
+[compile]
+# Use bytecode caching for faster startup
+root = "www"
+
+# Workspace configuration
+[modules]
+# Configure root module resolution
+auto = true

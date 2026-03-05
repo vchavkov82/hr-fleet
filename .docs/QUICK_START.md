@@ -61,9 +61,9 @@ blog/
     └─ pages/
       └─ index.astro ← UPDATED (now full homepage)
 
-DESIGN_SYSTEM.md ← Complete documentation
-IMPLEMENTATION_SUMMARY.md ← What was done
-QUICK_START.md ← This file
+DESIGN_SYSTEM.md - Complete documentation
+IMPLEMENTATION_SUMMARY.md - What was done
+QUICK_START.md - This file
 ```
 
 ## Making Changes

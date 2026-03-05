@@ -3,7 +3,8 @@ import createNextIntlPlugin from 'next-intl/plugin'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 const withBundleAnalyzer = BundleAnalyzer({
@@ -67,8 +68,16 @@ const nextConfig = {
 
   webpack: (config, { dev, isServer }) => {
     if (dev) {
-      // Avoid flaky dev runtime errors caused by corrupted filesystem cache.
-      config.cache = false
+      // Enable webpack filesystem caching for faster rebuilds
+      config.cache = {
+        type: 'filesystem',
+        cacheDirectory: resolve(__dirname, '.next/cache/webpack'),
+        buildDependencies: {
+          config: [__filename],
+        },
+        // Invalidate cache if environment changes
+        version: `webpack-${process.env.NEXT_PUBLIC_APP_VERSION || '1.0.0'}`,
+      }
 
       if (!isServer) {
         // In dev mode next-intl's BaseLink resolves next/link to the Pages Router

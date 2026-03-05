@@ -28,12 +28,14 @@ cleanup() {
   echo ""
   echo "Stopping all dev servers..."
   for pid in "${PIDS[@]}"; do
-    kill "$pid" 2>/dev/null || true
+    if kill -0 "$pid" 2>/dev/null; then
+      kill "$pid" 2>/dev/null || true
+    fi
   done
   wait 2>/dev/null || true
   echo "Done."
 }
-trap cleanup INT TERM
+trap cleanup INT TERM EXIT
 
 echo ""
 echo -e "${C_BOLD}Starting HR frontend dev servers...${C_RESET}"

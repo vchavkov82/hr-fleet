@@ -27,7 +27,11 @@ case "$CMD" in
     exit 0
     ;;
   logs)
-    $COMPOSE logs -f ${2:-}
+    if [ -n "${2:-}" ]; then
+      $COMPOSE logs -f "$2"
+    else
+      $COMPOSE logs -f
+    fi
     exit 0
     ;;
   ps|status)
@@ -52,7 +56,14 @@ fi
 
 # Tear down existing containers/pods to avoid name conflicts
 echo "Cleaning up existing containers..."
-$COMPOSE down 2>/dev/null || true
+$COMPOSE down -v --remove-orphans 2>/dev/null || true
+
+# Fallback cleanup for stubborn containers (by name pattern)
+sleep 1
+for container in hr-www hr-blog hr-docs hr-caddy; do
+  podman rm -f "$container" 2>/dev/null || true
+done
+podman pod rm -f pod_deploy 2>/dev/null || true
 
 echo ""
 echo "Starting HR development environment..."
