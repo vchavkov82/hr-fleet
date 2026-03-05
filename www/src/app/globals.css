@@ -27,6 +27,11 @@
     @apply font-heading;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
+
+  /* Fix for Next.js portal container */
+  nextjs-portal {
+    display: contents;
+  }
 }
 
 @layer components {

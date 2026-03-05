@@ -3,9 +3,10 @@
 COMPOSE := podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml
 
 .PHONY: help up down restart logs ps clean clean-all clean-cache clean-webpack clean-www clean-blog clean-docs \
-	dev infra infra-down infra-logs dev-www dev-blog dev-docs \
+	dev dev-apps infra infra-down infra-logs dev-www dev-blog dev-docs \
 	build build-www build-blog build-docs build-all \
 	test test-watch test-e2e lint typecheck \
+	check-links check-links-www check-links-blog check-links-docs \
 	install bootstrap nuke
 
 help: ## Show this help
@@ -58,12 +59,15 @@ nuke: ## Full clean: containers, volumes, caches, node_modules
 
 # ── Development ─────────────────────────────────────────────────────────────
 
-dev: ## Start everything (infra + frontend dev servers)
-	@echo "Starting infrastructure..." && \
-	scripts/dev.sh up && \
+dev: ## Start everything (infra + frontend dev servers in parallel)
+	scripts/dev.sh up & \
+	sleep 2 && \
 	scripts/dev-apps.sh
 
-infra: ## Start infrastructure only (containers: Caddy, etc.)
+dev-apps: ## Start all frontend dev servers (www, blog, docs)
+	scripts/dev-apps.sh
+
+infra: ## Start infrastructure only (PostgreSQL, Redis, Caddy, etc.)
 	scripts/dev.sh
 
 infra-down: ## Stop infrastructure
@@ -72,13 +76,13 @@ infra-down: ## Stop infrastructure
 infra-logs: ## Follow infrastructure logs
 	scripts/dev.sh logs
 
-dev-www: ## Start HR site in dev mode (port 3010)
+dev-www: ## Start HR site only in dev mode (port 3010)
 	cd www && PORT=3010 bun dev
 
-dev-blog: ## Start HR blog in dev mode (port 3013)
+dev-blog: ## Start HR blog only in dev mode (port 3013)
 	cd blog && bun dev
 
-dev-docs: ## Start HR docs in dev mode (port 3011)
+dev-docs: ## Start HR docs only in dev mode (port 3011)
 	cd docs && bun dev
 
 # ── Build ───────────────────────────────────────────────────────────────────
@@ -113,6 +117,18 @@ lint: ## Lint all workspaces
 
 typecheck: ## Type-check all workspaces
 	node_modules/.bin/turbo run typecheck
+
+check-links: ## Check for broken links on all sites (requires servers running)
+	scripts/check-broken-links.sh
+
+check-links-www: ## Check broken links on HR site only
+	scripts/check-broken-links.sh --site www
+
+check-links-blog: ## Check broken links on blog only
+	scripts/check-broken-links.sh --site blog
+
+check-links-docs: ## Check broken links on docs only
+	scripts/check-broken-links.sh --site docs
 
 # ── Setup ───────────────────────────────────────────────────────────────────
 

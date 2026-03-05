@@ -1,7 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { Link } from '@/navigation'
 import { routing } from '@/i18n/routing'
 
 export const dynamic = 'force-static'
@@ -112,9 +112,10 @@ export default async function HrToolsPage({
                 <Link
                   key={calc.href}
                   href={calc.href}
-                  className="card p-6 group flex flex-col gap-4"
+                  className="card p-6 group flex flex-col gap-4 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label={`${title}: ${description}`}
                 >
-                  <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-primary-50 text-primary">
+                  <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-primary-50 text-primary group-hover:bg-primary-100 transition-colors">
                     {calc.icon}
                   </div>
                   <div>
@@ -130,6 +131,7 @@ export default async function HrToolsPage({
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"

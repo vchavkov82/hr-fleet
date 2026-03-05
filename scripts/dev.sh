@@ -9,6 +9,16 @@ cd "$ROOT_DIR"
 
 COMPOSE="podman-compose -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml"
 
+# Cleanup on interrupt
+cleanup() {
+  trap - INT TERM EXIT
+  echo ""
+  echo "Shutting down services..."
+  $COMPOSE down 2>/dev/null || true
+  exit 0
+}
+trap cleanup INT TERM EXIT
+
 # Handle subcommands before doing anything else
 CMD="${1:-up}"
 
@@ -70,14 +80,20 @@ echo "Starting HR development environment..."
 echo ""
 
 # Start all services
-$COMPOSE up -d
+if ! $COMPOSE up -d; then
+  echo "Error: Failed to start services" >&2
+  exit 1
+fi
 
 echo ""
 echo "Waiting for services to start..."
 sleep 3
 
-# Show status
-$COMPOSE ps
+# Verify services started
+echo ""
+if ! $COMPOSE ps; then
+  echo "Warning: Could not verify service status" >&2
+fi
 
 echo ""
 echo "Development environment is ready!"
@@ -95,7 +111,7 @@ echo ""
 echo "Run 'make dev-apps' to start frontend dev servers."
 echo ""
 echo "Commands:"
-echo "  scripts/dev.sh stop      Stop all services"
-echo "  scripts/dev.sh restart   Restart all services"
-echo "  scripts/dev.sh logs      Follow all logs"
-echo "  scripts/dev.sh ps        Show service status"
+echo "  make infra-down  Stop all services"
+echo "  make infra       Restart all services"
+echo "  make infra-logs  Follow all logs"
+echo "  make ps          Show service status"
