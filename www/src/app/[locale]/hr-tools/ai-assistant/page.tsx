@@ -10,7 +10,7 @@ const chat = createAnChat({
 })
 
 export default function AIAssistantPage() {
-  const { messages, status, stop, error } = useChat({ chat } as unknown as Record<string, unknown>)
+  const { messages, input, setInput, handleSubmit, stop, isLoading, error } = useChat({ chat })
 
   return (
     <div className="min-h-screen bg-background">
@@ -25,9 +25,10 @@ export default function AIAssistantPage() {
             <AnAgentChat
               messages={messages}
               onSend={(message) => {
-                // message is already in the correct format
+                setInput(message.content)
+                handleSubmit(new Event('submit') as any)
               }}
-              status={status}
+              status={isLoading ? 'in_progress' : 'idle'}
               onStop={stop}
               error={error ?? undefined}
               theme={theme}
