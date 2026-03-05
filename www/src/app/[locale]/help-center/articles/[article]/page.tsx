@@ -2529,7 +2529,7 @@ export default async function ArticlePage({
                                 </div>
                                 <div className="bg-surface-lighter p-6 rounded-xl">
                                     <h3 className="font-semibold mb-3">Email Support</h3>
-                                    <p className="text-gray-600 text-sm mb-4">We'll reply within 24 hours.</p>
+                                    <p className="text-gray-600 text-sm mb-4">We&apos;ll reply within 24 hours.</p>
                                     <a href="mailto:support@hr.bg" className="text-primary font-semibold hover:text-primary/80 transition-colors">
                                         support@hr.bg
                                     </a>

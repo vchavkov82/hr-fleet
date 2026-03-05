@@ -8,10 +8,7 @@ services:
     image: caddy:2-alpine
     container_name: hr-caddy
     hostname: hr-caddy
-    ports:
-      - "0.0.0.0:80:80"
-      - "0.0.0.0:443:443"
-      - "0.0.0.0:443:443/udp"   # HTTP/3 (QUIC)
+    # Ports defined in override files only — dev uses 8080/8443, prod uses 80/443
     env_file:
       - ../.env
     volumes:

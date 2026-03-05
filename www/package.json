@@ -23,8 +23,14 @@
     "stop": "sh -c 'pids=$(ss -ltnp \"sport = :3010\" 2>/dev/null | sed -n \"s/.*pid=\\([0-9]\\+\\).*/\\1/p\" | sort -u); if [ -n \"$pids\" ]; then kill -9 $pids >/dev/null 2>&1 || true; fi'"
   },
   "dependencies": {
+    "@ai-sdk/react": "^3.0.118",
+    "@an-sdk/agent": "^0.0.5",
+    "@an-sdk/nextjs": "^0.0.8",
+    "@an-sdk/node": "^0.0.2",
+    "@an-sdk/react": "^0.1.2",
     "@headlessui/react": "^2.2.0",
     "@hookform/resolvers": "^3.9.1",
+    "ai": "^6.0.116",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
     "gray-matter": "^4.0.3",
@@ -38,7 +44,7 @@
     "remark-gfm": "^4.0.1",
     "swiper": "^12.1.2",
     "tailwind-merge": "^2.5.4",
-    "zod": "^3.23.8"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.1.6",

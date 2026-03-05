@@ -23,6 +23,15 @@ export async function generateMetadata({
 
 const CALCULATORS = [
   {
+    href: '/hr-tools/ai-assistant',
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5h.01v.01H12v-.01z" />
+      </svg>
+    ),
+    labelKey: 'calculatorCards.aiAssistant',
+  },
+  {
     href: '/hr-tools/salary-calculator',
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

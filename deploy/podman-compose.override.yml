@@ -1,7 +1,17 @@
 # HR Product — Development Overrides
 # Source mounts for hot-reload, dev commands, and dev-only env vars.
+#
+# Caddy uses ports 8090/8453 instead of 80/443 to avoid conflicting with
+# ../jobs which occupies 80/443 and port 8080 (Go API).
+# Access locally via:  http://hr.localhost:8090  /  https://hr.localhost:8453
 
 services:
+
+  caddy:
+    ports:
+      - "0.0.0.0:8090:80"
+      - "0.0.0.0:8453:443"
+      - "0.0.0.0:8453:443/udp"
 
   hr:
     volumes:
@@ -27,11 +37,11 @@ services:
 
   hr-docs:
     volumes:
-      - ../docs:/app
-      - hr_docs_node_modules:/app/node_modules
-    working_dir: /app
+      - ../:/workspace
+      - hr_docs_node_modules:/workspace/node_modules
+    working_dir: /workspace/docs
     entrypoint: sh
-    command: ["-c", "bun install && bun dev"]
+    command: ["-c", "cd /workspace && bun install && cd docs && bun dev"]
 
 volumes:
   hr_node_modules:

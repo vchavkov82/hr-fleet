@@ -1,11 +1,12 @@
 # HR Product - Standalone Makefile
 
-COMPOSE := podman-compose -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml
+COMPOSE := podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml
 
-.PHONY: help up down restart logs ps clean clean-all \
+.PHONY: help up down restart logs ps clean clean-all clean-cache clean-www clean-blog clean-docs \
 	dev dev-all dev-apps dev-www dev-blog dev-docs \
 	build build-www build-blog build-docs build-all \
-	install bootstrap
+	test test-watch test-e2e lint typecheck \
+	install bootstrap nuke
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -32,6 +33,25 @@ clean: ## Remove containers and networks (keeps volumes)
 
 clean-all: ## Remove containers, networks, and volumes (WARNING: deletes data)
 	$(COMPOSE) down -v
+
+clean-cache: ## Clear all build caches (.next, .astro, dist, .turbo)
+	rm -rf www/.next www/.next/cache blog/dist blog/.astro docs/dist docs/.astro .turbo
+
+clean-www: ## Clear www build cache and restart container
+	rm -rf www/.next
+	-podman restart hr-www 2>/dev/null || true
+
+clean-blog: ## Clear blog build cache
+	rm -rf blog/dist blog/.astro
+
+clean-docs: ## Clear docs build cache
+	rm -rf docs/dist docs/.astro
+
+nuke: ## Full clean: containers, volumes, caches, node_modules
+	-$(COMPOSE) down -v 2>/dev/null || true
+	-podman pod rm -f --all 2>/dev/null || true
+	rm -rf node_modules www/node_modules blog/node_modules docs/node_modules
+	rm -rf www/.next blog/dist blog/.astro docs/dist docs/.astro .turbo
 
 # ── Development ─────────────────────────────────────────────────────────────
 
@@ -69,6 +89,23 @@ build-docs: ## Build HR docs only
 	node_modules/.bin/turbo run build --filter=@hr/docs
 
 build-all: build ## Build everything (alias for build)
+
+# ── Test ──────────────────────────────────────────────────────────────
+
+test: ## Run unit tests
+	cd www && bun run test
+
+test-watch: ## Run unit tests in watch mode
+	cd www && bun run test:watch
+
+test-e2e: ## Run e2e tests (Playwright, needs running dev server)
+	cd www && bun run test:e2e
+
+lint: ## Lint all workspaces
+	node_modules/.bin/turbo run lint
+
+typecheck: ## Type-check all workspaces
+	node_modules/.bin/turbo run typecheck
 
 # ── Setup ───────────────────────────────────────────────────────────────────
 

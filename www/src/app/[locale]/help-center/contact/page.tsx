@@ -48,7 +48,7 @@ export default async function ContactPage({
                             Contact Support
                         </h1>
                         <p className="text-xl text-blue-200 leading-relaxed mb-8">
-                            Can't find what you're looking for? Our support team is here to help.
+                            Can&apos;t find what you&apos;re looking for? Our support team is here to help.
                         </p>
 
                         <SearchBar placeholder="Search for answers before contacting..." />
@@ -121,7 +121,7 @@ export default async function ContactPage({
                                     Send Us a Message
                                 </h2>
                                 <p className="text-gray-600 text-center mb-8">
-                                    Fill out the form below and we'll get back to you as soon as possible.
+                                    Fill out the form below and we&apos;ll get back to you as soon as possible.
                                 </p>
                                 <ContactForm />
                             </div>
@@ -151,9 +151,9 @@ export default async function ContactPage({
                                             </svg>
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold mb-2">Can't log in?</h3>
+                                            <h3 className="font-semibold mb-2">Can&apos;t log in?</h3>
                                             <ul className="text-sm text-gray-600 space-y-1">
-                                                <li>• Reset your password using "Forgot Password"</li>
+                                                <li>• Reset your password using &ldquo;Forgot Password&rdquo;</li>
                                                 <li>• Clear browser cache and cookies</li>
                                                 <li>• Try incognito/private browsing mode</li>
                                                 <li>• Check if Caps Lock is on</li>
@@ -172,7 +172,7 @@ export default async function ContactPage({
                                         <div>
                                             <h3 className="font-semibold mb-2">Job posting not appearing?</h3>
                                             <ul className="text-sm text-gray-600 space-y-1">
-                                                <li>• Check if the job is set to "Published"</li>
+                                                <li>• Check if the job is set to &ldquo;Published&rdquo;</li>
                                                 <li>• Verify posting date is not in the future</li>
                                                 <li>• Ensure all required fields are filled</li>
                                                 <li>• Wait 5-10 minutes for indexing</li>

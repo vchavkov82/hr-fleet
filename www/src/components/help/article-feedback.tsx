@@ -76,7 +76,7 @@ export function ArticleFeedback({ articleId, className = '' }: ArticleFeedbackPr
             {feedback === 'not-helpful' && (
                 <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                     <p className="text-sm text-gray-600 mb-3">
-                        We're sorry this article wasn't helpful. Would you like to:
+                        We&apos;re sorry this article wasn&apos;t helpful. Would you like to:
                     </p>
                     <div className="flex flex-wrap gap-2">
                         <button className="px-3 py-1 text-sm bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors">

@@ -4,7 +4,9 @@
   "packageManager": "bun@1.3.6",
   "workspaces": [
     "packages/design-system",
-    "www"
+    "www",
+    "blog",
+    "docs"
   ],
   "scripts": {
     "prepare": "husky",
@@ -29,6 +31,7 @@
     "clean:cache": "rm -rf www/.next && echo 'Cache cleaned'"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
     "turbo": "^2.8.12"
@@ -40,6 +43,16 @@
     ],
     "www/**/*.{json,md}": [
       "cd www && bunx prettier --write"
+    ],
+    "blog/**/*.{ts,tsx,astro}": [
+      "cd blog && bunx eslint --fix",
+      "cd blog && bunx prettier --write"
+    ],
+    "blog/**/*.{json,md}": [
+      "cd blog && bunx prettier --write"
+    ],
+    "docs/**/*.{ts,tsx,astro,mdx}": [
+      "cd docs && bunx prettier --write"
     ]
   },
   "overrides": {
@@ -49,5 +62,9 @@
   "engines": {
     "node": ">=20.0.0",
     "bun": ">=1.3.0"
+  },
+  "dependencies": {
+    "@an-sdk/agent": "^0.0.5",
+    "zod": "^4.3.6"
   }
 }

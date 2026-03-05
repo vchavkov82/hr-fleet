@@ -65,10 +65,23 @@ const nextConfig = {
     ]
   },
 
-  webpack: (config, { dev }) => {
+  webpack: (config, { dev, isServer }) => {
     if (dev) {
       // Avoid flaky dev runtime errors caused by corrupted filesystem cache.
       config.cache = false
+
+      if (!isServer) {
+        // In dev mode next-intl's BaseLink resolves next/link to the Pages Router
+        // implementation (next/dist/client/link) because its node_modules files
+        // don't get the appPagesBrowser webpack layer alias applied. That Pages
+        // Router link transitively requires is-dynamic.js which is absent from
+        // the App Router client bundle → runtime TypeError.
+        // Fix: alias the Pages Router link entry points to the App Router version.
+        const nextPkg = new URL(import.meta.resolve('next/package.json')).pathname
+        const nextRoot = nextPkg.replace(/\/package\.json$/, '')
+        config.resolve.alias['next/dist/api/link'] = `${nextRoot}/dist/client/app-dir/link.js`
+        config.resolve.alias['next/dist/client/link'] = `${nextRoot}/dist/client/app-dir/link.js`
+      }
     }
     return config
   },

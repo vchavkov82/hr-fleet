@@ -156,7 +156,7 @@ export default async function SearchPage({
                             Search Results
                         </h1>
                         <p className="text-xl text-blue-200 mb-8">
-                            {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
+                            {results.length} result{results.length !== 1 ? 's' : ''} for &ldquo;{query}&rdquo;
                         </p>
                         <SearchBar placeholder={t('hero.searchPlaceholder')} />
                     </div>

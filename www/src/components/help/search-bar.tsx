@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { Suspense, useState, useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { useRouter, useSearchParams } from 'next/navigation'
 
@@ -9,7 +9,19 @@ interface SearchBarProps {
     className?: string
 }
 
-export function SearchBar({ placeholder, className = '' }: SearchBarProps) {
+export function SearchBar(props: SearchBarProps) {
+    return (
+        <Suspense fallback={
+            <div className={`relative ${props.className || ''}`}>
+                <div className="w-full px-6 py-4 rounded-lg bg-white animate-pulse h-14" />
+            </div>
+        }>
+            <SearchBarInner {...props} />
+        </Suspense>
+    )
+}
+
+function SearchBarInner({ placeholder, className = '' }: SearchBarProps) {
     const t = useTranslations('helpCenter')
     const router = useRouter()
     const searchParams = useSearchParams()
