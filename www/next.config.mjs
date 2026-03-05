@@ -68,17 +68,6 @@ const nextConfig = {
 
   webpack: (config, { dev, isServer }) => {
     if (dev) {
-      // Enable webpack filesystem caching for faster rebuilds
-      config.cache = {
-        type: 'filesystem',
-        cacheDirectory: resolve(__dirname, '.next/cache/webpack'),
-        buildDependencies: {
-          config: [__filename],
-        },
-        // Invalidate cache if environment changes
-        version: `webpack-${process.env.NEXT_PUBLIC_APP_VERSION || '1.0.0'}`,
-      }
-
       if (!isServer) {
         // In dev mode next-intl's BaseLink resolves next/link to the Pages Router
         // implementation (next/dist/client/link) because its node_modules files
