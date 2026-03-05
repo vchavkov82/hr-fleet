@@ -18,29 +18,41 @@ const allTutorials = await getCollection('docs', ({ id }) => {
 });
 
 const tutorialData = await Promise.all(
-  allTutorials.map(async (tutorial) => {
-    const title = tutorial.data.title || 'Unknown Tutorial';
-    const description = tutorial.data.description || `Tutorial: ${title}`;
-    const slug = tutorial.id; // Use id instead of slug for proper path
-    const imagePath = `/src/assets/images/aws/tutorials/${tutorial.data.leadimage}`;
-    const optimizedLeadImage = await getImage({
-      src: images[imagePath](),
-      format: 'png',
-      width: 330,
-    });
+  allTutorials
+    .filter((tutorial) => tutorial.data.leadimage) // Filter out tutorials without leadimage
+    .map(async (tutorial) => {
+      const title = tutorial.data.title || 'Unknown Tutorial';
+      const description = tutorial.data.description || `Tutorial: ${title}`;
+      const slug = tutorial.id; // Use id instead of slug for proper path
+      const imagePath = `/src/assets/images/aws/tutorials/${tutorial.data.leadimage}`;
 
-    return {
-      title,
-      description,
-      slug,
-      leadimage: optimizedLeadImage.src,
-      services: tutorial.data.services || [],
-      platform: tutorial.data.platform || [],
-      deployment: tutorial.data.deployment || [],
-      pro: tutorial.data.pro || false,
-    };
-  })
-);
+      let leadimage = '';
+      try {
+        if (images[imagePath]) {
+          const optimizedLeadImage = await getImage({
+            src: images[imagePath](),
+            format: 'png',
+            width: 330,
+          });
+          leadimage = optimizedLeadImage.src;
+        }
+      } catch (e) {
+        // Skip tutorials with missing images
+        return null;
+      }
+
+      return {
+        title,
+        description,
+        slug,
+        leadimage,
+        services: tutorial.data.services || [],
+        platform: tutorial.data.platform || [],
+        deployment: tutorial.data.deployment || [],
+        pro: tutorial.data.pro || false,
+      };
+    })
+).then(results => results.filter(r => r !== null));
 ---
 
 <TutorialsShowcase

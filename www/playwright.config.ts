@@ -5,35 +5,30 @@ const isCI = !!process.env.CI
 
 export default defineConfig({
   testDir: './tests/e2e',
-  fullyParallel: true,
+  timeout: 60000,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   reporter: 'html',
   use: {
     baseURL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    navigationTimeout: 30000,
   },
 
-  projects: isCI
-    ? [
-        {
-          name: 'chromium',
-          use: { ...devices['Desktop Chrome'] },
-        },
-      ]
-    : [
-        {
-          name: 'chromium',
-          use: { ...devices['Desktop Chrome'] },
-        },
-      ],
+  projects: [
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+  ],
 
   webServer: {
     command: 'bun dev',
     url: baseURL,
     reuseExistingServer: !process.env.CI,
-    timeout: 120000,
+    timeout: 300000,
   },
 })

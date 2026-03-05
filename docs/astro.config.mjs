@@ -38,17 +38,17 @@ export default defineConfig({
         },
       },
       plugins: [
-        starlightImageZoom({
-          showCaptions: true,
-        }),
-        starlightFullViewMode({
-          leftSidebarEnabled: false,
-        }),
-        starlightUtils({
-          multiSidebar: {
-            switcherStyle: 'dropdown',
-          },
-        }),
+        // starlightImageZoom({
+        //   showCaptions: true,
+        // }),
+        // starlightFullViewMode({
+        //   leftSidebarEnabled: false,
+        // }),
+        // starlightUtils({
+        //   multiSidebar: {
+        //     switcherStyle: 'dropdown',
+        //   },
+        // }),
       ],
       sidebar: [
         {

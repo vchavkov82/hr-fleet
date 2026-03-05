@@ -25,9 +25,9 @@ test.describe('Salary Calculator', () => {
     if (inputs.length > 0) {
       await inputs[0].fill('3000')
 
-      // Results should be displayed
-      const outputs = await page.locator('output, [role="status"], .result, .summary').all()
-      expect(outputs.length).toBeGreaterThan(0)
+      // Results should be displayed in divs with bg-primary-50, bg-green-50, bg-amber-50 classes
+      const results = await page.locator('div[class*="bg-primary-50"], div[class*="bg-green-50"], div[class*="bg-amber-50"]').all()
+      expect(results.length).toBeGreaterThan(0)
     }
   })
 
