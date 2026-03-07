@@ -1,0 +1,20 @@
+{
+  "sectionLabel": "Features",
+  "heading": "Everything your HR team needs",
+  "subheading": "Four powerful AI-assisted modules that cover the complete employee lifecycle — from hire to retire.",
+  "learnMore": "Learn more",
+  "items": {
+    "ats": {
+      "title": "ATS & Recruitment",
+      "description": "AI-powered candidate matching, customizable Kanban pipelines, and automated screening. Track every candidate from CV to signed contract."
+    },
+    "employees": {
+      "title": "Employee Management",
+      "description": "Central employee database with self-service portal, document management, and organizational charts. Everything in one place."
+    },
+    "leave": {
+      "title": "Leave & Payroll",
+      "description": "Automated leave requests and approvals, Bulgarian payroll processing with NRA compliance, and real-time balance tracking."
+    }
+  }
+}

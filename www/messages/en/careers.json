@@ -1,0 +1,74 @@
+{
+  "metaTitle": "Careers | HR",
+  "metaDescription": "Join our team and help build the future of HR software for Bulgarian businesses.",
+  "hero": {
+    "heading": "Join Our Team",
+    "subheading": "Help us build the HR platform that makes a real difference for companies and candidates."
+  },
+  "culture": {
+    "heading": "Why Work With Us",
+    "subheading": "We're building something special - and we'd love for you to be part of it.",
+    "remote": {
+      "title": "Remote-First",
+      "description": "Work from anywhere in Bulgaria. We trust our team to deliver great work, wherever they are."
+    },
+    "learning": {
+      "title": "Continuous Learning",
+      "description": "Access to courses, conferences, and a budget for your professional development."
+    },
+    "health": {
+      "title": "Health & Wellness",
+      "description": "Private health insurance, gym allowances, and mental health support."
+    },
+    "retreats": {
+      "title": "Team Retreats",
+      "description": "Regular team building events and annual retreats to connect and recharge."
+    }
+  },
+  "positions": {
+    "heading": "Open Positions",
+    "subheading": "We're always looking for talented people to join our team.",
+    "noMatch": "No positions match your criteria at the moment, but we're always interested in hearing from great people.",
+    "spontaneousButton": "Send Spontaneous Application",
+    "applyButton": "Apply Now"
+  },
+  "benefits": {
+    "heading": "Benefits & Perks",
+    "subheading": "We take care of our team so they can take care of our customers.",
+    "items": [
+      "Competitive salary and equity package",
+      "Flexible working hours",
+      "28 days paid vacation",
+      "Private health insurance",
+      "Professional development budget",
+      "Modern equipment of your choice"
+    ]
+  },
+  "process": {
+    "heading": "Our Hiring Process",
+    "subheading": "Transparent, respectful, and designed to find the best fit for both sides.",
+    "steps": [
+      {
+        "title": "Application Review",
+        "description": "We review every application carefully and respond within 5 business days."
+      },
+      {
+        "title": "Technical Interview",
+        "description": "A technical discussion with the team to assess skills and cultural fit."
+      },
+      {
+        "title": "Final Interview",
+        "description": "Meet the leadership team and discuss your vision for the role."
+      },
+      {
+        "title": "Offer",
+        "description": "We'll extend an offer with detailed compensation and benefits information."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Ready to Join Us?",
+    "subheading": "Take the next step in your career and help shape the future of HR in Bulgaria.",
+    "button": "View Open Positions"
+  }
+}

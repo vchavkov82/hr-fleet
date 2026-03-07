@@ -1,0 +1,27 @@
+{
+  "sectionLabel": "Blog",
+  "heading": "Latest from our blog",
+  "subheading": "Practical tips, trends and insights for HR professionals.",
+  "readMore": "Read more",
+  "viewAll": "View all posts",
+  "items": [
+    {
+      "title": "AI in Recruiting: How to Use Artificial Intelligence Responsibly",
+      "excerpt": "AI recruiting tools are now a reality. But how do you apply them without violating GDPR or unfairly excluding candidates?",
+      "category": "Technology",
+      "href": "/blog"
+    },
+    {
+      "title": "5 Employer Branding Strategies That Work",
+      "excerpt": "How do you attract top talent when competing with multinationals? Real examples from the Bulgarian market.",
+      "category": "Employer Branding",
+      "href": "/blog"
+    },
+    {
+      "title": "Onboarding That Works: How to Retain New Employees",
+      "excerpt": "Research shows 20% of turnover happens in the first 45 days. Here's how to prevent it.",
+      "category": "Onboarding",
+      "href": "/blog"
+    }
+  ]
+}

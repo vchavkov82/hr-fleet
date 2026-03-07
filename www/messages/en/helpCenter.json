@@ -1,0 +1,119 @@
+{
+  "metaTitle": "Help Center | HR",
+  "metaDescription": "Guides, FAQs, and support for HR: recruitment, leave, payroll, and Core HR. Get answers and contact support.",
+  "hero": {
+    "heading": "How Can We Help?",
+    "subheading": "Search our knowledge base or browse by category.",
+    "searchPlaceholder": "Search for answers...",
+    "searchAriaLabel": "Search help center articles",
+    "searchButtonLabel": "Search"
+  },
+  "popular": {
+    "title": "Popular Articles",
+    "subheading": "Most frequently read by our users.",
+    "articles": {
+      "article1": {
+        "title": "Getting Started with HR",
+        "description": "A complete guide to setting up your account and posting your first job.",
+        "category": "Getting Started",
+        "readTime": "5 min"
+      },
+      "article2": {
+        "title": "How to Use the ATS Pipeline",
+        "description": "Move candidates through stages, add notes, and collaborate with your team.",
+        "category": "Recruiting",
+        "readTime": "8 min"
+      },
+      "article3": {
+        "title": "Setting Up AI CV Screening",
+        "description": "Configure AI scoring criteria to automatically rank candidates.",
+        "category": "Recruiting",
+        "readTime": "6 min"
+      },
+      "article4": {
+        "title": "GDPR Compliance in HR",
+        "description": "How HR handles candidate data and how to configure consent settings.",
+        "category": "Security",
+        "readTime": "10 min"
+      },
+      "article5": {
+        "title": "Managing Leave Requests",
+        "description": "How to configure leave types, approval workflows, and team calendars.",
+        "category": "Leave & Absence",
+        "readTime": "7 min"
+      },
+      "article6": {
+        "title": "Running Your First Payroll",
+        "description": "Step-by-step guide to processing payroll with Bulgarian tax compliance.",
+        "category": "Payroll",
+        "readTime": "12 min"
+      }
+    }
+  },
+  "categories": {
+    "title": "Browse by Category",
+    "subheading": "Find exactly what you need.",
+    "articlesCount": "articles",
+    "gettingStarted": {
+      "title": "Getting Started"
+    },
+    "employees": {
+      "title": "Employee Management"
+    },
+    "leave": {
+      "title": "Leave & Absence"
+    },
+    "payroll": {
+      "title": "Payroll"
+    },
+    "integrations": {
+      "title": "Integrations"
+    },
+    "security": {
+      "title": "Account & Billing"
+    }
+  },
+  "quickLinks": {
+    "sectionLabel": "Quick links",
+    "gettingStarted": {
+      "title": "Getting Started Guide",
+      "description": "New to HR? Start here."
+    },
+    "userGuide": {
+      "title": "User Guide",
+      "description": "Complete documentation for all features."
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "description": "Solutions to common problems."
+    },
+    "contact": {
+      "title": "Contact Support",
+      "description": "Can't find what you need? We're here."
+    }
+  },
+  "stillNeedHelp": {
+    "title": "Still Need Help?",
+    "description": "Our support team is ready to assist you.",
+    "options": {
+      "liveChat": {
+        "title": "Live Chat",
+        "description": "Chat with support in real time.",
+        "button": "Start chat"
+      },
+      "email": {
+        "title": "Email Support",
+        "description": "We'll reply within 24 hours."
+      },
+      "demo": {
+        "title": "Book a Demo",
+        "description": "See HR with a guide.",
+        "button": "Schedule demo"
+      }
+    }
+  },
+  "article": {
+    "tocTitle": "Table of Contents",
+    "tocHint": "Sections will appear here when structured content is available."
+  }
+}

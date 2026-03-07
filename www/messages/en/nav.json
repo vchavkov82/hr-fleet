@@ -1,0 +1,33 @@
+{
+  "features": "Features",
+  "pricing": "Pricing",
+  "hrTools": "HR Tools",
+  "blog": "Blog",
+  "login": "Login",
+  "startFree": "Start free trial",
+  "resources": {
+    "label": "Resources",
+    "blog": "Blog",
+    "hrTools": "HR Tools",
+    "helpCenter": "Help Center"
+  },
+  "resourcesItems": {
+    "blogDesc": "Latest HR insights and trends",
+    "hrToolsDesc": "Free HR tools and calculators",
+    "helpCenterDesc": "Guides and documentation"
+  },
+  "featuresItems": {
+    "ats": "ATS / Recruitment",
+    "atsDesc": "Smart candidate sourcing, screening and tracking",
+    "employees": "Employee Management",
+    "employeesDesc": "Central employee database with self-service portal",
+    "leave": "Leave Tracking",
+    "leaveDesc": "Automated leave requests, approvals and balances",
+    "payroll": "Payroll",
+    "payrollDesc": "Bulgarian payroll processing with NRA compliance",
+    "performance": "Performance Reviews",
+    "performanceDesc": "360-degree reviews, goals and continuous feedback",
+    "onboarding": "Onboarding",
+    "onboardingDesc": "Automated checklists and tasks for new hires"
+  }
+}

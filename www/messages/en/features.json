@@ -1,0 +1,31 @@
+{
+  "sectionLabel": "Features",
+  "heading": "Everything in one intelligent platform",
+  "subheading": "Stop juggling multiple tools. Our AI-powered automation anticipates your needs, reduces repetitive work, and keeps you focused on strategic decisions.",
+  "items": {
+    "recruiting": {
+      "title": "Smart Recruiting",
+      "description": "AI-powered candidate matching, scoring, and screening. Find better candidates faster while reducing manual review work by hours per week."
+    },
+    "ats": {
+      "title": "ATS Pipeline",
+      "description": "Customizable Kanban stages for every position. Track every candidate from CV to signed contract with AI-assisted scheduling and planning."
+    },
+    "onboarding": {
+      "title": "Onboarding Module",
+      "description": "Automated workflows, e-documents and company introduction. Make new hires productive from day one with structured, consistent experiences."
+    },
+    "analytics": {
+      "title": "HR Analytics",
+      "description": "Time-to-hire, cost-per-hire, retention rate and dozens of other real-time metrics."
+    },
+    "integrations": {
+      "title": "Integrations",
+      "description": "Over 50 ready-made connections — Slack, LinkedIn, Google Workspace, accounting systems and more."
+    },
+    "gdpr": {
+      "title": "GDPR & Security",
+      "description": "Full compliance with European regulations. Role-based access, audit log, and SOC 2 Type II certification."
+    }
+  }
+}

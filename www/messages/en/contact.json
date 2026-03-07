@@ -1,0 +1,106 @@
+{
+  "metaTitle": "Contact Us | HR",
+  "metaDescription": "Contact HR for demos, pricing, or support. We reply within 1 business day. Sofia, Bulgaria.",
+  "hero": {
+    "heading": "Get in Touch",
+    "subheading": "Request a demo, get a quote, or ask a question. We reply within one business day."
+  },
+  "options": {
+    "liveChat": {
+      "title": "Live Chat",
+      "description": "Chat with our support team in real time.",
+      "button": "Start chat"
+    },
+    "email": {
+      "title": "Email Us",
+      "description": "We'll reply within 24 hours on business days."
+    },
+    "demo": {
+      "title": "Book a Demo",
+      "description": "See HR in action with a personal walkthrough.",
+      "button": "Schedule demo"
+    }
+  },
+  "form": {
+    "title": "Send Us a Message",
+    "description": "Fill out the form and we'll get back to you shortly.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Work email",
+    "phone": "Phone number (optional)",
+    "company": "Company",
+    "companySize": "Company size",
+    "selectCompanySize": "Select company size",
+    "companySizes": {
+      "small": "1-10 employees",
+      "medium": "11-50 employees",
+      "large": "51-200 employees",
+      "enterprise": "201+ employees"
+    },
+    "subject": "Subject",
+    "selectSubject": "Select a subject",
+    "subjects": {
+      "general": "General inquiry",
+      "sales": "Sales",
+      "demo": "Request a demo",
+      "support": "Technical support",
+      "partnership": "Partnership opportunity",
+      "feedback": "Feedback",
+      "other": "Other"
+    },
+    "message": "Message",
+    "privacy": "I agree to the",
+    "privacyLink": "Privacy Policy",
+    "submit": "Send message",
+    "submitting": "Sending...",
+    "successTitle": "Message sent!",
+    "successMessage": "Thank you for reaching out. We will get back to you within 1 business day.",
+    "successAction": "Send another message"
+  },
+  "offices": {
+    "title": "Contact Information",
+    "email": {
+      "title": "Email"
+    },
+    "phone": {
+      "title": "Phone"
+    },
+    "address": {
+      "title": "Address",
+      "value": "Business Park Sofia, Building 2, Sofia 1766, Bulgaria"
+    }
+  },
+  "support": {
+    "title": "Support Hours",
+    "mondayFriday": "Monday – Friday",
+    "weekdayHours": "9:00 AM – 6:00 PM EET",
+    "saturday": "Saturday",
+    "saturdayHours": "10:00 AM – 2:00 PM EET",
+    "sunday": "Sunday",
+    "sundayHours": "Closed",
+    "responseTime": "Average response time",
+    "responseTimeValue": "< 2 hours"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subheading": "Quick answers to common questions.",
+    "items": {
+      "question1": "How do I get started?",
+      "answer1": "Sign up for free at hr.bg. No credit card required. You can start posting jobs and managing candidates immediately. Our onboarding wizard will guide you through the setup process.",
+      "question2": "Do you offer a free trial?",
+      "answer2": "Yes — all paid plans include a 60-day free trial. No credit card required to start. You'll have full access to all features during the trial period.",
+      "question3": "Is my data secure?",
+      "answer3": "Absolutely. We're SOC 2 Type II certified and fully GDPR compliant. Your data is encrypted at rest and in transit using industry-standard AES-256 encryption. We also conduct regular security audits.",
+      "question4": "Can I migrate from my current ATS?",
+      "answer4": "Yes. We offer a free migration service for customers on paid plans. Our team will help you import your existing candidate data, job postings, and company information. Contact our team to get started.",
+      "question5": "What payment methods do you accept?",
+      "answer5": "We accept all major credit cards (Visa, Mastercard, American Express), bank transfers, and PayPal. For annual plans, we also offer invoice billing.",
+      "question6": "Can I cancel my subscription anytime?",
+      "answer6": "Yes, you can cancel your subscription at any time with no penalties. Your data will remain accessible for 30 days after cancellation, giving you time to export if needed.",
+      "question7": "Do you offer training and onboarding?",
+      "answer7": "Yes! All paid plans include personalized onboarding sessions. We also offer comprehensive video tutorials, documentation, and live training webinars every week.",
+      "question8": "What kind of support do you provide?",
+      "answer8": "We offer email support for all plans, with response times under 24 hours. Premium and Enterprise plans include priority support, phone support, and a dedicated account manager."
+    }
+  }
+}

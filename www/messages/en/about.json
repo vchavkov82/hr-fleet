@@ -1,0 +1,57 @@
+{
+  "metaTitle": "About Us | HR",
+  "metaDescription": "Learn about HR — the Bulgarian HR platform built for SMBs. Meet our team, mission, and values.",
+  "hero": {
+    "heading": "About HR",
+    "subheading": "We are building the HR platform that Bulgarian companies actually need — simple, compliant, and powerful."
+  },
+  "story": {
+    "heading": "Our Story",
+    "content1": "HR was founded in Sofia by a team of HR professionals and engineers who saw firsthand how Bulgarian SMBs struggled with outdated HR processes, manual spreadsheets, and expensive enterprise software that did not fit their needs.",
+    "content2": "We built a platform combining powerful automation with a simple, intuitive interface — so HR teams can focus on people, not paperwork. Today, hundreds of Bulgarian companies trust HR to manage their entire employee lifecycle."
+  },
+  "mission": {
+    "heading": "Our Mission & Values",
+    "content": "To make great HR accessible to every Bulgarian company, regardless of size or budget. We believe every employee deserves a professional onboarding, every candidate deserves a respectful process, and every HR team deserves tools that actually work."
+  },
+  "stats": {
+    "companies": "Companies",
+    "employees": "Employees managed",
+    "rating": "Rating",
+    "uptime": "Uptime"
+  },
+  "values": {
+    "simplicity": {
+      "title": "Simplicity",
+      "description": "HR software should not require a PhD to use. Every feature prioritizes ease of use and fast time-to-value."
+    },
+    "innovation": {
+      "title": "Innovation",
+      "description": "We embrace AI and automation to save HR teams hours of manual work every week."
+    },
+    "compliance": {
+      "title": "Compliance",
+      "description": "Full compliance with Bulgarian labor law and GDPR. SOC 2 Type II certified. Your data is safe."
+    }
+  },
+  "team": {
+    "heading": "Leadership Team",
+    "subheading": "Meet the people building the future of HR in Bulgaria.",
+    "members": {
+      "ceo": "CEO & Co-founder",
+      "ceoBio": "Former HR Director with 10+ years in talent acquisition across Bulgarian and European markets.",
+      "cto": "CTO & Co-founder",
+      "ctoBio": "Software architect with experience building enterprise SaaS platforms at scale.",
+      "cpo": "CPO",
+      "cpoBio": "Product designer focused on making complex HR workflows feel effortless.",
+      "coo": "COO",
+      "cooBio": "Operations expert who has scaled HR departments across Central and Eastern Europe."
+    }
+  },
+  "cta": {
+    "heading": "Ready to transform your HR?",
+    "subheading": "Join hundreds of Bulgarian companies already hiring smarter with HR.",
+    "primaryButton": "Start free trial",
+    "secondaryButton": "Contact us"
+  }
+}

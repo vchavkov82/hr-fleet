@@ -1,0 +1,28 @@
+{
+  "sectionLabel": "Testimonials",
+  "heading": "Trusted by companies",
+  "subheading": "See how HR helps real teams hire smarter, reduce admin work, and build stronger companies.",
+  "items": [
+    {
+      "quote": "HR reduced our time-to-hire by 40%. AI screening literally saves hours of work every week.",
+      "author": "Elena Dimitrova",
+      "role": "HR Director",
+      "company": "TechSoft Bulgaria",
+      "avatar": "ED"
+    },
+    {
+      "quote": "The onboarding module is great. New employees arrive at the office already familiar with the company — we've never had such a smooth start.",
+      "author": "Peter Stoyanov",
+      "role": "CEO",
+      "company": "Rapid Commerce OOD",
+      "avatar": "PS"
+    },
+    {
+      "quote": "We moved from chaos in spreadsheets to full process visibility. GDPR compliance is a huge plus for us as a financial company.",
+      "author": "Maria Koleva",
+      "role": "Head of People",
+      "company": "FinPro Solutions",
+      "avatar": "MK"
+    }
+  ]
+}

@@ -1,0 +1,1971 @@
+{
+  "features": {
+    "metaTitle": "Features | HR — AI-Powered ATS, Leave, Payroll, Core HR",
+    "metaDescription": "HR AI-powered features: ATS with AI screening & matching (70% faster hiring), Core HR, leave tracking, Bulgarian payroll (NRA), performance reviews, onboarding. One intelligent platform.",
+    "hero": {
+      "heading": "AI-Powered HR for Every Team",
+      "subheading": "From posting a job to onboarding a new hire — do more with less. HR covers every step with intelligent automation that reduces admin work by 97% and cuts time-to-hire by 70%."
+    },
+    "sections": {
+      "ats": {
+        "title": "ATS & Recruitment",
+        "description": "Hiring without the headaches. Powered by AI, our applicant tracking system anticipates your needs, matches candidates intelligently, automates scheduling, and helps you focus on building your dream team.",
+        "features": [
+          "Post jobs to multiple boards with one click",
+          "AI-powered candidate matching and ranking",
+          "Automated interview scheduling with calendar sync",
+          "AI-assisted candidate screening & scoring",
+          "Team collaboration with shared feedback & scorecards",
+          "Customizable hiring pipelines per role"
+        ],
+        "imagePlaceholder": "ATS Dashboard"
+      },
+      "employees": {
+        "title": "Employee Management",
+        "description": "Keep all employee information organized and accessible. From org charts to document management, give your team the tools they need for self-service HR.",
+        "features": [
+          "Comprehensive employee profiles with custom fields",
+          "Visual org chart with drag-and-drop editing",
+          "Centralized document management and e-signatures",
+          "Employee self-service portal for personal data updates",
+          "Automated alerts for contract renewals and probation periods"
+        ],
+        "imagePlaceholder": "Employee Directory"
+      },
+      "leave": {
+        "title": "Leave Tracking",
+        "description": "Simplify leave management with automated workflows. Employees request time off, managers approve with one click, and balances update automatically.",
+        "features": [
+          "Easy leave requests with mobile-friendly interface",
+          "Multi-level approval workflows by department",
+          "Real-time leave balance tracking per employee",
+          "Team calendar view to prevent scheduling conflicts",
+          "Support for Bulgarian public holidays and custom leave types"
+        ],
+        "imagePlaceholder": "Leave Calendar"
+      },
+      "payroll": {
+        "title": "Payroll Integration",
+        "description": "Connect your HR data directly to payroll. Accurate calculations based on Bulgarian tax law, automatic payslip generation, and seamless bank transfers.",
+        "features": [
+          "Automated payroll processing with Bulgarian tax compliance",
+          "Real-time tax and social security calculations",
+          "Digital payslip generation and distribution",
+          "Bank transfer file export for all major Bulgarian banks",
+          "Year-end reporting and NAP declarations"
+        ],
+        "imagePlaceholder": "Payroll Dashboard"
+      },
+      "performance": {
+        "title": "Performance Reviews",
+        "description": "Build a culture of continuous feedback and growth. Set clear goals, run structured review cycles, and create development plans that drive results.",
+        "features": [
+          "SMART goal setting with progress tracking",
+          "360-degree feedback from peers, managers, and reports",
+          "Configurable review cycles (quarterly, semi-annual, annual)",
+          "Individual development plans with milestone tracking",
+          "Performance analytics and team benchmarking"
+        ],
+        "imagePlaceholder": "Performance Overview"
+      },
+      "onboarding": {
+        "title": "Onboarding",
+        "description": "Make every new hire's first days exceptional. Automated task checklists, document collection, and welcome workflows ensure nothing falls through the cracks.",
+        "features": [
+          "Customizable onboarding task checklists by role",
+          "Automated document collection and verification",
+          "Welcome email workflows with company resources",
+          "Mentor and buddy assignment with check-in reminders",
+          "Onboarding progress dashboard for HR and managers"
+        ],
+        "imagePlaceholder": "Onboarding Workflow"
+      }
+    }
+  },
+  "pricing": {
+    "metaTitle": "Pricing - Get a Quote | HR",
+    "metaDescription": "AI-powered HR pricing for Bulgarian companies. Modular ATS, Core HR, Leave, Payroll, Performance, Onboarding. Reduce manual admin work and accelerate hiring. Get a quote.",
+    "sectionLabel": "Pricing",
+    "heading": "Simple, transparent pricing — built for ROI",
+    "subheading": "Choose the modules you need. Pay only for what you use, and save time and effort across your entire HR process.",
+    "modulesHeading": "Choose your modules",
+    "modulesSubheading": "Each module works independently or together. Mix and match to build the perfect HR solution for your company.",
+    "getQuote": "Get a quote",
+    "modules": {
+      "coreHr": {
+        "name": "Core HR",
+        "description": "Centralize employee data, org structure, and HR documents in one secure platform.",
+        "features": [
+          "Employee profiles & directory",
+          "Organization chart",
+          "Document storage & management",
+          "Role-based access control",
+          "Custom fields & workflows"
+        ]
+      },
+      "ats": {
+        "name": "Applicant Tracking",
+        "description": "Streamline your hiring process from job posting to offer letter with AI-powered screening.",
+        "features": [
+          "Job posting & distribution",
+          "Candidate pipeline & Kanban",
+          "AI CV screening & ranking",
+          "Interview scheduling",
+          "Offer management"
+        ]
+      },
+      "leave": {
+        "name": "Leave Management",
+        "description": "Automate leave requests, approvals, and accrual tracking with full calendar visibility.",
+        "features": [
+          "Leave request & approval workflow",
+          "Team leave calendar",
+          "Accrual policies & balances",
+          "Holiday calendar management",
+          "Absence reports & analytics"
+        ]
+      },
+      "payroll": {
+        "name": "Payroll",
+        "description": "Process payroll with Bulgarian tax compliance, automatic calculations, and bank integrations.",
+        "features": [
+          "Payroll processing & calculations",
+          "Bulgarian tax & social security",
+          "Bank integration & payments",
+          "Payslip generation",
+          "Annual tax reporting"
+        ]
+      },
+      "performance": {
+        "name": "Performance",
+        "description": "Set goals, run 360-degree reviews, and track employee growth with data-driven insights.",
+        "features": [
+          "Goal setting & OKRs",
+          "360-degree reviews",
+          "Performance reports & analytics",
+          "Continuous feedback",
+          "Competency frameworks"
+        ]
+      },
+      "onboarding": {
+        "name": "Onboarding",
+        "description": "Create smooth onboarding experiences with task checklists, welcome portals, and e-signatures.",
+        "features": [
+          "Task checklists & templates",
+          "Welcome portal for new hires",
+          "Electronic signatures",
+          "Equipment & access provisioning",
+          "Onboarding analytics"
+        ]
+      }
+    },
+    "comparisonHeading": "Feature comparison",
+    "comparisonSubheading": "See what is included in each module at a glance.",
+    "comparisonFeatureCol": "Feature",
+    "comparison": {
+      "employeeProfiles": "Employee profiles & directory",
+      "orgChart": "Organization chart",
+      "documentStorage": "Document storage",
+      "jobPosting": "Job posting & distribution",
+      "candidatePipeline": "Candidate pipeline",
+      "aiScreening": "AI CV screening",
+      "leaveRequests": "Leave requests & approvals",
+      "leaveCalendar": "Team leave calendar",
+      "accrualPolicies": "Accrual policies",
+      "payrollProcessing": "Payroll processing",
+      "taxReporting": "Tax & social security reporting",
+      "bankIntegration": "Bank integration",
+      "goalTracking": "Goal tracking & OKRs",
+      "reviews360": "360-degree reviews",
+      "performanceReports": "Performance reports",
+      "taskChecklists": "Onboarding task checklists",
+      "welcomePortal": "Welcome portal",
+      "eSignatures": "Electronic signatures"
+    },
+    "quoteForm": {
+      "title": "Get a personalized quote",
+      "subtitle": "Tell us about your company and we will prepare a tailored proposal within 24 hours.",
+      "name": "Full name",
+      "namePlaceholder": "John Smith",
+      "email": "Work email",
+      "emailPlaceholder": "john@company.com",
+      "company": "Company name",
+      "companyPlaceholder": "Acme Inc.",
+      "employees": "Company size",
+      "employeesPlaceholder": "Select company size",
+      "employeeSizes": [
+        "1-10 employees",
+        "11-50 employees",
+        "51-200 employees",
+        "200+ employees"
+      ],
+      "modules": "Interested modules",
+      "message": "Additional message (optional)",
+      "messagePlaceholder": "Tell us about your specific needs or questions...",
+      "submit": "Request a quote",
+      "successTitle": "Thank you!",
+      "successMessage": "We have received your quote request. Our team will get back to you within 24 hours with a personalized proposal.",
+      "submitAnother": "Submit another request",
+      "required": "Required",
+      "selectModule": "Select at least one module"
+    },
+    "faqHeading": "Frequently asked questions",
+    "faqItems": [
+      {
+        "question": "How does the per-module pricing work?",
+        "answer": "You only pay for the modules you use. Each module has its own pricing based on the number of employees in your company. You can start with one module and add more as your needs grow."
+      },
+      {
+        "question": "Is there a minimum contract period?",
+        "answer": "No. All our plans are month-to-month with no long-term commitment required. You can cancel or change modules at any time."
+      },
+      {
+        "question": "Can I try before I buy?",
+        "answer": "Yes! We offer a 60-day free trial for all modules. No credit card required. Start using the platform immediately and see the value for yourself."
+      },
+      {
+        "question": "What happens to my data if I cancel?",
+        "answer": "Your data remains accessible for 30 days after cancellation. You can export all your data at any time. We follow GDPR best practices for data retention and deletion."
+      },
+      {
+        "question": "Do you offer discounts for multiple modules?",
+        "answer": "Yes, we offer bundle discounts when you combine multiple modules. The more modules you add, the better the per-module price. Contact us for a personalized quote."
+      }
+    ]
+  },
+  "hrTools": {
+    "metaTitle": "Free HR Tools & Templates | HR",
+    "metaDescription": "Free HR tools for Bulgarian companies: salary and leave calculators, job description and employment contract templates, onboarding checklists.",
+    "sectionLabel": "HR Tools",
+    "heading": "Free resources for HR teams",
+    "subheading": "Templates, calculators, and guides for Bulgarian HR. Download or use online — no sign-up required.",
+    "downloadFree": "Download free",
+    "needHelp": "Need help?",
+    "needHelpDesc": "Our HR consultants are ready to help.",
+    "requestConsult": "Request a free consultation",
+    "tools": [
+      {
+        "title": "Job Description Templates",
+        "description": "Ready-to-use templates for 100+ positions in IT, finance, marketing and manufacturing.",
+        "badge": "Free"
+      },
+      {
+        "title": "Time-to-hire Calculator",
+        "description": "Calculate average time-to-hire by department and identify bottlenecks in your process.",
+        "badge": "Free"
+      },
+      {
+        "title": "Employee Evaluation Forms",
+        "description": "Professional performance review templates with competency frameworks.",
+        "badge": "Popular"
+      },
+      {
+        "title": "HR Benchmark Report 2025",
+        "description": "Compare your company's HR metrics with the industry standard.",
+        "badge": "PDF"
+      },
+      {
+        "title": "Onboarding Checklist",
+        "description": "Complete checklist for successful onboarding of new employees — from day 1 to the end of probation.",
+        "badge": "Free"
+      },
+      {
+        "title": "Interview Guide",
+        "description": "Structured competency-based questions for various roles and experience levels.",
+        "badge": "PDF"
+      },
+      {
+        "title": "Cost-per-hire Calculator",
+        "description": "Calculate the real cost of every hire, including hidden costs and opportunity cost.",
+        "badge": "Free"
+      }
+    ],
+    "templates": {
+      "metaTitle": "Free HR Document Templates | HR",
+      "metaDescription": "Download free HR document templates — employment contracts, job descriptions, leave policies, onboarding checklists, performance reviews and termination documents for Bulgarian companies.",
+      "heading": "Free HR Document Templates",
+      "subheading": "Professional, ready-to-use templates for Bulgarian HR teams. Download for free and customize to fit your organization.",
+      "downloadFree": "Download free",
+      "ctaHeading": "Need custom templates for your team?",
+      "ctaDescription": "Start your free trial and access our full library of customizable HR document templates, automated workflows, and compliance tools.",
+      "ctaButton": "Start your free trial",
+      "emailGate": {
+        "heading": "Download {templateName}",
+        "subtext": "Enter your details to get free access to this template",
+        "nameLabel": "Your name",
+        "namePlaceholder": "e.g. Maria Ivanova",
+        "emailLabel": "Work email",
+        "emailPlaceholder": "maria@company.bg",
+        "submit": "Download free template",
+        "successMessage": "Template is on its way!"
+      },
+      "downloadCard": {
+        "format": "Format",
+        "pdf": "PDF Document",
+        "downloadFree": "Download free",
+        "downloadAgain": "Download again",
+        "unlocked": "Unlocked",
+        "whatsIncluded": "What's included",
+        "howToUse": "How to use this template"
+      },
+      "relatedTitle": "Related templates",
+      "list": [
+        {
+          "name": "Employment Contract Template",
+          "slug": "employment-contract",
+          "description": "A comprehensive employment contract template compliant with the Bulgarian Labour Code, covering all essential clauses from probation periods to termination conditions.",
+          "whatsIncluded": [
+            "Standard employment terms and conditions",
+            "Probation period clauses (up to 6 months per Art. 70 Labour Code)",
+            "Working hours, overtime, and rest period provisions",
+            "Salary structure and payment terms",
+            "Non-compete and confidentiality clauses",
+            "Termination conditions and notice periods"
+          ],
+          "howToUse": [
+            "Download and review the complete template",
+            "Fill in employer and employee details in the designated fields",
+            "Customize clauses to match your company policies",
+            "Review with legal counsel for compliance with current Bulgarian labour legislation",
+            "Print two copies — one for employer, one for employee"
+          ],
+          "seoContent": "Under the Bulgarian Labour Code (Kodeks na truda), every employment relationship must be formalized with a written contract before the employee starts working. The contract must be registered with the National Revenue Agency (NRA) within 3 days. Key mandatory elements include job title, workplace location, duration (fixed-term or indefinite), working hours, base salary, and annual paid leave entitlement (minimum 20 working days per Art. 155). Probation periods can be up to 6 months and must be explicitly stated. This template covers all requirements of Articles 62-70 of the Bulgarian Labour Code."
+        },
+        {
+          "name": "Job Description Template",
+          "slug": "job-description",
+          "description": "Structured job description template with sections for responsibilities, requirements, benefits and salary ranges — optimized for the Bulgarian job market.",
+          "whatsIncluded": [
+            "Job title and department classification",
+            "Reporting structure and team overview",
+            "Core responsibilities and daily tasks",
+            "Required and preferred qualifications",
+            "Salary range guidance for Bulgarian market",
+            "Benefits package and growth opportunities"
+          ],
+          "howToUse": [
+            "Start by defining the role's primary purpose in one sentence",
+            "List 5-8 core responsibilities in order of importance",
+            "Separate must-have requirements from nice-to-have qualifications",
+            "Include salary range (candidates in Bulgaria expect transparency)",
+            "Add your company culture section and benefits",
+            "Have the hiring manager review before publishing"
+          ],
+          "seoContent": "A well-crafted job description is essential for attracting quality candidates in the Bulgarian labour market. According to research, job postings with salary ranges receive 30% more applications. Bulgarian job seekers value transparency about working conditions, including whether the role is on-site, hybrid, or remote. The National Classification of Professions and Positions (NKPD) should be referenced for correct job code classification, which is required for labour contract registration with the NRA. Include information about social benefits, as these are a key differentiator in the competitive Bulgarian tech and business market."
+        },
+        {
+          "name": "Leave Policy Template",
+          "slug": "leave-policy",
+          "description": "Complete leave policy template covering all types of leave under Bulgarian law — annual, sick, maternity, paternity, and special leave provisions.",
+          "whatsIncluded": [
+            "Annual paid leave (minimum 20 days per Art. 155)",
+            "Sick leave procedures and documentation requirements",
+            "Maternity leave (410 days per Art. 163)",
+            "Paternity leave (15 days per Art. 163)",
+            "Unpaid leave provisions and approval process",
+            "Public holidays and bridge day policies"
+          ],
+          "howToUse": [
+            "Review the legal minimums outlined in the template",
+            "Decide on any additional leave days above the legal minimum",
+            "Customize the approval workflow to match your organization",
+            "Set clear procedures for sick leave documentation",
+            "Define the process for requesting and tracking leave",
+            "Distribute to all employees and update your employee handbook"
+          ],
+          "seoContent": "Bulgarian labour law provides some of the most generous leave entitlements in the EU. Under Art. 155 of the Labour Code, every employee is entitled to a minimum of 20 working days of paid annual leave. Employees under 18 get at least 26 days. Workers in hazardous conditions receive additional leave. Sick leave is covered by the employer for the first 3 days (70% of salary per Art. 40(5) of the Social Security Code) and by the National Social Security Institute (NOI) from day 4 onwards (80-90% of salary). Maternity leave totals 410 calendar days — 45 days before the due date and 365 days after birth, paid at 90% of the average gross salary. Fathers are entitled to 15 days of paternity leave after the child's birth."
+        },
+        {
+          "name": "Onboarding Checklist",
+          "slug": "onboarding-checklist",
+          "description": "Structured 90-day onboarding checklist covering pre-boarding, first day, first week, and first three months — ensuring new hires are set up for success.",
+          "whatsIncluded": [
+            "Pre-boarding tasks (IT setup, workspace, accounts)",
+            "Day 1 welcome schedule and orientation",
+            "First week goals and team introductions",
+            "30-day milestone check-in template",
+            "60-day performance discussion guide",
+            "90-day probation review framework"
+          ],
+          "howToUse": [
+            "Share the pre-boarding section with IT and admin teams one week before start date",
+            "Assign a buddy or mentor from the new hire's team",
+            "Walk through the Day 1 checklist with the new employee",
+            "Schedule all milestone check-ins in advance",
+            "Use the 30/60/90 templates for structured feedback conversations",
+            "Complete the probation review before the end of the trial period"
+          ],
+          "seoContent": "Effective onboarding is critical for employee retention — research shows that structured onboarding improves new hire retention by 82%. In Bulgaria, probation periods can last up to 6 months (Art. 70 of the Labour Code), making the first 90 days especially important. During probation, either party can terminate the contract with no notice and no reason given. A good onboarding process should cover legal requirements (signing the labour contract, NRA registration, workplace safety briefing per the Healthy and Safe Working Conditions Act), practical setup (equipment, accounts, access), and cultural integration (team introductions, company values, communication norms)."
+        },
+        {
+          "name": "Performance Review Form",
+          "slug": "performance-review",
+          "description": "360-degree performance review template with self-assessment, manager evaluation, peer feedback sections and goal-setting framework.",
+          "whatsIncluded": [
+            "Self-assessment questionnaire (competencies + achievements)",
+            "Manager evaluation form with rating scales",
+            "Peer feedback collection template",
+            "Goal setting framework (OKR-compatible)",
+            "Development plan and training needs assessment",
+            "Overall performance summary and next steps"
+          ],
+          "howToUse": [
+            "Distribute self-assessment forms 2 weeks before the review meeting",
+            "Collect peer feedback from 3-5 colleagues who work closely with the employee",
+            "Manager completes their evaluation independently",
+            "Schedule a 60-minute review meeting in a private setting",
+            "Discuss results openly and agree on goals for the next period",
+            "Document action items and follow up within 30 days"
+          ],
+          "seoContent": "Regular performance reviews are essential for talent retention and development in Bulgaria's competitive job market. While Bulgarian labour law does not mandate formal performance reviews, they are critical for documenting employee performance — especially relevant during probation periods (Art. 71 of the Labour Code) and when considering promotions or terminations. Best practices for Bulgarian companies include conducting reviews at least twice per year, aligning individual goals with company objectives, and documenting all assessments in writing. The 360-degree feedback approach, combining self-assessment with manager and peer input, provides the most comprehensive view of employee performance."
+        },
+        {
+          "name": "Termination Document Template",
+          "slug": "termination-document",
+          "description": "Legally compliant termination notice and separation agreement template covering all grounds for termination under the Bulgarian Labour Code.",
+          "whatsIncluded": [
+            "Termination notice letter (employer-initiated)",
+            "Mutual termination agreement (Art. 325, para. 1)",
+            "Required notice period calculations",
+            "Severance pay calculations and obligations",
+            "Final settlement checklist (salary, leave, bonuses)",
+            "Return of company property documentation"
+          ],
+          "howToUse": [
+            "Determine the legal basis for termination (with/without notice, mutual, disciplinary)",
+            "Calculate the required notice period (minimum 30 days, or as stated in contract)",
+            "Compute severance obligations (if applicable)",
+            "Prepare the termination document using the appropriate template section",
+            "Have the document reviewed by legal counsel",
+            "Deliver the notice in writing and obtain signed acknowledgment"
+          ],
+          "seoContent": "Termination of employment in Bulgaria is strictly regulated by the Labour Code (Articles 325-335). Employers must follow specific procedures depending on the type of termination. Mutual termination (Art. 325, para. 1) requires written agreement from both parties. Employer-initiated termination with notice (Art. 328) requires at least 30 days' notice (or up to 3 months if specified in the contract) and must cite one of the legally recognized grounds. Termination without notice (Art. 330) is limited to serious breaches. Severance pay is mandatory in certain cases: employees terminated due to company closure or downsizing are entitled to compensation equal to at least 1 month's gross salary. Employees with 10+ years of service at the same employer who reach retirement age receive 2 months' salary (6 months if with 10+ years of service in the same company per Art. 222(3))."
+        }
+      ]
+    },
+    "employmentCostCalculator": {
+      "metaTitle": "Employment Cost Calculator Bulgaria 2026 | Total Employer Cost",
+      "metaDescription": "Calculate the total cost of employing staff in Bulgaria for 2026. See employer social security contributions, health insurance, and team cost projections.",
+      "sectionLabel": "Employment Cost",
+      "heading": "Employment Cost Calculator Bulgaria 2026",
+      "introP1": "Calculate the true cost of hiring employees in Bulgaria. Beyond gross salary, employers must pay social security, health insurance, and pension contributions that add approximately 18-19% to the base salary cost.",
+      "introP2": "Use this calculator to project monthly and annual costs for your entire team, helping you budget accurately for your Bulgarian workforce.",
+      "grossSalary": "Gross Salary per Employee",
+      "numberOfEmployees": "Number of Employees",
+      "bornAfter1960": "Employees born after 31 Dec 1959 (universal pension fund applies)",
+      "costPerEmployee": "Cost per Employee",
+      "perMonth": "per month",
+      "monthlyTeam": "Monthly Team Cost",
+      "employees": "employees",
+      "annualTeam": "Annual Team Cost",
+      "perYear": "per year",
+      "perEmployeeBreakdown": "Per-Employee Cost Breakdown",
+      "pension": "Pension (Cat. III)",
+      "illnessMaternity": "Illness & Maternity",
+      "unemployment": "Unemployment",
+      "accident": "Accident at Work",
+      "health": "Health Insurance",
+      "universalPension": "Universal Pension Fund",
+      "totalEmployerContributions": "Total Employer Contributions",
+      "totalPerEmployee": "Total Cost per Employee",
+      "disclaimer": "Calculations use 2026 Bulgarian social security rates for Category III workers. Actual costs may vary based on industry risk classification and collective agreements.",
+      "obligationsTitle": "Employer Social Security Obligations in Bulgaria",
+      "obligationsP1": "Bulgarian employers are required by law to register employees with the National Revenue Agency (NRA) and the National Social Security Institute (NSSI). Social security contributions must be paid monthly by the 25th of the following month.",
+      "obligationsP2": "The employer bears the larger share of contributions (approximately 60% of the total). For Category III workers (the most common classification for office and IT professionals), the total employer contribution rate is approximately 18.92% of insurable income for employees born after 1960.",
+      "penaltiesTitle": "Penalties for Non-Compliance",
+      "penaltiesP1": "Failure to register employees or pay social security contributions on time results in significant penalties. The NRA may impose fines of 1,500 to 15,000 BGN for first offenses, and 3,000 to 20,000 BGN for repeated violations. Additionally, late payments accrue interest at the statutory rate.",
+      "optimizationTitle": "Optimizing Employment Costs",
+      "optimizationP1": "While social security rates are fixed by law, companies can optimize total employment costs through meal vouchers (tax-exempt up to 200 BGN/month), voluntary health insurance, and professional development budgets. These benefits are either tax-deductible or exempt from social security contributions, making them cost-effective alternatives to gross salary increases.",
+      "ctaTitle": "Automate Employment Cost Tracking",
+      "ctaDesc": "Let HR calculate labour costs and track social security contributions automatically.",
+      "ctaButton": "Start free trial"
+    },
+    "leaveCalculator": {
+      "metaTitle": "Leave Calculator Bulgaria 2026 | Annual Leave Entitlement",
+      "metaDescription": "Calculate leave balances and entitlements under Bulgarian labour law for 2026.",
+      "sectionLabel": "Leave Calculator",
+      "heading": "Leave Calculator Bulgaria 2026",
+      "introP1": "Calculate your employees' annual leave entitlement under the Bulgarian Labour Code. The minimum statutory leave in Bulgaria is 20 working days, with additional days for seniority, disability or hazardous work.",
+      "introP2": "Use this calculator to determine the exact leave entitlement for each employee based on their circumstances.",
+      "baseLeave": "Base Annual Leave (days)",
+      "years": "Years of service",
+      "experienceBonus": "Seniority bonus",
+      "isUnder18": "Employee is under 18",
+      "isDisabled": "Employee has a disability",
+      "hasHazardousWork": "Hazardous working conditions",
+      "hazardousBonus": "Hazardous work bonus",
+      "totalAnnualLeave": "Total Annual Leave",
+      "days": "days",
+      "publicHolidays": "Public holidays",
+      "workingDays": "Working days per year",
+      "totalDaysOff": "Total days off per year",
+      "disclaimer": "Calculations based on 2026 Bulgarian Labour Code provisions. Individual collective agreements may grant additional leave.",
+      "component": "Leave Calculator",
+      "laborCodeTitle": "Leave Entitlement Under Bulgarian Labour Code",
+      "laborCodeP1": "Under Article 155 of the Bulgarian Labour Code, all employees are entitled to a minimum of 20 working days paid annual leave. This minimum cannot be reduced by employment contract or collective agreement.",
+      "laborCodeP2": "Additional leave is granted for: employees under 18 (26 days minimum), employees with disabilities (26 days minimum), and employees in hazardous or night-shift work (Art. 156).",
+      "maternityTitle": "Maternity & Parental Leave",
+      "maternityP1": "Bulgarian law provides 410 days of maternity leave (Art. 163 Labour Code), of which 45 days must be taken before birth. Parental leave is also available until the child reaches 2 years of age.",
+      "sickLeaveTitle": "Sick Leave",
+      "sickLeaveP1": "The employer pays the first day of sick leave (Art. 40 Social Insurance Code). From the second day onwards, the National Social Security Institute (NSSI) pays 80% of the average daily wage for the last 18 months.",
+      "ctaTitle": "Automate Leave Management",
+      "ctaDesc": "Let HR handle leave requests, approvals and balance tracking automatically.",
+      "ctaButton": "Start free trial",
+      "yearsOfService": "Years of service",
+      "yearsOfServiceHint": "Additional leave is granted after 5, 10 and 15 years of service"
+    },
+    "calculatorsLabel": "Calculators",
+    "calculatorsHeading": "Smart Calculators",
+    "calculatorsSubheading": "Quick calculations for HR compliance in Bulgaria.",
+    "calculatorCards": {
+      "salary": {
+        "title": "Salary Calculator",
+        "description": "Calculate net and gross salary in Bulgaria with social security and income tax."
+      },
+      "leave": {
+        "title": "Leave Calculator",
+        "description": "Calculate annual leave balances and entitlements under Bulgarian labour law."
+      },
+      "employmentCost": {
+        "title": "Employment Cost Calculator",
+        "description": "Calculate total employment costs including taxes, social security and benefits."
+      },
+      "aiAssistant": {
+        "title": "AI Assistant",
+        "description": "Get instant answers to your HR questions with our intelligent AI assistant."
+      }
+    },
+    "heroHeading": "Free resources for HR teams",
+    "heroSubheading": "Practical tools, templates and guides built by HR experts.",
+    "templatesLabel": "Templates",
+    "templatesHeading": "Free HR Document Templates",
+    "templatesSubheading": "Download and customise professional HR document templates.",
+    "tryItFree": "Try it free",
+    "salaryCalculator": {
+      "metaTitle": "Salary Calculator Bulgaria 2026 | Net & Gross Salary",
+      "metaDescription": "Calculate net and gross salary in Bulgaria with social security and income tax for 2026.",
+      "sectionLabel": "Salary Calculator",
+      "heading": "Salary Calculator Bulgaria 2026",
+      "introP1": "Calculate exact net take-home pay or gross salary for Bulgarian employees. Includes all 2026 social security and health insurance rates.",
+      "introP2": "Switch between Gross-to-Net and Net-to-Gross calculations.",
+      "grossToNet": "Gross to Net",
+      "netToGross": "Net to Gross",
+      "grossSalary": "Gross Salary",
+      "desiredNet": "Desired Net Salary",
+      "bornAfter1960": "Born after 31 Dec 1959 (universal pension applies)",
+      "netSalary": "Net Salary",
+      "deduction": "Total deductions",
+      "employee": "Employee",
+      "employer": "Employer",
+      "pension": "Pension (Cat. III)",
+      "illnessMaternity": "Illness & Maternity",
+      "unemployment": "Unemployment",
+      "accident": "Accident at Work",
+      "health": "Health Insurance",
+      "universalPension": "Universal Pension Fund",
+      "incomeTax": "Income Tax (10%)",
+      "totalContributions": "Total contributions",
+      "totalCost": "Total employer cost",
+      "minMax": "Min/Max salary info",
+      "insurableNote": "Contributions calculated on insurable income",
+      "howItWorksTitle": "How salary calculations work in Bulgaria",
+      "howItWorksP1": "Bulgarian social security contributions are split between employee and employer. The employee pays approximately 13.78% and the employer pays approximately 18.92% on top of the gross salary.",
+      "howItWorksP2": "Income tax is flat 10% applied to taxable income (gross minus employee social security contributions).",
+      "socialSecurityTitle": "Social Security Rates 2026",
+      "socialSecurityP1": "The total social security rate for Category III workers is 32.7% — split between employee (13.78%) and employer (18.92%).",
+      "socialSecurityP2": "Contributions are calculated on insurable income, which must be between the minimum and maximum insurable income set annually by the National Assembly.",
+      "employerCostsTitle": "Total Employer Cost",
+      "employerCostsP1": "The true cost of an employee is their gross salary plus all employer social security contributions. This is typically 18-19% above the gross salary.",
+      "ctaTitle": "Automate Payroll Calculations",
+      "ctaDesc": "Let HR handle salary calculations, payslips and compliance automatically.",
+      "ctaButton": "Start free trial"
+    }
+  },
+  "about": {
+    "metaTitle": "About Us | HR",
+    "metaDescription": "Learn more about HR — the Bulgarian HR platform for small and medium businesses. Meet our team, mission and values.",
+    "hero": {
+      "heading": "About HR",
+      "subheading": "We're building the HR platform Bulgarian companies truly need — simple, compliant, and powerful."
+    },
+    "story": {
+      "heading": "Our Story",
+      "content1": "HR was founded in Sofia by a team of HR professionals and engineers who saw firsthand how Bulgarian SMEs struggle with outdated HR processes, manual spreadsheets and expensive enterprise software that doesn't fit their needs.",
+      "content2": "We built a platform combining powerful automation with a simple, intuitive interface — so HR teams can focus on people, not paperwork. Today hundreds of Bulgarian companies trust HR to manage their entire employee lifecycle."
+    },
+    "mission": {
+      "heading": "Our Mission & Values",
+      "content": "To make quality HR management accessible to every Bulgarian company, regardless of size or budget. We believe every employee deserves a professional onboarding, every candidate deserves a respectful process, and every HR team deserves tools that actually work."
+    },
+    "stats": {
+      "companies": "Companies",
+      "employees": "Managed employees",
+      "rating": "Rating",
+      "uptime": "Uptime"
+    },
+    "values": {
+      "simplicity": {
+        "title": "Simplicity",
+        "description": "HR software shouldn't require a PhD to use. Every feature prioritizes ease of use and fast value."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We use AI and automation to save HR teams hours of manual work every week."
+      },
+      "compliance": {
+        "title": "Compliance",
+        "description": "Full compliance with Bulgarian labour law and GDPR. SOC 2 Type II certified. Your data is protected."
+      }
+    },
+    "team": {
+      "heading": "Leadership Team",
+      "subheading": "Meet the people building the future of HR in Bulgaria.",
+      "members": {
+        "ceo": "CEO & Co-founder",
+        "ceoBio": "Former HR Director with 10+ years of talent acquisition experience in Bulgarian and European markets.",
+        "cto": "CTO & Co-founder",
+        "ctoBio": "Software architect with experience building enterprise SaaS platforms at scale.",
+        "cpo": "CPO",
+        "cpoBio": "Product designer focused on making complex HR processes feel simple.",
+        "coo": "COO",
+        "cooBio": "Operations expert who has scaled HR departments across Central and Eastern Europe."
+      }
+    },
+    "cta": {
+      "heading": "Ready to transform your HR?",
+      "subheading": "Join hundreds of Bulgarian companies already hiring smarter with HR.",
+      "primaryButton": "Start free trial",
+      "secondaryButton": "Contact us"
+    }
+  },
+  "contact": {
+    "metaTitle": "Contact Us | HR",
+    "metaDescription": "Get in touch with the HR team. We're here to help.",
+    "hero": {
+      "heading": "Contact Us",
+      "subheading": "Have a question or want to learn more? We'd love to hear from you."
+    },
+    "options": {
+      "liveChat": {
+        "title": "Live Chat",
+        "description": "Chat with our support team in real time.",
+        "button": "Start Chat"
+      },
+      "email": {
+        "title": "Email Us",
+        "description": "We respond within 24 hours on business days."
+      },
+      "demo": {
+        "title": "Request a Demo",
+        "description": "See HR in action with a personalized walkthrough.",
+        "button": "Book a Demo"
+      }
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "description": "Fill in the form and we'll get back to you shortly.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Work email",
+      "phone": "Phone number (optional)",
+      "company": "Company",
+      "companySize": "Company size",
+      "selectCompanySize": "Select company size",
+      "companySizes": {
+        "small": "1-10 employees",
+        "medium": "11-50 employees",
+        "large": "51-200 employees",
+        "enterprise": "201+ employees"
+      },
+      "subject": "Subject",
+      "selectSubject": "Select subject",
+      "subjects": {
+        "general": "General inquiry",
+        "sales": "Sales",
+        "demo": "Demo request",
+        "support": "Technical support",
+        "partnership": "Partnership opportunity",
+        "feedback": "Feedback",
+        "other": "Other"
+      },
+      "message": "Message",
+      "privacy": "I agree to the",
+      "privacyLink": "Privacy Policy",
+      "submit": "Send message",
+      "submitting": "Sending...",
+      "successTitle": "Message sent!",
+      "successMessage": "Thanks for reaching out. We'll respond within 1 business day.",
+      "successAction": "Send another message"
+    },
+    "offices": {
+      "title": "Contact Information",
+      "email": {
+        "title": "Email"
+      },
+      "phone": {
+        "title": "Phone"
+      },
+      "address": {
+        "title": "Address",
+        "value": "Business Park Sofia, Building 2, Sofia 1766, Bulgaria"
+      }
+    },
+    "support": {
+      "title": "Support Hours",
+      "mondayFriday": "Monday – Friday",
+      "weekdayHours": "9:00 AM – 6:00 PM EET",
+      "saturday": "Saturday",
+      "saturdayHours": "10:00 AM – 2:00 PM EET",
+      "sunday": "Sunday",
+      "sundayHours": "Closed",
+      "responseTime": "Average response time",
+      "responseTimeValue": "< 2 hours"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subheading": "Quick answers to common questions.",
+      "items": {
+        "question1": "How do I get started?",
+        "answer1": "Sign up for free. No credit card required. Start posting jobs and managing candidates immediately.",
+        "question2": "Do you offer a free trial?",
+        "answer2": "Yes — all paid plans include a 14-day free trial. No credit card required to start.",
+        "question3": "Is my data secure?",
+        "answer3": "Absolutely. We are SOC 2 Type II certified and fully GDPR compliant. Your data is encrypted at rest and in transit.",
+        "question4": "Can I migrate from my current ATS?",
+        "answer4": "Yes. We offer a free migration service for paid plan customers. Our team will help you import existing candidate data, job listings and company information. Contact our team to get started.",
+        "question5": "What payment methods do you accept?",
+        "answer5": "We accept all major credit cards (Visa, Mastercard, American Express), bank transfers and PayPal. For annual plans, we also offer invoice billing.",
+        "question6": "Can I cancel my subscription at any time?",
+        "answer6": "Yes, you can cancel your subscription at any time with no penalties. Your data will remain accessible for 30 days after cancellation, giving you time to export it if needed.",
+        "question7": "Do you offer training and onboarding?",
+        "answer7": "Yes! All paid plans include personalized onboarding sessions. We also offer comprehensive video tutorials, documentation and live weekly training webinars.",
+        "question8": "What kind of support do you offer?",
+        "answer8": "We offer email support for all plans with response times under 24 hours. Premium and Enterprise plans include priority support, phone support and a dedicated account manager."
+      }
+    }
+  },
+  "careers": {
+    "metaTitle": "Careers | HR",
+    "metaDescription": "Join our team and help build the future of HR software for Bulgarian businesses.",
+    "hero": {
+      "heading": "Join Our Team",
+      "subheading": "Help us build the HR platform that makes a real difference for companies and candidates.",
+      "primaryButton": "View open positions",
+      "secondaryButton": "Our culture"
+    },
+    "culture": {
+      "heading": "Why work with us",
+      "subheading": "We're building something special — and we'd love you to be part of it.",
+      "values": {
+        "remote": {
+          "title": "Remote-first",
+          "description": "Work from anywhere in Bulgaria. We trust our team to deliver great work wherever they are."
+        },
+        "learning": {
+          "title": "Continuous learning",
+          "description": "Access to courses, conferences and a budget for your professional development."
+        },
+        "health": {
+          "title": "Health & wellbeing",
+          "description": "Private health insurance, gym benefits and mental health support."
+        },
+        "retreats": {
+          "title": "Team retreats",
+          "description": "Regular team-building events and annual gatherings to connect and recharge."
+        }
+      }
+    },
+    "positions": {
+      "heading": "Open Positions",
+      "subheading": "We're always looking for talented people to join our team.",
+      "noMatch": "No positions matching your criteria right now, but we're always interested in hearing from great people.",
+      "spontaneousButton": "Send a spontaneous application",
+      "applyButton": "Apply now",
+      "items": {
+        "seniorEngineer": {
+          "title": "Senior Software Engineer",
+          "description": "Build and scale our core HR platform using Go and React.",
+          "department": "Engineering",
+          "location": "Remote (Bulgaria)",
+          "type": "Full-time"
+        },
+        "productDesigner": {
+          "title": "Product Designer",
+          "description": "Design intuitive experiences that make HR management simple.",
+          "department": "Design",
+          "location": "Remote (Bulgaria)",
+          "type": "Full-time"
+        },
+        "hrSpecialist": {
+          "title": "HR Specialist",
+          "description": "Help our customers get the most out of the HR platform.",
+          "department": "Customer Success",
+          "location": "Sofia / Remote",
+          "type": "Full-time"
+        },
+        "marketingManager": {
+          "title": "Marketing Manager",
+          "description": "Drive growth through content, SEO and demand generation campaigns.",
+          "department": "Marketing",
+          "location": "Remote (Bulgaria)",
+          "type": "Full-time"
+        },
+        "qaEngineer": {
+          "title": "QA Engineer",
+          "description": "Ensure the quality and reliability of our platform through automated and manual testing.",
+          "department": "Engineering",
+          "location": "Remote (Bulgaria)",
+          "type": "Full-time"
+        }
+      }
+    },
+    "benefits": {
+      "heading": "Benefits & perks",
+      "subheading": "We take care of our team so they can take care of our customers.",
+      "health": {
+        "title": "Health & wellbeing",
+        "items": {
+          "private": "Private health insurance",
+          "dental": "Dental coverage",
+          "vision": "Vision coverage",
+          "wellness": "Annual wellness budget"
+        }
+      },
+      "workLife": {
+        "title": "Work-life balance",
+        "items": {
+          "remote": "Remote-first culture",
+          "flexible": "Flexible working hours",
+          "vacation": "28 days paid vacation",
+          "parental": "Parental leave"
+        }
+      },
+      "financial": {
+        "title": "Financial",
+        "items": {
+          "competitive": "Competitive salary",
+          "equity": "Employee equity program",
+          "bonus": "Performance bonus",
+          "retirement": "Retirement plan contribution"
+        }
+      },
+      "development": {
+        "title": "Growth & development",
+        "items": {
+          "budget": "Learning & development budget",
+          "conferences": "Conference attendance",
+          "courses": "Online courses & certifications",
+          "mentorship": "Mentorship program"
+        }
+      }
+    },
+    "process": {
+      "heading": "Our hiring process",
+      "subheading": "Transparent, respectful and designed to find the best fit for both sides.",
+      "steps": {
+        "apply": {
+          "title": "Application review",
+          "description": "We review every application carefully and respond within 5 business days."
+        },
+        "screening": {
+          "title": "Screening call",
+          "description": "A 30-minute call to discuss your experience and answer your questions."
+        },
+        "interviews": {
+          "title": "Interviews",
+          "description": "Technical and cultural interviews with the team to assess skills and fit."
+        },
+        "offer": {
+          "title": "Offer",
+          "description": "We'll make an offer with detailed information about compensation and benefits."
+        }
+      }
+    },
+    "cta": {
+      "heading": "Ready to join?",
+      "subheading": "Take the next step in your career and help shape the future of HR in Bulgaria.",
+      "button": "View open positions"
+    }
+  },
+  "blog": {
+    "metaTitle": "HR Blog",
+    "metaDescription": "Practical advice, trends, and insights for HR professionals.",
+    "sectionLabel": "Blog",
+    "heading": "HR Insights",
+    "subheading": "Practical advice and analysis from HR professionals with real-world experience.",
+    "readMore": "Read more →",
+    "readTime": "min read",
+    "posts": [
+      {
+        "title": "AI in Recruiting: How to Use Artificial Intelligence Responsibly",
+        "excerpt": "AI recruiting tools are now a reality. But how do you apply them without violating GDPR or unfairly excluding candidates?",
+        "category": "Technology",
+        "date": "February 15, 2025",
+        "author": "Maria Ivanova"
+      },
+      {
+        "title": "5 Employer Branding Strategies That Actually Work",
+        "excerpt": "How do you attract top talent when competing with multinational companies? Real examples from the market.",
+        "category": "Employer Branding",
+        "date": "February 8, 2025",
+        "author": "Peter Georgiev"
+      },
+      {
+        "title": "Onboarding That Works: How to Retain New Employees",
+        "excerpt": "Research shows that 20% of turnover happens within the first 45 days. Here’s how to prevent it.",
+        "category": "Onboarding",
+        "date": "February 1, 2025",
+        "author": "Elena Stoyanova"
+      },
+      {
+        "title": "IT Sector Salaries: How to Negotiate Fairly",
+        "excerpt": "Market data, benchmarks, and tactics for reaching fair compensation — from both sides of the table.",
+        "category": "Compensation",
+        "date": "January 25, 2025",
+        "author": "Dimitar Nikolov"
+      },
+      {
+        "title": "GDPR for HR: What You Need to Know in 2025",
+        "excerpt": "An updated guide to processing personal data for candidates and employees in line with the latest guidelines.",
+        "category": "Legal",
+        "date": "January 18, 2025",
+        "author": "Atty. Krasimira Veleva"
+      },
+      {
+        "title": "Remote Hiring: A Guide for 2025",
+        "excerpt": "How to evaluate candidates for remote positions, conduct virtual interviews, and build trust from day one.",
+        "category": "Remote Work",
+        "date": "January 10, 2025",
+        "author": "Maria Ivanova"
+      }
+    ]
+  },
+  "cookies": {
+    "metaTitle": "Cookie Policy | HR",
+    "metaDescription": "Learn how HR uses cookies and similar technologies to provide you with a better experience.",
+    "lastUpdated": "Last updated: February 1, 2026",
+    "hero": {
+      "heading": "Cookie Policy",
+      "subheading": "How HR uses cookies and similar technologies to improve your experience."
+    },
+    "toc": {
+      "title": "Table of Contents",
+      "whatAreCookies": "What Are Cookies",
+      "typesOfCookies": "Types of Cookies",
+      "cookiesWeUse": "Cookies We Use",
+      "howToManage": "How to Manage",
+      "thirdParty": "Third-Party Cookies",
+      "changes": "Updates",
+      "contact": "Contact"
+    },
+    "whatAre": {
+      "title": "What Are Cookies",
+      "description": "Cookies are small text files stored on your device when you visit our website. They help us provide a better experience by remembering your preferences and understanding how you use our platform.",
+      "purpose": "Cookies serve various purposes — from keeping you logged in to helping us understand which features are most useful."
+    },
+    "types": {
+      "title": "Types of Cookies We Use",
+      "description": "We use the following categories of cookies on our platform:",
+      "essential": {
+        "title": "Essential Cookies",
+        "description": "Required for the platform to function. These cannot be disabled.",
+        "examples": "Session management, authentication, security",
+        "cookiesUsed": "session_id, auth_token, csrf_token"
+      },
+      "functional": {
+        "title": "Functional Cookies",
+        "description": "Remember your preferences and settings to personalise your experience.",
+        "examples": "Language preference, UI theme, notification settings",
+        "cookiesUsed": "language, theme, preferences"
+      },
+      "performance": {
+        "title": "Performance Cookies",
+        "description": "Help us understand how visitors use our site so we can improve it.",
+        "examples": "Page views, session duration, error tracking",
+        "cookiesUsed": "_ga, _gid, _gat"
+      },
+      "marketing": {
+        "title": "Marketing Cookies",
+        "description": "Used to deliver relevant advertising and track campaign effectiveness.",
+        "examples": "Ad targeting, conversion tracking, retargeting",
+        "cookiesUsed": "_fbp, li_sugr"
+      }
+    },
+    "cookieTable": {
+      "title": "Cookie Details",
+      "description": "Specific cookies used on our platform:",
+      "colName": "Cookie Name",
+      "colPurpose": "Purpose",
+      "colType": "Type",
+      "colDuration": "Duration",
+      "sessionId": "Maintains your login session",
+      "authToken": "Authentication token for secure access",
+      "csrfToken": "Prevents cross-site request forgery attacks",
+      "language": "Stores your language preference",
+      "locale": "Stores your locale/region setting",
+      "theme": "Remembers your UI theme preference",
+      "preferences": "Stores your platform preferences",
+      "ga": "Google Analytics — tracks site usage",
+      "gid": "Google Analytics — distinguishes users",
+      "gat": "Google Analytics — throttles request rate",
+      "fbp": "Facebook Pixel — tracks conversions",
+      "liSugr": "LinkedIn Insight Tag — tracks conversions",
+      "typeEssential": "Essential",
+      "typeFunctional": "Functional",
+      "typeAnalytics": "Analytics",
+      "typeMarketing": "Marketing",
+      "session": "Session",
+      "year": "1 year",
+      "years": "2 years",
+      "months": "6 months"
+    },
+    "thirdParty": {
+      "title": "Third-Party Cookies",
+      "description": "We use services from these third-party providers that may set cookies:",
+      "analytics": {
+        "description": "We use Google Analytics to understand how visitors interact with our site. Google may set cookies to track usage."
+      },
+      "linkedin": {
+        "description": "We use LinkedIn Insight Tag to measure the effectiveness of our LinkedIn advertising campaigns."
+      },
+      "marketing": {
+        "description": "We use marketing tools that may set cookies to help us reach potential customers across the web."
+      },
+      "privacyPolicy": "View privacy policy"
+    },
+    "managing": {
+      "title": "Managing Your Cookie Preferences",
+      "description": "You have control over the cookies we use. Here's how to manage them:",
+      "consent": {
+        "title": "Cookie Consent Banner",
+        "description": "When you first visit our site, you can accept or decline non-essential cookies via our consent banner. You can update your preferences at any time."
+      },
+      "browser": {
+        "title": "Browser Settings",
+        "description": "You can control cookies through your browser settings. Most browsers allow you to block or delete cookies.",
+        "popular": "Popular browser guides: Chrome, Firefox, Safari, Edge"
+      }
+    },
+    "choices": {
+      "impact": {
+        "title": "Impact of Disabling Cookies",
+        "description": "Disabling essential cookies will prevent you from logging in and using core platform features. Disabling functional cookies may affect your personalised experience."
+      }
+    },
+    "updates": {
+      "title": "Updates to This Policy",
+      "content": "We may update this Cookie Policy from time to time. We'll notify you of significant changes by posting a notice on our website or by email. The date at the top of this page indicates when it was last revised."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "If you have questions about our use of cookies, please contact us:",
+      "email": "privacy@hr.com",
+      "phone": "+359 2 000 0000",
+      "address": "Address",
+      "addressDetails": "Business Park Sofia, Building 2, Sofia 1766, Bulgaria"
+    }
+  },
+  "systemStatus": {
+    "metaTitle": "System Status | HR",
+    "metaDescription": "Check the real-time status of all HR services.",
+    "hero": {
+      "heading": "System Status",
+      "subheading": "Real-time status of all HR services and infrastructure."
+    },
+    "currentStatus": {
+      "title": "Current Status",
+      "allSystems": "All systems are operating normally",
+      "operational": "Operational",
+      "lastUpdated": "Last updated"
+    },
+    "services": {
+      "title": "Service Status",
+      "description": "Current status of all platform services.",
+      "items": {
+        "webApp": {
+          "title": "Web Application",
+          "description": "Main HR dashboard and interface"
+        },
+        "api": {
+          "title": "API",
+          "description": "REST API endpoints"
+        },
+        "database": {
+          "title": "Database",
+          "description": "Data storage and retrieval"
+        },
+        "email": {
+          "title": "Email Delivery",
+          "description": "Notifications and email communications"
+        },
+        "integrations": {
+          "title": "Integrations",
+          "description": "Third-party service connections"
+        },
+        "ai": {
+          "title": "AI Services",
+          "description": "CV screening and AI features"
+        },
+        "search": {
+          "title": "Search",
+          "description": "Full-text search for job postings, candidates, and documents"
+        },
+        "fileStorage": {
+          "title": "File Storage",
+          "description": "Document storage, CV uploads, and file management"
+        }
+      }
+    },
+    "status": {
+      "operational": "Operational",
+      "resolved": "Resolved"
+    },
+    "uptime": {
+      "title": "Uptime",
+      "description": "Historical availability data.",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "last7Days": "Last 7 days",
+      "last24Hours": "Last 24 hours",
+      "last30Days": "Last 30 days",
+      "thisWeek": "This week",
+      "thisMonth": "This month",
+      "uptime": "Uptime",
+      "uptimeHistory": "Uptime history",
+      "daysAgo": "30 days ago",
+      "legendOperational": "Operational",
+      "legendDegraded": "Degraded"
+    },
+    "incidents": {
+      "title": "Active Incidents",
+      "description": "Any current incidents will be listed here.",
+      "noIncidents": "No active incidents",
+      "noIncidentsDescription": "All systems are operating normally."
+    },
+    "pastIncidents": {
+      "title": "Past Incidents",
+      "items": {
+        "incident1": {
+          "title": "Increased API Latency",
+          "description": "Increased API response times due to database load. The issue was identified and resolved.",
+          "date": "February 10, 2025",
+          "duration": "Duration: 47 minutes"
+        },
+        "incident2": {
+          "title": "Email Delivery Delays",
+          "description": "Email notifications were delayed by up to 30 minutes due to a third-party provider issue.",
+          "date": "January 28, 2025",
+          "duration": "Duration: 2 hours"
+        },
+        "incident3": {
+          "title": "Scheduled Maintenance",
+          "description": "Planned database maintenance window. Read-only mode was active during maintenance.",
+          "date": "January 15, 2025",
+          "duration": "Duration: 1 hour"
+        }
+      }
+    },
+    "subscribe": {
+      "title": "Subscribe to notifications",
+      "description": "Receive alerts for incidents and maintenance windows.",
+      "placeholder": "Your email address",
+      "button": "Subscribe"
+    },
+    "contact": {
+      "title": "Report an issue",
+      "description": "Something wrong? Let us know.",
+      "email": {
+        "title": "Email",
+        "description": "status@hr.com"
+      },
+      "twitter": {
+        "title": "Twitter / X",
+        "description": "@JobsHRStatus"
+      }
+    }
+  },
+  "partners": {
+    "metaTitle": "Partner Program | HR",
+    "metaDescription": "Join the HR partner program and grow your business with us.",
+    "hero": {
+      "heading": "Become a Partner",
+      "subheading": "Grow your business by becoming a HR partner. Competitive commissions and full partner support.",
+      "button": "Apply to Become a Partner"
+    },
+    "why": {
+      "title": "Why Become Our Partner?",
+      "subheading": "Join a growing ecosystem and build a stream of recurring revenue.",
+      "benefits": {
+        "revenue": {
+          "title": "Recurring Revenue",
+          "description": "Earn competitive commissions for every client you refer or resell."
+        },
+        "training": {
+          "title": "Partner Training",
+          "description": "Comprehensive onboarding, certification programs, and ongoing product training."
+        },
+        "coMarketing": {
+          "title": "Co-Marketing",
+          "description": "Joint campaigns, co-branded materials, events, and shared lead generation."
+        },
+        "support": {
+          "title": "Dedicated Support",
+          "description": "Your own partner manager, priority technical support, and sales resources."
+        }
+      }
+    },
+    "types": {
+      "title": "Partnership Types",
+      "subheading": "Choose the partner model that fits your business.",
+      "referral": {
+        "title": "Referral Partner",
+        "description": "Refer clients and earn a commission for every successful deal.",
+        "benefits": {
+          "benefit1": "20% commission for the first year",
+          "benefit2": "Dedicated referral dashboard",
+          "benefit3": "Co-branded marketing materials",
+          "benefit4": "Priority support for referred clients"
+        }
+      },
+      "reseller": {
+        "title": "Reseller Partner",
+        "description": "Resell HR under your own brand with custom pricing.",
+        "benefits": {
+          "benefit1": "Up to 35% margin",
+          "benefit2": "White-label options",
+          "benefit3": "Full partner training",
+          "benefit4": "Access to all features"
+        }
+      },
+      "integration": {
+        "title": "Integration Partner",
+        "description": "Build a native integration with HR and reach our customer base.",
+        "benefits": {
+          "benefit1": "Listing in our integrations marketplace",
+          "benefit2": "API access and sandbox",
+          "benefit3": "Co-marketing opportunities",
+          "benefit4": "Technical support"
+        }
+      },
+      "technology": {
+        "title": "Technology Partner",
+        "description": "Deeper technical collaboration for building joint solutions.",
+        "benefits": {
+          "benefit1": "Joint go-to-market strategy",
+          "benefit2": "Shared customer success",
+          "benefit3": "Product roadmap participation",
+          "benefit4": "Co-development opportunities"
+        }
+      }
+    },
+    "current": {
+      "title": "Current Partners",
+      "subheading": "Trusted by leading companies in HR technology."
+    },
+    "form": {
+      "title": "Apply to Become a Partner",
+      "description": "Tell us about your business and we’ll get back to you within 2 business days.",
+      "contactName": "Contact Name",
+      "companyName": "Company Name",
+      "email": "Business Email",
+      "website": "Website",
+      "partnerType": "Partnership Type",
+      "selectType": "Select a partnership type",
+      "companySize": "Company Size",
+      "selectSize": "Select your company size",
+      "sizes": {
+        "small": "1–10 employees",
+        "medium": "11–50 employees",
+        "large": "51–200 employees",
+        "enterprise": "200+ employees"
+      },
+      "agreement": "I agree to the terms of the partner program",
+      "submit": "Submit Application",
+      "successTitle": "Application Submitted!",
+      "successMessage": "Thank you for your interest in partnering with HR. Our team will review your application and get back to you within 2 business days."
+    },
+    "contact": {
+      "title": "Have Questions?",
+      "description": "Our partner team is here to help.",
+      "email": {
+        "title": "Email",
+        "description": "partners@hr.com"
+      },
+      "phone": {
+        "title": "Phone",
+        "description": "+359 2 123 4567"
+      }
+    }
+  },
+  "privacy": {
+    "metaTitle": "Privacy Policy | HR",
+    "metaDescription": "Learn how HR collects, uses, and protects your personal data. Compliant with GDPR and applicable data protection law.",
+    "lastUpdated": "Last updated: February 1, 2026",
+    "hero": {
+      "heading": "Privacy Policy",
+      "subheading": "How we collect, use, and protect your personal data in accordance with GDPR and applicable data protection legislation."
+    },
+    "toc": {
+      "title": "Contents",
+      "introduction": "Introduction",
+      "dataController": "Data Controller",
+      "dataWeCollect": "Data We Collect",
+      "howWeUse": "How We Use Your Data",
+      "legalBasis": "Legal Basis (GDPR Article 6)",
+      "dataSharing": "Data Sharing",
+      "internationalTransfers": "International Transfers",
+      "dataRetention": "Data Retention",
+      "yourRights": "Your Rights",
+      "children": "Children’s Privacy",
+      "changes": "Changes to This Policy",
+      "contactDpo": "Contact DPO"
+    },
+    "introduction": {
+      "title": "1. Introduction",
+      "content": "HR Ltd (“we”, “us”, “our”) is committed to protecting your privacy and personal data. This Privacy Policy explains how we collect, use, store, and share your personal data when you use the HR platform and related services.",
+      "scope": "This policy applies to all users of the HR platform, including employers, HR administrators, and employees. It has been prepared in accordance with Regulation (EU) 2016/679 (the General Data Protection Regulation / GDPR) and applicable national data protection legislation."
+    },
+    "controller": {
+      "title": "2. Data Controller",
+      "description": "The data controller responsible for your personal data is:",
+      "companyLabel": "Company",
+      "bulstat": "Company Registration No.",
+      "addressLabel": "Registered address",
+      "addressValue": "Business Park Sofia, Building 2, Sofia 1766, Bulgaria",
+      "emailLabel": "DPO Email"
+    },
+    "information": {
+      "title": "3. Data We Collect",
+      "description": "We collect the following categories of personal data depending on your role and how you use the platform:",
+      "personal": {
+        "title": "Identity Data",
+        "description": "Data you provide directly when creating an account or using the service:",
+        "items": {
+          "name": "Full name, job title, and organisational role",
+          "email": "Email address (work and/or personal)",
+          "phone": "Phone number",
+          "company": "Company name, registration number, and VAT number",
+          "address": "Business address and correspondence address"
+        }
+      },
+      "usage": {
+        "title": "Usage and Technical Data",
+        "description": "Data collected automatically when you interact with the platform:",
+        "items": {
+          "pages": "Pages visited and features used",
+          "features": "Click patterns and navigation flows",
+          "time": "Session duration and login frequency",
+          "device": "Device type, operating system, and screen resolution",
+          "browser": "Browser type and version, IP address"
+        }
+      },
+      "employment": {
+        "title": "Employment Data",
+        "description": "Data processed on behalf of your employer through the HR platform:",
+        "items": {
+          "cv": "CVs, cover letters, and application materials",
+          "salary": "Salary information and payroll data",
+          "leave": "Leave balances, requests, and attendance records",
+          "performance": "Performance reviews, goals, and feedback"
+        }
+      }
+    },
+    "usage": {
+      "title": "4. How We Use Your Data",
+      "description": "We process your personal data for the following purposes:",
+      "items": {
+        "service": "Providing and maintaining the HR platform and its features",
+        "support": "Responding to your enquiries and providing technical support",
+        "improvement": "Analysing usage patterns to improve our services and user experience",
+        "communication": "Sending notifications, updates, and (with your consent) marketing communications",
+        "security": "Detecting and preventing fraud, abuse, and security threats",
+        "legal": "Complying with legal obligations under applicable law, including tax reporting"
+      }
+    },
+    "legalBasis": {
+      "title": "5. Legal Basis (GDPR Article 6)",
+      "description": "We process your personal data on the following legal bases as defined in Article 6(1) of the GDPR:",
+      "consent": {
+        "title": "Consent (Art. 6(1)(a))",
+        "description": "For marketing communications, non-essential cookies, and analytics. You may withdraw your consent at any time via account settings or cookie preferences."
+      },
+      "contract": {
+        "title": "Contractual Necessity (Art. 6(1)(b))",
+        "description": "Processing necessary to perform our contract with you, including account management, service delivery, billing, and customer support."
+      },
+      "legal": {
+        "title": "Legal Obligation (Art. 6(1)(c))",
+        "description": "Processing required to comply with applicable tax law, accounting law, employment law, and social security reporting obligations."
+      },
+      "interest": {
+        "title": "Legitimate Interests (Art. 6(1)(f))",
+        "description": "Processing necessary for our legitimate business interests, including platform security, fraud prevention, service improvement, and direct marketing to existing customers. We conduct a balancing test to ensure your rights are not overridden."
+      }
+    },
+    "sharing": {
+      "title": "6. Data Sharing",
+      "description": "We are committed to keeping your data confidential. We share personal data only in limited circumstances:",
+      "never": {
+        "title": "What We Never Do",
+        "content": "We never sell your personal data to third parties. We never share employee data with other employers or advertisers. We never use your data for purposes unrelated to our service."
+      },
+      "exceptions": {
+        "title": "When We May Share Data",
+        "description": "We may share your data in the following limited circumstances:",
+        "items": {
+          "consent": "With your explicit consent for specific purposes",
+          "providers": "With trusted service providers (sub-processors) who help operate the platform, under strict data processing agreements",
+          "legal": "When required by applicable law, court order, or regulatory request",
+          "safety": "To protect the safety, rights, or property of our users or the public",
+          "transfer": "In the event of a merger, acquisition, or sale of assets, with advance notice to affected users"
+        }
+      }
+    },
+    "international": {
+      "title": "7. International Transfers",
+      "description": "Your data is stored primarily within the European Union (AWS Frankfurt). Where a transfer of data outside the EU/EEA is necessary for specific services, we ensure appropriate safeguards are in place.",
+      "safeguards": "Transfer safeguards include: EU adequacy decisions, Standard Contractual Clauses (SCCs) approved by the European Commission, and supplementary measures recommended by the EDPB. We do not transfer data to countries without adequate protection unless such safeguards are in place."
+    },
+    "retention": {
+      "title": "8. Data Retention",
+      "description": "We retain your personal data only for as long as necessary for the purposes described in this policy:",
+      "items": {
+        "active": "Account data: retained for the duration of the subscription plus 30 days for data export",
+        "legal": "Financial records: retained for 5 years as required by accounting law, and 10 years for tax documentation",
+        "deletion": "On account deletion: personal data is anonymised or deleted within 30 days, unless statutory retention periods apply"
+      }
+    },
+    "rights": {
+      "title": "9. Your Rights",
+      "description": "Under the GDPR, you have the following rights in relation to your personal data:",
+      "access": {
+        "title": "Right of Access (Art. 15)",
+        "content": "Request a copy of all personal data we hold about you, including the purposes of processing and categories of recipients."
+      },
+      "correction": {
+        "title": "Right to Rectification (Art. 16)",
+        "content": "Request correction of inaccurate or incomplete personal data. You can update most data directly through your account settings."
+      },
+      "deletion": {
+        "title": "Right to Erasure (Art. 17)",
+        "content": "Request deletion of your personal data when it is no longer needed for the original purpose, subject to statutory retention requirements."
+      },
+      "portability": {
+        "title": "Right to Data Portability (Art. 20)",
+        "content": "Receive your personal data in a structured, machine-readable format (JSON/CSV) and transfer it to another service provider."
+      },
+      "restriction": {
+        "title": "Right to Restriction (Art. 18)",
+        "content": "Request restriction of the processing of your data while a dispute is being resolved or accuracy is being verified."
+      },
+      "objection": {
+        "title": "Right to Object (Art. 21)",
+        "content": "Object to processing based on legitimate interests or direct marketing at any time. We will cease processing unless we can demonstrate compelling legitimate grounds."
+      },
+      "exerciseNote": "To exercise any of these rights, contact our DPO at dpo@hr.com. We will respond within 30 days (extendable by 60 days for complex requests), as required by the GDPR. You also have the right to lodge a complaint with your national data protection supervisory authority."
+    },
+    "children": {
+      "title": "10. Children’s Privacy",
+      "content": "HR is a platform for businesses and is not intended for persons under the age of 16. We do not knowingly collect personal data from children. If you believe we have inadvertently collected data from a minor, please contact us immediately at privacy@hr.com and we will delete it without delay."
+    },
+    "changes": {
+      "title": "11. Changes to This Policy",
+      "content": "We may update this Privacy Policy periodically to reflect changes in our practices, technology, legal requirements, or other factors. We will notify you of material changes at least 30 days in advance by email and/or in-app notification. The date of the last update is shown at the top of this page. We recommend reviewing this policy regularly."
+    },
+    "contact": {
+      "title": "12. Contact the DPO",
+      "description": "For questions about this Privacy Policy or to exercise your data protection rights, please contact:",
+      "email": "Email",
+      "dpo": "Data Protection Officer",
+      "address": "Address",
+      "addressDetails": "Business Park Sofia, Building 2, Sofia 1766, Bulgaria",
+      "phone": "Phone",
+      "supervisory": "Supervisory Authority",
+      "supervisoryDetails": "Your national data protection authority (e.g. ICO in the UK, CNIL in France). In Bulgaria: Commission for Personal Data Protection (CPDP), www.cpdp.bg"
+    },
+    "summary": {
+      "title": "Summary",
+      "content": "We collect only the data necessary to provide our HR platform services, process it lawfully under the GDPR, and protect it with industry-standard security measures. Your rights to access, rectification, erasure, and data portability are fully supported.",
+      "trust": "Your trust is the foundation of our business.",
+      "commitment": "We are committed to transparency and data protection."
+    }
+  },
+  "terms": {
+    "metaTitle": "Terms of Service | HR",
+    "metaDescription": "Read the Terms of Service for the HR platform. Governed by applicable law.",
+    "lastUpdated": "Last updated: February 1, 2026",
+    "hero": {
+      "heading": "Terms of Service",
+      "subheading": "Please read these terms carefully before using the HR platform."
+    },
+    "toc": {
+      "title": "Contents",
+      "introduction": "Acceptance of Terms",
+      "services": "Description of Service",
+      "accounts": "User Accounts",
+      "acceptableUse": "Acceptable Use",
+      "intellectualProperty": "Intellectual Property",
+      "payment": "Payment Terms",
+      "dataProcessing": "Data Processing",
+      "liability": "Limitation of Liability",
+      "termination": "Termination",
+      "governingLaw": "Governing Law",
+      "contact": "Contact Information"
+    },
+    "introduction": {
+      "title": "1. Acceptance of Terms",
+      "content": "HR Ltd, a company registered under applicable law, with registered office at Business Park Sofia, Building 2, Sofia 1766, Bulgaria (“Company”, “we”, “us”, “our”), operates the HR platform and related services. These Terms of Service (“Terms”) constitute a legally binding agreement between you and the Company.",
+      "acceptance": "By accessing or using our platform, you confirm that you have read, understood, and agree to be bound by these Terms. If you do not agree, you must not use our services. These Terms apply to all visitors, users, and paid subscribers."
+    },
+    "services": {
+      "title": "2. Description of Service",
+      "description": "HR provides a cloud-based human resources management platform (“Service”) which includes, but is not limited to:",
+      "items": {
+        "item1": "Applicant Tracking System (ATS) with AI-powered matching",
+        "item2": "Employee database management and self-service portal",
+        "item3": "Leave tracking with automated approvals and balance calculations",
+        "item4": "Payroll processing compliant with applicable regulations",
+        "item5": "Performance reviews and 360-degree feedback tools"
+      },
+      "scope": "The Service is designed for businesses and is compliant with applicable employment legislation and EU regulations. Features may vary depending on your subscription plan."
+    },
+    "account": {
+      "title": "3. User Accounts",
+      "description": "The creation and management of accounts is subject to the following conditions:",
+      "registration": {
+        "title": "Registration",
+        "content": "You must provide accurate, complete, and up-to-date information when creating an account, including the legal company name and registration number where applicable. You are responsible for maintaining the confidentiality of your login credentials. Each user must have a separate account; shared accounts are not permitted."
+      },
+      "termination": {
+        "title": "Account Closure",
+        "content": "You may close your account at any time via account settings. Upon termination, we will retain your data for the statutory period required by applicable accounting and tax legislation before secure deletion."
+      }
+    },
+    "responsibilities": {
+      "title": "4. Acceptable Use",
+      "description": "As a HR user, you agree to use the platform responsibly and in compliance with all applicable laws:",
+      "accuracy": {
+        "title": "Data Accuracy",
+        "content": "You must ensure that all data entered into the platform, including employee records, job postings, and salary information, is accurate and up to date. Inaccurate data may lead to non-compliance with applicable employment regulations."
+      },
+      "compliance": {
+        "title": "Legal Compliance",
+        "content": "You must comply with all applicable laws and regulations, including employment law and anti-discrimination directives, when using the platform for recruitment and HR management."
+      },
+      "security": {
+        "title": "Account Security",
+        "content": "You are responsible for maintaining the security of your login credentials and for all activity under your account. You must notify us immediately at security@hr.com of any unauthorised access or security breach."
+      },
+      "prohibited": {
+        "title": "Prohibited Activities",
+        "description": "You may not use the Service to:",
+        "items": {
+          "spam": "Send unsolicited messages or spam through the platform",
+          "malware": "Upload malware, viruses, or harmful code",
+          "scraping": "Scrape, crawl, or extract data from the platform using automated tools",
+          "impersonation": "Impersonate another person, organisation, or entity",
+          "illegal": "Engage in activities that violate applicable law, including discriminatory hiring practices"
+        }
+      }
+    },
+    "intellectual": {
+      "title": "5. Intellectual Property",
+      "description": "Intellectual property rights are protected under applicable copyright law and international treaties.",
+      "ours": {
+        "title": "Our Property",
+        "content": "The HR platform, including its software, design, logos, documentation, and all related materials, is the exclusive intellectual property of HR Ltd. You receive a limited, non-exclusive, non-transferable licence to use the Service during your subscription period. You may not copy, modify, decompile, or distribute any part of the platform."
+      },
+      "yours": {
+        "title": "Your Content",
+        "content": "All data and content you upload to the platform (employee records, documents, job postings) remains your property. By uploading content, you grant us a limited licence to process, store, and display it solely for the purpose of providing the Service. This licence terminates upon deletion of the content or closure of your account."
+      }
+    },
+    "fees": {
+      "title": "6. Payment Terms",
+      "description": "Paid subscriptions are governed by the following terms, in accordance with applicable consumer protection and e-commerce legislation:",
+      "subscription": {
+        "title": "Subscription Plans",
+        "content": "Paid plans are billed monthly or annually in advance. Prices are shown on our Pricing page and may be quoted in your local currency or EUR. Applicable taxes (e.g. VAT) will be added where required by law."
+      },
+      "refunds": {
+        "title": "Refunds and Cancellation",
+        "content": "We offer a 14-day free trial for new accounts. After the trial period, payments are non-refundable except where required by applicable consumer protection law. You may cancel your subscription at any time; the service will continue until the end of the current billing period."
+      },
+      "taxes": {
+        "title": "Taxes and Invoicing",
+        "content": "All invoices comply with applicable VAT requirements. Electronic invoices are issued automatically upon payment and are available in your account. Business customers must provide a valid company registration number and VAT number for correct invoicing."
+      }
+    },
+    "privacy": {
+      "title": "7. Data Processing",
+      "description": "We take data protection seriously. As a data processor under the GDPR, we process personal data only to the extent necessary to provide the Service and in accordance with our Data Processing Agreement.",
+      "policyText": "Please review our",
+      "policyLink": "Privacy Policy",
+      "policyLink2": "and GDPR Compliance page for full details on how your data is collected, processed, and protected."
+    },
+    "liability": {
+      "title": "8. Limitation of Liability",
+      "description": "To the maximum extent permitted by applicable law:",
+      "items": {
+        "item1": "We are not liable for indirect, incidental, special, or consequential damages, including loss of profit or data",
+        "item2": "Our total cumulative liability shall not exceed the amounts paid by you in the 12 months preceding the claim",
+        "item3": "We are not liable for the acts or omissions of third-party service providers integrated with the platform",
+        "item4": "We are not liable for service interruptions caused by events beyond our reasonable control (force majeure)"
+      }
+    },
+    "indemnification": {
+      "title": "Indemnification",
+      "content": "You agree to indemnify, defend, and hold harmless HR Ltd, its officers, directors, employees, and agents from any claims, damages, losses, or expenses (including reasonable legal fees) arising from your use of the platform, breach of these Terms, or infringement of any third-party rights."
+    },
+    "termination": {
+      "title": "9. Termination",
+      "description": "Either party may terminate this agreement under the following conditions:",
+      "byUser": {
+        "title": "Termination by You",
+        "content": "You may terminate your account at any time via account settings. After termination, you may export your data within 30 days. After this period, data will be securely deleted unless statutory retention is required."
+      },
+      "byUs": {
+        "title": "Termination by Us",
+        "content": "We may suspend or terminate your access immediately if you materially breach these Terms, fail to pay subscription fees after 30 days, use the platform for illegal activities, or pose a security risk to other users. We will provide reasonable notice except in cases of serious breach."
+      }
+    },
+    "governing": {
+      "title": "10. Governing Law",
+      "content": "These Terms are governed by and construed in accordance with the laws of the jurisdiction in which HR Ltd is registered, as well as applicable EU regulations including Regulation (EU) 2016/679 (GDPR).",
+      "disputes": "Any disputes arising from or related to these Terms shall be resolved by the competent courts in the jurisdiction of our registered office, unless mandatory consumer protection rules require otherwise. Before commencing legal proceedings, the parties shall attempt to resolve disputes amicably through direct negotiation for a period of at least 30 days."
+    },
+    "changes": {
+      "title": "Changes to Terms",
+      "content": "We may update these Terms from time to time to reflect changes in our services, legal requirements, or business practices. We will notify you at least 30 days before material changes take effect by email and in-app notification. Continued use of the Service after changes take effect constitutes acceptance of the updated Terms."
+    },
+    "contact": {
+      "title": "11. Contact Information",
+      "description": "If you have questions about these Terms, please contact us:",
+      "companyName": "Company",
+      "email": "Email",
+      "address": "Address",
+      "addressDetails": "Business Park Sofia, Building 2, Sofia 1766, Bulgaria",
+      "phone": "Phone"
+    },
+    "summary": {
+      "title": "Summary",
+      "content": "These Terms govern your use of the HR platform. They are designed to protect both parties fairly and transparently.",
+      "agreement": "If you do not agree with these Terms, please do not use HR.",
+      "acceptance": "By creating an account, you accept these Terms in full."
+    }
+  },
+  "gdpr": {
+    "metaTitle": "GDPR Compliance | HR",
+    "metaDescription": "Learn about HR’s commitment to GDPR compliance, data protection measures, and your rights as a data subject.",
+    "lastUpdated": "Last updated: February 1, 2026",
+    "hero": {
+      "heading": "GDPR Compliance",
+      "subheading": "Our commitment to protecting your personal data under European and applicable national data protection legislation."
+    },
+    "toc": {
+      "title": "Contents",
+      "commitment": "Our Commitment",
+      "dataProcessing": "Data Processing Agreement",
+      "subProcessors": "Sub-processors",
+      "technicalMeasures": "Technical and Organisational Measures",
+      "dataSubjectRights": "Data Subject Rights",
+      "crossBorder": "Cross-border Transfers",
+      "dpo": "Data Protection Officer",
+      "breachNotification": "Breach Notification",
+      "complianceDocs": "Compliance Documentation",
+      "contact": "Contact"
+    },
+    "overview": {
+      "title": "1. Our Commitment",
+      "description": "HR Ltd is fully committed to compliance with Regulation (EU) 2016/679 (the General Data Protection Regulation / GDPR) and applicable national data protection legislation. As a data controller and processor, we implement comprehensive measures to protect personal data throughout its lifecycle.",
+      "keyPrinciples": {
+        "title": "Core GDPR Principles We Follow (Article 5)",
+        "lawfulness": "Lawfulness — We process data only with a valid legal basis (Article 6)",
+        "fairness": "Fairness — We process data in a way that data subjects would reasonably expect",
+        "transparency": "Transparency — We clearly communicate what data we collect and why",
+        "purpose": "Purpose Limitation — We collect data only for specified, explicit, and legitimate purposes",
+        "minimization": "Data Minimisation — We collect only the data necessary for each purpose",
+        "accuracy": "Accuracy — We keep personal data accurate and up to date",
+        "limitation": "Storage Limitation — We retain data only for as long as necessary",
+        "integrity": "Integrity and Confidentiality — We protect data with appropriate technical and organisational measures"
+      }
+    },
+    "dpa": {
+      "title": "2. Data Processing Agreement",
+      "description": "When HR processes personal data on behalf of our customers (as a data processor under Article 28 GDPR), we enter into a Data Processing Agreement (DPA) that establishes clear obligations and safeguards:",
+      "scope": {
+        "title": "Scope of Processing",
+        "description": "The DPA covers all personal data processed through the HR platform, including employee records, recruitment data, payroll information, and HR documents. Processing is limited to the purposes specified in the service contract."
+      },
+      "duration": {
+        "title": "Duration and Termination",
+        "description": "The DPA is in effect for the duration of the service contract. Upon termination, we will return or securely delete all personal data within 30 days, unless retention is required by applicable law (e.g. statutory accounting retention periods)."
+      },
+      "obligations": {
+        "title": "Processor Obligations",
+        "description": "We process personal data only on documented instructions from the controller, ensure all staff with access are bound by confidentiality, implement appropriate technical and organisational security measures, assist with data subject requests, and support compliance assessments."
+      }
+    },
+    "subProcessors": {
+      "title": "3. Sub-processors",
+      "description": "We use the following sub-processors to deliver our services. Each sub-processor is bound by a data processing agreement and has been assessed for GDPR compliance:",
+      "colProvider": "Provider",
+      "colPurpose": "Purpose",
+      "colLocation": "Data Location",
+      "aws": "Cloud infrastructure and data hosting",
+      "analytics": "Website usage analytics",
+      "email": "Transactional email delivery",
+      "payments": "Payment processing and invoicing"
+    },
+    "security": {
+      "title": "4. Technical and Organisational Measures",
+      "description": "We implement comprehensive security measures as required by Article 32 of the GDPR to ensure the ongoing confidentiality, integrity, availability, and resilience of processing systems:",
+      "measures": {
+        "title": "Security Measures (Article 32 GDPR)",
+        "encryption": "Encryption: TLS 1.3 for data in transit, AES-256 for data at rest within our EU infrastructure",
+        "access": "Access Control: Role-based access control (RBAC), multi-factor authentication (MFA), and the principle of least privilege",
+        "audits": "Audit Logging: Comprehensive logging of all data accesses and modifications with tamper-resistant log storage",
+        "training": "Staff Training: Annual GDPR and data protection training for all employees, with specialist training for the development team",
+        "backup": "Business Continuity: Automated encrypted backups with point-in-time recovery, stored in geographically separated EU data centres",
+        "monitoring": "Monitoring: 24/7 security monitoring with automated threat detection and incident response procedures"
+      }
+    },
+    "rights": {
+      "title": "5. Data Subject Rights",
+      "description": "Under Chapter III of the GDPR, data subjects have the following rights. We facilitate the exercise of all these rights through our platform and DPO:",
+      "inform": {
+        "title": "Right to Be Informed (Articles 13–14)",
+        "description": "You have the right to clear, transparent information about how your personal data is collected and used. This GDPR page and our Privacy Policy fulfil this obligation."
+      },
+      "access": {
+        "title": "Right of Access (Article 15)",
+        "description": "You may request a complete copy of all personal data we hold about you, including processing purposes, data categories, recipients, and retention periods."
+      },
+      "rectification": {
+        "title": "Right to Rectification (Article 16)",
+        "description": "You may request correction of inaccurate or incomplete personal data. Most data can be updated directly through account settings."
+      },
+      "erasure": {
+        "title": "Right to Erasure (Article 17)",
+        "description": "You may request deletion of your personal data when processing is no longer necessary, you withdraw consent, or processing is unlawful — subject to statutory retention requirements under applicable law."
+      },
+      "restrict": {
+        "title": "Right to Restriction (Article 18)",
+        "description": "You may request restriction of processing while data accuracy is being verified, the lawfulness of processing is being contested, or you require the data for legal claims."
+      },
+      "portability": {
+        "title": "Right to Data Portability (Article 20)",
+        "description": "You may receive your personal data in a structured, commonly used, machine-readable format (JSON or CSV) and transmit it to another controller."
+      },
+      "objection": {
+        "title": "Right to Object (Article 21)",
+        "description": "You may object to processing based on legitimate interests or for direct marketing purposes at any time. We will cease processing unless we can demonstrate compelling legitimate grounds."
+      },
+      "automated": {
+        "title": "Automated Decision-Making (Article 22)",
+        "description": "You have the right not to be subject to decisions based solely on automated processing that produce legal or similarly significant effects. Our AI features (e.g. candidate matching) provide recommendations only — all final decisions are always made by humans."
+      }
+    },
+    "exercise": {
+      "title": "How to Exercise Your Rights",
+      "description": "We have established a streamlined process for handling data subject requests:",
+      "process": {
+        "title": "Request Process",
+        "step1": "Submit your request to dpo@hr.com with your full name and account email",
+        "step2": "We will verify your identity within 3 business days",
+        "step3": "Your request will be processed within 30 calendar days (Article 12(3) GDPR)",
+        "step4": "You will receive confirmation and any requested data in your chosen format"
+      },
+      "timeline": {
+        "title": "Response Timeline",
+        "content": "We respond within 30 days. For complex or numerous requests, this period may be extended by 60 days with prior notice, as permitted by Article 12(3) GDPR."
+      }
+    },
+    "transfers": {
+      "title": "6. Cross-border Transfers",
+      "description": "HR stores all primary data within the European Union (AWS Frankfurt, eu-central-1). Where a transfer of data outside the EU/EEA is necessary for specific services, we rely on the following GDPR-approved transfer mechanisms:",
+      "safeguards": {
+        "title": "Transfer Safeguards",
+        "adequacy": "EU Adequacy Decisions (Article 45 GDPR) — for transfers to countries with equivalent protection",
+        "sccs": "Standard Contractual Clauses (Article 46(2)(c) GDPR) — approved by European Commission Decision 2021/914, with supplementary measures per EDPB Recommendations 01/2020",
+        "bcrs": "Binding Corporate Rules (Article 47 GDPR) — where applicable for multinational sub-processors",
+        "derogations": "Derogations under Article 49 — only as a last resort, with explicit consent and individual risk assessment"
+      }
+    },
+    "breaches": {
+      "title": "8. Breach Notification",
+      "description": "We maintain a comprehensive data breach response plan in accordance with Articles 33–34 of the GDPR:",
+      "notification": {
+        "title": "Notification Obligations",
+        "content": "In the event of a personal data breach that is likely to result in a risk to the rights and freedoms of individuals, we will: (1) notify the competent supervisory authority within 72 hours of becoming aware of the breach (Article 33); (2) notify affected data subjects without undue delay where the breach is likely to result in a high risk (Article 34); (3) document all breaches in our internal breach register, regardless of risk level."
+      }
+    },
+    "compliance": {
+      "title": "9. Compliance Documentation",
+      "description": "We maintain the following documentation to demonstrate GDPR compliance (Article 5(2) accountability principle):",
+      "items": {
+        "ropa": "Records of Processing Activities (RoPA), as required by Article 30",
+        "dpia": "Data Protection Impact Assessments (DPIAs) for high-risk processing activities (Article 35)",
+        "policies": "Internal data protection policies and procedures, reviewed annually",
+        "training": "Staff training records and annual compliance certificates",
+        "incidents": "Data breach register and incident response documentation"
+      }
+    },
+    "cookies": {
+      "title": "Cookies and Tracking",
+      "description": "The use of cookies and similar tracking technologies is governed by our Cookie Policy.",
+      "moreInfo": "For full details, please see our",
+      "policyLink": "Cookie Policy"
+    },
+    "controller": {
+      "title": "Data Controller",
+      "description": "The data controller responsible for your personal data is:",
+      "company": "Company",
+      "address": "Address",
+      "addressDetails": "Business Park Sofia, Building 2, Sofia 1766, Bulgaria",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "dataTypes": {
+      "title": "Types of Data We Process",
+      "description": "We process various categories of personal data depending on your relationship with us:",
+      "personal": {
+        "title": "Personal Identification Data",
+        "description": "Basic personal information provided during registration and use:",
+        "items": {
+          "name": "Full name and job title",
+          "email": "Email address",
+          "phone": "Phone number",
+          "address": "Business address",
+          "cv": "CV and application documents"
+        }
+      },
+      "sensitive": {
+        "title": "Special Category Data (Article 9)",
+        "description": "Processed only with explicit consent or where necessary for employment law obligations:",
+        "items": {
+          "health": "Health data (e.g. sick leave) — processed under Art. 9(2)(b) for employment obligations",
+          "disability": "Disability information — processed for reasonable adjustment requirements under applicable law",
+          "ethnicity": "Ethnic origin — only where voluntarily provided for diversity monitoring",
+          "religion": "Religious beliefs — only for managing holiday preferences where voluntarily provided"
+        }
+      },
+      "technical": {
+        "title": "Technical Data",
+        "description": "Automatically collected when using the platform:",
+        "items": {
+          "ip": "IP address and geolocation (country level)",
+          "cookies": "Cookie identifiers and session data",
+          "identifier": "Device identifiers and browser fingerprint",
+          "location": "Approximate geographic location derived from IP"
+        }
+      }
+    },
+    "legalBasis": {
+      "title": "Legal Basis for Processing",
+      "description": "We process personal data on the legal bases established in Article 6 of the GDPR:",
+      "consent": {
+        "title": "Consent (Art. 6(1)(a))",
+        "description": "For marketing emails, non-essential cookies, and voluntary data collection."
+      },
+      "contract": {
+        "title": "Contractual Necessity (Art. 6(1)(b))",
+        "description": "For service delivery, account management, billing, and customer support."
+      },
+      "legal": {
+        "title": "Legal Obligation (Art. 6(1)(c))",
+        "description": "For tax reporting, employment law compliance, and regulatory requirements."
+      },
+      "interest": {
+        "title": "Legitimate Interests (Art. 6(1)(f))",
+        "description": "For platform security, fraud prevention, and service improvements."
+      }
+    },
+    "dpo": {
+      "title": "7. Data Protection Officer",
+      "description": "HR has appointed a Data Protection Officer (DPO) in accordance with Article 37 of the GDPR. The DPO oversees our data protection strategy and monitors compliance:",
+      "name": "Name",
+      "nameValue": "Data Protection Officer, HR Ltd",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "addressDetails": "Business Park Sofia, Building 2, Sofia 1766, Bulgaria"
+    },
+    "contact": {
+      "title": "10. Contact and Complaints",
+      "description": "For any questions regarding our GDPR compliance or to exercise your data protection rights:",
+      "us": {
+        "title": "Contact Us",
+        "description": "Our Data Protection Officer is available to assist you with any data protection enquiries."
+      },
+      "supervisory": {
+        "title": "Supervisory Authority",
+        "description": "If you are not satisfied with our response, you have the right to lodge a complaint with the competent supervisory authority:",
+        "authority": "Authority",
+        "authorityName": "Your national data protection authority",
+        "authorityAddress": "Please visit your national DPA’s website for contact details"
+      },
+      "addressDetails": "Business Park Sofia, Building 2, Sofia 1766, Bulgaria"
+    },
+    "summary": {
+      "title": "Our GDPR Commitment",
+      "content": "HR Ltd is committed to full compliance with the GDPR and applicable data protection legislation. We implement technical and organisational measures that exceed the minimum requirements, conduct regular compliance audits, and maintain transparent communication with our users about data processing activities.",
+      "commitment": "Protecting your data is our priority.",
+      "promise": "We continuously review and update our practices to ensure the highest standard of data protection."
+    }
+  },
+  "auth": {
+    "login": {
+      "metaTitle": "Login | HR",
+      "metaDescription": "Sign in to your HR account to manage your HR processes, employees and payroll.",
+      "heading": "Welcome back",
+      "emailLabel": "Work email",
+      "passwordLabel": "Password",
+      "forgotPassword": "Forgot password?",
+      "rememberMe": "Remember me",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "signUpLink": "Start free trial",
+      "sslNote": "Secured with 256-bit SSL encryption",
+      "panel": {
+        "heading": "Manage your entire HR workflow in one place",
+        "subheading": "Trusted by hundreds of Bulgarian companies",
+        "feature1": "Onboard employees in minutes, not days",
+        "feature2": "Automate leave requests and approvals",
+        "feature3": "Stay compliant with Bulgarian labour law"
+      }
+    },
+    "signUp": {
+      "metaTitle": "Start Free Trial | HR",
+      "metaDescription": "Start your free 14-day trial of HR. No credit card required.",
+      "heading": "Start your free trial",
+      "firstNameLabel": "First name",
+      "lastNameLabel": "Last name",
+      "emailLabel": "Work email",
+      "passwordLabel": "Password",
+      "companyLabel": "Company name",
+      "submitFree": "Start free trial",
+      "submitTrial": "Start 14-day trial",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "noCardNote": "No credit card required",
+      "trialNote": "14-day free trial, then",
+      "selectedPlan": "Selected plan",
+      "growthPlan": "Growth plan",
+      "and": "and",
+      "termsText": "By signing up, you agree to our",
+      "termsLink": "Terms of Service",
+      "privacyLink": "Privacy Policy",
+      "panel": {
+        "heading": "Join hundreds of Bulgarian companies",
+        "subheading": "Everything you need to manage HR in one platform",
+        "feature1": "Employee management & onboarding",
+        "feature2": "Leave & absence management",
+        "feature3": "Payroll calculations & compliance",
+        "testimonial": "HR transformed how we manage our team. Setup took minutes and the support is outstanding.",
+        "testimonialAuthor": "Maria Petrova",
+        "testimonialRole": "HR Manager, Sofia Tech Ltd"
+      }
+    }
+  }
+}

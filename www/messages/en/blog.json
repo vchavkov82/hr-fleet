@@ -1,0 +1,56 @@
+{
+  "metaTitle": "HR Blog",
+  "metaDescription": "Practical tips, trends and insights for HR professionals.",
+  "sectionLabel": "Blog",
+  "heading": "HR Insights",
+  "subheading": "Practical advice and analysis from HR professionals with real-world experience.",
+  "featuredHeading": "Featured Articles",
+  "recentHeading": "Recent Articles",
+  "viewAll": "View all posts",
+  "readMore": "Read more →",
+  "readTime": "min read",
+  "posts": [
+    {
+      "title": "AI in Recruiting: How to Use Artificial Intelligence Responsibly",
+      "excerpt": "AI recruiting tools are now a reality. But how do you apply them without violating GDPR or unfairly excluding candidates?",
+      "category": "Technology",
+      "date": "February 15, 2025",
+      "author": "Maria Ivanova"
+    },
+    {
+      "title": "5 Employer Branding Strategies That Work",
+      "excerpt": "How do you attract top talent when competing with multinationals? Real examples from the market.",
+      "category": "Employer Branding",
+      "date": "February 8, 2025",
+      "author": "Peter Georgiev"
+    },
+    {
+      "title": "Onboarding That Works: How to Retain New Employees",
+      "excerpt": "Research shows 20% of turnover happens in the first 45 days. Here's how to prevent it.",
+      "category": "Onboarding",
+      "date": "February 1, 2025",
+      "author": "Elena Stoyanova"
+    },
+    {
+      "title": "IT Salaries: How to Negotiate Fairly",
+      "excerpt": "Market data, benchmarks and tactics for achieving fair compensation — from both sides of the table.",
+      "category": "Compensation",
+      "date": "January 25, 2025",
+      "author": "Dimitar Nikolov"
+    },
+    {
+      "title": "GDPR for HR: What You Need to Know in 2025",
+      "excerpt": "Updated guide on processing personal data of candidates and employees in line with the latest guidelines.",
+      "category": "Legal",
+      "date": "January 18, 2025",
+      "author": "Krasimira Veleva, Esq."
+    },
+    {
+      "title": "Remote Hiring: The 2025 Guide",
+      "excerpt": "How to evaluate remote candidates, conduct virtual interviews and build trust from day one.",
+      "category": "Remote Work",
+      "date": "January 10, 2025",
+      "author": "Maria Ivanova"
+    }
+  ]
+}

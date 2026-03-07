@@ -1,0 +1,19 @@
+{
+  "sectionLabel": "How it works",
+  "heading": "Up and running in minutes",
+  "subheading": "Three simple steps to transform your HR operations.",
+  "steps": {
+    "signup": {
+      "title": "Sign up in minutes",
+      "description": "Create your account in under 2 minutes. No credit card needed, no complex setup. Start working immediately."
+    },
+    "import": {
+      "title": "Import your team",
+      "description": "Upload your employee list or add them manually. We handle the data migration so you can focus on people."
+    },
+    "manage": {
+      "title": "Start managing HR",
+      "description": "Recruitment, leave tracking, payroll — everything runs from one dashboard. See results from day one."
+    }
+  }
+}

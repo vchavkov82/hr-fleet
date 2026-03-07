@@ -1,0 +1,113 @@
+{
+  "metaTitle": "Partner Program | HR",
+  "metaDescription": "Join the HR partner program and grow your business with us.",
+  "hero": {
+    "heading": "Become a Partner",
+    "subheading": "Grow your business by partnering with HR. Competitive commissions and full partner support.",
+    "button": "Apply to partner"
+  },
+  "why": {
+    "title": "Why Partner With Us?",
+    "subheading": "Join a growing ecosystem and build a recurring revenue stream.",
+    "benefits": {
+      "revenue": {
+        "title": "Recurring Revenue",
+        "description": "Earn competitive commissions on every customer you refer or resell."
+      },
+      "training": {
+        "title": "Partner Training",
+        "description": "Comprehensive onboarding, certification programs, and ongoing product education."
+      },
+      "coMarketing": {
+        "title": "Co-Marketing",
+        "description": "Joint campaigns, co-branded materials, events, and shared lead generation."
+      },
+      "support": {
+        "title": "Dedicated Support",
+        "description": "Your own partner manager, priority technical support, and sales enablement resources."
+      }
+    }
+  },
+  "types": {
+    "title": "Partner Types",
+    "subheading": "Choose the partnership model that fits your business.",
+    "referral": {
+      "title": "Referral Partner",
+      "description": "Refer customers and earn a commission on every successful deal.",
+      "benefits": {
+        "benefit1": "20% commission on first year",
+        "benefit2": "Dedicated referral dashboard",
+        "benefit3": "Co-branded marketing materials",
+        "benefit4": "Priority support for referred clients"
+      }
+    },
+    "reseller": {
+      "title": "Reseller Partner",
+      "description": "Resell HR under your own brand with custom pricing.",
+      "benefits": {
+        "benefit1": "Up to 35% margin",
+        "benefit2": "White-label options",
+        "benefit3": "Full partner training",
+        "benefit4": "Access to all features"
+      }
+    },
+    "integration": {
+      "title": "Integration Partner",
+      "description": "Build a native integration with HR and reach our customer base.",
+      "benefits": {
+        "benefit1": "Listed in our integration marketplace",
+        "benefit2": "API access and sandbox",
+        "benefit3": "Co-marketing opportunities",
+        "benefit4": "Technical support"
+      }
+    },
+    "technology": {
+      "title": "Technology Partner",
+      "description": "Deeper technical collaboration to build joint solutions.",
+      "benefits": {
+        "benefit1": "Joint go-to-market strategy",
+        "benefit2": "Shared customer success",
+        "benefit3": "Product roadmap input",
+        "benefit4": "Co-development opportunities"
+      }
+    }
+  },
+  "current": {
+    "title": "Current Partners",
+    "subheading": "Trusted by leading companies in HR tech."
+  },
+  "form": {
+    "title": "Apply to Partner",
+    "description": "Tell us about your business and we'll be in touch within 2 business days.",
+    "contactName": "Contact name",
+    "companyName": "Company name",
+    "email": "Work email",
+    "website": "Website",
+    "partnerType": "Partner type",
+    "selectType": "Select partner type",
+    "companySize": "Company size",
+    "selectSize": "Select company size",
+    "sizes": {
+      "small": "1-10 employees",
+      "medium": "11-50 employees",
+      "large": "51-200 employees",
+      "enterprise": "200+ employees"
+    },
+    "agreement": "I agree to the partner program terms and conditions",
+    "submit": "Submit application",
+    "successTitle": "Application submitted!",
+    "successMessage": "Thank you for your interest in partnering with HR. Our team will review your application and get back to you within 2 business days."
+  },
+  "contact": {
+    "title": "Have Questions?",
+    "description": "Our partnership team is here to help.",
+    "email": {
+      "title": "Email",
+      "description": "partners@hr.com"
+    },
+    "phone": {
+      "title": "Phone",
+      "description": "+359 2 123 4567"
+    }
+  }
+}

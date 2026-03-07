@@ -1,0 +1,26 @@
+{
+  "sectionLabel": "Impact",
+  "heading": "Trusted by companies across Bulgaria",
+  "items": {
+    "companies": {
+      "value": 500,
+      "suffix": "+",
+      "label": "Companies"
+    },
+    "hired": {
+      "value": 12000,
+      "suffix": "+",
+      "label": "Candidates hired"
+    },
+    "satisfaction": {
+      "value": 98,
+      "suffix": "%",
+      "label": "Satisfaction rate"
+    },
+    "faster": {
+      "value": 3.2,
+      "suffix": "x",
+      "label": "Faster hiring"
+    }
+  }
+}

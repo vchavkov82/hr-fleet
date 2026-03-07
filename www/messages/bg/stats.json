@@ -1,0 +1,26 @@
+{
+  "sectionLabel": "Въздействие",
+  "heading": "Доверието на компании в цяла България",
+  "items": {
+    "companies": {
+      "value": 500,
+      "suffix": "+",
+      "label": "Компании"
+    },
+    "hired": {
+      "value": 12000,
+      "suffix": "+",
+      "label": "Наети кандидати"
+    },
+    "satisfaction": {
+      "value": 98,
+      "suffix": "%",
+      "label": "Степен на удовлетвореност"
+    },
+    "faster": {
+      "value": 3.2,
+      "suffix": "x",
+      "label": "По-бързо наемане"
+    }
+  }
+}
