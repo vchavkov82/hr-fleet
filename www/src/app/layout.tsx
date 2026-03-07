@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { inter, mulish } from './fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -28,9 +27,5 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" className={`${inter.variable} ${mulish.variable}`} suppressHydrationWarning>
-      <body className="flex min-h-screen flex-col">{children}</body>
-    </html>
-  )
+  return children
 }

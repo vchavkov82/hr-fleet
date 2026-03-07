@@ -25,10 +25,14 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <Header />
-      <main className="flex-1">{children}</main>
-      <Footer />
-    </NextIntlClientProvider>
+    <html lang={locale} className={`${inter.variable} ${mulish.variable}`} suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col">
+        <NextIntlClientProvider messages={messages}>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   )
 }
