@@ -1,85 +1,78 @@
 {
   "features": {
-    "metaTitle": "Features | HR — AI-Powered ATS, Leave, Payroll, Core HR",
-    "metaDescription": "HR AI-powered features: ATS with AI screening & matching (70% faster hiring), Core HR, leave tracking, Bulgarian payroll (NRA), performance reviews, onboarding. One intelligent platform.",
+    "metaTitle": "Features | HR - Employee Management, Calculators, Compliance",
+    "metaDescription": "HR platform features: employee management with directory and search, Bulgarian salary calculators with 2026 tax rates, and built-in labor law compliance. Start managing your team today.",
     "hero": {
-      "heading": "AI-Powered HR for Every Team",
-      "subheading": "From posting a job to onboarding a new hire — do more with less. HR covers every step with intelligent automation that reduces admin work by 97% and cuts time-to-hire by 70%."
+      "heading": "HR Platform Features",
+      "subheading": "Employee management, salary calculators, and Bulgarian compliance tools available today. More modules coming soon as we grow the platform."
     },
     "sections": {
-      "ats": {
-        "title": "ATS & Recruitment",
-        "description": "Hiring without the headaches. Powered by AI, our applicant tracking system anticipates your needs, matches candidates intelligently, automates scheduling, and helps you focus on building your dream team.",
-        "features": [
-          "Post jobs to multiple boards with one click",
-          "AI-powered candidate matching and ranking",
-          "Automated interview scheduling with calendar sync",
-          "AI-assisted candidate screening & scoring",
-          "Team collaboration with shared feedback & scorecards",
-          "Customizable hiring pipelines per role"
-        ],
-        "imagePlaceholder": "ATS Dashboard"
-      },
       "employees": {
         "title": "Employee Management",
-        "description": "Keep all employee information organized and accessible. From org charts to document management, give your team the tools they need for self-service HR.",
+        "description": "A centralized employee directory with search and filtering. Add, edit, and manage employee profiles across departments with a clean, bilingual interface.",
         "features": [
-          "Comprehensive employee profiles with custom fields",
-          "Visual org chart with drag-and-drop editing",
-          "Centralized document management and e-signatures",
-          "Employee self-service portal for personal data updates",
-          "Automated alerts for contract renewals and probation periods"
+          "Employee profiles with key personal and work details",
+          "Directory with search and department filtering",
+          "Add and edit employees with intuitive forms",
+          "Department-based organization",
+          "Bilingual interface (Bulgarian and English)"
         ],
         "imagePlaceholder": "Employee Directory"
       },
-      "leave": {
-        "title": "Leave Tracking",
-        "description": "Simplify leave management with automated workflows. Employees request time off, managers approve with one click, and balances update automatically.",
+      "calculators": {
+        "title": "HR Calculators & Tools",
+        "description": "Accurate salary calculations and freelancer vs employment comparisons built for the Bulgarian market. All calculations use 2026 tax rates and social security contributions.",
         "features": [
-          "Easy leave requests with mobile-friendly interface",
-          "Multi-level approval workflows by department",
-          "Real-time leave balance tracking per employee",
-          "Team calendar view to prevent scheduling conflicts",
-          "Support for Bulgarian public holidays and custom leave types"
+          "Salary calculator with 2026 Bulgarian tax rates",
+          "EOOD vs employment comparison tool",
+          "Net-to-gross and gross-to-net calculations",
+          "Social security contribution breakdown",
+          "Visual savings and cost highlights"
         ],
+        "imagePlaceholder": "Salary Calculator"
+      },
+      "compliance": {
+        "title": "Bulgarian Compliance",
+        "description": "Built-in awareness of Bulgarian labor law and tax regulations. All calculations and tools follow current NRA guidelines and social security rates.",
+        "features": [
+          "2026 tax rates and thresholds built in",
+          "Social security calculations for all categories",
+          "Bulgarian Labour Code awareness",
+          "Bulgarian-first interface design",
+          "NRA-compatible calculation methods"
+        ],
+        "imagePlaceholder": "Compliance Dashboard"
+      },
+      "ats": {
+        "title": "Applicant Tracking",
+        "description": "A hiring pipeline to manage job postings, candidates, and interviews in one place.",
+        "imagePlaceholder": "ATS Dashboard"
+      },
+      "leave": {
+        "title": "Leave Management",
+        "description": "Automated leave requests, approvals, and balance tracking with team calendar visibility.",
         "imagePlaceholder": "Leave Calendar"
       },
       "payroll": {
         "title": "Payroll Integration",
-        "description": "Connect your HR data directly to payroll. Accurate calculations based on Bulgarian tax law, automatic payslip generation, and seamless bank transfers.",
-        "features": [
-          "Automated payroll processing with Bulgarian tax compliance",
-          "Real-time tax and social security calculations",
-          "Digital payslip generation and distribution",
-          "Bank transfer file export for all major Bulgarian banks",
-          "Year-end reporting and NAP declarations"
-        ],
+        "description": "Payroll processing with Bulgarian tax compliance, payslip generation, and bank integrations.",
         "imagePlaceholder": "Payroll Dashboard"
       },
       "performance": {
         "title": "Performance Reviews",
-        "description": "Build a culture of continuous feedback and growth. Set clear goals, run structured review cycles, and create development plans that drive results.",
-        "features": [
-          "SMART goal setting with progress tracking",
-          "360-degree feedback from peers, managers, and reports",
-          "Configurable review cycles (quarterly, semi-annual, annual)",
-          "Individual development plans with milestone tracking",
-          "Performance analytics and team benchmarking"
-        ],
+        "description": "Goal setting, 360-degree reviews, and performance analytics to drive employee growth.",
         "imagePlaceholder": "Performance Overview"
       },
       "onboarding": {
         "title": "Onboarding",
-        "description": "Make every new hire's first days exceptional. Automated task checklists, document collection, and welcome workflows ensure nothing falls through the cracks.",
-        "features": [
-          "Customizable onboarding task checklists by role",
-          "Automated document collection and verification",
-          "Welcome email workflows with company resources",
-          "Mentor and buddy assignment with check-in reminders",
-          "Onboarding progress dashboard for HR and managers"
-        ],
+        "description": "Task checklists, document collection, and welcome workflows for smooth new hire onboarding.",
         "imagePlaceholder": "Onboarding Workflow"
       }
+    },
+    "roadmap": {
+      "heading": "Coming Soon",
+      "subheading": "We are building these modules next. Stay tuned.",
+      "comingSoon": "Coming soon"
     }
   },
   "pricing": {
