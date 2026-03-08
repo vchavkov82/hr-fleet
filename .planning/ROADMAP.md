@@ -63,10 +63,10 @@ Plans:
 | 1. HR App MVP | v1.0 | All | In Progress | - |
 | 2. Freelancer vs Payroll Comparison | 3/4 | In Progress|  | - |
 
-### Phase 3: User odo
+### Phase 3: Odoo HR Backend Integration
 
-**Goal:** [To be planned]
-**Requirements**: TBD
+**Goal:** Integrate self-hosted Odoo 18 Community as HR backend with Go API proxy. Deploy Odoo in podman-compose, build JSON-RPC client in Go, expose clean REST API. Frontend: authenticated /dashboard with employee directory (table view, CRUD).
+**Requirements**: EMP-01, EMP-02
 **Depends on:** Phase 2
 **Plans:** 0 plans
 
