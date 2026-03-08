@@ -72,3 +72,72 @@ export const BG_TAX_2026 = {
   /** Approximate number of public holidays per year */
   PUBLIC_HOLIDAYS_PER_YEAR: 15,
 } as const
+
+/**
+ * EOOD/OOD (Limited Company) Tax Constants for 2026
+ *
+ * Used for freelancer vs employment comparison calculator.
+ * Assumes owner self-insures on minimum income and extracts profit as dividends.
+ *
+ * Sources:
+ * - PWC Bulgaria Corporate Withholding Taxes (https://taxsummaries.pwc.com/bulgaria/corporate/withholding-taxes)
+ * - T8G Consulting - Dividend Tax Increase (https://t8gconsulting.com/en/increase-of-the-dividend-tax-in-bulgaria-from-5-to-10/)
+ * - Ruskov & Kollegen - Self-Insured Persons (https://ruskov-law.eu/bulgaria/article/social-security-contributions-self-insured-persons.html)
+ * - KiK-Info Contribution Rates (https://kik-info.com/spravochnik/osigurovki-i-danaci/)
+ */
+export const BG_EOOD_2026 = {
+  /** Corporate income tax rate */
+  CORPORATE_TAX_RATE: 0.10,
+
+  /** Dividend withholding tax (increased from 5% to 10% in 2026) */
+  DIVIDEND_TAX_RATE: 0.10,
+
+  /**
+   * Self-insured person contribution rates (managing director / owner)
+   * Self-insured persons pay 100% of contributions themselves (no employer/employee split)
+   */
+  SELF_INSURANCE: {
+    /** Pension — born after 31.12.1959 (14.8%) or born before (19.8%) */
+    PENSION_AFTER_1959: 0.148,
+    PENSION_BEFORE_1960: 0.198,
+
+    /** Universal pension fund (born after 31.12.1959 only) */
+    UNIVERSAL_PENSION: 0.05,
+
+    /** General illness and maternity (optional but recommended) */
+    ILLNESS_MATERNITY: 0.035,
+
+    /** Health insurance */
+    HEALTH: 0.08,
+
+    /** Total rate — born after 1959, with illness/maternity */
+    TOTAL_AFTER_1959_WITH_SICK: 0.313,
+
+    /** Total rate — born after 1959, without illness/maternity */
+    TOTAL_AFTER_1959_NO_SICK: 0.278,
+  },
+
+  /** Minimum self-insurance income base (BGN/month, April 2025+) */
+  MIN_SELF_INSURANCE_INCOME: 1077,
+
+  /** Maximum self-insurance income base (BGN/month, 2026) */
+  MAX_SELF_INSURANCE_INCOME: 4130,
+
+  /**
+   * Typical monthly overhead costs (BGN)
+   * Used as defaults in the comparison calculator — user can adjust
+   */
+  OVERHEAD: {
+    /** Monthly accountant fee (average, BGN) */
+    ACCOUNTANT_FEE: 294,
+
+    /** Monthly bank account maintenance (BGN) */
+    BANK_FEES: 25,
+
+    /** Company registration amortized over 5 years (BGN/month) */
+    REGISTRATION_AMORTIZED: 40,
+
+    /** Estimated admin time cost — 3 hours/month at average rate (BGN) */
+    ADMIN_TIME: 150,
+  },
+} as const
