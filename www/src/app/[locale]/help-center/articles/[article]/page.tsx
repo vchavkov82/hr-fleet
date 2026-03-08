@@ -12,20 +12,11 @@ import { notFound } from 'next/navigation'
 export function generateStaticParams() {
     return routing.locales.map((locale) =>
         [
-            'getting-started', 'company-setup', 'team-invitation', 'first-job-posting', 'dashboard-overview',
-            'notification-settings', 'mobile-app-setup', 'candidate-screening', 'interview-scheduling',
-            'job-board-integration', 'candidate-pipeline', 'ats-pipeline',
-            'employee-data', 'org-chart', 'employee-documents', 'employee-onboarding', 'performance-reviews',
-            'employee-directory', 'employee-self-service', 'custom-workflows', 'time-tracking', 'custom-reports',
-            'employee-benefits', 'employee-offboarding', 'training-development',
-            'leave-requests', 'leave-policies', 'team-calendar', 'sick-leave-tracking', 'public-holidays',
-            'leave-accrual', 'parental-leave',
-            'payroll-setup', 'tax-configuration', 'payslips', 'payroll-reports', 'bonus-management',
-            'payroll-corrections', 'bulk-payroll-processing', 'overtime-management', 'expense-reimbursement',
-            'slack-integration', 'google-workspace', 'microsoft-teams', 'accounting-software',
-            'sso-setup', 'zapier-integration', 'webhook-automation',
-            'gdpr-compliance', 'user-permissions', 'backup-recovery', 'two-factor-auth', 'billing-invoices',
-            'audit-logs', 'data-export', 'data-privacy'
+            'getting-started', 'dashboard-overview', 'company-setup', 'notification-settings',
+            'employee-directory', 'employee-data', 'employee-documents',
+            'salary-calculator', 'freelancer-comparison', 'hr-document-templates',
+            'tax-social-security', 'labor-code-basics', 'data-protection',
+            'user-permissions', 'account-settings', 'two-factor-auth', 'data-export'
         ].map((article) => ({
             locale,
             article
@@ -2361,10 +2352,11 @@ After setting up your pipeline:
 
 function getRelatedArticles(currentArticleId: string, category: string) {
     const allArticles = [
-        'getting-started', 'company-setup', 'team-invitation', 'mobile-app-setup', 'candidate-screening', 'employee-data', 'org-chart',
-        'employee-documents', 'leave-requests', 'leave-policies', 'team-calendar', 'payroll-setup',
-        'tax-configuration', 'payslips', 'slack-integration', 'google-workspace',
-        'gdpr-compliance', 'user-permissions', 'backup-recovery'
+        'getting-started', 'dashboard-overview', 'company-setup', 'notification-settings',
+        'employee-directory', 'employee-data', 'employee-documents',
+        'salary-calculator', 'freelancer-comparison', 'hr-document-templates',
+        'tax-social-security', 'labor-code-basics', 'data-protection',
+        'user-permissions', 'account-settings', 'two-factor-auth', 'data-export'
     ]
 
     // Simple logic: return other articles from the same category

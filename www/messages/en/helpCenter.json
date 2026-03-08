@@ -1,6 +1,6 @@
 {
   "metaTitle": "Help Center | HR",
-  "metaDescription": "Guides, FAQs, and support for HR: recruitment, leave, payroll, and Core HR. Get answers and contact support.",
+  "metaDescription": "Guides, FAQs, and support for HR: employee management, HR calculators, and Bulgarian compliance. Get answers and contact support.",
   "hero": {
     "heading": "How Can We Help?",
     "subheading": "Search our knowledge base or browse by category.",
@@ -13,40 +13,40 @@
     "subheading": "Most frequently read by our users.",
     "articles": {
       "article1": {
-        "title": "Getting Started with HR",
-        "description": "A complete guide to setting up your account and posting your first job.",
+        "title": "Getting Started with HR Platform",
+        "description": "A complete guide to signing up, navigating the dashboard, and taking your first steps with the platform.",
         "category": "Getting Started",
         "readTime": "5 min"
       },
       "article2": {
-        "title": "How to Use the ATS Pipeline",
-        "description": "Move candidates through stages, add notes, and collaborate with your team.",
-        "category": "Recruiting",
+        "title": "Managing Your Employee Directory",
+        "description": "How to add, edit, search, and filter employees in your organization's directory.",
+        "category": "Employee Management",
         "readTime": "8 min"
       },
       "article3": {
-        "title": "Setting Up AI CV Screening",
-        "description": "Configure AI scoring criteria to automatically rank candidates.",
-        "category": "Recruiting",
+        "title": "Using the Salary Calculator",
+        "description": "How to calculate net and gross salary with Bulgarian 2026 tax rates and social security contributions.",
+        "category": "HR Tools",
         "readTime": "6 min"
       },
       "article4": {
-        "title": "GDPR Compliance in HR",
-        "description": "How HR handles candidate data and how to configure consent settings.",
-        "category": "Security",
-        "readTime": "10 min"
-      },
-      "article5": {
-        "title": "Managing Leave Requests",
-        "description": "How to configure leave types, approval workflows, and team calendars.",
-        "category": "Leave & Absence",
+        "title": "Freelancer vs Employment Comparison",
+        "description": "How to use the EOOD vs payroll comparison tool to evaluate employment models side by side.",
+        "category": "HR Tools",
         "readTime": "7 min"
       },
+      "article5": {
+        "title": "Dashboard Overview",
+        "description": "Navigating the admin dashboard, understanding widgets, metrics, and key performance indicators.",
+        "category": "Getting Started",
+        "readTime": "5 min"
+      },
       "article6": {
-        "title": "Running Your First Payroll",
-        "description": "Step-by-step guide to processing payroll with Bulgarian tax compliance.",
-        "category": "Payroll",
-        "readTime": "12 min"
+        "title": "Bulgarian Tax & Social Security Guide",
+        "description": "Understanding the 2026 tax rates, social security calculations, and compliance requirements built into the platform.",
+        "category": "Compliance",
+        "readTime": "10 min"
       }
     }
   },
@@ -60,17 +60,14 @@
     "employees": {
       "title": "Employee Management"
     },
-    "leave": {
-      "title": "Leave & Absence"
+    "hrTools": {
+      "title": "HR Tools & Calculators"
     },
-    "payroll": {
-      "title": "Payroll"
+    "compliance": {
+      "title": "Bulgarian Compliance"
     },
-    "integrations": {
-      "title": "Integrations"
-    },
-    "security": {
-      "title": "Account & Billing"
+    "account": {
+      "title": "Account & Settings"
     }
   },
   "quickLinks": {
@@ -80,8 +77,8 @@
       "description": "New to HR? Start here."
     },
     "userGuide": {
-      "title": "User Guide",
-      "description": "Complete documentation for all features."
+      "title": "Employee Management Guide",
+      "description": "Learn how to manage your team."
     },
     "troubleshooting": {
       "title": "Troubleshooting",
