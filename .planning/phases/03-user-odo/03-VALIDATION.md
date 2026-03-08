@@ -2,7 +2,7 @@
 phase: 03
 slug: user-odo
 status: draft
-nyquist_compliant: false
+nyquist_compliant: true
 wave_0_complete: false
 created: 2026-03-08
 ---
@@ -40,27 +40,31 @@ created: 2026-03-08
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 03-01-01 | 01 | 0 | EMP-01, EMP-02 | infra | `cd backend && go test ./...` | ❌ W0 | ⬜ pending |
-| 03-02-01 | 02 | 1 | EMP-01, EMP-02 | integration | `cd backend && go test ./platform/odoo/ -v` | ❌ W0 | ⬜ pending |
-| 03-03-01 | 03 | 1 | EMP-01 | integration | `cd backend && go test ./internal/handler/ -run TestCreateEmployee -v` | ❌ W0 | ⬜ pending |
-| 03-03-02 | 03 | 1 | EMP-02 | integration | `cd backend && go test ./internal/handler/ -run TestListEmployees -v` | ❌ W0 | ⬜ pending |
-| 03-04-01 | 04 | 2 | EMP-01 | unit | `cd www && bun run test -- employee-form` | ❌ W0 | ⬜ pending |
-| 03-04-02 | 04 | 2 | EMP-02 | unit | `cd www && bun run test -- employee-table` | ❌ W0 | ⬜ pending |
-| 03-05-01 | 05 | 2 | EMP-02 | e2e | `cd www && bun run test:e2e -- dashboard` | ❌ W0 | ⬜ pending |
+| 03-01-01 | 01 | 0 | EMP-01, EMP-02 | infra | `cd backend && go test ./...` | Wave 0 | pending |
+| 03-02-01 | 02 | 1 | EMP-01, EMP-02 | unit | `cd backend && go test ./platform/odoo/ -v` | Wave 0 | pending |
+| 03-03-01 | 03 | 2 | EMP-01 | unit | `cd backend && go test ./internal/service/ -v -run Employee` | Wave 0 | pending |
+| 03-03-02 | 03 | 2 | EMP-01, EMP-02 | unit | `cd backend && go test ./internal/handler/ -v -run Employee` | Wave 0 | pending |
+| 03-03-03 | 03 | 2 | EMP-01 | unit | `cd backend && go test ./internal/service/ -v -run Provision` | Wave 0 | pending |
+| 03-04-01 | 04 | 2 | EMP-01 | unit | `cd www && bun run test -- dashboard-components` | Wave 0 | pending |
+| 03-05-01 | 05 | 3 | EMP-01, EMP-02 | unit | `cd www && bun run test -- employee-table employee-form` | Wave 0 | pending |
+| 03-05-02 | 05 | 3 | EMP-02 | e2e | `cd www && bun run test:e2e -- dashboard` | Wave 0 | pending |
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+*Status: pending / green / red / flaky*
 
 ---
 
 ## Wave 0 Requirements
 
-- [ ] `backend/go.mod` — Go module initialization
-- [ ] `backend/go.sum` — Dependency lock file
-- [ ] `backend/platform/odoo/client_test.go` — JSON-RPC client unit tests
-- [ ] `backend/internal/handler/employee_test.go` — Handler tests with mocked Odoo client
-- [ ] `www/tests/unit/employee-table.test.tsx` — Table component tests
-- [ ] `www/tests/unit/employee-form.test.tsx` — Form component tests
-- [ ] `www/tests/e2e/dashboard.spec.ts` — Dashboard E2E tests
+- [x] `backend/go.mod` — Go module initialization (Plan 01 Task 2 creates this)
+- [x] `backend/go.sum` — Dependency lock file (Plan 01 Task 2 creates this)
+- [x] `backend/platform/odoo/client_test.go` — JSON-RPC client unit tests (Plan 02 Task 1 creates this, TDD)
+- [x] `backend/internal/handler/employee_test.go` — Handler tests with mocked service (Plan 03 Task 2 creates this, TDD)
+- [x] `backend/internal/service/employee_test.go` — Service tests including graceful degradation (Plan 03 Task 1 creates this, TDD)
+- [x] `backend/internal/service/provisioning_test.go` — Provisioning service tests (Plan 03 Task 2 creates this, TDD)
+- [x] `www/tests/unit/dashboard-components.test.tsx` — Dashboard component render tests (Plan 04 Task 2 creates this)
+- [x] `www/tests/unit/employee-table.test.tsx` — Table component tests (Plan 05 Task 2 creates this)
+- [x] `www/tests/unit/employee-form.test.tsx` — Form component tests (Plan 05 Task 2 creates this)
+- [x] `www/tests/e2e/dashboard.spec.ts` — Dashboard E2E tests (Plan 05 Task 2 creates this)
 
 ---
 
@@ -75,11 +79,11 @@ created: 2026-03-08
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 45s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 45s
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** approved
