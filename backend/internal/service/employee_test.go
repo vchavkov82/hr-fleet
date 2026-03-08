@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"strings"
 	"testing"
 
 	"github.com/alicebob/miniredis/v2"
@@ -155,7 +156,7 @@ func TestEmployeeService_List_GracefulDegradation_StaleCache(t *testing.T) {
 	}
 
 	// Delete primary cache (simulating expiry), keep stale
-	keys, _ := mr.Keys()
+	keys := mr.Keys()
 	for _, k := range keys {
 		if k != "" && !contains(k, ":stale") {
 			mr.Del(k)
@@ -203,7 +204,7 @@ func TestEmployeeService_Get_GracefulDegradation(t *testing.T) {
 	}
 
 	// Delete primary, keep stale
-	keys, _ := mr.Keys()
+	keys := mr.Keys()
 	for _, k := range keys {
 		if k != "" && !contains(k, ":stale") {
 			mr.Del(k)
@@ -221,14 +222,5 @@ func TestEmployeeService_Get_GracefulDegradation(t *testing.T) {
 }
 
 func contains(s, substr string) bool {
-	return len(s) >= len(substr) && (s == substr || len(s) > 0 && containsStr(s, substr))
-}
-
-func containsStr(s, substr string) bool {
-	for i := 0; i <= len(s)-len(substr); i++ {
-		if s[i:i+len(substr)] == substr {
-			return true
-		}
-	}
-	return false
+	return strings.Contains(s, substr)
 }
