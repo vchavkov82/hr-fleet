@@ -1,0 +1,46 @@
+{
+  "sidebar": {
+    "overview": "Dashboard",
+    "employees": "Employees",
+    "leave": "Leave",
+    "recruitment": "Recruitment",
+    "settings": "Settings"
+  },
+  "employees": {
+    "title": "Employee Directory",
+    "addNew": "Add Employee",
+    "search": "Search employees...",
+    "department": "Department",
+    "position": "Position",
+    "startDate": "Start Date",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "allDepartments": "All Departments",
+    "noResults": "No employees found",
+    "name": "Name",
+    "email": "Email",
+    "form": {
+      "name": "Full Name",
+      "email": "Work Email",
+      "jobTitle": "Job Title",
+      "department": "Department",
+      "employeeType": "Employee Type",
+      "startDate": "Start Date",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "types": {
+      "employee": "Employee",
+      "contractor": "Contractor",
+      "trainee": "Trainee"
+    }
+  },
+  "overview": {
+    "title": "Dashboard Overview",
+    "totalEmployees": "Total Employees",
+    "pendingLeave": "Pending Leave",
+    "recentHires": "Recent Hires",
+    "upcomingBirthdays": "Upcoming Birthdays"
+  }
+}

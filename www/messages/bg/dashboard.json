@@ -1,0 +1,46 @@
+{
+  "sidebar": {
+    "overview": "Табло",
+    "employees": "Служители",
+    "leave": "Отпуски",
+    "recruitment": "Подбор",
+    "settings": "Настройки"
+  },
+  "employees": {
+    "title": "Списък служители",
+    "addNew": "Добави служител",
+    "search": "Търсене на служители...",
+    "department": "Отдел",
+    "position": "Позиция",
+    "startDate": "Начална дата",
+    "status": "Статус",
+    "active": "Активен",
+    "inactive": "Неактивен",
+    "allDepartments": "Всички отдели",
+    "noResults": "Няма намерени служители",
+    "name": "Име",
+    "email": "Имейл",
+    "form": {
+      "name": "Пълно име",
+      "email": "Служебен имейл",
+      "jobTitle": "Длъжност",
+      "department": "Отдел",
+      "employeeType": "Тип служител",
+      "startDate": "Начална дата",
+      "save": "Запази",
+      "cancel": "Отказ"
+    },
+    "types": {
+      "employee": "Служител",
+      "contractor": "Изпълнител",
+      "trainee": "Стажант"
+    }
+  },
+  "overview": {
+    "title": "Преглед",
+    "totalEmployees": "Общо служители",
+    "pendingLeave": "Чакащи отпуски",
+    "recentHires": "Нови назначения",
+    "upcomingBirthdays": "Предстоящи рождени дни"
+  }
+}

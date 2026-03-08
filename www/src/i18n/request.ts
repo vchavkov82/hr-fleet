@@ -6,6 +6,7 @@ const namespaces = [
   'pricingPreview', 'testimonials', 'cta', 'trustedCompanies',
   'blogPosts', 'stats', 'footer', 'pages', 'blog', 'about',
   'careers', 'contact', 'partners', 'helpCenter', 'cookies', 'auth',
+  'dashboard',
 ] as const
 
 async function loadMessages(locale: string) {
