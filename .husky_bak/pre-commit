@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-# Run lint-staged for all changed files
-npx lint-staged
