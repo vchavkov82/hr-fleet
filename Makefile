@@ -3,9 +3,9 @@
 COMPOSE := podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml
 
 .PHONY: help up down restart logs ps clean clean-all clean-cache clean-webpack clean-www clean-blog clean-docs \
-	dev dev-apps infra infra-down infra-logs dev-www dev-blog dev-docs \
+	dev dev-apps infra infra-down infra-logs dev-www dev-blog dev-docs dev-backend odoo-init \
 	build build-www build-blog build-docs build-all \
-	test test-watch test-e2e lint typecheck \
+	test test-watch test-e2e test-backend lint typecheck \
 	check-links check-links-www check-links-blog check-links-docs \
 	install bootstrap nuke
 
@@ -85,6 +85,12 @@ dev-blog: ## Start HR blog only in dev mode (port 3013)
 dev-docs: ## Start HR docs only in dev mode (port 3011)
 	cd docs && bun dev
 
+dev-backend: ## Start Go backend in dev mode (port 8080)
+	cd backend && go run ./cmd/server/
+
+odoo-init: ## Initialize Odoo HR modules (run once after first start)
+	bash deploy/odoo-init.sh
+
 # ── Build ───────────────────────────────────────────────────────────────────
 
 build: ## Build www + blog via turbo (sequential to avoid OOM, turbo caches each)
@@ -117,6 +123,9 @@ test-watch: ## Run unit tests in watch mode
 
 test-e2e: ## Run e2e tests (Playwright, needs running dev server)
 	cd www && bun run test:e2e
+
+test-backend: ## Run Go backend tests
+	cd backend && go test ./...
 
 lint: ## Lint all workspaces
 	node_modules/.bin/turbo run lint
