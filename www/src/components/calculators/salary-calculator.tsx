@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { BG_TAX_2026 } from '@/lib/bulgarian-tax'
+import { computeNetFromGross } from '@/lib/calculations'
 
 type Mode = 'gross-to-net' | 'net-to-gross'
 
@@ -11,70 +12,6 @@ const fmt = new Intl.NumberFormat('bg-BG', {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 })
-
-function computeNetFromGross(gross: number, bornAfter1960: boolean) {
-  const ss = BG_TAX_2026.SOCIAL_SECURITY
-  const h = BG_TAX_2026.HEALTH
-  const up = BG_TAX_2026.UNIVERSAL_PENSION
-
-  // Insurable income is clamped between min and max
-  const insurable = Math.min(
-    Math.max(gross, BG_TAX_2026.MIN_INSURABLE_INCOME),
-    BG_TAX_2026.MAX_INSURABLE_INCOME
-  )
-
-  // Employee deductions (on insurable income)
-  const empPension = insurable * ss.PENSION_EMPLOYEE
-  const empIllness = insurable * ss.ILLNESS_MATERNITY_EMPLOYEE
-  const empUnemployment = insurable * ss.UNEMPLOYMENT_EMPLOYEE
-  const empHealth = insurable * h.EMPLOYEE
-  const empUniversal = bornAfter1960 ? insurable * up.EMPLOYEE : 0
-
-  const totalEmployeeDeductions =
-    empPension + empIllness + empUnemployment + empHealth + empUniversal
-
-  // Taxable income and tax
-  const taxableIncome = gross - totalEmployeeDeductions
-  const incomeTax = Math.max(taxableIncome, 0) * BG_TAX_2026.INCOME_TAX_RATE
-
-  // Net salary
-  const netSalary = gross - totalEmployeeDeductions - incomeTax
-
-  // Employer contributions (on insurable income)
-  const erPension = insurable * ss.PENSION_EMPLOYER
-  const erIllness = insurable * ss.ILLNESS_MATERNITY_EMPLOYER
-  const erUnemployment = insurable * ss.UNEMPLOYMENT_EMPLOYER
-  const erAccident = insurable * ss.ACCIDENT_EMPLOYER
-  const erHealth = insurable * h.EMPLOYER
-  const erUniversal = bornAfter1960 ? insurable * up.EMPLOYER : 0
-
-  const totalEmployerContributions =
-    erPension + erIllness + erUnemployment + erAccident + erHealth + erUniversal
-
-  const totalEmployerCost = gross + totalEmployerContributions
-
-  return {
-    gross,
-    insurable,
-    empPension,
-    empIllness,
-    empUnemployment,
-    empHealth,
-    empUniversal,
-    totalEmployeeDeductions,
-    taxableIncome: Math.max(taxableIncome, 0),
-    incomeTax,
-    netSalary,
-    erPension,
-    erIllness,
-    erUnemployment,
-    erAccident,
-    erHealth,
-    erUniversal,
-    totalEmployerContributions,
-    totalEmployerCost,
-  }
-}
 
 function findGrossFromNet(targetNet: number, bornAfter1960: boolean): number {
   // Binary search for gross that yields the target net
