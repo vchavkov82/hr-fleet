@@ -14,10 +14,10 @@
 - [x] **MKT-06**: AI Assistant integration via 21st Agents (Claude Sonnet 4.6)
 
 ### Salary Calculator — Freelancer vs Payroll Comparison
-- [ ] **CALC-01**: Side-by-side comparison showing net income: EOOD/OOD freelancer vs employment through payroll service
-- [ ] **CALC-02**: EOOD calculation includes: corporate tax (10%), dividend tax (10%), self-insurance on minimum (1,077 BGN), monthly accountant fee (~150 EUR), company admin overhead
-- [ ] **CALC-03**: Employment calculation uses existing salary calculator logic (employee/employer social security, income tax)
-- [ ] **CALC-04**: Comparison at user-entered gross amount showing: net to person, total cost to client/employer, effective tax rate, money saved/lost
+- [x] **CALC-01**: Side-by-side comparison showing net income: EOOD/OOD freelancer vs employment through payroll service
+- [x] **CALC-02**: EOOD calculation includes: corporate tax (10%), dividend tax (10%), self-insurance on minimum (1,077 BGN), monthly accountant fee (~150 EUR), company admin overhead
+- [x] **CALC-03**: Employment calculation uses existing salary calculator logic (employee/employer social security, income tax)
+- [x] **CALC-04**: Comparison at user-entered gross amount showing: net to person, total cost to client/employer, effective tax rate, money saved/lost
 - [ ] **CALC-05**: Visual highlight of savings when using payroll service vs EOOD (marketing angle: "save X BGN/month")
 - [ ] **CALC-06**: Include hidden costs breakdown: accountant fees, admin time, company registration amortized, bank fees, closure risk
 - [ ] **CALC-07**: Benefits comparison table: paid leave, sick leave, maternity, unemployment insurance, mortgage eligibility, labor code protection
@@ -60,10 +60,10 @@
 | MKT-05 | Phase 1 | Complete |
 | MKT-06 | Phase 1 | Complete |
 
-| CALC-01 | Phase 2 | Pending |
-| CALC-02 | Phase 2 | Pending |
-| CALC-03 | Phase 2 | Pending |
-| CALC-04 | Phase 2 | Pending |
+| CALC-01 | Phase 2 | Complete |
+| CALC-02 | Phase 2 | Complete |
+| CALC-03 | Phase 2 | Complete |
+| CALC-04 | Phase 2 | Complete |
 | CALC-05 | Phase 2 | Pending |
 | CALC-06 | Phase 2 | Pending |
 | CALC-07 | Phase 2 | Pending |

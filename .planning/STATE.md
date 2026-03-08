@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-08T11:44:30.326Z"
-last_activity: 2026-03-05 -- Separated HR platform from Jobs project, integrated 21st Agents AI assistant
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-03-08T12:10:01.300Z"
+last_activity: 2026-03-08 -- Extracted pure calculation functions for freelancer vs employment comparison (TDD)
 progress:
   total_phases: 2
   completed_phases: 1
-  total_plans: 10
-  completed_plans: 10
-  percent: 100
+  total_plans: 14
+  completed_plans: 11
+  percent: 79
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-05)
 
 **Core value:** Bulgarian SMBs can manage all their HR operations in one unified platform with built-in Bulgarian compliance.
-**Current focus:** Phase 1 - HR App Marketing Site & MVP
+**Current focus:** Phase 2 - Salary Calculator Freelancer vs Payroll Comparison
 
 ## Current Position
 
-Phase: 1 of 1+ (HR App Marketing Site & MVP)
-Plan: 10 of 10 (All plans complete)
+Phase: 2 of 2 (Salary Calculator Freelancer vs Payroll Comparison)
+Plan: 2 of 4 (Plan 01 complete, starting Plan 02)
 Status: Executing
-Last activity: 2026-03-05 -- Separated HR platform from Jobs project, integrated 21st Agents AI assistant
+Last activity: 2026-03-08 -- Extracted pure calculation functions for freelancer vs employment comparison (TDD)
 
-Progress: [##########] 100% (Phase 1 Marketing Site)
+Progress: [████████░░] 79% (11/14 plans complete)
 
 ## Performance Metrics
 
@@ -71,6 +71,10 @@ Progress: [##########] 100% (Phase 1 Marketing Site)
 - Bulgarian-first design (English secondary)
 - AI assistant for HR policy/calculation queries
 - Email-gated templates for lead capture
+- Extracted computeNetFromGross to shared lib/calculations.ts (single source of truth)
+- EOOD self-insurance calculated on minimum base (1077 BGN) not revenue
+- TDD workflow for calculation functions (red-green-refactor)
+- [Phase 02]: Extracted computeNetFromGross to shared lib/calculations.ts for single source of truth
 
 ### Setup Requirements (User Responsibilities)
 
@@ -90,7 +94,7 @@ Progress: [##########] 100% (Phase 1 Marketing Site)
 
 ## Session Continuity
 
-Last session: 2026-03-08T11:44:30.323Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-salary-calculator-freelancer-vs-payroll-comparison/02-CONTEXT.md
-Next up: Plan Phase 2 (Employee Management) or address immediate HR feature gaps
+Last session: 2026-03-08T12:10:01.296Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: None
+Next up: Execute Plan 02-02 (freelancer comparison UI component)
