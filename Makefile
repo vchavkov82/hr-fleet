@@ -87,8 +87,9 @@ dev-docs: ## Start HR docs only in dev mode (port 3011)
 
 # ── Build ───────────────────────────────────────────────────────────────────
 
-build: ## Build HR apps via turbo (www, blog) with cache optimization
-	node_modules/.bin/turbo run build --filter=@hr/www --filter=@hr/blog --cache-workers=4
+build: ## Build www + blog via turbo (sequential to avoid OOM, turbo caches each)
+	node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4
+	node_modules/.bin/turbo run build --filter=@hr/blog --cache-workers=4
 
 build-www: ## Build HR site only
 	node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4
@@ -99,7 +100,12 @@ build-blog: ## Build HR blog only
 build-docs: ## Build HR docs only
 	node_modules/.bin/turbo run build --filter=@hr/docs --cache-workers=4
 
-build-all: build ## Build everything (alias for build)
+build-all: ## Build all packages (www, blog, docs)
+	node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4
+	node_modules/.bin/turbo run build --filter=@hr/blog --filter=@hr/docs --cache-workers=4
+
+check: ## Run typecheck + lint in parallel via turbo
+	node_modules/.bin/turbo run typecheck lint --cache-workers=4
 
 # ── Test ──────────────────────────────────────────────────────────────
 

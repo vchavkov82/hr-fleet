@@ -8,7 +8,7 @@
     "dev:www": "cd www && PORT=3010 pnpm dev",
     "dev:blog": "cd blog && pnpm dev",
     "dev:docs": "cd docs && pnpm dev",
-    "build": "turbo run build --cache-workers=4",
+    "build": "turbo run build --filter=@hr/www --cache-workers=4 && turbo run build --filter=@hr/blog --cache-workers=4",
     "build:www": "node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4",
     "build:blog": "node_modules/.bin/turbo run build --filter=@hr/blog --cache-workers=4",
     "build:docs": "node_modules/.bin/turbo run build --filter=@hr/docs --cache-workers=4",
@@ -23,7 +23,7 @@
     "test:all": "cd www && pnpm run test",
     "clean": "rm -rf node_modules www/node_modules blog/node_modules docs/node_modules && echo 'node_modules cleaned'",
     "clean:cache": "rm -rf www/.next www/.next/cache www/node_modules/.cache .turbo && echo 'Build cache cleaned'",
-    "prebuild": "pnpm run typecheck"
+    "check": "turbo run typecheck lint --cache-workers=4"
   },
   "devDependencies": {
     "@parcel/watcher-linux-x64-glibc": "^2.5.6",

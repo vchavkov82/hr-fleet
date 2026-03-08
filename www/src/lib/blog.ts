@@ -1,6 +1,13 @@
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
-import matter from 'gray-matter'
+import yaml from 'js-yaml'
+
+function matter(source: string): { data: Record<string, unknown>; content: string } {
+  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/)
+  if (!match) return { data: {}, content: source }
+  const data = (yaml.load(match[1]) as Record<string, unknown>) || {}
+  return { data, content: match[2] }
+}
 
 const BLOG_DIR = path.join(process.cwd(), 'src/content/blog')
 const BG_SUFFIX = '-bg'

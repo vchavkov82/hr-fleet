@@ -19,7 +19,9 @@ const nextConfig = {
   reactStrictMode: true,
   generateEtags: false,
   eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: false },
+  // Type checking runs as a separate turbo task (typecheck) for better parallelism
+  typescript: { ignoreBuildErrors: true },
+  serverExternalPackages: ['remark-gfm'],
   allowedDevOrigins: ['hr.svc.chavkov.com', 'suse-09.lan.assistance.bg'],
 
   // CDN asset prefix only in production; in dev this can cause stale chunk/runtime mismatches.
@@ -81,6 +83,10 @@ const nextConfig = {
         config.resolve.alias['next/dist/client/link'] = `${nextRoot}/dist/client/app-dir/link.js`
       }
     }
+
+    // Speed up module resolution
+    config.resolve.symlinks = false
+
     return config
   },
 }
