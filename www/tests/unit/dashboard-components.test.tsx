@@ -115,10 +115,11 @@ describe('EmployeeForm', () => {
 
 describe('MetricCard', () => {
   it('renders title and value', () => {
+    // Use string value to bypass requestAnimationFrame animation (not available in jsdom)
     render(
       <MetricCard
         title="Total Employees"
-        value={42}
+        value="42"
         icon={<span data-testid="icon">IC</span>}
       />,
     )
