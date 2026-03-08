@@ -85,7 +85,7 @@ Plans:
 **Plans:** 4 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Homepage cleanup: strip fake sections, rewrite hero/CTA/features for honest copy
+- [x] 04-01-PLAN.md — Homepage cleanup: strip fake sections, rewrite hero/CTA/features for honest copy
 - [ ] 04-02-PLAN.md — Features page restructure (active + roadmap) and pricing page (single plan)
 - [ ] 04-03-PLAN.md — Help center content rewrite for real features
 - [ ] 04-04-PLAN.md — 6 new Bulgarian blog posts (labor law, platform how-tos, EOOD/freelancer)
