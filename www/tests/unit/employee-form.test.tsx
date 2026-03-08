@@ -109,7 +109,7 @@ describe('EmployeeForm', () => {
 
   it('shows loading state during submission', async () => {
     // onSubmit returns a never-resolving promise to keep submitting=true
-    const onSubmit = vi.fn(() => new Promise(() => {}))
+    const onSubmit = vi.fn((): Promise<void> => new Promise(() => {}))
     const onCancel = vi.fn()
     render(<EmployeeForm onSubmit={onSubmit} onCancel={onCancel} />)
 
