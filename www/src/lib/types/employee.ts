@@ -1,3 +1,4 @@
+/** Maps to Odoo hr.employee record fields. */
 export interface Employee {
   id: number
   name: string
@@ -7,18 +8,22 @@ export interface Employee {
   job: { id: number; name: string }
   manager: { id: number; name: string } | null
   workPhone: string
-  employeeType: string
+  mobilePhone: string
+  employeeType: OdooEmployeeType
   active: boolean
   createDate: string
   writeDate: string
 }
+
+/** Odoo employee_type selection values. */
+export type OdooEmployeeType = 'employee' | 'student' | 'trainee' | 'contractor' | 'freelance'
 
 export interface EmployeeCreateInput {
   name: string
   workEmail: string
   jobTitle: string
   departmentId: number
-  employeeType: string
+  employeeType: OdooEmployeeType
 }
 
 export interface EmployeeListResponse {

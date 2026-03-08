@@ -4,18 +4,19 @@ import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/navigation'
 import EmployeeForm from '@/components/dashboard/employee-form'
-import type { Employee, EmployeeCreateInput } from '@/lib/types/employee'
+import type { Employee, EmployeeCreateInput, OdooEmployeeType } from '@/lib/types/employee'
 
-// Mock data -- will be replaced by API call in Plan 05
+// Mock Odoo hr.employee record -- will be replaced by API call in Plan 05
 const MOCK_EMPLOYEE: Employee = {
   id: 1,
   name: 'Ivan Petrov',
   workEmail: 'ivan@company.bg',
   jobTitle: 'Senior Developer',
-  department: { id: 1, name: 'Engineering' },
+  department: { id: 5, name: 'Research & Development' },
   job: { id: 1, name: 'Developer' },
   manager: null,
   workPhone: '+359 88 123 4567',
+  mobilePhone: '+359 89 123 4567',
   employeeType: 'employee',
   active: true,
   createDate: '2024-03-15',
@@ -71,10 +72,12 @@ export default function EmployeeDetailPage() {
           <Row label={t('department')} value={employee.department.name} />
           <Row label={t('position')} value={employee.jobTitle} />
           <Row label="Phone" value={employee.workPhone} />
+          {employee.mobilePhone && <Row label="Mobile" value={employee.mobilePhone} />}
+          {employee.manager && <Row label="Manager" value={employee.manager.name} />}
           <Row label={t('status')} value={employee.active ? t('active') : t('inactive')} />
           <Row
             label="Type"
-            value={t(`types.${employee.employeeType as 'employee' | 'contractor' | 'trainee'}`)}
+            value={t(`types.${employee.employeeType as OdooEmployeeType}`)}
           />
           <Row label={t('startDate')} value={new Date(employee.createDate).toLocaleDateString()} />
         </dl>

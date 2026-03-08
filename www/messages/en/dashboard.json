@@ -32,8 +32,10 @@
     },
     "types": {
       "employee": "Employee",
+      "student": "Student",
+      "trainee": "Trainee",
       "contractor": "Contractor",
-      "trainee": "Trainee"
+      "freelance": "Freelancer"
     }
   },
   "overview": {

@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from 'react'
 import { useTranslations } from 'next-intl'
-import type { Employee, EmployeeCreateInput } from '@/lib/types/employee'
+import type { Employee, EmployeeCreateInput, OdooEmployeeType } from '@/lib/types/employee'
 
 interface EmployeeFormProps {
   employee?: Employee
@@ -10,16 +10,20 @@ interface EmployeeFormProps {
   onCancel: () => void
 }
 
+// Odoo hr.department standard records -- will be fetched from API in Plan 05
 const DEPARTMENTS = [
-  { id: 1, name: 'Engineering' },
-  { id: 2, name: 'Marketing' },
+  { id: 1, name: 'Administration' },
+  { id: 2, name: 'Human Resources' },
   { id: 3, name: 'Sales' },
-  { id: 4, name: 'HR' },
-  { id: 5, name: 'Finance' },
-  { id: 6, name: 'Operations' },
+  { id: 4, name: 'Accounting' },
+  { id: 5, name: 'Research & Development' },
+  { id: 6, name: 'Manufacturing' },
+  { id: 7, name: 'IT' },
+  { id: 8, name: 'Marketing' },
 ]
 
-const EMPLOYEE_TYPES = ['employee', 'contractor', 'trainee'] as const
+// Odoo employee_type selection field values
+const EMPLOYEE_TYPES: OdooEmployeeType[] = ['employee', 'student', 'trainee', 'contractor', 'freelance']
 
 export default function EmployeeForm({ employee, onSubmit, onCancel }: EmployeeFormProps) {
   const t = useTranslations('dashboard.employees')
@@ -28,7 +32,7 @@ export default function EmployeeForm({ employee, onSubmit, onCancel }: EmployeeF
   const [workEmail, setWorkEmail] = useState(employee?.workEmail ?? '')
   const [jobTitle, setJobTitle] = useState(employee?.jobTitle ?? '')
   const [departmentId, setDepartmentId] = useState(employee?.department.id ?? 0)
-  const [employeeType, setEmployeeType] = useState(employee?.employeeType ?? 'employee')
+  const [employeeType, setEmployeeType] = useState<OdooEmployeeType>(employee?.employeeType ?? 'employee')
   const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
 
@@ -124,7 +128,7 @@ export default function EmployeeForm({ employee, onSubmit, onCancel }: EmployeeF
         <select
           id="emp-type"
           value={employeeType}
-          onChange={(e) => setEmployeeType(e.target.value)}
+          onChange={(e) => setEmployeeType(e.target.value as OdooEmployeeType)}
           className={inputClass}
         >
           {EMPLOYEE_TYPES.map((type) => (

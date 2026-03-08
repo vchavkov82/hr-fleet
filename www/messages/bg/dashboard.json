@@ -32,8 +32,10 @@
     },
     "types": {
       "employee": "Служител",
+      "student": "Студент",
+      "trainee": "Стажант",
       "contractor": "Изпълнител",
-      "trainee": "Стажант"
+      "freelance": "Свободна практика"
     }
   },
   "overview": {
