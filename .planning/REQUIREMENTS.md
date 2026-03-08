@@ -18,12 +18,12 @@
 - [x] **CALC-02**: EOOD calculation includes: corporate tax (10%), dividend tax (10%), self-insurance on minimum (1,077 BGN), monthly accountant fee (~150 EUR), company admin overhead
 - [x] **CALC-03**: Employment calculation uses existing salary calculator logic (employee/employer social security, income tax)
 - [x] **CALC-04**: Comparison at user-entered gross amount showing: net to person, total cost to client/employer, effective tax rate, money saved/lost
-- [ ] **CALC-05**: Visual highlight of savings when using payroll service vs EOOD (marketing angle: "save X BGN/month")
-- [ ] **CALC-06**: Include hidden costs breakdown: accountant fees, admin time, company registration amortized, bank fees, closure risk
-- [ ] **CALC-07**: Benefits comparison table: paid leave, sick leave, maternity, unemployment insurance, mortgage eligibility, labor code protection
+- [x] **CALC-05**: Visual highlight of savings when using payroll service vs EOOD (marketing angle: "save X BGN/month")
+- [x] **CALC-06**: Include hidden costs breakdown: accountant fees, admin time, company registration amortized, bank fees, closure risk
+- [x] **CALC-07**: Benefits comparison table: paid leave, sick leave, maternity, unemployment insurance, mortgage eligibility, labor code protection
 - [ ] **CALC-08**: Fully localized in Bulgarian and English
 - [ ] **CALC-09**: SEO content sections explaining the comparison for organic traffic
-- [ ] **CALC-10**: Mobile-responsive design consistent with existing calculators
+- [x] **CALC-10**: Mobile-responsive design consistent with existing calculators
 
 ### HR Employee Management
 - [ ] **EMP-01**: Admin can create employee records (name, email, role, start date, contract type)
@@ -64,12 +64,12 @@
 | CALC-02 | Phase 2 | Complete |
 | CALC-03 | Phase 2 | Complete |
 | CALC-04 | Phase 2 | Complete |
-| CALC-05 | Phase 2 | Pending |
-| CALC-06 | Phase 2 | Pending |
-| CALC-07 | Phase 2 | Pending |
+| CALC-05 | Phase 2 | Complete |
+| CALC-06 | Phase 2 | Complete |
+| CALC-07 | Phase 2 | Complete |
 | CALC-08 | Phase 2 | Pending |
 | CALC-09 | Phase 2 | Pending |
-| CALC-10 | Phase 2 | Pending |
+| CALC-10 | Phase 2 | Complete |
 
 **Coverage:**
 - v1.0 requirements: 6 marketing (complete), 10 calculator comparison (pending), 4 HR features (pending), 4 ATS features (pending)

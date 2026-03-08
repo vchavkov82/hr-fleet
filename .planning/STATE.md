@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-03-08T12:10:01.300Z"
-last_activity: 2026-03-08 -- Extracted pure calculation functions for freelancer vs employment comparison (TDD)
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-03-08T12:14:30.000Z"
+last_activity: 2026-03-08 -- Built FreelancerComparison interactive UI component with side-by-side comparison
 progress:
   total_phases: 2
   completed_phases: 1
   total_plans: 14
-  completed_plans: 11
-  percent: 79
+  completed_plans: 12
+  percent: 86
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-05)
 ## Current Position
 
 Phase: 2 of 2 (Salary Calculator Freelancer vs Payroll Comparison)
-Plan: 2 of 4 (Plan 01 complete, starting Plan 02)
+Plan: 3 of 4 (Plan 02 complete, starting Plan 03)
 Status: Executing
-Last activity: 2026-03-08 -- Extracted pure calculation functions for freelancer vs employment comparison (TDD)
+Last activity: 2026-03-08 -- Built FreelancerComparison interactive UI component with side-by-side comparison
 
-Progress: [████████░░] 79% (11/14 plans complete)
+Progress: [█████████░] 86% (12/14 plans complete)
 
 ## Performance Metrics
 
@@ -75,6 +75,8 @@ Progress: [████████░░] 79% (11/14 plans complete)
 - EOOD self-insurance calculated on minimum base (1077 BGN) not revenue
 - TDD workflow for calculation functions (red-green-refactor)
 - [Phase 02]: Extracted computeNetFromGross to shared lib/calculations.ts for single source of truth
+- [Phase 02]: VAT toggle is UI-only display; VAT is pass-through and does not affect net income calculation
+- [Phase 02]: Employment column highlighted green with recommended badge; EOOD column muted gray
 
 ### Setup Requirements (User Responsibilities)
 
@@ -94,7 +96,7 @@ Progress: [████████░░] 79% (11/14 plans complete)
 
 ## Session Continuity
 
-Last session: 2026-03-08T12:10:01.296Z
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-03-08T12:14:30.000Z
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None
-Next up: Execute Plan 02-02 (freelancer comparison UI component)
+Next up: Execute Plan 02-03 (page integration and i18n)
