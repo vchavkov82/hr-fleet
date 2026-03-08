@@ -28,6 +28,7 @@
       "employeeType": "Employee Type",
       "startDate": "Start Date",
       "save": "Save",
+      "saved": "Employee saved successfully",
       "cancel": "Cancel"
     },
     "types": {
