@@ -45,7 +45,7 @@ func (c *Client) nextID() int {
 // args are the positional arguments.
 //
 // On session expiry (AccessDenied), Call will re-authenticate once and retry.
-func (c *Client) Call(service, method string, args []interface{}) (json.RawMessage, error) {
+func (c *Client) Call(service, method string, args []any) (json.RawMessage, error) {
 	result, err := c.doCall(service, method, args)
 	if err != nil && isSessionExpired(err) && c.uid > 0 {
 		// Re-authenticate and retry once
@@ -58,8 +58,8 @@ func (c *Client) Call(service, method string, args []interface{}) (json.RawMessa
 }
 
 // doCall performs a single JSON-RPC call without retry logic.
-func (c *Client) doCall(service, method string, args []interface{}) (json.RawMessage, error) {
-	params := map[string]interface{}{
+func (c *Client) doCall(service, method string, args []any) (json.RawMessage, error) {
+	params := map[string]any{
 		"service": service,
 		"method":  method,
 		"args":    args,
@@ -121,7 +121,7 @@ func isSessionExpired(err error) bool {
 			return true
 		}
 		// Check data field for AccessDenied exception
-		if data, ok := rpcErr.Data.(map[string]interface{}); ok {
+		if data, ok := rpcErr.Data.(map[string]any); ok {
 			name, _ := data["name"].(string)
 			if strings.Contains(name, "AccessDenied") {
 				return true
@@ -132,21 +132,21 @@ func isSessionExpired(err error) bool {
 }
 
 // SearchRead performs a search_read operation on the given Odoo model.
-func (c *Client) SearchRead(model string, domain []interface{}, fields []string, limit, offset int) ([]map[string]interface{}, error) {
+func (c *Client) SearchRead(model string, domain []any, fields []string, limit, offset int) ([]map[string]any, error) {
 	if err := c.EnsureAuthenticated(); err != nil {
 		return nil, err
 	}
 
-	kwargs := map[string]interface{}{
+	kwargs := map[string]any{
 		"fields": fields,
 		"limit":  limit,
 		"offset": offset,
 	}
 
-	args := []interface{}{
+	args := []any{
 		c.db, c.uid, c.password,
 		model, "search_read",
-		[]interface{}{domain},
+		[]any{domain},
 		kwargs,
 	}
 
@@ -155,7 +155,7 @@ func (c *Client) SearchRead(model string, domain []interface{}, fields []string,
 		return nil, fmt.Errorf("search_read %s: %w", model, err)
 	}
 
-	var records []map[string]interface{}
+	var records []map[string]any
 	if err := json.Unmarshal(result, &records); err != nil {
 		return nil, fmt.Errorf("parse search_read result: %w", err)
 	}
@@ -164,15 +164,15 @@ func (c *Client) SearchRead(model string, domain []interface{}, fields []string,
 }
 
 // SearchCount returns the count of records matching the domain.
-func (c *Client) SearchCount(model string, domain []interface{}) (int64, error) {
+func (c *Client) SearchCount(model string, domain []any) (int64, error) {
 	if err := c.EnsureAuthenticated(); err != nil {
 		return 0, err
 	}
 
-	args := []interface{}{
+	args := []any{
 		c.db, c.uid, c.password,
 		model, "search_count",
-		[]interface{}{domain},
+		[]any{domain},
 	}
 
 	result, err := c.Call("object", "execute_kw", args)
@@ -189,15 +189,15 @@ func (c *Client) SearchCount(model string, domain []interface{}) (int64, error) 
 }
 
 // Create creates a new record in the given Odoo model and returns its ID.
-func (c *Client) Create(model string, vals map[string]interface{}) (int64, error) {
+func (c *Client) Create(model string, vals map[string]any) (int64, error) {
 	if err := c.EnsureAuthenticated(); err != nil {
 		return 0, err
 	}
 
-	args := []interface{}{
+	args := []any{
 		c.db, c.uid, c.password,
 		model, "create",
-		[]interface{}{vals},
+		[]any{vals},
 	}
 
 	result, err := c.Call("object", "execute_kw", args)
@@ -214,15 +214,15 @@ func (c *Client) Create(model string, vals map[string]interface{}) (int64, error
 }
 
 // Write updates an existing record in the given Odoo model.
-func (c *Client) Write(model string, id int64, vals map[string]interface{}) error {
+func (c *Client) Write(model string, id int64, vals map[string]any) error {
 	if err := c.EnsureAuthenticated(); err != nil {
 		return err
 	}
 
-	args := []interface{}{
+	args := []any{
 		c.db, c.uid, c.password,
 		model, "write",
-		[]interface{}{[]int64{id}, vals},
+		[]any{[]int64{id}, vals},
 	}
 
 	_, err := c.Call("object", "execute_kw", args)
@@ -234,16 +234,16 @@ func (c *Client) Write(model string, id int64, vals map[string]interface{}) erro
 }
 
 // Read fetches records by IDs from the given Odoo model.
-func (c *Client) Read(model string, ids []int64, fields []string) ([]map[string]interface{}, error) {
+func (c *Client) Read(model string, ids []int64, fields []string) ([]map[string]any, error) {
 	if err := c.EnsureAuthenticated(); err != nil {
 		return nil, err
 	}
 
-	args := []interface{}{
+	args := []any{
 		c.db, c.uid, c.password,
 		model, "read",
-		[]interface{}{ids},
-		map[string]interface{}{"fields": fields},
+		[]any{ids},
+		map[string]any{"fields": fields},
 	}
 
 	result, err := c.Call("object", "execute_kw", args)
@@ -251,7 +251,7 @@ func (c *Client) Read(model string, ids []int64, fields []string) ([]map[string]
 		return nil, fmt.Errorf("read %s: %w", model, err)
 	}
 
-	var records []map[string]interface{}
+	var records []map[string]any
 	if err := json.Unmarshal(result, &records); err != nil {
 		return nil, fmt.Errorf("parse read result: %w", err)
 	}

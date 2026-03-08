@@ -11,7 +11,7 @@ func (c *Client) Authenticate() error {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	args := []interface{}{c.db, c.username, c.password}
+	args := []any{c.db, c.username, c.password}
 
 	result, err := c.doCall("common", "login", args)
 	if err != nil {

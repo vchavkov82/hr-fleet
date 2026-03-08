@@ -7,9 +7,9 @@ import (
 
 // ListEmployees retrieves hr.employee records from Odoo with optional domain filters.
 // Returns the employee slice and total count for pagination.
-func (c *Client) ListEmployees(domain []interface{}, limit, offset int) ([]Employee, int, error) {
+func (c *Client) ListEmployees(domain []any, limit, offset int) ([]Employee, int, error) {
 	if domain == nil {
-		domain = []interface{}{}
+		domain = []any{}
 	}
 
 	// Get total count for pagination
@@ -57,7 +57,7 @@ func (c *Client) GetEmployee(id int64) (*Employee, error) {
 
 // CreateEmployee creates a new hr.employee record in Odoo.
 func (c *Client) CreateEmployee(req EmployeeCreateRequest) (int64, error) {
-	vals := map[string]interface{}{
+	vals := map[string]any{
 		"name":          req.Name,
 		"work_email":    req.WorkEmail,
 		"job_title":     req.JobTitle,
@@ -77,7 +77,7 @@ func (c *Client) CreateEmployee(req EmployeeCreateRequest) (int64, error) {
 
 // UpdateEmployee updates an existing hr.employee record with the provided fields.
 // Only the fields present in vals are sent (partial update).
-func (c *Client) UpdateEmployee(id int64, vals map[string]interface{}) error {
+func (c *Client) UpdateEmployee(id int64, vals map[string]any) error {
 	if err := c.Write("hr.employee", id, vals); err != nil {
 		return fmt.Errorf("update employee %d: %w", id, err)
 	}
@@ -85,7 +85,7 @@ func (c *Client) UpdateEmployee(id int64, vals map[string]interface{}) error {
 }
 
 // parseEmployee converts a raw Odoo record map into an Employee struct.
-func parseEmployee(rec map[string]interface{}) (Employee, error) {
+func parseEmployee(rec map[string]any) (Employee, error) {
 	emp := Employee{
 		ID:           toInt64(rec["id"]),
 		Name:         toString(rec["name"]),
@@ -108,8 +108,8 @@ func parseEmployee(rec map[string]interface{}) (Employee, error) {
 
 // parseMany2One extracts a Many2One value from an Odoo field.
 // Odoo returns many2one as [id, "name"] or false if empty.
-func parseMany2One(v interface{}) Many2One {
-	arr, ok := v.([]interface{})
+func parseMany2One(v any) Many2One {
+	arr, ok := v.([]any)
 	if !ok || len(arr) < 2 {
 		return Many2One{}
 	}
@@ -119,8 +119,8 @@ func parseMany2One(v interface{}) Many2One {
 	}
 }
 
-// toInt64 converts an interface{} to int64.
-func toInt64(v interface{}) int64 {
+// toInt64 converts an any to int64.
+func toInt64(v any) int64 {
 	switch n := v.(type) {
 	case float64:
 		return int64(n)
@@ -136,14 +136,14 @@ func toInt64(v interface{}) int64 {
 	}
 }
 
-// toString converts an interface{} to string.
-func toString(v interface{}) string {
+// toString converts an any to string.
+func toString(v any) string {
 	s, _ := v.(string)
 	return s
 }
 
-// toBool converts an interface{} to bool.
-func toBool(v interface{}) bool {
+// toBool converts an any to bool.
+func toBool(v any) bool {
 	b, _ := v.(bool)
 	return b
 }

@@ -6,7 +6,7 @@ import "encoding/json"
 type JSONRPCRequest struct {
 	JSONRPC string      `json:"jsonrpc"`
 	Method  string      `json:"method"`
-	Params  interface{} `json:"params"`
+	Params  any `json:"params"`
 	ID      int         `json:"id"`
 }
 
@@ -22,7 +22,7 @@ type JSONRPCResponse struct {
 type RPCError struct {
 	Code    int         `json:"code"`
 	Message string      `json:"message"`
-	Data    interface{} `json:"data,omitempty"`
+	Data    any `json:"data,omitempty"`
 }
 
 func (e *RPCError) Error() string {
