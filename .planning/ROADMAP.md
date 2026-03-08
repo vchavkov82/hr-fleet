@@ -68,7 +68,7 @@ Plans:
 **Goal:** Integrate self-hosted Odoo 18 Community as HR backend with Go API proxy. Deploy Odoo in podman-compose, build JSON-RPC client in Go, expose clean REST API. Frontend: authenticated /dashboard with employee directory (table view, CRUD).
 **Requirements**: EMP-01, EMP-02
 **Depends on:** Phase 2
-**Plans:** 1/5 plans executed
+**Plans:** 2/5 plans executed
 
 Plans:
 - [ ] 03-01-PLAN.md — Infrastructure: Odoo + PostgreSQL + Redis in podman-compose, Go project scaffold
