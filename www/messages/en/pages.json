@@ -533,6 +533,10 @@
       "aiAssistant": {
         "title": "AI Assistant",
         "description": "Get instant answers to your HR questions with our intelligent AI assistant."
+      },
+      "freelancerComparison": {
+        "title": "Freelancer vs Employment",
+        "description": "Compare EOOD freelancer income with employment salary — see the real difference after taxes and costs."
       }
     },
     "heroHeading": "Free resources for HR teams",
@@ -579,6 +583,120 @@
       "ctaTitle": "Automate Payroll Calculations",
       "ctaDesc": "Let HR handle salary calculations, payslips and compliance automatically.",
       "ctaButton": "Start free trial"
+    },
+    "freelancerComparison": {
+      "metaTitle": "Freelancer vs Employment Calculator Bulgaria 2026 | EOOD vs Payroll",
+      "metaDescription": "Compare freelancer EOOD income with employment salary in Bulgaria for 2026. See the real tax difference, hidden costs, and net take-home pay side by side.",
+      "sectionLabel": "Freelancer Comparison",
+      "heading": "Freelancer vs Employment Calculator Bulgaria 2026",
+      "introP1": "Should you work as a freelancer through an EOOD or accept a payroll position? This calculator compares net take-home pay, effective tax rates, and hidden costs for both options based on the same gross monthly amount.",
+      "introP2": "Enter your expected monthly revenue and see a complete side-by-side breakdown of taxes, social security contributions, overhead costs, and benefits for EOOD ownership versus standard employment in Bulgaria.",
+
+      "input": {
+        "monthlyAmount": "Monthly Amount (BGN)",
+        "monthlyAmountHelp": "Enter the gross monthly amount before any taxes or deductions",
+        "bornAfter1960": "Born after 31 Dec 1959 (universal pension fund applies)",
+        "illnessMaternity": "Illness & Maternity insurance",
+        "illnessMaternityNote": "Self-insured persons can opt in for illness and maternity coverage at an additional 3.5% contribution",
+        "vatRegistered": "VAT registered",
+        "vatNote": "VAT registration is mandatory when annual turnover exceeds 100,000 BGN. If registered, you charge 20% VAT on invoices.",
+        "monthly": "Monthly",
+        "annual": "Annual"
+      },
+
+      "savings": {
+        "banner": "Potential Savings with EOOD",
+        "perMonth": "per month",
+        "perYear": "per year",
+        "effectiveTaxRate": "Effective Tax Rate",
+        "eoodRate": "EOOD",
+        "employmentRate": "Employment",
+        "totalWithVacation": "Including vacation value"
+      },
+
+      "eood": {
+        "title": "EOOD (Freelancer)",
+        "revenue": "Monthly Revenue",
+        "selfInsurance": "Self-Insurance Contributions",
+        "insuranceBase": "Insurance Base",
+        "overhead": "Monthly Overhead",
+        "accountantFee": "Accountant Fee",
+        "bankFees": "Bank Fees",
+        "adminTime": "Administrative Time",
+        "registrationAmortized": "Registration (Amortized)",
+        "totalOverhead": "Total Overhead",
+        "taxableProfit": "Taxable Profit",
+        "corporateTax": "Corporate Tax (10%)",
+        "afterTaxProfit": "After-Tax Profit",
+        "dividendTax": "Dividend Tax (5%)",
+        "netToOwner": "Net to Owner",
+        "effectiveTaxRate": "Effective Tax Rate",
+        "vatBreakdown": "VAT Breakdown",
+        "exclVat": "Revenue excl. VAT",
+        "vatAmount": "VAT Amount (20%)",
+        "totalInvoice": "Total Invoice Amount",
+        "vatNote": "VAT is collected and remitted to the state — it does not affect your net income"
+      },
+
+      "employment": {
+        "title": "Employment (Payroll)",
+        "recommended": "Recommended",
+        "grossSalary": "Gross Salary",
+        "employeeDeductions": "Employee Deductions",
+        "incomeTax": "Income Tax (10%)",
+        "netSalary": "Net Salary",
+        "employerCost": "Total Employer Cost",
+        "effectiveTaxRate": "Effective Tax Rate"
+      },
+
+      "benefits": {
+        "title": "Benefits Comparison",
+        "paidLeave": "Paid Annual Leave",
+        "paidLeaveEood": "No guaranteed leave",
+        "paidLeaveEmployment": "Minimum 20 working days",
+        "sickPay": "Sick Pay",
+        "sickPayEood": "Only if opted in for illness insurance",
+        "sickPayEmployment": "Employer pays first day, then 80% from NSSI",
+        "maternity": "Maternity Leave",
+        "maternityEood": "Based on insurance base (lower)",
+        "maternityEmployment": "410 days at 90% of salary",
+        "unemployment": "Unemployment Benefits",
+        "unemploymentEood": "Not eligible",
+        "unemploymentEmployment": "Up to 12 months based on service",
+        "mortgage": "Mortgage Access",
+        "mortgageEood": "Harder — banks require 2+ years of accounts",
+        "mortgageEmployment": "Easier — stable income proof",
+        "laborProtection": "Labour Law Protection",
+        "laborProtectionEood": "None — you are the employer",
+        "laborProtectionEmployment": "Full protection under Labour Code",
+        "vacationDays": "Vacation Days Value",
+        "vacationDaysMin": "20 days minimum",
+        "vacationValue": "Equivalent daily salary value"
+      },
+
+      "disclaimer": "This calculator provides estimates based on 2026 Bulgarian tax rates and social security contributions. Actual results may vary based on individual circumstances, industry classification, and specific EOOD expenses. Consult a licensed accountant for personalized advice.",
+
+      "cta": {
+        "title": "Ready to Optimize Your Compensation?",
+        "description": "Whether you choose freelancing or employment, HR helps you manage payroll, taxes, and compliance automatically.",
+        "button": "Start free trial"
+      },
+
+      "mobileCta": {
+        "savings": "Save with EOOD",
+        "button": "Get started"
+      },
+
+      "seo": {
+        "howItWorksTitle": "How the Freelancer vs Employment Comparison Works",
+        "howItWorksP1": "This calculator models two scenarios: running a single-person EOOD (the most common freelancer structure in Bulgaria) and standard employment under a labour contract. For the EOOD scenario, it accounts for self-insurance on the minimum base (1,077 BGN for 2026), corporate tax at 10%, dividend tax at 5%, and typical monthly overhead including accountant fees, bank charges, and administrative time.",
+        "howItWorksP2": "For the employment scenario, it calculates the standard employee social security deductions (13.78% for those born after 1960), flat income tax at 10%, and shows the total employer cost including the employer's share of contributions (18.92%). The comparison also factors in the monetary value of employment benefits like paid leave, sick pay, and labour law protection.",
+        "eoodVsEmploymentTitle": "EOOD vs Employment in Bulgaria: Key Tax Differences",
+        "eoodVsEmploymentP1": "The main tax advantage of an EOOD is that self-insurance contributions are calculated on a chosen base (minimum 1,077 BGN), not on actual revenue. This means high earners pay proportionally less in social security. However, EOOD income is taxed twice: first as corporate profit (10%), then as dividends (5%), resulting in an effective combined rate of 14.5% on distributed profits.",
+        "eoodVsEmploymentP2": "Employment offers a simpler tax structure but higher effective rates for above-average earners. The total social security burden is 32.7% of insurable income (split between employee and employer), plus 10% income tax. However, employees gain significant non-monetary benefits: 20+ days of paid leave, full sick pay coverage, maternity benefits based on actual salary, unemployment insurance, and full protection under the Bulgarian Labour Code.",
+        "hiddenCostsTitle": "Hidden Costs of Running an EOOD in Bulgaria",
+        "hiddenCostsP1": "Beyond taxes, EOOD owners face ongoing costs that reduce the apparent tax advantage: mandatory accounting services (100-300 BGN/month), bank maintenance fees (15-30 BGN/month), annual financial statement filing, and the time cost of administrative tasks like invoicing, tax declarations, and dealing with the NRA. Registration costs (approximately 500-800 BGN) and potential deregistration costs should also be amortized. These overhead costs can total 200-500 BGN monthly, significantly narrowing the gap between freelancer and employment net income, especially for revenues below 5,000 BGN."
+      }
     }
   },
   "about": {
