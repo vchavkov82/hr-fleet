@@ -56,6 +56,67 @@ services:
       - hr
     restart: unless-stopped
 
+  # ── Odoo ERP ─────────────────────────────────────────────────────────────
+  hr-odoo-db:
+    image: postgres:17-alpine
+    container_name: hr-odoo-db
+    hostname: hr-odoo-db
+    environment:
+      POSTGRES_DB: odoo
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: ${ODOO_DB_PASSWORD:-odoo}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo_db_data:/var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hr
+    restart: unless-stopped
+
+  odoo:
+    image: odoo:18.0
+    container_name: hr-odoo
+    hostname: hr-odoo
+    ports:
+      - "127.0.0.1:8069:8069"
+    environment:
+      HOST: hr-odoo-db
+      PORT: 5432
+      USER: odoo
+      PASSWORD: ${ODOO_DB_PASSWORD:-odoo}
+    volumes:
+      - odoo_data:/var/lib/odoo
+      - ./odoo.conf:/etc/odoo/odoo.conf:ro
+      - ./odoo-addons:/mnt/extra-addons
+    depends_on:
+      hr-odoo-db:
+        condition: service_healthy
+    networks:
+      - hr
+    restart: unless-stopped
+
+  # ── Redis cache ──────────────────────────────────────────────────────────
+  hr-redis:
+    image: redis:7-alpine
+    container_name: hr-redis
+    hostname: hr-redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hr
+    restart: unless-stopped
+
 networks:
   hr:
     driver: bridge
@@ -63,3 +124,6 @@ networks:
 volumes:
   caddy_data:
   caddy_config:
+  odoo_data:
+  odoo_db_data:
+  redis_data:
