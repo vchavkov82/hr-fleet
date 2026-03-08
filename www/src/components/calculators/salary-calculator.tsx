@@ -2,26 +2,26 @@
 
 import { useState, useMemo } from 'react'
 import { BG_TAX_2026 } from '@/lib/bulgarian-tax'
-import { computeNetFromGross } from '@/lib/calculations'
+import { computeNetFromGross, eurToBgn, bgnToEur } from '@/lib/calculations'
 
 type Mode = 'gross-to-net' | 'net-to-gross'
 
-const fmt = new Intl.NumberFormat('bg-BG', {
+const fmt = new Intl.NumberFormat('en-IE', {
   style: 'currency',
-  currency: 'BGN',
+  currency: 'EUR',
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 })
 
-function findGrossFromNet(targetNet: number, bornAfter1960: boolean): number {
-  // Binary search for gross that yields the target net
-  let lo = targetNet
-  let hi = targetNet * 2
+function findGrossFromNet(targetNetBgn: number, bornAfter1960: boolean): number {
+  // Binary search for gross (BGN) that yields the target net (BGN)
+  let lo = targetNetBgn
+  let hi = targetNetBgn * 2
   for (let i = 0; i < 100; i++) {
     const mid = (lo + hi) / 2
     const result = computeNetFromGross(mid, bornAfter1960)
-    if (Math.abs(result.netSalary - targetNet) < 0.01) return mid
-    if (result.netSalary < targetNet) {
+    if (Math.abs(result.netSalary - targetNetBgn) < 0.01) return mid
+    if (result.netSalary < targetNetBgn) {
       lo = mid
     } else {
       hi = mid
@@ -35,19 +35,23 @@ interface SalaryCalculatorProps {
 }
 
 export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
-  const [amount, setAmount] = useState(2000)
+  const [amount, setAmount] = useState(Math.round(bgnToEur(2000)))
   const [mode, setMode] = useState<Mode>('gross-to-net')
   const [bornAfter1960, setBornAfter1960] = useState(true)
 
+  // Convert EUR input to BGN for calculations
   const result = useMemo(() => {
-    const val = Math.max(0, amount || 0)
+    const valBgn = eurToBgn(Math.max(0, amount || 0))
     if (mode === 'gross-to-net') {
-      return computeNetFromGross(val, bornAfter1960)
+      return computeNetFromGross(valBgn, bornAfter1960)
     } else {
-      const gross = findGrossFromNet(val, bornAfter1960)
+      const gross = findGrossFromNet(valBgn, bornAfter1960)
       return computeNetFromGross(gross, bornAfter1960)
     }
   }, [amount, mode, bornAfter1960])
+
+  // Format BGN result as EUR
+  const fmtEur = (v: number) => fmt.format(bgnToEur(v))
 
   return (
     <div className="card p-6 sm:p-8">
@@ -90,7 +94,7 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
             className="w-full rounded-xl border border-gray-200 py-3 pl-4 pr-16 text-lg font-semibold text-navy focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
           />
           <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-400">
-            BGN
+            EUR
           </span>
         </div>
       </div>
@@ -115,7 +119,7 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
               {labels.grossSalary}
             </p>
             <p className="mt-1 text-xl font-bold text-navy">
-              {fmt.format(result.gross)}
+              {fmtEur(result.gross)}
             </p>
           </div>
           <div className="rounded-xl bg-green-50 p-4 text-center">
@@ -123,7 +127,7 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
               {labels.netSalary}
             </p>
             <p className="mt-1 text-xl font-bold text-green-700">
-              {fmt.format(result.netSalary)}
+              {fmtEur(result.netSalary)}
             </p>
           </div>
           <div className="rounded-xl bg-amber-50 p-4 text-center">
@@ -131,7 +135,7 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
               {labels.totalCost}
             </p>
             <p className="mt-1 text-xl font-bold text-amber-700">
-              {fmt.format(result.totalEmployerCost)}
+              {fmtEur(result.totalEmployerCost)}
             </p>
           </div>
         </div>
@@ -156,10 +160,10 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
               <tr>
                 <td className="py-2.5 px-4 text-gray-700">{labels.pension}</td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.empPension)}
+                  {fmtEur(result.empPension)}
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.erPension)}
+                  {fmtEur(result.erPension)}
                 </td>
               </tr>
               <tr>
@@ -167,10 +171,10 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
                   {labels.illnessMaternity}
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.empIllness)}
+                  {fmtEur(result.empIllness)}
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.erIllness)}
+                  {fmtEur(result.erIllness)}
                 </td>
               </tr>
               <tr>
@@ -178,10 +182,10 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
                   {labels.unemployment}
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.empUnemployment)}
+                  {fmtEur(result.empUnemployment)}
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.erUnemployment)}
+                  {fmtEur(result.erUnemployment)}
                 </td>
               </tr>
               <tr>
@@ -190,16 +194,16 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium">-</td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.erAccident)}
+                  {fmtEur(result.erAccident)}
                 </td>
               </tr>
               <tr>
                 <td className="py-2.5 px-4 text-gray-700">{labels.health}</td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.empHealth)}
+                  {fmtEur(result.empHealth)}
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.erHealth)}
+                  {fmtEur(result.erHealth)}
                 </td>
               </tr>
               {bornAfter1960 && (
@@ -208,10 +212,10 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
                     {labels.universalPension}
                   </td>
                   <td className="py-2.5 px-4 text-right font-medium">
-                    {fmt.format(result.empUniversal)}
+                    {fmtEur(result.empUniversal)}
                   </td>
                   <td className="py-2.5 px-4 text-right font-medium">
-                    {fmt.format(result.erUniversal)}
+                    {fmtEur(result.erUniversal)}
                   </td>
                 </tr>
               )}
@@ -220,10 +224,10 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
                   {labels.totalContributions}
                 </td>
                 <td className="py-2.5 px-4 text-right text-red-600">
-                  {fmt.format(result.totalEmployeeDeductions)}
+                  {fmtEur(result.totalEmployeeDeductions)}
                 </td>
                 <td className="py-2.5 px-4 text-right text-red-600">
-                  {fmt.format(result.totalEmployerContributions)}
+                  {fmtEur(result.totalEmployerContributions)}
                 </td>
               </tr>
               <tr>
@@ -231,7 +235,7 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
                   {labels.incomeTax} (10%)
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium">
-                  {fmt.format(result.incomeTax)}
+                  {fmtEur(result.incomeTax)}
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium">-</td>
               </tr>
@@ -241,9 +245,9 @@ export default function SalaryCalculator({ labels }: SalaryCalculatorProps) {
 
         {/* Insurable income note */}
         <p className="text-xs text-gray-500 text-center">
-          {labels.insurableNote} {fmt.format(result.insurable)} (
-          {labels.minMax}: {fmt.format(BG_TAX_2026.MIN_INSURABLE_INCOME)} -{' '}
-          {fmt.format(BG_TAX_2026.MAX_INSURABLE_INCOME)})
+          {labels.insurableNote} {fmtEur(result.insurable)} (
+          {labels.minMax}: {fmt.format(bgnToEur(BG_TAX_2026.MIN_INSURABLE_INCOME))} -{' '}
+          {fmt.format(bgnToEur(BG_TAX_2026.MAX_INSURABLE_INCOME))})
         </p>
       </div>
     </div>

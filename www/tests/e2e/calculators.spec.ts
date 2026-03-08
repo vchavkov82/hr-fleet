@@ -85,7 +85,7 @@ test.describe('Freelancer Comparison Calculator', () => {
     const amountInput = page.locator('input[type="number"]').first()
     await amountInput.fill('4000')
 
-    // Savings banner should show a non-zero savings amount (contains BGN currency)
+    // Savings banner should show a non-zero savings amount (contains EUR currency)
     const savingsBanner = page.locator('.bg-green-50.border.border-green-200')
     await expect(savingsBanner).toContainText(/\d/)
 

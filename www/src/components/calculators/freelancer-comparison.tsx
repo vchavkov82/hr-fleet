@@ -7,11 +7,13 @@ import {
   computeEoodNet,
   computeSavings,
   computeEmploymentEffectiveTaxRate,
+  eurToBgn,
+  bgnToEur,
 } from '@/lib/calculations'
 
-const fmt = new Intl.NumberFormat('bg-BG', {
+const fmt = new Intl.NumberFormat('en-IE', {
   style: 'currency',
-  currency: 'BGN',
+  currency: 'EUR',
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 })
@@ -26,32 +28,38 @@ export default function FreelancerComparison({
   labels,
 }: FreelancerComparisonProps) {
   // ── State ──────────────────────────────────────────────────────────────────
-  const [monthlyAmount, setMonthlyAmount] = useState(3000)
+  const [monthlyAmount, setMonthlyAmount] = useState(Math.round(bgnToEur(3000)))
   const [bornAfter1960, setBornAfter1960] = useState(true)
   const [includeIllnessMaternity, setIncludeIllnessMaternity] = useState(true)
   const [includeVat, setIncludeVat] = useState(false)
   const [isAnnual, setIsAnnual] = useState(false)
   const [vacationDays, setVacationDays] = useState(20)
   const [accountantFee, setAccountantFee] = useState<number>(
-    BG_EOOD_2026.OVERHEAD.ACCOUNTANT_FEE,
+    Math.round(bgnToEur(BG_EOOD_2026.OVERHEAD.ACCOUNTANT_FEE)),
   )
-  const [bankFees, setBankFees] = useState<number>(BG_EOOD_2026.OVERHEAD.BANK_FEES)
-  const [adminTime, setAdminTime] = useState<number>(BG_EOOD_2026.OVERHEAD.ADMIN_TIME)
+  const [bankFees, setBankFees] = useState<number>(Math.round(bgnToEur(BG_EOOD_2026.OVERHEAD.BANK_FEES)))
+  const [adminTime, setAdminTime] = useState<number>(Math.round(bgnToEur(BG_EOOD_2026.OVERHEAD.ADMIN_TIME)))
   const [registrationAmortized, setRegistrationAmortized] = useState<number>(
-    BG_EOOD_2026.OVERHEAD.REGISTRATION_AMORTIZED,
+    Math.round(bgnToEur(BG_EOOD_2026.OVERHEAD.REGISTRATION_AMORTIZED)),
   )
   const [showDeductions, setShowDeductions] = useState(false)
 
-  // ── Calculations ───────────────────────────────────────────────────────────
+  // ── Calculations (convert EUR input → BGN for engine, results stay in BGN) ─
+  const monthlyAmountBgn = eurToBgn(Math.max(0, monthlyAmount || 0))
   const eoodResult = useMemo(
     () =>
-      computeEoodNet(Math.max(0, monthlyAmount || 0), {
+      computeEoodNet(monthlyAmountBgn, {
         bornAfter1960,
         includeIllnessMaternity,
-        overhead: { accountantFee, bankFees, adminTime, registrationAmortized },
+        overhead: {
+          accountantFee: eurToBgn(accountantFee),
+          bankFees: eurToBgn(bankFees),
+          adminTime: eurToBgn(adminTime),
+          registrationAmortized: eurToBgn(registrationAmortized),
+        },
       }),
     [
-      monthlyAmount,
+      monthlyAmountBgn,
       bornAfter1960,
       includeIllnessMaternity,
       accountantFee,
@@ -62,11 +70,11 @@ export default function FreelancerComparison({
   )
 
   const employmentResult = useMemo(
-    () => computeNetFromGross(Math.max(0, monthlyAmount || 0), bornAfter1960),
-    [monthlyAmount, bornAfter1960],
+    () => computeNetFromGross(monthlyAmountBgn, bornAfter1960),
+    [monthlyAmountBgn, bornAfter1960],
   )
 
-  const dailySalary = (monthlyAmount || 0) / 21
+  const dailySalary = monthlyAmountBgn / 21
   const savings = useMemo(
     () =>
       computeSavings(
@@ -86,7 +94,7 @@ export default function FreelancerComparison({
   const invoiceWithVat = (monthlyAmount || 0) + vatAmount
 
   // ── Helpers ────────────────────────────────────────────────────────────────
-  const fmtVal = (v: number) => fmt.format(v * multiplier)
+  const fmtVal = (v: number) => fmt.format(bgnToEur(v) * multiplier)
   const periodLabel = isAnnual ? labels.perYear : labels.perMonth
 
   // ── Benefits rows ──────────────────────────────────────────────────────────
@@ -156,7 +164,7 @@ export default function FreelancerComparison({
               className="w-full rounded-xl border border-gray-200 py-3 pl-4 pr-16 text-lg font-semibold text-navy focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
             />
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-400">
-              BGN
+              EUR
             </span>
           </div>
         </div>
@@ -309,7 +317,7 @@ export default function FreelancerComparison({
               value={fmtVal(eoodResult.monthlyRevenue)}
             />
             <Row
-              label={`${labels.selfInsurance} (${labels.base} ${fmt.format(eoodResult.insuranceBase)})`}
+              label={`${labels.selfInsurance} (${labels.base} ${fmt.format(bgnToEur(eoodResult.insuranceBase))})`}
               value={`-${fmtVal(eoodResult.monthlyInsurance)}`}
               muted
             />
@@ -700,7 +708,7 @@ function OverheadInput({
           className="w-full rounded-lg border border-gray-200 py-1 pl-2 pr-8 text-xs font-medium text-right focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none"
         />
         <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-400">
-          BGN
+          EUR
         </span>
       </div>
     </div>

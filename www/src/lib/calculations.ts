@@ -6,6 +6,21 @@
  */
 import { BG_TAX_2026, BG_EOOD_2026 } from './bulgarian-tax'
 
+// ─── Currency Conversion ────────────────────────────────────────────────────
+
+/** Fixed BGN/EUR exchange rate (1 EUR = 1.95583 BGN) */
+export const BGN_EUR_RATE = 1.95583
+
+/** Convert BGN amount to EUR */
+export function bgnToEur(bgn: number): number {
+  return bgn / BGN_EUR_RATE
+}
+
+/** Convert EUR amount to BGN */
+export function eurToBgn(eur: number): number {
+  return eur * BGN_EUR_RATE
+}
+
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 export interface EmploymentResult {

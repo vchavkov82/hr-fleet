@@ -473,9 +473,9 @@
       "obligationsP1": "Bulgarian employers are required by law to register employees with the National Revenue Agency (NRA) and the National Social Security Institute (NSSI). Social security contributions must be paid monthly by the 25th of the following month.",
       "obligationsP2": "The employer bears the larger share of contributions (approximately 60% of the total). For Category III workers (the most common classification for office and IT professionals), the total employer contribution rate is approximately 18.92% of insurable income for employees born after 1960.",
       "penaltiesTitle": "Penalties for Non-Compliance",
-      "penaltiesP1": "Failure to register employees or pay social security contributions on time results in significant penalties. The NRA may impose fines of 1,500 to 15,000 BGN for first offenses, and 3,000 to 20,000 BGN for repeated violations. Additionally, late payments accrue interest at the statutory rate.",
+      "penaltiesP1": "Failure to register employees or pay social security contributions on time results in significant penalties. The NRA may impose fines of €767 to €7,669 for first offenses, and €1,534 to €10,226 for repeated violations. Additionally, late payments accrue interest at the statutory rate.",
       "optimizationTitle": "Optimizing Employment Costs",
-      "optimizationP1": "While social security rates are fixed by law, companies can optimize total employment costs through meal vouchers (tax-exempt up to 200 BGN/month), voluntary health insurance, and professional development budgets. These benefits are either tax-deductible or exempt from social security contributions, making them cost-effective alternatives to gross salary increases.",
+      "optimizationP1": "While social security rates are fixed by law, companies can optimize total employment costs through meal vouchers (tax-exempt up to €102/month), voluntary health insurance, and professional development budgets. These benefits are either tax-deductible or exempt from social security contributions, making them cost-effective alternatives to gross salary increases.",
       "ctaTitle": "Automate Employment Cost Tracking",
       "ctaDesc": "Let HR calculate labour costs and track social security contributions automatically.",
       "ctaButton": "Start free trial"
@@ -593,13 +593,13 @@
       "introP2": "Enter your expected monthly revenue and see a complete side-by-side breakdown of taxes, social security contributions, overhead costs, and benefits for EOOD ownership versus standard employment in Bulgaria.",
 
       "input": {
-        "monthlyAmount": "Monthly Amount (BGN)",
+        "monthlyAmount": "Monthly Amount (EUR)",
         "monthlyAmountHelp": "Enter the gross monthly amount before any taxes or deductions",
         "bornAfter1960": "Born after 31 Dec 1959 (universal pension fund applies)",
         "illnessMaternity": "Illness & Maternity insurance",
         "illnessMaternityNote": "Self-insured persons can opt in for illness and maternity coverage at an additional 3.5% contribution",
         "vatRegistered": "VAT registered",
-        "vatNote": "VAT registration is mandatory when annual turnover exceeds 100,000 BGN. If registered, you charge 20% VAT on invoices.",
+        "vatNote": "VAT registration is mandatory when annual turnover exceeds €51,130. If registered, you charge 20% VAT on invoices.",
         "monthly": "Monthly",
         "annual": "Annual"
       },
@@ -689,13 +689,13 @@
 
       "seo": {
         "howItWorksTitle": "How the Freelancer vs Employment Comparison Works",
-        "howItWorksP1": "This calculator models two scenarios: running a single-person EOOD (the most common freelancer structure in Bulgaria) and standard employment under a labour contract. For the EOOD scenario, it accounts for self-insurance on the minimum base (1,077 BGN for 2026), corporate tax at 10%, dividend tax at 5%, and typical monthly overhead including accountant fees, bank charges, and administrative time.",
+        "howItWorksP1": "This calculator models two scenarios: running a single-person EOOD (the most common freelancer structure in Bulgaria) and standard employment under a labour contract. For the EOOD scenario, it accounts for self-insurance on the minimum base (€551 for 2026), corporate tax at 10%, dividend tax at 5%, and typical monthly overhead including accountant fees, bank charges, and administrative time.",
         "howItWorksP2": "For the employment scenario, it calculates the standard employee social security deductions (13.78% for those born after 1960), flat income tax at 10%, and shows the total employer cost including the employer's share of contributions (18.92%). The comparison also factors in the monetary value of employment benefits like paid leave, sick pay, and labour law protection.",
         "eoodVsEmploymentTitle": "EOOD vs Employment in Bulgaria: Key Tax Differences",
-        "eoodVsEmploymentP1": "The main tax advantage of an EOOD is that self-insurance contributions are calculated on a chosen base (minimum 1,077 BGN), not on actual revenue. This means high earners pay proportionally less in social security. However, EOOD income is taxed twice: first as corporate profit (10%), then as dividends (5%), resulting in an effective combined rate of 14.5% on distributed profits.",
+        "eoodVsEmploymentP1": "The main tax advantage of an EOOD is that self-insurance contributions are calculated on a chosen base (minimum €551), not on actual revenue. This means high earners pay proportionally less in social security. However, EOOD income is taxed twice: first as corporate profit (10%), then as dividends (5%), resulting in an effective combined rate of 14.5% on distributed profits.",
         "eoodVsEmploymentP2": "Employment offers a simpler tax structure but higher effective rates for above-average earners. The total social security burden is 32.7% of insurable income (split between employee and employer), plus 10% income tax. However, employees gain significant non-monetary benefits: 20+ days of paid leave, full sick pay coverage, maternity benefits based on actual salary, unemployment insurance, and full protection under the Bulgarian Labour Code.",
         "hiddenCostsTitle": "Hidden Costs of Running an EOOD in Bulgaria",
-        "hiddenCostsP1": "Beyond taxes, EOOD owners face ongoing costs that reduce the apparent tax advantage: mandatory accounting services (100-300 BGN/month), bank maintenance fees (15-30 BGN/month), annual financial statement filing, and the time cost of administrative tasks like invoicing, tax declarations, and dealing with the NRA. Registration costs (approximately 500-800 BGN) and potential deregistration costs should also be amortized. These overhead costs can total 200-500 BGN monthly, significantly narrowing the gap between freelancer and employment net income, especially for revenues below 5,000 BGN."
+        "hiddenCostsP1": "Beyond taxes, EOOD owners face ongoing costs that reduce the apparent tax advantage: mandatory accounting services (€51–153/month), bank maintenance fees (€8–15/month), annual financial statement filing, and the time cost of administrative tasks like invoicing, tax declarations, and dealing with the NRA. Registration costs (approximately €256–409) and potential deregistration costs should also be amortized. These overhead costs can total €102–256 monthly, significantly narrowing the gap between freelancer and employment net income, especially for revenues below €2,556."
       }
     }
   },
