@@ -26,8 +26,8 @@
 - [x] **CALC-10**: Mobile-responsive design consistent with existing calculators
 
 ### HR Employee Management
-- [ ] **EMP-01**: Admin can create employee records (name, email, role, start date, contract type)
-- [ ] **EMP-02**: Admin can view employee directory with filtering/search
+- [x] **EMP-01**: Admin can create employee records (name, email, role, start date, contract type)
+- [x] **EMP-02**: Admin can view employee directory with filtering/search
 - [ ] **EMP-03**: Admin can manage employee leave balances and requests
 - [ ] **EMP-04**: Admin can track time-off and generate absence reports
 
