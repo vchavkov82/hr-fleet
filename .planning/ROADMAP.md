@@ -24,8 +24,41 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 15-01-PLAN.md through 15-10-PLAN.md
 
+### Phase 2: Salary Calculator — Freelancer vs Payroll Comparison
+**Goal**: Add comparison tool showing freelancers how much money they lose running an EOOD vs using our payroll service. Marketing-driven feature to convert freelancers into customers.
+**Depends on**: Phase 1 (existing salary calculator infrastructure)
+**Status**: Planning
+**Requirements**: CALC-01 through CALC-10
+**Plans**: 4 plans
+
+**Scope:**
+- New comparison calculator page at `/hr-tools/freelancer-comparison`
+- EOOD tax model: corporate tax 10%, dividend tax 10%, self-insurance on minimum (1,077 BGN), accountant fees
+- Employment model: reuse existing `BG_TAX_2026` constants and calculation logic
+- Side-by-side results: net income, total cost, effective tax rate, monthly/annual savings
+- Hidden costs breakdown (accountant, admin time, bank fees, registration, closure costs)
+- Benefits comparison table (leave, sick pay, maternity, unemployment, mortgage eligibility)
+- Visual "you save X BGN/month" highlight for marketing conversion
+- SEO content for "ЕООД vs трудов договор" / "freelancer vs employment Bulgaria"
+- Full BG/EN localization
+- Unit and E2E tests
+
+**Key Tax Data (2026):**
+- EOOD: 10% corporate + 10% dividend = ~19% effective on profit
+- Self-insurance minimum: 1,077 BGN → ~337 BGN/month contributions
+- Accountant: ~150 EUR/month (~294 BGN)
+- Employment: ~13.78% employee + ~18.92% employer social security + 10% income tax
+- Social security ceiling: 3,850 BGN (employment) / 4,130 BGN (self-insured)
+
+Plans:
+- [ ] 02-01-PLAN.md — Extract shared calculation logic + EOOD computation (TDD)
+- [ ] 02-02-PLAN.md — Build FreelancerComparison client component (UI)
+- [ ] 02-03-PLAN.md — Server page, translations (BG/EN), SEO content, navigation
+- [ ] 02-04-PLAN.md — Unit tests, E2E tests, visual verification
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1. HR App MVP | v1.0 | All | In Progress | - |
+| 2. Freelancer vs Payroll Comparison | v1.1 | 0/4 | Planning | - |
