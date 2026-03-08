@@ -76,3 +76,16 @@ Plans:
 - [ ] 03-03-PLAN.md — Go REST API handlers, Redis caching, JWT middleware
 - [ ] 03-04-PLAN.md — Next.js dashboard UI: layout, employee table, forms, translations
 - [ ] 03-05-PLAN.md — Integration wiring, tests, and visual verification
+
+### Phase 4: Content aligned with Odoo
+
+**Goal:** Align all marketing content with real platform capabilities. Strip fabricated statistics and fake social proof. Rewrite homepage, features, pricing, and help center to reflect what actually works (employee management, HR calculators, Bulgarian compliance). Add roadmap sections for planned modules. Write 6 new targeted blog posts for Bulgarian HR market SEO.
+**Requirements**: CONTENT-01 through CONTENT-07
+**Depends on:** Phase 3
+**Plans:** 4 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Homepage cleanup: strip fake sections, rewrite hero/CTA/features for honest copy
+- [ ] 04-02-PLAN.md — Features page restructure (active + roadmap) and pricing page (single plan)
+- [ ] 04-03-PLAN.md — Help center content rewrite for real features
+- [ ] 04-04-PLAN.md — 6 new Bulgarian blog posts (labor law, platform how-tos, EOOD/freelancer)
