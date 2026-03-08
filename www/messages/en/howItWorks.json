@@ -1,19 +1,19 @@
 {
   "sectionLabel": "How it works",
   "heading": "Up and running in minutes",
-  "subheading": "Three simple steps to transform your HR operations.",
+  "subheading": "Three simple steps to streamline your HR operations.",
   "steps": {
     "signup": {
       "title": "Sign up in minutes",
       "description": "Create your account in under 2 minutes. No credit card needed, no complex setup. Start working immediately."
     },
     "import": {
-      "title": "Import your team",
-      "description": "Upload your employee list or add them manually. We handle the data migration so you can focus on people."
+      "title": "Add your employees",
+      "description": "Add your team members to the employee directory one by one or in bulk. Set up profiles with job titles, departments, and contact details."
     },
     "manage": {
-      "title": "Start managing HR",
-      "description": "Recruitment, leave tracking, payroll — everything runs from one dashboard. See results from day one."
+      "title": "Manage your HR",
+      "description": "Track employee records, calculate salaries with Bulgarian tax rates, and use compliance tools -- all from one dashboard."
     }
   }
 }
