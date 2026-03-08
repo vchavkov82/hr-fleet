@@ -63,6 +63,10 @@ Progress: [█████████░] 93% (13/14 plans complete)
 - **Authentication**: JWT-based
 - **Design**: Corporate blue palette (#1e3a8a primary, enterprise-feeling)
 
+### Roadmap Evolution
+
+- Phase 3 added: User odo
+
 ### Decisions
 
 - Separated HR platform from Jobs platform (independent repository)
