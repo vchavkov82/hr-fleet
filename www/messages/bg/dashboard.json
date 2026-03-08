@@ -28,7 +28,6 @@
       "employeeType": "Тип служител",
       "startDate": "Начална дата",
       "save": "Запази",
-      "saved": "Служителят е запазен успешно",
       "cancel": "Отказ"
     },
     "types": {
@@ -41,9 +40,18 @@
   },
   "overview": {
     "title": "Преглед",
+    "subtitle": "Проследявайте метриките на екипа и последната активност",
     "totalEmployees": "Общо служители",
     "pendingLeave": "Чакащи отпуски",
     "recentHires": "Нови назначения",
-    "upcomingBirthdays": "Предстоящи рождени дни"
+    "openPositions": "Отворени позиции",
+    "upcomingBirthdays": "Предстоящи рождени дни",
+    "vsLastMonth": "спрямо миналия месец",
+    "lastUpdated": "Обновено току-що",
+    "employeeGrowth": "Ръст на служителите",
+    "departmentDistribution": "По отдели",
+    "recentActivity": "Последна активност",
+    "quickActions": "Бързи действия",
+    "upcomingEvents": "Предстоящи събития"
   }
 }

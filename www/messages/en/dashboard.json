@@ -28,7 +28,6 @@
       "employeeType": "Employee Type",
       "startDate": "Start Date",
       "save": "Save",
-      "saved": "Employee saved successfully",
       "cancel": "Cancel"
     },
     "types": {
@@ -41,9 +40,18 @@
   },
   "overview": {
     "title": "Dashboard Overview",
+    "subtitle": "Track your workforce metrics and recent activity",
     "totalEmployees": "Total Employees",
     "pendingLeave": "Pending Leave",
     "recentHires": "Recent Hires",
-    "upcomingBirthdays": "Upcoming Birthdays"
+    "openPositions": "Open Positions",
+    "upcomingBirthdays": "Upcoming Birthdays",
+    "vsLastMonth": "vs last month",
+    "lastUpdated": "Updated just now",
+    "employeeGrowth": "Employee Growth",
+    "departmentDistribution": "By Department",
+    "recentActivity": "Recent Activity",
+    "quickActions": "Quick Actions",
+    "upcomingEvents": "Upcoming Events"
   }
 }
