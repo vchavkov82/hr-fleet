@@ -48,7 +48,9 @@ describe('computeNetFromGross', () => {
 
     // Employer contributions
     expect(result.erPension).toBeCloseTo(2000 * 0.0888, 2)
-    expect(result.totalEmployerCost).toBeCloseTo(2000 + 2000 * 0.1892, 2)
+    // Total employer rate = pension 0.0888 + illness 0.021 + unemployment 0.006 + accident 0.005 + health 0.048 + universal 0.028 = 0.1968
+    const totalErRate = 0.0888 + 0.021 + 0.006 + 0.005 + 0.048 + 0.028
+    expect(result.totalEmployerCost).toBeCloseTo(2000 + 2000 * totalErRate, 2)
   })
 
   it('computes correct result at minimum wage (1213 BGN)', () => {
