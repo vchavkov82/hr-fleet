@@ -31,6 +31,8 @@ case "$CMD" in
     ;;
   restart)
     echo "Restarting all services..."
+    echo "Killing processes on ports (if any)..."
+    "$SCRIPT_DIR/kill-ports.sh" || echo "No conflicting ports found"
     $COMPOSE down
     $COMPOSE up -d
     echo "Services restarted."
@@ -63,6 +65,10 @@ if [ ! -f .env ]; then
   echo "Creating .env from .env.example..."
   cp .env.example .env
 fi
+
+# Kill processes on HR ports (if any)
+echo "Killing processes on ports (if any)..."
+"$SCRIPT_DIR/kill-ports.sh" || echo "No conflicting ports found"
 
 # Tear down existing containers/pods to avoid name conflicts
 echo "Cleaning up existing containers..."

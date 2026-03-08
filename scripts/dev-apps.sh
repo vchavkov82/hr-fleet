@@ -22,6 +22,11 @@ prefix() {
   done
 }
 
+# Kill previous dev server processes on HR ports
+echo "Killing previous dev servers (if any)..."
+"$SCRIPT_DIR/kill-ports.sh" || echo "No conflicting ports found"
+echo ""
+
 PIDS=()
 
 cleanup() {
