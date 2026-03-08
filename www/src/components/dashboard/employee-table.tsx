@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/navigation'
 import {
@@ -14,20 +14,74 @@ import {
   type SortingState,
 } from '@tanstack/react-table'
 import type { Employee } from '@/lib/types/employee'
+import { fetchEmployees, ApiError } from '@/lib/api'
 
 interface EmployeeTableProps {
-  data: Employee[]
+  /** Auth token for API calls. When empty, falls back to data prop. */
+  token?: string
+  /** Pre-loaded data (used for testing / SSR fallback). */
+  data?: Employee[]
   departments?: string[]
   loading?: boolean
 }
 
 const columnHelper = createColumnHelper<Employee>()
 
-export default function EmployeeTable({ data, departments = [], loading }: EmployeeTableProps) {
+export default function EmployeeTable({ token, data: initialData, departments = [], loading: externalLoading }: EmployeeTableProps) {
   const t = useTranslations('dashboard.employees')
   const [sorting, setSorting] = useState<SortingState>([])
   const [globalFilter, setGlobalFilter] = useState('')
   const [departmentFilter, setDepartmentFilter] = useState('')
+  const [employees, setEmployees] = useState<Employee[]>(initialData ?? [])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const loadEmployees = useCallback(async (search?: string) => {
+    if (!token) return
+    setLoading(true)
+    setError(null)
+    try {
+      const res = await fetchEmployees(token, {
+        search,
+        department: departmentFilter || undefined,
+      })
+      setEmployees(res.data)
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(`${err.status}: ${err.message}`)
+      } else {
+        setError('Failed to load employees')
+      }
+    } finally {
+      setLoading(false)
+    }
+  }, [token, departmentFilter])
+
+  // Fetch on mount and when department filter changes
+  useEffect(() => {
+    if (token) {
+      loadEmployees()
+    }
+  }, [token, loadEmployees])
+
+  // Use initialData when no token (test / SSR fallback mode)
+  useEffect(() => {
+    if (!token && initialData) {
+      setEmployees(initialData)
+    }
+  }, [token, initialData])
+
+  // Debounced search
+  const handleSearchChange = useCallback((value: string) => {
+    setGlobalFilter(value)
+    if (token) {
+      if (debounceRef.current) clearTimeout(debounceRef.current)
+      debounceRef.current = setTimeout(() => {
+        loadEmployees(value)
+      }, 300)
+    }
+  }, [token, loadEmployees])
 
   const columns = useMemo(
     () => [
@@ -85,16 +139,16 @@ export default function EmployeeTable({ data, departments = [], loading }: Emplo
   )
 
   const filteredData = useMemo(() => {
-    if (!departmentFilter) return data
-    return data.filter((e) => e.department.name === departmentFilter)
-  }, [data, departmentFilter])
+    if (!departmentFilter) return employees
+    return employees.filter((e) => e.department.name === departmentFilter)
+  }, [employees, departmentFilter])
 
   const table = useReactTable({
     data: filteredData,
     columns,
-    state: { sorting, globalFilter },
+    state: { sorting, globalFilter: token ? '' : globalFilter },
     onSortingChange: setSorting,
-    onGlobalFilterChange: setGlobalFilter,
+    onGlobalFilterChange: token ? undefined : setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -102,9 +156,11 @@ export default function EmployeeTable({ data, departments = [], loading }: Emplo
     initialState: { pagination: { pageSize: 20 } },
   })
 
-  if (loading) {
+  const isLoading = externalLoading || loading
+
+  if (isLoading) {
     return (
-      <div className="space-y-3">
+      <div className="space-y-3" data-testid="loading-skeleton">
         {Array.from({ length: 5 }).map((_, i) => (
           <div key={i} className="h-12 bg-gray-100 rounded animate-pulse" />
         ))}
@@ -112,10 +168,24 @@ export default function EmployeeTable({ data, departments = [], loading }: Emplo
     )
   }
 
+  if (error) {
+    return (
+      <div className="rounded-lg border border-red-200 bg-red-50 p-6 text-center" data-testid="error-state">
+        <p className="text-red-700 mb-3">{error}</p>
+        <button
+          onClick={() => loadEmployees()}
+          className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors"
+        >
+          Retry
+        </button>
+      </div>
+    )
+  }
+
   const uniqueDepartments =
     departments.length > 0
       ? departments
-      : [...new Set(data.map((e) => e.department.name))].filter(Boolean).sort()
+      : [...new Set(employees.map((e) => e.department.name))].filter(Boolean).sort()
 
   return (
     <div>
@@ -125,7 +195,7 @@ export default function EmployeeTable({ data, departments = [], loading }: Emplo
           type="text"
           placeholder={t('search')}
           value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
+          onChange={(e) => handleSearchChange(e.target.value)}
           className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         <select

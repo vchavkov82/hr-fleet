@@ -1,6 +1,14 @@
 import type { Employee, EmployeeCreateInput, EmployeeListResponse } from './types/employee'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'
+/**
+ * API base URL:
+ * - In browser: use relative path (Caddy proxy handles /api/v1/*)
+ * - In SSR/dev without proxy: use NEXT_PUBLIC_API_URL or direct backend
+ */
+const API_BASE =
+  typeof window !== 'undefined'
+    ? (process.env.NEXT_PUBLIC_API_URL || '')
+    : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080')
 
 export class ApiError extends Error {
   constructor(

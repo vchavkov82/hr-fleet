@@ -10,7 +10,7 @@ interface EmployeeFormProps {
   onCancel: () => void
 }
 
-// Odoo hr.department standard records -- will be fetched from API in Plan 05
+// Odoo hr.department standard records -- will be fetched from API in future phase
 const DEPARTMENTS = [
   { id: 1, name: 'Administration' },
   { id: 2, name: 'Human Resources' },
@@ -35,6 +35,8 @@ export default function EmployeeForm({ employee, onSubmit, onCancel }: EmployeeF
   const [employeeType, setEmployeeType] = useState<OdooEmployeeType>(employee?.employeeType ?? 'employee')
   const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
 
   function validate(): boolean {
     const errs: Record<string, string> = {}
@@ -49,6 +51,8 @@ export default function EmployeeForm({ employee, onSubmit, onCancel }: EmployeeF
     e.preventDefault()
     if (!validate()) return
     setSubmitting(true)
+    setSubmitError(null)
+    setSubmitSuccess(false)
     try {
       await onSubmit({
         name: name.trim(),
@@ -57,6 +61,9 @@ export default function EmployeeForm({ employee, onSubmit, onCancel }: EmployeeF
         departmentId,
         employeeType,
       })
+      setSubmitSuccess(true)
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Failed to save employee')
     } finally {
       setSubmitting(false)
     }
@@ -69,6 +76,17 @@ export default function EmployeeForm({ employee, onSubmit, onCancel }: EmployeeF
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5 max-w-lg">
+      {submitError && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" data-testid="submit-error">
+          {submitError}
+        </div>
+      )}
+      {submitSuccess && (
+        <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700" data-testid="submit-success">
+          {t('form.saved')}
+        </div>
+      )}
+
       <div>
         <label htmlFor="emp-name" className={labelClass}>{t('form.name')}</label>
         <input

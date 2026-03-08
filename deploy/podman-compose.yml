@@ -17,8 +17,32 @@ services:
       - caddy_config:/config
     depends_on:
       - hr
+      - hr-api
       - hr-blog
       - hr-docs
+    networks:
+      - hr
+    restart: unless-stopped
+
+  # ── Go backend API ───────────────────────────────────────────────────────
+  hr-api:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: hr-api
+    hostname: hr-api
+    ports:
+      - "127.0.0.1:8080:8080"
+    env_file:
+      - ../.env
+    environment:
+      ODOO_URL: http://hr-odoo:8069
+      REDIS_URL: redis://hr-redis:6379
+    depends_on:
+      odoo:
+        condition: service_started
+      hr-redis:
+        condition: service_healthy
     networks:
       - hr
     restart: unless-stopped
