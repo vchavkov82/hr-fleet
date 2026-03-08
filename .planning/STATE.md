@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 4 context gathered
-last_updated: "2026-03-08T20:41:17.225Z"
-last_activity: 2026-03-08 -- Dashboard UI with TanStack Table employee directory, CRUD forms, sidebar, and BG/EN translations
+stopped_at: Completed 04-03-PLAN.md
+last_updated: "2026-03-08T21:12:16Z"
+last_activity: 2026-03-08 -- Help center rewrite for real features (employee directory, salary calculator, freelancer comparison)
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 19
-  completed_plans: 17
-  percent: 95
+  total_plans: 22
+  completed_plans: 20
+  percent: 91
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-05)
 ## Current Position
 
 Phase: 4 of 4 (Content Aligned with Odoo)
-Plan: 1 of 4 (Plan 01 complete)
+Plan: 3 of 4 (Plan 03 complete)
 Status: Executing
-Last activity: 2026-03-08 -- Homepage content alignment: stripped fake social proof, rewrote copy for real capabilities
+Last activity: 2026-03-08 -- Help center rewrite for real features (employee directory, salary calculator, freelancer comparison)
 
-Progress: [█████████░] 95% (18/22 plans complete)
+Progress: [█████████░] 91% (20/22 plans complete)
 
 ## Performance Metrics
 
@@ -100,6 +100,8 @@ Progress: [█████████░] 95% (18/22 plans complete)
 - [Phase 04]: Removed fake social proof (TrustedCompanies, StatsCounters, Testimonials) from homepage
 - [Phase 04]: FEATURE_KEYS pattern: TSX array keys must match featuresOverview.json item keys exactly
 - [Phase 04]: Content honesty principle: every text claim must map to a working feature
+- [Phase 04]: Replaced Leave/Payroll/Integrations help categories with HR Tools/Compliance/Account to match real product
+- [Phase 04]: Removed all ATS, AI screening, payroll processing references from help center
 
 ### Setup Requirements (User Responsibilities)
 
@@ -119,7 +121,7 @@ Progress: [█████████░] 95% (18/22 plans complete)
 
 ## Session Continuity
 
-Last session: 2026-03-08T21:09:30Z
-Stopped at: Completed 04-01-PLAN.md
-Resume file: .planning/phases/04-content-aligned-with-odoo/04-01-SUMMARY.md
-Next up: Execute Plan 04-02 (Features page content alignment)
+Last session: 2026-03-08T21:12:16Z
+Stopped at: Completed 04-03-PLAN.md
+Resume file: .planning/phases/04-content-aligned-with-odoo/04-03-SUMMARY.md
+Next up: Execute Plan 04-04 (remaining content alignment)

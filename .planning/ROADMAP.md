@@ -82,7 +82,7 @@ Plans:
 **Goal:** Align all marketing content with real platform capabilities. Strip fabricated statistics and fake social proof. Rewrite homepage, features, pricing, and help center to reflect what actually works (employee management, HR calculators, Bulgarian compliance). Add roadmap sections for planned modules. Write 6 new targeted blog posts for Bulgarian HR market SEO.
 **Requirements**: CONTENT-01 through CONTENT-07
 **Depends on:** Phase 3
-**Plans:** 4 plans
+**Plans:** 3/4 plans executed
 
 Plans:
 - [x] 04-01-PLAN.md — Homepage cleanup: strip fake sections, rewrite hero/CTA/features for honest copy
