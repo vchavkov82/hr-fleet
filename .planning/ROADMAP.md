@@ -61,4 +61,4 @@ Plans:
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1. HR App MVP | v1.0 | All | In Progress | - |
-| 2. Freelancer vs Payroll Comparison | 2/4 | In Progress|  | - |
+| 2. Freelancer vs Payroll Comparison | 3/4 | In Progress|  | - |

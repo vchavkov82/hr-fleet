@@ -21,8 +21,8 @@
 - [x] **CALC-05**: Visual highlight of savings when using payroll service vs EOOD (marketing angle: "save X BGN/month")
 - [x] **CALC-06**: Include hidden costs breakdown: accountant fees, admin time, company registration amortized, bank fees, closure risk
 - [x] **CALC-07**: Benefits comparison table: paid leave, sick leave, maternity, unemployment insurance, mortgage eligibility, labor code protection
-- [ ] **CALC-08**: Fully localized in Bulgarian and English
-- [ ] **CALC-09**: SEO content sections explaining the comparison for organic traffic
+- [x] **CALC-08**: Fully localized in Bulgarian and English
+- [x] **CALC-09**: SEO content sections explaining the comparison for organic traffic
 - [x] **CALC-10**: Mobile-responsive design consistent with existing calculators
 
 ### HR Employee Management
@@ -67,8 +67,8 @@
 | CALC-05 | Phase 2 | Complete |
 | CALC-06 | Phase 2 | Complete |
 | CALC-07 | Phase 2 | Complete |
-| CALC-08 | Phase 2 | Pending |
-| CALC-09 | Phase 2 | Pending |
+| CALC-08 | Phase 2 | Complete |
+| CALC-09 | Phase 2 | Complete |
 | CALC-10 | Phase 2 | Complete |
 
 **Coverage:**
