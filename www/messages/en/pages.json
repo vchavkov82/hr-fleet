@@ -76,13 +76,14 @@
     }
   },
   "pricing": {
-    "metaTitle": "Pricing - Get a Quote | HR",
-    "metaDescription": "AI-powered HR pricing for Bulgarian companies. Modular ATS, Core HR, Leave, Payroll, Performance, Onboarding. Reduce manual admin work and accelerate hiring. Get a quote.",
+    "metaTitle": "Pricing | HR",
+    "metaDescription": "HR platform pricing for Bulgarian companies. Start with employee management and add modules as they become available. Get a personalized quote.",
     "sectionLabel": "Pricing",
-    "heading": "Simple, transparent pricing — built for ROI",
-    "subheading": "Choose the modules you need. Pay only for what you use, and save time and effort across your entire HR process.",
-    "modulesHeading": "Choose your modules",
-    "modulesSubheading": "Each module works independently or together. Mix and match to build the perfect HR solution for your company.",
+    "heading": "Simple pricing for growing teams",
+    "subheading": "Start with employee management. Add modules as we build them.",
+    "modulesHeading": "Available now",
+    "modulesSubheading": "Start managing your employees today.",
+    "comingSoon": "Coming soon",
     "getQuote": "Get a quote",
     "modules": {
       "coreHr": {
@@ -152,28 +153,13 @@
         ]
       }
     },
-    "comparisonHeading": "Feature comparison",
-    "comparisonSubheading": "See what is included in each module at a glance.",
+    "comparisonHeading": "What's included",
+    "comparisonSubheading": "Features available in the HR Platform today.",
     "comparisonFeatureCol": "Feature",
     "comparison": {
       "employeeProfiles": "Employee profiles & directory",
       "orgChart": "Organization chart",
-      "documentStorage": "Document storage",
-      "jobPosting": "Job posting & distribution",
-      "candidatePipeline": "Candidate pipeline",
-      "aiScreening": "AI CV screening",
-      "leaveRequests": "Leave requests & approvals",
-      "leaveCalendar": "Team leave calendar",
-      "accrualPolicies": "Accrual policies",
-      "payrollProcessing": "Payroll processing",
-      "taxReporting": "Tax & social security reporting",
-      "bankIntegration": "Bank integration",
-      "goalTracking": "Goal tracking & OKRs",
-      "reviews360": "360-degree reviews",
-      "performanceReports": "Performance reports",
-      "taskChecklists": "Onboarding task checklists",
-      "welcomePortal": "Welcome portal",
-      "eSignatures": "Electronic signatures"
+      "documentStorage": "Document storage"
     },
     "quoteForm": {
       "title": "Get a personalized quote",
@@ -205,24 +191,24 @@
     "faqHeading": "Frequently asked questions",
     "faqItems": [
       {
-        "question": "How does the per-module pricing work?",
-        "answer": "You only pay for the modules you use. Each module has its own pricing based on the number of employees in your company. You can start with one module and add more as your needs grow."
+        "question": "What is included in the HR Platform?",
+        "answer": "The HR Platform currently includes employee management with a searchable directory, employee profiles, and department organization. We also offer free HR calculators and Bulgarian compliance tools. More modules like ATS, leave management, and payroll are in development."
       },
       {
         "question": "Is there a minimum contract period?",
-        "answer": "No. All our plans are month-to-month with no long-term commitment required. You can cancel or change modules at any time."
+        "answer": "No. All our plans are month-to-month with no long-term commitment required. You can cancel at any time."
       },
       {
         "question": "Can I try before I buy?",
-        "answer": "Yes! We offer a 60-day free trial for all modules. No credit card required. Start using the platform immediately and see the value for yourself."
+        "answer": "Yes! We offer a free trial to get started. No credit card required. Start using the platform immediately and see the value for yourself."
       },
       {
         "question": "What happens to my data if I cancel?",
         "answer": "Your data remains accessible for 30 days after cancellation. You can export all your data at any time. We follow GDPR best practices for data retention and deletion."
       },
       {
-        "question": "Do you offer discounts for multiple modules?",
-        "answer": "Yes, we offer bundle discounts when you combine multiple modules. The more modules you add, the better the per-module price. Contact us for a personalized quote."
+        "question": "When will additional modules be available?",
+        "answer": "We are actively building ATS, leave management, payroll, performance reviews, and onboarding modules. Contact us for updates on availability and to express interest in specific modules."
       }
     ]
   },

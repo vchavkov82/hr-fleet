@@ -1,9 +1,9 @@
 {
   "sectionLabel": "Pricing",
-  "heading": "Modular pricing",
-  "subheading": "Pick only the modules you need. Pay for what you use.",
+  "heading": "Simple pricing",
+  "subheading": "Start with employee management. More modules coming soon.",
   "getQuote": "Get a quote",
-  "seeAllModules": "See all 6 modules →",
+  "seeAllModules": "See pricing details",
   "modules": {
     "coreHr": {
       "name": "Core HR",
@@ -17,22 +17,20 @@
     },
     "ats": {
       "name": "Applicant Tracking",
-      "description": "Hiring pipeline with AI screening",
+      "description": "Hiring pipeline and candidate management. Coming soon.",
       "features": [
         "Job posting",
         "Candidate pipeline",
-        "AI CV screening",
         "Interview scheduling"
       ]
     },
     "leave": {
       "name": "Leave Management",
-      "description": "Automated leave tracking and approvals",
+      "description": "Leave tracking and approvals. Coming soon.",
       "features": [
         "Leave requests",
         "Team calendar",
-        "Accrual policies",
-        "Absence reports"
+        "Accrual policies"
       ]
     }
   }
