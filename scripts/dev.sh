@@ -7,7 +7,7 @@ ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
 cd "$ROOT_DIR"
 
-COMPOSE="podman-compose -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml"
+COMPOSE="podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml"
 
 # Cleanup on interrupt
 cleanup() {
@@ -109,10 +109,10 @@ echo "  HR site      http://hr.localhost       -> hr:3010"
 echo "  HR blog      http://blog.hr.localhost  -> hr-blog:3013"
 echo "  HR docs      http://docs.localhost     -> hr-docs:3011"
 echo ""
-echo "Direct ports (no Caddy):"
-echo "  HR site      http://localhost:3010"
-echo "  HR blog      http://localhost:3013"
-echo "  HR docs      http://localhost:3011"
+echo "Direct container ports (or use dev-apps on 3010/3011/3013):"
+echo "  HR site      http://localhost:3020"
+echo "  HR blog      http://localhost:3023"
+echo "  HR docs      http://localhost:3021"
 echo ""
 echo "Run 'make dev-apps' to start frontend dev servers."
 echo ""

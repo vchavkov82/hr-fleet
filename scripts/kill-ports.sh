@@ -2,7 +2,7 @@
 # Kill processes using HR service ports
 set -e
 
-PORTS=(3010 3011 3013 8080)
+PORTS=(3010 3011 3013 3020 3021 3023 6379 6380 8080)
 
 echo "Checking for processes using HR ports..."
 
