@@ -144,7 +144,7 @@
 /* Second level navigation text styles - group headers and direct links */
 .sidebar-content .top-level li details ul > li > a > span,
 .sidebar-content .top-level li details summary span {
-  font-family: 'AeonikFono', sans-serif !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Mulish', sans-serif !important;
   font-size: 15px !important;
   font-weight:500;
   color: var(--sl-color-gray-3);
@@ -170,7 +170,7 @@
 }
 
 .sidebar-content .top-level > li .large {
-    font-family: 'AeonikFono', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Mulish', sans-serif;
     font-size: 16px !important;
     font-weight:500;
     line-height: 1.0;
@@ -183,8 +183,8 @@ select.astro-oojz3yon {
     border-radius: 6px;
     border: 1px solid #999CAD;
     color: var(--sl-color-gray-3);
-    font-family: 'Aeonikpro', sans-serif;
-    font-size: 18px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Mulish', sans-serif;
+    font-size: 16px;
 }
 
 :where(.astro-3ii7xxms)[aria-current="page"], :where(.astro-3ii7xxms)[aria-current="page"] > span {
@@ -227,7 +227,7 @@ li:has([aria-current="page"]) > a > span::before {
 }
 
 .tab a[aria-selected="true"] {
-    color: var(--localstack-purple);
+    color: var(--sl-color-accent);
 }
 
 .sl-markdown-content .sl-link-button  {
@@ -253,8 +253,8 @@ a[rel="prev"] span, a[rel="next"] span {
 
 a[rel="prev"] span span, a[rel="next"] span span {
     color: var(--sl-color-gray-2);
-    font-family: "Aeonikpro";
-    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Mulish', sans-serif;
+    font-size: 14px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: -0.15px;
@@ -270,8 +270,8 @@ footer .pagination-links {
 
 h2#starlight__on-this-page {
     color: var(--sl-color-gray-4);
-    font-family: "Aeonikpro";
-    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Mulish', sans-serif;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
