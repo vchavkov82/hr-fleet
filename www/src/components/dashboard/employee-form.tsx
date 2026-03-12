@@ -70,19 +70,19 @@ export default function EmployeeForm({ employee, onSubmit, onCancel }: EmployeeF
   }
 
   const inputClass =
-    'w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+    'w-full rounded-lg border border-gray-300 px-4 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
   const errorClass = 'mt-1 text-xs text-red-600'
-  const labelClass = 'block text-sm font-medium text-gray-700 mb-1'
+  const labelClass = 'block text-xs font-medium text-gray-700 mb-1'
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5 max-w-lg">
       {submitError && (
-        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" data-testid="submit-error">
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-700" data-testid="submit-error">
           {submitError}
         </div>
       )}
       {submitSuccess && (
-        <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700" data-testid="submit-success">
+        <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-xs text-green-700" data-testid="submit-success">
           {t('form.saved')}
         </div>
       )}
@@ -159,14 +159,14 @@ export default function EmployeeForm({ employee, onSubmit, onCancel }: EmployeeF
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-lg bg-blue-900 px-6 py-2.5 text-sm font-medium text-white hover:bg-blue-800 transition-colors disabled:opacity-50"
+          className="rounded-lg bg-blue-900 px-6 py-2.5 text-xs font-medium text-white hover:bg-blue-800 transition-colors disabled:opacity-50"
         >
           {submitting ? '...' : t('form.save')}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+          className="rounded-lg border border-gray-300 px-6 py-2.5 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors"
         >
           {t('form.cancel')}
         </button>

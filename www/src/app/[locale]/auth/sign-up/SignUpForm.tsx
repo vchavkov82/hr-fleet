@@ -120,7 +120,7 @@ export default function SignUpForm({
   }
 
   const inputClass = (field: string) =>
-    `w-full rounded-xl border px-4 py-2.5 text-sm text-navy placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 ${
+    `w-full rounded-xl border px-4 py-2.5 text-xs text-navy placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 ${
       fieldErrors[field] ? 'border-red-300 bg-red-50' : 'border-gray-200'
     }`;
 
@@ -128,7 +128,7 @@ export default function SignUpForm({
     <>
       {plan !== 'starter' && (
         <div className="mb-6 p-4 bg-primary-50 rounded-xl border border-primary/20">
-          <p className="text-sm text-primary font-medium">
+          <p className="text-xs text-primary font-medium">
             {selectedPlan}{' '}
             <span className="font-bold capitalize">
               {plan === 'growth' ? growthPlan : 'Enterprise'}
@@ -139,7 +139,7 @@ export default function SignUpForm({
       )}
 
       {error && (
-        <div className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-700">
           {error}
         </div>
       )}
@@ -147,7 +147,7 @@ export default function SignUpForm({
       <form onSubmit={handleSubmit} className="space-y-5" noValidate>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-navy mb-1.5">
+            <label htmlFor="firstName" className="block text-xs font-medium text-navy mb-1.5">
               {firstNameLabel}
             </label>
             <input
@@ -161,7 +161,7 @@ export default function SignUpForm({
             {fieldErrors.firstName && <p className="mt-1 text-xs text-red-600">{fieldErrors.firstName}</p>}
           </div>
           <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-navy mb-1.5">
+            <label htmlFor="lastName" className="block text-xs font-medium text-navy mb-1.5">
               {lastNameLabel}
             </label>
             <input
@@ -177,7 +177,7 @@ export default function SignUpForm({
         </div>
 
         <div>
-          <label htmlFor="company" className="block text-sm font-medium text-navy mb-1.5">
+          <label htmlFor="company" className="block text-xs font-medium text-navy mb-1.5">
             {companyLabel}
           </label>
           <input
@@ -192,7 +192,7 @@ export default function SignUpForm({
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-navy mb-1.5">
+          <label htmlFor="email" className="block text-xs font-medium text-navy mb-1.5">
             {emailLabel}
           </label>
           <input
@@ -208,7 +208,7 @@ export default function SignUpForm({
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-navy mb-1.5">
+          <label htmlFor="password" className="block text-xs font-medium text-navy mb-1.5">
             {passwordLabel}
           </label>
           <input
@@ -233,7 +233,7 @@ export default function SignUpForm({
                 fieldErrors.terms ? 'border-red-300' : 'border-gray-300'
               } text-primary`}
             />
-            <label htmlFor="terms" className="text-sm text-gray-600">
+            <label htmlFor="terms" className="text-xs text-gray-600">
               {termsText}{' '}
               <Link href="#" className="text-primary hover:underline">{termsLink}</Link>
               {' '}{and}{' '}
@@ -262,7 +262,7 @@ export default function SignUpForm({
 
       <div className="mt-6 text-center space-y-2">
         <p className="text-xs text-gray-400">{noCardNote}</p>
-        <p className="text-sm text-gray-500">
+        <p className="text-xs text-gray-500">
           {hasAccount}{' '}
           <Link href="/auth/login" className="text-primary font-medium hover:underline">
             {loginLink}

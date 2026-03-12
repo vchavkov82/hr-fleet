@@ -86,7 +86,7 @@ export function ContactForm({ labels }: ContactFormProps) {
         <p className="text-green-700 mb-4">{labels.successMessage}</p>
         <button
           onClick={() => setSubmitted(false)}
-          className="text-sm text-primary hover:text-primary/80 font-medium"
+          className="text-xs text-primary hover:text-primary/80 font-medium"
         >
           {labels.successAction}
         </button>
@@ -98,87 +98,87 @@ export function ContactForm({ labels }: ContactFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="firstName" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.firstName} *
           </label>
           <input
             type="text"
             id="firstName"
             {...register('firstName')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
             placeholder="John"
           />
-          {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName.message}</p>}
+          {errors.firstName && <p className="mt-1 text-xs text-red-600">{errors.firstName.message}</p>}
         </div>
 
         <div>
-          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="lastName" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.lastName} *
           </label>
           <input
             type="text"
             id="lastName"
             {...register('lastName')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
             placeholder="Doe"
           />
-          {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName.message}</p>}
+          {errors.lastName && <p className="mt-1 text-xs text-red-600">{errors.lastName.message}</p>}
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="email" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.email} *
           </label>
           <input
             type="email"
             id="email"
             {...register('email')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
             placeholder="john@company.com"
           />
-          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
+          {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>}
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="phone" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.phone}
           </label>
           <input
             type="tel"
             id="phone"
             {...register('phone')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
             placeholder="+359 888 123 456"
           />
-          {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
+          {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>}
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="company" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.company} *
           </label>
           <input
             type="text"
             id="company"
             {...register('company')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
             placeholder="Acme Inc."
           />
-          {errors.company && <p className="mt-1 text-sm text-red-600">{errors.company.message}</p>}
+          {errors.company && <p className="mt-1 text-xs text-red-600">{errors.company.message}</p>}
         </div>
 
         <div>
-          <label htmlFor="companySize" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="companySize" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.companySize}
           </label>
           <select
             id="companySize"
             {...register('companySize')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
           >
             <option value="">{labels.selectCompanySize}</option>
             <option value="1-10">{labels.companySizes.small}</option>
@@ -190,13 +190,13 @@ export function ContactForm({ labels }: ContactFormProps) {
       </div>
 
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="subject" className="block text-xs font-medium text-gray-700 mb-2">
           {labels.subject} *
         </label>
         <select
           id="subject"
           {...register('subject')}
-          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
         >
           <option value="">{labels.selectSubject}</option>
           <option value="general">{labels.subjects.general}</option>
@@ -207,21 +207,21 @@ export function ContactForm({ labels }: ContactFormProps) {
           <option value="feedback">{labels.subjects.feedback}</option>
           <option value="other">{labels.subjects.other}</option>
         </select>
-        {errors.subject && <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>}
+        {errors.subject && <p className="mt-1 text-xs text-red-600">{errors.subject.message}</p>}
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="message" className="block text-xs font-medium text-gray-700 mb-2">
           {labels.message} *
         </label>
         <textarea
           id="message"
           rows={6}
           {...register('message')}
-          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow resize-none"
+          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow resize-none"
           placeholder="Please provide details about your inquiry..."
         />
-        {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
+        {errors.message && <p className="mt-1 text-xs text-red-600">{errors.message.message}</p>}
         <p className="mt-1 text-xs text-gray-500">Minimum 20 characters</p>
       </div>
 
@@ -232,11 +232,11 @@ export function ContactForm({ labels }: ContactFormProps) {
           {...register('privacy')}
           className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
         />
-        <label htmlFor="privacy" className="ml-2 text-sm text-gray-600">
+        <label htmlFor="privacy" className="ml-2 text-xs text-gray-600">
           {labels.privacy} <a href="/privacy" className="text-primary hover:underline">{labels.privacyLink}</a>
         </label>
       </div>
-      {errors.privacy && <p className="text-sm text-red-600">{errors.privacy.message}</p>}
+      {errors.privacy && <p className="text-xs text-red-600">{errors.privacy.message}</p>}
 
       <button
         type="submit"

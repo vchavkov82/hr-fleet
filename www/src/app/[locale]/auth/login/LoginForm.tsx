@@ -77,14 +77,14 @@ export default function LoginForm({
   return (
     <>
       {error && (
-        <div className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-700">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-5" noValidate>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-navy mb-1.5">
+          <label htmlFor="email" className="block text-xs font-medium text-navy mb-1.5">
             {emailLabel}
           </label>
           <input
@@ -94,7 +94,7 @@ export default function LoginForm({
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={`w-full rounded-xl border px-4 py-2.5 text-sm text-navy placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 ${
+            className={`w-full rounded-xl border px-4 py-2.5 text-xs text-navy placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 ${
               fieldErrors.email ? 'border-red-300 bg-red-50' : 'border-gray-200'
             }`}
             placeholder="ivan@company.bg"
@@ -106,10 +106,10 @@ export default function LoginForm({
 
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <label htmlFor="password" className="block text-sm font-medium text-navy">
+            <label htmlFor="password" className="block text-xs font-medium text-navy">
               {passwordLabel}
             </label>
-            <Link href="#" className="text-sm text-primary hover:underline">
+            <Link href="#" className="text-xs text-primary hover:underline">
               {forgotPassword}
             </Link>
           </div>
@@ -120,7 +120,7 @@ export default function LoginForm({
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className={`w-full rounded-xl border px-4 py-2.5 text-sm text-navy placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 ${
+            className={`w-full rounded-xl border px-4 py-2.5 text-xs text-navy placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 ${
               fieldErrors.password ? 'border-red-300 bg-red-50' : 'border-gray-200'
             }`}
           />
@@ -136,7 +136,7 @@ export default function LoginForm({
             type="checkbox"
             className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
           />
-          <label htmlFor="remember" className="text-sm text-gray-600">
+          <label htmlFor="remember" className="text-xs text-gray-600">
             {rememberMe}
           </label>
         </div>
@@ -158,7 +158,7 @@ export default function LoginForm({
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-gray-500">
+      <p className="mt-6 text-center text-xs text-gray-500">
         {noAccount}{' '}
         <Link href="/auth/sign-up" className="text-primary font-medium hover:underline">
           {signUpLink}

@@ -107,7 +107,7 @@ export function QuoteForm({ selectedModule, labels }: QuoteFormProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Name */}
         <div>
-          <label htmlFor="quote-name" className="block text-sm font-medium text-gray-700 mb-1.5">
+          <label htmlFor="quote-name" className="block text-xs font-medium text-gray-700 mb-1.5">
             {labels.name} <span className="text-red-500">*</span>
           </label>
           <input
@@ -115,14 +115,14 @@ export function QuoteForm({ selectedModule, labels }: QuoteFormProps) {
             type="text"
             {...register('name')}
             placeholder={labels.namePlaceholder}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition"
+            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-xs text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition"
           />
           {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
         </div>
 
         {/* Email */}
         <div>
-          <label htmlFor="quote-email" className="block text-sm font-medium text-gray-700 mb-1.5">
+          <label htmlFor="quote-email" className="block text-xs font-medium text-gray-700 mb-1.5">
             {labels.email} <span className="text-red-500">*</span>
           </label>
           <input
@@ -130,14 +130,14 @@ export function QuoteForm({ selectedModule, labels }: QuoteFormProps) {
             type="email"
             {...register('email')}
             placeholder={labels.emailPlaceholder}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition"
+            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-xs text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition"
           />
           {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
         </div>
 
         {/* Company */}
         <div>
-          <label htmlFor="quote-company" className="block text-sm font-medium text-gray-700 mb-1.5">
+          <label htmlFor="quote-company" className="block text-xs font-medium text-gray-700 mb-1.5">
             {labels.company} <span className="text-red-500">*</span>
           </label>
           <input
@@ -145,20 +145,20 @@ export function QuoteForm({ selectedModule, labels }: QuoteFormProps) {
             type="text"
             {...register('company')}
             placeholder={labels.companyPlaceholder}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition"
+            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-xs text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition"
           />
           {errors.company && <p className="mt-1 text-xs text-red-500">{errors.company.message}</p>}
         </div>
 
         {/* Company Size */}
         <div>
-          <label htmlFor="quote-employees" className="block text-sm font-medium text-gray-700 mb-1.5">
+          <label htmlFor="quote-employees" className="block text-xs font-medium text-gray-700 mb-1.5">
             {labels.employees} <span className="text-red-500">*</span>
           </label>
           <select
             id="quote-employees"
             {...register('employees')}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition"
+            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-xs text-gray-900 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition"
           >
             <option value="">{labels.employeesPlaceholder}</option>
             {labels.employeeSizes.map((size) => (
@@ -171,7 +171,7 @@ export function QuoteForm({ selectedModule, labels }: QuoteFormProps) {
 
       {/* Modules */}
       <div className="mt-6">
-        <label className="block text-sm font-medium text-gray-700 mb-3">
+        <label className="block text-xs font-medium text-gray-700 mb-3">
           {labels.modules} <span className="text-red-500">*</span>
         </label>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -186,7 +186,7 @@ export function QuoteForm({ selectedModule, labels }: QuoteFormProps) {
                 {...register('modules')}
                 className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary/20"
               />
-              <span className="text-sm text-gray-700">{labels.moduleNames[key]}</span>
+              <span className="text-xs text-gray-700">{labels.moduleNames[key]}</span>
             </label>
           ))}
         </div>
@@ -195,7 +195,7 @@ export function QuoteForm({ selectedModule, labels }: QuoteFormProps) {
 
       {/* Message */}
       <div className="mt-6">
-        <label htmlFor="quote-message" className="block text-sm font-medium text-gray-700 mb-1.5">
+        <label htmlFor="quote-message" className="block text-xs font-medium text-gray-700 mb-1.5">
           {labels.message}
         </label>
         <textarea
@@ -203,7 +203,7 @@ export function QuoteForm({ selectedModule, labels }: QuoteFormProps) {
           rows={4}
           {...register('message')}
           placeholder={labels.messagePlaceholder}
-          className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition resize-none"
+          className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-xs text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition resize-none"
         />
       </div>
 
@@ -212,7 +212,7 @@ export function QuoteForm({ selectedModule, labels }: QuoteFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full md:w-auto bg-primary text-white font-semibold rounded-xl px-8 py-3 text-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full md:w-auto bg-primary text-white font-semibold rounded-xl px-8 py-3 text-xs hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isSubmitting ? '...' : labels.submit}
         </button>

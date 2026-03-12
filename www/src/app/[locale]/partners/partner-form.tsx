@@ -82,67 +82,67 @@ export function PartnerForm({ labels }: PartnerFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="companyName" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.companyName} *
           </label>
           <input
             type="text"
             id="companyName"
             {...register('companyName')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
           />
-          {errors.companyName && <p className="mt-1 text-sm text-red-600">{errors.companyName.message}</p>}
+          {errors.companyName && <p className="mt-1 text-xs text-red-600">{errors.companyName.message}</p>}
         </div>
         <div>
-          <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="website" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.website}
           </label>
           <input
             type="url"
             id="website"
             {...register('website')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
           />
-          {errors.website && <p className="mt-1 text-sm text-red-600">{errors.website.message}</p>}
+          {errors.website && <p className="mt-1 text-xs text-red-600">{errors.website.message}</p>}
         </div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="contactName" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="contactName" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.contactName} *
           </label>
           <input
             type="text"
             id="contactName"
             {...register('contactName')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
           />
-          {errors.contactName && <p className="mt-1 text-sm text-red-600">{errors.contactName.message}</p>}
+          {errors.contactName && <p className="mt-1 text-xs text-red-600">{errors.contactName.message}</p>}
         </div>
         <div>
-          <label htmlFor="partner-email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="partner-email" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.email} *
           </label>
           <input
             type="email"
             id="partner-email"
             {...register('email')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
           />
-          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
+          {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>}
         </div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="partnerType" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="partnerType" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.partnerType} *
           </label>
           <select
             id="partnerType"
             {...register('partnerType')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
           >
             <option value="">{labels.selectType}</option>
             <option value="referral">{labels.types.referral}</option>
@@ -150,16 +150,16 @@ export function PartnerForm({ labels }: PartnerFormProps) {
             <option value="reseller">{labels.types.reseller}</option>
             <option value="technology">{labels.types.technology}</option>
           </select>
-          {errors.partnerType && <p className="mt-1 text-sm text-red-600">{errors.partnerType.message}</p>}
+          {errors.partnerType && <p className="mt-1 text-xs text-red-600">{errors.partnerType.message}</p>}
         </div>
         <div>
-          <label htmlFor="companySize" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="companySize" className="block text-xs font-medium text-gray-700 mb-2">
             {labels.companySize} *
           </label>
           <select
             id="companySize"
             {...register('companySize')}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow"
           >
             <option value="">{labels.selectSize}</option>
             <option value="small">{labels.sizes.small}</option>
@@ -167,7 +167,7 @@ export function PartnerForm({ labels }: PartnerFormProps) {
             <option value="large">{labels.sizes.large}</option>
             <option value="enterprise">{labels.sizes.enterprise}</option>
           </select>
-          {errors.companySize && <p className="mt-1 text-sm text-red-600">{errors.companySize.message}</p>}
+          {errors.companySize && <p className="mt-1 text-xs text-red-600">{errors.companySize.message}</p>}
         </div>
       </div>
 
@@ -178,11 +178,11 @@ export function PartnerForm({ labels }: PartnerFormProps) {
           {...register('agreement')}
           className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
         />
-        <label htmlFor="agreement" className="ml-2 text-sm text-gray-600">
+        <label htmlFor="agreement" className="ml-2 text-xs text-gray-600">
           {labels.agreement}
         </label>
       </div>
-      {errors.agreement && <p className="text-sm text-red-600">{errors.agreement.message}</p>}
+      {errors.agreement && <p className="text-xs text-red-600">{errors.agreement.message}</p>}
 
       <button
         type="submit"

@@ -91,13 +91,13 @@ export function ContactForm({ className = '' }: ContactFormProps) {
         <form onSubmit={handleSubmit} className={`space-y-6 ${className}`}>
             {error && (
                 <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <p className="text-red-600 text-sm">{error}</p>
+                    <p className="text-red-600 text-xs">{error}</p>
                 </div>
             )}
 
             <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="name" className="block text-xs font-medium text-gray-700 mb-2">
                         Name *
                     </label>
                     <input
@@ -107,13 +107,13 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent"
                         placeholder="Your full name"
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="email" className="block text-xs font-medium text-gray-700 mb-2">
                         Email *
                     </label>
                     <input
@@ -123,7 +123,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent"
                         placeholder="your@email.com"
                     />
                 </div>
@@ -131,7 +131,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
 
             <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="phone" className="block text-xs font-medium text-gray-700 mb-2">
                         Phone Number (optional)
                     </label>
                     <input
@@ -140,13 +140,13 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent"
                         placeholder="+359 888 123 456"
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="company" className="block text-xs font-medium text-gray-700 mb-2">
                         Company
                     </label>
                     <input
@@ -155,7 +155,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                         name="company"
                         value={formData.company}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent"
                         placeholder="Your company name"
                     />
                 </div>
@@ -163,7 +163,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
 
             <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="subject" className="block text-xs font-medium text-gray-700 mb-2">
                         Subject *
                     </label>
                     <select
@@ -172,7 +172,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent"
                     >
                         <option value="">Select a subject</option>
                         <option value="general">General Inquiry</option>
@@ -187,7 +187,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                 </div>
 
                 <div>
-                    <label htmlFor="priority" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="priority" className="block text-xs font-medium text-gray-700 mb-2">
                         Priority
                     </label>
                     <select
@@ -195,7 +195,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                         name="priority"
                         value={formData.priority}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent"
                     >
                         <option value="">Select priority</option>
                         <option value="low">Low - General question</option>
@@ -207,7 +207,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
             </div>
 
             <div>
-                <label htmlFor="articleReference" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="articleReference" className="block text-xs font-medium text-gray-700 mb-2">
                     Related Help Article (optional)
                 </label>
                 <input
@@ -216,14 +216,14 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                     name="articleReference"
                     value={formData.articleReference}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder="e.g., Getting Started, Job Posting"
                 />
                 <p className="mt-1 text-xs text-gray-500">If your question relates to a specific help article, mention it here</p>
             </div>
 
             <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="message" className="block text-xs font-medium text-gray-700 mb-2">
                     Message *
                 </label>
                 <textarea
@@ -233,14 +233,14 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg text-xs focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                     placeholder="Describe your issue or question in detail..."
                 />
                 <p className="mt-1 text-xs text-gray-500">Minimum 20 characters. Include steps to reproduce if reporting a bug.</p>
             </div>
 
             <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-500">
+                <p className="text-xs text-gray-500">
                     ⚡ Average response time: 2-4 hours
                 </p>
                 <button
