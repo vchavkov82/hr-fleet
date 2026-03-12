@@ -5,6 +5,7 @@ title: "Стратегии за ангажираност на служители
 featured: true
 draft: false
 tags: ["engagement", "culture", "retention", "productivity", "hr-strategy"]
+featuredImage: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=960&h=540&fit=crop"
 description: "Открийте доказани стратегии за ангажираност на служителите, които повишават производителността, намаляват текучеството и създават процъфтяваща работна култура в модерните организации."
 ---
 

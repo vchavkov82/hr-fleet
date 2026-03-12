@@ -5,6 +5,7 @@ title: "Building a Thriving Hybrid Work Culture: Strategies for 2024 and Beyond"
 featured: true
 draft: false
 tags: ["hybrid-work", "remote-work", "workplace-culture", "team-collaboration", "management"]
+featuredImage: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=960&h=540&fit=crop"
 description: "Master the art of hybrid work with practical strategies for building culture, maintaining equity, and driving collaboration across distributed teams."
 ---
 

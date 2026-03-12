@@ -5,6 +5,7 @@ title: "Data-Driven HR: How People Analytics Transforms Decision Making"
 featured: false
 draft: false
 tags: ["analytics", "people-analytics", "hr-technology", "data", "hr-strategy"]
+featuredImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=960&h=540&fit=crop"
 description: "Learn how to leverage people analytics and HR data to make smarter decisions about hiring, retention, performance, and workforce planning."
 ---
 

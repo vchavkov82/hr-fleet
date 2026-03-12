@@ -5,6 +5,7 @@ title: "Employee Engagement Strategies That Actually Work in 2024"
 featured: true
 draft: false
 tags: ["engagement", "culture", "retention", "productivity", "hr-strategy"]
+featuredImage: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=960&h=540&fit=crop"
 description: "Proven employee engagement strategies for 2024: measure eNPS, recognition, growth, and work-life balance. With Bulgaria-specific tips and HR tools."
 ---
 

@@ -5,6 +5,7 @@ title: "Effective Employee Retention Strategies for Modern Workplaces"
 featured: false
 draft: false
 tags: ["retention", "employee-engagement", "hr-strategy", "workplace-culture"]
+featuredImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=960&h=540&fit=crop"
 description: "Learn proven strategies to reduce employee turnover and build a loyal, engaged workforce in today's competitive job market."
 ---
 

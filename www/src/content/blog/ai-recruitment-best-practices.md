@@ -5,6 +5,7 @@ title: "AI in Recruitment: Best Practices for Responsible Implementation"
 featured: true
 draft: false
 tags: ["ai", "recruitment", "technology", "automation", "gdpr"]
+featuredImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=960&h=540&fit=crop"
 description: "Learn how to implement AI-powered recruitment tools responsibly while maintaining compliance with GDPR and avoiding bias in candidate selection."
 ---
 

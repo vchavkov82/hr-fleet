@@ -5,6 +5,7 @@ title: "Building a Diverse and Inclusive Workplace: Strategies That Work"
 featured: true
 draft: false
 tags: ["diversity", "inclusion", "workplace-culture", "hr-strategy"]
+featuredImage: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=960&h=540&fit=crop"
 description: "Discover proven strategies for creating a diverse and inclusive workplace that fosters innovation, employee satisfaction, and business success."
 ---
 

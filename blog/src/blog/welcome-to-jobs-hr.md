@@ -5,6 +5,7 @@ title: "Welcome to HR - Your Complete HR Management Solution"
 featured: true
 draft: false
 tags: ["announcement", "hr-management", "company"]
+featuredImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=960&h=540&fit=crop"
 description: "HR is the all-in-one HR platform for Bulgarian companies: recruitment, leave, payroll, and performance — in one place. Start your free trial."
 ---
 

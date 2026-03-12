@@ -7,6 +7,7 @@ export default async function BlogPosts() {
     title: string
     excerpt: string
     category: string
+    image?: string
     href: string
   }>
 
@@ -29,8 +30,18 @@ export default async function BlogPosts() {
               key={item.title}
               className="rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
             >
-              {/* Image placeholder */}
-              <div className="aspect-[16/9] bg-gradient-to-br from-primary-50 via-primary-100 to-accent/20" />
+              {item.image ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[16/9] w-full object-cover"
+                />
+              ) : (
+                <div className="aspect-[16/9] bg-gradient-to-br from-primary-50 via-primary-100 to-accent/20" />
+              )}
 
               <div className="p-6">
                 <span className="inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold text-primary mb-3">

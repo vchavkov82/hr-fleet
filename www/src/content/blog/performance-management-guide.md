@@ -5,6 +5,7 @@ title: "Modern Performance Management: A Complete Guide"
 featured: false
 draft: false
 tags: ["performance-management", "employee-development", "hr-processes", "feedback"]
+featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=960&h=540&fit=crop"
 description: "Master modern performance management with our comprehensive guide to effective employee evaluation and development strategies."
 ---
 

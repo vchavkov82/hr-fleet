@@ -5,6 +5,7 @@ title: "Как да изчислим нетна заплата в Българи
 featured: false
 draft: false
 tags: ["salary-calculator", "bulgaria-2026", "net-salary", "tax-calculation"]
+featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=960&h=540&fit=crop"
 description: "Стъпка по стъпка ръководство за изчисляване на нетна заплата в България за 2026 г. — осигуровки, данък, примери и онлайн калкулатор."
 ---
 

@@ -5,6 +5,7 @@ title: "Remote Work Management: A Complete Guide for 2024"
 featured: true
 draft: false
 tags: ["remote-work", "management", "productivity", "team-collaboration"]
+featuredImage: "https://images.unsplash.com/photo-1587825140708-dfaf18c4b138?w=960&h=540&fit=crop"
 description: "Complete guide to remote work management in 2024: hiring, onboarding, communication, performance, and culture. With Bulgarian labour law notes and HR."
 ---
 

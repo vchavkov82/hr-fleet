@@ -5,6 +5,7 @@ title: "Кога да преминете от фрийлансър (ЕООД) к
 featured: false
 draft: false
 tags: ["freelancer", "eood", "career-advice", "employment"]
+featuredImage: "https://images.unsplash.com/photo-1507679799987-c73b4177fea2?w=960&h=540&fit=crop"
 description: "5 ясни признака, че е време да преминете от ЕООД към трудов договор — финансови, социални и практически аргументи за всеки сценарий."
 ---
 

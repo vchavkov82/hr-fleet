@@ -5,6 +5,7 @@ title: "Employee Wellbeing and Mental Health: Building a Supportive Workplace"
 featured: true
 draft: false
 tags: ["wellbeing", "mental-health", "workplace-culture", "employee-engagement", "hr-strategy"]
+featuredImage: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=960&h=540&fit=crop"
 description: "Discover how to create a workplace that prioritizes employee wellbeing and mental health, driving engagement, productivity, and retention."
 ---
 

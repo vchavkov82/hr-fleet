@@ -5,6 +5,7 @@ title: "Skills Gap Analysis and Strategic Workforce Planning"
 featured: false
 draft: false
 tags: ["workforce-planning", "skills-gap", "talent-management", "hr-strategy", "learning-development"]
+featuredImage: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=960&h=540&fit=crop"
 description: "Learn how to identify skills gaps, build a future-ready workforce, and align talent strategy with business objectives through strategic workforce planning."
 ---
 

@@ -5,6 +5,7 @@ title: "Employer Branding: How to Attract and Retain Top Talent"
 featured: true
 draft: false
 tags: ["employer-branding", "talent-acquisition", "hr-strategy", "recruitment"]
+featuredImage: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=960&h=540&fit=crop"
 description: "Learn how to build a strong employer brand that attracts top candidates, reduces hiring costs, and improves employee retention in a competitive job market."
 ---
 

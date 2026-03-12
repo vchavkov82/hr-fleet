@@ -5,6 +5,7 @@ title: "HR Compliance Essentials: Navigating Employment Law in 2024"
 featured: false
 draft: false
 tags: ["compliance", "employment-law", "hr-processes", "gdpr", "risk-management"]
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848e968ab7?w=960&h=540&fit=crop"
 description: "Stay ahead of evolving employment regulations with this comprehensive guide to HR compliance essentials, from data privacy to workplace safety."
 ---
 

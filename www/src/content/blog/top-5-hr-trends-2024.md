@@ -5,6 +5,7 @@ title: "Top 5 HR Trends Shaping 2024"
 featured: true
 draft: false
 tags: ["hr-trends", "2024", "workplace", "technology"]
+featuredImage: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=960&h=540&fit=crop"
 description: "Top 5 HR trends in 2024: AI in HR, hybrid work, employee experience, skills-based hiring, and data-driven decisions. How HR supports them."
 ---
 

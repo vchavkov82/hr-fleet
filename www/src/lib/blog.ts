@@ -21,6 +21,7 @@ export type BlogFrontmatter = {
   draft?: boolean
   tags?: string[]
   ogImage?: string
+  featuredImage?: string
   description: string
   canonicalURL?: string
   timezone?: string
@@ -72,6 +73,7 @@ async function readPostFile(fileName: string): Promise<BlogPost> {
     draft: Boolean(data.draft),
     tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
     ogImage: typeof data.ogImage === 'string' ? data.ogImage : undefined,
+    featuredImage: typeof data.featuredImage === 'string' ? data.featuredImage : undefined,
     description: (data.description as string) || '',
     canonicalURL: typeof data.canonicalURL === 'string' ? data.canonicalURL : undefined,
     timezone: typeof data.timezone === 'string' ? data.timezone : undefined,

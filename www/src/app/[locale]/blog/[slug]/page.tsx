@@ -107,6 +107,19 @@ export default async function BlogPostPage({
         </div>
       </section>
 
+      {post.data.featuredImage && (
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={post.data.featuredImage}
+            alt={post.data.title}
+            loading="eager"
+            decoding="async"
+            className="w-full rounded-2xl shadow-lg object-cover aspect-[2/1]"
+          />
+        </div>
+      )}
+
       {/* Article Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <article className="prose prose-lg prose-gray max-w-none prose-headings:text-gray-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">

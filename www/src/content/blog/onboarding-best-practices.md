@@ -5,6 +5,7 @@ title: "The Ultimate Guide to Employee Onboarding in 2024"
 featured: false
 draft: false
 tags: ["onboarding", "employee-experience", "hr-processes", "retention", "new-hires"]
+featuredImage: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=960&h=540&fit=crop"
 description: "Transform your onboarding process with proven strategies that accelerate time-to-productivity, boost retention, and create lasting first impressions."
 ---
 

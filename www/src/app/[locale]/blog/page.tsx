@@ -56,7 +56,7 @@ function BlogCard({
   readMore,
   readTime,
 }: {
-  post: { slug: string; locale: string; readTimeMinutes: number; data: { title: string; description: string; author: string; pubDatetime: string; tags?: string[] } }
+  post: { slug: string; locale: string; readTimeMinutes: number; data: { title: string; description: string; author: string; pubDatetime: string; tags?: string[]; featuredImage?: string } }
   locale: string
   readMore: string
   readTime: string
@@ -66,7 +66,17 @@ function BlogCard({
   return (
     <article className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg hover:border-blue-300 transition-all">
       <Link href={`/${locale}/blog/${post.slug}`} className="block h-full">
-        <div className="aspect-video bg-gradient-to-br from-blue-50 via-white to-purple-50" />
+        {post.data.featuredImage ? (
+          <img
+            src={post.data.featuredImage}
+            alt={post.data.title}
+            loading="lazy"
+            decoding="async"
+            className="aspect-video w-full object-cover"
+          />
+        ) : (
+          <div className="aspect-video bg-gradient-to-br from-blue-50 via-white to-purple-50" />
+        )}
         <div className="p-6 flex flex-col gap-3">
           <div className="flex items-center gap-3">
             {firstTag && (
