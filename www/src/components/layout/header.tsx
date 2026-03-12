@@ -50,13 +50,6 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
-  const isHelpCenterRoute =
-    pathname.startsWith('/en/help-center') || pathname.startsWith('/bg/help-center')
-
-  if (isHelpCenterRoute) {
-    return null
-  }
-
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="container-xl">
@@ -67,7 +60,7 @@ export default function Header() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" />
               </svg>
             </div>
-            <span className="text-xl font-semibold text-navy">HR Service</span>
+            <span className="text-xl font-semibold text-gray-900">HR Service</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
@@ -79,7 +72,7 @@ export default function Header() {
                   href={link.href}
                   className={clsx(
                     'text-sm transition-colors',
-                    isActive ? 'text-primary font-medium' : 'text-gray-600 hover:text-navy'
+                    isActive ? 'text-primary font-medium' : 'text-gray-600 hover:text-gray-900'
                   )}
                 >
                   {t(link.key)}
@@ -90,22 +83,23 @@ export default function Header() {
 
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
-            <Link href="/auth/login" className="text-sm text-gray-600 hover:text-navy transition-colors">
-              {t('login')}
+            <Link href="/auth/login" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+              {t('signIn')}
             </Link>
             <Link
               href="/auth/sign-up"
               className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium cursor-pointer"
             >
-              {t('startFree')}
+              {t('getStarted')}
             </Link>
           </div>
 
           <button
-            className="md:hidden p-2 text-gray-600 hover:text-navy cursor-pointer"
+            className="md:hidden p-2 text-gray-600 hover:text-gray-900 cursor-pointer"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? (
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,7 +115,7 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
+        <div className="md:hidden border-t border-gray-200 bg-white" id="mobile-menu" aria-hidden={!mobileOpen}>
           <div className="px-4 py-4 space-y-3">
             {NAV_LINKS.map((link) => {
               const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href)
@@ -148,14 +142,14 @@ export default function Header() {
                 className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
                 onClick={() => setMobileOpen(false)}
               >
-                {t('login')}
+                {t('signIn')}
               </Link>
               <Link
                 href="/auth/sign-up"
                 className="block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark text-center"
                 onClick={() => setMobileOpen(false)}
               >
-                {t('startFree')}
+                {t('getStarted')}
               </Link>
             </div>
           </div>

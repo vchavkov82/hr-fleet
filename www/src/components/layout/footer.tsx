@@ -9,11 +9,9 @@ export default async function Footer() {
       key: 'product',
       label: t('columns.product.label'),
       links: [
-        { label: t('columns.product.ats'), href: '/features#ats' },
-        { label: t('columns.product.employees'), href: '/features#employees' },
-        { label: t('columns.product.leave'), href: '/features#leave' },
-        { label: t('columns.product.payroll'), href: '/features#payroll' },
-        { label: t('columns.product.performance'), href: '/features#performance' },
+        { label: t('columns.product.features'), href: '/features' },
+        { label: t('columns.product.pricing'), href: '/pricing' },
+        { label: t('columns.product.hrTools'), href: '/hr-tools' },
       ],
     },
     {
@@ -39,7 +37,7 @@ export default async function Footer() {
   ]
 
   return (
-    <footer className="bg-navy-dark text-gray-300">
+    <footer className="bg-gray-900 text-gray-300">
       <div className="container-xl py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -52,7 +50,7 @@ export default async function Footer() {
               <span className="text-xl font-semibold text-white">HR Service</span>
             </div>
             <p className="text-sm">
-              {t('tagline')}
+              {t('taglineShort')}
             </p>
           </div>
 
@@ -72,7 +70,7 @@ export default async function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-white/10 mt-8 pt-8 text-sm text-center">
+        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
           <p>&copy; {new Date().getFullYear()} HR Service. {t('copyright')}</p>
         </div>
       </div>

@@ -4,59 +4,17 @@
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
 
-/* Header + footer alignment with marketing site */
+/* Figma/marketing header & footer alignment — DESIGN_ALIGNMENT.md */
 
 :root {
-  --docs-nav-height: 64px;
+  --sl-color-bg-nav: #ffffff;
+  --sl-color-hairline-shade: #e5e7eb;
+  --sl-nav-height: 64px;
 }
 
-.sl-top-nav {
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
-  background-color: #ffffff;
-  backdrop-filter: blur(12px);
-}
-
-.sl-top-nav .site-title {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  letter-spacing: -0.04em;
-}
-
-.sl-top-nav .site-title::before {
-  content: "";
-  width: 32px;
-  height: 32px;
-  border-radius: 0.75rem;
-  background: #1B4DDB;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 25px rgba(27, 77, 219, 0.35);
-}
-
-.sl-top-nav .site-title span {
-  font-size: 1.1rem;
-  color: #0F172A;
-}
-
-.sl-top-nav a {
-  font-size: 0.9rem;
-}
-
-.sl-footer {
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
-  background: linear-gradient(135deg, #030B24 0%, #020617 100%);
-  color: rgba(248, 250, 252, 0.85);
-}
-
-.sl-footer a {
-  color: rgba(191, 219, 254, 0.9);
-}
-
-.sl-footer a:hover {
-  color: #FFFFFF;
+header.header {
+  background-color: #ffffff !important;
+  border-bottom-color: #e5e7eb !important;
 }
 
 :root {

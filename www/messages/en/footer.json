@@ -1,10 +1,14 @@
 {
   "tagline": "The all-in-one HR platform for Bulgarian businesses. Recruit, manage and grow your team from one place.",
+  "taglineShort": "Modern HR management platform for growing businesses.",
   "compliant": "Compliant",
   "copyright": "All rights reserved.",
   "columns": {
     "product": {
       "label": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "hrTools": "HR Tools",
       "ats": "ATS / Recruitment",
       "employees": "Employee Management",
       "leave": "Leave Tracking",
@@ -19,7 +23,7 @@
     },
     "company": {
       "label": "Company",
-      "about": "About Us",
+      "about": "About",
       "careers": "Careers",
       "partners": "Partners",
       "contact": "Contact"

@@ -18,6 +18,10 @@ export default defineConfig({
     starlight({
       title: 'HR Docs',
       favicon: '/favicon.png',
+      components: {
+        Header: './src/components/Header.astro',
+        Footer: './src/components/Footer.astro',
+      },
       locales: {
         root: {
           label: 'English',
