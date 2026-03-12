@@ -12,10 +12,55 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+
+  .skip-to-content {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]
+      focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg
+      focus:shadow-lg focus:text-sm focus:font-medium;
+  }
 }
 
 @layer components {
   .container-xl {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-label {
+    @apply inline-block text-xs font-semibold uppercase tracking-widest text-primary;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white
+      rounded-lg hover:bg-primary-dark transition-colors font-medium cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary
+      border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors font-medium cursor-pointer;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-1 text-primary hover:text-primary-dark
+      transition-colors font-medium cursor-pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

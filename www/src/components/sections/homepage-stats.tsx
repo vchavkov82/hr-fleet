@@ -12,11 +12,11 @@ export default async function HomepageStats() {
 
   return (
     <section className="py-16 bg-white border-y border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-xl">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {items.map((item) => (
             <div key={item.label} className="text-center">
-              <p className="text-4xl font-bold text-gray-900">
+              <p className="text-4xl font-bold font-heading text-navy">
                 {item.value.toLocaleString()}{item.suffix}
               </p>
               <p className="mt-2 text-gray-600">{item.label}</p>

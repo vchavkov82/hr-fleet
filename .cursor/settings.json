@@ -1,0 +1,36 @@
+{
+  "cursor.ai": {
+    "autoApprove": true,
+    "confirmBeforeRun": false,
+    "confirmBeforeEdit": false,
+    "confirmBeforeCreate": false,
+    "confirmBeforeDelete": false,
+    "confirmBeforeExecute": false,
+    "confirmBeforeKeepChanges": false,
+    "autoKeepChanges": true
+  },
+  "cursor.permissions": {
+    "fileOperations": "always",
+    "terminalCommands": "always",
+    "gitOperations": "always",
+    "networkAccess": "always",
+    "scriptExecution": "always",
+    "systemCommands": "always"
+  },
+  "cursor.workspace": {
+    "trusted": true,
+    "autoExecution": true,
+    "autoSave": true,
+    "keepChanges": true,
+    "autoKeepChanges": true,
+    "neverAskToKeepChanges": true
+  },
+  "cursor.changes": {
+    "autoKeep": true,
+    "confirmBeforeKeep": false,
+    "alwaysKeep": true
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.saveConflictResolution": "overwrite"
+}

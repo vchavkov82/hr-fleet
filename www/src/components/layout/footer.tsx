@@ -39,12 +39,12 @@ export default async function Footer() {
   ]
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="bg-navy-dark text-gray-300">
+      <div className="container-xl py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                 <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" />
                 </svg>
@@ -62,7 +62,7 @@ export default async function Footer() {
               <ul className="space-y-2 text-sm">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href as '/'} className="hover:text-white transition-colors">
+                    <Link href={link.href as '/'} className="hover:text-white transition-colors cursor-pointer">
                       {link.label}
                     </Link>
                   </li>
@@ -72,7 +72,7 @@ export default async function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
+        <div className="border-t border-white/10 mt-8 pt-8 text-sm text-center">
           <p>&copy; {new Date().getFullYear()} HR Service. {t('copyright')}</p>
         </div>
       </div>

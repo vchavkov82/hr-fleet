@@ -63,6 +63,8 @@ dev: ## Start everything (infra + frontend dev servers in parallel)
 	scripts/dev.sh up & \
 	sleep 2 && \
 	scripts/dev-apps.sh
+	@echo ""
+	@echo "HR docs dev: http://$$(hostname -f 2>/dev/null || hostname):5011"
 
 dev-apps: ## Start all frontend dev servers (www, blog, docs)
 	scripts/dev-apps.sh

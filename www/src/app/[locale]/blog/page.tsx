@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { routing } from '@/i18n/routing'
 import { getAllPosts } from '@/lib/blog'
+import { BlogImage } from '@/components/blog/BlogImage'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -67,11 +68,10 @@ function BlogCard({
     <article className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg hover:border-blue-300 transition-all">
       <Link href={`/${locale}/blog/${post.slug}`} className="block h-full">
         {post.data.featuredImage ? (
-          <img
+          <BlogImage
             src={post.data.featuredImage}
             alt={post.data.title}
             loading="lazy"
-            decoding="async"
             className="aspect-video w-full object-cover"
           />
         ) : (
@@ -116,15 +116,21 @@ function BlogCard({
 
 export default async function BlogPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>
+  searchParams?: Promise<{ tag?: string }>
 }) {
   const { locale } = await params
+  const { tag } = (await (searchParams ?? Promise.resolve({}))) as { tag?: string }
   setRequestLocale(locale)
   const t = await getTranslations('blog')
   const posts = await getAllPosts(locale)
-  const featured = posts.filter((post) => post.data.featured)
-  const recent = posts.filter((post) => !post.data.featured)
+  const filteredPosts = tag
+    ? posts.filter((post) => post.data.tags?.includes(tag))
+    : posts
+  const featured = filteredPosts.filter((post) => post.data.featured)
+  const recent = filteredPosts.filter((post) => !post.data.featured)
 
   return (
     <div>
@@ -151,6 +157,11 @@ export default async function BlogPage({
               <h2 className="text-3xl font-bold text-gray-900">
                 {t('featuredHeading')}
               </h2>
+              {tag && (
+                <span className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+                  <span>{t('tagFilterLabel', { tag })}</span>
+                </span>
+              )}
               <Link href={`/${locale}/blog`} className="text-sm font-medium text-blue-600 hover:text-blue-700">
                 {t('viewAll')}
               </Link>

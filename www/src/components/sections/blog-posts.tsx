@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/navigation'
+import { BlogImage } from '@/components/blog/BlogImage'
 
 export default async function BlogPosts() {
   const t = await getTranslations('blogPosts')
@@ -26,18 +27,18 @@ export default async function BlogPosts() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {items.map((item) => (
-            <div
+            <Link
               key={item.title}
-              className="rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
+              href={item.href as '/blog'}
+              className="group rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white cursor-pointer block"
             >
               {item.image ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
+                <BlogImage
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
-                  decoding="async"
                   className="aspect-[16/9] w-full object-cover"
+                  aspectClass="aspect-[16/9]"
                 />
               ) : (
                 <div className="aspect-[16/9] bg-gradient-to-br from-primary-50 via-primary-100 to-accent/20" />
@@ -47,23 +48,20 @@ export default async function BlogPosts() {
                 <span className="inline-block rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold text-primary mb-3">
                   {item.category}
                 </span>
-                <h3 className="text-lg font-bold font-heading text-navy mb-2 line-clamp-2">
+                <h3 className="text-lg font-bold font-heading text-navy mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
                   {item.excerpt}
                 </p>
-                <Link
-                  href={item.href as '/blog'}
-                  className="inline-flex items-center text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
-                >
+                <span className="inline-flex items-center text-sm font-semibold text-primary group-hover:text-primary-dark transition-colors">
                   {t('readMore')}
-                  <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

@@ -7,8 +7,10 @@ This folder holds specs and mapping so Figma frames stay aligned with the HR app
 | File | Purpose |
 |------|--------|
 | **REQUIRED_FRAMES.md** | Spec for Figma Make (or manual creation): list of frames to create and a copy-paste prompt. |
-| **HR_TO_FIGMA_MAPPING.json** | Mapping: HR routes → Figma frame names and (optional) node IDs. Update `figmaNodeId` and `figmaFileKey` after creating frames. |
-| **DESIGN_ALIGNMENT.md** | Design tokens and patterns: colors, typography, spacing, components. Use to align Figma with the app. |
+| **FEATURES_FRAME_SPEC.md** | **Features page:** Navy-deep hero, 3 FeatureRows (mock dashboard + text, one reversed), Roadmap (5 cards), CTA. Use so the Figma Features frame matches www. |
+| **HELP_CENTER_FRAME_SPEC.md** | **Help Center only:** Section-by-section layout for Help Center (home), Category, and Article so the Figma frame matches the www implementation (navy-deep hero, quick links, categories, popular articles, still need help). |
+| **HR_TO_FIGMA_MAPPING.json** | Mapping: HR routes → Figma frame names and (optional) node IDs. Update `figmaNodeId` and `figmaFileKey` after creating frames. Help Center entries reference `layoutSpec` for HELP_CENTER_FRAME_SPEC.md. |
+| **DESIGN_ALIGNMENT.md** | Design tokens and patterns: colors, typography, spacing, components. Use to align Figma with the app. Includes navy-deep and Help Center notes. |
 
 ## Workflow
 

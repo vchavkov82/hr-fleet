@@ -11,14 +11,14 @@ Create the following frames for an HR SaaS web app. Use a consistent layout: hea
 
 Frames to create:
 1. Home – Hero with headline and CTA, stats strip, features grid, testimonials, final CTA
-2. Features – Hero, feature list with icons and descriptions
+2. **Features** – Navy-deep hero (H1 + subheading); 3 feature rows (image + text, alternating left/right) with mock dashboard; Roadmap (5 “Coming soon” cards); CTA strip. See FEATURES_FRAME_SPEC.md.
 3. Pricing – Plans (Free / Pro / Enterprise), feature comparison, FAQ
 4. Blog – Blog listing with cards, sidebar
 5. Blog Post – Single article layout with TOC and related posts
 6. About – Company story, team, values
-7. Help Center – Search, categories, popular articles, contact options
-8. Help Center Category – Category title, article list
-9. Help Center Article – Article content, TOC, live chat/email/demo CTAs
+7. **Help Center** – Navy-deep hero with H1 + search bar; Quick Links (4 cards); Browse by Category (5 cards, 3-col grid); Popular Articles (6 cards, 2-col); Still Need Help (3 cards: Live Chat, Email, Demo). See **HELP_CENTER_FRAME_SPEC.md** for exact layout.
+8. **Help Center Category** – Navy-deep header with breadcrumbs, category icon+title+description, search; then article list (cards with icon, title, description, meta). See HELP_CENTER_FRAME_SPEC.md.
+9. **Help Center Article** – Navy-deep header (breadcrumbs, category pill, H1, meta); content with TOC sidebar + prose; Related Articles; Still Need Help strip. See HELP_CENTER_FRAME_SPEC.md.
 10. Contact – Contact form (name, email, company, message)
 11. Auth Login – Email/password form, sign-up link
 12. Auth Sign-up – Registration form (name, company, email, password)
@@ -41,14 +41,14 @@ Frames to create:
 | # | Frame name (Figma) | HR route | Description |
 |---|--------------------|----------|-------------|
 | 1 | Home | `/[locale]` | Landing: Hero, stats, features, testimonials, CTA |
-| 2 | Features | `/[locale]/features` | Feature list with icons |
+| 2 | Features | `/[locale]/features` | Navy-deep hero, 3 FeatureRows (mock dashboard + text), roadmap (5 cards), CTA. **Spec:** FEATURES_FRAME_SPEC.md |
 | 3 | Pricing | `/[locale]/pricing` | Plans + FAQ |
 | 4 | Blog | `/[locale]/blog` | Blog listing |
 | 5 | Blog Post | `/[locale]/blog/[slug]` | Single article |
 | 6 | About | `/[locale]/about` | About page |
-| 7 | Help Center | `/[locale]/help-center` | Help home |
-| 8 | Help Center Category | `/[locale]/help-center/categories/[category]` | Category view |
-| 9 | Help Center Article | `/[locale]/help-center/articles/[article]` | Article view |
+| 7 | Help Center | `/[locale]/help-center` | Help home — navy-deep hero, quick links, categories, popular articles, still need help. **Spec:** HELP_CENTER_FRAME_SPEC.md |
+| 8 | Help Center Category | `/[locale]/help-center/categories/[category]` | Category view — navy-deep header + article list. **Spec:** HELP_CENTER_FRAME_SPEC.md |
+| 9 | Help Center Article | `/[locale]/help-center/articles/[article]` | Article view — navy-deep header, TOC+content, related, still need help. **Spec:** HELP_CENTER_FRAME_SPEC.md |
 | 10 | Help Center Contact | `/[locale]/help-center/contact` | Help contact |
 | 11 | Help Center Search | `/[locale]/help-center/search` | Search results |
 | 12 | Contact | `/[locale]/contact` | Contact form |

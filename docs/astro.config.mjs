@@ -96,7 +96,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     server: {
-      allowedHosts: ['localhost', 'suse-09.lan.assistance.bg'],
+      // Allow LAN access via hostname (e.g. suse-09.lan.assistance.bg:5011)
+      allowedHosts: ['localhost', 'suse-09.lan.assistance.bg', '.lan.assistance.bg'],
     },
   },
 

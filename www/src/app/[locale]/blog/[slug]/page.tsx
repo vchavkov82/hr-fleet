@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
 import { createMdxComponents } from '@/components/blog/mdx-components'
+import { BlogImage } from '@/components/blog/BlogImage'
 import { getAllPostParams, getAllPosts, getPostBySlug } from '@/lib/blog'
 
 export async function generateStaticParams() {
@@ -109,13 +110,12 @@ export default async function BlogPostPage({
 
       {post.data.featuredImage && (
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <BlogImage
             src={post.data.featuredImage}
             alt={post.data.title}
             loading="eager"
-            decoding="async"
             className="w-full rounded-2xl shadow-lg object-cover aspect-[2/1]"
+            aspectClass="aspect-[2/1]"
           />
         </div>
       )}
@@ -142,9 +142,13 @@ export default async function BlogPostPage({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
               </svg>
               {post.data.tags.map((tag: string) => (
-                <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                <Link
+                  key={tag}
+                  href={`/${locale}/blog?tag=${encodeURIComponent(tag)}`}
+                  className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                >
                   {tag}
-                </span>
+                </Link>
               ))}
             </div>
           </div>

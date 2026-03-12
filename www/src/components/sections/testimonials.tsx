@@ -12,9 +12,9 @@ export default async function Testimonials() {
 
   return (
     <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+          <h2 className="text-3xl sm:text-4xl font-bold font-heading text-navy">
             {t('heading')}
           </h2>
           <p className="mt-4 text-lg text-gray-600">
@@ -24,7 +24,7 @@ export default async function Testimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {items.map((item) => (
-            <div key={item.author} className="bg-gray-50 rounded-xl p-8">
+            <div key={item.author} className="bg-surface-lighter rounded-xl p-8">
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <svg
@@ -39,7 +39,7 @@ export default async function Testimonials() {
               </div>
               <p className="text-gray-700 mb-6">&ldquo;{item.quote}&rdquo;</p>
               <div>
-                <p className="font-semibold text-gray-900">{item.author}</p>
+                <p className="font-semibold text-navy">{item.author}</p>
                 <p className="text-sm text-gray-600">{item.role}, {item.company}</p>
               </div>
             </div>

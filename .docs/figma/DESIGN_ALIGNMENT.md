@@ -15,6 +15,7 @@ Use this document to align Figma frames and components with the HR app design sy
 | Accent          | `#0EA5E9` | `accent`                        |
 | Navy (headings) | `#0F172A` | `navy`, `text-navy`             |
 | Navy light      | `#1E293B` | `navy-light`                    |
+| Navy deep       | `#030B24` | `navy-deep` — **Help Center hero/header bg** (not the marketing gradient) |
 | Success         | `#059669` | `success`                       |
 | Warning         | `#D97706` | `warning`                       |
 | Body text       | `#4B5563` | `text-gray-600`                 |
@@ -67,6 +68,12 @@ Use the same max width and similar padding in Figma frames (e.g. 1440px artboard
 | Features   | `www/src/components/sections/features.tsx` | Grid of cards with icon, title, description. |
 | Metric card| `www/src/components/dashboard/metric-card.tsx` | Value + label. |
 | Buttons    | Inline in components | Primary: `bg-primary`; secondary: border + white bg. Radius `rounded-lg`. |
+
+### Help Center (www, not docs app)
+
+Help Center pages live under `www/src/app/[locale]/help-center/`. They use a **different hero**: **navy-deep** (`#030B24`) background with white text and a centered search bar — not the marketing hero gradient. Layout: no shared Header/Footer in the content; sections use `container-xl` (max-w-7xl). See **HELP_CENTER_FRAME_SPEC.md** for section-by-section layout (hero, quick links, categories, popular articles, still need help) so the Figma Help Center frame matches www.
+
+**Features page** (`www/src/app/[locale]/features/page.tsx`) also uses a **navy-deep hero** (same as Help Center), then three **FeatureRow** sections (image + text, one row reversed), a **Roadmap** block (5 cards with “Coming soon” badge), and the **CTA** component. See **FEATURES_FRAME_SPEC.md** for exact layout so the Figma Features frame matches www.
 
 Align Figma components to these names and structure so **Code Connect** mappings (see `HR_TO_FIGMA_MAPPING.json` and the Code Connect skill) stay consistent.
 

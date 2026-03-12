@@ -21,9 +21,9 @@ function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
           type="button"
           onClick={() => switchLocale(locale)}
           className={clsx(
-            'px-2.5 py-1 rounded-md text-xs font-semibold uppercase transition-colors',
+            'px-2.5 py-1 rounded-md text-xs font-semibold uppercase transition-colors cursor-pointer',
             currentLocale === locale
-              ? 'bg-blue-600 text-white'
+              ? 'bg-primary text-white'
               : 'text-gray-500 hover:text-gray-900'
           )}
         >
@@ -44,33 +44,30 @@ const NAV_LINKS = [
   { key: 'contact', href: '/contact' as const },
 ]
 
-const NAV_LABELS: Record<string, string> = {
-  home: 'Home',
-  features: 'Features',
-  pricing: 'Pricing',
-  blog: 'Blog',
-  about: 'About',
-  helpCenter: 'Help Center',
-  contact: 'Contact',
-}
-
 export default function Header() {
   const t = useTranslations('nav')
   const locale = useLocale()
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
+  const isHelpCenterRoute =
+    pathname.startsWith('/en/help-center') || pathname.startsWith('/bg/help-center')
+
+  if (isHelpCenterRoute) {
+    return null
+  }
+
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-xl">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" />
               </svg>
             </div>
-            <span className="text-xl font-semibold text-gray-900">HR Service</span>
+            <span className="text-xl font-semibold text-navy">HR Service</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
@@ -81,10 +78,11 @@ export default function Header() {
                   key={link.key}
                   href={link.href}
                   className={clsx(
-                    isActive ? 'text-blue-600 font-medium' : 'text-gray-600 hover:text-gray-900'
+                    'text-sm transition-colors',
+                    isActive ? 'text-primary font-medium' : 'text-gray-600 hover:text-navy'
                   )}
                 >
-                  {NAV_LABELS[link.key]}
+                  {t(link.key)}
                 </Link>
               )
             })}
@@ -92,19 +90,19 @@ export default function Header() {
 
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
-            <Link href="/auth/login" className="text-gray-600 hover:text-gray-900">
+            <Link href="/auth/login" className="text-sm text-gray-600 hover:text-navy transition-colors">
               {t('login')}
             </Link>
             <Link
               href="/auth/sign-up"
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium cursor-pointer"
             >
               {t('startFree')}
             </Link>
           </div>
 
           <button
-            className="md:hidden p-2 text-gray-600 hover:text-gray-900"
+            className="md:hidden p-2 text-gray-600 hover:text-navy cursor-pointer"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
@@ -133,11 +131,11 @@ export default function Header() {
                   href={link.href}
                   className={clsx(
                     'block px-4 py-2 rounded-lg',
-                    isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50'
+                    isActive ? 'bg-primary-50 text-primary' : 'text-gray-600 hover:bg-gray-50'
                   )}
                   onClick={() => setMobileOpen(false)}
                 >
-                  {NAV_LABELS[link.key]}
+                  {t(link.key)}
                 </Link>
               )
             })}
@@ -154,7 +152,7 @@ export default function Header() {
               </Link>
               <Link
                 href="/auth/sign-up"
-                className="block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-center"
+                className="block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark text-center"
                 onClick={() => setMobileOpen(false)}
               >
                 {t('startFree')}

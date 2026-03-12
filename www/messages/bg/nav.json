@@ -1,8 +1,12 @@
 {
+  "home": "Начало",
   "features": "Функционалности",
   "pricing": "Цени",
   "hrTools": "HR инструменти",
   "blog": "Блог",
+  "about": "За нас",
+  "helpCenter": "Помощен център",
+  "contact": "Контакт",
   "login": "Вход",
   "startFree": "Безплатен пробен период",
   "resources": {

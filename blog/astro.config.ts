@@ -48,7 +48,7 @@ export default defineConfig({
     // See: https://github.com/withastro/astro/issues/14030
     plugins: [tailwindcss()],
     server: {
-      allowedHosts: ["localhost", "suse-09.lan.assistance.bg"],
+      allowedHosts: ["localhost", "suse-09.lan.assistance.bg", "suse-06.lan.assistance.bg", ".lan.assistance.bg"],
     },
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],

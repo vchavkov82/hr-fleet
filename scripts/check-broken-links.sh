@@ -69,6 +69,8 @@ check_url() {
 
 check_www() {
     local base_url="http://localhost:5010"
+    local www_blog_dir="$PROJECT_ROOT/www/src/content/blog"
+    local locales=("en" "bg")
     echo ""
     echo "=== HR Site (localhost:5010) ==="
 
@@ -84,15 +86,62 @@ check_www() {
     check_url "/en/terms" "$base_url"
     check_url "/bg" "$base_url"
     check_url "/bg/hr-tools" "$base_url"
+
+    # Localized blog listing pages on www
+    for locale in "${locales[@]}"; do
+        check_url "/${locale}/blog" "$base_url"
+    done
+
+    # Localized blog posts on www (derived from markdown filenames)
+    if [ -d "$www_blog_dir" ]; then
+        echo "  Checking www blog posts from $www_blog_dir"
+        shopt -s nullglob
+        local post_files=("$www_blog_dir"/*.md)
+        shopt -u nullglob
+
+        for post_file in "${post_files[@]}"; do
+            local filename
+            filename="$(basename "$post_file")"
+            local slug="${filename%.md}"
+
+            for locale in "${locales[@]}"; do
+                check_url "/${locale}/blog/${slug}" "$base_url"
+            done
+        done
+    else
+        echo "  (No www blog posts directory found at $www_blog_dir)"
+    fi
 }
 
 check_blog() {
     local base_url="http://localhost:5013"
+    local posts_dir="$PROJECT_ROOT/blog/src/blog"
     echo ""
     echo "=== HR Blog (localhost:5013) ==="
 
+    # Core blog routes
     check_url "/" "$base_url"
-    check_url "/blog" "$base_url" 2>/dev/null || true
+    check_url "/blog" "$base_url"
+    check_url "/search" "$base_url"
+    check_url "/archives" "$base_url"
+    check_url "/tags" "$base_url"
+
+    # Individual blog posts (derived from markdown filenames)
+    if [ -d "$posts_dir" ]; then
+        echo "  Checking blog posts from $posts_dir"
+        shopt -s nullglob
+        local post_files=("$posts_dir"/*.md)
+        shopt -u nullglob
+
+        for post_file in "${post_files[@]}"; do
+            local filename
+            filename="$(basename "$post_file")"
+            local slug="${filename%.md}"
+            check_url "/posts/${slug}/" "$base_url"
+        done
+    else
+        echo "  (No blog posts directory found at $posts_dir)"
+    fi
 }
 
 check_docs() {
@@ -101,7 +150,6 @@ check_docs() {
     echo "=== HR Docs (localhost:5011) ==="
 
     check_url "/" "$base_url"
-    check_url "/en/introduction" "$base_url" 2>/dev/null || true
 }
 
 # Check servers are accessible

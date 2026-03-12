@@ -38,7 +38,7 @@ const POPULAR_ARTICLES = [
 const QUICK_LINKS = [
   { key: 'gettingStarted', href: '/help-center/categories/getting-started', emoji: '🚀' },
   { key: 'userGuide', href: '/help-center/categories/getting-started', emoji: '📖' },
-  { key: 'troubleshooting', href: '/help-center/categories/security', emoji: '🔧' },
+  { key: 'troubleshooting', href: '/help-center/categories/account', emoji: '🔧' },
   { key: 'contact', href: '/help-center/contact', emoji: '💬' },
 ] as const
 

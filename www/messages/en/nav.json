@@ -1,8 +1,12 @@
 {
+  "home": "Home",
   "features": "Features",
   "pricing": "Pricing",
   "hrTools": "HR Tools",
   "blog": "Blog",
+  "about": "About",
+  "helpCenter": "Help Center",
+  "contact": "Contact",
   "login": "Login",
   "startFree": "Start free trial",
   "resources": {
