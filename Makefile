@@ -76,16 +76,16 @@ infra-down: ## Stop infrastructure
 infra-logs: ## Follow infrastructure logs
 	scripts/dev.sh logs
 
-dev-www: ## Start HR site only in dev mode (port 3010)
-	cd www && PORT=3010 bun dev
+dev-www: ## Start HR site only in dev mode (port 5010)
+	cd www && PORT=5010 bun dev
 
-dev-blog: ## Start HR blog only in dev mode (port 3013)
+dev-blog: ## Start HR blog only in dev mode (port 5013)
 	cd blog && bun dev
 
-dev-docs: ## Start HR docs only in dev mode (port 3011)
+dev-docs: ## Start HR docs only in dev mode (port 5011)
 	cd docs && bun dev
 
-dev-backend: ## Start Go backend in dev mode (port 8080)
+dev-backend: ## Start Go backend in dev mode (port 5080)
 	cd backend && go run ./cmd/server/
 
 odoo-init: ## Initialize Odoo HR modules (run once after first start)
@@ -154,13 +154,13 @@ bootstrap: install ## Full setup from scratch
 	@echo "Bootstrap complete!"
 	@echo ""
 	@echo "Via Caddy (add subdomains to /etc/hosts -> 127.0.0.1):"
-	@echo "  HR site      http://hr.localhost       -> hr:3010"
-	@echo "  HR blog      http://blog.hr.localhost  -> hr-blog:3013"
-	@echo "  HR docs      http://docs.localhost     -> hr-docs:3011"
+	@echo "  HR site      http://hr.localhost       -> hr:5010"
+	@echo "  HR blog      http://blog.hr.localhost  -> hr-blog:5013"
+	@echo "  HR docs      http://docs.localhost     -> hr-docs:5011"
 	@echo ""
 	@echo "Direct ports (dev only):"
-	@echo "  HR site      http://localhost:3010"
-	@echo "  HR blog      http://localhost:3013"
-	@echo "  HR docs      http://localhost:3011"
+	@echo "  HR site      http://localhost:5010"
+	@echo "  HR blog      http://localhost:5013"
+	@echo "  HR docs      http://localhost:5011"
 
 .DEFAULT_GOAL := help

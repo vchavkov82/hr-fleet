@@ -1,7 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
-import Main from "@/layouts/Main.astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -20,11 +19,19 @@ const { page } = Astro.props;
 
 <Layout title={`Posts | ${SITE.title}`}>
   <Header />
-  <Main wide pageTitle="Статии" pageDesc="Всички публикации от HR блога.">
+
+  <section class="bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-gray-900">All Articles</h1>
+      <p class="mt-2 text-gray-600">Browse all posts from the HR blog.</p>
+    </div>
+  </section>
+
+  <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <ul class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {page.data.map(data => <Card display="card" variant="h3" {...data} />)}
     </ul>
-  </Main>
+  </main>
 
   <Pagination {page} />
 

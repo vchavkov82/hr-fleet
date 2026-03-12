@@ -3,18 +3,11 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Socials from "@/components/Socials.astro";
 import Card from "@/components/Card.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import { SITE } from "@/config";
-import { SOCIALS } from "@/constants";
-import HeroSection from "@/components/HeroSection.astro";
-import FeaturesSection from "@/components/FeaturesSection.astro";
-import StatsSection from "@/components/StatsSection.astro";
-import CTASection from "@/components/CTASection.astro";
 
 const posts = await getCollection("blog");
-
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
@@ -23,83 +16,81 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 <Layout>
   <Header />
 
-  {/* Main Homepage Sections */}
-  <HeroSection />
-  <FeaturesSection />
-  <StatsSection />
-
-  {/* Blog Content Section */}
-  <main id="main-content" data-layout="index" class="app-layout-wide py-20 sm:py-28 bg-white">
-    <section id="hero" class="max-w-4xl mx-auto">
-      <div class="mb-16">
-        <span class="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-primary border border-blue-200">
-          Latest Insights
-        </span>
-
-        <h2 class="mt-4 text-4xl font-bold text-navy sm:text-5xl tracking-tight">
-          HR Tips & Resources
-        </h2>
-
-        <p class="mt-4 text-lg text-gray-600 leading-relaxed">
-          Practical advice, trends, and insights for HR professionals.
-          Learn how to optimize recruitment, hiring, and employee management with HR.
+  <!-- Blog Hero -->
+  <section class="bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+          HR Insights & Resources
+        </h1>
+        <p class="text-xl text-gray-600">
+          Expert advice, best practices, and trends to help you build a better workplace
         </p>
-
-        {
-          SOCIALS.length > 0 && (
-            <div class="mt-6 flex max-sm:flex-col sm:items-center text-sm text-gray-600">
-              <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Follow us:</div>
-              <Socials />
-            </div>
-          )
-        }
       </div>
-    </section>
+    </div>
+  </section>
 
-    {
-      featuredPosts.length > 0 && (
-        <section id="featured" class="pt-12">
-          <div class="flex items-center justify-between gap-4">
-            <h3 class="text-2xl font-semibold tracking-tight text-navy">Featured Articles</h3>
-            <a href="/posts/" class="text-sm font-semibold text-primary hover:underline">
-              View all
-            </a>
-          </div>
+  <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Featured Posts -->
+    {featuredPosts.length > 0 && (
+      <section class="py-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Featured Articles</h2>
+        <ul class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {featuredPosts.slice(0, 2).map(data => (
+            <Card display="featured" variant="h2" {...data} />
+          ))}
+        </ul>
 
-          <ul class="mt-6 grid grid-cols-1 gap-8">
-            {featuredPosts.slice(0, 1).map(data => (
-              <Card display="featured" variant="h2" {...data} />
+        {featuredPosts.length > 2 && (
+          <ul class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredPosts.slice(2, 5).map(data => (
+              <Card display="card" variant="h3" {...data} />
             ))}
           </ul>
+        )}
+      </section>
+    )}
 
-          {featuredPosts.length > 1 && (
-            <ul class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {featuredPosts.slice(1, 4).map(data => (
-                <Card display="card" variant="h3" {...data} />
-              ))}
-            </ul>
+    <!-- All Articles -->
+    {recentPosts.length > 0 && (
+      <section class="py-12 border-t border-gray-200">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-2xl font-bold text-gray-900">Latest Articles</h2>
+          <a href="/posts/" class="text-sm font-medium text-blue-600 hover:text-blue-700">
+            View all &rarr;
+          </a>
+        </div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {recentPosts.map(
+            (data, index) =>
+              index < SITE.postPerIndex && <Card display="card" variant="h3" {...data} />
           )}
-        </section>
-      )
-    }
-
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-14 pb-10">
-          <h3 class="text-2xl font-semibold tracking-tight text-navy">Recent Articles</h3>
-          <ul class="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card display="card" variant="h3" {...data} />
-            )}
-          </ul>
-        </section>
-      )
-    }
+        </ul>
+      </section>
+    )}
   </main>
 
-  {/* CTA Section */}
-  <CTASection />
+  <!-- Newsletter CTA -->
+  <section class="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">
+        Subscribe to Our Newsletter
+      </h2>
+      <p class="text-xl text-blue-100 mb-8">
+        Get the latest HR insights and tips delivered to your inbox every week
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          class="flex-1 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+        />
+        <button class="px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-medium whitespace-nowrap">
+          Subscribe
+        </button>
+      </div>
+    </div>
+  </section>
 
   <Footer />
 </Layout>

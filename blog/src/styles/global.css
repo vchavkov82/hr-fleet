@@ -6,50 +6,25 @@
 :root,
 html[data-theme="light"] {
   --background: #ffffff;
-  --foreground: #1e293b;
-  --accent: #1B4DDB;
-  --surface: #f8fafc;
-  --surface-strong: #eef2ff;
-  --muted: #e2e8f0;
-  --border: #e2e8f0;
-  --primary: #1B4DDB;
-  --primary-light: #3B6EF0;
-  --primary-dark: #133AAB;
-  --navy: #0F172A;
-  --navy-light: #1E293B;
-  --gray-50: #f8fafc;
-  --gray-100: #f1f5f9;
-  --gray-200: #e2e8f0;
-  --gray-300: #cbd5e1;
-  --gray-400: #94a3b8;
-  --gray-500: #64748b;
-  --gray-600: #475569;
+  --foreground: #111827;
+  --accent: #2563eb;
+  --surface: #f9fafb;
+  --surface-strong: #f3f4f6;
+  --muted: #e5e7eb;
+  --border: #e5e7eb;
 }
 
 html[data-theme="dark"] {
-  --background: #0F172A;
-  --foreground: #f8fafc;
-  --accent: #3B6EF0;
-  --surface: #0b1224;
-  --surface-strong: #111a2f;
-  --muted: #1E293B;
-  --border: #334155;
-  --primary: #3B6EF0;
-  --primary-light: #60a5fa;
-  --primary-dark: #1B4DDB;
-  --navy: #0F172A;
-  --navy-light: #1E293B;
-  --gray-50: #1e293b;
-  --gray-100: #334155;
-  --gray-200: #475569;
-  --gray-300: #64748b;
-  --gray-400: #94a3b8;
-  --gray-500: #cbd5e1;
-  --gray-600: #e2e8f0;
+  --background: #111827;
+  --foreground: #f9fafb;
+  --accent: #3b82f6;
+  --surface: #1f2937;
+  --surface-strong: #374151;
+  --muted: #374151;
+  --border: #374151;
 }
 
 @theme inline {
-  --font-app: var(--font-google-sans-code);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
@@ -57,44 +32,17 @@ html[data-theme="dark"] {
   --color-surface-strong*: var(--surface-strong);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  --color-primary*: var(--primary);
-  --color-primary-light*: var(--primary-light);
-  --color-primary-dark*: var(--primary-dark);
-  --color-navy*: var(--navy);
-  --color-navy-light*: var(--navy-light);
-  --color-gray-50*: var(--gray-50);
-  --color-gray-100*: var(--gray-100);
-  --color-gray-200*: var(--gray-200);
-  --color-gray-300*: var(--gray-300);
-  --color-gray-400*: var(--gray-400);
-  --color-gray-500*: var(--gray-500);
-  --color-gray-600*: var(--gray-600);
 }
 
 @layer base {
   * {
     @apply border-border outline-accent/75;
-    scrollbar-width: auto;
-    scrollbar-color: var(--color-muted) transparent;
   }
   html {
     @apply overflow-y-scroll scroll-smooth;
   }
   body {
-    @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background relative overflow-hidden;
-    background-image: radial-gradient(circle at 20% 20%, rgba(59, 110, 240, 0.09), transparent 35%),
-      radial-gradient(circle at 80% 0%, rgba(17, 24, 39, 0.08), transparent 30%),
-      linear-gradient(180deg, rgba(27, 77, 219, 0.035), transparent 35%);
-  }
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(circle at 60% 40%, rgba(59, 110, 240, 0.12), transparent 32%),
-      radial-gradient(circle at 15% 70%, rgba(12, 18, 32, 0.12), transparent 28%);
-    opacity: 0.8;
-    z-index: 0;
+    @apply flex min-h-svh flex-col bg-white text-gray-900 antialiased;
   }
   a,
   button {
@@ -103,11 +51,6 @@ html[data-theme="dark"] {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
-  }
-
-  header, main, footer {
-    position: relative;
-    z-index: 1;
   }
 }
 
@@ -123,12 +66,6 @@ html[data-theme="dark"] {
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
-.active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
-}
-
-/* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
-/* Anything that has been anchored to should have extra scroll margin */
 :target {
-  scroll-margin-block: 1rem;
+  scroll-margin-block: 5rem;
 }

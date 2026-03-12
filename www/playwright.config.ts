@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3010'
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:5010'
 const isCI = !!process.env.CI
 
 export default defineConfig({

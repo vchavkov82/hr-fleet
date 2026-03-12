@@ -11,7 +11,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  server: { host: true, port: 3011 },
+  server: { host: true, port: 5011 },
   site: 'https://docs.jobshr.com',
 
   integrations: [
@@ -96,7 +96,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     server: {
-      allowedHosts: ['localhost'],
+      allowedHosts: ['localhost', 'suse-09.lan.assistance.bg'],
     },
   },
 

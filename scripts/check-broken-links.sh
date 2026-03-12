@@ -68,9 +68,9 @@ check_url() {
 }
 
 check_www() {
-    local base_url="http://localhost:3010"
+    local base_url="http://localhost:5010"
     echo ""
-    echo "=== HR Site (localhost:3010) ==="
+    echo "=== HR Site (localhost:5010) ==="
 
     check_url "/" "$base_url"
     check_url "/en" "$base_url"
@@ -87,18 +87,18 @@ check_www() {
 }
 
 check_blog() {
-    local base_url="http://localhost:3013"
+    local base_url="http://localhost:5013"
     echo ""
-    echo "=== HR Blog (localhost:3013) ==="
+    echo "=== HR Blog (localhost:5013) ==="
 
     check_url "/" "$base_url"
     check_url "/blog" "$base_url" 2>/dev/null || true
 }
 
 check_docs() {
-    local base_url="http://localhost:3011"
+    local base_url="http://localhost:5011"
     echo ""
-    echo "=== HR Docs (localhost:3011) ==="
+    echo "=== HR Docs (localhost:5011) ==="
 
     check_url "/" "$base_url"
     check_url "/en/introduction" "$base_url" 2>/dev/null || true

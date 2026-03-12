@@ -4,8 +4,8 @@
   "packageManager": "pnpm@9.0.0",
   "scripts": {
     "prepare": "husky",
-    "dev": "cd www && PORT=3010 pnpm dev",
-    "dev:www": "cd www && PORT=3010 pnpm dev",
+    "dev": "cd www && PORT=5010 pnpm dev",
+    "dev:www": "cd www && PORT=5010 pnpm dev",
     "dev:blog": "cd blog && pnpm dev",
     "dev:docs": "cd docs && pnpm dev",
     "build": "turbo run build --filter=@hr/www --cache-workers=4 && turbo run build --filter=@hr/blog --cache-workers=4",

@@ -1,10 +1,9 @@
 import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
-import { SectionReveal } from '@/components/ui/section-reveal'
 import Hero from '@/components/sections/hero'
+import HomepageStats from '@/components/sections/homepage-stats'
 import Features from '@/components/sections/features'
-import HowItWorks from '@/components/sections/how-it-works'
-import BlogPosts from '@/components/sections/blog-posts'
+import Testimonials from '@/components/sections/testimonials'
 import CTA from '@/components/sections/cta'
 
 export function generateStaticParams() {
@@ -22,22 +21,10 @@ export default async function HomePage({
   return (
     <>
       <Hero />
-
-      <SectionReveal>
-        <Features />
-      </SectionReveal>
-
-      <SectionReveal>
-        <HowItWorks />
-      </SectionReveal>
-
-      <SectionReveal>
-        <BlogPosts />
-      </SectionReveal>
-
-      <SectionReveal>
-        <CTA />
-      </SectionReveal>
+      <HomepageStats />
+      <Features />
+      <Testimonials />
+      <CTA />
     </>
   )
 }

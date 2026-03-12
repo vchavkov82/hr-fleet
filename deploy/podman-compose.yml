@@ -32,7 +32,7 @@ services:
     container_name: hr-api
     hostname: hr-api
     ports:
-      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:5080:8080"
     env_file:
       - ../.env
     environment:
@@ -47,13 +47,13 @@ services:
       - hr
     restart: unless-stopped
 
-  # ── Frontend apps (host ports 3020/3021/3023 to avoid conflict with dev-apps on 3010/3011/3013) ──
+  # ── Frontend apps (host ports 5020/5021/5023 to avoid conflict with dev-apps on 5010/5011/5013) ──
   hr:
     image: oven/bun:1-alpine
     container_name: hr-www
     hostname: hr-www
     ports:
-      - "0.0.0.0:3020:3010"
+      - "0.0.0.0:5020:3010"
     env_file:
       - ../.env
     networks:
@@ -65,7 +65,7 @@ services:
     container_name: hr-blog
     hostname: hr-blog
     ports:
-      - "127.0.0.1:3023:3013"
+      - "127.0.0.1:5023:3013"
     networks:
       - hr
     restart: unless-stopped
@@ -75,7 +75,7 @@ services:
     container_name: hr-docs
     hostname: hr-docs
     ports:
-      - "127.0.0.1:3021:3011"
+      - "127.0.0.1:5021:3011"
     networks:
       - hr
     restart: unless-stopped
@@ -123,13 +123,13 @@ services:
       - hr
     restart: unless-stopped
 
-  # ── Redis cache (host 6380 to avoid conflict with local Redis on 6379) ─────
+  # ── Redis cache (host 5380 to avoid conflict with local Redis on 5379) ─────
   hr-redis:
     image: redis:7-alpine
     container_name: hr-redis
     hostname: hr-redis
     ports:
-      - "127.0.0.1:6380:6379"
+      - "127.0.0.1:5380:6379"
     volumes:
       - redis_data:/data
     healthcheck:

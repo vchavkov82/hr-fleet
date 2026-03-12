@@ -1,71 +1,21 @@
-@import 'swiper/css';
-@import 'swiper/css/navigation';
-@import 'swiper/css/pagination';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 255 255 255;
-    --foreground: 15 23 42;
-  }
-
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-white text-navy antialiased;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    @apply bg-white text-gray-900 antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-  }
-
-  /* Fix for Next.js portal container */
-  nextjs-portal {
-    display: contents;
   }
 }
 
 @layer components {
   .container-xl {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-primary-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed;
-  }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-primary/20 bg-white px-6 py-3 text-sm font-semibold text-primary shadow-sm transition-all duration-200 hover:bg-primary-50 hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
-  }
-
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary transition-all duration-200 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
-  }
-
-  .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-accent-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
-  }
-
-  .card {
-    @apply rounded-2xl bg-white border border-gray-100 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-200;
-  }
-
-  .section-label {
-    @apply inline-flex items-center gap-2 rounded-full bg-primary-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
   }
 }

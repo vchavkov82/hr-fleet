@@ -5,36 +5,30 @@ export default async function CTA() {
   const t = await getTranslations('cta')
 
   return (
-    <section className="py-24">
-      <div className="container-xl">
-        <div className="rounded-3xl bg-primary p-12 md:p-16 text-center relative overflow-hidden">
-          {/* Decorative circles */}
-          <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/5" aria-hidden="true" />
-          <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-white/5" aria-hidden="true" />
-
-          <div className="relative z-10">
-            <h2 className="text-4xl sm:text-5xl font-bold font-heading text-white leading-tight text-balance">
-              {t('heading')}
-            </h2>
-            <p className="mt-4 text-xl text-blue-100 max-w-2xl mx-auto">
-              {t('subheading')}
-            </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/auth/sign-up"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-primary px-8 py-4 text-base font-semibold shadow-lg hover:bg-blue-50 transition-colors"
-              >
-                {t('ctaStart')}
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 text-white px-8 py-4 text-base font-semibold hover:bg-white/10 transition-colors"
-              >
-                {t('ctaContact')}
-              </Link>
-            </div>
-            <p className="mt-6 text-sm text-blue-200">{t('trustText')}</p>
-          </div>
+    <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          {t('heading')}
+        </h2>
+        <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          {t('subheading')}
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/auth/sign-up"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors text-lg font-medium"
+          >
+            {t('ctaStart')}
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-white border-2 border-white rounded-lg hover:bg-white hover:text-blue-600 transition-colors text-lg font-medium"
+          >
+            {t('ctaContact')}
+          </Link>
         </div>
       </div>
     </section>

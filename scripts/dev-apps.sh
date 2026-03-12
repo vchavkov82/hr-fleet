@@ -46,7 +46,7 @@ echo ""
 echo -e "${C_BOLD}Starting HR frontend dev servers...${C_RESET}"
 echo ""
 
-(cd www  && PORT=3010 bun dev  2>&1 | prefix "$C_HR"        "hr"       ) &
+(cd www  && PORT=5010 bun dev  2>&1 | prefix "$C_HR"        "hr"       ) &
 PIDS+=($!)
 
 (cd blog && bun dev            2>&1 | prefix "$C_HR_BLOG"   "hr-blog"  ) &
@@ -60,9 +60,9 @@ sleep 2
 echo ""
 echo -e "${C_BOLD}Dev servers started. Access URLs:${C_RESET}"
 echo ""
-echo -e "  ${C_HR}HR site${C_RESET}          http://localhost:3010"
-echo -e "  ${C_HR_BLOG}HR blog${C_RESET}          http://localhost:3013"
-echo -e "  ${C_HR_DOCS}HR docs${C_RESET}          http://localhost:3011"
+echo -e "  ${C_HR}HR site${C_RESET}          http://localhost:5010"
+echo -e "  ${C_HR_BLOG}HR blog${C_RESET}          http://localhost:5013"
+echo -e "  ${C_HR_DOCS}HR docs${C_RESET}          http://localhost:5011"
 echo ""
 echo -e "Press ${C_BOLD}Ctrl+C${C_RESET} to stop all servers."
 echo ""

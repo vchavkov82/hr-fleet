@@ -1,20 +1,32 @@
 {
   "sectionLabel": "Features",
-  "heading": "Everything your HR team needs",
-  "subheading": "Employee management, salary calculators, and Bulgarian compliance tools -- built for the way you work.",
+  "heading": "Everything you need to manage your team",
+  "subheading": "Powerful features designed to simplify your HR workflows and improve employee experience.",
   "learnMore": "Learn more",
   "items": {
     "employees": {
       "title": "Employee Management",
-      "description": "A centralized employee directory with profiles, search, and filtering. Add, edit, and organize your team by department -- all in a clean, bilingual interface."
+      "description": "Centralize all employee data, from personal information to performance records in one secure location."
     },
-    "calculators": {
-      "title": "HR Calculators",
-      "description": "Salary calculator and freelancer vs employment comparison tool with up-to-date 2026 Bulgarian tax rates, social security contributions, and net/gross breakdowns."
+    "leave": {
+      "title": "Leave Management",
+      "description": "Streamline leave requests, approvals, and tracking with automated workflows and real-time updates."
+    },
+    "documents": {
+      "title": "Document Storage",
+      "description": "Store and organize all HR documents securely with easy access and version control."
+    },
+    "analytics": {
+      "title": "Analytics & Reports",
+      "description": "Get insights into workforce trends, attendance patterns, and performance metrics."
     },
     "compliance": {
-      "title": "Bulgarian Compliance",
-      "description": "Built-in Bulgarian labor law compliance with current NRA tax rates, social security calculations, and regulatory awareness baked into every tool."
+      "title": "Security & Compliance",
+      "description": "Enterprise-grade security with role-based access control and compliance management."
+    },
+    "automation": {
+      "title": "Automated Workflows",
+      "description": "Automate repetitive HR tasks and focus on strategic initiatives that matter."
     }
   }
 }

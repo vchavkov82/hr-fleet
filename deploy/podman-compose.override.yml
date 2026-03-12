@@ -1,17 +1,17 @@
 # HR Product — Development Overrides
 # Source mounts for hot-reload, dev commands, and dev-only env vars.
 #
-# Caddy uses ports 8090/8453 instead of 80/443 to avoid conflicting with
+# Caddy uses ports 5090/5453 instead of 80/443 to avoid conflicting with
 # ../jobs which occupies 80/443 and port 8080 (Go API).
-# Access locally via:  http://hr.localhost:8090  /  https://hr.localhost:8453
+# Access locally via:  http://hr.localhost:5090  /  https://hr.localhost:5453
 
 services:
 
   caddy:
     ports:
-      - "0.0.0.0:8090:80"
-      - "0.0.0.0:8453:443"
-      - "0.0.0.0:8453:443/udp"
+      - "0.0.0.0:5090:80"
+      - "0.0.0.0:5453:443"
+      - "0.0.0.0:5453:443/udp"
 
   hr:
     volumes:
@@ -19,8 +19,8 @@ services:
       - hr_node_modules:/app/node_modules
     working_dir: /app
     environment:
-      - PORT=3010
-      - HR_BLOG_URL=http://hr-blog:3013
+      - PORT=5010
+      - HR_BLOG_URL=http://hr-blog:5013
     entrypoint: ["/app/docker-entrypoint.sh"]
     command: []
 
@@ -33,7 +33,7 @@ services:
       - ASTRO_TELEMETRY_DISABLED=1
       - HOST=0.0.0.0
     entrypoint: sh
-    command: ["-c", "bun install && bun run build && bunx serve -l 3013 dist"]
+    command: ["-c", "bun install && bun run build && bunx serve -l 5013 dist"]
 
   hr-docs:
     volumes:

@@ -8,7 +8,7 @@ import type { Employee, EmployeeCreateInput, EmployeeListResponse } from './type
 const API_BASE =
   typeof window !== 'undefined'
     ? (process.env.NEXT_PUBLIC_API_URL || '')
-    : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080')
+    : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5080')
 
 export class ApiError extends Error {
   constructor(

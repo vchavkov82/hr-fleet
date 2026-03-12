@@ -15,7 +15,7 @@ import { SITE } from "./src/config";
 export default defineConfig({
   server: {
     host: "0.0.0.0",  // Listen on all interfaces
-    port: 3013,
+    port: 5013,
   },
   site: SITE.website,
   security: {
@@ -47,6 +47,9 @@ export default defineConfig({
     // This will be fixed in Astro 6 with Vite 7 support
     // See: https://github.com/withastro/astro/issues/14030
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ["localhost", "suse-09.lan.assistance.bg"],
+    },
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
