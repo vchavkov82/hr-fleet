@@ -70,6 +70,22 @@ export default defineConfig({
     preserveScriptOrder: true,
     fonts: [
       {
+        name: "Inter",
+        cssVariable: "--font-inter",
+        provider: fontProviders.google(),
+        fallbacks: ["system-ui", "sans-serif"],
+        weights: [300, 400, 500, 600, 700, 800],
+        styles: ["normal"],
+      },
+      {
+        name: "Mulish",
+        cssVariable: "--font-mulish",
+        provider: fontProviders.google(),
+        fallbacks: ["system-ui", "sans-serif"],
+        weights: [400, 500, 600, 700, 800],
+        styles: ["normal"],
+      },
+      {
         name: "Google Sans Code",
         cssVariable: "--font-google-sans-code",
         provider: fontProviders.google(),

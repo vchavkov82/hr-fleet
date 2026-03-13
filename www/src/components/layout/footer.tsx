@@ -20,6 +20,7 @@ export default async function Footer() {
       links: [
         { label: t('columns.company.about'), href: '/about' },
         { label: t('columns.resources.blog'), href: '/blog' },
+        { label: 'Docs', href: 'https://docs.jobshr.com/', isExternal: true },
         { label: t('columns.resources.helpCenter'), href: '/help-center' },
         { label: t('columns.company.contact'), href: '/contact' },
         { label: t('columns.company.careers'), href: '/careers' },
@@ -60,9 +61,15 @@ export default async function Footer() {
               <ul className="space-y-2 text-sm">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href as '/'} className="hover:text-white transition-colors cursor-pointer">
-                      {link.label}
-                    </Link>
+                    {'isExternal' in link ? (
+                      <a href={link.href} className="hover:text-white transition-colors cursor-pointer">
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link href={link.href as '/'} className="hover:text-white transition-colors cursor-pointer">
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

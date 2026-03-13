@@ -13,11 +13,13 @@ const shouldRenderSearch =
 
 const locale = Astro.locals.starlightRoute.locale ?? 'en';
 const baseUrl = 'https://jobshr.com';
+const blogUrl = 'https://hr.svc.chavkov.com';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Features', href: '/features' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Blog', href: `${blogUrl}/`, isExternal: true },
+  { label: 'Docs', href: '/', isLocal: true },
   { label: 'About', href: '/about' },
   { label: 'Help Center', href: '/help-center' },
   { label: 'Contact', href: '/contact' },
@@ -36,11 +38,14 @@ const navLinks = [
     </a>
 
     <nav class="nav-links" aria-label="Main navigation">
-      {navLinks.map((link) => (
-        <a href={`${baseUrl}/${locale === 'root' ? 'en' : locale}${link.href}`} class="nav-link">
-          {link.label}
-        </a>
-      ))}
+      {navLinks.map((link) => {
+        const href = link.isExternal ? link.href : link.isLocal ? link.href : `${baseUrl}/${locale === 'root' ? 'en' : locale}${link.href}`;
+        return (
+          <a href={href} class="nav-link">
+            {link.label}
+          </a>
+        );
+      })}
     </nav>
 
     <div class="header-right">

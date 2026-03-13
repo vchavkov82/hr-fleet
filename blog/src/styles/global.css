@@ -7,7 +7,7 @@
 html[data-theme="light"] {
   --background: #ffffff;
   --foreground: #111827;
-  --accent: #2563eb;
+  --accent: #1B4DDB;
   --surface: #f9fafb;
   --surface-strong: #f3f4f6;
   --muted: #e5e7eb;
@@ -17,7 +17,7 @@ html[data-theme="light"] {
 html[data-theme="dark"] {
   --background: #111827;
   --foreground: #f9fafb;
-  --accent: #3b82f6;
+  --accent: #3B6EF0;
   --surface: #1f2937;
   --surface-strong: #374151;
   --muted: #374151;
@@ -40,9 +40,14 @@ html[data-theme="dark"] {
   }
   html {
     @apply overflow-y-scroll scroll-smooth;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
   body {
     @apply flex min-h-svh flex-col bg-white text-gray-900 antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Mulish', 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.03em;
   }
   a,
   button {

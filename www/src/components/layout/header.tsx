@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { Link, usePathname, useRouter } from '@/navigation'
 import { clsx } from 'clsx'
+import { useModal } from '@/components/modals/modal-provider'
 
 function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
   const router = useRouter()
@@ -39,6 +40,7 @@ const NAV_LINKS = [
   { key: 'features', href: '/features' as const },
   { key: 'pricing', href: '/pricing' as const },
   { key: 'blog', href: '/blog' as const },
+  { key: 'docs', href: 'https://docs.jobshr.com/' as const, isExternal: true },
   { key: 'about', href: '/about' as const },
   { key: 'helpCenter', href: '/help-center' as const },
   { key: 'contact', href: '/contact' as const },
@@ -49,6 +51,7 @@ export default function Header() {
   const locale = useLocale()
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
+  const { openLogin, openSignUp, openContact } = useModal()
 
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
@@ -65,7 +68,33 @@ export default function Header() {
 
           <div className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((link) => {
-              const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href)
+              const isActive = link.href === '/' ? pathname === '/' : !('isExternal' in link) && pathname.startsWith(link.href)
+              if (link.key === 'contact') {
+                return (
+                  <button
+                    key={link.key}
+                    type="button"
+                    onClick={openContact}
+                    className={clsx(
+                      'text-sm transition-colors cursor-pointer',
+                      isActive ? 'text-primary font-medium' : 'text-gray-600 hover:text-gray-900'
+                    )}
+                  >
+                    {t(link.key)}
+                  </button>
+                )
+              }
+              if ('isExternal' in link) {
+                return (
+                  <a
+                    key={link.key}
+                    href={link.href}
+                    className="text-sm transition-colors text-gray-600 hover:text-gray-900"
+                  >
+                    {t(link.key)}
+                  </a>
+                )
+              }
               return (
                 <Link
                   key={link.key}
@@ -83,15 +112,20 @@ export default function Header() {
 
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
-            <Link href="/auth/login" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+            <button
+              type="button"
+              onClick={openLogin}
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+            >
               {t('signIn')}
-            </Link>
-            <Link
-              href="/auth/sign-up"
+            </button>
+            <button
+              type="button"
+              onClick={() => openSignUp()}
               className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium cursor-pointer"
             >
               {t('getStarted')}
-            </Link>
+            </button>
           </div>
 
           <button
@@ -118,7 +152,34 @@ export default function Header() {
         <div className="md:hidden border-t border-gray-200 bg-white" id="mobile-menu" aria-hidden={!mobileOpen}>
           <div className="px-4 py-4 space-y-3">
             {NAV_LINKS.map((link) => {
-              const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href)
+              const isActive = link.href === '/' ? pathname === '/' : !('isExternal' in link) && pathname.startsWith(link.href)
+              if (link.key === 'contact') {
+                return (
+                  <button
+                    key={link.key}
+                    type="button"
+                    onClick={() => { setMobileOpen(false); openContact() }}
+                    className={clsx(
+                      'block w-full text-left px-4 py-2 rounded-lg cursor-pointer',
+                      isActive ? 'bg-primary-50 text-primary' : 'text-gray-600 hover:bg-gray-50'
+                    )}
+                  >
+                    {t(link.key)}
+                  </button>
+                )
+              }
+              if ('isExternal' in link) {
+                return (
+                  <a
+                    key={link.key}
+                    href={link.href}
+                    className="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {t(link.key)}
+                  </a>
+                )
+              }
               return (
                 <Link
                   key={link.key}
@@ -137,20 +198,20 @@ export default function Header() {
               <div className="px-4 py-2">
                 <LanguageSwitcher currentLocale={locale} />
               </div>
-              <Link
-                href="/auth/login"
-                className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
-                onClick={() => setMobileOpen(false)}
+              <button
+                type="button"
+                onClick={() => { setMobileOpen(false); openLogin() }}
+                className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg cursor-pointer"
               >
                 {t('signIn')}
-              </Link>
-              <Link
-                href="/auth/sign-up"
-                className="block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark text-center"
-                onClick={() => setMobileOpen(false)}
+              </button>
+              <button
+                type="button"
+                onClick={() => { setMobileOpen(false); openSignUp() }}
+                className="block w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark text-center cursor-pointer"
               >
                 {t('getStarted')}
-              </Link>
+              </button>
             </div>
           </div>
         </div>

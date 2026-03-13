@@ -10,33 +10,35 @@ import config from 'virtual:starlight/user-config';
 
 const locale = Astro.locals.starlightRoute.locale ?? 'en';
 const baseUrl = 'https://jobshr.com';
+const blogUrl = 'https://hr.svc.chavkov.com';
 const localePath = locale === 'root' ? 'en' : locale;
 
 const columns = [
   {
     label: 'Product',
     links: [
-      { label: 'Features', href: '/features' },
-      { label: 'Pricing', href: '/pricing' },
-      { label: 'HR Tools', href: '/hr-tools' },
+      { label: 'Features', href: `${baseUrl}/${localePath}/features` },
+      { label: 'Pricing', href: `${baseUrl}/${localePath}/pricing` },
+      { label: 'HR Tools', href: `${baseUrl}/${localePath}/hr-tools` },
     ],
   },
   {
     label: 'Company',
     links: [
-      { label: 'About', href: '/about' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Help Center', href: '/help-center' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'Careers', href: '/careers' },
+      { label: 'About', href: `${baseUrl}/${localePath}/about` },
+      { label: 'Blog', href: `${blogUrl}/` },
+      { label: 'Docs', href: '/' },
+      { label: 'Help Center', href: `${baseUrl}/${localePath}/help-center` },
+      { label: 'Contact', href: `${baseUrl}/${localePath}/contact` },
+      { label: 'Careers', href: `${baseUrl}/${localePath}/careers` },
     ],
   },
   {
     label: 'Legal',
     links: [
-      { label: 'Terms of Service', href: '/terms' },
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Cookie Policy', href: '/cookies' },
+      { label: 'Terms of Service', href: `${baseUrl}/${localePath}/terms` },
+      { label: 'Privacy Policy', href: `${baseUrl}/${localePath}/privacy` },
+      { label: 'Cookie Policy', href: `${baseUrl}/${localePath}/cookies` },
     ],
   },
 ];
@@ -74,7 +76,7 @@ const columns = [
         <ul class="footer-links">
           {column.links.map((link) => (
             <li>
-              <a href={`${baseUrl}/${localePath}${link.href}`} class="footer-link">{link.label}</a>
+              <a href={link.href} class="footer-link">{link.label}</a>
             </li>
           ))}
         </ul>
