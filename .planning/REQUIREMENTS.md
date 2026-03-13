@@ -46,10 +46,10 @@
 
 ### Foundation & Monorepo (Phase 0 from gsd-requirements)
 - [x] **FND-01**: Monorepo setup with pnpm workspaces + Turborepo (apps/web, apps/docs, apps/admin, services/api, services/worker, packages/*)
-- [ ] **FND-02**: CI/CD pipelines (.github/workflows): test, build, deploy, security scan
+- [x] **FND-02**: CI/CD pipelines (.github/workflows): test, build, deploy, security scan
 - [ ] **FND-03**: Figma design system: color tokens, typography, spacing, component library (7 categories)
 - [ ] **FND-04**: Design tokens JSON export consumed by Tailwind config
-- [ ] **FND-05**: Odoo 17 provisioning (Community or Enterprise — decision pending)
+- [x] **FND-05**: Odoo 17 provisioning (Community or Enterprise — decision pending)
 
 ### Core Go REST API (Phase 1 from gsd-requirements)
 - [ ] **API-01**: Go 1.22+ REST API with Chi/Fiber router, versioned under /api/v1

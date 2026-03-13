@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.1
-milestone_name: GSD Payroll Platform
+milestone_name: — GSD Payroll Platform Expansion
 status: executing
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-03-13T22:02:23.000Z"
-last_activity: 2026-03-13 -- Completed 05-01 monorepo restructure
+stopped_at: Completed 05-03-PLAN.md
+last_updated: "2026-03-13T22:08:15.679Z"
+last_activity: 2026-03-13 -- Completed 05-04 CI/CD pipelines
 progress:
   total_phases: 12
-  completed_phases: 4
-  total_plans: 23
-  completed_plans: 23
+  completed_phases: 3
+  total_plans: 27
+  completed_plans: 25
   percent: 36
 ---
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-13)
 ## Current Position
 
 Phase: 5 of 11 (Foundation & Monorepo Setup)
-Plan: 02 of 04 complete (01 + 02 done)
+Plan: 04 of 04 complete (01 + 02 + 03 + 04 done)
 Status: Executing
-Last activity: 2026-03-13 -- Completed 05-01 monorepo restructure
+Last activity: 2026-03-13 -- Completed 05-04 CI/CD pipelines
 
 Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0 plans complete)
 
@@ -113,6 +113,10 @@ Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0
 - [Phase 05]: Monorepo layout: apps/* for frontends, services/* for backends, packages/* for shared
 - [Phase 05]: Go services integrated into Turborepo via thin package.json with go build/test/lint scripts
 - [Phase 05]: Go module path changed from github.com/vchavkov/hr-backend to github.com/vchavkov/hr/services/api
+- [Phase 05]: Reusable CI workflow (workflow_call) so deploy-prod can call it as a job
+- [Phase 05]: postgres:16-alpine for API database separate from Odoo postgres:17
+- [Phase 05]: Odoo 18 confirmed (FND-05 Odoo 17 reference outdated)
+- [Phase 05]: sqlc generates type-safe Go from SQL into internal/db/ via pgx/v5
 
 ### Setup Requirements (User Responsibilities)
 
@@ -135,7 +139,7 @@ Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0
 
 ## Session Continuity
 
-Last session: 2026-03-13T22:02:23.000Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-03-13T22:08:15.675Z
+Stopped at: Completed 05-03-PLAN.md
 Resume file: None
 Next up: 05-03-PLAN.md or 05-04-PLAN.md (wave 2)
