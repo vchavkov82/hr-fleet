@@ -1,0 +1,35 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  ci:
+    name: CI Gates
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+
+  deploy:
+    name: Deploy to Production
+    needs: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd ~/hr
+            git pull origin main
+            docker compose -f deploy/podman-compose.yml up -d --build
+            docker compose -f deploy/podman-compose.yml ps
