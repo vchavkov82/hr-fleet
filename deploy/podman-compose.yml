@@ -36,9 +36,12 @@ services:
     env_file:
       - ../.env
     environment:
+      DATABASE_URL: postgres://hr:hr_dev_password@hr-db:5432/hr_platform?sslmode=disable
       ODOO_URL: http://hr-odoo:8069
       REDIS_URL: redis://hr-redis:6379
     depends_on:
+      hr-db:
+        condition: service_healthy
       odoo:
         condition: service_started
       hr-redis:
@@ -76,6 +79,29 @@ services:
     hostname: hr-docs
     ports:
       - "127.0.0.1:5021:3011"
+    networks:
+      - hr
+    restart: unless-stopped
+
+  # ── PostgreSQL (API database) ────────────────────────────────────────────
+  hr-db:
+    image: postgres:16-alpine
+    container_name: hr-db
+    hostname: hr-db
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_DB: hr_platform
+      POSTGRES_USER: hr
+      POSTGRES_PASSWORD: hr_dev_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - hr_db_data:/var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hr -d hr_platform"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - hr
     restart: unless-stopped
@@ -150,4 +176,5 @@ volumes:
   caddy_config:
   odoo_data:
   odoo_db_data:
+  hr_db_data:
   redis_data:
