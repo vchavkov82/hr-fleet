@@ -64,7 +64,7 @@ Plans:
 | 2. Freelancer vs Payroll Comparison | v1.0 | 4/4 | Complete | 2026-03-05 |
 | 3. Odoo HR Backend Integration | v1.0 | 5/5 | Complete | 2026-03-07 |
 | 4. Content Aligned with Odoo | v1.0 | 4/4 | Complete | 2026-03-08 |
-| 5. Foundation & Monorepo | 4/4 | Complete   | 2026-03-13 | - |
+| 5. Foundation & Monorepo | v1.1 | 4/4 | Complete | 2026-03-13 |
 | 6. Core Go REST API | v1.1 | 0/TBD | Not Started | - |
 | 7. Admin UI with RBAC | v1.1 | 0/TBD | Not Started | - |
 | 8. Marketing Site Enhancement | v1.1 | 0/TBD | Not Started | - |
@@ -108,14 +108,14 @@ Plans:
 **Goal**: Restructure into monorepo (pnpm workspaces + Turborepo). Set up CI/CD pipelines, design system tokens with CSS custom properties and dark mode, Odoo 18 provisioning, Go project scaffold with Chi + sqlc + pgx.
 **Requirements**: FND-01 through FND-05
 **Depends on**: Phase 4 (existing codebase)
-**Status**: Planning
+**Status**: Complete
 **Plans**: 4 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — Monorepo restructure: relocate apps, update workspace and Turborepo configs
-- [ ] 05-02-PLAN.md — Design system tokens: CSS custom properties, dark mode, Tailwind integration
-- [ ] 05-03-PLAN.md — Go API scaffold: sqlc + pgx/v5, initial migration, Docker Compose update
-- [ ] 05-04-PLAN.md — CI/CD pipelines: GitHub Actions for test, build, deploy, security scan
+- [x] 05-01-PLAN.md — Monorepo restructure: relocate apps, update workspace and Turborepo configs
+- [x] 05-02-PLAN.md — Design system tokens: CSS custom properties, dark mode, Tailwind integration
+- [x] 05-03-PLAN.md — Go API scaffold: sqlc + pgx/v5, initial migration, Docker Compose update
+- [x] 05-04-PLAN.md — CI/CD pipelines: GitHub Actions for test, build, deploy, security scan
 
 ### Phase 6: Core Go REST API
 **Goal**: Build versioned REST API (/api/v1) in Go: auth (JWT RS256 + API Key), employee CRUD, payslips, payroll runs (async via Asynq), contracts, leave management, reports, webhooks. Odoo XML-RPC integration with connection pooling, circuit breaker, retry. Swagger/OpenAPI docs auto-generated. Structured logging, Prometheus metrics, OpenTelemetry tracing.

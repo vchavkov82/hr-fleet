@@ -163,7 +163,7 @@
 | EMP-04 | Phase 5+ | Pending |
 | ATS-01–04 | Phase 7+ | Pending |
 | COMP-01–03 | Phase 7+ | Pending |
-| FND-01–05 | Phase 5 | Pending |
+| FND-01–05 | Phase 5 | Complete |
 | API-01–13 | Phase 6 | Pending |
 | ADM-01–14 | Phase 7 | Pending |
 | MKT-10–18 | Phase 8 | Pending |
