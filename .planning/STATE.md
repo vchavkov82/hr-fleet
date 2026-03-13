@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.1
-milestone_name: GSD Payroll Platform
-status: planning
-stopped_at: Phase 5 complete, Phase 6 next
-last_updated: "2026-03-13T22:15:00.000Z"
-last_activity: 2026-03-13 -- Completed Phase 5 Foundation & Monorepo Setup (4/4 plans, verified)
+milestone_name: — GSD Payroll Platform Expansion
+status: executing
+stopped_at: Completed 12-01-PLAN.md
+last_updated: "2026-03-13T23:22:59.436Z"
+last_activity: 2026-03-13 -- Completed 05-04 CI/CD pipelines
 progress:
-  total_phases: 11
-  completed_phases: 5
-  total_plans: 27
-  completed_plans: 27
-  percent: 45
+  total_phases: 12
+  completed_phases: 3
+  total_plans: 29
+  completed_plans: 26
+  percent: 36
 ---
 
 # Project State
@@ -117,6 +117,7 @@ Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0
 - [Phase 05]: postgres:16-alpine for API database separate from Odoo postgres:17
 - [Phase 05]: Odoo 18 confirmed (FND-05 Odoo 17 reference outdated)
 - [Phase 05]: sqlc generates type-safe Go from SQL into internal/db/ via pgx/v5
+- [Phase 12]: Replaced all bun references with pnpm across containers, scripts, and configs
 
 ### Setup Requirements (User Responsibilities)
 
@@ -139,7 +140,7 @@ Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0
 
 ## Session Continuity
 
-Last session: 2026-03-13T22:08:15.675Z
-Stopped at: Completed 05-03-PLAN.md
+Last session: 2026-03-13T23:22:59.427Z
+Stopped at: Completed 12-01-PLAN.md
 Resume file: None
 Next up: 05-03-PLAN.md or 05-04-PLAN.md (wave 2)
