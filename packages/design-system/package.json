@@ -6,7 +6,12 @@
   "exports": {
     "./tailwind": "./tailwind.config.ts",
     "./colors": "./tokens/colors.ts",
-    "./typography": "./tokens/typography.ts"
+    "./typography": "./tokens/typography.ts",
+    "./styles/globals.css": "./styles/globals.css",
+    "./tokens/css-vars": "./tokens/css-vars.ts",
+    "./tokens/tokens.json": "./tokens/tokens.json",
+    "./tokens/dark": "./tokens/dark.ts",
+    "./tokens/transform": "./tokens/transform.ts"
   },
   "dependencies": {
     "tailwindcss": "^4.1.18",
