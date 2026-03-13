@@ -108,8 +108,8 @@ npm create astro@latest -- --template satnaing/astro-paper
 # yarn
 yarn create astro --template satnaing/astro-paper
 
-# bun
-bun create astro@latest -- --template satnaing/astro-paper
+# pnpm
+pnpm create astro@latest -- --template satnaing/astro-paper
 ```
 
 Then start the project by running the following commands:

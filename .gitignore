@@ -1,3 +1,7 @@
+# Bun lockfiles (project uses pnpm)
+bun.lock
+**/bun.lock
+
 # Environment
 .env
 .env.local
