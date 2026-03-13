@@ -2,8 +2,8 @@
 
 ## Milestones
 
-- [x] **v1.0 MVP** - Phase 1 (HR App MVP - shipped 2026-02-26)
-- [ ] **v1.1 Enhanced Features** - Phases 2+ (in progress)
+- [x] **v1.0 MVP** - Phases 1–4 (Marketing site, calculators, Odoo integration, content — completed 2026-03-08)
+- [ ] **v1.1 GSD Payroll Platform** - Phases 5–11 (Monorepo, Core API, Admin UI, Marketing enhancement, Docs/Blog, QA, Launch)
 
 ## Phases
 
@@ -60,8 +60,17 @@ Plans:
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 1. HR App MVP | v1.0 | All | In Progress | - |
-| 2. Freelancer vs Payroll Comparison | 3/4 | In Progress|  | - |
+| 1. HR App MVP | v1.0 | 10/10 | Complete | 2026-02-26 |
+| 2. Freelancer vs Payroll Comparison | v1.0 | 4/4 | Complete | 2026-03-05 |
+| 3. Odoo HR Backend Integration | v1.0 | 5/5 | Complete | 2026-03-07 |
+| 4. Content Aligned with Odoo | v1.0 | 4/4 | Complete | 2026-03-08 |
+| 5. Foundation & Monorepo | v1.1 | 0/4 | Planning | - |
+| 6. Core Go REST API | v1.1 | 0/TBD | Not Started | - |
+| 7. Admin UI with RBAC | v1.1 | 0/TBD | Not Started | - |
+| 8. Marketing Site Enhancement | v1.1 | 0/TBD | Not Started | - |
+| 9. Documentation Hub & Blog | v1.1 | 0/TBD | Not Started | - |
+| 10. Integration QA & Security | v1.1 | 0/TBD | Not Started | - |
+| 11. Launch | v1.1 | 0/TBD | Not Started | - |
 
 ### Phase 3: Odoo HR Backend Integration
 
@@ -86,6 +95,65 @@ Plans:
 
 Plans:
 - [x] 04-01-PLAN.md — Homepage cleanup: strip fake sections, rewrite hero/CTA/features for honest copy
-- [ ] 04-02-PLAN.md — Features page restructure (active + roadmap) and pricing page (single plan)
-- [ ] 04-03-PLAN.md — Help center content rewrite for real features
-- [ ] 04-04-PLAN.md — 6 new Bulgarian blog posts (labor law, platform how-tos, EOOD/freelancer)
+- [x] 04-02-PLAN.md — Features page restructure (active + roadmap) and pricing page (single plan)
+- [x] 04-03-PLAN.md — Help center content rewrite for real features
+- [x] 04-04-PLAN.md — 6 new Bulgarian blog posts (labor law, platform how-tos, EOOD/freelancer)
+
+---
+
+## v1.1 — GSD Payroll Platform Expansion
+
+### Phase 5: Foundation & Monorepo Setup
+**Goal**: Restructure into monorepo (pnpm workspaces + Turborepo). Set up CI/CD pipelines, design system tokens with CSS custom properties and dark mode, Odoo 18 provisioning, Go project scaffold with Chi + sqlc + pgx.
+**Requirements**: FND-01 through FND-05
+**Depends on**: Phase 4 (existing codebase)
+**Status**: Planning
+**Plans**: 4 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Monorepo restructure: relocate apps, update workspace and Turborepo configs
+- [ ] 05-02-PLAN.md — Design system tokens: CSS custom properties, dark mode, Tailwind integration
+- [ ] 05-03-PLAN.md — Go API scaffold: sqlc + pgx/v5, initial migration, Docker Compose update
+- [ ] 05-04-PLAN.md — CI/CD pipelines: GitHub Actions for test, build, deploy, security scan
+
+### Phase 6: Core Go REST API
+**Goal**: Build versioned REST API (/api/v1) in Go: auth (JWT RS256 + API Key), employee CRUD, payslips, payroll runs (async via Asynq), contracts, leave management, reports, webhooks. Odoo XML-RPC integration with connection pooling, circuit breaker, retry. Swagger/OpenAPI docs auto-generated. Structured logging, Prometheus metrics, OpenTelemetry tracing.
+**Requirements**: API-01 through API-13
+**Depends on**: Phase 5 (monorepo + Go scaffold)
+**Status**: Not Started
+**Plans**: TBD
+
+### Phase 7: Admin UI with RBAC
+**Goal**: React 18 + Vite 5 SPA for platform operators. Login, dashboard (KPI cards), employee CRUD (TanStack Table), payroll run flow, payslip viewer, contract management, leave approval, reports (Recharts), users & roles, audit log, settings. RBAC enforced at API and UI layers with 7 role types. Type-safe API client from OpenAPI spec.
+**Requirements**: ADM-01 through ADM-14
+**Depends on**: Phase 6 (REST API)
+**Status**: Not Started
+**Plans**: TBD
+
+### Phase 8: Marketing Site Enhancement
+**Goal**: Upgrade Next.js marketing site to full page inventory with SSG+ISR. Achieve Lighthouse Performance ≥ 90, SEO ≥ 95. Add JSON-LD structured data, dynamic sitemap, Core Web Vitals optimization, semantic HTML5, hreflang tags. Industry solutions pages, integrations hub, security page.
+**Requirements**: MKT-10 through MKT-18
+**Depends on**: Phase 5 (monorepo)
+**Status**: Not Started
+**Plans**: TBD
+
+### Phase 9: Documentation Hub & Blog
+**Goal**: Nuxt.js 3 documentation hub with @nuxt/content, Algolia DocSearch, all content sections (Getting Started through FAQ). Blog with article schema, OG images, RSS feed, category/tag pages, author profiles. Git-based doc versioning.
+**Requirements**: DOC-01 through DOC-05, BLOG-01 through BLOG-06
+**Depends on**: Phase 6 (API for API Reference docs)
+**Status**: Not Started
+**Plans**: TBD
+
+### Phase 10: Integration QA & Security
+**Goal**: E2E test suite, penetration testing, performance profiling, load testing (10k req/min target). Security hardening: TLS 1.3, HSTS, CSP, dependency scanning (Dependabot + govulncheck).
+**Requirements**: QA-01 through QA-04, NFR-01 through NFR-06
+**Depends on**: Phases 6–9 (all components built)
+**Status**: Not Started
+**Plans**: TBD
+
+### Phase 11: Launch
+**Goal**: DNS cutover, production deployment, monitoring (Prometheus + Grafana + Sentry + uptime), runbook, on-call rotation. SLA 99.9%, zero-downtime deployments via K8s rolling updates.
+**Requirements**: LAUNCH-01 through LAUNCH-04
+**Depends on**: Phase 10 (QA passed)
+**Status**: Not Started
+**Plans**: TBD
