@@ -43,3 +43,4 @@ logs/
 
 # Core dumps
 core
+services/api/server
