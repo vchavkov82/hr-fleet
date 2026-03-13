@@ -3,7 +3,7 @@
 ## Milestones
 
 - [x] **v1.0 MVP** - Phases 1–4 (Marketing site, calculators, Odoo integration, content — completed 2026-03-08)
-- [ ] **v1.1 GSD Payroll Platform** - Phases 5–11 (Monorepo, Core API, Admin UI, Marketing enhancement, Docs/Blog, QA, Launch)
+- [ ] **v1.1 GSD Payroll Platform** - Phases 5–12 (Monorepo, Core API, Admin UI, Marketing enhancement, Docs/Blog, QA, Launch, pnpm+turbo migration)
 
 ## Phases
 
@@ -64,13 +64,14 @@ Plans:
 | 2. Freelancer vs Payroll Comparison | v1.0 | 4/4 | Complete | 2026-03-05 |
 | 3. Odoo HR Backend Integration | v1.0 | 5/5 | Complete | 2026-03-07 |
 | 4. Content Aligned with Odoo | v1.0 | 4/4 | Complete | 2026-03-08 |
-| 5. Foundation & Monorepo | v1.1 | 0/4 | Planning | - |
+| 5. Foundation & Monorepo | 2/4 | In Progress|  | - |
 | 6. Core Go REST API | v1.1 | 0/TBD | Not Started | - |
 | 7. Admin UI with RBAC | v1.1 | 0/TBD | Not Started | - |
 | 8. Marketing Site Enhancement | v1.1 | 0/TBD | Not Started | - |
 | 9. Documentation Hub & Blog | v1.1 | 0/TBD | Not Started | - |
 | 10. Integration QA & Security | v1.1 | 0/TBD | Not Started | - |
 | 11. Launch | v1.1 | 0/TBD | Not Started | - |
+| 12. Migrate to pnpm+turbo | v1.1 | 0/TBD | Not Started | - |
 
 ### Phase 3: Odoo HR Backend Integration
 
@@ -157,3 +158,12 @@ Plans:
 **Depends on**: Phase 10 (QA passed)
 **Status**: Not Started
 **Plans**: TBD
+
+### Phase 12: Migrate to pnpm+turbo
+**Goal**: [To be planned]
+**Depends on**: Phase 11
+**Status**: Not Started
+**Plans**: 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 12 to break down)
