@@ -24,7 +24,7 @@ The admin panel is at `admin/packages/manager/`:
 - **API SDK**: `@jobs/api-client` at `admin/packages/api-v4/` (Axios-based, tsup build)
 - **Auth**: JWT in localStorage (`jobs_access_token`, `jobs_refresh_token`)
 - **Node**: 22.19.0 via Volta
-- **Package manager**: bun
+- **Package manager**: pnpm
 
 ### API Integration
 

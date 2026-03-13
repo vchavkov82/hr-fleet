@@ -13,34 +13,34 @@ This project includes comprehensive unit and E2E testing to ensure code quality 
 ### Unit Tests
 ```bash
 # Run unit tests once
-bun run test
+pnpm run test
 
 # Watch mode (rerun on file changes)
-bun run test:watch
+pnpm run test:watch
 
 # UI dashboard
-bun run test:ui
+pnpm run test:ui
 ```
 
 ### E2E Tests
 ```bash
 # Run all E2E tests
-bun run test:e2e
+pnpm run test:e2e
 
 # UI mode (interactive)
-bun run test:e2e:ui
+pnpm run test:e2e:ui
 
 # Debug mode (step through)
-bun run test:e2e:debug
+pnpm run test:e2e:debug
 
 # Specific browser
-bun run test:e2e -- --project=chromium
+pnpm run test:e2e -- --project=chromium
 ```
 
 ### All Tests
 ```bash
 # Run unit tests only (recommended for CI)
-bun run test:all
+pnpm run test:all
 ```
 
 ### E2E Tests Setup
@@ -51,7 +51,7 @@ bun run test:all
 1. Playwright browsers must be installed:
 ```bash
 cd www
-bun x playwright install
+pnpm dlx playwright install
 ```
 
 2. System dependencies (Linux):
@@ -66,13 +66,13 @@ sudo npx playwright install-deps
 #### Running E2E Tests
 ```bash
 # Run E2E tests (requires browsers installed)
-bun run test:e2e
+pnpm run test:e2e
 
 # Debug mode (interactive browser)
-bun run test:e2e:debug
+pnpm run test:e2e:debug
 
 # UI mode
-bun run test:e2e:ui
+pnpm run test:e2e:ui
 ```
 
 > **Note:** E2E tests are optional in most development workflows. Focus on unit tests for rapid iteration, and run E2E tests before deployment or in CI pipelines.
@@ -152,7 +152,7 @@ Tests are configured for CI environments:
 # - 2 retry attempts for flaky tests
 # - Strict forbidOnly mode
 
-PLAYWRIGHT_BASE_URL=https://staging.example.com bun run test:e2e
+PLAYWRIGHT_BASE_URL=https://staging.example.com pnpm run test:e2e
 ```
 
 ## Debugging
@@ -160,19 +160,19 @@ PLAYWRIGHT_BASE_URL=https://staging.example.com bun run test:e2e
 ### Unit Tests
 ```bash
 # With Vitest UI
-bun run test:ui
+pnpm run test:ui
 
 # With console output
-bun run test:watch
+pnpm run test:watch
 ```
 
 ### E2E Tests
 ```bash
 # Interactive debug mode
-bun run test:e2e:debug
+pnpm run test:e2e:debug
 
 # With UI
-bun run test:e2e:ui
+pnpm run test:e2e:ui
 
 # With tracing (generates video/trace)
 playwright test --trace on
@@ -209,7 +209,7 @@ If E2E tests fail with "browserType.launch: Executable doesn't exist":
 1. Install Playwright browsers:
 ```bash
 cd www
-bun x playwright install
+pnpm dlx playwright install
 ```
 
 2. Install system dependencies (Linux):
@@ -226,7 +226,7 @@ sudo apt-get install libxrandr2 libxcomposite1 libxcursor1 libxdamage1 \
 3. On macOS/Windows: Browsers should work automatically after `playwright install`
 
 ### E2E Tests Timeout
-- Ensure the dev server starts successfully: `bun dev`
+- Ensure the dev server starts successfully: `pnpm dev`
 - Check if port 3010 is accessible
 - Increase timeout in playwright.config.ts if needed
 

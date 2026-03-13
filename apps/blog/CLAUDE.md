@@ -12,7 +12,7 @@ Content marketing blog for the HR SaaS product. Drives organic traffic via SEO-o
 - **Feed**: `@astrojs/rss`
 - **Sitemap**: `@astrojs/sitemap`
 - **OG Images**: `@resvg/resvg-js` (server-side SVG → PNG)
-- **Package manager**: bun
+- **Package manager**: pnpm
 - **Port**: 3013
 
 ## Content Structure (`src/`)
@@ -61,15 +61,15 @@ draft: false
 make dev-hr-blog       # Start dev server on port 3013
 
 # From app/hr-blog/
-bun dev               # Astro dev server
-bun build             # astro check + build + pagefind + copy pagefind to public/
-bun preview           # Preview production build
-bun lint              # ESLint
-bun format            # Prettier
+pnpm dev               # Astro dev server
+pnpm build             # astro check + build + pagefind + copy pagefind to public/
+pnpm preview           # Preview production build
+pnpm lint              # ESLint
+pnpm format            # Prettier
 ```
 
 ## Build Notes
-- `bun build` runs `astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/`
+- `pnpm build` runs `astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/`
 - Pagefind index must be rebuilt with every content change for search to stay current
 - OG images are generated at build time via `scripts/generateOgImages.ts`
 

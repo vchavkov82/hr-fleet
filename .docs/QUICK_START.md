@@ -7,7 +7,7 @@
 cd /home/vchavkov/src/jobs/hr
 
 # Install all dependencies including the new design-system package
-bun install
+pnpm install
 # or
 npm install
 ```

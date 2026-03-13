@@ -51,9 +51,9 @@ sidebar:
 make dev-hr-docs       # Start dev server on port 3011
 
 # From app/hr-docs/
-bun dev               # Astro Starlight dev server
-bun build             # Production build
-bun preview           # Preview build
+pnpm dev               # Astro Starlight dev server
+pnpm build             # Production build
+pnpm preview           # Preview build
 ```
 
 ---

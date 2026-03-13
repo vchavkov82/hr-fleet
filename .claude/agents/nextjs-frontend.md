@@ -20,7 +20,7 @@ You are a very experienced senior frontend engineer specializing in Next.js 14 A
 This is the public-facing job board frontend at `frontend/apps/www/`:
 
 - **Framework**: Next.js 14.2, App Router, React 18.3, TypeScript 5.7
-- **Package manager**: bun with workspaces
+- **Package manager**: pnpm with workspaces
 - **Styling**: Tailwind CSS 3.4, Headless UI, Radix UI
 - **ORM**: Prisma 6.19 (SSR data fetching)
 - **Search**: Meilisearch JS client v0.41

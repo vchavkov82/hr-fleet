@@ -41,7 +41,7 @@ make restart         # Restart all services
 make logs            # Follow all service logs
 make ps              # Show running containers
 make bootstrap       # Full fresh setup
-make install         # Install dependencies with bun
+make install         # Install dependencies with pnpm
 make nuke            # Full nuclear reset (containers + volumes + node_modules + cache)
 
 # Help
@@ -57,7 +57,7 @@ make help            # Show all available commands with descriptions
 make bootstrap
 
 # This will:
-# 1. Install all dependencies with bun
+# 1. Install all dependencies with pnpm
 # 2. Display connection URLs and available ports
 # 3. Show instructions for next steps
 ```
@@ -109,7 +109,7 @@ The build system uses **Turbo** with optimized caching for fast builds:
 
 1. **Webpack Cache** - Dev file changes rebuild in 1-2 seconds (was 3-5 sec)
 2. **Turbo Cache** - Task results cached, parallel workers for efficiency
-3. **Bun Cache** - Global npm cache for faster dependency resolution
+3. **pnpm Cache** - Content-addressable store for faster dependency resolution
 4. **Environment Aware** - Cache invalidates when .env changes
 
 ### Build Commands
@@ -253,7 +253,7 @@ The `Makefile` is organized by category:
 
 ### Faster Development
 
-1. **Use `make dev-apps` not `npm run dev`**
+1. **Use `make dev-apps` not `pnpm dev`**
    - Parallel startup (all 3 servers at once)
    - Colored output for easier debugging
    - Proper process management
@@ -281,9 +281,9 @@ The `Makefile` is organized by category:
 
 ### Faster Installs
 
-1. **Use bun instead of npm/yarn**
+1. **Use pnpm instead of npm/yarn**
    ```bash
-   bun install       # 3-5x faster than npm
+   pnpm install       # Faster than npm with content-addressable store
    ```
 
 2. **First install does full install**
@@ -379,7 +379,7 @@ make build          # Final check that prod build works
 If you pull changes from main:
 
 ```bash
-bun install         # Update dependencies if needed
+pnpm install         # Update dependencies if needed
 make clean-webpack  # Clear old webpack cache
 make dev-apps       # Start fresh dev servers
 ```
@@ -450,7 +450,7 @@ watch -n 3 'make typecheck'
 make dev
 
 # Terminal 2: HR site with debugging
-cd www && PORT=3010 NODE_OPTIONS=--inspect bun dev
+cd www && PORT=3010 NODE_OPTIONS=--inspect pnpm dev
 
 # Then open chrome://inspect in Chrome DevTools
 ```
@@ -458,7 +458,7 @@ cd www && PORT=3010 NODE_OPTIONS=--inspect bun dev
 ## Reference
 
 - **Makefile** - Source of truth for all commands
-- **package.json** - NPM/bun scripts (usually called via make)
+- **package.json** - NPM/pnpm scripts (usually called via make)
 - **.docs/QUICK_START.md** - High-level overview
 - **.docs/AGENT_SETUP.md** - AI Assistant configuration
 - **.docs/DESIGN_SYSTEM.md** - Design tokens and components
@@ -483,5 +483,5 @@ cat scripts/dev-apps.sh   # Frontend servers startup
 
 For questions about specific build configurations, see:
 - `turbo.json` - Turbo caching configuration
-- `bunfig.toml` - Bun runtime configuration
+- `.npmrc` - pnpm configuration
 - `www/next.config.mjs` - Next.js webpack configuration

@@ -49,7 +49,7 @@ const chat = createAnChat({
 ### 3. Test the Integration
 ```bash
 # Start the development server
-bun run dev
+pnpm run dev
 
 # Navigate to:
 # http://localhost:3010/en/hr-tools (or your default locale)
@@ -126,5 +126,5 @@ Edit `www/src/app/theme.json` to customize colors, fonts, layout, and other UI p
 - Verify the token route is accessible at `/api/an-token`
 
 ### Type Errors
-- Run `bun run typecheck` to verify TypeScript compilation
-- Ensure all dependencies are installed: `bun install`
+- Run `pnpm run typecheck` to verify TypeScript compilation
+- Ensure all dependencies are installed: `pnpm install`

@@ -17,7 +17,7 @@ You are a very experienced senior frontend performance engineer specializing in 
 
 ### Public Job Board (`frontend/apps/www/`)
 - Next.js 14.2 with App Router (SSR-first)
-- bun package manager
+- pnpm package manager
 - Prisma for SSR data, Meilisearch for search, Go API for mutations
 - Framer Motion, GSAP for animations
 - Tailwind CSS, Headless UI, Radix UI
@@ -105,7 +105,7 @@ const [user, jobs] = await Promise.all([
 ### Bundle Analysis Commands
 ```bash
 # Next.js bundle analysis
-cd frontend && ANALYZE=true bun build
+cd frontend && ANALYZE=true pnpm build
 
 # Vite bundle analysis
 cd admin && npx vite-bundle-visualizer
