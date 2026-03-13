@@ -33,7 +33,7 @@ services:
       - ASTRO_TELEMETRY_DISABLED=1
       - HOST=0.0.0.0
     entrypoint: sh
-    command: ["-c", "bun install && bun run build && bunx serve -l 5013 dist"]
+    command: ["-c", "npm i -g pnpm && pnpm install && pnpm build && npx serve -l 5013 dist"]
 
   hr-docs:
     volumes:
@@ -41,7 +41,7 @@ services:
       - hr_docs_node_modules:/workspace/node_modules
     working_dir: /workspace/apps/docs
     entrypoint: sh
-    command: ["-c", "cd /workspace && bun install && cd apps/docs && bun dev"]
+    command: ["-c", "cd /workspace && npm i -g pnpm && pnpm install && cd apps/docs && pnpm dev"]
 
 volumes:
   hr_node_modules:

@@ -52,7 +52,7 @@ services:
 
   # ── Frontend apps (host ports 5020/5021/5023 to avoid conflict with dev-apps on 5010/5011/5013) ──
   hr:
-    image: oven/bun:1-alpine
+    image: node:20-alpine
     container_name: hr-www
     hostname: hr-www
     ports:
@@ -64,7 +64,7 @@ services:
     restart: unless-stopped
 
   hr-blog:
-    image: oven/bun:1-alpine
+    image: node:20-alpine
     container_name: hr-blog
     hostname: hr-blog
     ports:
@@ -74,7 +74,7 @@ services:
     restart: unless-stopped
 
   hr-docs:
-    image: oven/bun:1-alpine
+    image: node:20-alpine
     container_name: hr-docs
     hostname: hr-docs
     ports:

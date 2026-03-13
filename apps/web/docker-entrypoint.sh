@@ -6,10 +6,10 @@ set -e
 cd /app
 
 echo "Installing dependencies..."
-bun install
+pnpm install
 
 # Patch @swc/core binding to not throw on Alpine (musl) where the native binary
-# isn't installed by bun's optional dep resolution. next-intl depends on @swc/core
+# isn't installed by the optional dep resolution. next-intl depends on @swc/core
 # for its extraction compiler, but we don't use that feature.
 SWC_BINDING="/app/node_modules/@swc/core/binding.js"
 if [ -f "$SWC_BINDING" ] && grep -q "throw new Error.*Failed to load native binding" "$SWC_BINDING"; then
@@ -17,4 +17,4 @@ if [ -f "$SWC_BINDING" ] && grep -q "throw new Error.*Failed to load native bind
 fi
 
 echo "Starting Next.js dev server..."
-exec bun dev
+exec pnpm dev
