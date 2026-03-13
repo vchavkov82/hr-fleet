@@ -16,7 +16,7 @@
     "test:e2e": "playwright test --project=firefox",
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:ui": "playwright test --ui",
-    "test:all": "bun run test",
+    "test:all": "pnpm run test",
     "format": "prettier --write .",
     "clean": "rm -rf .next node_modules/.cache",
     "clean:start": "pnpm run clean && pnpm run start",

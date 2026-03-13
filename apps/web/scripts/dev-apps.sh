@@ -50,7 +50,7 @@ WWW_PID=$!
 
 sleep 2
 
-(cd blog && bun dev 2>&1 | while IFS= read -r line; do echo -e "${GREEN}[hr-blog   ]${NC} $line"; done) &
+(cd blog && pnpm dev 2>&1 | while IFS= read -r line; do echo -e "${GREEN}[hr-blog   ]${NC} $line"; done) &
 BLOG_PID=$!
 
 (cd docs && astro dev --host 2>&1 | while IFS= read -r line; do echo -e "${CYAN}[hr-docs   ]${NC} $line"; done) &

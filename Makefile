@@ -79,13 +79,13 @@ infra-logs: ## Follow infrastructure logs
 	scripts/dev.sh logs
 
 dev-www: ## Start HR site only in dev mode (port 5010)
-	cd apps/web && PORT=5010 bun dev
+	cd apps/web && PORT=5010 pnpm dev
 
 dev-blog: ## Start HR blog only in dev mode (port 5013)
-	cd apps/blog && bun dev
+	cd apps/blog && pnpm dev
 
 dev-docs: ## Start HR docs only in dev mode (port 5011)
-	cd apps/docs && bun dev
+	cd apps/docs && pnpm dev
 
 dev-backend: ## Start Go backend in dev mode (port 5080)
 	cd services/api && go run ./cmd/server/
@@ -118,13 +118,13 @@ check: ## Run typecheck + lint in parallel via turbo
 # ── Test ──────────────────────────────────────────────────────────────
 
 test: ## Run unit tests
-	cd apps/web && bun run test
+	cd apps/web && pnpm run test
 
 test-watch: ## Run unit tests in watch mode
-	cd apps/web && bun run test:watch
+	cd apps/web && pnpm run test:watch
 
 test-e2e: ## Run e2e tests (Playwright, needs running dev server)
-	cd apps/web && bun run test:e2e
+	cd apps/web && pnpm run test:e2e
 
 test-backend: ## Run Go backend tests
 	cd services/api && go test ./...
