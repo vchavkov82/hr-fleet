@@ -1,0 +1,8 @@
+{
+  "name": "@hr/admin",
+  "private": true,
+  "scripts": {
+    "build": "echo 'admin not yet implemented'",
+    "dev": "echo 'admin not yet implemented'"
+  }
+}

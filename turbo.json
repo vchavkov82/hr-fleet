@@ -10,7 +10,8 @@
         ".next/**",
         "!.next/cache/**",
         "dist/**",
-        ".astro/**"
+        ".astro/**",
+        "bin/**"
       ],
       "cache": true,
       "env": [

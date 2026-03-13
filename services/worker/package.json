@@ -1,0 +1,10 @@
+{
+  "name": "@hr/worker",
+  "private": true,
+  "scripts": {
+    "build": "go build -o bin/worker ./cmd/worker",
+    "test": "go test ./...",
+    "lint": "golangci-lint run ./...",
+    "dev": "go run ./cmd/worker"
+  }
+}
