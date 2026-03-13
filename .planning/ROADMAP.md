@@ -71,7 +71,7 @@ Plans:
 | 9. Documentation Hub & Blog | v1.1 | 0/TBD | Not Started | - |
 | 10. Integration QA & Security | v1.1 | 0/TBD | Not Started | - |
 | 11. Launch | v1.1 | 0/TBD | Not Started | - |
-| 12. Migrate to pnpm+turbo | 2/2 | Complete   | 2026-03-13 | - |
+| 12. Migrate to pnpm+turbo | v1.1 | 2/2 | Complete | 2026-03-13 |
 
 ### Phase 3: Odoo HR Backend Integration
 
@@ -162,9 +162,9 @@ Plans:
 ### Phase 12: Migrate to pnpm+turbo
 **Goal**: Remove all bun artifacts and references from the codebase, replacing with pnpm equivalents. Update container images, scripts, and documentation to consistently use pnpm as the sole package manager.
 **Depends on**: Phase 11
-**Status**: Not Started
+**Status**: Complete
 **Plans**: 2 plans
 
 Plans:
-- [ ] 12-01-PLAN.md — Remove bun artifacts, update containers and scripts to pnpm
-- [ ] 12-02-PLAN.md — Update CLAUDE.md and DEVELOPER.md documentation to pnpm
+- [x] 12-01-PLAN.md — Remove bun artifacts, update containers and scripts to pnpm
+- [x] 12-02-PLAN.md — Update documentation and agent configs to pnpm
