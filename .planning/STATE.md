@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: — GSD Payroll Platform Expansion
 status: executing
-stopped_at: Completed 12-01-PLAN.md
-last_updated: "2026-03-13T23:22:59.436Z"
+stopped_at: Completed 12-02-PLAN.md
+last_updated: "2026-03-13T23:23:35.212Z"
 last_activity: 2026-03-13 -- Completed 05-04 CI/CD pipelines
 progress:
   total_phases: 12
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 29
-  completed_plans: 26
+  completed_plans: 27
   percent: 36
 ---
 
@@ -118,6 +118,7 @@ Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0
 - [Phase 05]: Odoo 18 confirmed (FND-05 Odoo 17 reference outdated)
 - [Phase 05]: sqlc generates type-safe Go from SQL into internal/db/ via pgx/v5
 - [Phase 12]: Replaced all bun references with pnpm across containers, scripts, and configs
+- [Phase 12]: All bun references replaced with pnpm in docs and agent configs
 
 ### Setup Requirements (User Responsibilities)
 
@@ -140,7 +141,7 @@ Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0
 
 ## Session Continuity
 
-Last session: 2026-03-13T23:22:59.427Z
-Stopped at: Completed 12-01-PLAN.md
+Last session: 2026-03-13T23:23:35.207Z
+Stopped at: Completed 12-02-PLAN.md
 Resume file: None
 Next up: 05-03-PLAN.md or 05-04-PLAN.md (wave 2)

@@ -71,7 +71,7 @@ Plans:
 | 9. Documentation Hub & Blog | v1.1 | 0/TBD | Not Started | - |
 | 10. Integration QA & Security | v1.1 | 0/TBD | Not Started | - |
 | 11. Launch | v1.1 | 0/TBD | Not Started | - |
-| 12. Migrate to pnpm+turbo | 1/2 | In Progress|  | - |
+| 12. Migrate to pnpm+turbo | 2/2 | Complete   | 2026-03-13 | - |
 
 ### Phase 3: Odoo HR Backend Integration
 
