@@ -1,36 +1,36 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
+milestone: v1.1
+milestone_name: GSD Payroll Platform
 status: executing
-stopped_at: Completed 04-04-PLAN.md
-last_updated: "2026-03-08T21:30:04.176Z"
-last_activity: 2026-03-08 -- 6 Bulgarian blog posts on labor law, social security, EOOD comparison, salary calculation, employee directory, freelancer advice
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-03-13T21:59:11.000Z"
+last_activity: 2026-03-13 -- Completed 05-02 design tokens pipeline
 progress:
-  total_phases: 4
-  completed_phases: 2
+  total_phases: 12
+  completed_phases: 4
   total_plans: 23
-  completed_plans: 21
-  percent: 91
+  completed_plans: 23
+  percent: 36
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-05)
+See: .planning/PROJECT.md (updated 2026-03-13)
 
-**Core value:** Bulgarian SMBs can manage all their HR operations in one unified platform with built-in Bulgarian compliance.
-**Current focus:** Phase 4 - Content Aligned with Odoo
+**Core value:** Cloud-native payroll and HR management platform rivaling Gusto/Rippling/Deel, leveraging Odoo backend, targeting Bulgarian SMBs.
+**Current focus:** v1.1 Planning — Phase 5 (Foundation & Monorepo) is next
 
 ## Current Position
 
-Phase: 4 of 4 (Content Aligned with Odoo)
-Plan: 4 of 4 (Plans 01-04 complete)
+Phase: 5 of 11 (Foundation & Monorepo Setup)
+Plan: 02 of 04 complete
 Status: Executing
-Last activity: 2026-03-08 -- 6 Bulgarian blog posts on labor law, social security, EOOD comparison, salary calculation, employee directory, freelancer advice
+Last activity: 2026-03-13 -- Completed 05-02 design tokens pipeline
 
-Progress: [█████████░] 91% (21/23 plans complete)
+Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0 plans complete)
 
 ## Performance Metrics
 
@@ -67,6 +67,7 @@ Progress: [█████████░] 91% (21/23 plans complete)
 
 - Phase 3 added: User odo
 - Phase 4 added: Content aligned with Odoo
+- Phase 12 added: Migrate to pnpm+turbo
 
 ### Decisions
 
@@ -105,6 +106,10 @@ Progress: [█████████░] 91% (21/23 plans complete)
 - [Phase 04]: ACTIVE_FEATURES vs ROADMAP_FEATURES split pattern for showing real vs planned capabilities
 - [Phase 04]: Single-column feature checklist instead of multi-module comparison table on pricing page
 - [Phase 04]: All blog posts written in Bulgarian with natural HR/legal terminology, referencing platform tools for internal linking
+- [Phase 05]: Tokens Studio JSON format as canonical source for all 7 design token categories
+- [Phase 05]: Dark mode via both prefers-color-scheme media query AND .dark CSS class
+- [Phase 05]: Tailwind colors reference CSS custom properties instead of hardcoded hex values
+- [Phase 05]: Component tokens (button, input, card, modal) included in token pipeline
 
 ### Setup Requirements (User Responsibilities)
 
@@ -114,17 +119,20 @@ Progress: [█████████░] 91% (21/23 plans complete)
 4. Update agent name in page.tsx if different from 'hr-assistant'
 5. Run `bun run dev` and test at http://localhost:3010/en/hr-tools
 
-## Next Phases (To Be Planned)
+## Next Phases (v1.1 GSD Payroll Platform)
 
-- Phase 2: Employee Management (CRUD, directory, onboarding)
-- Phase 3: Leave Management (tracking, approval workflows)
-- Phase 4: ATS (job posting, applications, candidate pipeline)
-- Phase 5: Performance Reviews & Workflows
-- Phase 6: Payroll Integration Foundation
+- **Phase 5**: Foundation & Monorepo Setup (FND-01–05)
+- **Phase 6**: Core Go REST API (API-01–13)
+- **Phase 7**: Admin UI with RBAC (ADM-01–14)
+- **Phase 8**: Marketing Site Enhancement (MKT-10–18)
+- **Phase 9**: Documentation Hub & Blog (DOC-01–05, BLOG-01–06)
+- **Phase 10**: Integration QA & Security (QA-01–04, NFR-01–06)
+- **Phase 11**: Launch (LAUNCH-01–04)
+- **Phase 12**: Migrate to pnpm+turbo
 
 ## Session Continuity
 
-Last session: 2026-03-08T21:25:52.944Z
-Stopped at: Completed 04-04-PLAN.md
+Last session: 2026-03-13T21:59:11.000Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None
-Next up: Execute Plan 04-04 (remaining content alignment)
+Next up: 05-03-PLAN.md or 05-04-PLAN.md
