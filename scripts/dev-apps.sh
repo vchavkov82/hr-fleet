@@ -46,13 +46,13 @@ echo ""
 echo -e "${C_BOLD}Starting HR frontend dev servers...${C_RESET}"
 echo ""
 
-(cd www  && PORT=5010 bun dev  2>&1 | prefix "$C_HR"        "hr"       ) &
+(cd apps/web  && PORT=5010 bun dev  2>&1 | prefix "$C_HR"        "hr"       ) &
 PIDS+=($!)
 
-(cd blog && bun dev            2>&1 | prefix "$C_HR_BLOG"   "hr-blog"  ) &
+(cd apps/blog && bun dev            2>&1 | prefix "$C_HR_BLOG"   "hr-blog"  ) &
 PIDS+=($!)
 
-(cd docs && bun dev            2>&1 | prefix "$C_HR_DOCS"   "hr-docs"  ) &
+(cd apps/docs && bun dev            2>&1 | prefix "$C_HR_DOCS"   "hr-docs"  ) &
 PIDS+=($!)
 
 sleep 2

@@ -1,5 +1,4 @@
 packages:
-  - 'packages/design-system'
-  - 'www'
-  - 'blog'
-  - 'docs'
+  - "apps/*"
+  - "services/*"
+  - "packages/*"

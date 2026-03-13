@@ -27,7 +27,7 @@ services:
   # ── Go backend API ───────────────────────────────────────────────────────
   hr-api:
     build:
-      context: ../backend
+      context: ../services/api
       dockerfile: Dockerfile
     container_name: hr-api
     hostname: hr-api

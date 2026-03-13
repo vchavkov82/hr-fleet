@@ -1,4 +1,4 @@
-module github.com/vchavkov/hr-backend
+module github.com/vchavkov/hr/services/api
 
 go 1.25.7
 

@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/alicebob/miniredis/v2"
-	"github.com/vchavkov/hr-backend/internal/cache"
-	"github.com/vchavkov/hr-backend/platform/odoo"
+	"github.com/vchavkov/hr/services/api/internal/cache"
+	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
 // mockOdooClient implements OdooClient for testing.

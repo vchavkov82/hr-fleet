@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/vchavkov/hr-backend/internal/cache"
-	"github.com/vchavkov/hr-backend/platform/odoo"
+	"github.com/vchavkov/hr/services/api/internal/cache"
+	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
 // ErrServiceUnavailable is returned when Odoo is down and no cached data exists.

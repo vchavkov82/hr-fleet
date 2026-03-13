@@ -12,8 +12,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/lestrrat-go/jwx/v2/jwt"
-	"github.com/vchavkov/hr-backend/platform/odoo"
-	"github.com/vchavkov/hr-backend/internal/service"
+	"github.com/vchavkov/hr/services/api/platform/odoo"
+	"github.com/vchavkov/hr/services/api/internal/service"
 )
 
 var testJWTAuth *jwtauth.JWTAuth

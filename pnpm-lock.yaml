@@ -34,7 +34,7 @@ importers:
         specifier: ^2.8.12
         version: 2.8.13
 
-  blog:
+  apps/blog:
     dependencies:
       '@astrojs/rss':
         specifier: ^4.0.14
@@ -122,7 +122,7 @@ importers:
         specifier: ^8.51.0
         version: 8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
 
-  docs:
+  apps/docs:
     dependencies:
       '@astrojs/markdoc':
         specifier: ^0.15.10
@@ -150,7 +150,7 @@ importers:
         version: 0.41.7
       '@hr/design-system':
         specifier: workspace:*
-        version: link:../packages/design-system
+        version: link:../../packages/design-system
       '@lorenzo_lewis/starlight-utils':
         specifier: ^0.3.2
         version: 0.3.2(@astrojs/starlight@0.37.6(astro@5.18.0(@types/node@20.19.35)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(astro@5.18.0(@types/node@20.19.35)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
@@ -210,19 +210,7 @@ importers:
         specifier: ^1.2.9
         version: 1.4.0
 
-  packages/design-system:
-    dependencies:
-      '@tailwindcss/forms':
-        specifier: ^0.5.9
-        version: 0.5.11(tailwindcss@4.2.1)
-      '@tailwindcss/typography':
-        specifier: ^0.5.19
-        version: 0.5.19(tailwindcss@4.2.1)
-      tailwindcss:
-        specifier: ^4.1.18
-        version: 4.2.1
-
-  www:
+  apps/web:
     dependencies:
       '@ai-sdk/react':
         specifier: ^3.0.118
@@ -357,6 +345,20 @@ importers:
       vitest:
         specifier: ^2.1.4
         version: 2.1.9(@types/node@20.19.35)(@vitest/ui@4.0.18)(jsdom@28.1.0)(lightningcss@1.31.1)
+
+  packages/design-system:
+    dependencies:
+      '@tailwindcss/forms':
+        specifier: ^0.5.9
+        version: 0.5.11(tailwindcss@4.2.1)
+      '@tailwindcss/typography':
+        specifier: ^0.5.19
+        version: 0.5.19(tailwindcss@4.2.1)
+      tailwindcss:
+        specifier: ^4.1.18
+        version: 4.2.1
+
+  services/api: {}
 
 packages:
 

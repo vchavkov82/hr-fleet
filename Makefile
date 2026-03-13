@@ -36,26 +36,26 @@ clean-all: ## Remove containers, networks, and volumes (WARNING: deletes data)
 	$(COMPOSE) down -v
 
 clean-cache: ## Clear all build caches (.next, .astro, dist, .turbo)
-	rm -rf www/.next www/.next/cache blog/dist blog/.astro docs/dist docs/.astro .turbo
+	rm -rf apps/web/.next apps/web/.next/cache apps/blog/dist apps/blog/.astro apps/docs/dist apps/docs/.astro .turbo
 
 clean-webpack: ## Clear webpack dev cache only (faster than full clean)
-	rm -rf www/.next/cache/webpack
+	rm -rf apps/web/.next/cache/webpack
 
 clean-www: ## Clear www build cache and restart container
-	rm -rf www/.next
+	rm -rf apps/web/.next
 	-podman restart hr-www 2>/dev/null || true
 
 clean-blog: ## Clear blog build cache
-	rm -rf blog/dist blog/.astro
+	rm -rf apps/blog/dist apps/blog/.astro
 
 clean-docs: ## Clear docs build cache
-	rm -rf docs/dist docs/.astro
+	rm -rf apps/docs/dist apps/docs/.astro
 
 nuke: ## Full clean: containers, volumes, caches, node_modules
 	-$(COMPOSE) down -v 2>/dev/null || true
 	-podman pod rm -f --all 2>/dev/null || true
-	rm -rf node_modules www/node_modules blog/node_modules docs/node_modules
-	rm -rf www/.next blog/dist blog/.astro docs/dist docs/.astro .turbo
+	rm -rf node_modules apps/web/node_modules apps/blog/node_modules apps/docs/node_modules
+	rm -rf apps/web/.next apps/blog/dist apps/blog/.astro apps/docs/dist apps/docs/.astro .turbo
 
 # ── Development ─────────────────────────────────────────────────────────────
 
@@ -79,16 +79,16 @@ infra-logs: ## Follow infrastructure logs
 	scripts/dev.sh logs
 
 dev-www: ## Start HR site only in dev mode (port 5010)
-	cd www && PORT=5010 bun dev
+	cd apps/web && PORT=5010 bun dev
 
 dev-blog: ## Start HR blog only in dev mode (port 5013)
-	cd blog && bun dev
+	cd apps/blog && bun dev
 
 dev-docs: ## Start HR docs only in dev mode (port 5011)
-	cd docs && bun dev
+	cd apps/docs && bun dev
 
 dev-backend: ## Start Go backend in dev mode (port 5080)
-	cd backend && go run ./cmd/server/
+	cd services/api && go run ./cmd/server/
 
 odoo-init: ## Initialize Odoo HR modules (run once after first start)
 	bash deploy/odoo-init.sh
@@ -118,16 +118,16 @@ check: ## Run typecheck + lint in parallel via turbo
 # ── Test ──────────────────────────────────────────────────────────────
 
 test: ## Run unit tests
-	cd www && bun run test
+	cd apps/web && bun run test
 
 test-watch: ## Run unit tests in watch mode
-	cd www && bun run test:watch
+	cd apps/web && bun run test:watch
 
 test-e2e: ## Run e2e tests (Playwright, needs running dev server)
-	cd www && bun run test:e2e
+	cd apps/web && bun run test:e2e
 
 test-backend: ## Run Go backend tests
-	cd backend && go test ./...
+	cd services/api && go test ./...
 
 lint: ## Lint all workspaces
 	node_modules/.bin/turbo run lint
@@ -150,7 +150,7 @@ check-links-docs: ## Check broken links on docs only
 # ── Setup ───────────────────────────────────────────────────────────────────
 
 install: ## Install all HR dependencies
-	bun install
+	pnpm install
 
 bootstrap: install ## Full setup from scratch
 	@echo "Bootstrap complete!"

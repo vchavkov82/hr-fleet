@@ -9,11 +9,11 @@ production = false
 
 [bundle]
 # Optimize bundles with tree-shaking
-root = "www"
+root = "apps/web"
 
 [compile]
 # Use bytecode caching for faster startup
-root = "www"
+root = "apps/web"
 
 # Workspace configuration
 [modules]
@@ -22,5 +22,5 @@ auto = true
 
 [test]
 # Exclude e2e tests and only run unit tests with vitest
-root = "www"
-preload = ["www/tests/setup.ts"]
+root = "apps/web"
+preload = ["apps/web/tests/setup.ts"]

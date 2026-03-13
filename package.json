@@ -4,25 +4,25 @@
   "packageManager": "pnpm@9.0.0",
   "scripts": {
     "prepare": "husky",
-    "dev": "cd www && PORT=5010 pnpm dev",
-    "dev:www": "cd www && PORT=5010 pnpm dev",
-    "dev:blog": "cd blog && pnpm dev",
-    "dev:docs": "cd docs && pnpm dev",
+    "dev": "cd apps/web && PORT=5010 pnpm dev",
+    "dev:www": "cd apps/web && PORT=5010 pnpm dev",
+    "dev:blog": "cd apps/blog && pnpm dev",
+    "dev:docs": "cd apps/docs && pnpm dev",
     "build": "turbo run build --filter=@hr/www --cache-workers=4 && turbo run build --filter=@hr/blog --cache-workers=4",
     "build:www": "node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4",
     "build:blog": "node_modules/.bin/turbo run build --filter=@hr/blog --cache-workers=4",
     "build:docs": "node_modules/.bin/turbo run build --filter=@hr/docs --cache-workers=4",
     "lint": "node_modules/.bin/turbo run lint",
     "typecheck": "node_modules/.bin/turbo run typecheck",
-    "test": "cd www && pnpm run test",
-    "test:watch": "cd www && pnpm run test:watch",
-    "test:ui": "cd www && pnpm run test:ui",
-    "test:e2e": "cd www && pnpm run test:e2e",
-    "test:e2e:debug": "cd www && pnpm run test:e2e:debug",
-    "test:e2e:ui": "cd www && pnpm run test:e2e:ui",
-    "test:all": "cd www && pnpm run test",
-    "clean": "rm -rf node_modules www/node_modules blog/node_modules docs/node_modules && echo 'node_modules cleaned'",
-    "clean:cache": "rm -rf www/.next www/.next/cache www/node_modules/.cache .turbo && echo 'Build cache cleaned'",
+    "test": "cd apps/web && pnpm run test",
+    "test:watch": "cd apps/web && pnpm run test:watch",
+    "test:ui": "cd apps/web && pnpm run test:ui",
+    "test:e2e": "cd apps/web && pnpm run test:e2e",
+    "test:e2e:debug": "cd apps/web && pnpm run test:e2e:debug",
+    "test:e2e:ui": "cd apps/web && pnpm run test:e2e:ui",
+    "test:all": "cd apps/web && pnpm run test",
+    "clean": "rm -rf node_modules apps/web/node_modules apps/blog/node_modules apps/docs/node_modules && echo 'node_modules cleaned'",
+    "clean:cache": "rm -rf apps/web/.next apps/web/.next/cache apps/web/node_modules/.cache .turbo && echo 'Build cache cleaned'",
     "check": "turbo run typecheck lint --cache-workers=4"
   },
   "devDependencies": {
@@ -33,22 +33,22 @@
     "turbo": "^2.8.12"
   },
   "lint-staged": {
-    "www/**/*.{ts,tsx}": [
-      "cd www && pnpm lint:fix",
-      "cd www && pnpm dlx prettier --write"
+    "apps/web/**/*.{ts,tsx}": [
+      "cd apps/web && pnpm lint:fix",
+      "cd apps/web && pnpm dlx prettier --write"
     ],
-    "www/**/*.{json,md}": [
-      "cd www && pnpm dlx prettier --write"
+    "apps/web/**/*.{json,md}": [
+      "cd apps/web && pnpm dlx prettier --write"
     ],
-    "blog/**/*.{ts,tsx,astro}": [
-      "cd blog && pnpm dlx eslint --fix",
-      "cd blog && pnpm dlx prettier --write"
+    "apps/blog/**/*.{ts,tsx,astro}": [
+      "cd apps/blog && pnpm dlx eslint --fix",
+      "cd apps/blog && pnpm dlx prettier --write"
     ],
-    "blog/**/*.{json,md}": [
-      "cd blog && pnpm dlx prettier --write"
+    "apps/blog/**/*.{json,md}": [
+      "cd apps/blog && pnpm dlx prettier --write"
     ],
-    "docs/**/*.{ts,tsx,astro,mdx}": [
-      "cd docs && pnpm dlx prettier --write"
+    "apps/docs/**/*.{ts,tsx,astro,mdx}": [
+      "cd apps/docs && pnpm dlx prettier --write"
     ]
   },
   "overrides": {

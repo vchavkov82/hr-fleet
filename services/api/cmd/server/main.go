@@ -9,12 +9,12 @@ import (
 	chimiddleware "github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
 	"github.com/go-chi/jwtauth/v5"
-	"github.com/vchavkov/hr-backend/internal/cache"
-	"github.com/vchavkov/hr-backend/internal/config"
-	"github.com/vchavkov/hr-backend/internal/handler"
-	"github.com/vchavkov/hr-backend/internal/middleware"
-	"github.com/vchavkov/hr-backend/internal/service"
-	"github.com/vchavkov/hr-backend/platform/odoo"
+	"github.com/vchavkov/hr/services/api/internal/cache"
+	"github.com/vchavkov/hr/services/api/internal/config"
+	"github.com/vchavkov/hr/services/api/internal/handler"
+	"github.com/vchavkov/hr/services/api/internal/middleware"
+	"github.com/vchavkov/hr/services/api/internal/service"
+	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
 func main() {

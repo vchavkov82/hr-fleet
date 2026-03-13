@@ -10,8 +10,8 @@ import (
 	"strings"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/vchavkov/hr-backend/internal/service"
-	"github.com/vchavkov/hr-backend/platform/odoo"
+	"github.com/vchavkov/hr/services/api/internal/service"
+	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
 // EmployeeServicer defines the interface the handler needs from the service layer.
