@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: — GSD Payroll Platform Expansion
 status: executing
-stopped_at: Completed 06-05-PLAN.md
-last_updated: "2026-03-14T07:52:28.836Z"
+stopped_at: Completed 06-07-PLAN.md
+last_updated: "2026-03-14T08:02:44.079Z"
 last_activity: 2026-03-14 -- Completed 06-02 Database Schema & sqlc Queries
 progress:
   total_phases: 12
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 36
-  completed_plans: 33
+  completed_plans: 34
   percent: 50
 ---
 
@@ -130,6 +130,7 @@ Progress: [████░░░░░░] 50% (5/11 phases complete)
 - [Phase 06]: HMAC-SHA256 webhook signing with Asynq async delivery queue
 - [Phase 06]: All monetary values in stotinki (int64) - no float64 for money
 - [Phase 06]: Asynq for async payroll processing with 202 + poll URL pattern
+- [Phase 06]: Used --mode flag for flexible api/worker/both deployment
 
 ### Setup Requirements (User Responsibilities)
 
@@ -152,7 +153,7 @@ Progress: [████░░░░░░] 50% (5/11 phases complete)
 
 ## Session Continuity
 
-Last session: 2026-03-14T07:52:28.832Z
-Stopped at: Completed 06-05-PLAN.md
+Last session: 2026-03-14T08:02:44.075Z
+Stopped at: Completed 06-07-PLAN.md
 Resume file: None
 Next up: 06-03-PLAN.md (wave 1 continues)

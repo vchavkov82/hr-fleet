@@ -62,7 +62,7 @@
 - [x] **API-08**: Report endpoints: payroll summary, tax liabilities
 - [x] **API-09**: Webhook registration and management endpoints
 - [x] **API-10**: Odoo XML-RPC integration layer: connection pooling (max 20), circuit breaker (gobreaker), exponential backoff retry
-- [ ] **API-11**: Swagger/OpenAPI 3.0 auto-generated from Go annotations (swaggo/swag), served at /api/docs
+- [x] **API-11**: Swagger/OpenAPI 3.0 auto-generated from Go annotations (swaggo/swag), served at /api/docs
 - [x] **API-12**: Structured JSON logging (zerolog), Prometheus metrics, OpenTelemetry tracing
 - [x] **API-13**: Redis caching (go-redis v9 + ristretto L1), Asynq task queue for async payroll
 
