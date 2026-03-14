@@ -61,10 +61,10 @@
 - [ ] **API-07**: Leave management endpoints: allocations, requests, approve/reject
 - [ ] **API-08**: Report endpoints: payroll summary, tax liabilities
 - [ ] **API-09**: Webhook registration and management endpoints
-- [ ] **API-10**: Odoo XML-RPC integration layer: connection pooling (max 20), circuit breaker (gobreaker), exponential backoff retry
+- [x] **API-10**: Odoo XML-RPC integration layer: connection pooling (max 20), circuit breaker (gobreaker), exponential backoff retry
 - [ ] **API-11**: Swagger/OpenAPI 3.0 auto-generated from Go annotations (swaggo/swag), served at /api/docs
-- [ ] **API-12**: Structured JSON logging (zerolog), Prometheus metrics, OpenTelemetry tracing
-- [ ] **API-13**: Redis caching (go-redis v9 + ristretto L1), Asynq task queue for async payroll
+- [x] **API-12**: Structured JSON logging (zerolog), Prometheus metrics, OpenTelemetry tracing
+- [x] **API-13**: Redis caching (go-redis v9 + ristretto L1), Asynq task queue for async payroll
 
 ### Admin UI with RBAC (Phase 2 from gsd-requirements)
 - [ ] **ADM-01**: React 18 + Vite 5 SPA with shadcn/ui + Radix UI

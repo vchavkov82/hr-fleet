@@ -1,15 +1,15 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.1
-milestone_name: GSD Payroll Platform
+milestone_name: — GSD Payroll Platform Expansion
 status: executing
-stopped_at: Completed 06-02-PLAN.md
-last_updated: "2026-03-14T00:31:53.000Z"
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-03-14T00:34:12.226Z"
 last_activity: 2026-03-14 -- Completed 06-02 Database Schema & sqlc Queries
 progress:
   total_phases: 12
-  completed_phases: 6
-  total_plans: 29
+  completed_phases: 4
+  total_plans: 36
   completed_plans: 29
   percent: 50
 ---
@@ -122,6 +122,8 @@ Progress: [████░░░░░░] 50% (5/11 phases complete)
 - [Phase 06]: BIGINT stotinki for all monetary fields (avoids float rounding)
 - [Phase 06]: TEXT[] for webhook events and API key scopes (PostgreSQL native arrays)
 - [Phase 06]: JSONB for calculation_details and error_details (flexible structured data)
+- [Phase 06]: Ristretto L1 cache with 1-min TTL in front of Redis L2, DeletePattern clears both layers
+- [Phase 06]: Circuit breaker trips after 5 consecutive Odoo failures, semaphore pool caps at 20
 
 ### Setup Requirements (User Responsibilities)
 
@@ -144,7 +146,7 @@ Progress: [████░░░░░░] 50% (5/11 phases complete)
 
 ## Session Continuity
 
-Last session: 2026-03-14T00:31:53Z
-Stopped at: Completed 06-02-PLAN.md
+Last session: 2026-03-14T00:34:07.092Z
+Stopped at: Completed 06-01-PLAN.md
 Resume file: None
 Next up: 06-03-PLAN.md (wave 1 continues)
