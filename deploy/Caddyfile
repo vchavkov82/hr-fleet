@@ -83,6 +83,19 @@
 	}
 }
 
+# ── Admin panel (Vite SPA) ──────────────────────────────────────────────────
+{$HR_ADMIN_DOMAIN:admin.hr.localhost} {
+	encode gzip zstd
+	import common_headers
+
+	# Vite build — content-hashed chunks are immutable
+	header /assets/* Cache-Control "public, max-age=31536000, s-maxage=31536000, immutable"
+
+	handle {
+		reverse_proxy hr-admin:5012
+	}
+}
+
 # ── HR docs (Astro Starlight) ───────────────────────────────────────────────
 {$HR_DOCS_DOMAIN:docs.localhost} {
 	encode gzip zstd
