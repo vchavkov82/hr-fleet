@@ -33,7 +33,7 @@ func NewPayslipHandler(svc PayslipServicer) *PayslipHandler {
 // @Tags Payslips
 // @Produce json
 // @Param id path string true "Payslip ID (UUID)"
-// @Success 200 {object} db.Payslip
+// @Success 200 {object} map[string]interface{}
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Security BearerAuth

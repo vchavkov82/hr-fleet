@@ -35,7 +35,7 @@ type createPayrollRunRequest struct {
 // @Accept json
 // @Produce json
 // @Param body body createPayrollRunRequest true "Payroll run period"
-// @Success 201 {object} db.PayrollRun
+// @Success 201 {object} map[string]interface{}
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Security BearerAuth
@@ -139,7 +139,7 @@ func (h *PayrollHandler) HandleProcess(w http.ResponseWriter, r *http.Request) {
 // @Tags Payroll
 // @Produce json
 // @Param id path string true "Payroll run ID (UUID)"
-// @Success 200 {object} db.PayrollRun
+// @Success 200 {object} map[string]interface{}
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Security BearerAuth

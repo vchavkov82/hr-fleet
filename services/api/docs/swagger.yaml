@@ -1,0 +1,1314 @@
+basePath: /api/v1
+definitions:
+  handler.ErrorBody:
+    properties:
+      code:
+        type: string
+      details:
+        items:
+          $ref: '#/definitions/handler.FieldError'
+        type: array
+      message:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      error:
+        $ref: '#/definitions/handler.ErrorBody'
+    type: object
+  handler.FieldError:
+    properties:
+      field:
+        type: string
+      message:
+        type: string
+    type: object
+  handler.ListMeta:
+    properties:
+      page:
+        type: integer
+      per_page:
+        type: integer
+      total:
+        type: integer
+      total_pages:
+        type: integer
+    type: object
+  handler.ListResponse:
+    properties:
+      data: {}
+      meta:
+        $ref: '#/definitions/handler.ListMeta'
+    type: object
+  handler.createAPIKeyRequest:
+    properties:
+      name:
+        type: string
+      scopes:
+        items:
+          type: string
+        type: array
+    type: object
+  handler.createPayrollRunRequest:
+    properties:
+      period_end:
+        description: YYYY-MM-DD
+        type: string
+      period_start:
+        description: YYYY-MM-DD
+        type: string
+    type: object
+  handler.loginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  handler.refreshRequest:
+    properties:
+      refresh_token:
+        type: string
+    type: object
+  handler.registerWebhookRequest:
+    properties:
+      events:
+        items:
+          type: string
+        type: array
+      url:
+        type: string
+    type: object
+  handler.tokenResponse:
+    properties:
+      access_token:
+        type: string
+      expires_in:
+        type: integer
+      refresh_token:
+        type: string
+      token_type:
+        type: string
+    type: object
+  odoo.Contract:
+    properties:
+      date_end:
+        type: string
+      date_start:
+        type: string
+      department_id:
+        $ref: '#/definitions/odoo.Many2One'
+      employee_id:
+        $ref: '#/definitions/odoo.Many2One'
+      id:
+        type: integer
+      name:
+        type: string
+      state:
+        type: string
+      structure_type_id:
+        $ref: '#/definitions/odoo.Many2One'
+      wage:
+        type: number
+    type: object
+  odoo.ContractCreateRequest:
+    properties:
+      date_end:
+        type: string
+      date_start:
+        type: string
+      department_id:
+        type: integer
+      employee_id:
+        type: integer
+      name:
+        type: string
+      structure_type_id:
+        type: integer
+      wage:
+        type: number
+    type: object
+  odoo.Employee:
+    properties:
+      active:
+        type: boolean
+      create_date:
+        type: string
+      department_id:
+        $ref: '#/definitions/odoo.Many2One'
+      employee_type:
+        type: string
+      id:
+        type: integer
+      job_id:
+        $ref: '#/definitions/odoo.Many2One'
+      job_title:
+        type: string
+      mobile_phone:
+        type: string
+      name:
+        type: string
+      parent_id:
+        $ref: '#/definitions/odoo.Many2One'
+      work_email:
+        type: string
+      work_phone:
+        type: string
+      write_date:
+        type: string
+    type: object
+  odoo.EmployeeCreateRequest:
+    properties:
+      department_id:
+        type: integer
+      employee_type:
+        type: string
+      job_title:
+        type: string
+      name:
+        type: string
+      work_email:
+        type: string
+    type: object
+  odoo.LeaveCreateRequest:
+    properties:
+      date_from:
+        type: string
+      date_to:
+        type: string
+      employee_id:
+        type: integer
+      holiday_status_id:
+        type: integer
+      name:
+        type: string
+    type: object
+  odoo.Many2One:
+    properties:
+      id:
+        format: int64
+        type: integer
+      name:
+        type: string
+    type: object
+  service.PayrollSummaryReport:
+    properties:
+      employee_count:
+        type: integer
+      period_end:
+        type: string
+      period_start:
+        type: string
+      total_employee_health_stotinki:
+        type: integer
+      total_employee_social_stotinki:
+        type: integer
+      total_employer_health_stotinki:
+        type: integer
+      total_employer_social_stotinki:
+        type: integer
+      total_gross_stotinki:
+        type: integer
+      total_income_tax_stotinki:
+        type: integer
+      total_net_stotinki:
+        type: integer
+    type: object
+  service.TaxLiabilityItem:
+    properties:
+      category:
+        type: string
+      employee_share_stotinki:
+        type: integer
+      employer_share_stotinki:
+        type: integer
+      total_stotinki:
+        type: integer
+    type: object
+  service.TaxLiabilityReport:
+    properties:
+      employee_count:
+        type: integer
+      liabilities:
+        items:
+          $ref: '#/definitions/service.TaxLiabilityItem'
+        type: array
+      period_end:
+        type: string
+      period_start:
+        type: string
+      total_stotinki:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: REST API for HR Platform with Bulgarian payroll
+  title: HR Platform API
+  version: "1.0"
+paths:
+  /auth/api-keys:
+    get:
+      description: List all API keys for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List API keys
+      tags:
+      - Auth
+    post:
+      consumes:
+      - application/json
+      description: Generate a new API key for the authenticated user
+      parameters:
+      - description: API key details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.createAPIKeyRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create a new API key
+      tags:
+      - Auth
+  /auth/api-keys/{id}:
+    delete:
+      description: Deactivate an API key by ID
+      parameters:
+      - description: API Key ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Deactivate an API key
+      tags:
+      - Auth
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user and return JWT access and refresh tokens
+      parameters:
+      - description: Login credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.loginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.tokenResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Login with email and password
+      tags:
+      - Auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Exchange a refresh token for new access and refresh tokens
+      parameters:
+      - description: Refresh token
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.refreshRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.tokenResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Refresh access token
+      tags:
+      - Auth
+  /contracts:
+    get:
+      description: List contracts with optional employee filter and pagination
+      parameters:
+      - description: Filter by employee ID
+        in: query
+        name: employee_id
+        type: integer
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 100)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: List contracts
+      tags:
+      - Contracts
+    post:
+      consumes:
+      - application/json
+      description: Create a new employment contract
+      parameters:
+      - description: Contract details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/odoo.ContractCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Create a new contract
+      tags:
+      - Contracts
+  /contracts/{id}:
+    get:
+      description: Retrieve a single contract by ID
+      parameters:
+      - description: Contract ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/odoo.Contract'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Get contract by ID
+      tags:
+      - Contracts
+  /employees:
+    get:
+      description: List employees with optional search, department filter, and pagination
+      parameters:
+      - description: Search by name or email
+        in: query
+        name: search
+        type: string
+      - description: Filter by department ID
+        in: query
+        name: department_id
+        type: integer
+      - description: Filter by active status (default true)
+        in: query
+        name: active
+        type: boolean
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 100)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "503":
+          description: Service Unavailable
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: List employees
+      tags:
+      - Employees
+    post:
+      consumes:
+      - application/json
+      description: Create a new employee in the HR system
+      parameters:
+      - description: Employee details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/odoo.EmployeeCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Create a new employee
+      tags:
+      - Employees
+  /employees/{id}:
+    delete:
+      description: Soft-delete (deactivate) an employee by ID
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Deactivate an employee
+      tags:
+      - Employees
+    get:
+      description: Retrieve a single employee by their Odoo ID
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/odoo.Employee'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Get employee by ID
+      tags:
+      - Employees
+    put:
+      consumes:
+      - application/json
+      description: Update employee fields by ID
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Fields to update
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Update an employee
+      tags:
+      - Employees
+  /leave/allocations:
+    get:
+      description: List leave allocations with optional employee filter
+      parameters:
+      - description: Filter by employee ID
+        in: query
+        name: employee_id
+        type: integer
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 100)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: List leave allocations
+      tags:
+      - Leave
+  /leave/requests:
+    get:
+      description: List leave requests with optional employee and status filter
+      parameters:
+      - description: Filter by employee ID
+        in: query
+        name: employee_id
+        type: integer
+      - description: Filter by status
+        in: query
+        name: status
+        type: string
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 100)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: List leave requests
+      tags:
+      - Leave
+    post:
+      consumes:
+      - application/json
+      description: Submit a new leave request
+      parameters:
+      - description: Leave request details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/odoo.LeaveCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Create a leave request
+      tags:
+      - Leave
+  /leave/requests/{id}/approve:
+    post:
+      description: Approve a pending leave request
+      parameters:
+      - description: Leave request ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Approve a leave request
+      tags:
+      - Leave
+  /leave/requests/{id}/reject:
+    post:
+      consumes:
+      - application/json
+      description: Reject a pending leave request with optional reason
+      parameters:
+      - description: Leave request ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Rejection reason
+        in: body
+        name: body
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Reject a leave request
+      tags:
+      - Leave
+  /payroll-runs:
+    get:
+      description: List payroll runs with optional status filter and pagination
+      parameters:
+      - description: Filter by status
+        in: query
+        name: status
+        type: string
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 100)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: List payroll runs
+      tags:
+      - Payroll
+    post:
+      consumes:
+      - application/json
+      description: Create a new payroll run for a date period
+      parameters:
+      - description: Payroll run period
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.createPayrollRunRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Create a payroll run
+      tags:
+      - Payroll
+  /payroll-runs/{id}:
+    get:
+      description: Retrieve payroll run details and processing status
+      parameters:
+      - description: Payroll run ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Get payroll run status
+      tags:
+      - Payroll
+  /payroll-runs/{id}/approve:
+    post:
+      description: Approve a draft payroll run for processing
+      parameters:
+      - description: Payroll run ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Approve a payroll run
+      tags:
+      - Payroll
+  /payroll-runs/{id}/process:
+    post:
+      description: Trigger async payroll processing, returns 202 with poll URL
+      parameters:
+      - description: Payroll run ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Process a payroll run
+      tags:
+      - Payroll
+  /payslips:
+    get:
+      description: List payslips for a specific payroll run
+      parameters:
+      - description: Payroll run ID (UUID)
+        in: query
+        name: payroll_run_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: List payslips
+      tags:
+      - Payslips
+  /payslips/{id}:
+    get:
+      description: Retrieve a single payslip by UUID
+      parameters:
+      - description: Payslip ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Get payslip by ID
+      tags:
+      - Payslips
+  /payslips/{id}/confirm:
+    post:
+      description: Confirm a payslip has been reviewed
+      parameters:
+      - description: Payslip ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Confirm a payslip
+      tags:
+      - Payslips
+  /reports/payroll-summary:
+    get:
+      description: Generate payroll summary for a date period
+      parameters:
+      - description: Period start (YYYY-MM-DD)
+        in: query
+        name: period_start
+        required: true
+        type: string
+      - description: Period end (YYYY-MM-DD)
+        in: query
+        name: period_end
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.PayrollSummaryReport'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Get payroll summary report
+      tags:
+      - Reports
+  /reports/tax-liabilities:
+    get:
+      description: Generate tax liabilities breakdown for a date period
+      parameters:
+      - description: Period start (YYYY-MM-DD)
+        in: query
+        name: period_start
+        required: true
+        type: string
+      - description: Period end (YYYY-MM-DD)
+        in: query
+        name: period_end
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.TaxLiabilityReport'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Get tax liabilities report
+      tags:
+      - Reports
+  /webhooks:
+    get:
+      description: List all registered webhooks
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: List webhooks
+      tags:
+      - Webhooks
+    post:
+      consumes:
+      - application/json
+      description: Register a new webhook endpoint for event notifications
+      parameters:
+      - description: Webhook registration
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.registerWebhookRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Register a webhook
+      tags:
+      - Webhooks
+  /webhooks/{id}:
+    delete:
+      description: Deactivate a webhook registration by ID
+      parameters:
+      - description: Webhook ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: Deactivate a webhook
+      tags:
+      - Webhooks
+  /webhooks/{id}/deliveries:
+    get:
+      description: List delivery attempts for a specific webhook
+      parameters:
+      - description: Webhook ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (default 20, max 100)
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      - APIKeyAuth: []
+      summary: List webhook deliveries
+      tags:
+      - Webhooks
+securityDefinitions:
+  APIKeyAuth:
+    in: header
+    name: X-API-Key
+    type: apiKey
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
