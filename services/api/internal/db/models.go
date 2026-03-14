@@ -8,6 +8,29 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+type ApiKey struct {
+	ID         pgtype.UUID
+	UserID     pgtype.UUID
+	Name       string
+	KeyHash    string
+	KeyPrefix  string
+	Scopes     []string
+	Active     bool
+	LastUsedAt pgtype.Timestamptz
+	ExpiresAt  pgtype.Timestamptz
+	CreatedAt  pgtype.Timestamptz
+}
+
+type AuditLog struct {
+	ID           int64
+	UserID       pgtype.UUID
+	Action       string
+	ResourceType string
+	ResourceID   string
+	Details      []byte
+	CreatedAt    pgtype.Timestamptz
+}
+
 type Employee struct {
 	ID         pgtype.UUID
 	OdooID     pgtype.Int4
@@ -18,4 +41,72 @@ type Employee struct {
 	Status     string
 	CreatedAt  pgtype.Timestamptz
 	UpdatedAt  pgtype.Timestamptz
+}
+
+type PayrollRun struct {
+	ID           pgtype.UUID
+	PeriodStart  pgtype.Date
+	PeriodEnd    pgtype.Date
+	Status       string
+	CreatedBy    pgtype.UUID
+	ApprovedBy   pgtype.UUID
+	ErrorDetails []byte
+	CompletedAt  pgtype.Timestamptz
+	CreatedAt    pgtype.Timestamptz
+	UpdatedAt    pgtype.Timestamptz
+}
+
+type Payslip struct {
+	ID                     pgtype.UUID
+	PayrollRunID           pgtype.UUID
+	EmployeeOdooID         int32
+	GrossSalaryStotinki    int64
+	EmployerSocialStotinki int64
+	EmployeeSocialStotinki int64
+	EmployerHealthStotinki int64
+	EmployeeHealthStotinki int64
+	IncomeTaxStotinki      int64
+	NetSalaryStotinki      int64
+	CalculationDetails     []byte
+	CreatedAt              pgtype.Timestamptz
+}
+
+type RefreshToken struct {
+	ID        pgtype.UUID
+	UserID    pgtype.UUID
+	TokenHash string
+	ExpiresAt pgtype.Timestamptz
+	CreatedAt pgtype.Timestamptz
+}
+
+type User struct {
+	ID           pgtype.UUID
+	Email        string
+	PasswordHash string
+	Role         string
+	Active       bool
+	CreatedAt    pgtype.Timestamptz
+	UpdatedAt    pgtype.Timestamptz
+}
+
+type WebhookDelivery struct {
+	ID               pgtype.UUID
+	WebhookID        pgtype.UUID
+	Event            string
+	Payload          []byte
+	Status           string
+	Attempts         int32
+	LastResponseCode pgtype.Int4
+	LastError        pgtype.Text
+	CreatedAt        pgtype.Timestamptz
+}
+
+type WebhookRegistration struct {
+	ID        pgtype.UUID
+	Url       string
+	Events    []string
+	Secret    string
+	Active    bool
+	CreatedBy pgtype.UUID
+	CreatedAt pgtype.Timestamptz
 }
