@@ -29,6 +29,18 @@ type createPayrollRunRequest struct {
 }
 
 // HandleCreate handles POST /api/v1/payroll-runs.
+// @Summary Create a payroll run
+// @Description Create a new payroll run for a date period
+// @Tags Payroll
+// @Accept json
+// @Produce json
+// @Param body body createPayrollRunRequest true "Payroll run period"
+// @Success 201 {object} db.PayrollRun
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /payroll-runs [post]
 func (h *PayrollHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 	var req createPayrollRunRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -59,6 +71,18 @@ func (h *PayrollHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleApprove handles POST /api/v1/payroll-runs/{id}/approve.
+// @Summary Approve a payroll run
+// @Description Approve a draft payroll run for processing
+// @Tags Payroll
+// @Produce json
+// @Param id path string true "Payroll run ID (UUID)"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 409 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /payroll-runs/{id}/approve [post]
 func (h *PayrollHandler) HandleApprove(w http.ResponseWriter, r *http.Request) {
 	runID, ok := parsePathUUID(w, r, "id")
 	if !ok {
@@ -76,7 +100,18 @@ func (h *PayrollHandler) HandleApprove(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleProcess handles POST /api/v1/payroll-runs/{id}/process.
-// Returns 202 Accepted with a poll URL.
+// @Summary Process a payroll run
+// @Description Trigger async payroll processing, returns 202 with poll URL
+// @Tags Payroll
+// @Produce json
+// @Param id path string true "Payroll run ID (UUID)"
+// @Success 202 {object} map[string]string
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 409 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /payroll-runs/{id}/process [post]
 func (h *PayrollHandler) HandleProcess(w http.ResponseWriter, r *http.Request) {
 	runID, ok := parsePathUUID(w, r, "id")
 	if !ok {
@@ -99,6 +134,17 @@ func (h *PayrollHandler) HandleProcess(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleGetStatus handles GET /api/v1/payroll-runs/{id}.
+// @Summary Get payroll run status
+// @Description Retrieve payroll run details and processing status
+// @Tags Payroll
+// @Produce json
+// @Param id path string true "Payroll run ID (UUID)"
+// @Success 200 {object} db.PayrollRun
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /payroll-runs/{id} [get]
 func (h *PayrollHandler) HandleGetStatus(w http.ResponseWriter, r *http.Request) {
 	runID, ok := parsePathUUID(w, r, "id")
 	if !ok {
@@ -115,6 +161,18 @@ func (h *PayrollHandler) HandleGetStatus(w http.ResponseWriter, r *http.Request)
 }
 
 // HandleList handles GET /api/v1/payroll-runs.
+// @Summary List payroll runs
+// @Description List payroll runs with optional status filter and pagination
+// @Tags Payroll
+// @Produce json
+// @Param status query string false "Filter by status"
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 20, max 100)"
+// @Success 200 {object} ListResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /payroll-runs [get]
 func (h *PayrollHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	page := intQueryParam(r, "page", 1)
 	perPage := intQueryParam(r, "per_page", 20)

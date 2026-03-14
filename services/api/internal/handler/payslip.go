@@ -28,6 +28,17 @@ func NewPayslipHandler(svc PayslipServicer) *PayslipHandler {
 }
 
 // HandleGet handles GET /api/v1/payslips/{id}.
+// @Summary Get payslip by ID
+// @Description Retrieve a single payslip by UUID
+// @Tags Payslips
+// @Produce json
+// @Param id path string true "Payslip ID (UUID)"
+// @Success 200 {object} db.Payslip
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /payslips/{id} [get]
 func (h *PayslipHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	id, ok := parsePathUUID(w, r, "id")
 	if !ok {
@@ -48,6 +59,17 @@ func (h *PayslipHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleList handles GET /api/v1/payslips?payroll_run_id=.
+// @Summary List payslips
+// @Description List payslips for a specific payroll run
+// @Tags Payslips
+// @Produce json
+// @Param payroll_run_id query string true "Payroll run ID (UUID)"
+// @Success 200 {object} map[string]any
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /payslips [get]
 func (h *PayslipHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	runIDStr := r.URL.Query().Get("payroll_run_id")
 	if runIDStr == "" {
@@ -74,7 +96,17 @@ func (h *PayslipHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleConfirm handles POST /api/v1/payslips/{id}/confirm.
-// Confirms a payslip (placeholder for future confirmation workflow).
+// @Summary Confirm a payslip
+// @Description Confirm a payslip has been reviewed
+// @Tags Payslips
+// @Produce json
+// @Param id path string true "Payslip ID (UUID)"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /payslips/{id}/confirm [post]
 func (h *PayslipHandler) HandleConfirm(w http.ResponseWriter, r *http.Request) {
 	id, ok := parsePathUUID(w, r, "id")
 	if !ok {

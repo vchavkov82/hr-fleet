@@ -34,6 +34,21 @@ func NewEmployeeHandler(svc EmployeeServicer) *EmployeeHandler {
 }
 
 // HandleList handles GET /api/v1/employees with search, department_id, page, per_page query params.
+// @Summary List employees
+// @Description List employees with optional search, department filter, and pagination
+// @Tags Employees
+// @Produce json
+// @Param search query string false "Search by name or email"
+// @Param department_id query integer false "Filter by department ID"
+// @Param active query boolean false "Filter by active status (default true)"
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 20, max 100)"
+// @Success 200 {object} map[string]any
+// @Failure 500 {object} map[string]string
+// @Failure 503 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /employees [get]
 func (h *EmployeeHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	search := r.URL.Query().Get("search")
 	departmentID, _ := strconv.ParseInt(r.URL.Query().Get("department_id"), 10, 64)
@@ -75,6 +90,17 @@ func (h *EmployeeHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleGet handles GET /api/v1/employees/{id}.
+// @Summary Get employee by ID
+// @Description Retrieve a single employee by their Odoo ID
+// @Tags Employees
+// @Produce json
+// @Param id path integer true "Employee ID"
+// @Success 200 {object} odoo.Employee
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /employees/{id} [get]
 func (h *EmployeeHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
@@ -97,6 +123,18 @@ func (h *EmployeeHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleCreate handles POST /api/v1/employees.
+// @Summary Create a new employee
+// @Description Create a new employee in the HR system
+// @Tags Employees
+// @Accept json
+// @Produce json
+// @Param body body odoo.EmployeeCreateRequest true "Employee details"
+// @Success 201 {object} map[string]any
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /employees [post]
 func (h *EmployeeHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 	var req odoo.EmployeeCreateRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -130,6 +168,19 @@ func (h *EmployeeHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleUpdate handles PUT /api/v1/employees/{id}.
+// @Summary Update an employee
+// @Description Update employee fields by ID
+// @Tags Employees
+// @Accept json
+// @Produce json
+// @Param id path integer true "Employee ID"
+// @Param body body map[string]any true "Fields to update"
+// @Success 200 {object} map[string]any
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /employees/{id} [put]
 func (h *EmployeeHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
@@ -159,6 +210,17 @@ func (h *EmployeeHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleDelete handles DELETE /api/v1/employees/{id} (soft delete).
+// @Summary Deactivate an employee
+// @Description Soft-delete (deactivate) an employee by ID
+// @Tags Employees
+// @Produce json
+// @Param id path integer true "Employee ID"
+// @Success 200 {object} map[string]any
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /employees/{id} [delete]
 func (h *EmployeeHandler) HandleDelete(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)

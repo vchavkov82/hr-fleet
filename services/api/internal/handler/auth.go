@@ -45,6 +45,16 @@ type createAPIKeyRequest struct {
 }
 
 // HandleLogin handles POST /auth/login.
+// @Summary Login with email and password
+// @Description Authenticate user and return JWT access and refresh tokens
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Param body body loginRequest true "Login credentials"
+// @Success 200 {object} tokenResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 401 {object} ErrorResponse
+// @Router /auth/login [post]
 func (h *AuthHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	var req loginRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -75,6 +85,16 @@ func (h *AuthHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleRefresh handles POST /auth/refresh.
+// @Summary Refresh access token
+// @Description Exchange a refresh token for new access and refresh tokens
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Param body body refreshRequest true "Refresh token"
+// @Success 200 {object} tokenResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 401 {object} ErrorResponse
+// @Router /auth/refresh [post]
 func (h *AuthHandler) HandleRefresh(w http.ResponseWriter, r *http.Request) {
 	var req refreshRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -102,6 +122,17 @@ func (h *AuthHandler) HandleRefresh(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleCreateAPIKey handles POST /auth/api-keys.
+// @Summary Create a new API key
+// @Description Generate a new API key for the authenticated user
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Param body body createAPIKeyRequest true "API key details"
+// @Success 201 {object} map[string]any
+// @Failure 400 {object} ErrorResponse
+// @Failure 401 {object} ErrorResponse
+// @Security BearerAuth
+// @Router /auth/api-keys [post]
 func (h *AuthHandler) HandleCreateAPIKey(w http.ResponseWriter, r *http.Request) {
 	_, claims, _ := jwtauth.FromContext(r.Context())
 	userIDStr, _ := claims["sub"].(string)
@@ -139,6 +170,14 @@ func (h *AuthHandler) HandleCreateAPIKey(w http.ResponseWriter, r *http.Request)
 }
 
 // HandleListAPIKeys handles GET /auth/api-keys.
+// @Summary List API keys
+// @Description List all API keys for the authenticated user
+// @Tags Auth
+// @Produce json
+// @Success 200 {object} map[string]any
+// @Failure 401 {object} ErrorResponse
+// @Security BearerAuth
+// @Router /auth/api-keys [get]
 func (h *AuthHandler) HandleListAPIKeys(w http.ResponseWriter, r *http.Request) {
 	_, claims, _ := jwtauth.FromContext(r.Context())
 	userIDStr, _ := claims["sub"].(string)
@@ -184,6 +223,15 @@ func (h *AuthHandler) HandleListAPIKeys(w http.ResponseWriter, r *http.Request) 
 }
 
 // HandleDeleteAPIKey handles DELETE /auth/api-keys/{id}.
+// @Summary Deactivate an API key
+// @Description Deactivate an API key by ID
+// @Tags Auth
+// @Produce json
+// @Param id path string true "API Key ID (UUID)"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} ErrorResponse
+// @Security BearerAuth
+// @Router /auth/api-keys/{id} [delete]
 func (h *AuthHandler) HandleDeleteAPIKey(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id := parseUUID(idStr)

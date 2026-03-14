@@ -26,6 +26,18 @@ func NewReportHandler(svc ReportServicer) *ReportHandler {
 }
 
 // HandlePayrollSummary handles GET /api/v1/reports/payroll-summary.
+// @Summary Get payroll summary report
+// @Description Generate payroll summary for a date period
+// @Tags Reports
+// @Produce json
+// @Param period_start query string true "Period start (YYYY-MM-DD)"
+// @Param period_end query string true "Period end (YYYY-MM-DD)"
+// @Success 200 {object} service.PayrollSummaryReport
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /reports/payroll-summary [get]
 func (h *ReportHandler) HandlePayrollSummary(w http.ResponseWriter, r *http.Request) {
 	periodStart, periodEnd, ok := parsePeriodParams(w, r)
 	if !ok {
@@ -42,6 +54,18 @@ func (h *ReportHandler) HandlePayrollSummary(w http.ResponseWriter, r *http.Requ
 }
 
 // HandleTaxLiabilities handles GET /api/v1/reports/tax-liabilities.
+// @Summary Get tax liabilities report
+// @Description Generate tax liabilities breakdown for a date period
+// @Tags Reports
+// @Produce json
+// @Param period_start query string true "Period start (YYYY-MM-DD)"
+// @Param period_end query string true "Period end (YYYY-MM-DD)"
+// @Success 200 {object} service.TaxLiabilityReport
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /reports/tax-liabilities [get]
 func (h *ReportHandler) HandleTaxLiabilities(w http.ResponseWriter, r *http.Request) {
 	periodStart, periodEnd, ok := parsePeriodParams(w, r)
 	if !ok {

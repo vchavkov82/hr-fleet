@@ -33,6 +33,18 @@ func NewLeaveHandler(svc LeaveServicer) *LeaveHandler {
 }
 
 // HandleListAllocations handles GET /api/v1/leave/allocations.
+// @Summary List leave allocations
+// @Description List leave allocations with optional employee filter
+// @Tags Leave
+// @Produce json
+// @Param employee_id query integer false "Filter by employee ID"
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 20, max 100)"
+// @Success 200 {object} ListResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /leave/allocations [get]
 func (h *LeaveHandler) HandleListAllocations(w http.ResponseWriter, r *http.Request) {
 	employeeID, _ := strconv.ParseInt(r.URL.Query().Get("employee_id"), 10, 64)
 	page := intQueryParam(r, "page", 1)
@@ -58,6 +70,19 @@ func (h *LeaveHandler) HandleListAllocations(w http.ResponseWriter, r *http.Requ
 }
 
 // HandleListRequests handles GET /api/v1/leave/requests.
+// @Summary List leave requests
+// @Description List leave requests with optional employee and status filter
+// @Tags Leave
+// @Produce json
+// @Param employee_id query integer false "Filter by employee ID"
+// @Param status query string false "Filter by status"
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 20, max 100)"
+// @Success 200 {object} ListResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /leave/requests [get]
 func (h *LeaveHandler) HandleListRequests(w http.ResponseWriter, r *http.Request) {
 	employeeID, _ := strconv.ParseInt(r.URL.Query().Get("employee_id"), 10, 64)
 	status := r.URL.Query().Get("status")
@@ -84,6 +109,18 @@ func (h *LeaveHandler) HandleListRequests(w http.ResponseWriter, r *http.Request
 }
 
 // HandleCreateRequest handles POST /api/v1/leave/requests.
+// @Summary Create a leave request
+// @Description Submit a new leave request
+// @Tags Leave
+// @Accept json
+// @Produce json
+// @Param body body odoo.LeaveCreateRequest true "Leave request details"
+// @Success 201 {object} map[string]any
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /leave/requests [post]
 func (h *LeaveHandler) HandleCreateRequest(w http.ResponseWriter, r *http.Request) {
 	var req odoo.LeaveCreateRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -122,6 +159,17 @@ func (h *LeaveHandler) HandleCreateRequest(w http.ResponseWriter, r *http.Reques
 }
 
 // HandleApproveRequest handles POST /api/v1/leave/requests/{id}/approve.
+// @Summary Approve a leave request
+// @Description Approve a pending leave request
+// @Tags Leave
+// @Produce json
+// @Param id path integer true "Leave request ID"
+// @Success 200 {object} map[string]any
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /leave/requests/{id}/approve [post]
 func (h *LeaveHandler) HandleApproveRequest(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
@@ -144,6 +192,19 @@ func (h *LeaveHandler) HandleApproveRequest(w http.ResponseWriter, r *http.Reque
 }
 
 // HandleRejectRequest handles POST /api/v1/leave/requests/{id}/reject.
+// @Summary Reject a leave request
+// @Description Reject a pending leave request with optional reason
+// @Tags Leave
+// @Accept json
+// @Produce json
+// @Param id path integer true "Leave request ID"
+// @Param body body object false "Rejection reason"
+// @Success 200 {object} map[string]any
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /leave/requests/{id}/reject [post]
 func (h *LeaveHandler) HandleRejectRequest(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)

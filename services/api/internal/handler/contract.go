@@ -31,6 +31,18 @@ func NewContractHandler(svc ContractServicer) *ContractHandler {
 }
 
 // HandleList handles GET /api/v1/contracts.
+// @Summary List contracts
+// @Description List contracts with optional employee filter and pagination
+// @Tags Contracts
+// @Produce json
+// @Param employee_id query integer false "Filter by employee ID"
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 20, max 100)"
+// @Success 200 {object} ListResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /contracts [get]
 func (h *ContractHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	employeeID, _ := strconv.ParseInt(r.URL.Query().Get("employee_id"), 10, 64)
 	page := intQueryParam(r, "page", 1)
@@ -56,6 +68,17 @@ func (h *ContractHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleGet handles GET /api/v1/contracts/{id}.
+// @Summary Get contract by ID
+// @Description Retrieve a single contract by ID
+// @Tags Contracts
+// @Produce json
+// @Param id path integer true "Contract ID"
+// @Success 200 {object} odoo.Contract
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /contracts/{id} [get]
 func (h *ContractHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
@@ -78,6 +101,18 @@ func (h *ContractHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleCreate handles POST /api/v1/contracts.
+// @Summary Create a new contract
+// @Description Create a new employment contract
+// @Tags Contracts
+// @Accept json
+// @Produce json
+// @Param body body odoo.ContractCreateRequest true "Contract details"
+// @Success 201 {object} map[string]any
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /contracts [post]
 func (h *ContractHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 	var req odoo.ContractCreateRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {

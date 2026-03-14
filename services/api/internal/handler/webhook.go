@@ -36,6 +36,18 @@ type registerWebhookRequest struct {
 }
 
 // HandleRegister handles POST /api/v1/webhooks.
+// @Summary Register a webhook
+// @Description Register a new webhook endpoint for event notifications
+// @Tags Webhooks
+// @Accept json
+// @Produce json
+// @Param body body registerWebhookRequest true "Webhook registration"
+// @Success 201 {object} map[string]any
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /webhooks [post]
 func (h *WebhookHandler) HandleRegister(w http.ResponseWriter, r *http.Request) {
 	var req registerWebhookRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -69,6 +81,15 @@ func (h *WebhookHandler) HandleRegister(w http.ResponseWriter, r *http.Request) 
 }
 
 // HandleList handles GET /api/v1/webhooks.
+// @Summary List webhooks
+// @Description List all registered webhooks
+// @Tags Webhooks
+// @Produce json
+// @Success 200 {object} map[string]any
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /webhooks [get]
 func (h *WebhookHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	regs, err := h.svc.List(r.Context())
 	if err != nil {
@@ -80,6 +101,16 @@ func (h *WebhookHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleDeactivate handles DELETE /api/v1/webhooks/{id}.
+// @Summary Deactivate a webhook
+// @Description Deactivate a webhook registration by ID
+// @Tags Webhooks
+// @Produce json
+// @Param id path string true "Webhook ID (UUID)"
+// @Success 200 {object} map[string]string
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /webhooks/{id} [delete]
 func (h *WebhookHandler) HandleDeactivate(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id := parseUUID(idStr)
@@ -93,6 +124,18 @@ func (h *WebhookHandler) HandleDeactivate(w http.ResponseWriter, r *http.Request
 }
 
 // HandleListDeliveries handles GET /api/v1/webhooks/{id}/deliveries.
+// @Summary List webhook deliveries
+// @Description List delivery attempts for a specific webhook
+// @Tags Webhooks
+// @Produce json
+// @Param id path string true "Webhook ID (UUID)"
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 20, max 100)"
+// @Success 200 {object} map[string]any
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /webhooks/{id}/deliveries [get]
 func (h *WebhookHandler) HandleListDeliveries(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id := parseUUID(idStr)
