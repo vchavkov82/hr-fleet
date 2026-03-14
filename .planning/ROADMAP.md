@@ -65,7 +65,7 @@ Plans:
 | 3. Odoo HR Backend Integration | v1.0 | 5/5 | Complete | 2026-03-07 |
 | 4. Content Aligned with Odoo | v1.0 | 4/4 | Complete | 2026-03-08 |
 | 5. Foundation & Monorepo | v1.1 | 4/4 | Complete | 2026-03-13 |
-| 6. Core Go REST API | v1.1 | 0/TBD | Not Started | - |
+| 6. Core Go REST API | v1.1 | 0/7 | Not Started | - |
 | 7. Admin UI with RBAC | v1.1 | 0/TBD | Not Started | - |
 | 8. Marketing Site Enhancement | v1.1 | 0/TBD | Not Started | - |
 | 9. Documentation Hub & Blog | v1.1 | 0/TBD | Not Started | - |
@@ -122,7 +122,16 @@ Plans:
 **Requirements**: API-01 through API-13
 **Depends on**: Phase 5 (monorepo + Go scaffold)
 **Status**: Not Started
-**Plans**: TBD
+**Plans**: 7 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Foundation: deps, response helpers, observability middleware, Odoo resilience, L1 cache
+- [ ] 06-02-PLAN.md — Database migrations and sqlc query generation
+- [ ] 06-03-PLAN.md — JWT RS256 auth, API keys, RBAC, auth endpoints
+- [ ] 06-04-PLAN.md — Employee CRUD enhancement, contracts, leave management
+- [ ] 06-05-PLAN.md — Bulgarian tax calculator, payroll runs, payslips, Asynq worker
+- [ ] 06-06-PLAN.md — Reports and webhook management
+- [ ] 06-07-PLAN.md — Swagger/OpenAPI docs, route wiring, worker binary, Makefile
 
 ### Phase 7: Admin UI with RBAC
 **Goal**: React 18 + Vite 5 SPA for platform operators. Login, dashboard (KPI cards), employee CRUD (TanStack Table), payroll run flow, payslip viewer, contract management, leave approval, reports (Recharts), users & roles, audit log, settings. RBAC enforced at API and UI layers with 7 role types. Type-safe API client from OpenAPI spec.
