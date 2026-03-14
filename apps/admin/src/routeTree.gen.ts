@@ -12,6 +12,10 @@ import { Route as rootRouteImport } from "./routes/__root"
 import { Route as LoginRouteImport } from "./routes/login"
 import { Route as AuthenticatedRouteImport } from "./routes/_authenticated"
 import { Route as AuthenticatedIndexRouteImport } from "./routes/_authenticated/index"
+import { Route as AuthenticatedReportsRouteImport } from "./routes/_authenticated/reports"
+import { Route as AuthenticatedPayslipsRouteImport } from "./routes/_authenticated/payslips"
+import { Route as AuthenticatedPayrollRouteImport } from "./routes/_authenticated/payroll"
+import { Route as AuthenticatedContractsRouteImport } from "./routes/_authenticated/contracts"
 
 const LoginRoute = LoginRouteImport.update({
   id: "/login",
@@ -27,27 +31,73 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: "/",
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
+  id: "/reports",
+  path: "/reports",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPayslipsRoute = AuthenticatedPayslipsRouteImport.update({
+  id: "/payslips",
+  path: "/payslips",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPayrollRoute = AuthenticatedPayrollRouteImport.update({
+  id: "/payroll",
+  path: "/payroll",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedContractsRoute = AuthenticatedContractsRouteImport.update({
+  id: "/contracts",
+  path: "/contracts",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof AuthenticatedIndexRoute
   "/login": typeof LoginRoute
+  "/contracts": typeof AuthenticatedContractsRoute
+  "/payroll": typeof AuthenticatedPayrollRoute
+  "/payslips": typeof AuthenticatedPayslipsRoute
+  "/reports": typeof AuthenticatedReportsRoute
 }
 export interface FileRoutesByTo {
   "/login": typeof LoginRoute
+  "/contracts": typeof AuthenticatedContractsRoute
+  "/payroll": typeof AuthenticatedPayrollRoute
+  "/payslips": typeof AuthenticatedPayslipsRoute
+  "/reports": typeof AuthenticatedReportsRoute
   "/": typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/_authenticated": typeof AuthenticatedRouteWithChildren
   "/login": typeof LoginRoute
+  "/_authenticated/contracts": typeof AuthenticatedContractsRoute
+  "/_authenticated/payroll": typeof AuthenticatedPayrollRoute
+  "/_authenticated/payslips": typeof AuthenticatedPayslipsRoute
+  "/_authenticated/reports": typeof AuthenticatedReportsRoute
   "/_authenticated/": typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/login"
+  fullPaths:
+    | "/"
+    | "/login"
+    | "/contracts"
+    | "/payroll"
+    | "/payslips"
+    | "/reports"
   fileRoutesByTo: FileRoutesByTo
-  to: "/login" | "/"
-  id: "__root__" | "/_authenticated" | "/login" | "/_authenticated/"
+  to: "/login" | "/contracts" | "/payroll" | "/payslips" | "/reports" | "/"
+  id:
+    | "__root__"
+    | "/_authenticated"
+    | "/login"
+    | "/_authenticated/contracts"
+    | "/_authenticated/payroll"
+    | "/_authenticated/payslips"
+    | "/_authenticated/reports"
+    | "/_authenticated/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -78,14 +128,50 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    "/_authenticated/reports": {
+      id: "/_authenticated/reports"
+      path: "/reports"
+      fullPath: "/reports"
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    "/_authenticated/payslips": {
+      id: "/_authenticated/payslips"
+      path: "/payslips"
+      fullPath: "/payslips"
+      preLoaderRoute: typeof AuthenticatedPayslipsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    "/_authenticated/payroll": {
+      id: "/_authenticated/payroll"
+      path: "/payroll"
+      fullPath: "/payroll"
+      preLoaderRoute: typeof AuthenticatedPayrollRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    "/_authenticated/contracts": {
+      id: "/_authenticated/contracts"
+      path: "/contracts"
+      fullPath: "/contracts"
+      preLoaderRoute: typeof AuthenticatedContractsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedContractsRoute: typeof AuthenticatedContractsRoute
+  AuthenticatedPayrollRoute: typeof AuthenticatedPayrollRoute
+  AuthenticatedPayslipsRoute: typeof AuthenticatedPayslipsRoute
+  AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedContractsRoute: AuthenticatedContractsRoute,
+  AuthenticatedPayrollRoute: AuthenticatedPayrollRoute,
+  AuthenticatedPayslipsRoute: AuthenticatedPayslipsRoute,
+  AuthenticatedReportsRoute: AuthenticatedReportsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 
