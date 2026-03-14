@@ -1,8 +1,55 @@
 {
   "name": "@hr/admin",
   "private": true,
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "build": "echo 'admin not yet implemented'",
-    "dev": "echo 'admin not yet implemented'"
+    "dev": "vite --port 5012",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 5012",
+    "test": "vitest",
+    "generate-api": "bash scripts/generate-api.sh",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@tanstack/react-router": "^1.120.3",
+    "@tanstack/react-query": "^5.75.5",
+    "@tanstack/react-table": "^8.21.3",
+    "@tanstack/react-virtual": "^3.13.6",
+    "openapi-fetch": "^0.13.5",
+    "recharts": "^2.15.3",
+    "zustand": "^5.0.5",
+    "react-hook-form": "^7.56.1",
+    "zod": "^3.25.3",
+    "@radix-ui/react-slot": "^1.2.0",
+    "@radix-ui/react-dialog": "^1.1.10",
+    "@radix-ui/react-dropdown-menu": "^2.1.10",
+    "@radix-ui/react-select": "^2.1.10",
+    "@radix-ui/react-tabs": "^1.1.7",
+    "@radix-ui/react-toast": "^1.2.10",
+    "lucide-react": "^0.477.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.0.2",
+    "date-fns": "^4.1.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.3",
+    "@vitejs/plugin-react": "^4.4.1",
+    "typescript": "~5.7.0",
+    "openapi-typescript": "^7.6.1",
+    "swagger2openapi": "^7.0.8",
+    "tailwindcss": "^4.1.5",
+    "@tailwindcss/vite": "^4.1.5",
+    "@tanstack/router-plugin": "^1.120.3",
+    "vitest": "^3.1.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "jsdom": "^26.1.0",
+    "msw": "^2.8.4",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
   }
 }
