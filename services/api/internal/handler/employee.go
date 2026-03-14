@@ -20,6 +20,7 @@ type EmployeeServicer interface {
 	Get(ctx context.Context, id int64) (*odoo.Employee, error)
 	Create(ctx context.Context, req odoo.EmployeeCreateRequest) (int64, error)
 	Update(ctx context.Context, id int64, vals map[string]any) error
+	Deactivate(ctx context.Context, id int64) error
 }
 
 // EmployeeHandler handles HTTP requests for employee operations.
@@ -154,6 +155,29 @@ func (h *EmployeeHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 
 	respondJSON(w, http.StatusOK, map[string]any{
 		"message": "Employee updated successfully",
+	})
+}
+
+// HandleDelete handles DELETE /api/v1/employees/{id} (soft delete).
+func (h *EmployeeHandler) HandleDelete(w http.ResponseWriter, r *http.Request) {
+	idStr := chi.URLParam(r, "id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid employee ID")
+		return
+	}
+
+	if err := h.svc.Deactivate(r.Context(), id); err != nil {
+		if errors.Is(err, service.ErrServiceUnavailable) {
+			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to deactivate employee")
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]any{
+		"message": "Employee deactivated successfully",
 	})
 }
 

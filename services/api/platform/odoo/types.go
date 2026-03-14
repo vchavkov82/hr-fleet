@@ -61,6 +61,94 @@ type EmployeeCreateRequest struct {
 	EmployeeType string `json:"employee_type"`
 }
 
+// Contract represents an hr.contract record from Odoo.
+type Contract struct {
+	ID            int64    `json:"id"`
+	EmployeeID    Many2One `json:"employee_id"`
+	Name          string   `json:"name"`
+	DateStart     string   `json:"date_start"`
+	DateEnd       string   `json:"date_end,omitempty"`
+	Wage          float64  `json:"wage"`
+	State         string   `json:"state"`
+	StructureType Many2One `json:"structure_type_id"`
+	Department    Many2One `json:"department_id"`
+}
+
+// ContractCreateRequest contains fields for creating a new hr.contract record.
+type ContractCreateRequest struct {
+	EmployeeID    int64   `json:"employee_id"`
+	Name          string  `json:"name"`
+	DateStart     string  `json:"date_start"`
+	DateEnd       string  `json:"date_end,omitempty"`
+	Wage          float64 `json:"wage"`
+	StructureType int64   `json:"structure_type_id,omitempty"`
+	DepartmentID  int64   `json:"department_id,omitempty"`
+}
+
+// contractFields lists the field names to request from Odoo for hr.contract records.
+var contractFields = []string{
+	"id",
+	"employee_id",
+	"name",
+	"date_start",
+	"date_end",
+	"wage",
+	"state",
+	"structure_type_id",
+	"department_id",
+}
+
+// LeaveAllocation represents an hr.leave.allocation record from Odoo.
+type LeaveAllocation struct {
+	ID              int64    `json:"id"`
+	EmployeeID      Many2One `json:"employee_id"`
+	HolidayStatusID Many2One `json:"holiday_status_id"`
+	NumberOfDays    float64  `json:"number_of_days"`
+	State           string   `json:"state"`
+}
+
+// leaveAllocationFields lists the field names for hr.leave.allocation.
+var leaveAllocationFields = []string{
+	"id",
+	"employee_id",
+	"holiday_status_id",
+	"number_of_days",
+	"state",
+}
+
+// LeaveRequest represents an hr.leave record from Odoo.
+type LeaveRequest struct {
+	ID              int64    `json:"id"`
+	EmployeeID      Many2One `json:"employee_id"`
+	HolidayStatusID Many2One `json:"holiday_status_id"`
+	DateFrom        string   `json:"date_from"`
+	DateTo          string   `json:"date_to"`
+	NumberOfDays    float64  `json:"number_of_days"`
+	State           string   `json:"state"`
+	Name            string   `json:"name"`
+}
+
+// LeaveCreateRequest contains fields for creating a new hr.leave record.
+type LeaveCreateRequest struct {
+	EmployeeID      int64  `json:"employee_id"`
+	HolidayStatusID int64  `json:"holiday_status_id"`
+	DateFrom        string `json:"date_from"`
+	DateTo          string `json:"date_to"`
+	Name            string `json:"name"`
+}
+
+// leaveRequestFields lists the field names for hr.leave.
+var leaveRequestFields = []string{
+	"id",
+	"employee_id",
+	"holiday_status_id",
+	"date_from",
+	"date_to",
+	"number_of_days",
+	"state",
+	"name",
+}
+
 // employeeFields lists the field names to request from Odoo for hr.employee records.
 var employeeFields = []string{
 	"id",

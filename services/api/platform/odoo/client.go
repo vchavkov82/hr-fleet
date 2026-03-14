@@ -314,6 +314,26 @@ func (c *Client) Write(model string, id int64, vals map[string]any) error {
 	return nil
 }
 
+// CallAction invokes a named action (e.g., action_approve) on a record.
+func (c *Client) CallAction(model string, ids []int64, action string) error {
+	if err := c.EnsureAuthenticated(); err != nil {
+		return err
+	}
+
+	args := []any{
+		c.db, c.uid, c.password,
+		model, action,
+		[]any{ids},
+	}
+
+	_, err := c.Call("object", "execute_kw", args)
+	if err != nil {
+		return fmt.Errorf("%s %s/%v: %w", action, model, ids, err)
+	}
+
+	return nil
+}
+
 // Read fetches records by IDs from the given Odoo model.
 func (c *Client) Read(model string, ids []int64, fields []string) ([]map[string]any, error) {
 	if err := c.EnsureAuthenticated(); err != nil {

@@ -33,10 +33,11 @@ func makeTestToken() string {
 
 // mockEmployeeService implements the EmployeeServicer interface for testing.
 type mockEmployeeService struct {
-	listFunc   func(ctx context.Context, search string, departmentID int64, activeOnly bool, limit, offset int) ([]odoo.Employee, int, error)
-	getFunc    func(ctx context.Context, id int64) (*odoo.Employee, error)
-	createFunc func(ctx context.Context, req odoo.EmployeeCreateRequest) (int64, error)
-	updateFunc func(ctx context.Context, id int64, vals map[string]any) error
+	listFunc       func(ctx context.Context, search string, departmentID int64, activeOnly bool, limit, offset int) ([]odoo.Employee, int, error)
+	getFunc        func(ctx context.Context, id int64) (*odoo.Employee, error)
+	createFunc     func(ctx context.Context, req odoo.EmployeeCreateRequest) (int64, error)
+	updateFunc     func(ctx context.Context, id int64, vals map[string]any) error
+	deactivateFunc func(ctx context.Context, id int64) error
 }
 
 func (m *mockEmployeeService) List(ctx context.Context, search string, departmentID int64, activeOnly bool, limit, offset int) ([]odoo.Employee, int, error) {
@@ -63,6 +64,13 @@ func (m *mockEmployeeService) Create(ctx context.Context, req odoo.EmployeeCreat
 func (m *mockEmployeeService) Update(ctx context.Context, id int64, vals map[string]any) error {
 	if m.updateFunc != nil {
 		return m.updateFunc(ctx, id, vals)
+	}
+	return nil
+}
+
+func (m *mockEmployeeService) Deactivate(ctx context.Context, id int64) error {
+	if m.deactivateFunc != nil {
+		return m.deactivateFunc(ctx, id)
 	}
 	return nil
 }

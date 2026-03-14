@@ -3,11 +3,13 @@ package service
 import (
 	"context"
 	"crypto/sha256"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"time"
 
 	"github.com/vchavkov/hr/services/api/internal/cache"
+	"github.com/vchavkov/hr/services/api/internal/db"
 	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
@@ -39,13 +41,15 @@ type listResult struct {
 // EmployeeService provides business logic for employee operations with
 // Redis caching and graceful degradation when Odoo is unavailable.
 type EmployeeService struct {
-	odoo  OdooClient
-	cache *cache.Cache
+	odoo       OdooClient
+	cache      *cache.Cache
+	queries    *db.Queries
+	webhookSvc WebhookDispatcher
 }
 
 // NewEmployeeService creates a new EmployeeService.
-func NewEmployeeService(odoo OdooClient, cache *cache.Cache) *EmployeeService {
-	return &EmployeeService{odoo: odoo, cache: cache}
+func NewEmployeeService(odoo OdooClient, cache *cache.Cache, queries *db.Queries, webhookSvc WebhookDispatcher) *EmployeeService {
+	return &EmployeeService{odoo: odoo, cache: cache, queries: queries, webhookSvc: webhookSvc}
 }
 
 // List retrieves employees with optional filtering, pagination, and caching.
@@ -114,6 +118,22 @@ func (s *EmployeeService) Create(ctx context.Context, req odoo.EmployeeCreateReq
 	// Invalidate list caches
 	_ = s.cache.DeletePattern(ctx, listKeyPrefix+"*")
 
+	// Audit log
+	if s.queries != nil {
+		details, _ := json.Marshal(map[string]any{"name": req.Name, "email": req.WorkEmail})
+		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
+			Action:       "employee.created",
+			ResourceType: "employee",
+			ResourceID:   fmt.Sprintf("%d", id),
+			Details:      details,
+		})
+	}
+
+	// Webhook dispatch
+	if s.webhookSvc != nil {
+		_ = s.webhookSvc.Dispatch(ctx, "employee.created", map[string]any{"id": id, "name": req.Name, "email": req.WorkEmail})
+	}
+
 	return id, nil
 }
 
@@ -128,7 +148,28 @@ func (s *EmployeeService) Update(ctx context.Context, id int64, vals map[string]
 	_ = s.cache.DeletePattern(ctx, listKeyPrefix+"*")
 	_ = s.cache.DeletePattern(ctx, fmt.Sprintf("%s%d*", detailKeyPfx, id))
 
+	// Audit log
+	if s.queries != nil {
+		details, _ := json.Marshal(vals)
+		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
+			Action:       "employee.updated",
+			ResourceType: "employee",
+			ResourceID:   fmt.Sprintf("%d", id),
+			Details:      details,
+		})
+	}
+
+	// Webhook dispatch
+	if s.webhookSvc != nil {
+		_ = s.webhookSvc.Dispatch(ctx, "employee.updated", map[string]any{"id": id, "changes": vals})
+	}
+
 	return nil
+}
+
+// Deactivate performs a soft delete by setting active=false in Odoo.
+func (s *EmployeeService) Deactivate(ctx context.Context, id int64) error {
+	return s.Update(ctx, id, map[string]any{"active": false})
 }
 
 // buildDomain constructs an Odoo domain filter from search parameters.

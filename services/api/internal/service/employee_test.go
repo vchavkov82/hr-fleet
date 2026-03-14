@@ -55,7 +55,7 @@ func setupTestService(t *testing.T) (*miniredis.Miniredis, *EmployeeService, *mo
 		t.Fatalf("NewCache: %v", err)
 	}
 	mock := &mockOdooClient{}
-	svc := NewEmployeeService(mock, c)
+	svc := NewEmployeeService(mock, c, nil, nil)
 	return mr, svc, mock
 }
 
