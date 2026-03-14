@@ -52,8 +52,8 @@
 - [x] **FND-05**: Odoo 17 provisioning (Community or Enterprise — decision pending)
 
 ### Core Go REST API (Phase 1 from gsd-requirements)
-- [ ] **API-01**: Go 1.22+ REST API with Chi/Fiber router, versioned under /api/v1
-- [ ] **API-02**: Auth endpoints: JWT (RS256) login, refresh; API Key (SHA-256 HMAC) support
+- [x] **API-01**: Go 1.22+ REST API with Chi/Fiber router, versioned under /api/v1
+- [x] **API-02**: Auth endpoints: JWT (RS256) login, refresh; API Key (SHA-256 HMAC) support
 - [ ] **API-03**: Employee CRUD endpoints with pagination, filtering, soft delete
 - [ ] **API-04**: Payslip endpoints: list, create batch, confirm
 - [ ] **API-05**: Payroll run endpoints: create, trigger, poll status (async via Asynq)
