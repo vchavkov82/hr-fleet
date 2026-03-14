@@ -55,12 +55,12 @@
 - [x] **API-01**: Go 1.22+ REST API with Chi/Fiber router, versioned under /api/v1
 - [x] **API-02**: Auth endpoints: JWT (RS256) login, refresh; API Key (SHA-256 HMAC) support
 - [x] **API-03**: Employee CRUD endpoints with pagination, filtering, soft delete
-- [ ] **API-04**: Payslip endpoints: list, create batch, confirm
-- [ ] **API-05**: Payroll run endpoints: create, trigger, poll status (async via Asynq)
+- [x] **API-04**: Payslip endpoints: list, create batch, confirm
+- [x] **API-05**: Payroll run endpoints: create, trigger, poll status (async via Asynq)
 - [x] **API-06**: Contract endpoints: list, create employment contracts
 - [x] **API-07**: Leave management endpoints: allocations, requests, approve/reject
-- [ ] **API-08**: Report endpoints: payroll summary, tax liabilities
-- [ ] **API-09**: Webhook registration and management endpoints
+- [x] **API-08**: Report endpoints: payroll summary, tax liabilities
+- [x] **API-09**: Webhook registration and management endpoints
 - [x] **API-10**: Odoo XML-RPC integration layer: connection pooling (max 20), circuit breaker (gobreaker), exponential backoff retry
 - [ ] **API-11**: Swagger/OpenAPI 3.0 auto-generated from Go annotations (swaggo/swag), served at /api/docs
 - [x] **API-12**: Structured JSON logging (zerolog), Prometheus metrics, OpenTelemetry tracing

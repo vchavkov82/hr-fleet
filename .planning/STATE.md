@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: — GSD Payroll Platform Expansion
 status: executing
-stopped_at: Completed 06-04-PLAN.md
-last_updated: "2026-03-14T07:52:12.196Z"
+stopped_at: Completed 06-05-PLAN.md
+last_updated: "2026-03-14T07:52:28.836Z"
 last_activity: 2026-03-14 -- Completed 06-02 Database Schema & sqlc Queries
 progress:
   total_phases: 12
   completed_phases: 4
   total_plans: 36
-  completed_plans: 32
+  completed_plans: 33
   percent: 50
 ---
 
@@ -126,6 +126,10 @@ Progress: [████░░░░░░] 50% (5/11 phases complete)
 - [Phase 06]: Circuit breaker trips after 5 consecutive Odoo failures, semaphore pool caps at 20
 - [Phase 06]: RS256 JWT with HS256 fallback, 7-role RBAC with 11 permissions
 - [Phase 06]: Used nil-check pattern for optional webhook/audit deps in employee/leave services
+- [Phase 06]: WebhookDispatcher interface in service package for cross-service event dispatching
+- [Phase 06]: HMAC-SHA256 webhook signing with Asynq async delivery queue
+- [Phase 06]: All monetary values in stotinki (int64) - no float64 for money
+- [Phase 06]: Asynq for async payroll processing with 202 + poll URL pattern
 
 ### Setup Requirements (User Responsibilities)
 
@@ -148,7 +152,7 @@ Progress: [████░░░░░░] 50% (5/11 phases complete)
 
 ## Session Continuity
 
-Last session: 2026-03-14T07:52:12.187Z
-Stopped at: Completed 06-04-PLAN.md
+Last session: 2026-03-14T07:52:28.832Z
+Stopped at: Completed 06-05-PLAN.md
 Resume file: None
 Next up: 06-03-PLAN.md (wave 1 continues)
