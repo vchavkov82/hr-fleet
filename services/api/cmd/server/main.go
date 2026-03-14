@@ -1,76 +1,146 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
+	"flag"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	chimiddleware "github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
 	"github.com/go-chi/jwtauth/v5"
+	"github.com/hibiken/asynq"
+	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	httpSwagger "github.com/swaggo/http-swagger/v2"
+
 	"github.com/vchavkov/hr/services/api/internal/cache"
 	"github.com/vchavkov/hr/services/api/internal/config"
+	"github.com/vchavkov/hr/services/api/internal/db"
+	_ "github.com/vchavkov/hr/services/api/docs"
 	"github.com/vchavkov/hr/services/api/internal/handler"
 	"github.com/vchavkov/hr/services/api/internal/middleware"
 	"github.com/vchavkov/hr/services/api/internal/service"
+	"github.com/vchavkov/hr/services/api/internal/worker"
 	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
+// @title HR Platform API
+// @version 1.0
+// @description REST API for HR Platform with Bulgarian payroll
+// @host localhost:8080
+// @BasePath /api/v1
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+// @securityDefinitions.apikey APIKeyAuth
+// @in header
+// @name X-API-Key
+
 func main() {
+	mode := flag.String("mode", "api", "Run mode: api, worker, or both")
+	flag.Parse()
+
 	cfg, err := config.Load()
 	if err != nil {
 		log.Fatalf("config: %v", err)
 	}
 
-	// Initialize Odoo client
-	odooClient := odoo.NewClient(cfg.OdooURL, cfg.OdooDB, cfg.OdooUser, cfg.OdooPassword)
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
-	// Initialize Redis cache
+	// Database pool
+	pool, err := pgxpool.New(ctx, cfg.DatabaseURL)
+	if err != nil {
+		log.Fatalf("database: %v", err)
+	}
+	defer pool.Close()
+
+	queries := db.New(pool)
+
+	// Redis cache
 	redisCache, err := cache.NewCache(cfg.RedisURL)
 	if err != nil {
-		log.Fatalf("redis: %v", err)
+		log.Fatalf("redis cache: %v", err)
 	}
 
-	// Initialize services
-	employeeSvc := service.NewEmployeeService(odooClient, redisCache)
-	provisioningSvc := service.NewProvisioningService(odooClient)
+	// Asynq client (for enqueuing tasks)
+	asynqClient := asynq.NewClient(asynq.RedisClientOpt{Addr: redisAddrFromURL(cfg.RedisURL)})
+	defer asynqClient.Close()
 
-	// Initialize JWT auth (RS256 or HS256 fallback)
-	var tokenAuth *jwtauth.JWTAuth
-	if cfg.JWTPrivateKey != "" && cfg.JWTPublicKey != "" {
-		privKey, err := os.ReadFile(cfg.JWTPrivateKey)
-		if err != nil {
-			log.Fatalf("read JWT private key: %v", err)
-		}
-		pubKey, err := os.ReadFile(cfg.JWTPublicKey)
-		if err != nil {
-			log.Fatalf("read JWT public key: %v", err)
-		}
-		tokenAuth, err = middleware.NewJWTAuth(privKey, pubKey)
-		if err != nil {
-			log.Fatalf("jwt auth: %v", err)
-		}
-		log.Println("JWT: using RS256 with RSA key pair")
-	} else {
-		tokenAuth = jwtauth.New("HS256", []byte(cfg.JWTSecret), nil)
-		log.Println("JWT: using HS256 (legacy mode)")
+	// Odoo client
+	odooClient := odoo.NewClient(cfg.OdooURL, cfg.OdooDB, cfg.OdooUser, cfg.OdooPassword)
+
+	// JWT auth
+	tokenAuth, err := initJWTAuth(cfg)
+	if err != nil {
+		log.Fatalf("jwt: %v", err)
 	}
 
-	// Initialize handlers
+	// Services
+	webhookSvc := service.NewWebhookService(queries, asynqClient)
+	authSvc := service.NewAuthService(queries, tokenAuth)
+	employeeSvc := service.NewEmployeeService(odooClient, redisCache, queries, webhookSvc)
+	contractSvc := service.NewContractService(odooClient, redisCache, queries)
+	leaveSvc := service.NewLeaveService(odooClient, redisCache, queries, webhookSvc)
+	payrollSvc := service.NewPayrollService(queries, asynqClient)
+	payslipSvc := service.NewPayslipService(queries)
+	reportSvc := service.NewReportService(queries)
+
+	// Signal handling
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
+
+	switch *mode {
+	case "api":
+		runAPI(cfg, tokenAuth, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc, sigCh)
+	case "worker":
+		runWorker(cfg, queries, sigCh)
+	case "both":
+		go runWorker(cfg, queries, sigCh)
+		runAPI(cfg, tokenAuth, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc, sigCh)
+	default:
+		log.Fatalf("unknown mode: %s (use api, worker, or both)", *mode)
+	}
+}
+
+func runAPI(
+	cfg *config.Config,
+	tokenAuth *jwtauth.JWTAuth,
+	authSvc *service.AuthService,
+	employeeSvc *service.EmployeeService,
+	contractSvc *service.ContractService,
+	leaveSvc *service.LeaveService,
+	payrollSvc *service.PayrollService,
+	payslipSvc *service.PayslipService,
+	reportSvc *service.ReportService,
+	webhookSvc *service.WebhookService,
+	sigCh <-chan os.Signal,
+) {
+	// Handlers
+	authHandler := handler.NewAuthHandler(authSvc, nil)
 	employeeHandler := handler.NewEmployeeHandler(employeeSvc)
-
-	// Initialize auth service and handler (requires DB queries - placeholder for now)
-	// TODO: Wire db.Queries when database pool is connected in main
-	_ = tokenAuth
+	contractHandler := handler.NewContractHandler(contractSvc)
+	leaveHandler := handler.NewLeaveHandler(leaveSvc)
+	payrollHandler := handler.NewPayrollHandler(payrollSvc)
+	payslipHandler := handler.NewPayslipHandler(payslipSvc)
+	reportHandler := handler.NewReportHandler(reportSvc)
+	webhookHandler := handler.NewWebhookHandler(webhookSvc)
 
 	r := chi.NewRouter()
 
 	// Global middleware
-	r.Use(chimiddleware.Logger)
+	r.Use(chimiddleware.RequestID)
+	r.Use(middleware.DefaultLogger())
 	r.Use(chimiddleware.Recoverer)
 	r.Use(chimiddleware.RealIP)
+	r.Use(middleware.Metrics())
 	r.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:5010", "https://hr.vchavkov.com"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -87,69 +157,179 @@ func main() {
 		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 	})
 
+	// Metrics (public)
+	r.Handle("/metrics", promhttp.Handler())
+
+	// Swagger docs
+	r.Get("/api/docs/*", httpSwagger.WrapHandler)
+
 	// API v1 routes
 	r.Route("/api/v1", func(r chi.Router) {
 		// Public auth routes
 		r.Group(func(r chi.Router) {
-			// Auth endpoints will be mounted here when DB is wired:
-			// r.Post("/auth/login", authHandler.HandleLogin)
-			// r.Post("/auth/refresh", authHandler.HandleRefresh)
+			r.Post("/auth/login", authHandler.HandleLogin)
+			r.Post("/auth/refresh", authHandler.HandleRefresh)
 		})
 
-		// Protected routes (JWT or API key)
+		// Protected routes (API key or JWT)
 		r.Group(func(r chi.Router) {
-			r.Use(jwtauth.Verifier(tokenAuth))
-			r.Use(jwtauth.Authenticator(tokenAuth))
+			r.Use(middleware.APIKeyOrJWT(tokenAuth, authSvc))
 
-			// Employee routes
+			// Auth - API key management
+			r.Post("/auth/api-keys", authHandler.HandleCreateAPIKey)
+			r.Get("/auth/api-keys", authHandler.HandleListAPIKeys)
+			r.Delete("/auth/api-keys/{id}", authHandler.HandleDeleteAPIKey)
+
+			// Employees
 			r.Route("/employees", func(r chi.Router) {
 				r.Get("/", employeeHandler.HandleList)
 				r.Post("/", employeeHandler.HandleCreate)
 				r.Get("/{id}", employeeHandler.HandleGet)
 				r.Put("/{id}", employeeHandler.HandleUpdate)
+				r.Delete("/{id}", employeeHandler.HandleDelete)
 			})
 
-			// API key management
-			// r.Post("/auth/api-keys", authHandler.HandleCreateAPIKey)
-			// r.Get("/auth/api-keys", authHandler.HandleListAPIKeys)
-			// r.Delete("/auth/api-keys/{id}", authHandler.HandleDeleteAPIKey)
+			// Contracts
+			r.Route("/contracts", func(r chi.Router) {
+				r.Get("/", contractHandler.HandleList)
+				r.Post("/", contractHandler.HandleCreate)
+				r.Get("/{id}", contractHandler.HandleGet)
+			})
 
-			// Provisioning endpoint (admin-only, for sign-up flow)
-			r.Post("/provision", func(w http.ResponseWriter, r *http.Request) {
-				var req struct {
-					CompanyName string `json:"company_name"`
-					AdminEmail  string `json:"admin_email"`
-					AdminName   string `json:"admin_name"`
-				}
-				if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-					w.Header().Set("Content-Type", "application/json")
-					w.WriteHeader(http.StatusBadRequest)
-					json.NewEncoder(w).Encode(map[string]string{"error": "Invalid request body"})
-					return
-				}
+			// Leave
+			r.Route("/leave", func(r chi.Router) {
+				r.Get("/allocations", leaveHandler.HandleListAllocations)
+				r.Get("/requests", leaveHandler.HandleListRequests)
+				r.Post("/requests", leaveHandler.HandleCreateRequest)
+				r.Post("/requests/{id}/approve", leaveHandler.HandleApproveRequest)
+				r.Post("/requests/{id}/reject", leaveHandler.HandleRejectRequest)
+			})
 
-				companyID, userID, err := provisioningSvc.ProvisionCompany(r.Context(), req.CompanyName, req.AdminEmail, req.AdminName)
-				if err != nil {
-					w.Header().Set("Content-Type", "application/json")
-					w.WriteHeader(http.StatusInternalServerError)
-					json.NewEncoder(w).Encode(map[string]string{"error": "Provisioning failed"})
-					return
-				}
+			// Payroll
+			r.Route("/payroll-runs", func(r chi.Router) {
+				r.Get("/", payrollHandler.HandleList)
+				r.Post("/", payrollHandler.HandleCreate)
+				r.Get("/{id}", payrollHandler.HandleGetStatus)
+				r.Post("/{id}/approve", payrollHandler.HandleApprove)
+				r.Post("/{id}/process", payrollHandler.HandleProcess)
+			})
 
-				w.Header().Set("Content-Type", "application/json")
-				w.WriteHeader(http.StatusCreated)
-				json.NewEncoder(w).Encode(map[string]any{
-					"company_id": companyID,
-					"user_id":    userID,
-					"message":    "Company provisioned successfully",
-				})
+			// Payslips
+			r.Route("/payslips", func(r chi.Router) {
+				r.Get("/", payslipHandler.HandleList)
+				r.Get("/{id}", payslipHandler.HandleGet)
+				r.Post("/{id}/confirm", payslipHandler.HandleConfirm)
+			})
+
+			// Reports
+			r.Route("/reports", func(r chi.Router) {
+				r.Get("/payroll-summary", reportHandler.HandlePayrollSummary)
+				r.Get("/tax-liabilities", reportHandler.HandleTaxLiabilities)
+			})
+
+			// Webhooks
+			r.Route("/webhooks", func(r chi.Router) {
+				r.Get("/", webhookHandler.HandleList)
+				r.Post("/", webhookHandler.HandleRegister)
+				r.Delete("/{id}", webhookHandler.HandleDeactivate)
+				r.Get("/{id}/deliveries", webhookHandler.HandleListDeliveries)
 			})
 		})
 	})
 
 	addr := ":" + cfg.Port
-	log.Printf("hr-api listening on %s", addr)
-	if err := http.ListenAndServe(addr, r); err != nil {
-		log.Fatalf("server: %v", err)
+	srv := &http.Server{
+		Addr:         addr,
+		Handler:      r,
+		ReadTimeout:  15 * time.Second,
+		WriteTimeout: 15 * time.Second,
+		IdleTimeout:  60 * time.Second,
 	}
+
+	go func() {
+		log.Printf("hr-api listening on %s", addr)
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("server: %v", err)
+		}
+	}()
+
+	<-sigCh
+	log.Println("shutting down API server...")
+	shutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer shutdownCancel()
+	if err := srv.Shutdown(shutdownCtx); err != nil {
+		log.Printf("server shutdown error: %v", err)
+	}
+}
+
+func runWorker(cfg *config.Config, queries *db.Queries, sigCh <-chan os.Signal) {
+	redisAddr := redisAddrFromURL(cfg.RedisURL)
+	srv := asynq.NewServer(
+		asynq.RedisClientOpt{Addr: redisAddr},
+		asynq.Config{
+			Concurrency: 10,
+			Queues: map[string]int{
+				"default":  6,
+				"critical": 3,
+				"low":      1,
+			},
+			RetryDelayFunc: asynq.DefaultRetryDelayFunc,
+		},
+	)
+
+	payrollProcessor := worker.NewPayrollProcessor(queries)
+	webhookDeliverHandler := worker.NewWebhookDeliverHandler()
+
+	mux := asynq.NewServeMux()
+	mux.HandleFunc(service.TaskTypePayrollProcess, payrollProcessor.HandlePayrollProcess)
+	mux.HandleFunc(service.TaskTypeWebhookDeliver, webhookDeliverHandler.ProcessTask)
+
+	go func() {
+		log.Printf("asynq worker listening on %s", redisAddr)
+		if err := srv.Run(mux); err != nil {
+			log.Fatalf("worker: %v", err)
+		}
+	}()
+
+	<-sigCh
+	log.Println("shutting down worker...")
+	srv.Shutdown()
+}
+
+func initJWTAuth(cfg *config.Config) (*jwtauth.JWTAuth, error) {
+	if cfg.JWTPrivateKey != "" && cfg.JWTPublicKey != "" {
+		privKey, err := os.ReadFile(cfg.JWTPrivateKey)
+		if err != nil {
+			return nil, err
+		}
+		pubKey, err := os.ReadFile(cfg.JWTPublicKey)
+		if err != nil {
+			return nil, err
+		}
+		ta, err := middleware.NewJWTAuth(privKey, pubKey)
+		if err != nil {
+			return nil, err
+		}
+		log.Println("JWT: using RS256 with RSA key pair")
+		return ta, nil
+	}
+	log.Println("JWT: using HS256 (legacy mode)")
+	return jwtauth.New("HS256", []byte(cfg.JWTSecret), nil), nil
+}
+
+// redisAddrFromURL extracts host:port from a redis:// URL.
+func redisAddrFromURL(u string) string {
+	// Strip redis:// prefix and any path/query
+	addr := u
+	if len(addr) > 8 && addr[:8] == "redis://" {
+		addr = addr[8:]
+	}
+	// Remove path portion
+	for i, c := range addr {
+		if c == '/' {
+			addr = addr[:i]
+			break
+		}
+	}
+	return addr
 }

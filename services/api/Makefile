@@ -1,13 +1,30 @@
-.PHONY: build run test lint docker-build
+.PHONY: api worker dev swagger generate-keys sqlc test test-race lint docker-build
 
-build:
+api:
 	go build -o bin/server ./cmd/server
 
-run:
-	go run ./cmd/server
+worker:
+	go build -o bin/worker ./cmd/worker
+
+dev:
+	go run ./cmd/server --mode=both
+
+swagger:
+	swag init -g cmd/server/main.go -o docs/
+
+generate-keys:
+	openssl genrsa -out jwt-private.pem 4096
+	openssl rsa -in jwt-private.pem -pubout -out jwt-public.pem
+	@echo "Keys generated: jwt-private.pem, jwt-public.pem"
+
+sqlc:
+	sqlc generate
 
 test:
-	go test ./...
+	go test ./... -short -count=1
+
+test-race:
+	go test -race ./... -short -count=1
 
 lint:
 	golangci-lint run ./...
