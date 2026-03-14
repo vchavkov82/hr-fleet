@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: GSD Payroll Platform
-status: planning
-stopped_at: Phase 12 complete, Phase 6 next
-last_updated: "2026-03-13T23:30:00.000Z"
-last_activity: 2026-03-13 -- Completed Phase 12 Migrate to pnpm+turbo (2/2 plans, verified)
+status: executing
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-03-14T00:31:53.000Z"
+last_activity: 2026-03-14 -- Completed 06-02 Database Schema & sqlc Queries
 progress:
   total_phases: 12
   completed_phases: 6
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-03-13)
 
 ## Current Position
 
-Phase: 5 of 11 (Foundation & Monorepo Setup)
-Plan: 04 of 04 complete (01 + 02 + 03 + 04 done)
+Phase: 6 of 11 (Core Go REST API)
+Plan: 02 of 07 complete
 Status: Executing
-Last activity: 2026-03-13 -- Completed 05-04 CI/CD pipelines
+Last activity: 2026-03-14 -- Completed 06-02 Database Schema & sqlc Queries
 
-Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0 plans complete)
+Progress: [████░░░░░░] 50% (5/11 phases complete)
 
 ## Performance Metrics
 
@@ -119,6 +119,9 @@ Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0
 - [Phase 05]: sqlc generates type-safe Go from SQL into internal/db/ via pgx/v5
 - [Phase 12]: Replaced all bun references with pnpm across containers, scripts, and configs
 - [Phase 12]: All bun references replaced with pnpm in docs and agent configs
+- [Phase 06]: BIGINT stotinki for all monetary fields (avoids float rounding)
+- [Phase 06]: TEXT[] for webhook events and API key scopes (PostgreSQL native arrays)
+- [Phase 06]: JSONB for calculation_details and error_details (flexible structured data)
 
 ### Setup Requirements (User Responsibilities)
 
@@ -141,7 +144,7 @@ Progress: [████░░░░░░] 36% (4/11 phases complete, 23/23 v1.0
 
 ## Session Continuity
 
-Last session: 2026-03-13T23:23:35.207Z
-Stopped at: Completed 12-02-PLAN.md
+Last session: 2026-03-14T00:31:53Z
+Stopped at: Completed 06-02-PLAN.md
 Resume file: None
-Next up: 05-03-PLAN.md or 05-04-PLAN.md (wave 2)
+Next up: 06-03-PLAN.md (wave 1 continues)
