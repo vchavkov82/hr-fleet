@@ -11,7 +11,7 @@ export default async function HomepageStats() {
   }))
 
   return (
-    <section className="py-16 bg-white border-y border-gray-200">
+    <section className="min-h-[180px] py-16 bg-white border-y border-gray-200">
       <div className="container-xl">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {items.map((item) => (

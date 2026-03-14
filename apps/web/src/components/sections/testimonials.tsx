@@ -11,7 +11,7 @@ export default async function Testimonials() {
   }>
 
   return (
-    <section className="py-20 bg-white">
+    <section className="min-h-[400px] py-20 bg-white">
       <div className="container-xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold font-heading text-navy">

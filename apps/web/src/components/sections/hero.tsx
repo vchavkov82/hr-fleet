@@ -46,6 +46,7 @@ export default async function Hero() {
                 width={1080}
                 height={720}
                 priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="w-full h-auto"
               />
             </div>
