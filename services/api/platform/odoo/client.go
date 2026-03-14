@@ -7,30 +7,85 @@ import (
 	"net/http"
 	"strings"
 	"sync"
+	"time"
+
+	"github.com/sony/gobreaker"
 )
 
-// Client is the Odoo JSON-RPC client with session management.
-type Client struct {
-	baseURL   string
-	db        string
-	uid       int64
-	username  string
-	password  string
-	client    *http.Client
-	sessionID string
-	mu        sync.Mutex
-	requestID int
+// ClientOptions configures circuit breaker and connection pool settings.
+type ClientOptions struct {
+	MaxConcurrent      int
+	CBMaxRequests      uint32
+	CBIntervalSeconds  int
+	CBTimeoutSeconds   int
+	CBFailureThreshold int
 }
 
-// NewClient creates a new Odoo JSON-RPC client.
-func NewClient(baseURL, db, username, password string) *Client {
-	return &Client{
-		baseURL:  strings.TrimRight(baseURL, "/"),
-		db:       db,
-		username: username,
-		password: password,
-		client:   &http.Client{},
+// DefaultClientOptions returns production-ready defaults.
+func DefaultClientOptions() ClientOptions {
+	return ClientOptions{
+		MaxConcurrent:      20,
+		CBMaxRequests:      3,
+		CBIntervalSeconds:  30,
+		CBTimeoutSeconds:   10,
+		CBFailureThreshold: 5,
 	}
+}
+
+// Client is the Odoo JSON-RPC client with session management,
+// circuit breaker, and connection pooling.
+type Client struct {
+	baseURL        string
+	db             string
+	uid            int64
+	username       string
+	password       string
+	client         *http.Client
+	sessionID      string
+	mu             sync.Mutex
+	requestID      int
+	cb             *gobreaker.CircuitBreaker
+	sem            chan struct{}
+	maxConcurrent  int
+}
+
+// NewClient creates a new Odoo JSON-RPC client with default options.
+func NewClient(baseURL, db, username, password string) *Client {
+	return NewClientWithOptions(baseURL, db, username, password, DefaultClientOptions())
+}
+
+// NewClientWithOptions creates a new Odoo JSON-RPC client with custom options.
+func NewClientWithOptions(baseURL, db, username, password string, opts ClientOptions) *Client {
+	if opts.MaxConcurrent <= 0 {
+		opts.MaxConcurrent = 20
+	}
+
+	failureThreshold := opts.CBFailureThreshold
+	cb := gobreaker.NewCircuitBreaker(gobreaker.Settings{
+		Name:        "odoo",
+		MaxRequests: opts.CBMaxRequests,
+		Interval:    time.Duration(opts.CBIntervalSeconds) * time.Second,
+		Timeout:     time.Duration(opts.CBTimeoutSeconds) * time.Second,
+		ReadyToTrip: func(counts gobreaker.Counts) bool {
+			return int(counts.ConsecutiveFailures) >= failureThreshold
+		},
+	})
+
+	return &Client{
+		baseURL:       strings.TrimRight(baseURL, "/"),
+		db:            db,
+		username:      username,
+		password:      password,
+		client:        &http.Client{},
+		cb:            cb,
+		sem:           make(chan struct{}, opts.MaxConcurrent),
+		maxConcurrent: opts.MaxConcurrent,
+	}
+}
+
+// MaxConcurrent returns the connection pool size limit.
+func (c *Client) MaxConcurrent() int {
+	return c.maxConcurrent
 }
 
 // nextID returns a monotonically increasing request ID.
@@ -46,15 +101,41 @@ func (c *Client) nextID() int {
 //
 // On session expiry (AccessDenied), Call will re-authenticate once and retry.
 func (c *Client) Call(service, method string, args []any) (json.RawMessage, error) {
-	result, err := c.doCall(service, method, args)
-	if err != nil && isSessionExpired(err) && c.uid > 0 {
-		// Re-authenticate and retry once
-		if authErr := c.Authenticate(); authErr != nil {
-			return nil, fmt.Errorf("re-auth failed: %w", authErr)
-		}
+	// Acquire semaphore for connection pooling
+	c.sem <- struct{}{}
+	defer func() { <-c.sem }()
+
+	// Execute through circuit breaker
+	result, err := c.cb.Execute(func() (interface{}, error) {
 		return c.doCall(service, method, args)
+	})
+	if err != nil {
+		// Check for circuit breaker open
+		if err == gobreaker.ErrOpenState || err == gobreaker.ErrTooManyRequests {
+			return nil, fmt.Errorf("circuit breaker is open")
+		}
+		// Re-auth on session expiry
+		if isSessionExpired(err) && c.uid > 0 {
+			if authErr := c.Authenticate(); authErr != nil {
+				return nil, fmt.Errorf("re-auth failed: %w", authErr)
+			}
+			retryResult, retryErr := c.cb.Execute(func() (interface{}, error) {
+				return c.doCall(service, method, args)
+			})
+			if retryErr != nil {
+				return nil, retryErr
+			}
+			if retryResult == nil {
+				return nil, nil
+			}
+			return retryResult.(json.RawMessage), nil
+		}
+		return nil, err
 	}
-	return result, err
+	if result == nil {
+		return nil, nil
+	}
+	return result.(json.RawMessage), nil
 }
 
 // doCall performs a single JSON-RPC call without retry logic.
