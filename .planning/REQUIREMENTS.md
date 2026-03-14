@@ -164,7 +164,7 @@
 | ATS-01–04 | Phase 7+ | Pending |
 | COMP-01–03 | Phase 7+ | Pending |
 | FND-01–05 | Phase 5 | Complete |
-| API-01–13 | Phase 6 | Pending |
+| API-01–13 | Phase 6 | Complete |
 | ADM-01–14 | Phase 7 | Pending |
 | MKT-10–18 | Phase 8 | Pending |
 | DOC-01–05, BLOG-01–06 | Phase 9 | Pending |
