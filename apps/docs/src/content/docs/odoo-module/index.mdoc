@@ -1,0 +1,26 @@
+---
+title: Odoo Integration
+description: Overview of the Odoo 18 integration that powers employee master data, leave management, and accounting synchronization in the HR platform.
+sidebar:
+  order: 1
+---
+
+## What Odoo Provides
+
+The HR platform integrates with Odoo 18 as its ERP backend. Odoo handles the core business logic for employee master data, leave accrual and approval workflows, and accounting entries. The Go API communicates with Odoo through a custom JSON-RPC client rather than Odoo's XML-RPC interface, providing better field compatibility with Odoo 18's data model.
+
+### Synchronized Data
+
+- **Employee records** — Name, department, position, contract details, and employment type are managed in Odoo and exposed through the HR API.
+- **Leave management** — Leave types, balances, requests, and approvals flow through Odoo's HR Leave module.
+- **Accounting integration** — Payroll journal entries and expense reports sync to Odoo's accounting module for financial reporting.
+
+## Architecture
+
+The Go API maintains a caching layer in front of Odoo to reduce load and improve response times. A Ristretto L1 in-memory cache (1-minute TTL) sits in front of a Redis L2 cache (5-minute TTL), with stale cache serving (30-minute TTL) providing graceful degradation when Odoo is temporarily unavailable.
+
+A circuit breaker pattern protects the system from cascading failures: after five consecutive Odoo communication failures, the circuit opens and requests are served from cache or return a service-unavailable response. A semaphore pool caps concurrent Odoo connections at twenty to prevent overloading the ERP server.
+
+## Next Steps
+
+See the setup guide for instructions on configuring the Odoo connection, required environment variables, and verifying the integration.

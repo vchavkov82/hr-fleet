@@ -1,0 +1,31 @@
+---
+title: Multi-Tenancy
+description: How the HR platform isolates tenant data, manages per-tenant configuration, and supports multiple organizations on a single deployment.
+sidebar:
+  order: 3
+---
+
+## Tenant Isolation Model
+
+The HR platform uses a shared-database, separate-schema approach to multi-tenancy. Each organization (tenant) has its data logically isolated through tenant ID foreign keys on all core tables. Every API request is scoped to the authenticated user's tenant, enforced at both the middleware and query layers.
+
+When a request arrives at the Go API, the JWT claims include the tenant identifier. Middleware extracts this value and injects it into the request context. All sqlc-generated queries include a tenant_id parameter, ensuring that database operations never leak data across organizations.
+
+## Per-Tenant Configuration
+
+Each tenant can configure the following independently:
+
+- **Enabled modules** — Organizations choose which HR modules (Core HR, Leave, Payroll, Onboarding) are active for their subscription.
+- **Leave policies** — Custom leave types, accrual rules, and approval workflows per organization.
+- **Payroll settings** — Tax configuration, social security contribution rates, and payment schedules aligned with Bulgarian NRA requirements.
+- **API keys** — Each tenant can generate scoped API keys for integrations, with configurable permissions and expiration dates.
+
+## Role-Based Access Within Tenants
+
+The platform implements a seven-role hierarchy: super_admin, admin, hr_manager, hr_specialist, manager, employee, and viewer. Each role maps to a set of eleven granular permissions controlling access to employees, leave, payroll, contracts, reports, settings, webhooks, API keys, users, audit logs, and the Odoo connection.
+
+Roles are assigned per tenant, meaning a user could theoretically belong to multiple organizations with different roles in each. The RBAC middleware checks both the user's role within the current tenant and the specific permission required by the endpoint.
+
+## Data Residency
+
+All tenant data is stored in PostgreSQL instances deployed within the same infrastructure region. The platform does not currently support cross-region data residency, but the architecture allows for future sharding by tenant if regulatory requirements demand geographic data isolation.

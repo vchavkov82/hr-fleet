@@ -1,0 +1,45 @@
+---
+title: Authentication & Authorization
+description: Detailed guide to JWT RS256 authentication, API key management, and the seven-role RBAC system with eleven permissions.
+sidebar:
+  order: 2
+---
+
+## JWT Authentication
+
+The HR API uses JSON Web Tokens signed with RS256 (RSA-SHA256) for user authentication. This asymmetric signing approach allows the API to verify tokens without sharing the private key with other services, while an HS256 fallback is available for simpler deployments.
+
+### Token Lifecycle
+
+1. **Login** — POST to `/api/v1/auth/login` with email and password. Returns an access token (15-minute expiry) and a refresh token (7-day expiry).
+2. **Access** — Include the access token in the `Authorization: Bearer <token>` header on each request.
+3. **Refresh** — When the access token expires, POST the refresh token to `/api/v1/auth/refresh` to obtain a new access token. The admin panel implements single-promise deduplication to prevent race conditions when multiple requests trigger a refresh simultaneously.
+4. **Logout** — POST to `/api/v1/auth/logout` to invalidate the refresh token.
+
+### Token Claims
+
+The JWT payload includes: `sub` (user ID), `email`, `role`, `tenant_id`, `permissions` (array), and standard claims (`iat`, `exp`, `iss`).
+
+## API Key Authentication
+
+For server-to-server integrations, the API supports scoped API keys passed via the `X-API-Key` header. API keys are generated through the admin panel and stored as bcrypt hashes in the database.
+
+Each API key has configurable scopes using PostgreSQL TEXT arrays, limiting which endpoints the key can access. Keys also support expiration dates for time-limited integrations. The full key value is displayed only once at creation time and cannot be retrieved afterward.
+
+## RBAC Permission Model
+
+The platform implements seven roles arranged in a hierarchy:
+
+| Role | Description |
+|------|-------------|
+| super_admin | Full system access across all tenants |
+| admin | Full access within a single tenant |
+| hr_manager | Manage employees, leave, payroll, contracts |
+| hr_specialist | View and edit employee and leave data |
+| manager | View team members, approve leave requests |
+| employee | View own profile, submit leave requests |
+| viewer | Read-only access to permitted resources |
+
+### Permissions
+
+Eleven granular permissions control access: `employees`, `leave`, `payroll`, `contracts`, `reports`, `settings`, `webhooks`, `api_keys`, `users`, `audit_logs`, and `odoo`. Each role maps to a predefined set of these permissions. The RBAC middleware checks the user's role within the current tenant context and verifies the required permission for each endpoint.

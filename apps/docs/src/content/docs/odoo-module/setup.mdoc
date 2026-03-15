@@ -1,0 +1,61 @@
+---
+title: Odoo Setup
+description: How to configure the Odoo 18 connection for the HR platform, including required environment variables, database setup, and verification steps.
+sidebar:
+  order: 2
+---
+
+## Prerequisites
+
+Before configuring the Odoo integration, ensure you have:
+
+- Odoo 18 Community or Enterprise edition running and accessible over HTTP
+- A dedicated Odoo database for the HR platform
+- An Odoo user account with administrative access to the HR modules
+- PostgreSQL 17 instance for Odoo (separate from the application database which uses PostgreSQL 16)
+
+## Environment Variables
+
+The Go API requires the following environment variables to connect to Odoo:
+
+```bash
+# Odoo connection
+ODOO_URL=http://odoo:8069
+ODOO_DB=hr_production
+ODOO_USERNAME=admin
+ODOO_PASSWORD=your-odoo-admin-password
+
+# Redis (required for caching layer)
+REDIS_URL=redis://redis:6379/0
+```
+
+These variables are typically set in the `deploy/podman-compose.override.yml` file for local development or through your deployment platform's secret management for production.
+
+## Database Configuration
+
+Odoo requires its own PostgreSQL instance. The Podman Compose configuration includes a dedicated `odoo-db` service running PostgreSQL 17, separate from the `api-db` service running PostgreSQL 16 for the application database.
+
+```yaml
+odoo-db:
+  image: postgres:17-alpine
+  environment:
+    POSTGRES_DB: hr_production
+    POSTGRES_USER: odoo
+    POSTGRES_PASSWORD: odoo-secret
+```
+
+## Verifying the Connection
+
+After configuring the environment variables, start the API server and check the health endpoint:
+
+```bash
+curl http://localhost:5080/api/v1/health
+```
+
+The response includes an `odoo` field indicating the connection status. If the connection fails, check that the Odoo instance is reachable from the API container and that the credentials are correct.
+
+## Troubleshooting
+
+- **Session expired** — The API automatically re-authenticates when Odoo returns an AccessDenied error, with a single retry to prevent infinite loops.
+- **Slow responses** — Check the cache hit rate in the API logs. Cold cache on first startup is expected; subsequent requests should be served from L1/L2 cache.
+- **Circuit breaker open** — After five consecutive failures, the circuit breaker opens. The API will serve stale cache data (up to 30 minutes old) until the circuit resets.
