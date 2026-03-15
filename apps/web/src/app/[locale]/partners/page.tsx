@@ -2,6 +2,8 @@ import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/structured-data'
 import { SectionReveal } from '@/components/ui/section-reveal'
 import { PartnerForm } from './partner-form'
 
@@ -16,7 +18,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'pages.partners' })
-  return { title: t('metaTitle'), description: t('metaDescription') }
+  return enhancedMetadata({
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    locale,
+    path: '/partners',
+  })
 }
 
 const PARTNER_TYPES = [
@@ -69,8 +76,14 @@ export default async function PartnersPage({
   setRequestLocale(locale)
   const t = await getTranslations('pages.partners')
 
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${BASE_URL}/${locale}` },
+    { name: t('hero.heading'), url: `${BASE_URL}/${locale}/partners` },
+  ])
+
   return (
     <div className="min-h-screen bg-white">
+      <script {...jsonLdScript(breadcrumbs)} />
       {/* Hero Section */}
       <section className="bg-navy-deep text-white py-20">
         <div className="container-xl">

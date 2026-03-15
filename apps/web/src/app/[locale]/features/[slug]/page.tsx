@@ -2,6 +2,8 @@ import { setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, faqJsonLd, jsonLdScript } from '@/lib/structured-data'
 import { SectionReveal } from '@/components/ui/section-reveal'
 import { featureDetails, getFeatureBySlug } from '@/data/feature-details'
 
@@ -16,13 +18,15 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
-  const { slug } = await params
+  const { locale, slug } = await params
   const feature = getFeatureBySlug(slug)
   if (!feature) return {}
-  return {
+  return enhancedMetadata({
     title: `${feature.name} | HR`,
     description: feature.description,
-  }
+    locale,
+    path: `/features/${slug}`,
+  })
 }
 
 export default async function FeatureDetailPage({
@@ -35,8 +39,16 @@ export default async function FeatureDetailPage({
   const feature = getFeatureBySlug(slug)
   if (!feature) notFound()
 
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${BASE_URL}/${locale}` },
+    { name: 'Features', url: `${BASE_URL}/${locale}/features` },
+    { name: feature.name, url: `${BASE_URL}/${locale}/features/${slug}` },
+  ])
+
   return (
     <div className="min-h-screen bg-white">
+      <script {...jsonLdScript(breadcrumbs)} />
+      <script {...jsonLdScript(faqJsonLd(feature.faqs))} />
       {/* Hero */}
       <section className="bg-navy-deep text-white py-20">
         <div className="container-xl">

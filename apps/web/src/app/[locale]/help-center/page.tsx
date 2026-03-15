@@ -3,6 +3,8 @@ import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/structured-data'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -15,7 +17,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'helpCenter' })
-  return { title: t('metaTitle'), description: t('metaDescription') }
+  return enhancedMetadata({
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    locale,
+    path: '/help-center',
+  })
 }
 
 const CATEGORIES = [
@@ -51,8 +58,14 @@ export default async function HelpCenterPage({
   setRequestLocale(locale)
   const t = await getTranslations('helpCenter')
 
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${BASE_URL}/${locale}` },
+    { name: t('hero.heading'), url: `${BASE_URL}/${locale}/help-center` },
+  ])
+
   return (
     <div className="min-h-screen bg-white">
+      <script {...jsonLdScript(breadcrumbs)} />
       {/* Hero */}
       <section className="bg-navy-deep text-white py-16 sm:py-20">
         <div className="container-xl text-center">

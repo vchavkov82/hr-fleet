@@ -570,7 +570,6 @@
       "heading": "Freelancer vs Employment Calculator Bulgaria 2026",
       "introP1": "Should you work as a freelancer through an EOOD or accept a payroll position? This calculator compares net take-home pay, effective tax rates, and hidden costs for both options based on the same gross monthly amount.",
       "introP2": "Enter your expected monthly revenue and see a complete side-by-side breakdown of taxes, social security contributions, overhead costs, and benefits for EOOD ownership versus standard employment in Bulgaria.",
-
       "input": {
         "monthlyAmount": "Monthly Amount (EUR)",
         "monthlyAmountHelp": "Enter the gross monthly amount before any taxes or deductions",
@@ -582,7 +581,6 @@
         "monthly": "Monthly",
         "annual": "Annual"
       },
-
       "savings": {
         "banner": "Potential Savings with EOOD",
         "perMonth": "per month",
@@ -592,7 +590,6 @@
         "employmentRate": "Employment",
         "totalWithVacation": "Including vacation value"
       },
-
       "eood": {
         "title": "EOOD (Freelancer)",
         "revenue": "Monthly Revenue",
@@ -616,7 +613,6 @@
         "totalInvoice": "Total Invoice Amount",
         "vatNote": "VAT is collected and remitted to the state — it does not affect your net income"
       },
-
       "employment": {
         "title": "Employment (Payroll)",
         "recommended": "Recommended",
@@ -627,7 +623,6 @@
         "employerCost": "Total Employer Cost",
         "effectiveTaxRate": "Effective Tax Rate"
       },
-
       "benefits": {
         "title": "Benefits Comparison",
         "paidLeave": "Paid Annual Leave",
@@ -652,20 +647,16 @@
         "vacationDaysMin": "20 days minimum",
         "vacationValue": "Equivalent daily salary value"
       },
-
       "disclaimer": "This calculator provides estimates based on 2026 Bulgarian tax rates and social security contributions. Actual results may vary based on individual circumstances, industry classification, and specific EOOD expenses. Consult a licensed accountant for personalized advice.",
-
       "cta": {
         "title": "Ready to Optimize Your Compensation?",
         "description": "Whether you choose freelancing or employment, HR helps you manage payroll, taxes, and compliance automatically.",
         "button": "Start free trial"
       },
-
       "mobileCta": {
         "savings": "Save with EOOD",
         "button": "Get started"
       },
-
       "seo": {
         "howItWorksTitle": "How the Freelancer vs Employment Comparison Works",
         "howItWorksP1": "This calculator models two scenarios: running a single-person EOOD (the most common freelancer structure in Bulgaria) and standard employment under a labour contract. For the EOOD scenario, it accounts for self-insurance on the minimum base (€551 for 2026), corporate tax at 10%, dividend tax at 5%, and typical monthly overhead including accountant fees, bank charges, and administrative time.",
@@ -2064,5 +2055,9 @@
         "testimonialRole": "HR Manager, Sofia Tech Ltd"
       }
     }
+  },
+  "home": {
+    "metaTitle": "HR Platform - Cloud HR Management Software | JobsHR",
+    "metaDescription": "Modern HR management platform for Bulgarian businesses. Employee management, salary calculators, compliance tools, and more."
   }
 }

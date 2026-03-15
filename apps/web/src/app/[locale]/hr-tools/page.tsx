@@ -3,6 +3,8 @@ import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { Link } from '@/navigation'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/structured-data'
 
 export const dynamic = 'force-static'
 export const revalidate = false
@@ -18,7 +20,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'pages.hrTools' })
-  return { title: t('metaTitle'), description: t('metaDescription') }
+  return enhancedMetadata({
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    locale,
+    path: '/hr-tools',
+  })
 }
 
 const CALCULATORS = [
@@ -83,8 +90,14 @@ export default async function HrToolsPage({
     badge: string
   }>
 
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${BASE_URL}/${locale}` },
+    { name: t('heroHeading'), url: `${BASE_URL}/${locale}/hr-tools` },
+  ])
+
   return (
     <div>
+      <script {...jsonLdScript(breadcrumbs)} />
       {/* Hero */}
       <section className="bg-navy-deep text-white py-16 sm:py-20">
         <div className="container-xl text-center">

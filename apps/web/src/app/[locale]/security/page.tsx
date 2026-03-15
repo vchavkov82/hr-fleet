@@ -1,6 +1,8 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/structured-data'
 import { SectionReveal } from '@/components/ui/section-reveal'
 
 export function generateStaticParams() {
@@ -18,7 +20,7 @@ export async function generateMetadata({
     locale === 'bg'
       ? 'Научете как защитаваме вашите данни с enterprise-grade сигурност.'
       : 'Learn how we protect your data with enterprise-grade security measures.'
-  return { title, description }
+  return enhancedMetadata({ title, description, locale, path: '/security' })
 }
 
 const SECURITY_SECTIONS = [
@@ -93,8 +95,14 @@ export default async function SecurityPage({
   setRequestLocale(locale)
   const isBg = locale === 'bg'
 
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${BASE_URL}/${locale}` },
+    { name: isBg ? 'Сигурност' : 'Security', url: `${BASE_URL}/${locale}/security` },
+  ])
+
   return (
     <div className="min-h-screen bg-white">
+      <script {...jsonLdScript(breadcrumbs)} />
       {/* Hero */}
       <section className="bg-navy-deep text-white py-20">
         <div className="container-xl">

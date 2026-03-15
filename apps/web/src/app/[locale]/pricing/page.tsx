@@ -2,6 +2,8 @@ import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, faqJsonLd, jsonLdScript } from '@/lib/structured-data'
 import { QuoteForm } from '@/components/ui/quote-form'
 
 export function generateStaticParams() {
@@ -15,7 +17,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'pages.pricing' })
-  return { title: t('metaTitle'), description: t('metaDescription') }
+  return enhancedMetadata({
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    locale,
+    path: '/pricing',
+  })
 }
 
 const ACTIVE_MODULES = ['coreHr'] as const
@@ -173,8 +180,16 @@ export default async function PricingPage({
     selectModule: t('quoteForm.selectModule'),
   }
 
+  const faqItems = t.raw('faqItems') as Array<{ question: string; answer: string }>
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${BASE_URL}/${locale}` },
+    { name: t('heading'), url: `${BASE_URL}/${locale}/pricing` },
+  ])
+
   return (
     <div>
+      <script {...jsonLdScript(breadcrumbs)} />
+      <script {...jsonLdScript(faqJsonLd(faqItems))} />
       {/* Hero */}
       <section className="bg-navy-deep text-white py-20">
         <div className="container-xl text-center">
@@ -373,12 +388,7 @@ export default async function PricingPage({
             </h2>
           </div>
           <div className="space-y-4">
-            {(
-              t.raw('faqItems') as Array<{
-                question: string
-                answer: string
-              }>
-            ).map((item, idx) => (
+            {faqItems.map((item, idx) => (
               <details
                 key={idx}
                 className="group bg-white rounded-xl border border-gray-200 overflow-hidden"

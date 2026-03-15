@@ -1,6 +1,8 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/structured-data'
 
 export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }))
@@ -13,10 +15,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const { locale } = await params
     const t = await getTranslations({ locale, namespace: 'pages.privacy' })
-    return {
+    return enhancedMetadata({
         title: t('metaTitle'),
         description: t('metaDescription'),
-    }
+        locale,
+        path: '/privacy',
+    })
 }
 
 const sections = [
@@ -43,8 +47,14 @@ export default async function PrivacyPage({
     setRequestLocale(locale)
     const t = await getTranslations('pages.privacy')
 
+    const breadcrumbs = breadcrumbJsonLd([
+        { name: 'Home', url: `${BASE_URL}/${locale}` },
+        { name: t('hero.heading'), url: `${BASE_URL}/${locale}/privacy` },
+    ])
+
     return (
         <div className="min-h-screen bg-white">
+            <script {...jsonLdScript(breadcrumbs)} />
             {/* Hero Section */}
             <section className="bg-navy text-white py-20">
                 <div className="container-xl">

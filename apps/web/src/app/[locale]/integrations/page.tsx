@@ -1,6 +1,8 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/structured-data'
 import { SectionReveal } from '@/components/ui/section-reveal'
 import { integrations, categoryLabels, type Integration } from '@/data/integrations'
 
@@ -19,7 +21,7 @@ export async function generateMetadata({
     locale === 'bg'
       ? 'Свържете HR платформата с инструментите, които вече използвате.'
       : 'Connect your HR platform with the tools you already use.'
-  return { title, description }
+  return enhancedMetadata({ title, description, locale, path: '/integrations' })
 }
 
 function groupByCategory(items: Integration[]): Record<string, Integration[]> {
@@ -43,8 +45,14 @@ export default async function IntegrationsPage({
   const isBg = locale === 'bg'
   const grouped = groupByCategory(integrations)
 
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${BASE_URL}/${locale}` },
+    { name: isBg ? 'Интеграции' : 'Integrations', url: `${BASE_URL}/${locale}/integrations` },
+  ])
+
   return (
     <div className="min-h-screen bg-white">
+      <script {...jsonLdScript(breadcrumbs)} />
       {/* Hero */}
       <section className="bg-navy-deep text-white py-20">
         <div className="container-xl">

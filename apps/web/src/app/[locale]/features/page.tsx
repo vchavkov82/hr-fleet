@@ -2,6 +2,8 @@ import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/structured-data'
 import CTA from '@/components/sections/cta'
 import { FeatureRow } from '@/components/sections/feature-row'
 import { SectionReveal } from '@/components/ui/section-reveal'
@@ -17,7 +19,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'pages.features' })
-  return { title: t('metaTitle'), description: t('metaDescription') }
+  return enhancedMetadata({
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    locale,
+    path: '/features',
+  })
 }
 
 const ACTIVE_FEATURES = [
@@ -43,8 +50,14 @@ export default async function FeaturesPage({
   setRequestLocale(locale)
   const t = await getTranslations('pages.features')
 
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${BASE_URL}/${locale}` },
+    { name: t('hero.heading'), url: `${BASE_URL}/${locale}/features` },
+  ])
+
   return (
     <div>
+      <script {...jsonLdScript(breadcrumbs)} />
       {/* Hero */}
       <section className="bg-navy-deep text-white py-20">
         <div className="container-xl text-center">

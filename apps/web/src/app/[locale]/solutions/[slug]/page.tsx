@@ -2,6 +2,8 @@ import { setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
+import { enhancedMetadata, BASE_URL } from '@/lib/seo'
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/structured-data'
 import { SectionReveal } from '@/components/ui/section-reveal'
 import { solutions, getSolutionBySlug } from '@/data/solutions'
 
@@ -16,13 +18,15 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
-  const { slug } = await params
+  const { locale, slug } = await params
   const solution = getSolutionBySlug(slug)
   if (!solution) return {}
-  return {
+  return enhancedMetadata({
     title: `${solution.name} HR Solutions | HR`,
     description: solution.description,
-  }
+    locale,
+    path: `/solutions/${slug}`,
+  })
 }
 
 export default async function SolutionPage({
@@ -35,8 +39,15 @@ export default async function SolutionPage({
   const solution = getSolutionBySlug(slug)
   if (!solution) notFound()
 
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${BASE_URL}/${locale}` },
+    { name: 'Solutions', url: `${BASE_URL}/${locale}/solutions` },
+    { name: solution.name, url: `${BASE_URL}/${locale}/solutions/${slug}` },
+  ])
+
   return (
     <div className="min-h-screen bg-white">
+      <script {...jsonLdScript(breadcrumbs)} />
       {/* Hero */}
       <section className="bg-navy-deep text-white py-20">
         <div className="container-xl">
