@@ -86,6 +86,36 @@ export default defineConfig({
           autogenerate: { directory: 'enterprise' },
           collapsed: true,
         },
+        {
+          label: 'Core Concepts',
+          autogenerate: { directory: 'core-concepts' },
+          collapsed: true,
+        },
+        {
+          label: 'SDK & API Guides',
+          autogenerate: { directory: 'sdk-guides' },
+          collapsed: true,
+        },
+        {
+          label: 'Odoo Integration',
+          autogenerate: { directory: 'odoo-module' },
+          collapsed: true,
+        },
+        {
+          label: 'Security',
+          autogenerate: { directory: 'security' },
+          collapsed: true,
+        },
+        {
+          label: 'Release Notes',
+          autogenerate: { directory: 'release-notes' },
+          collapsed: true,
+        },
+        {
+          label: 'FAQ',
+          autogenerate: { directory: 'faq' },
+          collapsed: true,
+        },
       ],
     }),
     markdoc(),
