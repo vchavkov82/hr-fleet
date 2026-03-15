@@ -1,0 +1,66 @@
+---
+import type { GetStaticPathsOptions } from "astro";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Card from "@/components/Card.astro";
+import Pagination from "@/components/Pagination.astro";
+import CategoryNav from "@/components/CategoryNav.astro";
+import getPostsByCategory, {
+  CATEGORIES,
+  type Category,
+} from "@/utils/getPostsByCategory";
+import { SITE } from "@/config";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+  return CATEGORIES.flatMap(cat => {
+    const categoryPosts = getPostsByCategory(posts, cat.slug);
+
+    return paginate(categoryPosts, {
+      params: { category: cat.slug },
+      props: { category: cat },
+      pageSize: SITE.postPerPage,
+    });
+  });
+}
+
+const { category } = Astro.params;
+const { page, category: cat } = Astro.props as {
+  page: any;
+  category: Category;
+};
+---
+
+<Layout title={`${cat.name} | ${SITE.title}`}>
+  <Header />
+
+  <section class="bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-gray-900">{cat.name}</h1>
+      <p class="mt-2 text-gray-600">{cat.description}</p>
+    </div>
+  </section>
+
+  <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <CategoryNav activeCategory={category} />
+
+    {
+      page.data.length > 0 ? (
+        <ul class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {page.data.map((data: any) => (
+            <Card display="card" variant="h3" {...data} />
+          ))}
+        </ul>
+      ) : (
+        <p class="mt-8 text-gray-500">No articles in this category yet.</p>
+      )
+    }
+  </main>
+
+  <Pagination {page} />
+
+  <Footer noMarginTop={page.lastPage > 1} />
+</Layout>
