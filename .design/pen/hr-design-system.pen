@@ -711,6 +711,675 @@
           ]
         }
       ]
+    },
+    {
+      "id": "component-button",
+      "name": "Components / Button",
+      "frames": [
+        {
+          "id": "button-frame",
+          "name": "Button Component",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 2400,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 60,
+              "y": 40,
+              "content": "Components / Button",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "2.25rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 100,
+              "content": "Properties: paddingX={component/button/paddingX} (1rem), paddingY={component/button/paddingY} (0.5rem), borderRadius={component/button/borderRadius} (0.5rem), fontSize={component/button/fontSize} (0.875rem), fontWeight={component/button/fontWeight} (500)",
+              "fontFamily": "{typography/fontFamily/sans}",
+              "fontSize": "{typography/fontSize/sm}",
+              "fontWeight": "400",
+              "fill": "{color/muted}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 160,
+              "content": "Primary",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Primary Buttons",
+              "x": 60,
+              "y": 200,
+              "children": [
+                {
+                  "type": "group",
+                  "name": "Primary States",
+                  "x": 0,
+                  "y": 0,
+                  "children": [
+                    { "type": "rectangle", "x": 0, "y": 0, "width": 140, "height": 40, "fill": "{color/primary/default}", "borderRadius": "{component/button/borderRadius}", "label": "Default" },
+                    { "type": "text", "x": 20, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF" },
+                    { "type": "rectangle", "x": 160, "y": 0, "width": 140, "height": 40, "fill": "{color/primary/light}", "borderRadius": "{component/button/borderRadius}", "label": "Hover" },
+                    { "type": "text", "x": 180, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF" },
+                    { "type": "rectangle", "x": 320, "y": 0, "width": 140, "height": 40, "fill": "{color/primary/dark}", "borderRadius": "{component/button/borderRadius}", "label": "Active" },
+                    { "type": "text", "x": 340, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF" },
+                    { "type": "rectangle", "x": 480, "y": 0, "width": 140, "height": 40, "fill": "{color/primary/default}", "borderRadius": "{component/button/borderRadius}", "opacity": 0.5, "label": "Disabled" },
+                    { "type": "text", "x": 500, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF", "opacity": 0.5 }
+                  ]
+                },
+                {
+                  "type": "group",
+                  "name": "Primary Sizes",
+                  "x": 0,
+                  "y": 70,
+                  "children": [
+                    { "type": "rectangle", "x": 0, "y": 0, "width": 100, "height": 32, "fill": "{color/primary/default}", "borderRadius": "{component/button/borderRadius}", "label": "sm" },
+                    { "type": "text", "x": 16, "y": 8, "content": "Small", "fontSize": "{typography/fontSize/xs}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF" },
+                    { "type": "rectangle", "x": 120, "y": 0, "width": 140, "height": 40, "fill": "{color/primary/default}", "borderRadius": "{component/button/borderRadius}", "label": "md (default)" },
+                    { "type": "text", "x": 140, "y": 10, "content": "Medium", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF" },
+                    { "type": "rectangle", "x": 280, "y": 0, "width": 180, "height": 48, "fill": "{color/primary/default}", "borderRadius": "{component/button/borderRadius}", "label": "lg" },
+                    { "type": "text", "x": 310, "y": 12, "content": "Large", "fontSize": "{typography/fontSize/base}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF" }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 360,
+              "content": "Secondary",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Secondary Buttons",
+              "x": 60,
+              "y": 400,
+              "children": [
+                {
+                  "type": "group",
+                  "name": "Secondary States",
+                  "x": 0,
+                  "y": 0,
+                  "children": [
+                    { "type": "rectangle", "x": 0, "y": 0, "width": 140, "height": 40, "fill": "{color/gray/200}", "borderRadius": "{component/button/borderRadius}", "label": "Default" },
+                    { "type": "text", "x": 20, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                    { "type": "rectangle", "x": 160, "y": 0, "width": 140, "height": 40, "fill": "{color/gray/300}", "borderRadius": "{component/button/borderRadius}", "label": "Hover" },
+                    { "type": "text", "x": 180, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                    { "type": "rectangle", "x": 320, "y": 0, "width": 140, "height": 40, "fill": "{color/gray/400}", "borderRadius": "{component/button/borderRadius}", "label": "Active" },
+                    { "type": "text", "x": 340, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                    { "type": "rectangle", "x": 480, "y": 0, "width": 140, "height": 40, "fill": "{color/gray/200}", "borderRadius": "{component/button/borderRadius}", "opacity": 0.5, "label": "Disabled" },
+                    { "type": "text", "x": 500, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}", "opacity": 0.5 }
+                  ]
+                },
+                {
+                  "type": "group",
+                  "name": "Secondary Sizes",
+                  "x": 0,
+                  "y": 70,
+                  "children": [
+                    { "type": "rectangle", "x": 0, "y": 0, "width": 100, "height": 32, "fill": "{color/gray/200}", "borderRadius": "{component/button/borderRadius}", "label": "sm" },
+                    { "type": "text", "x": 16, "y": 8, "content": "Small", "fontSize": "{typography/fontSize/xs}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                    { "type": "rectangle", "x": 120, "y": 0, "width": 140, "height": 40, "fill": "{color/gray/200}", "borderRadius": "{component/button/borderRadius}", "label": "md (default)" },
+                    { "type": "text", "x": 140, "y": 10, "content": "Medium", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                    { "type": "rectangle", "x": 280, "y": 0, "width": 180, "height": 48, "fill": "{color/gray/200}", "borderRadius": "{component/button/borderRadius}", "label": "lg" },
+                    { "type": "text", "x": 310, "y": 12, "content": "Large", "fontSize": "{typography/fontSize/base}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 560,
+              "content": "Outline",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Outline Buttons",
+              "x": 60,
+              "y": 600,
+              "children": [
+                {
+                  "type": "group",
+                  "name": "Outline States",
+                  "x": 0,
+                  "y": 0,
+                  "children": [
+                    { "type": "rectangle", "x": 0, "y": 0, "width": 140, "height": 40, "fill": "transparent", "stroke": "{color/primary/default}", "strokeWidth": 1.5, "borderRadius": "{component/button/borderRadius}", "label": "Default" },
+                    { "type": "text", "x": 20, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                    { "type": "rectangle", "x": 160, "y": 0, "width": 140, "height": 40, "fill": "{color/primary/50}", "stroke": "{color/primary/default}", "strokeWidth": 1.5, "borderRadius": "{component/button/borderRadius}", "label": "Hover" },
+                    { "type": "text", "x": 180, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                    { "type": "rectangle", "x": 320, "y": 0, "width": 140, "height": 40, "fill": "{color/primary/100}", "stroke": "{color/primary/dark}", "strokeWidth": 1.5, "borderRadius": "{component/button/borderRadius}", "label": "Active" },
+                    { "type": "text", "x": 340, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/dark}" },
+                    { "type": "rectangle", "x": 480, "y": 0, "width": 140, "height": 40, "fill": "transparent", "stroke": "{color/primary/default}", "strokeWidth": 1.5, "borderRadius": "{component/button/borderRadius}", "opacity": 0.5, "label": "Disabled" },
+                    { "type": "text", "x": 500, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}", "opacity": 0.5 }
+                  ]
+                },
+                {
+                  "type": "group",
+                  "name": "Outline Sizes",
+                  "x": 0,
+                  "y": 70,
+                  "children": [
+                    { "type": "rectangle", "x": 0, "y": 0, "width": 100, "height": 32, "fill": "transparent", "stroke": "{color/primary/default}", "strokeWidth": 1.5, "borderRadius": "{component/button/borderRadius}", "label": "sm" },
+                    { "type": "text", "x": 16, "y": 8, "content": "Small", "fontSize": "{typography/fontSize/xs}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                    { "type": "rectangle", "x": 120, "y": 0, "width": 140, "height": 40, "fill": "transparent", "stroke": "{color/primary/default}", "strokeWidth": 1.5, "borderRadius": "{component/button/borderRadius}", "label": "md (default)" },
+                    { "type": "text", "x": 140, "y": 10, "content": "Medium", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                    { "type": "rectangle", "x": 280, "y": 0, "width": 180, "height": 48, "fill": "transparent", "stroke": "{color/primary/default}", "strokeWidth": 1.5, "borderRadius": "{component/button/borderRadius}", "label": "lg" },
+                    { "type": "text", "x": 310, "y": 12, "content": "Large", "fontSize": "{typography/fontSize/base}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 760,
+              "content": "Ghost",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Ghost Buttons",
+              "x": 60,
+              "y": 800,
+              "children": [
+                {
+                  "type": "group",
+                  "name": "Ghost States",
+                  "x": 0,
+                  "y": 0,
+                  "children": [
+                    { "type": "rectangle", "x": 0, "y": 0, "width": 140, "height": 40, "fill": "transparent", "borderRadius": "{component/button/borderRadius}", "label": "Default" },
+                    { "type": "text", "x": 20, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                    { "type": "rectangle", "x": 160, "y": 0, "width": 140, "height": 40, "fill": "{color/gray/100}", "borderRadius": "{component/button/borderRadius}", "label": "Hover" },
+                    { "type": "text", "x": 180, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                    { "type": "rectangle", "x": 320, "y": 0, "width": 140, "height": 40, "fill": "{color/gray/200}", "borderRadius": "{component/button/borderRadius}", "label": "Active" },
+                    { "type": "text", "x": 340, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                    { "type": "rectangle", "x": 480, "y": 0, "width": 140, "height": 40, "fill": "transparent", "borderRadius": "{component/button/borderRadius}", "opacity": 0.5, "label": "Disabled" },
+                    { "type": "text", "x": 500, "y": 10, "content": "Button", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}", "opacity": 0.5 }
+                  ]
+                },
+                {
+                  "type": "group",
+                  "name": "Ghost Sizes",
+                  "x": 0,
+                  "y": 70,
+                  "children": [
+                    { "type": "rectangle", "x": 0, "y": 0, "width": 100, "height": 32, "fill": "transparent", "borderRadius": "{component/button/borderRadius}", "label": "sm" },
+                    { "type": "text", "x": 16, "y": 8, "content": "Small", "fontSize": "{typography/fontSize/xs}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                    { "type": "rectangle", "x": 120, "y": 0, "width": 140, "height": 40, "fill": "transparent", "borderRadius": "{component/button/borderRadius}", "label": "md (default)" },
+                    { "type": "text", "x": 140, "y": 10, "content": "Medium", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                    { "type": "rectangle", "x": 280, "y": 0, "width": 180, "height": 48, "fill": "transparent", "borderRadius": "{component/button/borderRadius}", "label": "lg" },
+                    { "type": "text", "x": 310, "y": 12, "content": "Large", "fontSize": "{typography/fontSize/base}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "component-input",
+      "name": "Components / Input",
+      "frames": [
+        {
+          "id": "input-frame",
+          "name": "Input Component",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 2400,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 60,
+              "y": 40,
+              "content": "Components / Input",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "2.25rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 100,
+              "content": "Properties: paddingX={component/input/paddingX} (0.75rem), paddingY={component/input/paddingY} (0.5rem), borderRadius={component/input/borderRadius} (0.375rem), fontSize={component/input/fontSize} (0.875rem), borderColor={component/input/borderColor} (#E5E7EB)",
+              "fontFamily": "{typography/fontFamily/sans}",
+              "fontSize": "{typography/fontSize/sm}",
+              "fontWeight": "400",
+              "fill": "{color/muted}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 160,
+              "content": "Text Input",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Text Input States",
+              "x": 60,
+              "y": 200,
+              "children": [
+                { "type": "text", "x": 0, "y": 0, "content": "Label", "fontSize": "{typography/fontSize/sm}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "rectangle", "x": 0, "y": 24, "width": 240, "height": 40, "fill": "{color/surface/default}", "stroke": "{component/input/borderColor}", "strokeWidth": 1, "borderRadius": "{component/input/borderRadius}", "label": "Empty / Placeholder" },
+                { "type": "text", "x": 12, "y": 34, "content": "Placeholder text...", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+
+                { "type": "text", "x": 280, "y": 0, "content": "Label", "fontSize": "{typography/fontSize/sm}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "rectangle", "x": 280, "y": 24, "width": 240, "height": 40, "fill": "{color/surface/default}", "stroke": "{component/input/borderColor}", "strokeWidth": 1, "borderRadius": "{component/input/borderRadius}", "label": "Filled" },
+                { "type": "text", "x": 292, "y": 34, "content": "John Doe", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+
+                { "type": "text", "x": 560, "y": 0, "content": "Label", "fontSize": "{typography/fontSize/sm}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "rectangle", "x": 560, "y": 24, "width": 240, "height": 40, "fill": "{color/surface/default}", "stroke": "{color/primary/default}", "strokeWidth": 2, "borderRadius": "{component/input/borderRadius}", "label": "Focused" },
+                { "type": "text", "x": 572, "y": 34, "content": "John Doe", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+
+                { "type": "text", "x": 840, "y": 0, "content": "Label", "fontSize": "{typography/fontSize/sm}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "rectangle", "x": 840, "y": 24, "width": 240, "height": 40, "fill": "{color/surface/default}", "stroke": "{color/error}", "strokeWidth": 1.5, "borderRadius": "{component/input/borderRadius}", "label": "Error" },
+                { "type": "text", "x": 852, "y": 34, "content": "Invalid input", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 840, "y": 70, "content": "This field is required", "fontSize": "{typography/fontSize/xs}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/error}" },
+
+                { "type": "text", "x": 1120, "y": 0, "content": "Label", "fontSize": "{typography/fontSize/sm}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+                { "type": "rectangle", "x": 1120, "y": 24, "width": 240, "height": 40, "fill": "{color/gray/50}", "stroke": "{color/gray/200}", "strokeWidth": 1, "borderRadius": "{component/input/borderRadius}", "opacity": 0.6, "label": "Disabled" },
+                { "type": "text", "x": 1132, "y": 34, "content": "Disabled value", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "opacity": 0.6 }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 340,
+              "content": "Select Dropdown",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Select States",
+              "x": 60,
+              "y": 380,
+              "children": [
+                { "type": "text", "x": 0, "y": 0, "content": "Department", "fontSize": "{typography/fontSize/sm}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "rectangle", "x": 0, "y": 24, "width": 240, "height": 40, "fill": "{color/surface/default}", "stroke": "{component/input/borderColor}", "strokeWidth": 1, "borderRadius": "{component/input/borderRadius}", "label": "Empty" },
+                { "type": "text", "x": 12, "y": 34, "content": "Select option...", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+                { "type": "text", "x": 210, "y": 34, "content": "v", "fontSize": "{typography/fontSize/sm}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+
+                { "type": "text", "x": 280, "y": 0, "content": "Department", "fontSize": "{typography/fontSize/sm}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "rectangle", "x": 280, "y": 24, "width": 240, "height": 40, "fill": "{color/surface/default}", "stroke": "{component/input/borderColor}", "strokeWidth": 1, "borderRadius": "{component/input/borderRadius}", "label": "Filled" },
+                { "type": "text", "x": 292, "y": 34, "content": "Engineering", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 490, "y": 34, "content": "v", "fontSize": "{typography/fontSize/sm}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+
+                { "type": "text", "x": 560, "y": 0, "content": "Department", "fontSize": "{typography/fontSize/sm}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "rectangle", "x": 560, "y": 24, "width": 240, "height": 40, "fill": "{color/surface/default}", "stroke": "{color/primary/default}", "strokeWidth": 2, "borderRadius": "{component/input/borderRadius}", "label": "Focused" },
+                { "type": "text", "x": 572, "y": 34, "content": "Engineering", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 500,
+              "content": "Checkbox",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Checkbox States",
+              "x": 60,
+              "y": 540,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 20, "height": 20, "fill": "{color/surface/default}", "stroke": "{component/input/borderColor}", "strokeWidth": 1.5, "borderRadius": "{borderRadius/sm}", "label": "Unchecked" },
+                { "type": "text", "x": 30, "y": 2, "content": "Unchecked", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+
+                { "type": "rectangle", "x": 160, "y": 0, "width": 20, "height": 20, "fill": "{color/primary/default}", "borderRadius": "{borderRadius/sm}", "label": "Checked" },
+                { "type": "text", "x": 166, "y": 3, "content": "✓", "fontSize": "{typography/fontSize/xs}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF" },
+                { "type": "text", "x": 190, "y": 2, "content": "Checked", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+
+                { "type": "rectangle", "x": 320, "y": 0, "width": 20, "height": 20, "fill": "{color/gray/100}", "stroke": "{color/gray/200}", "strokeWidth": 1.5, "borderRadius": "{borderRadius/sm}", "opacity": 0.6, "label": "Disabled" },
+                { "type": "text", "x": 350, "y": 2, "content": "Disabled", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "opacity": 0.6 }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 600,
+              "content": "Radio Button",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Radio States",
+              "x": 60,
+              "y": 640,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 20, "height": 20, "fill": "{color/surface/default}", "stroke": "{component/input/borderColor}", "strokeWidth": 1.5, "borderRadius": "{borderRadius/full}", "label": "Unselected" },
+                { "type": "text", "x": 30, "y": 2, "content": "Option A", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+
+                { "type": "rectangle", "x": 160, "y": 0, "width": 20, "height": 20, "fill": "{color/surface/default}", "stroke": "{color/primary/default}", "strokeWidth": 2, "borderRadius": "{borderRadius/full}", "label": "Selected" },
+                { "type": "rectangle", "x": 165, "y": 5, "width": 10, "height": 10, "fill": "{color/primary/default}", "borderRadius": "{borderRadius/full}" },
+                { "type": "text", "x": 190, "y": 2, "content": "Option B (selected)", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+
+                { "type": "rectangle", "x": 400, "y": 0, "width": 20, "height": 20, "fill": "{color/gray/100}", "stroke": "{color/gray/200}", "strokeWidth": 1.5, "borderRadius": "{borderRadius/full}", "opacity": 0.6, "label": "Disabled" },
+                { "type": "text", "x": 430, "y": 2, "content": "Disabled", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "opacity": 0.6 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "component-card",
+      "name": "Components / Card",
+      "frames": [
+        {
+          "id": "card-frame",
+          "name": "Card Component",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 2000,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 60,
+              "y": 40,
+              "content": "Components / Card",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "2.25rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 100,
+              "content": "Properties: padding={component/card/padding} (1.5rem), borderRadius={component/card/borderRadius} (0.75rem), shadow={component/card/shadow} (md), background={component/card/background} (#FFFFFF)",
+              "fontFamily": "{typography/fontFamily/sans}",
+              "fontSize": "{typography/fontSize/sm}",
+              "fontWeight": "400",
+              "fill": "{color/muted}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 160,
+              "content": "Default Card",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Default Card",
+              "x": 60,
+              "y": 200,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 360, "height": 200, "fill": "{component/card/background}", "shadow": "{component/card/shadow}", "borderRadius": "{component/card/borderRadius}", "stroke": "{color/border}", "strokeWidth": 1 },
+                { "type": "text", "x": 24, "y": 24, "content": "Card Title", "fontSize": "{typography/fontSize/lg}", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/heading}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 24, "y": 56, "content": "This is a default card with a title and\ndescription text. Cards are used to group\nrelated content together.", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "lineHeight": "{typography/lineHeight/sm}" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 460,
+              "y": 160,
+              "content": "Card with Header",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Card with Header",
+              "x": 460,
+              "y": 200,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 360, "height": 240, "fill": "{component/card/background}", "shadow": "{component/card/shadow}", "borderRadius": "{component/card/borderRadius}", "stroke": "{color/border}", "strokeWidth": 1 },
+                { "type": "rectangle", "x": 0, "y": 0, "width": 360, "height": 52, "fill": "{color/surface/light}", "borderRadius": "0.75rem 0.75rem 0 0" },
+                { "type": "text", "x": 24, "y": 16, "content": "Employee Details", "fontSize": "{typography/fontSize/base}", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/heading}", "fill": "{color/foreground}" },
+                { "type": "rectangle", "x": 0, "y": 52, "width": 360, "height": 1, "fill": "{color/border}" },
+                { "type": "text", "x": 24, "y": 72, "content": "Name: Ivan Petrov\nDepartment: Engineering\nRole: Senior Developer", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "lineHeight": "{typography/lineHeight/base}" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 860,
+              "y": 160,
+              "content": "Card with Footer",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Card with Footer",
+              "x": 860,
+              "y": 200,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 360, "height": 240, "fill": "{component/card/background}", "shadow": "{component/card/shadow}", "borderRadius": "{component/card/borderRadius}", "stroke": "{color/border}", "strokeWidth": 1 },
+                { "type": "text", "x": 24, "y": 24, "content": "Leave Request", "fontSize": "{typography/fontSize/lg}", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/heading}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 24, "y": 56, "content": "Annual leave request for March 20-24.\n5 working days.", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "lineHeight": "{typography/lineHeight/sm}" },
+                { "type": "rectangle", "x": 0, "y": 188, "width": 360, "height": 1, "fill": "{color/border}" },
+                { "type": "rectangle", "x": 24, "y": 200, "width": 100, "height": 32, "fill": "{color/primary/default}", "borderRadius": "{component/button/borderRadius}" },
+                { "type": "text", "x": 44, "y": 208, "content": "Approve", "fontSize": "{typography/fontSize/xs}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF" },
+                { "type": "rectangle", "x": 136, "y": 200, "width": 80, "height": 32, "fill": "transparent", "stroke": "{color/border}", "strokeWidth": 1, "borderRadius": "{component/button/borderRadius}" },
+                { "type": "text", "x": 152, "y": 208, "content": "Deny", "fontSize": "{typography/fontSize/xs}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 480,
+              "content": "Card with Image",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Card with Image",
+              "x": 60,
+              "y": 520,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 360, "height": 320, "fill": "{component/card/background}", "shadow": "{component/card/shadow}", "borderRadius": "{component/card/borderRadius}", "stroke": "{color/border}", "strokeWidth": 1 },
+                { "type": "rectangle", "x": 0, "y": 0, "width": 360, "height": 160, "fill": "{color/primary/100}", "borderRadius": "0.75rem 0.75rem 0 0", "label": "Image placeholder" },
+                { "type": "text", "x": 130, "y": 70, "content": "IMAGE", "fontSize": "{typography/fontSize/lg}", "fontWeight": "{typography/fontWeight/bold}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" },
+                { "type": "text", "x": 24, "y": 180, "content": "Blog Post Title", "fontSize": "{typography/fontSize/lg}", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/heading}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 24, "y": 212, "content": "A brief description of the blog post\ncontent goes here.", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "lineHeight": "{typography/lineHeight/sm}" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 460,
+              "y": 480,
+              "content": "Interactive Card (Hover)",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Interactive Card",
+              "x": 460,
+              "y": 520,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 360, "height": 200, "fill": "{component/card/background}", "shadow": "{shadow/lg}", "borderRadius": "{component/card/borderRadius}", "stroke": "{color/border}", "strokeWidth": 1, "label": "Elevated shadow on hover" },
+                { "type": "text", "x": 24, "y": 24, "content": "Quick Action", "fontSize": "{typography/fontSize/lg}", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/heading}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 24, "y": 56, "content": "Click this card to perform a quick\naction. Shadow elevates on hover.", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "lineHeight": "{typography/lineHeight/sm}" },
+                { "type": "text", "x": 24, "y": 160, "content": "Learn more →", "fontSize": "{component/input/fontSize}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/primary/default}" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "component-modal",
+      "name": "Components / Modal",
+      "frames": [
+        {
+          "id": "modal-frame",
+          "name": "Modal Component",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 2000,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 60,
+              "y": 40,
+              "content": "Components / Modal",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "2.25rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 100,
+              "content": "Properties: borderRadius={component/modal/borderRadius} (1rem), shadow={component/modal/shadow} (xl), backdropColor={component/modal/backdropColor} (rgba(0,0,0,0.5))",
+              "fontFamily": "{typography/fontFamily/sans}",
+              "fontSize": "{typography/fontSize/sm}",
+              "fontWeight": "400",
+              "fill": "{color/muted}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 160,
+              "content": "Modal Anatomy",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Modal Anatomy - Confirmation Dialog",
+              "x": 60,
+              "y": 200,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 700, "height": 500, "fill": "{component/modal/backdropColor}", "borderRadius": "{borderRadius/lg}", "label": "Backdrop Overlay" },
+                { "type": "rectangle", "x": 70, "y": 50, "width": 560, "height": 400, "fill": "{component/card/background}", "shadow": "{component/modal/shadow}", "borderRadius": "{component/modal/borderRadius}", "label": "Modal Container" },
+
+                { "type": "rectangle", "x": 70, "y": 50, "width": 560, "height": 60, "fill": "{color/surface/light}", "borderRadius": "1rem 1rem 0 0", "label": "Header" },
+                { "type": "text", "x": 94, "y": 68, "content": "Confirm Action", "fontSize": "{typography/fontSize/lg}", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/heading}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 590, "y": 68, "content": "X", "fontSize": "{typography/fontSize/lg}", "fontWeight": "{typography/fontWeight/bold}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+                { "type": "rectangle", "x": 70, "y": 110, "width": 560, "height": 1, "fill": "{color/border}" },
+
+                { "type": "text", "x": 94, "y": 140, "content": "Content Area", "fontSize": "{typography/fontSize/sm}", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+                { "type": "text", "x": 94, "y": 170, "content": "Are you sure you want to delete this employee\nrecord? This action cannot be undone.\n\nAll associated data including leave requests,\npayroll history, and documents will be\npermanently removed.", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}", "lineHeight": "{typography/lineHeight/base}" },
+
+                { "type": "rectangle", "x": 70, "y": 390, "width": 560, "height": 1, "fill": "{color/border}" },
+                { "type": "rectangle", "x": 70, "y": 391, "width": 560, "height": 59, "fill": "{color/surface/lighter}", "borderRadius": "0 0 1rem 1rem", "label": "Footer" },
+                { "type": "rectangle", "x": 420, "y": 404, "width": 100, "height": 34, "fill": "{color/error}", "borderRadius": "{component/button/borderRadius}" },
+                { "type": "text", "x": 444, "y": 412, "content": "Delete", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "#FFFFFF" },
+                { "type": "rectangle", "x": 530, "y": 404, "width": 80, "height": 34, "fill": "transparent", "stroke": "{color/border}", "strokeWidth": 1, "borderRadius": "{component/button/borderRadius}" },
+                { "type": "text", "x": 548, "y": 412, "content": "Cancel", "fontSize": "{component/button/fontSize}", "fontWeight": "{component/button/fontWeight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 740,
+              "content": "Size Variants",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Modal Size - Small (400px)",
+              "x": 60,
+              "y": 780,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 400, "height": 200, "fill": "{component/card/background}", "shadow": "{component/modal/shadow}", "borderRadius": "{component/modal/borderRadius}", "stroke": "{color/border}", "strokeWidth": 1 },
+                { "type": "rectangle", "x": 0, "y": 0, "width": 400, "height": 50, "fill": "{color/surface/light}", "borderRadius": "1rem 1rem 0 0" },
+                { "type": "text", "x": 20, "y": 16, "content": "Small Modal (400px)", "fontSize": "{typography/fontSize/base}", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/heading}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 370, "y": 16, "content": "X", "fontSize": "{typography/fontSize/base}", "fontWeight": "{typography/fontWeight/bold}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+                { "type": "rectangle", "x": 0, "y": 50, "width": 400, "height": 1, "fill": "{color/border}" },
+                { "type": "text", "x": 20, "y": 72, "content": "Compact dialogs, confirmations,\nsimple alerts.", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "lineHeight": "{typography/lineHeight/sm}" }
+              ]
+            },
+            {
+              "type": "group",
+              "name": "Modal Size - Medium (560px)",
+              "x": 60,
+              "y": 1010,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 560, "height": 220, "fill": "{component/card/background}", "shadow": "{component/modal/shadow}", "borderRadius": "{component/modal/borderRadius}", "stroke": "{color/border}", "strokeWidth": 1 },
+                { "type": "rectangle", "x": 0, "y": 0, "width": 560, "height": 50, "fill": "{color/surface/light}", "borderRadius": "1rem 1rem 0 0" },
+                { "type": "text", "x": 20, "y": 16, "content": "Medium Modal (560px) — Default", "fontSize": "{typography/fontSize/base}", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/heading}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 530, "y": 16, "content": "X", "fontSize": "{typography/fontSize/base}", "fontWeight": "{typography/fontWeight/bold}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+                { "type": "rectangle", "x": 0, "y": 50, "width": 560, "height": 1, "fill": "{color/border}" },
+                { "type": "text", "x": 20, "y": 72, "content": "Standard forms, detail views,\nmost common use case for modals.", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "lineHeight": "{typography/lineHeight/sm}" }
+              ]
+            },
+            {
+              "type": "group",
+              "name": "Modal Size - Large (720px)",
+              "x": 60,
+              "y": 1260,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 720, "height": 240, "fill": "{component/card/background}", "shadow": "{component/modal/shadow}", "borderRadius": "{component/modal/borderRadius}", "stroke": "{color/border}", "strokeWidth": 1 },
+                { "type": "rectangle", "x": 0, "y": 0, "width": 720, "height": 50, "fill": "{color/surface/light}", "borderRadius": "1rem 1rem 0 0" },
+                { "type": "text", "x": 20, "y": 16, "content": "Large Modal (720px)", "fontSize": "{typography/fontSize/base}", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/heading}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 690, "y": 16, "content": "X", "fontSize": "{typography/fontSize/base}", "fontWeight": "{typography/fontWeight/bold}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}" },
+                { "type": "rectangle", "x": 0, "y": 50, "width": 720, "height": 1, "fill": "{color/border}" },
+                { "type": "text", "x": 20, "y": 72, "content": "Complex forms, multi-step wizards,\ndata tables, rich content views.", "fontSize": "{component/input/fontSize}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/muted}", "lineHeight": "{typography/lineHeight/sm}" }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
