@@ -54,7 +54,7 @@ export function useRejectLeave() {
         "/leave/requests/{id}/reject",
         {
           params: { path: { id } },
-          body: reason ? ({ reason } as Record<string, never>) : {},
+          body: reason ? ({ reason } as unknown as Record<string, never>) : {},
         },
       );
       if (error) throw new Error("Failed to reject leave request");

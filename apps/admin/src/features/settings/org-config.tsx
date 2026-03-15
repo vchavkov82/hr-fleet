@@ -31,7 +31,7 @@ export function OrgConfig() {
     handleSubmit,
     formState: { errors, isDirty },
   } = useForm<OrgFormValues>({
-    resolver: zodResolver(orgSchema),
+    resolver: zodResolver(orgSchema as any),
     values: settings ?? {
       name: "",
       address: "",

@@ -35,7 +35,7 @@ export function ContractForm({ onSuccess, onCancel }: ContractFormProps) {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ContractFormValues>({
-    resolver: zodResolver(contractSchema),
+    resolver: zodResolver(contractSchema as any),
   });
 
   const onSubmit = async (values: ContractFormValues) => {

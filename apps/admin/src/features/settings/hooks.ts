@@ -17,7 +17,7 @@ export function useOrgSettings() {
     queryFn: async () => {
       const { data, error } = await client.GET("/settings/organization");
       if (error) throw new Error("Failed to fetch organization settings");
-      return data as OrgSettings;
+      return data as unknown as OrgSettings;
     },
   });
 }
@@ -26,7 +26,7 @@ export function useUpdateOrgSettings() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (body: OrgSettings) => {
-      const { data, error } = await client.PUT("/settings/organization", { body });
+      const { data, error } = await client.PUT("/settings/organization", { body: body as unknown as Record<string, unknown> });
       if (error) throw new Error("Failed to update organization settings");
       return data;
     },
@@ -49,7 +49,7 @@ export function useOdooStatus() {
     queryFn: async () => {
       const { data, error } = await client.GET("/settings/odoo-status");
       if (error) throw new Error("Failed to fetch Odoo status");
-      return data as OdooStatus;
+      return data as unknown as OdooStatus;
     },
     refetchInterval: 30_000,
   });
@@ -123,7 +123,7 @@ export function useApiKeys() {
   return useQuery({
     queryKey: ["api-keys"],
     queryFn: async () => {
-      const { data, error } = await client.GET("/api-keys");
+      const { data, error } = await client.GET("/auth/api-keys");
       if (error) throw new Error("Failed to fetch API keys");
       return data as { keys: ApiKey[] };
     },
@@ -134,9 +134,9 @@ export function useCreateApiKey() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (body: { name: string; scopes: string[] }) => {
-      const { data, error } = await client.POST("/api-keys", { body });
+      const { data, error } = await client.POST("/auth/api-keys", { body });
       if (error) throw new Error("Failed to create API key");
-      return data as CreateApiKeyResponse;
+      return data as unknown as CreateApiKeyResponse;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["api-keys"] }),
   });
@@ -146,7 +146,7 @@ export function useRevokeApiKey() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await client.DELETE("/api-keys/{id}", {
+      const { error } = await client.DELETE("/auth/api-keys/{id}", {
         params: { path: { id } },
       });
       if (error) throw new Error("Failed to revoke API key");

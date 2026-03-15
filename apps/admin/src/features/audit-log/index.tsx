@@ -49,7 +49,7 @@ function AuditLogContent() {
   const pageCount = Math.ceil(total / pagination.pageSize);
 
   const parentRef = useRef<HTMLDivElement>(null);
-  const virtualizer = useVirtualizer({
+  void useVirtualizer({
     count: entries.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 48,

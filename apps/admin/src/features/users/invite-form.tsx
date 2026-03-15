@@ -55,7 +55,7 @@ export function InviteForm({ open, onClose }: Props) {
 
     const result = inviteSchema.safeParse({ email, role });
     if (!result.success) {
-      setError(result.error.issues[0].message);
+      setError(result.error.issues[0]?.message ?? "Validation failed");
       return;
     }
 

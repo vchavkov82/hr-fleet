@@ -24,7 +24,8 @@ function TaxTooltip({
   payload?: Array<{ name: string; value: number }>;
 }) {
   if (!active || !payload?.length) return null;
-  const entry = payload[0];
+  const entry = payload?.[0];
+  if (!entry) return null;
   return (
     <div className="rounded-lg border bg-white p-3 shadow-sm">
       <p className="font-medium text-gray-900">{entry.name}</p>

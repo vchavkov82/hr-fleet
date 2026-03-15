@@ -23,7 +23,7 @@ export function usePayrollReport(dateRange: DateRange) {
     queryKey: ["reports", "payroll", dateRange.from, dateRange.to],
     queryFn: async () => {
       const { data, error } = await client.GET("/reports/payroll-summary", {
-        params: { query: { from: dateRange.from, to: dateRange.to } },
+        params: { query: { period_start: dateRange.from, period_end: dateRange.to } },
       });
       if (error) throw new Error("Failed to fetch payroll report");
       return (data as { months: PayrollMonth[] })?.months ?? [];
@@ -37,7 +37,7 @@ export function useTaxReport(dateRange: DateRange) {
     queryKey: ["reports", "tax", dateRange.from, dateRange.to],
     queryFn: async () => {
       const { data, error } = await client.GET("/reports/tax-liabilities", {
-        params: { query: { from: dateRange.from, to: dateRange.to } },
+        params: { query: { period_start: dateRange.from, period_end: dateRange.to } },
       });
       if (error) throw new Error("Failed to fetch tax report");
       return (data as { breakdown: TaxBreakdown[] })?.breakdown ?? [];

@@ -35,7 +35,7 @@ export function EmployeeForm({
   const isEdit = !!employee;
 
   const form = useForm<EmployeeFormValues>({
-    resolver: zodResolver(employeeSchema),
+    resolver: zodResolver(employeeSchema as any),
     defaultValues: employee
       ? {
           name: employee.name ?? "",
