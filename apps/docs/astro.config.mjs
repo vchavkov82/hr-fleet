@@ -21,6 +21,7 @@ export default defineConfig({
       components: {
         Header: './src/components/Header.astro',
         Footer: './src/components/Footer.astro',
+        Head: './src/components/HeadSEO.astro',
       },
       locales: {
         root: {
