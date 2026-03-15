@@ -3,6 +3,17 @@ import { glob } from "astro/loaders";
 import { SITE } from "@/config";
 
 export const BLOG_PATH = "src/blog";
+export const AUTHORS_PATH = "src/content/authors";
+
+const authors = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: `./${AUTHORS_PATH}` }),
+  schema: z.object({
+    name: z.string(),
+    bio: z.string().optional(),
+    avatar: z.string().optional(),
+    social: z.string().optional(),
+  }),
+});
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: `./${BLOG_PATH}` }),
@@ -24,4 +35,4 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+export const collections = { blog, authors };
