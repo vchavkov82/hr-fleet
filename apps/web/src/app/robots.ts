@@ -4,11 +4,13 @@ export default function robots(): MetadataRoute.Robots {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://jobshr.com'
 
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/dashboard/', '/auth/', '/api/'],
+      },
+    ],
     sitemap: `${baseUrl}/sitemap.xml`,
   }
 }
-

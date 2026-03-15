@@ -32,6 +32,31 @@ const nextConfig = {
     loaderFile: './src/lib/cloudflare-image-loader.ts',
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/:locale/home',
+        destination: '/:locale',
+        permanent: true,
+      },
+      {
+        source: '/blog/:path*',
+        destination: 'https://blog.jobshr.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/docs/:path*',
+        destination: 'https://docs.jobshr.com/:path*',
+        permanent: true,
+      },
+    ]
+  },
+
   async headers() {
     if (process.env.NODE_ENV !== 'production') {
       return []
