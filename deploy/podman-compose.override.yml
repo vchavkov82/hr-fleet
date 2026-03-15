@@ -43,6 +43,18 @@ services:
     entrypoint: sh
     command: ["-c", "cd /workspace && npm i -g pnpm && pnpm install && cd apps/docs && pnpm dev"]
 
+  # NFR-04: API service healthcheck for load balancer routing and auto-restart
+  api:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    # NFR-04: Horizontal scaling — increase replicas behind Caddy reverse proxy
+    # deploy:
+    #   replicas: 3
+
 volumes:
   hr_node_modules:
   hr_blog_node_modules:
