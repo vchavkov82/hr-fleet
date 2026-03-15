@@ -1,0 +1,716 @@
+{
+  "version": "1.0",
+  "name": "HR Design System",
+  "description": "Source of truth for the HR SaaS platform design system",
+  "created": "2026-03-15",
+  "variables": {
+    "collections": {
+      "Light Theme": {
+        "color/primary/default": "#1B4DDB",
+        "color/primary/light": "#3B6EF0",
+        "color/primary/dark": "#133AAB",
+        "color/primary/50": "#EEF2FF",
+        "color/primary/100": "#DBE4FE",
+        "color/primary/200": "#BCC8FC",
+        "color/primary/500": "#1B4DDB",
+        "color/primary/600": "#133AAB",
+        "color/primary/700": "#0E2E80",
+        "color/primary/900": "#0A1F5C",
+        "color/accent/default": "#0EA5E9",
+        "color/accent/light": "#38BDF8",
+        "color/accent/dark": "#0284C7",
+        "color/navy/default": "#0F172A",
+        "color/navy/light": "#1E293B",
+        "color/navy/dark": "#020617",
+        "color/navy/deep": "#030B24",
+        "color/success": "#059669",
+        "color/warning": "#D97706",
+        "color/error": "#DC2626",
+        "color/info": "#0EA5E9",
+        "color/surface/default": "#FFFFFF",
+        "color/surface/light": "#F0F4FE",
+        "color/surface/lighter": "#F8FAFC",
+        "color/background": "#FFFFFF",
+        "color/foreground": "#0F172A",
+        "color/muted": "#6B7280",
+        "color/border": "#E5E7EB",
+        "color/gray/50": "#F9FAFB",
+        "color/gray/100": "#F3F4F6",
+        "color/gray/200": "#E5E7EB",
+        "color/gray/300": "#D1D5DB",
+        "color/gray/400": "#9CA3AF",
+        "color/gray/500": "#6B7280",
+        "color/gray/600": "#4B5563",
+        "color/gray/700": "#374151",
+        "color/gray/800": "#1F2937",
+        "color/gray/900": "#111827"
+      },
+      "Dark Theme": {
+        "color/primary/default": "#3B6EF0",
+        "color/primary/light": "#5B8AF5",
+        "color/primary/dark": "#1B4DDB",
+        "color/accent/default": "#38BDF8",
+        "color/accent/light": "#7DD3FC",
+        "color/accent/dark": "#0EA5E9",
+        "color/success": "#34D399",
+        "color/warning": "#FBBF24",
+        "color/error": "#F87171",
+        "color/info": "#38BDF8",
+        "color/surface/default": "#0F172A",
+        "color/surface/light": "#1E293B",
+        "color/surface/lighter": "#334155",
+        "color/background": "#020617",
+        "color/foreground": "#F1F5F9",
+        "color/muted": "#94A3B8",
+        "color/border": "#334155",
+        "color/gray/50": "#111827",
+        "color/gray/100": "#1F2937",
+        "color/gray/200": "#374151",
+        "color/gray/300": "#4B5563",
+        "color/gray/400": "#6B7280",
+        "color/gray/500": "#9CA3AF",
+        "color/gray/600": "#D1D5DB",
+        "color/gray/700": "#E5E7EB",
+        "color/gray/800": "#F3F4F6",
+        "color/gray/900": "#F9FAFB"
+      },
+      "Global": {
+        "typography/fontFamily/sans": "var(--font-inter), system-ui, sans-serif",
+        "typography/fontFamily/heading": "var(--font-mulish), var(--font-inter), system-ui, sans-serif",
+        "typography/fontSize/xs": "0.75rem",
+        "typography/fontSize/sm": "0.875rem",
+        "typography/fontSize/base": "1rem",
+        "typography/fontSize/lg": "1.125rem",
+        "typography/fontSize/xl": "1.25rem",
+        "typography/fontSize/2xl": "1.5rem",
+        "typography/fontSize/3xl": "1.875rem",
+        "typography/fontSize/4xl": "2.25rem",
+        "typography/fontSize/5xl": "3rem",
+        "typography/lineHeight/xs": "1rem",
+        "typography/lineHeight/sm": "1.25rem",
+        "typography/lineHeight/base": "1.5rem",
+        "typography/lineHeight/lg": "1.75rem",
+        "typography/lineHeight/xl": "1.75rem",
+        "typography/lineHeight/2xl": "2rem",
+        "typography/lineHeight/3xl": "2.25rem",
+        "typography/lineHeight/4xl": "2.5rem",
+        "typography/lineHeight/5xl": "1",
+        "typography/fontWeight/extralight": "200",
+        "typography/fontWeight/light": "300",
+        "typography/fontWeight/normal": "400",
+        "typography/fontWeight/medium": "500",
+        "typography/fontWeight/semibold": "600",
+        "typography/fontWeight/bold": "700",
+        "typography/fontWeight/extrabold": "800",
+        "typography/fontWeight/black": "900",
+        "spacing/0": "0",
+        "spacing/1": "0.25rem",
+        "spacing/2": "0.5rem",
+        "spacing/3": "0.75rem",
+        "spacing/4": "1rem",
+        "spacing/5": "1.25rem",
+        "spacing/6": "1.5rem",
+        "spacing/8": "2rem",
+        "spacing/10": "2.5rem",
+        "spacing/12": "3rem",
+        "spacing/16": "4rem",
+        "spacing/20": "5rem",
+        "spacing/24": "6rem",
+        "spacing/32": "8rem",
+        "spacing/40": "10rem",
+        "spacing/48": "12rem",
+        "spacing/64": "16rem",
+        "shadow/sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+        "shadow/default": "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)",
+        "shadow/md": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
+        "shadow/lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)",
+        "shadow/xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+        "shadow/none": "none",
+        "borderRadius/none": "0",
+        "borderRadius/sm": "0.125rem",
+        "borderRadius/default": "0.25rem",
+        "borderRadius/md": "0.375rem",
+        "borderRadius/lg": "0.5rem",
+        "borderRadius/xl": "0.75rem",
+        "borderRadius/2xl": "1rem",
+        "borderRadius/full": "9999px",
+        "zIndex/0": "0",
+        "zIndex/10": "10",
+        "zIndex/20": "20",
+        "zIndex/30": "30",
+        "zIndex/40": "40",
+        "zIndex/50": "50",
+        "zIndex/dropdown": "1000",
+        "zIndex/sticky": "1020",
+        "zIndex/fixed": "1030",
+        "zIndex/modal-backdrop": "1040",
+        "zIndex/modal": "1050",
+        "zIndex/popover": "1060",
+        "zIndex/tooltip": "1070",
+        "zIndex/toast": "1080",
+        "component/button/paddingX": "{spacing/4}",
+        "component/button/paddingY": "{spacing/2}",
+        "component/button/borderRadius": "{borderRadius/lg}",
+        "component/button/fontSize": "{typography/fontSize/sm}",
+        "component/button/fontWeight": "{typography/fontWeight/medium}",
+        "component/input/paddingX": "{spacing/3}",
+        "component/input/paddingY": "{spacing/2}",
+        "component/input/borderRadius": "{borderRadius/md}",
+        "component/input/fontSize": "{typography/fontSize/sm}",
+        "component/input/borderColor": "{color/border}",
+        "component/card/padding": "{spacing/6}",
+        "component/card/borderRadius": "{borderRadius/xl}",
+        "component/card/shadow": "{shadow/md}",
+        "component/card/background": "{color/surface/default}",
+        "component/modal/borderRadius": "{borderRadius/2xl}",
+        "component/modal/shadow": "{shadow/xl}",
+        "component/modal/backdropColor": "rgba(0, 0, 0, 0.5)"
+      }
+    }
+  },
+  "pages": [
+    {
+      "id": "cover",
+      "name": "Cover",
+      "frames": [
+        {
+          "id": "cover-frame",
+          "name": "Cover",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 120,
+              "y": 300,
+              "content": "HR Design System",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "3rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 120,
+              "y": 380,
+              "content": "Source of truth for the HR SaaS platform design system",
+              "fontFamily": "{typography/fontFamily/sans}",
+              "fontSize": "1.25rem",
+              "fontWeight": "400",
+              "fill": "{color/muted}"
+            },
+            {
+              "type": "text",
+              "x": 120,
+              "y": 440,
+              "content": "Version 1.0 | 2026-03-15",
+              "fontFamily": "{typography/fontFamily/sans}",
+              "fontSize": "1rem",
+              "fontWeight": "400",
+              "fill": "{color/muted}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "colors",
+      "name": "Colors",
+      "frames": [
+        {
+          "id": "colors-frame",
+          "name": "Color Palette",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 2400,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 60,
+              "y": 40,
+              "content": "Colors",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "2.25rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 100,
+              "content": "Primary",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Primary Palette",
+              "x": 60,
+              "y": 140,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 120, "height": 80, "fill": "{color/primary/50}", "label": "50\n#EEF2FF" },
+                { "type": "rectangle", "x": 140, "y": 0, "width": 120, "height": 80, "fill": "{color/primary/100}", "label": "100\n#DBE4FE" },
+                { "type": "rectangle", "x": 280, "y": 0, "width": 120, "height": 80, "fill": "{color/primary/200}", "label": "200\n#BCC8FC" },
+                { "type": "rectangle", "x": 420, "y": 0, "width": 120, "height": 80, "fill": "{color/primary/500}", "label": "500 (DEFAULT)\n#1B4DDB" },
+                { "type": "rectangle", "x": 560, "y": 0, "width": 120, "height": 80, "fill": "{color/primary/600}", "label": "600\n#133AAB" },
+                { "type": "rectangle", "x": 700, "y": 0, "width": 120, "height": 80, "fill": "{color/primary/700}", "label": "700\n#0E2E80" },
+                { "type": "rectangle", "x": 840, "y": 0, "width": 120, "height": 80, "fill": "{color/primary/900}", "label": "900\n#0A1F5C" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 260,
+              "content": "Accent",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Accent Palette",
+              "x": 60,
+              "y": 300,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 120, "height": 80, "fill": "{color/accent/default}", "label": "Default\n#0EA5E9" },
+                { "type": "rectangle", "x": 140, "y": 0, "width": 120, "height": 80, "fill": "{color/accent/light}", "label": "Light\n#38BDF8" },
+                { "type": "rectangle", "x": 280, "y": 0, "width": 120, "height": 80, "fill": "{color/accent/dark}", "label": "Dark\n#0284C7" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 420,
+              "content": "Navy",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Navy Palette",
+              "x": 60,
+              "y": 460,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 120, "height": 80, "fill": "{color/navy/default}", "label": "Default\n#0F172A" },
+                { "type": "rectangle", "x": 140, "y": 0, "width": 120, "height": 80, "fill": "{color/navy/light}", "label": "Light\n#1E293B" },
+                { "type": "rectangle", "x": 280, "y": 0, "width": 120, "height": 80, "fill": "{color/navy/dark}", "label": "Dark\n#020617" },
+                { "type": "rectangle", "x": 420, "y": 0, "width": 120, "height": 80, "fill": "{color/navy/deep}", "label": "Deep\n#030B24" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 580,
+              "content": "Semantic",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Semantic Colors",
+              "x": 60,
+              "y": 620,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 120, "height": 80, "fill": "{color/success}", "label": "Success\n#059669" },
+                { "type": "rectangle", "x": 140, "y": 0, "width": 120, "height": 80, "fill": "{color/warning}", "label": "Warning\n#D97706" },
+                { "type": "rectangle", "x": 280, "y": 0, "width": 120, "height": 80, "fill": "{color/error}", "label": "Error\n#DC2626" },
+                { "type": "rectangle", "x": 420, "y": 0, "width": 120, "height": 80, "fill": "{color/info}", "label": "Info\n#0EA5E9" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 740,
+              "content": "Surface",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Surface Colors",
+              "x": 60,
+              "y": 780,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 120, "height": 80, "fill": "{color/surface/default}", "label": "Default\n#FFFFFF", "stroke": "{color/border}" },
+                { "type": "rectangle", "x": 140, "y": 0, "width": 120, "height": 80, "fill": "{color/surface/light}", "label": "Light\n#F0F4FE" },
+                { "type": "rectangle", "x": 280, "y": 0, "width": 120, "height": 80, "fill": "{color/surface/lighter}", "label": "Lighter\n#F8FAFC" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 900,
+              "content": "Gray Scale",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Gray Scale",
+              "x": 60,
+              "y": 940,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/50}", "label": "50\n#F9FAFB" },
+                { "type": "rectangle", "x": 140, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/100}", "label": "100\n#F3F4F6" },
+                { "type": "rectangle", "x": 280, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/200}", "label": "200\n#E5E7EB" },
+                { "type": "rectangle", "x": 420, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/300}", "label": "300\n#D1D5DB" },
+                { "type": "rectangle", "x": 560, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/400}", "label": "400\n#9CA3AF" },
+                { "type": "rectangle", "x": 700, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/500}", "label": "500\n#6B7280" },
+                { "type": "rectangle", "x": 840, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/600}", "label": "600\n#4B5563" },
+                { "type": "rectangle", "x": 980, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/700}", "label": "700\n#374151" },
+                { "type": "rectangle", "x": 1120, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/800}", "label": "800\n#1F2937" },
+                { "type": "rectangle", "x": 1260, "y": 0, "width": 120, "height": 80, "fill": "{color/gray/900}", "label": "900\n#111827" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "typography",
+      "name": "Typography",
+      "frames": [
+        {
+          "id": "typography-frame",
+          "name": "Typography Scale",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 2200,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 60,
+              "y": 40,
+              "content": "Typography",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "2.25rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 120,
+              "content": "Font Families",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 160,
+              "content": "Inter (Body) — The quick brown fox jumps over the lazy dog",
+              "fontFamily": "{typography/fontFamily/sans}",
+              "fontSize": "1.125rem",
+              "fontWeight": "400",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 200,
+              "content": "Mulish (Headings) — The quick brown fox jumps over the lazy dog",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.125rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 280,
+              "content": "Font Size Scale",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Font Sizes",
+              "x": 60,
+              "y": 320,
+              "children": [
+                { "type": "text", "x": 0, "y": 0, "content": "xs (0.75rem) — The quick brown fox", "fontSize": "{typography/fontSize/xs}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 30, "content": "sm (0.875rem) — The quick brown fox", "fontSize": "{typography/fontSize/sm}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 65, "content": "base (1rem) — The quick brown fox", "fontSize": "{typography/fontSize/base}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 105, "content": "lg (1.125rem) — The quick brown fox", "fontSize": "{typography/fontSize/lg}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 150, "content": "xl (1.25rem) — The quick brown fox", "fontSize": "{typography/fontSize/xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 200, "content": "2xl (1.5rem) — The quick brown fox", "fontSize": "{typography/fontSize/2xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 260, "content": "3xl (1.875rem) — The quick brown fox", "fontSize": "{typography/fontSize/3xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 330, "content": "4xl (2.25rem) — The quick brown fox", "fontSize": "{typography/fontSize/4xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 410, "content": "5xl (3rem) — The quick brown fox", "fontSize": "{typography/fontSize/5xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 780,
+              "content": "Font Weights",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Font Weights",
+              "x": 60,
+              "y": 820,
+              "children": [
+                { "type": "text", "x": 0, "y": 0, "content": "Extra Light (200) — The quick brown fox", "fontSize": "1.125rem", "fontWeight": "{typography/fontWeight/extralight}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 40, "content": "Light (300) — The quick brown fox", "fontSize": "1.125rem", "fontWeight": "{typography/fontWeight/light}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 80, "content": "Normal (400) — The quick brown fox", "fontSize": "1.125rem", "fontWeight": "{typography/fontWeight/normal}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 120, "content": "Medium (500) — The quick brown fox", "fontSize": "1.125rem", "fontWeight": "{typography/fontWeight/medium}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 160, "content": "Semibold (600) — The quick brown fox", "fontSize": "1.125rem", "fontWeight": "{typography/fontWeight/semibold}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 200, "content": "Bold (700) — The quick brown fox", "fontSize": "1.125rem", "fontWeight": "{typography/fontWeight/bold}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 240, "content": "Extra Bold (800) — The quick brown fox", "fontSize": "1.125rem", "fontWeight": "{typography/fontWeight/extrabold}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 280, "content": "Black (900) — The quick brown fox", "fontSize": "1.125rem", "fontWeight": "{typography/fontWeight/black}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 1160,
+              "content": "Line Heights",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Line Heights",
+              "x": 60,
+              "y": 1200,
+              "children": [
+                { "type": "text", "x": 0, "y": 0, "content": "xs — lineHeight: 1rem", "fontSize": "{typography/fontSize/xs}", "lineHeight": "{typography/lineHeight/xs}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 30, "content": "sm — lineHeight: 1.25rem", "fontSize": "{typography/fontSize/sm}", "lineHeight": "{typography/lineHeight/sm}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 65, "content": "base — lineHeight: 1.5rem", "fontSize": "{typography/fontSize/base}", "lineHeight": "{typography/lineHeight/base}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 105, "content": "lg — lineHeight: 1.75rem", "fontSize": "{typography/fontSize/lg}", "lineHeight": "{typography/lineHeight/lg}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 150, "content": "xl — lineHeight: 1.75rem", "fontSize": "{typography/fontSize/xl}", "lineHeight": "{typography/lineHeight/xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 200, "content": "2xl — lineHeight: 2rem", "fontSize": "{typography/fontSize/2xl}", "lineHeight": "{typography/lineHeight/2xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 255, "content": "3xl — lineHeight: 2.25rem", "fontSize": "{typography/fontSize/3xl}", "lineHeight": "{typography/lineHeight/3xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 320, "content": "4xl — lineHeight: 2.5rem", "fontSize": "{typography/fontSize/4xl}", "lineHeight": "{typography/lineHeight/4xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" },
+                { "type": "text", "x": 0, "y": 395, "content": "5xl — lineHeight: 1", "fontSize": "{typography/fontSize/5xl}", "lineHeight": "{typography/lineHeight/5xl}", "fontFamily": "{typography/fontFamily/sans}", "fill": "{color/foreground}" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spacing",
+      "name": "Spacing",
+      "frames": [
+        {
+          "id": "spacing-frame",
+          "name": "Spacing Scale",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 60,
+              "y": 40,
+              "content": "Spacing",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "2.25rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Spacing Scale",
+              "x": 60,
+              "y": 120,
+              "children": [
+                { "type": "rectangle", "x": 200, "y": 0, "width": 0, "height": 24, "fill": "{color/primary/default}", "label": "spacing/0 — 0" },
+                { "type": "rectangle", "x": 200, "y": 40, "width": 4, "height": 24, "fill": "{color/primary/default}", "label": "spacing/1 — 0.25rem" },
+                { "type": "rectangle", "x": 200, "y": 80, "width": 8, "height": 24, "fill": "{color/primary/default}", "label": "spacing/2 — 0.5rem" },
+                { "type": "rectangle", "x": 200, "y": 120, "width": 12, "height": 24, "fill": "{color/primary/default}", "label": "spacing/3 — 0.75rem" },
+                { "type": "rectangle", "x": 200, "y": 160, "width": 16, "height": 24, "fill": "{color/primary/default}", "label": "spacing/4 — 1rem" },
+                { "type": "rectangle", "x": 200, "y": 200, "width": 20, "height": 24, "fill": "{color/primary/default}", "label": "spacing/5 — 1.25rem" },
+                { "type": "rectangle", "x": 200, "y": 240, "width": 24, "height": 24, "fill": "{color/primary/default}", "label": "spacing/6 — 1.5rem" },
+                { "type": "rectangle", "x": 200, "y": 280, "width": 32, "height": 24, "fill": "{color/primary/default}", "label": "spacing/8 — 2rem" },
+                { "type": "rectangle", "x": 200, "y": 320, "width": 40, "height": 24, "fill": "{color/primary/default}", "label": "spacing/10 — 2.5rem" },
+                { "type": "rectangle", "x": 200, "y": 360, "width": 48, "height": 24, "fill": "{color/primary/default}", "label": "spacing/12 — 3rem" },
+                { "type": "rectangle", "x": 200, "y": 400, "width": 64, "height": 24, "fill": "{color/primary/default}", "label": "spacing/16 — 4rem" },
+                { "type": "rectangle", "x": 200, "y": 440, "width": 80, "height": 24, "fill": "{color/primary/default}", "label": "spacing/20 — 5rem" },
+                { "type": "rectangle", "x": 200, "y": 480, "width": 96, "height": 24, "fill": "{color/primary/default}", "label": "spacing/24 — 6rem" },
+                { "type": "rectangle", "x": 200, "y": 520, "width": 128, "height": 24, "fill": "{color/primary/default}", "label": "spacing/32 — 8rem" },
+                { "type": "rectangle", "x": 200, "y": 560, "width": 160, "height": 24, "fill": "{color/primary/default}", "label": "spacing/40 — 10rem" },
+                { "type": "rectangle", "x": 200, "y": 600, "width": 192, "height": 24, "fill": "{color/primary/default}", "label": "spacing/48 — 12rem" },
+                { "type": "rectangle", "x": 200, "y": 640, "width": 256, "height": 24, "fill": "{color/primary/default}", "label": "spacing/64 — 16rem" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shadows-radii",
+      "name": "Shadows and Border Radius",
+      "frames": [
+        {
+          "id": "shadows-radii-frame",
+          "name": "Shadows & Radii",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1000,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 60,
+              "y": 40,
+              "content": "Shadows and Border Radius",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "2.25rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 120,
+              "content": "Shadows",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Shadow Samples",
+              "x": 60,
+              "y": 160,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 200, "height": 120, "fill": "{color/surface/default}", "shadow": "{shadow/sm}", "borderRadius": "{borderRadius/lg}", "label": "shadow/sm" },
+                { "type": "rectangle", "x": 240, "y": 0, "width": 200, "height": 120, "fill": "{color/surface/default}", "shadow": "{shadow/default}", "borderRadius": "{borderRadius/lg}", "label": "shadow/default" },
+                { "type": "rectangle", "x": 480, "y": 0, "width": 200, "height": 120, "fill": "{color/surface/default}", "shadow": "{shadow/md}", "borderRadius": "{borderRadius/lg}", "label": "shadow/md" },
+                { "type": "rectangle", "x": 720, "y": 0, "width": 200, "height": 120, "fill": "{color/surface/default}", "shadow": "{shadow/lg}", "borderRadius": "{borderRadius/lg}", "label": "shadow/lg" },
+                { "type": "rectangle", "x": 960, "y": 0, "width": 200, "height": 120, "fill": "{color/surface/default}", "shadow": "{shadow/xl}", "borderRadius": "{borderRadius/lg}", "label": "shadow/xl" }
+              ]
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 340,
+              "content": "Border Radius",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Border Radius Samples",
+              "x": 60,
+              "y": 380,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 0, "width": 120, "height": 120, "fill": "{color/primary/200}", "borderRadius": "{borderRadius/none}", "label": "none — 0" },
+                { "type": "rectangle", "x": 160, "y": 0, "width": 120, "height": 120, "fill": "{color/primary/200}", "borderRadius": "{borderRadius/sm}", "label": "sm — 0.125rem" },
+                { "type": "rectangle", "x": 320, "y": 0, "width": 120, "height": 120, "fill": "{color/primary/200}", "borderRadius": "{borderRadius/default}", "label": "default — 0.25rem" },
+                { "type": "rectangle", "x": 480, "y": 0, "width": 120, "height": 120, "fill": "{color/primary/200}", "borderRadius": "{borderRadius/md}", "label": "md — 0.375rem" },
+                { "type": "rectangle", "x": 640, "y": 0, "width": 120, "height": 120, "fill": "{color/primary/200}", "borderRadius": "{borderRadius/lg}", "label": "lg — 0.5rem" },
+                { "type": "rectangle", "x": 800, "y": 0, "width": 120, "height": 120, "fill": "{color/primary/200}", "borderRadius": "{borderRadius/xl}", "label": "xl — 0.75rem" },
+                { "type": "rectangle", "x": 960, "y": 0, "width": 120, "height": 120, "fill": "{color/primary/200}", "borderRadius": "{borderRadius/2xl}", "label": "2xl — 1rem" },
+                { "type": "rectangle", "x": 1120, "y": 0, "width": 120, "height": 120, "fill": "{color/primary/200}", "borderRadius": "{borderRadius/full}", "label": "full — 9999px" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "z-index",
+      "name": "Z-Index",
+      "frames": [
+        {
+          "id": "z-index-frame",
+          "name": "Z-Index Stacking",
+          "type": "frame",
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "fill": "{color/background}",
+          "children": [
+            {
+              "type": "text",
+              "x": 60,
+              "y": 40,
+              "content": "Z-Index",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "2.25rem",
+              "fontWeight": "700",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "text",
+              "x": 60,
+              "y": 100,
+              "content": "Stacking Order",
+              "fontFamily": "{typography/fontFamily/heading}",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "fill": "{color/foreground}"
+            },
+            {
+              "type": "group",
+              "name": "Z-Index Layers",
+              "x": 60,
+              "y": 140,
+              "children": [
+                { "type": "rectangle", "x": 0, "y": 560, "width": 1200, "height": 60, "fill": "{color/gray/100}", "zIndex": 0, "label": "z-0 (0) — Base content" },
+                { "type": "rectangle", "x": 20, "y": 490, "width": 1160, "height": 60, "fill": "{color/gray/200}", "zIndex": 10, "label": "z-10 (10)" },
+                { "type": "rectangle", "x": 40, "y": 420, "width": 1120, "height": 60, "fill": "{color/gray/300}", "zIndex": 20, "label": "z-20 (20)" },
+                { "type": "rectangle", "x": 60, "y": 350, "width": 1080, "height": 60, "fill": "{color/gray/400}", "zIndex": 30, "label": "z-30 (30)" },
+                { "type": "rectangle", "x": 80, "y": 280, "width": 1040, "height": 60, "fill": "{color/gray/500}", "zIndex": 40, "label": "z-40 (40)" },
+                { "type": "rectangle", "x": 100, "y": 210, "width": 1000, "height": 60, "fill": "{color/gray/600}", "zIndex": 50, "label": "z-50 (50)" },
+                { "type": "rectangle", "x": 140, "y": 140, "width": 900, "height": 60, "fill": "{color/accent/light}", "zIndex": 1000, "label": "dropdown (1000)" },
+                { "type": "rectangle", "x": 180, "y": 100, "width": 800, "height": 60, "fill": "{color/accent/default}", "zIndex": 1020, "label": "sticky (1020)" },
+                { "type": "rectangle", "x": 220, "y": 60, "width": 700, "height": 60, "fill": "{color/primary/200}", "zIndex": 1030, "label": "fixed (1030)" },
+                { "type": "rectangle", "x": 260, "y": 30, "width": 600, "height": 40, "fill": "rgba(0,0,0,0.3)", "zIndex": 1040, "label": "modal-backdrop (1040)" },
+                { "type": "rectangle", "x": 300, "y": 10, "width": 500, "height": 50, "fill": "{color/surface/default}", "shadow": "{shadow/xl}", "zIndex": 1050, "label": "modal (1050)" },
+                { "type": "rectangle", "x": 820, "y": 200, "width": 200, "height": 40, "fill": "{color/surface/default}", "shadow": "{shadow/lg}", "zIndex": 1060, "label": "popover (1060)" },
+                { "type": "rectangle", "x": 820, "y": 160, "width": 160, "height": 30, "fill": "{color/navy/default}", "zIndex": 1070, "label": "tooltip (1070)" },
+                { "type": "rectangle", "x": 820, "y": 120, "width": 200, "height": 40, "fill": "{color/success}", "zIndex": 1080, "label": "toast (1080)" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

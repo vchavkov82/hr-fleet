@@ -48,3 +48,9 @@ logs/
 # Core dumps
 core
 services/api/server
+
+# Brain symlinks (originals in ~/.config/brain)
+.design
+!.design/pen/
+!.design/pen/*.pen
+**/.docs
