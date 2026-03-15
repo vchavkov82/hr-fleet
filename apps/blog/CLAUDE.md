@@ -1,19 +1,23 @@
-# HR Blog — Astro 5 Blog (AstroPaper Template)
+# CLAUDE.md
 
-## Product
-Content marketing blog for the HR SaaS product. Drives organic traffic via SEO-optimized HR/recruitment articles. Built on AstroPaper, a high-performance Astro 5 blog template.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this directory.
+
+## App
+
+Content marketing blog for the HR SaaS product (`@hr/blog`). Drives organic traffic via SEO-optimized HR/recruitment articles. Built on AstroPaper, a high-performance Astro 5 blog template.
 
 ## Tech Stack
 
 - **Framework**: Astro 5 (content collections, SSG)
 - **Template**: AstroPaper v5
-- **Styling**: Tailwind CSS v4 (via `@tailwindcss/vite`)
+- **Styling**: Tailwind CSS v4 (via `@tailwindcss/vite`), fonts: Inter, Mulish, Google Sans Code
 - **Search**: Pagefind (static full-text search, built into `dist/`)
+- **Code highlighting**: Shiki (min-light + night-owl themes)
 - **Feed**: `@astrojs/rss`
 - **Sitemap**: `@astrojs/sitemap`
-- **OG Images**: `@resvg/resvg-js` (server-side SVG → PNG)
-- **Package manager**: pnpm
-- **Port**: 3013
+- **OG Images**: satori + resvg-js + sharp (server-side SVG → PNG)
+- **Images**: Cloudflare Image Resizing (passthrough service)
+- **Port**: 5013
 
 ## Content Structure (`src/`)
 
@@ -58,9 +62,9 @@ draft: false
 
 ```bash
 # From repo root
-make dev-hr-blog       # Start dev server on port 3013
+make dev-blog          # Start dev server on port 5013
 
-# From app/hr-blog/
+# From apps/blog/
 pnpm dev               # Astro dev server
 pnpm build             # astro check + build + pagefind + copy pagefind to public/
 pnpm preview           # Preview production build

@@ -13,12 +13,14 @@ import { Route as LoginRouteImport } from "./routes/login"
 import { Route as AuthenticatedRouteImport } from "./routes/_authenticated"
 import { Route as AuthenticatedIndexRouteImport } from "./routes/_authenticated/index"
 import { Route as AuthenticatedUsersRouteImport } from "./routes/_authenticated/users"
+import { Route as AuthenticatedSettingsRouteImport } from "./routes/_authenticated/settings"
 import { Route as AuthenticatedReportsRouteImport } from "./routes/_authenticated/reports"
 import { Route as AuthenticatedPayslipsRouteImport } from "./routes/_authenticated/payslips"
 import { Route as AuthenticatedPayrollRouteImport } from "./routes/_authenticated/payroll"
 import { Route as AuthenticatedLeaveRouteImport } from "./routes/_authenticated/leave"
 import { Route as AuthenticatedEmployeesRouteImport } from "./routes/_authenticated/employees"
 import { Route as AuthenticatedContractsRouteImport } from "./routes/_authenticated/contracts"
+import { Route as AuthenticatedAuditLogRouteImport } from "./routes/_authenticated/audit-log"
 
 const LoginRoute = LoginRouteImport.update({
   id: "/login",
@@ -37,6 +39,11 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
 const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
   id: "/users",
   path: "/users",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: "/settings",
+  path: "/settings",
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
@@ -69,26 +76,35 @@ const AuthenticatedContractsRoute = AuthenticatedContractsRouteImport.update({
   path: "/contracts",
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedAuditLogRoute = AuthenticatedAuditLogRouteImport.update({
+  id: "/audit-log",
+  path: "/audit-log",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof AuthenticatedIndexRoute
   "/login": typeof LoginRoute
+  "/audit-log": typeof AuthenticatedAuditLogRoute
   "/contracts": typeof AuthenticatedContractsRoute
   "/employees": typeof AuthenticatedEmployeesRoute
   "/leave": typeof AuthenticatedLeaveRoute
   "/payroll": typeof AuthenticatedPayrollRoute
   "/payslips": typeof AuthenticatedPayslipsRoute
   "/reports": typeof AuthenticatedReportsRoute
+  "/settings": typeof AuthenticatedSettingsRoute
   "/users": typeof AuthenticatedUsersRoute
 }
 export interface FileRoutesByTo {
   "/login": typeof LoginRoute
+  "/audit-log": typeof AuthenticatedAuditLogRoute
   "/contracts": typeof AuthenticatedContractsRoute
   "/employees": typeof AuthenticatedEmployeesRoute
   "/leave": typeof AuthenticatedLeaveRoute
   "/payroll": typeof AuthenticatedPayrollRoute
   "/payslips": typeof AuthenticatedPayslipsRoute
   "/reports": typeof AuthenticatedReportsRoute
+  "/settings": typeof AuthenticatedSettingsRoute
   "/users": typeof AuthenticatedUsersRoute
   "/": typeof AuthenticatedIndexRoute
 }
@@ -96,12 +112,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/_authenticated": typeof AuthenticatedRouteWithChildren
   "/login": typeof LoginRoute
+  "/_authenticated/audit-log": typeof AuthenticatedAuditLogRoute
   "/_authenticated/contracts": typeof AuthenticatedContractsRoute
   "/_authenticated/employees": typeof AuthenticatedEmployeesRoute
   "/_authenticated/leave": typeof AuthenticatedLeaveRoute
   "/_authenticated/payroll": typeof AuthenticatedPayrollRoute
   "/_authenticated/payslips": typeof AuthenticatedPayslipsRoute
   "/_authenticated/reports": typeof AuthenticatedReportsRoute
+  "/_authenticated/settings": typeof AuthenticatedSettingsRoute
   "/_authenticated/users": typeof AuthenticatedUsersRoute
   "/_authenticated/": typeof AuthenticatedIndexRoute
 }
@@ -110,34 +128,40 @@ export interface FileRouteTypes {
   fullPaths:
     | "/"
     | "/login"
+    | "/audit-log"
     | "/contracts"
     | "/employees"
     | "/leave"
     | "/payroll"
     | "/payslips"
     | "/reports"
+    | "/settings"
     | "/users"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/login"
+    | "/audit-log"
     | "/contracts"
     | "/employees"
     | "/leave"
     | "/payroll"
     | "/payslips"
     | "/reports"
+    | "/settings"
     | "/users"
     | "/"
   id:
     | "__root__"
     | "/_authenticated"
     | "/login"
+    | "/_authenticated/audit-log"
     | "/_authenticated/contracts"
     | "/_authenticated/employees"
     | "/_authenticated/leave"
     | "/_authenticated/payroll"
     | "/_authenticated/payslips"
     | "/_authenticated/reports"
+    | "/_authenticated/settings"
     | "/_authenticated/users"
     | "/_authenticated/"
   fileRoutesById: FileRoutesById
@@ -175,6 +199,13 @@ declare module "@tanstack/react-router" {
       path: "/users"
       fullPath: "/users"
       preLoaderRoute: typeof AuthenticatedUsersRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    "/_authenticated/settings": {
+      id: "/_authenticated/settings"
+      path: "/settings"
+      fullPath: "/settings"
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     "/_authenticated/reports": {
@@ -219,27 +250,38 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedContractsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    "/_authenticated/audit-log": {
+      id: "/_authenticated/audit-log"
+      path: "/audit-log"
+      fullPath: "/audit-log"
+      preLoaderRoute: typeof AuthenticatedAuditLogRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedAuditLogRoute: typeof AuthenticatedAuditLogRoute
   AuthenticatedContractsRoute: typeof AuthenticatedContractsRoute
   AuthenticatedEmployeesRoute: typeof AuthenticatedEmployeesRoute
   AuthenticatedLeaveRoute: typeof AuthenticatedLeaveRoute
   AuthenticatedPayrollRoute: typeof AuthenticatedPayrollRoute
   AuthenticatedPayslipsRoute: typeof AuthenticatedPayslipsRoute
   AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAuditLogRoute: AuthenticatedAuditLogRoute,
   AuthenticatedContractsRoute: AuthenticatedContractsRoute,
   AuthenticatedEmployeesRoute: AuthenticatedEmployeesRoute,
   AuthenticatedLeaveRoute: AuthenticatedLeaveRoute,
   AuthenticatedPayrollRoute: AuthenticatedPayrollRoute,
   AuthenticatedPayslipsRoute: AuthenticatedPayslipsRoute,
   AuthenticatedReportsRoute: AuthenticatedReportsRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
