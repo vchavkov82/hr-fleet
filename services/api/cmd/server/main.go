@@ -140,6 +140,7 @@ func runAPI(
 	r.Use(middleware.DefaultLogger())
 	r.Use(chimiddleware.Recoverer)
 	r.Use(chimiddleware.RealIP)
+	r.Use(middleware.PublicRateLimit())
 	r.Use(middleware.Metrics())
 	r.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:5010", "https://hr.vchavkov.com"},
@@ -174,6 +175,7 @@ func runAPI(
 		// Protected routes (API key or JWT)
 		r.Group(func(r chi.Router) {
 			r.Use(middleware.APIKeyOrJWT(tokenAuth, authSvc))
+			r.Use(middleware.AuthenticatedRateLimit())
 
 			// Auth - API key management
 			r.Post("/auth/api-keys", authHandler.HandleCreateAPIKey)
