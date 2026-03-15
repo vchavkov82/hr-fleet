@@ -50,7 +50,7 @@ core
 services/api/server
 
 # Brain symlinks (originals in ~/.config/brain)
-.design
-!.design/pen/
-!.design/pen/*.pen
 **/.docs
+
+# Track .pen design files
+!.design/pen/*.pen
