@@ -1,1 +1,0 @@
-/home/vchavkov/.config/brain/setup/hooks/gsd-context-monitor.js
