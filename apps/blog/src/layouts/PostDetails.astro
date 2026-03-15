@@ -7,8 +7,11 @@ import Tag from "@/components/Tag.astro";
 import Datetime from "@/components/Datetime.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
+import ReadingTime from "@/components/ReadingTime.astro";
+import AuthorCard from "@/components/AuthorCard.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
+import { getReadingTime } from "@/utils/getReadingTime";
 import { SITE } from "@/config";
 
 type Props = {
@@ -32,6 +35,7 @@ const {
 } = post.data;
 
 const { Content } = await render(post);
+const readingTimeText = getReadingTime(post.body ?? "");
 
 let ogImageUrl: string | undefined;
 if (typeof initOgImage === "string") {
@@ -111,7 +115,11 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
             <p class="text-sm text-gray-600">HR Insights</p>
           </div>
         </div>
-        <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="text-gray-500" />
+        <div class="flex items-center gap-3">
+          <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="text-gray-500" />
+          <span class="text-gray-300">|</span>
+          <ReadingTime readingTime={readingTimeText} />
+        </div>
       </div>
     </div>
   </section>
@@ -140,6 +148,13 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
     >
       <Content />
     </article>
+
+    <!-- Author -->
+    <AuthorCard
+      name={author || SITE.author}
+      bio="Практични съвети и тенденции в HR управлението."
+      social={SITE.website}
+    />
 
     <!-- Tags -->
     <div class="mt-12 pt-8 border-t border-gray-200">

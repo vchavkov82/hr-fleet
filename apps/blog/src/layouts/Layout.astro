@@ -35,7 +35,10 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: `${title}`,
+  description: `${description}`,
   image: `${socialImageURL}`,
+  url: `${canonicalURL}`,
+  mainEntityOfPage: `${canonicalURL}`,
   datePublished: `${pubDatetime?.toISOString()}`,
   ...(modDatetime && { dateModified: modDatetime.toISOString() }),
   author: [
@@ -45,6 +48,11 @@ const structuredData = {
       ...(profile && { url: profile }),
     },
   ],
+  publisher: {
+    "@type": "Organization",
+    name: SITE.title,
+    url: SITE.website,
+  },
 };
 ---
 
