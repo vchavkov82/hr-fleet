@@ -13,7 +13,8 @@ set -euo pipefail
 CORE_MODULES="hr,hr_holidays,hr_attendance,hr_recruitment,hr_expense,hr_contract"
 
 # OCA server-tools (dependencies for other OCA modules)
-OCA_SERVER_TOOLS="base_technical_features"
+# Note: base_technical_features was removed in OCA server-tools for Odoo 18
+OCA_SERVER_TOOLS=""
 
 # OCA web widgets (dependencies for other OCA modules)
 OCA_WEB="web_widget_x2many_2d_matrix"
