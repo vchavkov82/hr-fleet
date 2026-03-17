@@ -5,6 +5,9 @@ set -e
 
 cd /app
 
+echo "Installing pnpm..."
+npm install -g pnpm
+
 echo "Installing dependencies..."
 pnpm install
 
