@@ -275,3 +275,42 @@ type ExpenseReport struct {
 var expenseFields = []string{
 	"id", "employee_id", "name", "date", "total_amount", "state", "product_id",
 }
+
+// Department represents an hr.department record from Odoo.
+type Department struct {
+	ID        int64    `json:"id"`
+	Name      string   `json:"name"`
+	ParentID  Many2One `json:"parent_id"`
+	ManagerID Many2One `json:"manager_id"`
+	CompanyID Many2One `json:"company_id"`
+	Active    bool     `json:"active"`
+	ChildIDs  []int64  `json:"child_ids"`
+}
+
+var departmentFields = []string{
+	"id", "name", "parent_id", "manager_id", "company_id", "active", "child_ids",
+}
+
+// EmployeeSkill represents an hr.employee.skill record from OCA hr.
+type EmployeeSkill struct {
+	ID          int64    `json:"id"`
+	EmployeeID  Many2One `json:"employee_id"`
+	SkillID     Many2One `json:"skill_id"`
+	SkillTypeID Many2One `json:"skill_type_id"`
+	SkillLevel  Many2One `json:"skill_level_id"`
+}
+
+var employeeSkillFields = []string{
+	"id", "employee_id", "skill_id", "skill_type_id", "skill_level_id",
+}
+
+// Skill represents an hr.skill record from OCA hr.
+type Skill struct {
+	ID          int64    `json:"id"`
+	Name        string   `json:"name"`
+	SkillTypeID Many2One `json:"skill_type_id"`
+}
+
+var skillFields = []string{
+	"id", "name", "skill_type_id",
+}
