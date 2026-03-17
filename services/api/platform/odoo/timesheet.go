@@ -36,6 +36,14 @@ func (c *Client) CreateTimesheet(vals map[string]any) (int64, error) {
 	return id, nil
 }
 
+// UpdateTimesheet updates an existing account.analytic.line record in Odoo.
+func (c *Client) UpdateTimesheet(id int64, vals map[string]any) error {
+	if err := c.Write("account.analytic.line", id, vals); err != nil {
+		return fmt.Errorf("update timesheet %d: %w", id, err)
+	}
+	return nil
+}
+
 // parseTimesheet converts a raw Odoo record map into a TimesheetEntry struct.
 func parseTimesheet(rec map[string]any) TimesheetEntry {
 	return TimesheetEntry{
