@@ -125,6 +125,45 @@ func (h *SkillHandler) HandleAddEmployeeSkill(w http.ResponseWriter, r *http.Req
 	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }
 
+// HandleDeleteEmployeeSkill handles DELETE /api/v1/employees/{id}/skills/{skillId}
+// @Summary Delete an employee skill
+// @Description Remove a skill from an employee
+// @Tags Skills
+// @Produce json
+// @Param id path integer true "Employee ID"
+// @Param skillId path integer true "Employee skill record ID"
+// @Success 200 {object} map[string]any
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Failure 503 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /employees/{id}/skills/{skillId} [delete]
+func (h *SkillHandler) HandleDeleteEmployeeSkill(w http.ResponseWriter, r *http.Request) {
+	_, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid employee ID")
+		return
+	}
+
+	skillRecordID, err := strconv.ParseInt(chi.URLParam(r, "skillId"), 10, 64)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid skill record ID")
+		return
+	}
+
+	if err := h.svc.DeleteEmployeeSkill(r.Context(), skillRecordID); err != nil {
+		if errors.Is(err, service.ErrServiceUnavailable) {
+			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to delete employee skill")
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]any{"message": "Employee skill deleted successfully"})
+}
+
 // HandleListSkills handles GET /api/v1/skills
 // @Summary List all skills
 // @Description List all available skills in the system
