@@ -34,3 +34,7 @@
 	path = deploy/odoo-addons/account-financial-reporting
 	url = https://github.com/OCA/account-financial-reporting.git
 	branch = 18.0
+[submodule "deploy/odoo-addons/web"]
+	path = deploy/odoo-addons/web
+	url = https://github.com/OCA/web.git
+	branch = 18.0
