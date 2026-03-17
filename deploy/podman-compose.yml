@@ -144,6 +144,7 @@ services:
     volumes:
       - odoo_data:/var/lib/odoo
       - ./odoo.conf:/etc/odoo/odoo.conf:ro
+      - ./odoo-addons/web:/mnt/extra-addons/web:ro
       - ./odoo-addons/server-tools:/mnt/extra-addons/server-tools:ro
       - ./odoo-addons/payroll:/mnt/extra-addons/payroll:ro
       - ./odoo-addons/hr:/mnt/extra-addons/hr:ro
