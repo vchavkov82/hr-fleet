@@ -56,6 +56,9 @@ PIDS+=($!)
 (cd apps/docs && pnpm dev            2>&1 | prefix "$C_HR_DOCS"   "hr-docs"  ) &
 PIDS+=($!)
 
+(cd apps/admin && pnpm dev           2>&1 | prefix "$C_HR_ADMIN"  "hr-admin" ) &
+PIDS+=($!)
+
 sleep 2
 
 echo ""
