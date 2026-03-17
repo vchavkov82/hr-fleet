@@ -53,7 +53,7 @@ func (s *AuthService) Login(ctx context.Context, email, password, ip, userAgent 
 
 	// Generate access token
 	userID := uuidToString(user.ID)
-	accessToken, err = auth.GenerateAccessToken(s.jwtAuth, userID, user.Email, user.Role)
+	accessToken, err = auth.GenerateAccessToken(s.jwtAuth, userID, user.Email, user.Role, user.CompanyID)
 	if err != nil {
 		return "", "", 0, fmt.Errorf("generate access token: %w", err)
 	}
