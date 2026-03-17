@@ -334,6 +334,30 @@ func (c *Client) CallAction(model string, ids []int64, action string) error {
 	return nil
 }
 
+// Healthy checks if the Odoo client circuit breaker is in a healthy state.
+// Returns nil if closed or half-open, error if open.
+func (c *Client) Healthy() error {
+	state := c.cb.State()
+	if state == gobreaker.StateOpen {
+		return fmt.Errorf("circuit breaker is open")
+	}
+	return nil
+}
+
+// CircuitBreakerState returns the current circuit breaker state as a string.
+func (c *Client) CircuitBreakerState() string {
+	switch c.cb.State() {
+	case gobreaker.StateClosed:
+		return "closed"
+	case gobreaker.StateHalfOpen:
+		return "half-open"
+	case gobreaker.StateOpen:
+		return "open"
+	default:
+		return "unknown"
+	}
+}
+
 // Read fetches records by IDs from the given Odoo model.
 func (c *Client) Read(model string, ids []int64, fields []string) ([]map[string]any, error) {
 	if err := c.EnsureAuthenticated(); err != nil {
