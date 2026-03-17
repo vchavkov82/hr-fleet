@@ -12,6 +12,7 @@ import (
 type TimesheetOdooClient interface {
 	ListTimesheets(domain []any, limit, offset int) ([]odoo.TimesheetEntry, int, error)
 	CreateTimesheet(vals map[string]any) (int64, error)
+	UpdateTimesheet(id int64, vals map[string]any) error
 }
 
 // TimesheetService provides business logic for timesheet operations.
