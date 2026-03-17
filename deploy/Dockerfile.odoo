@@ -16,7 +16,7 @@ COPY odoo-addons/hr/requirements.txt /tmp/req-hr.txt
 COPY odoo-addons/timesheet/requirements.txt /tmp/req-timesheet.txt
 COPY odoo-addons/reporting-engine/requirements.txt /tmp/req-reporting-engine.txt
 
-RUN pip3 install --no-cache-dir \
+RUN pip3 install --no-cache-dir --break-system-packages \
     -r /tmp/req-server-tools.txt \
     -r /tmp/req-hr.txt \
     -r /tmp/req-timesheet.txt \
