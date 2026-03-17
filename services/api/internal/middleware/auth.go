@@ -27,9 +27,10 @@ func NewJWTAuth(privateKeyPEM, publicKeyPEM []byte) (*jwtauth.JWTAuth, error) {
 
 // UserClaims holds extracted JWT claims for the current request.
 type UserClaims struct {
-	Subject string
-	Email   string
-	Role    string
+	Subject   string
+	Email     string
+	Role      string
+	CompanyID int64
 }
 
 // GetUserFromContext extracts user claims from the request context.
