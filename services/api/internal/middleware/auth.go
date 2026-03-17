@@ -94,6 +94,13 @@ func APIKeyOrJWT(jwtAuth *jwtauth.JWTAuth, authSvc *service.AuthService) func(ht
 	}
 }
 
+// CompanyIDFromContext extracts the company_id from the request context.
+// Returns 0 if not set (e.g. user has no company association).
+func CompanyIDFromContext(ctx context.Context) int64 {
+	id, _ := ctx.Value(CtxCompanyID).(int64)
+	return id
+}
+
 func pgUUIDToString(u pgtype.UUID) string {
 	if !u.Valid {
 		return ""
