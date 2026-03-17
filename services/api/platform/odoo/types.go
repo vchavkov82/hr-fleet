@@ -232,3 +232,46 @@ type PayslipRun struct {
 var payslipRunFields = []string{
 	"id", "name", "date_start", "date_end", "state",
 }
+
+// TimesheetEntry represents an account.analytic.line (timesheet) record.
+type TimesheetEntry struct {
+	ID         int64    `json:"id"`
+	EmployeeID Many2One `json:"employee_id"`
+	ProjectID  Many2One `json:"project_id"`
+	TaskID     Many2One `json:"task_id"`
+	Date       string   `json:"date"`
+	UnitAmount float64  `json:"unit_amount"`
+	Name       string   `json:"name"`
+}
+
+var timesheetFields = []string{
+	"id", "employee_id", "project_id", "task_id", "date", "unit_amount", "name",
+}
+
+// AttendanceRecord represents an hr.attendance record.
+type AttendanceRecord struct {
+	ID          int64    `json:"id"`
+	EmployeeID  Many2One `json:"employee_id"`
+	CheckIn     string   `json:"check_in"`
+	CheckOut    string   `json:"check_out"`
+	WorkedHours float64  `json:"worked_hours"`
+}
+
+var attendanceFields = []string{
+	"id", "employee_id", "check_in", "check_out", "worked_hours",
+}
+
+// ExpenseReport represents an hr.expense record.
+type ExpenseReport struct {
+	ID          int64    `json:"id"`
+	EmployeeID  Many2One `json:"employee_id"`
+	Name        string   `json:"name"`
+	Date        string   `json:"date"`
+	TotalAmount float64  `json:"total_amount"`
+	State       string   `json:"state"`
+	ProductID   Many2One `json:"product_id"`
+}
+
+var expenseFields = []string{
+	"id", "employee_id", "name", "date", "total_amount", "state", "product_id",
+}
