@@ -36,11 +36,15 @@ func NewJWTAuth(privateKeyPEM, publicKeyPEM []byte) (*jwtauth.JWTAuth, error) {
 }
 
 // GenerateAccessToken creates a signed RS256 JWT with 15-minute expiry.
-func GenerateAccessToken(auth *jwtauth.JWTAuth, userID, email, role string) (string, error) {
+// If companyID > 0, it is included in the token claims for multi-tenancy scoping.
+func GenerateAccessToken(auth *jwtauth.JWTAuth, userID, email, role string, companyID int64) (string, error) {
 	claims := map[string]interface{}{
 		"sub":   userID,
 		"email": email,
 		"role":  role,
+	}
+	if companyID > 0 {
+		claims["company_id"] = companyID
 	}
 	jwtauth.SetExpiry(claims, time.Now().Add(15*time.Minute))
 	jwtauth.SetIssuedAt(claims, time.Now())
