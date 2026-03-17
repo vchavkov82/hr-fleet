@@ -17,6 +17,7 @@ type SkillServicer interface {
 	ListEmployeeSkills(ctx context.Context, employeeID int64, limit, offset int) ([]odoo.EmployeeSkill, int, error)
 	AddEmployeeSkill(ctx context.Context, employeeID, skillID, skillLevelID int64) (int64, error)
 	ListSkills(ctx context.Context, limit, offset int) ([]odoo.Skill, int, error)
+	DeleteEmployeeSkill(ctx context.Context, id int64) error
 }
 
 // SkillHandler handles HTTP requests for skill operations.
