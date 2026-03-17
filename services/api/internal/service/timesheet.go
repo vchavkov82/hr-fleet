@@ -67,3 +67,11 @@ func (s *TimesheetService) Create(ctx context.Context, employeeID int64, date, n
 	}
 	return id, nil
 }
+
+// Update updates an existing timesheet entry.
+func (s *TimesheetService) Update(ctx context.Context, id int64, vals map[string]any) error {
+	if err := s.odoo.UpdateTimesheet(id, vals); err != nil {
+		return fmt.Errorf("update timesheet %d: %w", id, err)
+	}
+	return nil
+}
