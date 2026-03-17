@@ -20,6 +20,7 @@ const (
 	PayrollStatusProcessing = "processing"
 	PayrollStatusCompleted  = "completed"
 	PayrollStatusFailed     = "failed"
+	PayrollStatusCancelled  = "cancelled"
 )
 
 // Asynq task type for payroll processing.
