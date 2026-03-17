@@ -150,3 +150,49 @@ func (h *ContractHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 		"message": "Contract created successfully",
 	})
 }
+
+// HandleUpdate handles PUT /api/v1/contracts/{id}.
+// @Summary Update a contract
+// @Description Update an existing employment contract
+// @Tags Contracts
+// @Accept json
+// @Produce json
+// @Param id path integer true "Contract ID"
+// @Param body body map[string]any true "Fields to update"
+// @Success 200 {object} map[string]any
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /contracts/{id} [put]
+func (h *ContractHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
+	idStr := chi.URLParam(r, "id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		RespondError(w, http.StatusBadRequest, "INVALID_ID", "Invalid contract ID")
+		return
+	}
+
+	var vals map[string]any
+	if err := json.NewDecoder(r.Body).Decode(&vals); err != nil {
+		RespondError(w, http.StatusBadRequest, "INVALID_BODY", "Invalid request body")
+		return
+	}
+	if len(vals) == 0 {
+		RespondError(w, http.StatusBadRequest, "VALIDATION_ERROR", "No fields to update")
+		return
+	}
+
+	if err := h.svc.Update(r.Context(), id, vals); err != nil {
+		if errors.Is(err, service.ErrServiceUnavailable) {
+			RespondError(w, http.StatusServiceUnavailable, "SERVICE_UNAVAILABLE", "HR service temporarily unavailable")
+			return
+		}
+		RespondError(w, http.StatusInternalServerError, "INTERNAL_ERROR", "Failed to update contract")
+		return
+	}
+
+	RespondJSON(w, http.StatusOK, map[string]any{
+		"message": "Contract updated successfully",
+	})
+}
