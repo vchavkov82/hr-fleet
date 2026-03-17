@@ -165,3 +165,70 @@ var employeeFields = []string{
 	"create_date",
 	"write_date",
 }
+
+// PayrollStructure represents an hr.payroll.structure record from Odoo (OCA payroll).
+type PayrollStructure struct {
+	ID      int64    `json:"id"`
+	Name    string   `json:"name"`
+	Code    string   `json:"code"`
+	TypeID  Many2One `json:"type_id"`
+	RuleIDs []int64  `json:"rule_ids"`
+	Active  bool     `json:"active"`
+}
+
+var payrollStructureFields = []string{
+	"id", "name", "code", "type_id", "rule_ids", "active",
+}
+
+// SalaryRule represents an hr.salary.rule record from Odoo (OCA payroll).
+type SalaryRule struct {
+	ID           int64    `json:"id"`
+	Name         string   `json:"name"`
+	Code         string   `json:"code"`
+	CategoryID   Many2One `json:"category_id"`
+	StructID     Many2One `json:"struct_id"`
+	Sequence     int64    `json:"sequence"`
+	Amount       float64  `json:"amount_fix"`
+	AmountPython string   `json:"amount_python_compute"`
+	Active       bool     `json:"active"`
+}
+
+var salaryRuleFields = []string{
+	"id", "name", "code", "category_id", "struct_id", "sequence",
+	"amount_fix", "amount_python_compute", "active",
+}
+
+// PayslipOCA represents an hr.payslip record from OCA payroll (richer than base).
+type PayslipOCA struct {
+	ID           int64    `json:"id"`
+	EmployeeID   Many2One `json:"employee_id"`
+	StructID     Many2One `json:"struct_id"`
+	Name         string   `json:"name"`
+	Number       string   `json:"number"`
+	DateFrom     string   `json:"date_from"`
+	DateTo       string   `json:"date_to"`
+	State        string   `json:"state"`
+	NetWage      float64  `json:"net_wage"`
+	GrossWage    float64  `json:"gross_wage"`
+	ContractID   Many2One `json:"contract_id"`
+	PayslipRunID Many2One `json:"payslip_run_id"`
+}
+
+var payslipOCAFields = []string{
+	"id", "employee_id", "struct_id", "name", "number",
+	"date_from", "date_to", "state", "net_wage", "gross_wage",
+	"contract_id", "payslip_run_id",
+}
+
+// PayslipRun represents an hr.payslip.run record from OCA payroll.
+type PayslipRun struct {
+	ID       int64  `json:"id"`
+	Name     string `json:"name"`
+	DateFrom string `json:"date_start"`
+	DateTo   string `json:"date_end"`
+	State    string `json:"state"`
+}
+
+var payslipRunFields = []string{
+	"id", "name", "date_start", "date_end", "state",
+}
