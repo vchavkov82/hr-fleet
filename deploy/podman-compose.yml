@@ -128,7 +128,10 @@ services:
     restart: unless-stopped
 
   odoo:
-    image: odoo:18.0
+    build:
+      context: .
+      dockerfile: Dockerfile.odoo
+    image: hr-odoo:18.0-oca
     container_name: hr-odoo
     hostname: hr-odoo
     ports:
@@ -141,7 +144,15 @@ services:
     volumes:
       - odoo_data:/var/lib/odoo
       - ./odoo.conf:/etc/odoo/odoo.conf:ro
-      - ./odoo-addons:/mnt/extra-addons
+      - ./odoo-addons/server-tools:/mnt/extra-addons/server-tools:ro
+      - ./odoo-addons/payroll:/mnt/extra-addons/payroll:ro
+      - ./odoo-addons/hr:/mnt/extra-addons/hr:ro
+      - ./odoo-addons/hr-holidays:/mnt/extra-addons/hr-holidays:ro
+      - ./odoo-addons/hr-attendance:/mnt/extra-addons/hr-attendance:ro
+      - ./odoo-addons/hr-expense:/mnt/extra-addons/hr-expense:ro
+      - ./odoo-addons/timesheet:/mnt/extra-addons/timesheet:ro
+      - ./odoo-addons/reporting-engine:/mnt/extra-addons/reporting-engine:ro
+      - ./odoo-addons/account-financial-reporting:/mnt/extra-addons/account-financial-reporting:ro
     depends_on:
       hr-odoo-db:
         condition: service_healthy
