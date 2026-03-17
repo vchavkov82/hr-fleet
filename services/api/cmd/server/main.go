@@ -93,6 +93,14 @@ func main() {
 	payslipSvc := service.NewPayslipService(queries)
 	reportSvc := service.NewReportService(queries)
 
+	// OCA-backed services
+	departmentSvc := service.NewDepartmentService(odooClient, redisCache)
+	skillSvc := service.NewSkillService(odooClient, redisCache)
+	payrollOCASvc := service.NewPayrollOCAService(odooClient, redisCache)
+	timesheetSvc := service.NewTimesheetService(odooClient, redisCache)
+	attendanceSvc := service.NewAttendanceService(odooClient, redisCache)
+	expenseSvc := service.NewExpenseService(odooClient, redisCache)
+
 	// Signal handling
 	sigCh := make(chan os.Signal, 1)
 	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
