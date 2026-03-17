@@ -170,6 +170,13 @@ check-links-docs: ## Check broken links on docs only
 # ── Setup ───────────────────────────────────────────────────────────────────
 
 install: ## Install all HR dependencies
+	@if command -v mise >/dev/null 2>&1; then \
+		mise trust --quiet 2>/dev/null || true; \
+		mise install; \
+	else \
+		echo "mise not found. Install: curl https://mise.run | sh"; \
+		echo "Then run: mise trust && mise install"; \
+	fi
 	pnpm install
 
 bootstrap: install ## Full setup from scratch
