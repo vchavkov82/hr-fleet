@@ -45,6 +45,14 @@ func (s *SkillService) AddEmployeeSkill(ctx context.Context, employeeID, skillID
 	return id, nil
 }
 
+// DeleteEmployeeSkill deletes an employee skill record.
+func (s *SkillService) DeleteEmployeeSkill(ctx context.Context, id int64) error {
+	if err := s.odoo.DeleteEmployeeSkill(id); err != nil {
+		return fmt.Errorf("delete employee skill %d: %w", id, err)
+	}
+	return nil
+}
+
 // ListSkills retrieves all available skills.
 func (s *SkillService) ListSkills(ctx context.Context, limit, offset int) ([]odoo.Skill, int, error) {
 	skills, total, err := s.odoo.ListSkills(nil, limit, offset)
