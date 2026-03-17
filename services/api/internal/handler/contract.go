@@ -18,6 +18,7 @@ type ContractServicer interface {
 	List(ctx context.Context, employeeID int64, page, perPage int) ([]odoo.Contract, int, error)
 	Get(ctx context.Context, id int64) (*odoo.Contract, error)
 	Create(ctx context.Context, req odoo.ContractCreateRequest) (int64, error)
+	Update(ctx context.Context, id int64, vals map[string]any) error
 }
 
 // ContractHandler handles HTTP requests for contract operations.
