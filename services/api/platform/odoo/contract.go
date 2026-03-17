@@ -60,6 +60,14 @@ func (c *Client) CreateContract(vals map[string]any) (int64, error) {
 	return id, nil
 }
 
+// UpdateContract updates an existing hr.contract record in Odoo.
+func (c *Client) UpdateContract(id int64, vals map[string]any) error {
+	if err := c.Write("hr.contract", id, vals); err != nil {
+		return fmt.Errorf("update contract %d: %w", id, err)
+	}
+	return nil
+}
+
 // parseContract converts a raw Odoo record map into a Contract struct.
 func parseContract(rec map[string]any) (Contract, error) {
 	c := Contract{
