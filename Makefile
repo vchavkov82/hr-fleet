@@ -4,10 +4,11 @@ COMPOSE := podman-compose --project-name hr -f deploy/podman-compose.yml -f depl
 
 .PHONY: help up down restart logs ps clean clean-all clean-cache clean-webpack clean-www clean-blog clean-docs \
 	dev dev-apps infra infra-down infra-logs dev-www dev-blog dev-docs dev-backend odoo-init \
-	build build-www build-blog build-docs build-all \
+	build build-www build-blog build-docs build-all build-odoo \
 	test test-watch test-e2e test-backend lint typecheck \
 	check-links check-links-www check-links-blog check-links-docs \
-	install bootstrap nuke
+	install bootstrap nuke \
+	oca-update oca-init
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
