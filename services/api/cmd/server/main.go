@@ -131,6 +131,12 @@ func runAPI(
 	payslipSvc *service.PayslipService,
 	reportSvc *service.ReportService,
 	webhookSvc *service.WebhookService,
+	departmentSvc *service.DepartmentService,
+	skillSvc *service.SkillService,
+	payrollOCASvc *service.PayrollOCAService,
+	timesheetSvc *service.TimesheetService,
+	attendanceSvc *service.AttendanceService,
+	expenseSvc *service.ExpenseService,
 	sigCh <-chan os.Signal,
 ) {
 	// Handlers
@@ -142,6 +148,14 @@ func runAPI(
 	payslipHandler := handler.NewPayslipHandler(payslipSvc)
 	reportHandler := handler.NewReportHandler(reportSvc)
 	webhookHandler := handler.NewWebhookHandler(webhookSvc)
+
+	// OCA handlers
+	departmentHandler := handler.NewDepartmentHandler(departmentSvc)
+	skillHandler := handler.NewSkillHandler(skillSvc)
+	payrollOCAHandler := handler.NewPayrollOCAHandler(payrollOCASvc)
+	timesheetHandler := handler.NewTimesheetHandler(timesheetSvc)
+	attendanceHandler := handler.NewAttendanceHandler(attendanceSvc)
+	expenseHandler := handler.NewExpenseHandler(expenseSvc)
 
 	r := chi.NewRouter()
 
