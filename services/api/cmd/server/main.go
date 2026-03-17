@@ -296,6 +296,7 @@ func runAPI(
 			r.Route("/timesheets", func(r chi.Router) {
 				r.Get("/", timesheetHandler.HandleList)
 				r.Post("/", timesheetHandler.HandleCreate)
+				r.Put("/{id}", timesheetHandler.HandleUpdate)
 			})
 
 			// OCA: Attendance
