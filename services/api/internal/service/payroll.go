@@ -35,8 +35,8 @@ var (
 
 // validTransitions defines the payroll state machine.
 var validTransitions = map[string][]string{
-	PayrollStatusDraft:    {PayrollStatusApproved},
-	PayrollStatusApproved: {PayrollStatusProcessing},
+	PayrollStatusDraft:      {PayrollStatusApproved, PayrollStatusCancelled},
+	PayrollStatusApproved:   {PayrollStatusProcessing, PayrollStatusCancelled},
 	PayrollStatusProcessing: {PayrollStatusCompleted, PayrollStatusFailed},
 }
 
