@@ -233,3 +233,33 @@ func (h *LeaveHandler) HandleRejectRequest(w http.ResponseWriter, r *http.Reques
 		"message": "Leave request rejected",
 	})
 }
+
+// HandleCancelRequest handles DELETE /api/v1/leave/requests/{id}.
+// @Summary Cancel a leave request
+// @Description Cancel a leave request by setting its state to cancelled
+// @Tags Leave
+// @Produce json
+// @Param id path integer true "Leave request ID"
+// @Success 200 {object} map[string]any
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /leave/requests/{id} [delete]
+func (h *LeaveHandler) HandleCancelRequest(w http.ResponseWriter, r *http.Request) {
+	idStr := chi.URLParam(r, "id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		RespondError(w, http.StatusBadRequest, "INVALID_ID", "Invalid leave request ID")
+		return
+	}
+
+	if err := h.svc.CancelRequest(r.Context(), id); err != nil {
+		RespondError(w, http.StatusInternalServerError, "INTERNAL_ERROR", "Failed to cancel leave request")
+		return
+	}
+
+	RespondJSON(w, http.StatusOK, map[string]any{
+		"message": "Leave request cancelled",
+	})
+}
