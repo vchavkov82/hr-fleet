@@ -46,7 +46,7 @@ echo "Step 2: OCA functional modules"
 podman exec hr-odoo odoo \
   -c /etc/odoo/odoo.conf \
   -d odoo \
-  -i "${OCA_PAYROLL},${OCA_HR},${OCA_TIMESHEET},${OCA_REPORTING}" \
+  -i "${OCA_PAYROLL},${OCA_TIMESHEET},${OCA_REPORTING}" \
   --stop-after-init
 
 echo ""
