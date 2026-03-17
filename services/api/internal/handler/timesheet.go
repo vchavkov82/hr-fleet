@@ -3,8 +3,11 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
+	"strings"
 
+	"github.com/vchavkov/hr/services/api/internal/service"
 	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
@@ -25,6 +28,21 @@ func NewTimesheetHandler(svc TimesheetServicer) *TimesheetHandler {
 }
 
 // HandleList handles GET /api/v1/timesheets
+// @Summary List timesheet entries
+// @Description List timesheet entries with optional employee and date filters
+// @Tags Timesheets
+// @Produce json
+// @Param employee_id query integer false "Filter by employee ID"
+// @Param date_from query string false "Filter from date (YYYY-MM-DD)"
+// @Param date_to query string false "Filter to date (YYYY-MM-DD)"
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 50)"
+// @Success 200 {object} map[string]any
+// @Failure 500 {object} map[string]string
+// @Failure 503 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /timesheets [get]
 func (h *TimesheetHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	employeeID := int64QueryParam(r, "employee_id", 0)
 	dateFrom := r.URL.Query().Get("date_from")
@@ -35,12 +53,15 @@ func (h *TimesheetHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 
 	entries, total, err := h.svc.List(r.Context(), employeeID, dateFrom, dateTo, perPage, offset)
 	if err != nil {
-		http.Error(w, `{"error":"failed to list timesheets"}`, http.StatusInternalServerError)
+		if errors.Is(err, service.ErrServiceUnavailable) {
+			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to list timesheets")
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]any{
+	respondJSON(w, http.StatusOK, map[string]any{
 		"data":  entries,
 		"total": total,
 		"page":  page,
@@ -48,6 +69,19 @@ func (h *TimesheetHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleCreate handles POST /api/v1/timesheets
+// @Summary Create a timesheet entry
+// @Description Create a new timesheet entry for an employee
+// @Tags Timesheets
+// @Accept json
+// @Produce json
+// @Param body body object true "Timesheet entry"
+// @Success 201 {object} map[string]any
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Failure 503 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /timesheets [post]
 func (h *TimesheetHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		EmployeeID int64   `json:"employee_id"`
@@ -58,17 +92,34 @@ func (h *TimesheetHandler) HandleCreate(w http.ResponseWriter, r *http.Request) 
 		TaskID     int64   `json:"task_id"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, `{"error":"invalid request body"}`, http.StatusBadRequest)
+		respondError(w, http.StatusBadRequest, "Invalid request body")
+		return
+	}
+
+	var errs []string
+	if req.EmployeeID <= 0 {
+		errs = append(errs, "employee_id must be greater than 0")
+	}
+	if strings.TrimSpace(req.Date) == "" {
+		errs = append(errs, "date is required")
+	}
+	if req.Hours <= 0 || req.Hours > 24 {
+		errs = append(errs, "hours must be greater than 0 and at most 24")
+	}
+	if len(errs) > 0 {
+		respondError(w, http.StatusBadRequest, strings.Join(errs, "; "))
 		return
 	}
 
 	id, err := h.svc.Create(r.Context(), req.EmployeeID, req.Date, req.Name, req.Hours, req.ProjectID, req.TaskID)
 	if err != nil {
-		http.Error(w, `{"error":"failed to create timesheet"}`, http.StatusInternalServerError)
+		if errors.Is(err, service.ErrServiceUnavailable) {
+			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to create timesheet entry")
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(map[string]any{"id": id})
+	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }

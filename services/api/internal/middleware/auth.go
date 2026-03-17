@@ -45,6 +45,9 @@ func GetUserFromContext(r *http.Request) *UserClaims {
 	if role, ok := r.Context().Value(CtxRole).(string); ok {
 		uc.Role = role
 	}
+	if companyID, ok := r.Context().Value(CtxCompanyID).(int64); ok {
+		uc.CompanyID = companyID
+	}
 	if uc.Subject == "" {
 		return nil
 	}

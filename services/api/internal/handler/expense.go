@@ -3,10 +3,13 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/vchavkov/hr/services/api/internal/service"
 	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
@@ -29,6 +32,20 @@ func NewExpenseHandler(svc ExpenseServicer) *ExpenseHandler {
 }
 
 // HandleList handles GET /api/v1/expenses
+// @Summary List expenses
+// @Description List expense reports with optional employee and state filters
+// @Tags Expenses
+// @Produce json
+// @Param employee_id query integer false "Filter by employee ID"
+// @Param state query string false "Filter by state (e.g. draft, approved, refused)"
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 50)"
+// @Success 200 {object} map[string]any
+// @Failure 500 {object} map[string]string
+// @Failure 503 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /expenses [get]
 func (h *ExpenseHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	employeeID := int64QueryParam(r, "employee_id", 0)
 	state := r.URL.Query().Get("state")
@@ -38,12 +55,15 @@ func (h *ExpenseHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 
 	expenses, total, err := h.svc.List(r.Context(), employeeID, state, perPage, offset)
 	if err != nil {
-		http.Error(w, `{"error":"failed to list expenses"}`, http.StatusInternalServerError)
+		if errors.Is(err, service.ErrServiceUnavailable) {
+			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to list expenses")
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]any{
+	respondJSON(w, http.StatusOK, map[string]any{
 		"data":  expenses,
 		"total": total,
 		"page":  page,
@@ -51,6 +71,19 @@ func (h *ExpenseHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleCreate handles POST /api/v1/expenses
+// @Summary Create an expense
+// @Description Create a new expense report for an employee
+// @Tags Expenses
+// @Accept json
+// @Produce json
+// @Param body body object true "Expense details"
+// @Success 201 {object} map[string]any
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Failure 503 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /expenses [post]
 func (h *ExpenseHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		EmployeeID int64   `json:"employee_id"`
@@ -59,26 +92,60 @@ func (h *ExpenseHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 		Date       string  `json:"date"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, `{"error":"invalid request body"}`, http.StatusBadRequest)
+		respondError(w, http.StatusBadRequest, "Invalid request body")
+		return
+	}
+
+	var errs []string
+	if req.EmployeeID <= 0 {
+		errs = append(errs, "employee_id must be greater than 0")
+	}
+	if strings.TrimSpace(req.Name) == "" {
+		errs = append(errs, "name is required")
+	}
+	if req.Amount <= 0 {
+		errs = append(errs, "amount must be greater than 0")
+	}
+	if strings.TrimSpace(req.Date) == "" {
+		errs = append(errs, "date is required")
+	}
+	if len(errs) > 0 {
+		respondError(w, http.StatusBadRequest, strings.Join(errs, "; "))
 		return
 	}
 
 	id, err := h.svc.Create(r.Context(), req.EmployeeID, req.Name, req.Amount, req.Date)
 	if err != nil {
-		http.Error(w, `{"error":"failed to create expense"}`, http.StatusInternalServerError)
+		if errors.Is(err, service.ErrServiceUnavailable) {
+			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to create expense")
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(map[string]any{"id": id})
+	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }
 
-// HandleApprove handles PATCH /api/v1/expenses/{id} with action=approve
+// HandleUpdate handles PATCH /api/v1/expenses/{id}
+// @Summary Update expense status
+// @Description Approve or refuse an expense by ID
+// @Tags Expenses
+// @Accept json
+// @Produce json
+// @Param id path integer true "Expense ID"
+// @Param body body object true "Action (approve or refuse)" example({"action": "approve"})
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Failure 503 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /expenses/{id} [patch]
 func (h *ExpenseHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		http.Error(w, `{"error":"invalid expense id"}`, http.StatusBadRequest)
+		respondError(w, http.StatusBadRequest, "Invalid expense ID")
 		return
 	}
 
@@ -86,26 +153,33 @@ func (h *ExpenseHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 		Action string `json:"action"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, `{"error":"invalid request body"}`, http.StatusBadRequest)
+		respondError(w, http.StatusBadRequest, "Invalid request body")
 		return
 	}
 
 	switch req.Action {
 	case "approve":
 		if err := h.svc.Approve(r.Context(), id); err != nil {
-			http.Error(w, `{"error":"failed to approve expense"}`, http.StatusInternalServerError)
+			if errors.Is(err, service.ErrServiceUnavailable) {
+				respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+				return
+			}
+			respondError(w, http.StatusInternalServerError, "Failed to approve expense")
 			return
 		}
 	case "refuse":
 		if err := h.svc.Refuse(r.Context(), id); err != nil {
-			http.Error(w, `{"error":"failed to refuse expense"}`, http.StatusInternalServerError)
+			if errors.Is(err, service.ErrServiceUnavailable) {
+				respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+				return
+			}
+			respondError(w, http.StatusInternalServerError, "Failed to refuse expense")
 			return
 		}
 	default:
-		http.Error(w, `{"error":"invalid action, use approve or refuse"}`, http.StatusBadRequest)
+		respondError(w, http.StatusBadRequest, "Invalid action, use approve or refuse")
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+	respondJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }
