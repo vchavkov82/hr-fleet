@@ -133,6 +133,30 @@ func (s *ContractService) Create(ctx context.Context, req odoo.ContractCreateReq
 	return id, nil
 }
 
+// Update updates an existing contract via Odoo.
+func (s *ContractService) Update(ctx context.Context, id int64, vals map[string]any) error {
+	if err := s.odoo.UpdateContract(id, vals); err != nil {
+		return fmt.Errorf("update contract %d: %w", id, err)
+	}
+
+	// Invalidate caches
+	_ = s.cache.DeletePattern(ctx, contractListKeyPfx+"*")
+	_ = s.cache.Delete(ctx, fmt.Sprintf("%s%d", contractDetailKeyPfx, id))
+
+	// Audit log
+	if s.queries != nil {
+		details, _ := json.Marshal(map[string]any{"contract_id": id, "fields": vals})
+		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
+			Action:       "contract.updated",
+			ResourceType: "contract",
+			ResourceID:   fmt.Sprintf("%d", id),
+			Details:      details,
+		})
+	}
+
+	return nil
+}
+
 func contractListCacheKey(employeeID int64, limit, offset int) string {
 	raw := fmt.Sprintf("e=%d&l=%d&o=%d", employeeID, limit, offset)
 	h := sha256.Sum256([]byte(raw))
