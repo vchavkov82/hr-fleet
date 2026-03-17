@@ -20,6 +20,7 @@ type LeaveServicer interface {
 	CreateRequest(ctx context.Context, req odoo.LeaveCreateRequest) (int64, error)
 	ApproveRequest(ctx context.Context, leaveID int64, approverUserID string) error
 	RejectRequest(ctx context.Context, leaveID int64, reason, rejecterUserID string) error
+	CancelRequest(ctx context.Context, leaveID int64) error
 }
 
 // LeaveHandler handles HTTP requests for leave operations.
