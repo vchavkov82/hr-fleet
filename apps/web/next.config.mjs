@@ -32,6 +32,15 @@ const nextConfig = {
     loaderFile: './src/lib/cloudflare-image-loader.ts',
   },
 
+  async rewrites() {
+    return [
+      {
+        source: '/api/v1/:path*',
+        destination: `${process.env.API_URL || 'http://localhost:5080'}/api/v1/:path*`,
+      },
+    ]
+  },
+
   async redirects() {
     return [
       {
