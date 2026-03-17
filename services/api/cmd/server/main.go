@@ -107,13 +107,13 @@ func main() {
 
 	switch *mode {
 	case "api":
-		runAPI(cfg, tokenAuth, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
+		runAPI(cfg, pool, redisCache, odooClient, tokenAuth, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
 			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, sigCh)
 	case "worker":
 		runWorker(cfg, queries, sigCh)
 	case "both":
 		go runWorker(cfg, queries, sigCh)
-		runAPI(cfg, tokenAuth, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
+		runAPI(cfg, pool, redisCache, odooClient, tokenAuth, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
 			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, sigCh)
 	default:
 		log.Fatalf("unknown mode: %s (use api, worker, or both)", *mode)
