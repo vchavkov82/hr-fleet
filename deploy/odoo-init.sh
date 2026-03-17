@@ -38,7 +38,7 @@ echo "Step 1: Core + server-tools base modules"
 podman exec hr-odoo odoo \
   -c /etc/odoo/odoo.conf \
   -d odoo \
-  -i "${CORE_MODULES},${OCA_SERVER_TOOLS}" \
+  -i "${CORE_MODULES},${OCA_SERVER_TOOLS},${OCA_WEB}" \
   --stop-after-init
 
 echo ""
