@@ -182,6 +182,10 @@ func runAPI(
 		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 	})
 
+	// Readiness check (public) — verifies Odoo, Redis, and PostgreSQL
+	healthHandler := handler.NewHealthHandler(pool, redisCache, odooClient)
+	r.Get("/health/ready", healthHandler.HandleReady)
+
 	// Metrics (public)
 	r.Handle("/metrics", promhttp.Handler())
 
