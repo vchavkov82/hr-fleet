@@ -114,7 +114,7 @@ func (s *AuthService) RefreshToken(ctx context.Context, refreshToken string) (ne
 	}
 
 	userID := uuidToString(user.ID)
-	newAccess, err = auth.GenerateAccessToken(s.jwtAuth, userID, user.Email, user.Role)
+	newAccess, err = auth.GenerateAccessToken(s.jwtAuth, userID, user.Email, user.Role, 0)
 	if err != nil {
 		return "", "", 0, fmt.Errorf("generate access token: %w", err)
 	}
