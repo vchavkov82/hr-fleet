@@ -88,6 +88,9 @@ dev-blog: ## Start HR blog only in dev mode (port 5013)
 dev-docs: ## Start HR docs only in dev mode (port 5011)
 	cd apps/docs && pnpm dev
 
+dev-admin: ## Start HR admin panel only in dev mode (port 5012)
+	cd apps/admin && pnpm dev
+
 dev-backend: ## Start Go backend in dev mode (port 5080)
 	cd services/api && go run ./cmd/server/
 
