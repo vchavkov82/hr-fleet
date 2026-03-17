@@ -41,6 +41,14 @@ func (c *Client) CreateEmployeeSkill(employeeID, skillID, skillLevelID int64) (i
 	return id, nil
 }
 
+// DeleteEmployeeSkill deletes an hr.employee.skill record from Odoo.
+func (c *Client) DeleteEmployeeSkill(id int64) error {
+	if err := c.CallAction("hr.employee.skill", []int64{id}, "unlink"); err != nil {
+		return fmt.Errorf("delete employee skill %d: %w", id, err)
+	}
+	return nil
+}
+
 // ListSkills retrieves hr.skill records from Odoo with optional domain filters.
 // Returns the skill slice and total count for pagination.
 func (c *Client) ListSkills(domain []any, limit, offset int) ([]Skill, int, error) {
