@@ -147,3 +147,16 @@ func toBool(v any) bool {
 	b, _ := v.(bool)
 	return b
 }
+
+// toInt64Slice converts an any to []int64.
+func toInt64Slice(v any) []int64 {
+	arr, ok := v.([]any)
+	if !ok {
+		return nil
+	}
+	result := make([]int64, len(arr))
+	for i, item := range arr {
+		result[i] = toInt64(item)
+	}
+	return result
+}
