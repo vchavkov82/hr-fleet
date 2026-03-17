@@ -78,6 +78,14 @@ func (c *Client) CreateLeaveRequest(vals map[string]any) (int64, error) {
 	return id, nil
 }
 
+// CancelLeaveRequest cancels an hr.leave record by setting its state to "cancel".
+func (c *Client) CancelLeaveRequest(id int64) error {
+	if err := c.Write("hr.leave", id, map[string]any{"state": "cancel"}); err != nil {
+		return fmt.Errorf("cancel leave request %d: %w", id, err)
+	}
+	return nil
+}
+
 // ActionApproveLeave calls action_approve on an hr.leave record.
 func (c *Client) ActionApproveLeave(leaveID int64) error {
 	return c.CallAction("hr.leave", []int64{leaveID}, "action_approve")
