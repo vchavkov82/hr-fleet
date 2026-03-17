@@ -2,11 +2,12 @@ package handler
 
 import (
 	"context"
-	"encoding/json"
+	"errors"
 	"net/http"
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/vchavkov/hr/services/api/internal/service"
 	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
@@ -27,6 +28,18 @@ func NewDepartmentHandler(svc DepartmentServicer) *DepartmentHandler {
 }
 
 // HandleList handles GET /api/v1/departments
+// @Summary List departments
+// @Description List all departments with pagination
+// @Tags Departments
+// @Produce json
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 50, max 100)"
+// @Success 200 {object} map[string]any
+// @Failure 500 {object} map[string]string
+// @Failure 503 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /departments [get]
 func (h *DepartmentHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	page := intQueryParam(r, "page", 1)
 	perPage := intQueryParam(r, "per_page", 50)
@@ -40,12 +53,15 @@ func (h *DepartmentHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 
 	depts, total, err := h.svc.List(r.Context(), perPage, offset)
 	if err != nil {
-		http.Error(w, `{"error":"failed to list departments"}`, http.StatusInternalServerError)
+		if errors.Is(err, service.ErrServiceUnavailable) {
+			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to list departments")
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]any{
+	respondJSON(w, http.StatusOK, map[string]any{
 		"data":  depts,
 		"total": total,
 		"page":  page,
@@ -53,19 +69,34 @@ func (h *DepartmentHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleGet handles GET /api/v1/departments/{id}
+// @Summary Get department by ID
+// @Description Retrieve a single department by its ID
+// @Tags Departments
+// @Produce json
+// @Param id path integer true "Department ID"
+// @Success 200 {object} odoo.Department
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 503 {object} map[string]string
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /departments/{id} [get]
 func (h *DepartmentHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		http.Error(w, `{"error":"invalid department id"}`, http.StatusBadRequest)
+		respondError(w, http.StatusBadRequest, "Invalid department ID")
 		return
 	}
 
 	dept, err := h.svc.Get(r.Context(), id)
 	if err != nil {
-		http.Error(w, `{"error":"department not found"}`, http.StatusNotFound)
+		if errors.Is(err, service.ErrServiceUnavailable) {
+			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			return
+		}
+		respondError(w, http.StatusNotFound, "Department not found")
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(dept)
+	respondJSON(w, http.StatusOK, dept)
 }
