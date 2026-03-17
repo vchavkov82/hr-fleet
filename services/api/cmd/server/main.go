@@ -260,6 +260,46 @@ func runAPI(
 				r.Delete("/{id}", webhookHandler.HandleDeactivate)
 				r.Get("/{id}/deliveries", webhookHandler.HandleListDeliveries)
 			})
+
+			// OCA: Departments
+			r.Route("/departments", func(r chi.Router) {
+				r.Get("/", departmentHandler.HandleList)
+				r.Get("/{id}", departmentHandler.HandleGet)
+			})
+
+			// OCA: Employee Skills (nested under employees)
+			r.Route("/employees/{id}/skills", func(r chi.Router) {
+				r.Get("/", skillHandler.HandleListEmployeeSkills)
+				r.Post("/", skillHandler.HandleAddEmployeeSkill)
+			})
+			r.Get("/skills", skillHandler.HandleListSkills)
+
+			// OCA: Payroll structures and rules
+			r.Route("/payroll", func(r chi.Router) {
+				r.Get("/structures", payrollOCAHandler.HandleListStructures)
+				r.Get("/structures/{id}", payrollOCAHandler.HandleGetStructure)
+				r.Get("/rules", payrollOCAHandler.HandleListRules)
+			})
+
+			// OCA: Timesheets
+			r.Route("/timesheets", func(r chi.Router) {
+				r.Get("/", timesheetHandler.HandleList)
+				r.Post("/", timesheetHandler.HandleCreate)
+			})
+
+			// OCA: Attendance
+			r.Route("/attendance", func(r chi.Router) {
+				r.Get("/", attendanceHandler.HandleList)
+				r.Post("/check-in", attendanceHandler.HandleCheckIn)
+				r.Post("/{id}/check-out", attendanceHandler.HandleCheckOut)
+			})
+
+			// OCA: Expenses
+			r.Route("/expenses", func(r chi.Router) {
+				r.Get("/", expenseHandler.HandleList)
+				r.Post("/", expenseHandler.HandleCreate)
+				r.Patch("/{id}", expenseHandler.HandleUpdate)
+			})
 		})
 	})
 
