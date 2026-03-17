@@ -25,6 +25,7 @@ RUN pip3 install --no-cache-dir --break-system-packages \
 
 # Copy OCA addons into the image (prod)
 # In dev, these are overridden by volume mounts
+COPY odoo-addons/web /mnt/extra-addons/web
 COPY odoo-addons/server-tools /mnt/extra-addons/server-tools
 COPY odoo-addons/payroll /mnt/extra-addons/payroll
 COPY odoo-addons/hr /mnt/extra-addons/hr
