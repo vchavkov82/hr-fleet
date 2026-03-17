@@ -268,6 +268,19 @@ func intQueryParam(r *http.Request, key string, defaultVal int) int {
 	return v
 }
 
+// int64QueryParam extracts an int64 query parameter with a default value.
+func int64QueryParam(r *http.Request, key string, defaultVal int64) int64 {
+	s := r.URL.Query().Get(key)
+	if s == "" {
+		return defaultVal
+	}
+	v, err := strconv.ParseInt(s, 10, 64)
+	if err != nil {
+		return defaultVal
+	}
+	return v
+}
+
 // isValidEmail performs a basic email format check.
 func isValidEmail(email string) bool {
 	if email == "" {
