@@ -199,6 +199,35 @@ func (h *PayrollHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	RespondList(w, runs, int64(len(runs)), page, perPage)
 }
 
+// HandleCancel handles POST /api/v1/payroll-runs/{id}/cancel.
+// @Summary Cancel a payroll run
+// @Description Cancel a draft or approved payroll run
+// @Tags Payroll
+// @Produce json
+// @Param id path string true "Payroll run ID (UUID)"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 409 {object} ErrorResponse
+// @Security BearerAuth
+// @Security APIKeyAuth
+// @Router /payroll-runs/{id}/cancel [post]
+func (h *PayrollHandler) HandleCancel(w http.ResponseWriter, r *http.Request) {
+	runID, ok := parsePathUUID(w, r, "id")
+	if !ok {
+		return
+	}
+	userID := userIDFromContext(r.Context())
+
+	err := h.svc.Cancel(r.Context(), runID, userID)
+	if err != nil {
+		handlePayrollError(w, err)
+		return
+	}
+
+	RespondJSON(w, http.StatusOK, map[string]string{"status": "cancelled"})
+}
+
 // handlePayrollError maps service errors to HTTP responses.
 func handlePayrollError(w http.ResponseWriter, err error) {
 	switch {
