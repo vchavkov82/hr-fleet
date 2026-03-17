@@ -47,7 +47,7 @@ func TestGenerateAccessToken(t *testing.T) {
 	priv, pub := generateTestKeys(t)
 	auth, _ := NewJWTAuth(priv, pub)
 
-	token, err := GenerateAccessToken(auth, "user-123", "test@example.com", "admin")
+	token, err := GenerateAccessToken(auth, "user-123", "test@example.com", "admin", 42)
 	if err != nil {
 		t.Fatalf("GenerateAccessToken: %v", err)
 	}
