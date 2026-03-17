@@ -122,6 +122,9 @@ func main() {
 
 func runAPI(
 	cfg *config.Config,
+	pool *pgxpool.Pool,
+	redisCache *cache.Cache,
+	odooClient *odoo.Client,
 	tokenAuth *jwtauth.JWTAuth,
 	authSvc *service.AuthService,
 	employeeSvc *service.EmployeeService,
