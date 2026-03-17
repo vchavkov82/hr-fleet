@@ -231,15 +231,3 @@ func parsePayslipRun(rec map[string]any) (PayslipRun, error) {
 	return r, nil
 }
 
-// toInt64Slice converts an any to []int64, handling Odoo's array-of-ids format.
-func toInt64Slice(v any) []int64 {
-	arr, ok := v.([]any)
-	if !ok {
-		return nil
-	}
-	result := make([]int64, len(arr))
-	for i, item := range arr {
-		result[i] = toInt64(item)
-	}
-	return result
-}
