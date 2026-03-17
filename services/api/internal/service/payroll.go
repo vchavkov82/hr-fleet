@@ -165,6 +165,30 @@ func (s *PayrollService) List(ctx context.Context, status pgtype.Text, limit, of
 	})
 }
 
+// Cancel transitions a payroll run to cancelled status.
+func (s *PayrollService) Cancel(ctx context.Context, runID, cancelledBy pgtype.UUID) error {
+	run, err := s.queries.GetPayrollRun(ctx, runID)
+	if err != nil {
+		return ErrPayrollNotFound
+	}
+	if run.Status == PayrollStatusCompleted {
+		return ErrPayrollImmutable
+	}
+	if !canTransition(run.Status, PayrollStatusCancelled) {
+		return ErrPayrollInvalidStatus
+	}
+
+	if err := s.queries.UpdatePayrollRunStatus(ctx, db.UpdatePayrollRunStatusParams{
+		ID:     runID,
+		Status: PayrollStatusCancelled,
+	}); err != nil {
+		return fmt.Errorf("cancel payroll run: %w", err)
+	}
+
+	s.audit(ctx, cancelledBy, "payroll.cancelled", "payroll_run", uuidToString(runID), nil)
+	return nil
+}
+
 // audit writes an audit log entry, logging errors but not failing the operation.
 func (s *PayrollService) audit(ctx context.Context, userID pgtype.UUID, action, resourceType, resourceID string, details map[string]any) {
 	var detailsJSON []byte
