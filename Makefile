@@ -94,6 +94,22 @@ dev-backend: ## Start Go backend in dev mode (port 5080)
 odoo-init: ## Initialize Odoo HR modules (run once after first start)
 	bash deploy/odoo-init.sh
 
+build-odoo: ## Build custom Odoo image with OCA modules
+	cd deploy && podman build -f Dockerfile.odoo -t hr-odoo:18.0-oca .
+
+oca-update: ## Update all OCA submodules to latest 18.0
+	git submodule update --remote deploy/odoo-addons/server-tools
+	git submodule update --remote deploy/odoo-addons/payroll
+	git submodule update --remote deploy/odoo-addons/hr
+	git submodule update --remote deploy/odoo-addons/hr-holidays
+	git submodule update --remote deploy/odoo-addons/hr-attendance
+	git submodule update --remote deploy/odoo-addons/hr-expense
+	git submodule update --remote deploy/odoo-addons/timesheet
+	git submodule update --remote deploy/odoo-addons/reporting-engine
+	git submodule update --remote deploy/odoo-addons/account-financial-reporting
+
+oca-init: build-odoo odoo-init ## Build Odoo image + install all OCA modules
+
 # ── Build ───────────────────────────────────────────────────────────────────
 
 build: ## Build www + blog via turbo (sequential to avoid OOM, turbo caches each)
