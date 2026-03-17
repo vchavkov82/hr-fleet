@@ -23,6 +23,7 @@ type ContractOdooClient interface {
 	SearchContracts(domain []any, limit, offset int) ([]odoo.Contract, int, error)
 	GetContract(id int64) (*odoo.Contract, error)
 	CreateContract(vals map[string]any) (int64, error)
+	UpdateContract(id int64, vals map[string]any) error
 }
 
 // ContractService provides business logic for contract operations.
