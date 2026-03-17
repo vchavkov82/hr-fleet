@@ -141,6 +141,7 @@ services:
       PORT: 5432
       USER: odoo
       PASSWORD: ${ODOO_DB_PASSWORD:-odoo}
+      OPENBLAS_NUM_THREADS: 1
     volumes:
       - odoo_data:/var/lib/odoo
       - ./odoo.conf:/etc/odoo/odoo.conf:ro
