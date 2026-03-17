@@ -88,6 +88,12 @@ func APIKeyOrJWT(jwtAuth *jwtauth.JWTAuth, authSvc *service.AuthService) func(ht
 				ctx := context.WithValue(r.Context(), CtxUserID, sub)
 				ctx = context.WithValue(ctx, CtxEmail, email)
 				ctx = context.WithValue(ctx, CtxRole, role)
+
+				// Extract company_id if present in claims (JSON numbers decode as float64).
+				if cid, ok := claims["company_id"].(float64); ok {
+					ctx = context.WithValue(ctx, CtxCompanyID, int64(cid))
+				}
+
 				next.ServeHTTP(w, r.WithContext(ctx))
 			})).ServeHTTP(w, r)
 		})
