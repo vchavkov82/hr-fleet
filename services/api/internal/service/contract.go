@@ -141,7 +141,7 @@ func (s *ContractService) Update(ctx context.Context, id int64, vals map[string]
 
 	// Invalidate caches
 	_ = s.cache.DeletePattern(ctx, contractListKeyPfx+"*")
-	_ = s.cache.Delete(ctx, fmt.Sprintf("%s%d", contractDetailKeyPfx, id))
+	_ = s.cache.DeletePattern(ctx, fmt.Sprintf("%s%d", contractDetailKeyPfx, id))
 
 	// Audit log
 	if s.queries != nil {
