@@ -227,6 +227,7 @@ func runAPI(
 				r.Get("/", contractHandler.HandleList)
 				r.Post("/", contractHandler.HandleCreate)
 				r.Get("/{id}", contractHandler.HandleGet)
+				r.Put("/{id}", contractHandler.HandleUpdate)
 			})
 
 			// Leave
@@ -234,6 +235,7 @@ func runAPI(
 				r.Get("/allocations", leaveHandler.HandleListAllocations)
 				r.Get("/requests", leaveHandler.HandleListRequests)
 				r.Post("/requests", leaveHandler.HandleCreateRequest)
+				r.Delete("/requests/{id}", leaveHandler.HandleCancelRequest)
 				r.Post("/requests/{id}/approve", leaveHandler.HandleApproveRequest)
 				r.Post("/requests/{id}/reject", leaveHandler.HandleRejectRequest)
 			})
@@ -245,6 +247,7 @@ func runAPI(
 				r.Get("/{id}", payrollHandler.HandleGetStatus)
 				r.Post("/{id}/approve", payrollHandler.HandleApprove)
 				r.Post("/{id}/process", payrollHandler.HandleProcess)
+				r.Post("/{id}/cancel", payrollHandler.HandleCancel)
 			})
 
 			// Payslips
