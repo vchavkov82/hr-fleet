@@ -15,11 +15,14 @@ CORE_MODULES="hr,hr_holidays,hr_attendance,hr_recruitment,hr_expense,hr_contract
 # OCA server-tools (dependencies for other OCA modules)
 OCA_SERVER_TOOLS="base_technical_features"
 
-# OCA payroll
-OCA_PAYROLL="hr_payroll"
+# OCA web widgets (dependencies for other OCA modules)
+OCA_WEB="web_widget_x2many_2d_matrix"
 
-# OCA HR extensions
-OCA_HR="hr_employee_skill"
+# OCA payroll
+OCA_PAYROLL="payroll"
+
+# OCA HR extensions (hr_skills is a core Odoo module, installed in step 1 automatically)
+OCA_HR=""
 
 # OCA timesheet
 OCA_TIMESHEET="hr_timesheet_sheet"
