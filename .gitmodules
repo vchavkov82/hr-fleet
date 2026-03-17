@@ -1,0 +1,36 @@
+[submodule "deploy/odoo-addons/server-tools"]
+	path = deploy/odoo-addons/server-tools
+	url = https://github.com/OCA/server-tools.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/payroll"]
+	path = deploy/odoo-addons/payroll
+	url = https://github.com/OCA/payroll.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/hr"]
+	path = deploy/odoo-addons/hr
+	url = https://github.com/OCA/hr.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/hr-holidays"]
+	path = deploy/odoo-addons/hr-holidays
+	url = https://github.com/OCA/hr-holidays.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/hr-attendance"]
+	path = deploy/odoo-addons/hr-attendance
+	url = https://github.com/OCA/hr-attendance.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/hr-expense"]
+	path = deploy/odoo-addons/hr-expense
+	url = https://github.com/OCA/hr-expense.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/timesheet"]
+	path = deploy/odoo-addons/timesheet
+	url = https://github.com/OCA/timesheet.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/reporting-engine"]
+	path = deploy/odoo-addons/reporting-engine
+	url = https://github.com/OCA/reporting-engine.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/account-financial-reporting"]
+	path = deploy/odoo-addons/account-financial-reporting
+	url = https://github.com/OCA/account-financial-reporting.git
+	branch = 18.0
