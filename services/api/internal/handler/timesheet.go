@@ -15,6 +15,7 @@ import (
 type TimesheetServicer interface {
 	List(ctx context.Context, employeeID int64, dateFrom, dateTo string, limit, offset int) ([]odoo.TimesheetEntry, int, error)
 	Create(ctx context.Context, employeeID int64, date, name string, hours float64, projectID, taskID int64) (int64, error)
+	Update(ctx context.Context, id int64, vals map[string]any) error
 }
 
 // TimesheetHandler handles HTTP requests for timesheet operations.
