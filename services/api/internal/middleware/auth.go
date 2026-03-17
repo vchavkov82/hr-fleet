@@ -14,9 +14,10 @@ import (
 type contextKey string
 
 const (
-	CtxUserID contextKey = "user_id"
-	CtxEmail  contextKey = "email"
-	CtxRole   contextKey = "role"
+	CtxUserID    contextKey = "user_id"
+	CtxEmail     contextKey = "email"
+	CtxRole      contextKey = "role"
+	CtxCompanyID contextKey = "company_id"
 )
 
 // NewJWTAuth creates a JWTAuth instance using RS256 with PEM-encoded RSA keys.
