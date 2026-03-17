@@ -9,13 +9,42 @@
 # -------------------------------------------------------------------
 set -euo pipefail
 
-MODULES="hr,hr_holidays,hr_attendance,hr_recruitment,hr_expense,hr_contract"
+# Core Odoo modules
+CORE_MODULES="hr,hr_holidays,hr_attendance,hr_recruitment,hr_expense,hr_contract"
 
-echo "Installing Odoo HR modules: ${MODULES}"
+# OCA server-tools (dependencies for other OCA modules)
+OCA_SERVER_TOOLS="base_technical_features"
+
+# OCA payroll
+OCA_PAYROLL="hr_payroll"
+
+# OCA HR extensions
+OCA_HR="hr_employee_skill"
+
+# OCA timesheet
+OCA_TIMESHEET="hr_timesheet_sheet"
+
+# OCA reporting
+OCA_REPORTING="report_xlsx"
+
+ALL_MODULES="${CORE_MODULES},${OCA_SERVER_TOOLS},${OCA_PAYROLL},${OCA_HR},${OCA_TIMESHEET},${OCA_REPORTING}"
+
+echo "Installing Odoo modules: ${ALL_MODULES}"
+echo ""
+echo "Step 1: Core + server-tools base modules"
 podman exec hr-odoo odoo \
   -c /etc/odoo/odoo.conf \
   -d odoo \
-  -i "${MODULES}" \
+  -i "${CORE_MODULES},${OCA_SERVER_TOOLS}" \
   --stop-after-init
 
-echo "Done. HR modules installed successfully."
+echo ""
+echo "Step 2: OCA functional modules"
+podman exec hr-odoo odoo \
+  -c /etc/odoo/odoo.conf \
+  -d odoo \
+  -i "${OCA_PAYROLL},${OCA_HR},${OCA_TIMESHEET},${OCA_REPORTING}" \
+  --stop-after-init
+
+echo ""
+echo "Done. All HR + OCA modules installed successfully."
