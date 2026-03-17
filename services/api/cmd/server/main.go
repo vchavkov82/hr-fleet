@@ -281,6 +281,7 @@ func runAPI(
 			r.Route("/employees/{id}/skills", func(r chi.Router) {
 				r.Get("/", skillHandler.HandleListEmployeeSkills)
 				r.Post("/", skillHandler.HandleAddEmployeeSkill)
+				r.Delete("/{skillId}", skillHandler.HandleDeleteEmployeeSkill)
 			})
 			r.Get("/skills", skillHandler.HandleListSkills)
 
