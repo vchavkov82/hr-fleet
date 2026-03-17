@@ -13,6 +13,7 @@ type SkillOdooClient interface {
 	ListEmployeeSkills(employeeID int64, limit, offset int) ([]odoo.EmployeeSkill, int, error)
 	CreateEmployeeSkill(employeeID, skillID, skillLevelID int64) (int64, error)
 	ListSkills(domain []any, limit, offset int) ([]odoo.Skill, int, error)
+	DeleteEmployeeSkill(id int64) error
 }
 
 // SkillService provides business logic for employee skill operations.
