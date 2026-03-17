@@ -13,6 +13,7 @@ C_BOLD='\033[1m'
 C_HR='\033[35m'        # magenta
 C_HR_BLOG='\033[32m'   # green
 C_HR_DOCS='\033[37m'   # white
+C_HR_ADMIN='\033[36m'  # cyan
 
 prefix() {
   local color="$1"
