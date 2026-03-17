@@ -100,6 +100,11 @@ func (c *Cache) EvictL1(key string) {
 	c.l1.Del(key)
 }
 
+// Ping checks Redis connectivity.
+func (c *Cache) Ping(ctx context.Context) error {
+	return c.client.Ping(ctx).Err()
+}
+
 // DeletePattern deletes all keys matching the given glob pattern from both L1 and L2.
 func (c *Cache) DeletePattern(ctx context.Context, pattern string) error {
 	iter := c.client.Scan(ctx, 0, pattern, 100).Iterator()
