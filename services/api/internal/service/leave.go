@@ -26,6 +26,7 @@ type LeaveOdooClient interface {
 	CreateLeaveRequest(vals map[string]any) (int64, error)
 	ActionApproveLeave(leaveID int64) error
 	ActionRefuseLeave(leaveID int64) error
+	CancelLeaveRequest(id int64) error
 }
 
 // LeaveService provides business logic for leave management.

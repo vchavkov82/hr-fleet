@@ -49,3 +49,43 @@ func (s *ProvisioningService) ProvisionCompany(ctx context.Context, companyName,
 
 	return companyID, userID, nil
 }
+
+// ProvisionDefaults creates default departments and leave types in Odoo
+// for a newly provisioned company.
+func (s *ProvisioningService) ProvisionDefaults(ctx context.Context, companyID int64) error {
+	// Default departments
+	departments := []string{"HR", "Engineering", "Sales", "Finance", "Operations"}
+	for _, name := range departments {
+		_, err := s.odoo.Create("hr.department", map[string]any{
+			"name":       name,
+			"company_id": companyID,
+		})
+		if err != nil {
+			log.Printf("ERROR: provisioning department %q for company %d: %v", name, companyID, err)
+			return fmt.Errorf("create department %q: %w", name, err)
+		}
+	}
+
+	// Default leave types
+	leaveTypes := []struct {
+		name string
+		code string
+	}{
+		{"Annual Leave", "ANNUAL"},
+		{"Sick Leave", "SICK"},
+		{"Unpaid Leave", "UNPAID"},
+	}
+	for _, lt := range leaveTypes {
+		_, err := s.odoo.Create("hr.leave.type", map[string]any{
+			"name":       lt.name,
+			"code":       lt.code,
+			"company_id": companyID,
+		})
+		if err != nil {
+			log.Printf("ERROR: provisioning leave type %q for company %d: %v", lt.name, companyID, err)
+			return fmt.Errorf("create leave type %q: %w", lt.name, err)
+		}
+	}
+
+	return nil
+}
