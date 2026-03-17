@@ -26,7 +26,7 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={`${inter.variable} ${mulish.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${inter.variable} ${mulish.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
         <NextIntlClientProvider messages={messages}>
           <ModalProvider>
