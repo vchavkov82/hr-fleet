@@ -186,6 +186,33 @@ func (s *LeaveService) RejectRequest(ctx context.Context, leaveID int64, reason,
 	return nil
 }
 
+// CancelRequest cancels a leave request via Odoo.
+func (s *LeaveService) CancelRequest(ctx context.Context, leaveID int64) error {
+	if err := s.odoo.CancelLeaveRequest(leaveID); err != nil {
+		return fmt.Errorf("cancel leave request %d: %w", leaveID, err)
+	}
+
+	_ = s.cache.DeletePattern(ctx, leaveReqKeyPfx+"*")
+
+	// Audit log
+	if s.queries != nil {
+		details, _ := json.Marshal(map[string]any{"leave_id": leaveID})
+		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
+			Action:       "leave.cancelled",
+			ResourceType: "leave",
+			ResourceID:   fmt.Sprintf("%d", leaveID),
+			Details:      details,
+		})
+	}
+
+	// Webhook dispatch
+	if s.webhookSvc != nil {
+		_ = s.webhookSvc.Dispatch(ctx, "leave.cancelled", map[string]any{"id": leaveID})
+	}
+
+	return nil
+}
+
 func leaveAllocCacheKey(employeeID int64, limit, offset int) string {
 	raw := fmt.Sprintf("e=%d&l=%d&o=%d", employeeID, limit, offset)
 	h := sha256.Sum256([]byte(raw))
