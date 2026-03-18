@@ -37,6 +37,8 @@ COPY odoo-addons/hr-expense /mnt/extra-addons/hr-expense
 COPY odoo-addons/timesheet /mnt/extra-addons/timesheet
 COPY odoo-addons/reporting-engine /mnt/extra-addons/reporting-engine
 COPY odoo-addons/account-financial-reporting /mnt/extra-addons/account-financial-reporting
+COPY odoo-addons/project /mnt/extra-addons/project
+COPY odoo-addons/fleet /mnt/extra-addons/fleet
 
 # Fix permissions
 RUN chown -R odoo:odoo /mnt/extra-addons

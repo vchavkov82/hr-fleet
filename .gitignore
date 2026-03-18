@@ -29,6 +29,9 @@ yarn-error.log*
 .npm
 .yarn-integrity
 
+# pnpm
+**/.pnpm-store/
+
 # TurboRepo
 .turbo/
 

@@ -38,3 +38,19 @@
 	path = deploy/odoo-addons/web
 	url = https://github.com/OCA/web.git
 	branch = 18.0
+[submodule "deploy/odoo-addons/project"]
+	path = deploy/odoo-addons/project
+	url = https://github.com/OCA/project.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/fleet"]
+	path = deploy/odoo-addons/fleet
+	url = https://github.com/OCA/fleet.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/rest-framework"]
+	path = deploy/odoo-addons/rest-framework
+	url = https://github.com/OCA/rest-framework.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/queue"]
+	path = deploy/odoo-addons/queue
+	url = https://github.com/OCA/queue.git
+	branch = 18.0

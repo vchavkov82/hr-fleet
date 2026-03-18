@@ -1,215 +1,186 @@
-import { useState } from "react";
-import { differenceInDays, parseISO } from "date-fns";
-import { useLeaveRequests } from "./hooks";
-import { LeaveActions } from "./leave-actions";
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import React, { useCallback, useEffect, useState } from 'react';
 
-type ViewMode = "pending" | "all";
+import {
+  getLeaveRequests,
+  approveLeave,
+  rejectLeave,
+  type LeaveRequest,
+  type PaginatedResponse,
+} from '@/api/api';
 
-function StatusBadge({ status }: { status?: string }) {
-  const colors: Record<string, string> = {
-    confirm: "bg-yellow-100 text-yellow-700",
-    validate: "bg-green-100 text-green-700",
-    refuse: "bg-red-100 text-red-700",
-    draft: "bg-gray-100 text-gray-600",
+export const LeaveList: React.FC = () => {
+  const [data, setData] = useState<PaginatedResponse<LeaveRequest> | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+
+  const loadData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await getLeaveRequests({ page: page + 1, per_page: rowsPerPage });
+      setData(result);
+    } catch {
+      setError('Failed to load leave requests.');
+    } finally {
+      setLoading(false);
+    }
+  }, [page, rowsPerPage]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  const handleApprove = async (id: string) => {
+    try {
+      await approveLeave(id);
+      loadData();
+    } catch {
+      setError('Failed to approve leave request.');
+    }
   };
-  const labels: Record<string, string> = {
-    confirm: "Pending",
-    validate: "Approved",
-    refuse: "Rejected",
-    draft: "Draft",
+
+  const handleReject = async (id: string) => {
+    try {
+      await rejectLeave(id);
+      loadData();
+    } catch {
+      setError('Failed to reject leave request.');
+    }
   };
-  const colorClass = colors[status ?? ""] ?? "bg-gray-100 text-gray-600";
-  return (
-    <span
-      className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colorClass}`}
-    >
-      {labels[status ?? ""] ?? status ?? "unknown"}
-    </span>
-  );
-}
 
-interface LeaveRequest {
-  id?: number;
-  employee_id?: { id?: number; name?: string };
-  holiday_status_id?: { id?: number; name?: string };
-  name?: string;
-  date_from?: string;
-  date_to?: string;
-  number_of_days?: number;
-  state?: string;
-}
-
-function computeDays(dateFrom?: string, dateTo?: string): number | null {
-  if (!dateFrom || !dateTo) return null;
-  return differenceInDays(parseISO(dateTo), parseISO(dateFrom)) + 1;
-}
-
-export function LeavePage() {
-  const [view, setView] = useState<ViewMode>("pending");
-  const [page, setPage] = useState(1);
-  const statusFilter = view === "pending" ? "confirm" : undefined;
-  const { data, isLoading, error } = useLeaveRequests({
-    page,
-    status: statusFilter,
-  });
-
-  const requests = (data?.data as LeaveRequest[] | undefined) ?? [];
-  const meta = data?.meta;
-
-  // Sort pending by oldest first
-  const sorted =
-    view === "pending"
-      ? [...requests].sort(
-          (a, b) =>
-            new Date(a.date_from ?? 0).getTime() -
-            new Date(b.date_from ?? 0).getTime(),
-        )
-      : requests;
+  const statusColor = (
+    status: string,
+  ): 'success' | 'default' | 'error' | 'warning' => {
+    switch (status) {
+      case 'approved':
+        return 'success';
+      case 'pending':
+        return 'warning';
+      case 'rejected':
+      case 'cancelled':
+        return 'error';
+      default:
+        return 'default';
+    }
+  };
 
   return (
-    <div>
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Leave Management</h1>
-        <div className="flex gap-2">
-          <button
-            onClick={() => {
-              setView("pending");
-              setPage(1);
-            }}
-            className={`rounded-md px-4 py-2 text-sm font-medium ${
-              view === "pending"
-                ? "bg-blue-600 text-white"
-                : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-            }`}
-          >
-            Pending Approval
-          </button>
-          <button
-            onClick={() => {
-              setView("all");
-              setPage(1);
-            }}
-            className={`rounded-md px-4 py-2 text-sm font-medium ${
-              view === "all"
-                ? "bg-blue-600 text-white"
-                : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-            }`}
-          >
-            All Requests
-          </button>
-        </div>
-      </div>
+    <Stack spacing={3}>
+      <Box>
+        <Typography variant="h4" fontWeight={700}>
+          Leave Requests
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Manage employee time off requests
+        </Typography>
+      </Box>
 
       {error && (
-        <div className="mt-4 rounded-md bg-red-50 p-4 text-sm text-red-700">
-          Failed to load leave requests.
-        </div>
+        <Alert severity="error" action={<Button onClick={loadData}>Retry</Button>}>
+          {error}
+        </Alert>
       )}
 
-      {isLoading ? (
-        <div className="mt-8 text-center text-gray-500">Loading...</div>
-      ) : (
-        <div className="mt-6 overflow-hidden rounded-lg border border-gray-200">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  Employee
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  Type
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  From
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  To
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  Days
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  Status
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
-              {sorted.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={7}
-                    className="px-4 py-8 text-center text-sm text-gray-500"
-                  >
-                    {view === "pending"
-                      ? "No pending leave requests."
-                      : "No leave requests found."}
-                  </td>
-                </tr>
-              ) : (
-                sorted.map((r) => (
-                  <tr key={r.id} className="hover:bg-gray-50">
-                    <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-900">
-                      {r.employee_id?.name ?? "—"}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-700">
-                      {r.holiday_status_id?.name ?? r.name ?? "—"}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-700">
-                      {r.date_from ?? "—"}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-700">
-                      {r.date_to ?? "—"}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-700">
-                      {r.number_of_days ??
-                        computeDays(r.date_from, r.date_to) ??
-                        "—"}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm">
-                      <StatusBadge status={r.state} />
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm">
-                      <LeaveActions
-                        requestId={r.id ?? 0}
-                        status={r.state}
-                      />
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {meta && (meta.total_pages ?? 0) > 1 && (
-        <div className="mt-4 flex items-center justify-between">
-          <p className="text-sm text-gray-600">
-            Page {meta.page} of {meta.total_pages} ({meta.total} total)
-          </p>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page <= 1}
-              className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <button
-              onClick={() =>
-                setPage((p) => Math.min(meta.total_pages ?? 1, p + 1))
-              }
-              disabled={page >= (meta.total_pages ?? 1)}
-              className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
+      <TableContainer component={Paper}>
+        {loading ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+            <CircularProgress />
+          </Box>
+        ) : (
+          <>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Employee</TableCell>
+                  <TableCell>Leave Type</TableCell>
+                  <TableCell>Start Date</TableCell>
+                  <TableCell>End Date</TableCell>
+                  <TableCell>Days</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.data.map((leave) => (
+                  <TableRow key={leave.id} hover>
+                    <TableCell>{leave.employee_name}</TableCell>
+                    <TableCell>{leave.leave_type}</TableCell>
+                    <TableCell>{new Date(leave.start_date).toLocaleDateString()}</TableCell>
+                    <TableCell>{new Date(leave.end_date).toLocaleDateString()}</TableCell>
+                    <TableCell>{leave.days}</TableCell>
+                    <TableCell>
+                      <Chip label={leave.status} size="small" color={statusColor(leave.status)} />
+                    </TableCell>
+                    <TableCell>
+                      {leave.status === 'pending' && (
+                        <Stack direction="row" spacing={0.5}>
+                          <Tooltip title="Approve">
+                            <IconButton
+                              size="small"
+                              color="success"
+                              onClick={() => handleApprove(leave.id)}
+                            >
+                              <CheckIcon fontSize="small" />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="Reject">
+                            <IconButton
+                              size="small"
+                              color="error"
+                              onClick={() => handleReject(leave.id)}
+                            >
+                              <CloseIcon fontSize="small" />
+                            </IconButton>
+                          </Tooltip>
+                        </Stack>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {(!data?.data || data.data.length === 0) && (
+                  <TableRow>
+                    <TableCell colSpan={7} align="center">
+                      No leave requests found
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <TablePagination
+              component="div"
+              count={data?.meta.total ?? 0}
+              page={page}
+              onPageChange={(_, newPage) => setPage(newPage)}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={(e) => {
+                setRowsPerPage(parseInt(e.target.value, 10));
+                setPage(0);
+              }}
+            />
+          </>
+        )}
+      </TableContainer>
+    </Stack>
   );
-}
+};

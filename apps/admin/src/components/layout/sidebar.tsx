@@ -10,6 +10,12 @@ import {
   UserCog,
   ShieldCheck,
   Settings,
+  Building2,
+  Clock,
+  UserCheck,
+  Receipt,
+  ClipboardCheck,
+  GraduationCap,
 } from "lucide-react";
 import { useHasPermission } from "@/auth/hooks";
 
@@ -23,10 +29,16 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard", to: "/", icon: LayoutDashboard },
   { label: "Employees", to: "/employees", icon: Users, permission: "employees:read" },
+  { label: "Departments", to: "/departments", icon: Building2, permission: "employees:read" },
   { label: "Payroll", to: "/payroll", icon: DollarSign, permission: "payroll:read" },
   { label: "Payslips", to: "/payslips", icon: FileText, permission: "payroll:read" },
   { label: "Contracts", to: "/contracts", icon: FileSignature, permission: "employees:read" },
   { label: "Leave", to: "/leave", icon: CalendarDays, permission: "employees:read" },
+  { label: "Timesheets", to: "/timesheets", icon: Clock, permission: "employees:read" },
+  { label: "Attendance", to: "/attendance", icon: UserCheck, permission: "employees:read" },
+  { label: "Expenses", to: "/expenses", icon: Receipt, permission: "employees:read" },
+  { label: "Appraisals", to: "/appraisals", icon: ClipboardCheck, permission: "employees:read" },
+  { label: "Training", to: "/training", icon: GraduationCap, permission: "employees:read" },
   { label: "Reports", to: "/reports", icon: BarChart3, permission: "reports:read" },
   { label: "Users & Roles", to: "/users", icon: UserCog, permission: "users:manage" },
   { label: "Audit Log", to: "/audit", icon: ShieldCheck, permission: "audit:read" },

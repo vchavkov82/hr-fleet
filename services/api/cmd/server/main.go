@@ -100,6 +100,10 @@ func main() {
 	timesheetSvc := service.NewTimesheetService(odooClient, redisCache)
 	attendanceSvc := service.NewAttendanceService(odooClient, redisCache)
 	expenseSvc := service.NewExpenseService(odooClient, redisCache)
+	appraisalSvc := service.NewAppraisalService(odooClient, redisCache)
+	courseSvc := service.NewCourseService(odooClient, redisCache)
+	projectSvc := service.NewProjectService(odooClient, redisCache)
+	fleetSvc := service.NewFleetService(odooClient, redisCache)
 
 	// Signal handling
 	sigCh := make(chan os.Signal, 1)
@@ -107,14 +111,14 @@ func main() {
 
 	switch *mode {
 	case "api":
-		runAPI(cfg, pool, redisCache, odooClient, tokenAuth, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
-			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, sigCh)
+		runAPI(cfg, pool, redisCache, odooClient, tokenAuth, asynqClient, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
+			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, appraisalSvc, courseSvc, projectSvc, fleetSvc, sigCh)
 	case "worker":
 		runWorker(cfg, queries, sigCh)
 	case "both":
 		go runWorker(cfg, queries, sigCh)
-		runAPI(cfg, pool, redisCache, odooClient, tokenAuth, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
-			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, sigCh)
+		runAPI(cfg, pool, redisCache, odooClient, tokenAuth, asynqClient, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
+			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, appraisalSvc, courseSvc, projectSvc, fleetSvc, sigCh)
 	default:
 		log.Fatalf("unknown mode: %s (use api, worker, or both)", *mode)
 	}
@@ -126,6 +130,7 @@ func runAPI(
 	redisCache *cache.Cache,
 	odooClient *odoo.Client,
 	tokenAuth *jwtauth.JWTAuth,
+	asynqClient *asynq.Client,
 	authSvc *service.AuthService,
 	employeeSvc *service.EmployeeService,
 	contractSvc *service.ContractService,
@@ -140,6 +145,10 @@ func runAPI(
 	timesheetSvc *service.TimesheetService,
 	attendanceSvc *service.AttendanceService,
 	expenseSvc *service.ExpenseService,
+	appraisalSvc *service.AppraisalService,
+	courseSvc *service.CourseService,
+	projectSvc *service.ProjectService,
+	fleetSvc *service.FleetService,
 	sigCh <-chan os.Signal,
 ) {
 	// Handlers
@@ -159,6 +168,10 @@ func runAPI(
 	timesheetHandler := handler.NewTimesheetHandler(timesheetSvc)
 	attendanceHandler := handler.NewAttendanceHandler(attendanceSvc)
 	expenseHandler := handler.NewExpenseHandler(expenseSvc)
+	appraisalHandler := handler.NewAppraisalHandler(appraisalSvc)
+	courseHandler := handler.NewCourseHandler(courseSvc)
+	projectHandler := handler.NewProjectHandler(projectSvc)
+	fleetHandler := handler.NewFleetHandler(fleetSvc)
 
 	r := chi.NewRouter()
 
@@ -312,6 +325,53 @@ func runAPI(
 				r.Post("/", expenseHandler.HandleCreate)
 				r.Patch("/{id}", expenseHandler.HandleUpdate)
 			})
+
+			// OCA: Appraisals
+			r.Route("/appraisals", func(r chi.Router) {
+				r.Get("/", appraisalHandler.HandleList)
+				r.Get("/templates", appraisalHandler.HandleListTemplates)
+				r.Post("/", appraisalHandler.HandleCreate)
+				r.Get("/{id}", appraisalHandler.HandleGet)
+				r.Put("/{id}", appraisalHandler.HandleUpdate)
+				r.Post("/{id}/confirm", appraisalHandler.HandleConfirm)
+				r.Post("/{id}/complete", appraisalHandler.HandleComplete)
+				r.Post("/{id}/reset", appraisalHandler.HandleReset)
+			})
+
+			// OCA: Training Courses
+			r.Route("/courses", func(r chi.Router) {
+				r.Get("/", courseHandler.HandleListCourses)
+				r.Get("/categories", courseHandler.HandleListCategories)
+				r.Post("/", courseHandler.HandleCreateCourse)
+				r.Get("/{id}", courseHandler.HandleGetCourse)
+				r.Put("/{id}", courseHandler.HandleUpdateCourse)
+				r.Get("/schedules", courseHandler.HandleListSchedules)
+				r.Post("/schedules", courseHandler.HandleCreateSchedule)
+				r.Get("/schedules/{id}", courseHandler.HandleGetSchedule)
+				r.Post("/schedules/{id}/advance", courseHandler.HandleAdvanceSchedule)
+				r.Post("/schedules/{id}/reset", courseHandler.HandleResetSchedule)
+				r.Post("/schedules/{id}/cancel", courseHandler.HandleCancelSchedule)
+				r.Get("/schedules/{id}/attendees", courseHandler.HandleListAttendees)
+				r.Patch("/attendees/{id}", courseHandler.HandleUpdateAttendeeResult)
+			})
+
+			// OCA: Projects
+			r.Route("/projects", func(r chi.Router) {
+				r.Get("/", projectHandler.HandleList)
+				r.Get("/{id}", projectHandler.HandleGet)
+				r.Get("/{id}/tasks", projectHandler.HandleListTasks)
+			})
+			r.Get("/tasks/{id}", projectHandler.HandleGetTask)
+
+			// OCA: Fleet
+			r.Route("/fleet", func(r chi.Router) {
+				r.Get("/vehicles", fleetHandler.HandleListVehicles)
+				r.Get("/vehicles/{id}", fleetHandler.HandleGetVehicle)
+				r.Get("/vehicles/{id}/logs", fleetHandler.HandleListVehicleLogs)
+			})
+
+			// Odoo Webhooks (no auth required for Odoo callbacks, uses token validation)
+			r.Post("/webhooks/odoo", handler.NewOdooWebhookHandler(asynqClient, cfg.OdooWebhookSecret).HandleWebhook)
 		})
 	})
 
@@ -357,10 +417,12 @@ func runWorker(cfg *config.Config, queries *db.Queries, sigCh <-chan os.Signal) 
 
 	payrollProcessor := worker.NewPayrollProcessor(queries)
 	webhookDeliverHandler := worker.NewWebhookDeliverHandler()
+	odooSyncHandler := worker.NewOdooSyncHandler()
 
 	mux := asynq.NewServeMux()
 	mux.HandleFunc(service.TaskTypePayrollProcess, payrollProcessor.HandlePayrollProcess)
 	mux.HandleFunc(service.TaskTypeWebhookDeliver, webhookDeliverHandler.ProcessTask)
+	mux.HandleFunc(worker.TaskTypeOdooSync, odooSyncHandler.ProcessTask)
 
 	go func() {
 		log.Printf("asynq worker listening on %s", redisAddr)

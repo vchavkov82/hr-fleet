@@ -13,14 +13,20 @@ import { Route as LoginRouteImport } from "./routes/login"
 import { Route as AuthenticatedRouteImport } from "./routes/_authenticated"
 import { Route as AuthenticatedIndexRouteImport } from "./routes/_authenticated/index"
 import { Route as AuthenticatedUsersRouteImport } from "./routes/_authenticated/users"
+import { Route as AuthenticatedTrainingRouteImport } from "./routes/_authenticated/training"
+import { Route as AuthenticatedTimesheetsRouteImport } from "./routes/_authenticated/timesheets"
 import { Route as AuthenticatedSettingsRouteImport } from "./routes/_authenticated/settings"
 import { Route as AuthenticatedReportsRouteImport } from "./routes/_authenticated/reports"
 import { Route as AuthenticatedPayslipsRouteImport } from "./routes/_authenticated/payslips"
 import { Route as AuthenticatedPayrollRouteImport } from "./routes/_authenticated/payroll"
 import { Route as AuthenticatedLeaveRouteImport } from "./routes/_authenticated/leave"
+import { Route as AuthenticatedExpensesRouteImport } from "./routes/_authenticated/expenses"
 import { Route as AuthenticatedEmployeesRouteImport } from "./routes/_authenticated/employees"
+import { Route as AuthenticatedDepartmentsRouteImport } from "./routes/_authenticated/departments"
 import { Route as AuthenticatedContractsRouteImport } from "./routes/_authenticated/contracts"
 import { Route as AuthenticatedAuditLogRouteImport } from "./routes/_authenticated/audit-log"
+import { Route as AuthenticatedAttendanceRouteImport } from "./routes/_authenticated/attendance"
+import { Route as AuthenticatedAppraisalsRouteImport } from "./routes/_authenticated/appraisals"
 
 const LoginRoute = LoginRouteImport.update({
   id: "/login",
@@ -39,6 +45,16 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
 const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
   id: "/users",
   path: "/users",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedTrainingRoute = AuthenticatedTrainingRouteImport.update({
+  id: "/training",
+  path: "/training",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedTimesheetsRoute = AuthenticatedTimesheetsRouteImport.update({
+  id: "/timesheets",
+  path: "/timesheets",
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
@@ -66,11 +82,22 @@ const AuthenticatedLeaveRoute = AuthenticatedLeaveRouteImport.update({
   path: "/leave",
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedExpensesRoute = AuthenticatedExpensesRouteImport.update({
+  id: "/expenses",
+  path: "/expenses",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedEmployeesRoute = AuthenticatedEmployeesRouteImport.update({
   id: "/employees",
   path: "/employees",
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedDepartmentsRoute =
+  AuthenticatedDepartmentsRouteImport.update({
+    id: "/departments",
+    path: "/departments",
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedContractsRoute = AuthenticatedContractsRouteImport.update({
   id: "/contracts",
   path: "/contracts",
@@ -81,30 +108,52 @@ const AuthenticatedAuditLogRoute = AuthenticatedAuditLogRouteImport.update({
   path: "/audit-log",
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedAttendanceRoute = AuthenticatedAttendanceRouteImport.update({
+  id: "/attendance",
+  path: "/attendance",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedAppraisalsRoute = AuthenticatedAppraisalsRouteImport.update({
+  id: "/appraisals",
+  path: "/appraisals",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof AuthenticatedIndexRoute
   "/login": typeof LoginRoute
+  "/appraisals": typeof AuthenticatedAppraisalsRoute
+  "/attendance": typeof AuthenticatedAttendanceRoute
   "/audit-log": typeof AuthenticatedAuditLogRoute
   "/contracts": typeof AuthenticatedContractsRoute
+  "/departments": typeof AuthenticatedDepartmentsRoute
   "/employees": typeof AuthenticatedEmployeesRoute
+  "/expenses": typeof AuthenticatedExpensesRoute
   "/leave": typeof AuthenticatedLeaveRoute
   "/payroll": typeof AuthenticatedPayrollRoute
   "/payslips": typeof AuthenticatedPayslipsRoute
   "/reports": typeof AuthenticatedReportsRoute
   "/settings": typeof AuthenticatedSettingsRoute
+  "/timesheets": typeof AuthenticatedTimesheetsRoute
+  "/training": typeof AuthenticatedTrainingRoute
   "/users": typeof AuthenticatedUsersRoute
 }
 export interface FileRoutesByTo {
   "/login": typeof LoginRoute
+  "/appraisals": typeof AuthenticatedAppraisalsRoute
+  "/attendance": typeof AuthenticatedAttendanceRoute
   "/audit-log": typeof AuthenticatedAuditLogRoute
   "/contracts": typeof AuthenticatedContractsRoute
+  "/departments": typeof AuthenticatedDepartmentsRoute
   "/employees": typeof AuthenticatedEmployeesRoute
+  "/expenses": typeof AuthenticatedExpensesRoute
   "/leave": typeof AuthenticatedLeaveRoute
   "/payroll": typeof AuthenticatedPayrollRoute
   "/payslips": typeof AuthenticatedPayslipsRoute
   "/reports": typeof AuthenticatedReportsRoute
   "/settings": typeof AuthenticatedSettingsRoute
+  "/timesheets": typeof AuthenticatedTimesheetsRoute
+  "/training": typeof AuthenticatedTrainingRoute
   "/users": typeof AuthenticatedUsersRoute
   "/": typeof AuthenticatedIndexRoute
 }
@@ -112,14 +161,20 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/_authenticated": typeof AuthenticatedRouteWithChildren
   "/login": typeof LoginRoute
+  "/_authenticated/appraisals": typeof AuthenticatedAppraisalsRoute
+  "/_authenticated/attendance": typeof AuthenticatedAttendanceRoute
   "/_authenticated/audit-log": typeof AuthenticatedAuditLogRoute
   "/_authenticated/contracts": typeof AuthenticatedContractsRoute
+  "/_authenticated/departments": typeof AuthenticatedDepartmentsRoute
   "/_authenticated/employees": typeof AuthenticatedEmployeesRoute
+  "/_authenticated/expenses": typeof AuthenticatedExpensesRoute
   "/_authenticated/leave": typeof AuthenticatedLeaveRoute
   "/_authenticated/payroll": typeof AuthenticatedPayrollRoute
   "/_authenticated/payslips": typeof AuthenticatedPayslipsRoute
   "/_authenticated/reports": typeof AuthenticatedReportsRoute
   "/_authenticated/settings": typeof AuthenticatedSettingsRoute
+  "/_authenticated/timesheets": typeof AuthenticatedTimesheetsRoute
+  "/_authenticated/training": typeof AuthenticatedTrainingRoute
   "/_authenticated/users": typeof AuthenticatedUsersRoute
   "/_authenticated/": typeof AuthenticatedIndexRoute
 }
@@ -128,40 +183,58 @@ export interface FileRouteTypes {
   fullPaths:
     | "/"
     | "/login"
+    | "/appraisals"
+    | "/attendance"
     | "/audit-log"
     | "/contracts"
+    | "/departments"
     | "/employees"
+    | "/expenses"
     | "/leave"
     | "/payroll"
     | "/payslips"
     | "/reports"
     | "/settings"
+    | "/timesheets"
+    | "/training"
     | "/users"
   fileRoutesByTo: FileRoutesByTo
   to:
     | "/login"
+    | "/appraisals"
+    | "/attendance"
     | "/audit-log"
     | "/contracts"
+    | "/departments"
     | "/employees"
+    | "/expenses"
     | "/leave"
     | "/payroll"
     | "/payslips"
     | "/reports"
     | "/settings"
+    | "/timesheets"
+    | "/training"
     | "/users"
     | "/"
   id:
     | "__root__"
     | "/_authenticated"
     | "/login"
+    | "/_authenticated/appraisals"
+    | "/_authenticated/attendance"
     | "/_authenticated/audit-log"
     | "/_authenticated/contracts"
+    | "/_authenticated/departments"
     | "/_authenticated/employees"
+    | "/_authenticated/expenses"
     | "/_authenticated/leave"
     | "/_authenticated/payroll"
     | "/_authenticated/payslips"
     | "/_authenticated/reports"
     | "/_authenticated/settings"
+    | "/_authenticated/timesheets"
+    | "/_authenticated/training"
     | "/_authenticated/users"
     | "/_authenticated/"
   fileRoutesById: FileRoutesById
@@ -201,6 +274,20 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedUsersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    "/_authenticated/training": {
+      id: "/_authenticated/training"
+      path: "/training"
+      fullPath: "/training"
+      preLoaderRoute: typeof AuthenticatedTrainingRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    "/_authenticated/timesheets": {
+      id: "/_authenticated/timesheets"
+      path: "/timesheets"
+      fullPath: "/timesheets"
+      preLoaderRoute: typeof AuthenticatedTimesheetsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     "/_authenticated/settings": {
       id: "/_authenticated/settings"
       path: "/settings"
@@ -236,11 +323,25 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedLeaveRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    "/_authenticated/expenses": {
+      id: "/_authenticated/expenses"
+      path: "/expenses"
+      fullPath: "/expenses"
+      preLoaderRoute: typeof AuthenticatedExpensesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     "/_authenticated/employees": {
       id: "/_authenticated/employees"
       path: "/employees"
       fullPath: "/employees"
       preLoaderRoute: typeof AuthenticatedEmployeesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    "/_authenticated/departments": {
+      id: "/_authenticated/departments"
+      path: "/departments"
+      fullPath: "/departments"
+      preLoaderRoute: typeof AuthenticatedDepartmentsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     "/_authenticated/contracts": {
@@ -257,31 +358,57 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedAuditLogRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    "/_authenticated/attendance": {
+      id: "/_authenticated/attendance"
+      path: "/attendance"
+      fullPath: "/attendance"
+      preLoaderRoute: typeof AuthenticatedAttendanceRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    "/_authenticated/appraisals": {
+      id: "/_authenticated/appraisals"
+      path: "/appraisals"
+      fullPath: "/appraisals"
+      preLoaderRoute: typeof AuthenticatedAppraisalsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedAppraisalsRoute: typeof AuthenticatedAppraisalsRoute
+  AuthenticatedAttendanceRoute: typeof AuthenticatedAttendanceRoute
   AuthenticatedAuditLogRoute: typeof AuthenticatedAuditLogRoute
   AuthenticatedContractsRoute: typeof AuthenticatedContractsRoute
+  AuthenticatedDepartmentsRoute: typeof AuthenticatedDepartmentsRoute
   AuthenticatedEmployeesRoute: typeof AuthenticatedEmployeesRoute
+  AuthenticatedExpensesRoute: typeof AuthenticatedExpensesRoute
   AuthenticatedLeaveRoute: typeof AuthenticatedLeaveRoute
   AuthenticatedPayrollRoute: typeof AuthenticatedPayrollRoute
   AuthenticatedPayslipsRoute: typeof AuthenticatedPayslipsRoute
   AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedTimesheetsRoute: typeof AuthenticatedTimesheetsRoute
+  AuthenticatedTrainingRoute: typeof AuthenticatedTrainingRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAppraisalsRoute: AuthenticatedAppraisalsRoute,
+  AuthenticatedAttendanceRoute: AuthenticatedAttendanceRoute,
   AuthenticatedAuditLogRoute: AuthenticatedAuditLogRoute,
   AuthenticatedContractsRoute: AuthenticatedContractsRoute,
+  AuthenticatedDepartmentsRoute: AuthenticatedDepartmentsRoute,
   AuthenticatedEmployeesRoute: AuthenticatedEmployeesRoute,
+  AuthenticatedExpensesRoute: AuthenticatedExpensesRoute,
   AuthenticatedLeaveRoute: AuthenticatedLeaveRoute,
   AuthenticatedPayrollRoute: AuthenticatedPayrollRoute,
   AuthenticatedPayslipsRoute: AuthenticatedPayslipsRoute,
   AuthenticatedReportsRoute: AuthenticatedReportsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedTimesheetsRoute: AuthenticatedTimesheetsRoute,
+  AuthenticatedTrainingRoute: AuthenticatedTrainingRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }

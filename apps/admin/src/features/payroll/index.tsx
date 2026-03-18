@@ -1,106 +1,139 @@
-import { useState } from "react";
-import { formatBGN } from "@/lib/format";
-import { usePayrollRuns, type PayrollRun } from "./hooks";
-import { NewPayrollRunButton } from "./run-form";
-import { PayrollRunStatus } from "./run-status";
+import AddIcon from '@mui/icons-material/Add';
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+import React, { useCallback, useEffect, useState } from 'react';
 
-const STATUS_COLORS: Record<string, string> = {
-  draft: "bg-gray-100 text-gray-700",
-  processing: "bg-yellow-100 text-yellow-800",
-  completed: "bg-green-100 text-green-700",
-  failed: "bg-red-100 text-red-700",
-  cancelled: "bg-gray-100 text-gray-500",
+import { getPayrollRuns, type PayrollRun, type PaginatedResponse } from '@/api/api';
+
+export const PayrollList: React.FC = () => {
+  const [data, setData] = useState<PaginatedResponse<PayrollRun> | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+
+  const loadData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await getPayrollRuns({ page: page + 1, per_page: rowsPerPage });
+      setData(result);
+    } catch {
+      setError('Failed to load payroll runs.');
+    } finally {
+      setLoading(false);
+    }
+  }, [page, rowsPerPage]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  const statusColor = (status: string): 'success' | 'default' | 'error' | 'warning' => {
+    switch (status) {
+      case 'completed':
+        return 'success';
+      case 'processing':
+        return 'warning';
+      case 'cancelled':
+        return 'error';
+      default:
+        return 'default';
+    }
+  };
+
+  return (
+    <Stack spacing={3}>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Box>
+          <Typography variant="h4" fontWeight={700}>
+            Payroll
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Payroll run management
+          </Typography>
+        </Box>
+        <Button variant="contained" startIcon={<AddIcon />}>
+          Run Payroll
+        </Button>
+      </Stack>
+
+      {error && (
+        <Alert severity="error" action={<Button onClick={loadData}>Retry</Button>}>
+          {error}
+        </Alert>
+      )}
+
+      <TableContainer component={Paper}>
+        {loading ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+            <CircularProgress />
+          </Box>
+        ) : (
+          <>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Period</TableCell>
+                  <TableCell>Employees</TableCell>
+                  <TableCell>Gross Total</TableCell>
+                  <TableCell>Net Total</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Created</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.data.map((run) => (
+                  <TableRow key={run.id} hover sx={{ cursor: 'pointer' }}>
+                    <TableCell>
+                      {new Date(run.period_start).toLocaleDateString()} -{' '}
+                      {new Date(run.period_end).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>{run.employee_count}</TableCell>
+                    <TableCell>${run.total_gross.toLocaleString()}</TableCell>
+                    <TableCell>${run.total_net.toLocaleString()}</TableCell>
+                    <TableCell>
+                      <Chip label={run.status} size="small" color={statusColor(run.status)} />
+                    </TableCell>
+                    <TableCell>{new Date(run.created_at).toLocaleDateString()}</TableCell>
+                  </TableRow>
+                ))}
+                {(!data?.data || data.data.length === 0) && (
+                  <TableRow>
+                    <TableCell colSpan={6} align="center">
+                      No payroll runs found
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <TablePagination
+              component="div"
+              count={data?.meta.total ?? 0}
+              page={page}
+              onPageChange={(_, newPage) => setPage(newPage)}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={(e) => {
+                setRowsPerPage(parseInt(e.target.value, 10));
+                setPage(0);
+              }}
+            />
+          </>
+        )}
+      </TableContainer>
+    </Stack>
+  );
 };
-
-export function PayrollPage() {
-  const { data: runs, isLoading } = usePayrollRuns();
-  const [expandedId, setExpandedId] = useState<string | null>(null);
-
-  return (
-    <div>
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Payroll Runs</h1>
-        <NewPayrollRunButton />
-      </div>
-
-      {isLoading ? (
-        <p className="mt-4 text-sm text-gray-500">Loading payroll runs...</p>
-      ) : !runs?.length ? (
-        <p className="mt-4 text-sm text-gray-500">No payroll runs yet.</p>
-      ) : (
-        <div className="mt-4 overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Period</th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Status</th>
-                <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Employees</th>
-                <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Total Gross</th>
-                <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Total Net</th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Created</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
-              {runs.map((run: PayrollRun) => (
-                <PayrollRunRow
-                  key={run.id}
-                  run={run}
-                  isExpanded={expandedId === run.id}
-                  onToggle={() =>
-                    setExpandedId(expandedId === run.id ? null : run.id)
-                  }
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {expandedId && (
-        <div className="mt-4">
-          <PayrollRunStatus runId={expandedId} />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function PayrollRunRow({
-  run,
-  isExpanded,
-  onToggle,
-}: {
-  run: PayrollRun;
-  isExpanded: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <tr
-      onClick={onToggle}
-      className={`cursor-pointer hover:bg-gray-50 ${isExpanded ? "bg-blue-50" : ""}`}
-    >
-      <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-900">
-        {run.month}/{run.year}
-      </td>
-      <td className="whitespace-nowrap px-4 py-3 text-sm">
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${STATUS_COLORS[run.status] ?? "bg-gray-100 text-gray-700"}`}
-        >
-          {run.status}
-        </span>
-      </td>
-      <td className="whitespace-nowrap px-4 py-3 text-right text-sm text-gray-900">
-        {run.employee_count}
-      </td>
-      <td className="whitespace-nowrap px-4 py-3 text-right text-sm text-gray-900">
-        {formatBGN(run.total_gross)}
-      </td>
-      <td className="whitespace-nowrap px-4 py-3 text-right text-sm text-gray-900">
-        {formatBGN(run.total_net)}
-      </td>
-      <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-500">
-        {new Date(run.created_at).toLocaleDateString("bg-BG")}
-      </td>
-    </tr>
-  );
-}

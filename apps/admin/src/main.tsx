@@ -1,31 +1,17 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
-import "./main.css";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000,
-      retry: 1,
-    },
-  },
-});
+import { App } from './App';
+import { AuthProvider } from './auth/AuthProvider';
+import { ColorModeProvider } from './theme/ColorMode';
 
-const router = createRouter({ routeTree });
-
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
-
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  </StrictMode>,
+const container = document.getElementById('root');
+createRoot(container!).render(
+  <React.StrictMode>
+    <ColorModeProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </ColorModeProvider>
+  </React.StrictMode>,
 );

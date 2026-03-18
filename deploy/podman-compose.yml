@@ -20,6 +20,8 @@ services:
       - hr-api
       - hr-blog
       - hr-docs
+      - hr-admin
+      - odoo
     networks:
       - hr
     restart: unless-stopped
@@ -79,6 +81,18 @@ services:
     hostname: hr-docs
     ports:
       - "127.0.0.1:5021:3011"
+    networks:
+      - hr
+    restart: unless-stopped
+
+  hr-admin:
+    image: node:22-alpine
+    container_name: hr-admin
+    hostname: hr-admin
+    ports:
+      - "127.0.0.1:5014:5014"
+    env_file:
+      - ../.env
     networks:
       - hr
     restart: unless-stopped
@@ -155,6 +169,8 @@ services:
       - ./odoo-addons/timesheet:/mnt/extra-addons/timesheet:ro
       - ./odoo-addons/reporting-engine:/mnt/extra-addons/reporting-engine:ro
       - ./odoo-addons/account-financial-reporting:/mnt/extra-addons/account-financial-reporting:ro
+      - ./odoo-addons/project:/mnt/extra-addons/project:ro
+      - ./odoo-addons/fleet:/mnt/extra-addons/fleet:ro
     depends_on:
       hr-odoo-db:
         condition: service_healthy

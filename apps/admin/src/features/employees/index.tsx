@@ -1,126 +1,163 @@
-import { useState, useMemo, useCallback } from "react";
-import type { PaginationState, SortingState } from "@tanstack/react-table";
-import type { components } from "@/api/generated/api";
-import { DataTable } from "@/components/shared/data-table";
-import { getEmployeeColumns } from "./columns";
-import { EmployeeForm } from "./employee-form";
-import { useEmployees, useCreateEmployee, useUpdateEmployee, useDeleteEmployee } from "./hooks";
-import { useHasPermission } from "@/auth/hooks";
-import { Plus } from "lucide-react";
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
+import InputAdornment from '@mui/material/InputAdornment';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import React, { useCallback, useEffect, useState } from 'react';
 
-type Employee = components["schemas"]["odoo.Employee"];
+import { getEmployees, type Employee, type PaginatedResponse } from '@/api/api';
 
-export function EmployeesPage() {
-  const canWrite = useHasPermission("employees:write");
+export const EmployeeList: React.FC = () => {
+  const [data, setData] = useState<PaginatedResponse<Employee> | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [search, setSearch] = useState('');
 
-  const [search, setSearch] = useState("");
-  const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: 20 });
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const loadData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await getEmployees({
+        page: page + 1,
+        per_page: rowsPerPage,
+        search: search || undefined,
+      });
+      setData(result);
+    } catch {
+      setError('Failed to load employees.');
+    } finally {
+      setLoading(false);
+    }
+  }, [page, rowsPerPage, search]);
 
-  const [formOpen, setFormOpen] = useState(false);
-  const [editingEmployee, setEditingEmployee] = useState<Employee | null>(null);
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
-  const { data, isLoading } = useEmployees({
-    page: pagination.pageIndex + 1,
-    perPage: pagination.pageSize,
-    search: search || undefined,
-  });
-
-  const listData = data as { data?: Employee[]; meta?: { total?: number; total_pages?: number } } | undefined;
-  const employees = listData?.data ?? [];
-  const pageCount = listData?.meta?.total_pages ?? 1;
-
-  const createMutation = useCreateEmployee();
-  const updateMutation = useUpdateEmployee();
-  const deleteMutation = useDeleteEmployee();
-
-  const handleEdit = useCallback((emp: Employee) => {
-    setEditingEmployee(emp);
-    setFormOpen(true);
-  }, []);
-
-  const handleDelete = useCallback(
-    (emp: Employee) => {
-      if (emp.id && confirm(`Deactivate ${emp.name}?`)) {
-        deleteMutation.mutate(emp.id);
-      }
-    },
-    [deleteMutation],
-  );
-
-  const handleFormSubmit = useCallback(
-    (values: { name: string; work_email: string; job_title?: string; department_id?: number; employee_type?: string }) => {
-      if (editingEmployee?.id) {
-        updateMutation.mutate(
-          { id: editingEmployee.id, body: values },
-          {
-            onSuccess: () => {
-              setFormOpen(false);
-              setEditingEmployee(null);
-            },
-          },
-        );
-      } else {
-        createMutation.mutate(values, {
-          onSuccess: () => {
-            setFormOpen(false);
-          },
-        });
-      }
-    },
-    [editingEmployee, createMutation, updateMutation],
-  );
-
-  const columns = useMemo(
-    () => getEmployeeColumns({ onEdit: handleEdit, onDelete: handleDelete, canWrite }),
-    [handleEdit, handleDelete, canWrite],
-  );
+  const statusColor = (status: string): 'success' | 'default' | 'error' => {
+    switch (status) {
+      case 'active':
+        return 'success';
+      case 'terminated':
+        return 'error';
+      default:
+        return 'default';
+    }
+  };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Employees</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Manage your organization's employees
-          </p>
-        </div>
-        {canWrite && (
-          <button
-            onClick={() => {
-              setEditingEmployee(null);
-              setFormOpen(true);
-            }}
-            className="inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-          >
-            <Plus className="h-4 w-4" />
-            Add Employee
-          </button>
+    <Stack spacing={3}>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Box>
+          <Typography variant="h4" fontWeight={700}>
+            Employees
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Manage your workforce
+          </Typography>
+        </Box>
+        <Button variant="contained" startIcon={<AddIcon />}>
+          Add Employee
+        </Button>
+      </Stack>
+
+      <Paper sx={{ p: 2 }}>
+        <TextField
+          placeholder="Search employees..."
+          size="small"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          sx={{ minWidth: 300 }}
+        />
+      </Paper>
+
+      {error && (
+        <Alert severity="error" action={<Button onClick={loadData}>Retry</Button>}>
+          {error}
+        </Alert>
+      )}
+
+      <TableContainer component={Paper}>
+        {loading ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+            <CircularProgress />
+          </Box>
+        ) : (
+          <>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Employee #</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Department</TableCell>
+                  <TableCell>Job Title</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Hire Date</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.data.map((employee) => (
+                  <TableRow key={employee.id} hover sx={{ cursor: 'pointer' }}>
+                    <TableCell>{employee.employee_number}</TableCell>
+                    <TableCell>
+                      {employee.first_name} {employee.last_name}
+                    </TableCell>
+                    <TableCell>{employee.email}</TableCell>
+                    <TableCell>{employee.department_name ?? '-'}</TableCell>
+                    <TableCell>{employee.job_title}</TableCell>
+                    <TableCell>
+                      <Chip label={employee.status} size="small" color={statusColor(employee.status)} />
+                    </TableCell>
+                    <TableCell>{new Date(employee.hire_date).toLocaleDateString()}</TableCell>
+                  </TableRow>
+                ))}
+                {(!data?.data || data.data.length === 0) && (
+                  <TableRow>
+                    <TableCell colSpan={7} align="center">
+                      No employees found
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <TablePagination
+              component="div"
+              count={data?.meta.total ?? 0}
+              page={page}
+              onPageChange={(_, newPage) => setPage(newPage)}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={(e) => {
+                setRowsPerPage(parseInt(e.target.value, 10));
+                setPage(0);
+              }}
+            />
+          </>
         )}
-      </div>
-
-      <DataTable
-        columns={columns}
-        data={employees}
-        pageCount={pageCount}
-        pagination={pagination}
-        onPaginationChange={setPagination}
-        sorting={sorting}
-        onSortingChange={setSorting}
-        isLoading={isLoading}
-        searchValue={search}
-        onSearchChange={setSearch}
-        searchPlaceholder="Search by name or email..."
-      />
-
-      <EmployeeForm
-        key={editingEmployee?.id ?? "new"}
-        open={formOpen}
-        onOpenChange={setFormOpen}
-        employee={editingEmployee}
-        onSubmit={handleFormSubmit}
-        isSubmitting={createMutation.isPending || updateMutation.isPending}
-      />
-    </div>
+      </TableContainer>
+    </Stack>
   );
-}
+};

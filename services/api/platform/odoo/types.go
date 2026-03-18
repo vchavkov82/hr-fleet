@@ -314,3 +314,205 @@ type Skill struct {
 var skillFields = []string{
 	"id", "name", "skill_type_id",
 }
+
+// Appraisal represents an hr.appraisal record from OCA hr_appraisal_oca.
+type Appraisal struct {
+	ID                        int64    `json:"id"`
+	EmployeeID                Many2One `json:"employee_id"`
+	ManagerIDs                []int64  `json:"manager_ids"`
+	DateClose                 string   `json:"date_close"`
+	State                     string   `json:"state"` // 1_new, 2_pending, 3_done
+	EmployeeFeedback          string   `json:"employee_feedback"`
+	ManagerFeedback           string   `json:"manager_feedback"`
+	EmployeeFeedbackPublished bool     `json:"employee_feedback_published"`
+	ManagerFeedbackPublished  bool     `json:"manager_feedback_published"`
+	DepartmentID              Many2One `json:"department_id"`
+	JobID                     Many2One `json:"job_id"`
+	TemplateID                Many2One `json:"appraisal_template_id"`
+	Note                      string   `json:"note"`
+	CreateDate                string   `json:"create_date"`
+	WriteDate                 string   `json:"write_date"`
+}
+
+var appraisalFields = []string{
+	"id", "employee_id", "manager_ids", "date_close", "state",
+	"employee_feedback", "manager_feedback",
+	"employee_feedback_published", "manager_feedback_published",
+	"department_id", "job_id", "appraisal_template_id", "note",
+	"create_date", "write_date",
+}
+
+// AppraisalCreateRequest contains fields for creating a new hr.appraisal record.
+type AppraisalCreateRequest struct {
+	EmployeeID int64  `json:"employee_id"`
+	DateClose  string `json:"date_close"`
+	TemplateID int64  `json:"appraisal_template_id,omitempty"`
+}
+
+// AppraisalTemplate represents an hr.appraisal.template record.
+type AppraisalTemplate struct {
+	ID                     int64    `json:"id"`
+	Description            string   `json:"description"`
+	CompanyID              Many2One `json:"company_id"`
+	EmployeeFeedbackTmpl   string   `json:"appraisal_employee_feedback_template"`
+	ManagerFeedbackTmpl    string   `json:"appraisal_manager_feedback_template"`
+}
+
+var appraisalTemplateFields = []string{
+	"id", "description", "company_id",
+	"appraisal_employee_feedback_template", "appraisal_manager_feedback_template",
+}
+
+// Course represents an hr.course record from OCA hr_course.
+type Course struct {
+	ID              int64    `json:"id"`
+	Name            string   `json:"name"`
+	CategoryID      Many2One `json:"category_id"`
+	Permanence      bool     `json:"permanence"`
+	PermanenceTime  string   `json:"permanence_time"`
+	Content         string   `json:"content"`
+	Objective       string   `json:"objective"`
+}
+
+var courseFields = []string{
+	"id", "name", "category_id", "permanence", "permanence_time", "content", "objective",
+}
+
+// CourseCategory represents an hr.course.category record.
+type CourseCategory struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
+}
+
+var courseCategoryFields = []string{"id", "name"}
+
+// CourseSchedule represents an hr.course.schedule record.
+type CourseSchedule struct {
+	ID            int64    `json:"id"`
+	Name          string   `json:"name"`
+	CourseID      Many2One `json:"course_id"`
+	StartDate     string   `json:"start_date"`
+	EndDate       string   `json:"end_date"`
+	Cost          float64  `json:"cost"`
+	AuthorizedBy  Many2One `json:"authorized_by"`
+	State         string   `json:"state"` // draft, waiting_attendees, in_progress, in_validation, completed, cancelled
+	AttendantIDs  []int64  `json:"attendant_ids"`
+	Place         string   `json:"place"`
+}
+
+var courseScheduleFields = []string{
+	"id", "name", "course_id", "start_date", "end_date", "cost",
+	"authorized_by", "state", "attendant_ids", "place",
+}
+
+// CourseAttendee represents an hr.course.attendee record.
+type CourseAttendee struct {
+	ID               int64    `json:"id"`
+	CourseScheduleID Many2One `json:"course_schedule_id"`
+	EmployeeID       Many2One `json:"employee_id"`
+	Result           string   `json:"result"` // passed, failed, absent, pending
+	Active           bool     `json:"active"`
+}
+
+var courseAttendeeFields = []string{
+	"id", "course_schedule_id", "employee_id", "result", "active",
+}
+
+// CourseCreateRequest contains fields for creating a new hr.course record.
+type CourseCreateRequest struct {
+	Name       string `json:"name"`
+	CategoryID int64  `json:"category_id"`
+	Permanence bool   `json:"permanence"`
+	Content    string `json:"content,omitempty"`
+	Objective  string `json:"objective,omitempty"`
+}
+
+// CourseScheduleCreateRequest contains fields for creating a new hr.course.schedule record.
+type CourseScheduleCreateRequest struct {
+	Name         string  `json:"name"`
+	CourseID     int64   `json:"course_id"`
+	StartDate    string  `json:"start_date"`
+	EndDate      string  `json:"end_date"`
+	Cost         float64 `json:"cost"`
+	AuthorizedBy int64   `json:"authorized_by"`
+	AttendantIDs []int64 `json:"attendant_ids,omitempty"`
+	Place        string  `json:"place,omitempty"`
+}
+
+// Project represents a project.project record from OCA project.
+type Project struct {
+	ID           int64    `json:"id"`
+	Name         string   `json:"name"`
+	Active       bool     `json:"active"`
+	PartnerID    Many2One `json:"partner_id"`
+	UserID       Many2One `json:"user_id"`
+	DateStart    string   `json:"date_start"`
+	Date         string   `json:"date"`
+	Description  string   `json:"description"`
+	TaskCount    int64    `json:"task_count"`
+	CompanyID    Many2One `json:"company_id"`
+}
+
+var projectFields = []string{
+	"id", "name", "active", "partner_id", "user_id",
+	"date_start", "date", "description", "task_count", "company_id",
+}
+
+// ProjectTask represents a project.task record.
+type ProjectTask struct {
+	ID            int64    `json:"id"`
+	Name          string   `json:"name"`
+	ProjectID     Many2One `json:"project_id"`
+	UserIDs       []int64  `json:"user_ids"`
+	StageID       Many2One `json:"stage_id"`
+	DateDeadline  string   `json:"date_deadline"`
+	Description   string   `json:"description"`
+	Priority      string   `json:"priority"`
+	State         string   `json:"state"`
+	PlannedHours  float64  `json:"planned_hours"`
+	EffectiveHours float64 `json:"effective_hours"`
+}
+
+var projectTaskFields = []string{
+	"id", "name", "project_id", "user_ids", "stage_id",
+	"date_deadline", "description", "priority", "state",
+	"planned_hours", "effective_hours",
+}
+
+// FleetVehicle represents a fleet.vehicle record from OCA fleet.
+type FleetVehicle struct {
+	ID              int64    `json:"id"`
+	Name            string   `json:"name"`
+	LicensePlate    string   `json:"license_plate"`
+	ModelID         Many2One `json:"model_id"`
+	DriverID        Many2One `json:"driver_id"`
+	FuelType        string   `json:"fuel_type"`
+	Odometer        float64  `json:"odometer"`
+	State           Many2One `json:"state_id"`
+	CompanyID       Many2One `json:"company_id"`
+	AcquisitionDate string   `json:"acquisition_date"`
+	Active          bool     `json:"active"`
+}
+
+var fleetVehicleFields = []string{
+	"id", "name", "license_plate", "model_id", "driver_id",
+	"fuel_type", "odometer", "state_id", "company_id",
+	"acquisition_date", "active",
+}
+
+// FleetVehicleLog represents a fleet.vehicle.log.services record.
+type FleetVehicleLog struct {
+	ID          int64    `json:"id"`
+	VehicleID   Many2One `json:"vehicle_id"`
+	ServiceType Many2One `json:"service_type_id"`
+	Date        string   `json:"date"`
+	Description string   `json:"description"`
+	Cost        float64  `json:"amount"`
+	Odometer    float64  `json:"odometer"`
+	State       string   `json:"state"`
+}
+
+var fleetVehicleLogFields = []string{
+	"id", "vehicle_id", "service_type_id", "date",
+	"description", "amount", "odometer", "state",
+}
