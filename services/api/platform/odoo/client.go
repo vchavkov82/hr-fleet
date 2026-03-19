@@ -299,8 +299,8 @@ func (c *Client) SearchCount(ctx context.Context, model string, domain []any) (i
 }
 
 // Create creates a new record in the given Odoo model and returns its ID.
-func (c *Client) Create(model string, vals map[string]any) (int64, error) {
-	if err := c.EnsureAuthenticated(); err != nil {
+func (c *Client) Create(ctx context.Context, model string, vals map[string]any) (int64, error) {
+	if err := c.EnsureAuthenticated(ctx); err != nil {
 		return 0, err
 	}
 
