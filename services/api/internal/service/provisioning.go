@@ -76,7 +76,7 @@ func (s *ProvisioningService) ProvisionDefaults(ctx context.Context, companyID i
 		{"Unpaid Leave", "UNPAID"},
 	}
 	for _, lt := range leaveTypes {
-		_, err := s.odoo.Create("hr.leave.type", map[string]any{
+		_, err := s.odoo.Create(ctx, "hr.leave.type", map[string]any{
 			"name":       lt.name,
 			"code":       lt.code,
 			"company_id": companyID,
