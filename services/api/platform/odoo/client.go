@@ -32,6 +32,7 @@ func DefaultClientOptions() ClientOptions {
 		CBIntervalSeconds:  30,
 		CBTimeoutSeconds:   10,
 		CBFailureThreshold: 5,
+		HTTPTimeoutSeconds: 30,
 	}
 }
 
