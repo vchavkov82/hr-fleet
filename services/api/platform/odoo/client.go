@@ -117,27 +117,36 @@ func (c *Client) nextID() int {
 // args are the positional arguments.
 //
 // On session expiry (AccessDenied), Call will re-authenticate once and retry.
-func (c *Client) Call(service, method string, args []any) (json.RawMessage, error) {
+func (c *Client) Call(ctx context.Context, service, method string, args []any) (json.RawMessage, error) {
 	// Acquire semaphore for connection pooling
-	c.sem <- struct{}{}
+	select {
+	case c.sem <- struct{}{}:
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
 	defer func() { <-c.sem }()
+
+	start := time.Now()
+	c.logger.Debug().Str("service", service).Str("method", method).Msg("odoo request start")
 
 	// Execute through circuit breaker
 	result, err := c.cb.Execute(func() (interface{}, error) {
-		return c.doCall(service, method, args)
+		return c.doCall(ctx, service, method, args)
 	})
 	if err != nil {
 		// Check for circuit breaker open
 		if err == gobreaker.ErrOpenState || err == gobreaker.ErrTooManyRequests {
+			c.logger.Warn().Dur("duration", time.Since(start)).Msg("circuit breaker is open")
 			return nil, fmt.Errorf("circuit breaker is open")
 		}
 		// Re-auth on session expiry
 		if isSessionExpired(err) && c.uid > 0 {
-			if authErr := c.Authenticate(); authErr != nil {
+			c.logger.Info().Msg("session expired, re-authenticating")
+			if authErr := c.Authenticate(ctx); authErr != nil {
 				return nil, fmt.Errorf("re-auth failed: %w", authErr)
 			}
 			retryResult, retryErr := c.cb.Execute(func() (interface{}, error) {
-				return c.doCall(service, method, args)
+				return c.doCall(ctx, service, method, args)
 			})
 			if retryErr != nil {
 				return nil, retryErr
@@ -145,10 +154,13 @@ func (c *Client) Call(service, method string, args []any) (json.RawMessage, erro
 			if retryResult == nil {
 				return nil, nil
 			}
+			c.logger.Debug().Dur("duration", time.Since(start)).Msg("odoo request complete (after re-auth)")
 			return retryResult.(json.RawMessage), nil
 		}
+		c.logger.Warn().Err(err).Dur("duration", time.Since(start)).Str("service", service).Str("method", method).Msg("odoo request failed")
 		return nil, err
 	}
+	c.logger.Debug().Dur("duration", time.Since(start)).Str("service", service).Str("method", method).Msg("odoo request complete")
 	if result == nil {
 		return nil, nil
 	}
