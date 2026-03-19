@@ -65,3 +65,12 @@ func envOrDefault(key, fallback string) string {
 	}
 	return fallback
 }
+
+func envOrDefaultInt(key string, fallback int) int {
+	if v := os.Getenv(key); v != "" {
+		if n, err := strconv.Atoi(v); err == nil {
+			return n
+		}
+	}
+	return fallback
+}
