@@ -60,10 +60,15 @@ func NewClient(baseURL, db, username, password string) *Client {
 }
 
 // NewClientWithOptions creates a new Odoo JSON-RPC client with custom options.
-func NewClientWithOptions(baseURL, db, username, password string, opts ClientOptions) *Client {
+func NewClientWithOptions(baseURL, db, username, password string, opts ClientOptions, logger zerolog.Logger) *Client {
 	if opts.MaxConcurrent <= 0 {
 		opts.MaxConcurrent = 20
 	}
+	if opts.HTTPTimeoutSeconds <= 0 {
+		opts.HTTPTimeoutSeconds = 30
+	}
+
+	l := logger.With().Str("component", "odoo").Logger()
 
 	failureThreshold := opts.CBFailureThreshold
 	cb := gobreaker.NewCircuitBreaker(gobreaker.Settings{
@@ -74,6 +79,12 @@ func NewClientWithOptions(baseURL, db, username, password string, opts ClientOpt
 		ReadyToTrip: func(counts gobreaker.Counts) bool {
 			return int(counts.ConsecutiveFailures) >= failureThreshold
 		},
+		OnStateChange: func(name string, from, to gobreaker.State) {
+			l.Warn().
+				Str("from", from.String()).
+				Str("to", to.String()).
+				Msg("circuit breaker state change")
+		},
 	})
 
 	return &Client{
@@ -81,10 +92,11 @@ func NewClientWithOptions(baseURL, db, username, password string, opts ClientOpt
 		db:            db,
 		username:      username,
 		password:      password,
-		client:        &http.Client{},
+		client:        &http.Client{Timeout: time.Duration(opts.HTTPTimeoutSeconds) * time.Second},
 		cb:            cb,
 		sem:           make(chan struct{}, opts.MaxConcurrent),
 		maxConcurrent: opts.MaxConcurrent,
+		logger:        l,
 	}
 }
 
