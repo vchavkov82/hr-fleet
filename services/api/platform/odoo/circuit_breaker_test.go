@@ -9,6 +9,9 @@ import (
 	"sync"
 	"sync/atomic"
 	"testing"
+	"time"
+
+	"github.com/rs/zerolog"
 
 	"github.com/rs/zerolog"
 )
