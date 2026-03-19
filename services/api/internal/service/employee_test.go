@@ -13,36 +13,36 @@ import (
 
 // mockOdooClient implements OdooClient for testing.
 type mockOdooClient struct {
-	listFunc   func(domain []any, limit, offset int) ([]odoo.Employee, int, error)
-	getFunc    func(id int64) (*odoo.Employee, error)
-	createFunc func(req odoo.EmployeeCreateRequest) (int64, error)
-	updateFunc func(id int64, vals map[string]any) error
+	listFunc   func(ctx context.Context, domain []any, limit, offset int) ([]odoo.Employee, int, error)
+	getFunc    func(ctx context.Context, id int64) (*odoo.Employee, error)
+	createFunc func(ctx context.Context, req odoo.EmployeeCreateRequest) (int64, error)
+	updateFunc func(ctx context.Context, id int64, vals map[string]any) error
 }
 
-func (m *mockOdooClient) ListEmployees(domain []any, limit, offset int) ([]odoo.Employee, int, error) {
+func (m *mockOdooClient) ListEmployees(ctx context.Context, domain []any, limit, offset int) ([]odoo.Employee, int, error) {
 	if m.listFunc != nil {
-		return m.listFunc(domain, limit, offset)
+		return m.listFunc(ctx, domain, limit, offset)
 	}
 	return nil, 0, nil
 }
 
-func (m *mockOdooClient) GetEmployee(id int64) (*odoo.Employee, error) {
+func (m *mockOdooClient) GetEmployee(ctx context.Context, id int64) (*odoo.Employee, error) {
 	if m.getFunc != nil {
-		return m.getFunc(id)
+		return m.getFunc(ctx, id)
 	}
 	return nil, nil
 }
 
-func (m *mockOdooClient) CreateEmployee(req odoo.EmployeeCreateRequest) (int64, error) {
+func (m *mockOdooClient) CreateEmployee(ctx context.Context, req odoo.EmployeeCreateRequest) (int64, error) {
 	if m.createFunc != nil {
-		return m.createFunc(req)
+		return m.createFunc(ctx, req)
 	}
 	return 0, nil
 }
 
-func (m *mockOdooClient) UpdateEmployee(id int64, vals map[string]any) error {
+func (m *mockOdooClient) UpdateEmployee(ctx context.Context, id int64, vals map[string]any) error {
 	if m.updateFunc != nil {
-		return m.updateFunc(id, vals)
+		return m.updateFunc(ctx, id, vals)
 	}
 	return nil
 }
@@ -64,7 +64,7 @@ func TestEmployeeService_List_CacheHit(t *testing.T) {
 	ctx := context.Background()
 
 	odooCallCount := 0
-	mock.listFunc = func(domain []any, limit, offset int) ([]odoo.Employee, int, error) {
+	mock.listFunc = func(_ context.Context, domain []any, limit, offset int) ([]odoo.Employee, int, error) {
 		odooCallCount++
 		return []odoo.Employee{{ID: 1, Name: "Alice"}}, 1, nil
 	}
@@ -93,7 +93,7 @@ func TestEmployeeService_List_CacheMiss_CallsOdoo(t *testing.T) {
 	ctx := context.Background()
 
 	called := false
-	mock.listFunc = func(domain []any, limit, offset int) ([]odoo.Employee, int, error) {
+	mock.listFunc = func(_ context.Context, domain []any, limit, offset int) ([]odoo.Employee, int, error) {
 		called = true
 		return []odoo.Employee{{ID: 1, Name: "Bob"}}, 1, nil
 	}
@@ -115,11 +115,11 @@ func TestEmployeeService_Create_InvalidatesCache(t *testing.T) {
 	ctx := context.Background()
 
 	callCount := 0
-	mock.listFunc = func(domain []any, limit, offset int) ([]odoo.Employee, int, error) {
+	mock.listFunc = func(_ context.Context, domain []any, limit, offset int) ([]odoo.Employee, int, error) {
 		callCount++
 		return []odoo.Employee{{ID: 1}}, 1, nil
 	}
-	mock.createFunc = func(req odoo.EmployeeCreateRequest) (int64, error) {
+	mock.createFunc = func(_ context.Context, req odoo.EmployeeCreateRequest) (int64, error) {
 		return 2, nil
 	}
 
@@ -143,7 +143,7 @@ func TestEmployeeService_List_GracefulDegradation_StaleCache(t *testing.T) {
 	mr, svc, mock := setupTestService(t)
 	ctx := context.Background()
 
-	mock.listFunc = func(domain []any, limit, offset int) ([]odoo.Employee, int, error) {
+	mock.listFunc = func(_ context.Context, domain []any, limit, offset int) ([]odoo.Employee, int, error) {
 		return []odoo.Employee{{ID: 1, Name: "Cached"}}, 1, nil
 	}
 
@@ -151,7 +151,7 @@ func TestEmployeeService_List_GracefulDegradation_StaleCache(t *testing.T) {
 	_, _, _ = svc.List(ctx, "", 0, true, 20, 0)
 
 	// Now Odoo fails
-	mock.listFunc = func(domain []any, limit, offset int) ([]odoo.Employee, int, error) {
+	mock.listFunc = func(_ context.Context, domain []any, limit, offset int) ([]odoo.Employee, int, error) {
 		return nil, 0, errors.New("odoo connection refused")
 	}
 
@@ -177,7 +177,7 @@ func TestEmployeeService_List_Unavailable_NoCacheAtAll(t *testing.T) {
 	_, svc, mock := setupTestService(t)
 	ctx := context.Background()
 
-	mock.listFunc = func(domain []any, limit, offset int) ([]odoo.Employee, int, error) {
+	mock.listFunc = func(_ context.Context, domain []any, limit, offset int) ([]odoo.Employee, int, error) {
 		return nil, 0, errors.New("odoo down")
 	}
 
@@ -191,7 +191,7 @@ func TestEmployeeService_Get_GracefulDegradation(t *testing.T) {
 	mr, svc, mock := setupTestService(t)
 	ctx := context.Background()
 
-	mock.getFunc = func(id int64) (*odoo.Employee, error) {
+	mock.getFunc = func(_ context.Context, id int64) (*odoo.Employee, error) {
 		return &odoo.Employee{ID: 1, Name: "Detail"}, nil
 	}
 
@@ -199,7 +199,7 @@ func TestEmployeeService_Get_GracefulDegradation(t *testing.T) {
 	_, _ = svc.Get(ctx, 1)
 
 	// Now Odoo fails
-	mock.getFunc = func(id int64) (*odoo.Employee, error) {
+	mock.getFunc = func(_ context.Context, id int64) (*odoo.Employee, error) {
 		return nil, errors.New("odoo down")
 	}
 
