@@ -400,7 +400,7 @@ func (c *Client) Read(ctx context.Context, model string, ids []int64, fields []s
 		map[string]any{"fields": fields},
 	}
 
-	result, err := c.Call("object", "execute_kw", args)
+	result, err := c.Call(ctx, "object", "execute_kw", args)
 	if err != nil {
 		return nil, fmt.Errorf("read %s: %w", model, err)
 	}
