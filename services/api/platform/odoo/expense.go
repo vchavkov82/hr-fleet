@@ -1,20 +1,23 @@
 package odoo
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
 // ListExpenses retrieves hr.expense records from Odoo with optional domain filters.
 // Returns the expense slice and total count for pagination.
-func (c *Client) ListExpenses(domain []any, limit, offset int) ([]ExpenseReport, int, error) {
+func (c *Client) ListExpenses(ctx context.Context, domain []any, limit, offset int) ([]ExpenseReport, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.expense", domain)
+	count, err := c.SearchCount(ctx, "hr.expense", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list expenses count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.expense", domain, expenseFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.expense", domain, expenseFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list expenses: %w", err)
 	}
@@ -28,8 +31,8 @@ func (c *Client) ListExpenses(domain []any, limit, offset int) ([]ExpenseReport,
 }
 
 // CreateExpense creates a new hr.expense record in Odoo.
-func (c *Client) CreateExpense(vals map[string]any) (int64, error) {
-	id, err := c.Create("hr.expense", vals)
+func (c *Client) CreateExpense(ctx context.Context, vals map[string]any) (int64, error) {
+	id, err := c.Create(ctx, "hr.expense", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create expense: %w", err)
 	}
@@ -37,13 +40,13 @@ func (c *Client) CreateExpense(vals map[string]any) (int64, error) {
 }
 
 // ApproveExpense triggers the approval action on an hr.expense record.
-func (c *Client) ApproveExpense(id int64) error {
-	return c.CallAction("hr.expense", []int64{id}, "action_approve")
+func (c *Client) ApproveExpense(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.expense", []int64{id}, "action_approve")
 }
 
 // RefuseExpense triggers the refusal action on an hr.expense record.
-func (c *Client) RefuseExpense(id int64) error {
-	return c.CallAction("hr.expense", []int64{id}, "action_refuse")
+func (c *Client) RefuseExpense(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.expense", []int64{id}, "action_refuse")
 }
 
 // parseExpense converts a raw Odoo record map into an ExpenseReport struct.
