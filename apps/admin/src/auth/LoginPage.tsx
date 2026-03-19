@@ -25,9 +25,13 @@ export const LoginPage: React.FC = () => {
       await login(email, password);
       navigate('/');
     } catch (err: unknown) {
-      const axiosError = err as { response?: { data?: { error?: string } }; message?: string };
+      const axiosError = err as {
+        response?: { data?: { error?: { message?: string } | string } };
+        message?: string;
+      };
+      const apiError = axiosError?.response?.data?.error;
       const msg =
-        axiosError?.response?.data?.error ||
+        (typeof apiError === 'object' ? apiError?.message : apiError) ||
         axiosError?.message ||
         'Login failed. Check your credentials.';
       setError(msg);
