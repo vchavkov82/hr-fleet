@@ -1,22 +1,23 @@
 package odoo
 
 import (
+	"context"
 	"fmt"
 )
 
 // ListPayrollStructures retrieves hr.payroll.structure records from Odoo with optional domain filters.
 // Returns the structure slice and total count for pagination.
-func (c *Client) ListPayrollStructures(domain []any, limit, offset int) ([]PayrollStructure, int, error) {
+func (c *Client) ListPayrollStructures(ctx context.Context, domain []any, limit, offset int) ([]PayrollStructure, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.payroll.structure", domain)
+	count, err := c.SearchCount(ctx, "hr.payroll.structure", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list payroll structures count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.payroll.structure", domain, payrollStructureFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.payroll.structure", domain, payrollStructureFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list payroll structures: %w", err)
 	}
@@ -34,8 +35,8 @@ func (c *Client) ListPayrollStructures(domain []any, limit, offset int) ([]Payro
 }
 
 // GetPayrollStructure retrieves a single hr.payroll.structure by ID.
-func (c *Client) GetPayrollStructure(id int64) (*PayrollStructure, error) {
-	records, err := c.Read("hr.payroll.structure", []int64{id}, payrollStructureFields)
+func (c *Client) GetPayrollStructure(ctx context.Context, id int64) (*PayrollStructure, error) {
+	records, err := c.Read(ctx, "hr.payroll.structure", []int64{id}, payrollStructureFields)
 	if err != nil {
 		return nil, fmt.Errorf("get payroll structure %d: %w", id, err)
 	}
@@ -54,17 +55,17 @@ func (c *Client) GetPayrollStructure(id int64) (*PayrollStructure, error) {
 
 // ListSalaryRules retrieves hr.salary.rule records from Odoo with optional domain filters.
 // Returns the rule slice and total count for pagination.
-func (c *Client) ListSalaryRules(domain []any, limit, offset int) ([]SalaryRule, int, error) {
+func (c *Client) ListSalaryRules(ctx context.Context, domain []any, limit, offset int) ([]SalaryRule, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.salary.rule", domain)
+	count, err := c.SearchCount(ctx, "hr.salary.rule", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list salary rules count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.salary.rule", domain, salaryRuleFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.salary.rule", domain, salaryRuleFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list salary rules: %w", err)
 	}
@@ -83,17 +84,17 @@ func (c *Client) ListSalaryRules(domain []any, limit, offset int) ([]SalaryRule,
 
 // ListPayslipsOCA retrieves hr.payslip records (OCA payroll) from Odoo with optional domain filters.
 // Returns the payslip slice and total count for pagination.
-func (c *Client) ListPayslipsOCA(domain []any, limit, offset int) ([]PayslipOCA, int, error) {
+func (c *Client) ListPayslipsOCA(ctx context.Context, domain []any, limit, offset int) ([]PayslipOCA, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.payslip", domain)
+	count, err := c.SearchCount(ctx, "hr.payslip", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list payslips oca count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.payslip", domain, payslipOCAFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.payslip", domain, payslipOCAFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list payslips oca: %w", err)
 	}
@@ -112,17 +113,17 @@ func (c *Client) ListPayslipsOCA(domain []any, limit, offset int) ([]PayslipOCA,
 
 // ListPayslipRuns retrieves hr.payslip.run records from Odoo with optional domain filters.
 // Returns the run slice and total count for pagination.
-func (c *Client) ListPayslipRuns(domain []any, limit, offset int) ([]PayslipRun, int, error) {
+func (c *Client) ListPayslipRuns(ctx context.Context, domain []any, limit, offset int) ([]PayslipRun, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.payslip.run", domain)
+	count, err := c.SearchCount(ctx, "hr.payslip.run", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list payslip runs count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.payslip.run", domain, payslipRunFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.payslip.run", domain, payslipRunFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list payslip runs: %w", err)
 	}
@@ -140,8 +141,8 @@ func (c *Client) ListPayslipRuns(domain []any, limit, offset int) ([]PayslipRun,
 }
 
 // CreatePayslipRun creates a new hr.payslip.run record in Odoo.
-func (c *Client) CreatePayslipRun(vals map[string]any) (int64, error) {
-	id, err := c.Create("hr.payslip.run", vals)
+func (c *Client) CreatePayslipRun(ctx context.Context, vals map[string]any) (int64, error) {
+	id, err := c.Create(ctx, "hr.payslip.run", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create payslip run: %w", err)
 	}
@@ -149,16 +150,16 @@ func (c *Client) CreatePayslipRun(vals map[string]any) (int64, error) {
 }
 
 // GeneratePayslips triggers the action_generate_payslips action on an hr.payslip.run record.
-func (c *Client) GeneratePayslips(runID int64) error {
-	if err := c.CallAction("hr.payslip.run", []int64{runID}, "action_generate_payslips"); err != nil {
+func (c *Client) GeneratePayslips(ctx context.Context, runID int64) error {
+	if err := c.CallAction(ctx, "hr.payslip.run", []int64{runID}, "action_generate_payslips"); err != nil {
 		return fmt.Errorf("generate payslips for run %d: %w", runID, err)
 	}
 	return nil
 }
 
 // ConfirmPayslipRun triggers the action_close action on an hr.payslip.run record.
-func (c *Client) ConfirmPayslipRun(runID int64) error {
-	if err := c.CallAction("hr.payslip.run", []int64{runID}, "action_close"); err != nil {
+func (c *Client) ConfirmPayslipRun(ctx context.Context, runID int64) error {
+	if err := c.CallAction(ctx, "hr.payslip.run", []int64{runID}, "action_close"); err != nil {
 		return fmt.Errorf("confirm payslip run %d: %w", runID, err)
 	}
 	return nil
@@ -230,4 +231,3 @@ func parsePayslipRun(rec map[string]any) (PayslipRun, error) {
 
 	return r, nil
 }
-
