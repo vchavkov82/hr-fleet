@@ -60,8 +60,9 @@ nuke: ## Full clean: containers, volumes, caches, node_modules
 
 # ── Development ─────────────────────────────────────────────────────────────
 
-dev: ## Start everything (infra + frontend dev servers in parallel)
+dev: ## Start everything (infra + check + frontend dev servers in parallel)
 	scripts/dev.sh up & \
+	node_modules/.bin/turbo run typecheck lint --cache-workers=4 & \
 	sleep 2 && \
 	scripts/dev-apps.sh
 	@echo ""
