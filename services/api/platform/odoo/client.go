@@ -335,7 +335,7 @@ func (c *Client) Write(ctx context.Context, model string, id int64, vals map[str
 		[]any{[]int64{id}, vals},
 	}
 
-	_, err := c.Call("object", "execute_kw", args)
+	_, err := c.Call(ctx, "object", "execute_kw", args)
 	if err != nil {
 		return fmt.Errorf("write %s/%d: %w", model, id, err)
 	}
