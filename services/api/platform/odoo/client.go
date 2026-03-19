@@ -21,6 +21,7 @@ type ClientOptions struct {
 	CBIntervalSeconds  int
 	CBTimeoutSeconds   int
 	CBFailureThreshold int
+	HTTPTimeoutSeconds int
 }
 
 // DefaultClientOptions returns production-ready defaults.
