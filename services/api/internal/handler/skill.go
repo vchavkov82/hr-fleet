@@ -48,7 +48,7 @@ func NewSkillHandler(svc SkillServicer) *SkillHandler {
 func (h *SkillHandler) HandleListEmployeeSkills(w http.ResponseWriter, r *http.Request) {
 	employeeID, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid employee ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid employee ID")
 		return
 	}
 
@@ -59,14 +59,14 @@ func (h *SkillHandler) HandleListEmployeeSkills(w http.ResponseWriter, r *http.R
 	skills, total, err := h.svc.ListEmployeeSkills(r.Context(), employeeID, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list employee skills")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list employee skills")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  skills,
 		"total": total,
 	})
@@ -90,7 +90,7 @@ func (h *SkillHandler) HandleListEmployeeSkills(w http.ResponseWriter, r *http.R
 func (h *SkillHandler) HandleAddEmployeeSkill(w http.ResponseWriter, r *http.Request) {
 	employeeID, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid employee ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid employee ID")
 		return
 	}
 
@@ -99,30 +99,30 @@ func (h *SkillHandler) HandleAddEmployeeSkill(w http.ResponseWriter, r *http.Req
 		SkillLevelID int64 `json:"skill_level_id"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	if req.SkillID <= 0 {
-		respondError(w, http.StatusBadRequest, "skill_id must be greater than 0")
+		RespondError(w, http.StatusBadRequest, "validation_error", "skill_id must be greater than 0")
 		return
 	}
 	if req.SkillLevelID <= 0 {
-		respondError(w, http.StatusBadRequest, "skill_level_id must be greater than 0")
+		RespondError(w, http.StatusBadRequest, "validation_error", "skill_level_id must be greater than 0")
 		return
 	}
 
 	id, err := h.svc.AddEmployeeSkill(r.Context(), employeeID, req.SkillID, req.SkillLevelID)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to add employee skill")
+		RespondError(w, http.StatusInternalServerError, "create_failed", "Failed to add employee skill")
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
+	RespondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }
 
 // HandleDeleteEmployeeSkill handles DELETE /api/v1/employees/{id}/skills/{skillId}
@@ -142,26 +142,26 @@ func (h *SkillHandler) HandleAddEmployeeSkill(w http.ResponseWriter, r *http.Req
 func (h *SkillHandler) HandleDeleteEmployeeSkill(w http.ResponseWriter, r *http.Request) {
 	_, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid employee ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid employee ID")
 		return
 	}
 
 	skillRecordID, err := strconv.ParseInt(chi.URLParam(r, "skillId"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid skill record ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid skill record ID")
 		return
 	}
 
 	if err := h.svc.DeleteEmployeeSkill(r.Context(), skillRecordID); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to delete employee skill")
+		RespondError(w, http.StatusInternalServerError, "delete_failed", "Failed to delete employee skill")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Employee skill deleted successfully"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Employee skill deleted successfully"})
 }
 
 // HandleListSkills handles GET /api/v1/skills
@@ -185,14 +185,14 @@ func (h *SkillHandler) HandleListSkills(w http.ResponseWriter, r *http.Request) 
 	skills, total, err := h.svc.ListSkills(r.Context(), perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list skills")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list skills")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  skills,
 		"total": total,
 	})

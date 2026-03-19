@@ -1,0 +1,35 @@
+---
+description: Documentation file naming and location conventions
+alwaysApply: true
+---
+
+# Documentation Conventions
+
+## Location
+
+All documentation files go in `.docs/` directory at the project root.
+
+## Naming
+
+Use lowercase filenames with hyphens for separators:
+
+```
+# ✅ GOOD
+.docs/api-reference.md
+.docs/getting-started.md
+.docs/adr/001-database-choice.md
+
+# ❌ BAD
+docs/API-Reference.md
+DOCS/GettingStarted.md
+Documentation/README.md
+```
+
+## Structure
+
+```
+.docs/
+  adr/           # Architecture Decision Records
+  guides/        # How-to guides
+  reference/     # API and technical reference
+```

@@ -15,10 +15,16 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { getPayrollRuns, type PayrollRun, type PaginatedResponse } from '@/api/api';
+import { StatusChip } from '@/components/shared';
+import { formatCurrency, formatDate } from '@/lib/format';
+
+export { PayrollRunDetail } from './PayrollRunDetail';
 
 export const PayrollList: React.FC = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState<PaginatedResponse<PayrollRun> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -42,17 +48,8 @@ export const PayrollList: React.FC = () => {
     loadData();
   }, [loadData]);
 
-  const statusColor = (status: string): 'success' | 'default' | 'error' | 'warning' => {
-    switch (status) {
-      case 'completed':
-        return 'success';
-      case 'processing':
-        return 'warning';
-      case 'cancelled':
-        return 'error';
-      default:
-        return 'default';
-    }
+  const handleRowClick = (run: PayrollRun) => {
+    navigate(`/payroll/${run.id}`);
   };
 
   return (
@@ -89,26 +86,31 @@ export const PayrollList: React.FC = () => {
                 <TableRow>
                   <TableCell>Period</TableCell>
                   <TableCell>Employees</TableCell>
-                  <TableCell>Gross Total</TableCell>
-                  <TableCell>Net Total</TableCell>
+                  <TableCell align="right">Gross Total</TableCell>
+                  <TableCell align="right">Net Total</TableCell>
                   <TableCell>Status</TableCell>
                   <TableCell>Created</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {data?.data.map((run) => (
-                  <TableRow key={run.id} hover sx={{ cursor: 'pointer' }}>
+                  <TableRow key={run.id} hover sx={{ cursor: 'pointer' }} onClick={() => handleRowClick(run)}>
                     <TableCell>
-                      {new Date(run.period_start).toLocaleDateString()} -{' '}
-                      {new Date(run.period_end).toLocaleDateString()}
+                      <Typography fontWeight={500}>
+                        {formatDate(run.period_start)} — {formatDate(run.period_end)}
+                      </Typography>
                     </TableCell>
-                    <TableCell>{run.employee_count}</TableCell>
-                    <TableCell>${run.total_gross.toLocaleString()}</TableCell>
-                    <TableCell>${run.total_net.toLocaleString()}</TableCell>
                     <TableCell>
-                      <Chip label={run.status} size="small" color={statusColor(run.status)} />
+                      <Chip label={run.employee_count} size="small" />
                     </TableCell>
-                    <TableCell>{new Date(run.created_at).toLocaleDateString()}</TableCell>
+                    <TableCell align="right">{formatCurrency(run.total_gross)}</TableCell>
+                    <TableCell align="right">
+                      <Typography fontWeight={600}>{formatCurrency(run.total_net)}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <StatusChip status={run.status} />
+                    </TableCell>
+                    <TableCell>{formatDate(run.created_at)}</TableCell>
                   </TableRow>
                 ))}
                 {(!data?.data || data.data.length === 0) && (

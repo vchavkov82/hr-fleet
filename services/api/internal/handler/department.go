@@ -54,14 +54,14 @@ func (h *DepartmentHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	depts, total, err := h.svc.List(r.Context(), perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list departments")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list departments")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  depts,
 		"total": total,
 		"page":  page,
@@ -84,19 +84,19 @@ func (h *DepartmentHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 func (h *DepartmentHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid department ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid department ID")
 		return
 	}
 
 	dept, err := h.svc.Get(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Department not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Department not found")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, dept)
+	RespondJSON(w, http.StatusOK, dept)
 }

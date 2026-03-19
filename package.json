@@ -53,7 +53,12 @@
   },
   "overrides": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "@an-sdk/nextjs>ai": "$ai",
+    "@an-sdk/nextjs>@ai-sdk/react": "$@ai-sdk/react",
+    "@an-sdk/nextjs>@an-sdk/react": "$@an-sdk/react",
+    "@an-sdk/react>ai": "$ai",
+    "@an-sdk/react>@ai-sdk/react": "$@ai-sdk/react"
   },
   "engines": {
     "node": ">=20.0.0"

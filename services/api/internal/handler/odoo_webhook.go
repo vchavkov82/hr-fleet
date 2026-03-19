@@ -47,18 +47,18 @@ func (h *OdooWebhookHandler) HandleWebhook(w http.ResponseWriter, r *http.Reques
 	var payload OdooWebhookPayload
 	if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
 		log.Warn().Err(err).Msg("invalid webhook payload")
-		respondError(w, http.StatusBadRequest, "Invalid payload")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid payload")
 		return
 	}
 
 	if h.secretToken != "" && payload.Token != h.secretToken {
 		log.Warn().Msg("invalid webhook token")
-		respondError(w, http.StatusUnauthorized, "Invalid token")
+		RespondError(w, http.StatusUnauthorized, "invalid_token", "Invalid token")
 		return
 	}
 
 	if payload.Model == "" || len(payload.RecordIDs) == 0 {
-		respondError(w, http.StatusBadRequest, "model and record_ids are required")
+		RespondError(w, http.StatusBadRequest, "validation_error", "model and record_ids are required")
 		return
 	}
 
@@ -69,14 +69,14 @@ func (h *OdooWebhookHandler) HandleWebhook(w http.ResponseWriter, r *http.Reques
 	task, err := worker.NewOdooSyncTask(payload.Model, payload.Operation, payload.RecordIDs)
 	if err != nil {
 		log.Error().Err(err).Msg("failed to create sync task")
-		respondError(w, http.StatusInternalServerError, "Failed to queue sync task")
+		RespondError(w, http.StatusInternalServerError, "task_creation_failed", "Failed to queue sync task")
 		return
 	}
 
 	_, err = h.asynqClient.Enqueue(task)
 	if err != nil {
 		log.Error().Err(err).Msg("failed to enqueue sync task")
-		respondError(w, http.StatusInternalServerError, "Failed to queue sync task")
+		RespondError(w, http.StatusInternalServerError, "enqueue_failed", "Failed to queue sync task")
 		return
 	}
 
@@ -86,7 +86,7 @@ func (h *OdooWebhookHandler) HandleWebhook(w http.ResponseWriter, r *http.Reques
 		Ints64("ids", payload.RecordIDs).
 		Msg("queued Odoo sync task")
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"message": "Sync task queued",
 		"model":   payload.Model,
 		"ids":     payload.RecordIDs,

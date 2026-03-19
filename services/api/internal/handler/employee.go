@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"math"
 	"net/http"
 	"strconv"
 	"strings"
@@ -69,24 +68,14 @@ func (h *EmployeeHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	employees, total, err := h.svc.List(r.Context(), search, departmentID, activeOnly, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list employees")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list employees")
 		return
 	}
 
-	totalPages := int(math.Ceil(float64(total) / float64(perPage)))
-
-	respondJSON(w, http.StatusOK, map[string]any{
-		"data": employees,
-		"pagination": map[string]any{
-			"page":        page,
-			"per_page":    perPage,
-			"total":       total,
-			"total_pages": totalPages,
-		},
-	})
+	RespondList(w, employees, int64(total), page, perPage)
 }
 
 // HandleGet handles GET /api/v1/employees/{id}.
@@ -105,21 +94,21 @@ func (h *EmployeeHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid employee ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid employee ID")
 		return
 	}
 
 	emp, err := h.svc.Get(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Employee not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Employee not found")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, emp)
+	RespondJSON(w, http.StatusOK, emp)
 }
 
 // HandleCreate handles POST /api/v1/employees.
@@ -138,30 +127,30 @@ func (h *EmployeeHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 func (h *EmployeeHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 	var req odoo.EmployeeCreateRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	// Validate required fields
-	var errs []string
+	var fieldErrors []FieldError
 	if len(strings.TrimSpace(req.Name)) < 2 {
-		errs = append(errs, "name is required (min 2 characters)")
+		fieldErrors = append(fieldErrors, FieldError{Field: "name", Message: "required (min 2 characters)"})
 	}
 	if !isValidEmail(req.WorkEmail) {
-		errs = append(errs, "work_email is required and must be a valid email")
+		fieldErrors = append(fieldErrors, FieldError{Field: "work_email", Message: "required and must be a valid email"})
 	}
-	if len(errs) > 0 {
-		respondError(w, http.StatusBadRequest, strings.Join(errs, "; "))
+	if len(fieldErrors) > 0 {
+		RespondError(w, http.StatusBadRequest, "validation_error", "Validation failed", fieldErrors...)
 		return
 	}
 
 	id, err := h.svc.Create(r.Context(), req)
 	if err != nil {
-		respondError(w, http.StatusInternalServerError, "Failed to create employee")
+		RespondError(w, http.StatusInternalServerError, "create_failed", "Failed to create employee")
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]any{
+	RespondJSON(w, http.StatusCreated, map[string]any{
 		"id":      id,
 		"message": "Employee created successfully",
 	})
@@ -185,26 +174,26 @@ func (h *EmployeeHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid employee ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid employee ID")
 		return
 	}
 
 	var vals map[string]any
 	if err := json.NewDecoder(r.Body).Decode(&vals); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	if err := h.svc.Update(r.Context(), id, vals); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to update employee")
+		RespondError(w, http.StatusInternalServerError, "update_failed", "Failed to update employee")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"message": "Employee updated successfully",
 	})
 }
@@ -225,34 +214,22 @@ func (h *EmployeeHandler) HandleDelete(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid employee ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid employee ID")
 		return
 	}
 
 	if err := h.svc.Deactivate(r.Context(), id); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to deactivate employee")
+		RespondError(w, http.StatusInternalServerError, "delete_failed", "Failed to deactivate employee")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"message": "Employee deactivated successfully",
 	})
-}
-
-// respondJSON writes a JSON response with the given status code.
-func respondJSON(w http.ResponseWriter, status int, data any) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(data)
-}
-
-// respondError writes a JSON error response.
-func respondError(w http.ResponseWriter, status int, message string) {
-	respondJSON(w, status, map[string]string{"error": message})
 }
 
 // intQueryParam extracts an integer query parameter with a default value.

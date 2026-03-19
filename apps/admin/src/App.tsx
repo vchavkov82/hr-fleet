@@ -10,12 +10,15 @@ import { AdminLayout } from './layout/AdminLayout';
 
 const Dashboard = lazy(() => import('./features/dashboard').then((m) => ({ default: m.Dashboard })));
 const EmployeeList = lazy(() => import('./features/employees').then((m) => ({ default: m.EmployeeList })));
+const EmployeeDetail = lazy(() => import('./features/employees').then((m) => ({ default: m.EmployeeDetail })));
 const DepartmentList = lazy(() => import('./features/departments').then((m) => ({ default: m.DepartmentList })));
+const DepartmentDetail = lazy(() => import('./features/departments').then((m) => ({ default: m.DepartmentDetail })));
 const ContractList = lazy(() => import('./features/contracts').then((m) => ({ default: m.ContractList })));
 const LeaveList = lazy(() => import('./features/leave').then((m) => ({ default: m.LeaveList })));
 const TimesheetList = lazy(() => import('./features/timesheets').then((m) => ({ default: m.TimesheetList })));
 const AttendanceList = lazy(() => import('./features/attendance').then((m) => ({ default: m.AttendanceList })));
 const PayrollList = lazy(() => import('./features/payroll').then((m) => ({ default: m.PayrollList })));
+const PayrollRunDetail = lazy(() => import('./features/payroll').then((m) => ({ default: m.PayrollRunDetail })));
 const PayslipList = lazy(() => import('./features/payslips').then((m) => ({ default: m.PayslipList })));
 const ExpenseList = lazy(() => import('./features/expenses').then((m) => ({ default: m.ExpenseList })));
 const AppraisalList = lazy(() => import('./features/appraisals').then((m) => ({ default: m.AppraisalList })));
@@ -53,12 +56,15 @@ export const App: React.FC = () => {
         >
           <Route path="/" element={<Dashboard />} />
           <Route path="/employees" element={<EmployeeList />} />
+          <Route path="/employees/:id" element={<EmployeeDetail />} />
           <Route path="/departments" element={<DepartmentList />} />
+          <Route path="/departments/:id" element={<DepartmentDetail />} />
           <Route path="/contracts" element={<ContractList />} />
           <Route path="/leave" element={<LeaveList />} />
           <Route path="/timesheets" element={<TimesheetList />} />
           <Route path="/attendance" element={<AttendanceList />} />
           <Route path="/payroll" element={<PayrollList />} />
+          <Route path="/payroll/:id" element={<PayrollRunDetail />} />
           <Route path="/payslips" element={<PayslipList />} />
           <Route path="/expenses" element={<ExpenseList />} />
           <Route path="/appraisals" element={<AppraisalList />} />

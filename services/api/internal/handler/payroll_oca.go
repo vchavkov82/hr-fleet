@@ -53,14 +53,14 @@ func (h *PayrollOCAHandler) HandleListStructures(w http.ResponseWriter, r *http.
 	structures, total, err := h.svc.ListStructures(r.Context(), perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list payroll structures")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list payroll structures")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  structures,
 		"total": total,
 	})
@@ -82,21 +82,21 @@ func (h *PayrollOCAHandler) HandleListStructures(w http.ResponseWriter, r *http.
 func (h *PayrollOCAHandler) HandleGetStructure(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid structure ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid structure ID")
 		return
 	}
 
 	structure, err := h.svc.GetStructure(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Payroll structure not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Payroll structure not found")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, structure)
+	RespondJSON(w, http.StatusOK, structure)
 }
 
 // HandleListRules handles GET /api/v1/payroll/rules
@@ -122,14 +122,14 @@ func (h *PayrollOCAHandler) HandleListRules(w http.ResponseWriter, r *http.Reque
 	rules, total, err := h.svc.ListRules(r.Context(), structID, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list salary rules")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list salary rules")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  rules,
 		"total": total,
 	})

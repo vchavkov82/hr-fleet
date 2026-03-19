@@ -63,14 +63,14 @@ func (h *CourseHandler) HandleListCourses(w http.ResponseWriter, r *http.Request
 	courses, total, err := h.svc.ListCourses(r.Context(), categoryID, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list courses")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list courses")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  courses,
 		"total": total,
 	})
@@ -92,21 +92,21 @@ func (h *CourseHandler) HandleListCourses(w http.ResponseWriter, r *http.Request
 func (h *CourseHandler) HandleGetCourse(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid course ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid course ID")
 		return
 	}
 
 	course, err := h.svc.GetCourse(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Course not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Course not found")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, course)
+	RespondJSON(w, http.StatusOK, course)
 }
 
 // HandleCreateCourse handles POST /api/v1/courses
@@ -126,30 +126,30 @@ func (h *CourseHandler) HandleGetCourse(w http.ResponseWriter, r *http.Request) 
 func (h *CourseHandler) HandleCreateCourse(w http.ResponseWriter, r *http.Request) {
 	var req odoo.CourseCreateRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	if req.Name == "" {
-		respondError(w, http.StatusBadRequest, "name is required")
+		RespondError(w, http.StatusBadRequest, "validation_error", "name is required")
 		return
 	}
 	if req.CategoryID <= 0 {
-		respondError(w, http.StatusBadRequest, "category_id is required")
+		RespondError(w, http.StatusBadRequest, "validation_error", "category_id is required")
 		return
 	}
 
 	id, err := h.svc.CreateCourse(r.Context(), req)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to create course")
+		RespondError(w, http.StatusInternalServerError, "create_failed", "Failed to create course")
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
+	RespondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }
 
 // HandleUpdateCourse handles PUT /api/v1/courses/{id}
@@ -170,26 +170,26 @@ func (h *CourseHandler) HandleCreateCourse(w http.ResponseWriter, r *http.Reques
 func (h *CourseHandler) HandleUpdateCourse(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid course ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid course ID")
 		return
 	}
 
 	var vals map[string]any
 	if err := json.NewDecoder(r.Body).Decode(&vals); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	if err := h.svc.UpdateCourse(r.Context(), id, vals); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to update course")
+		RespondError(w, http.StatusInternalServerError, "update_failed", "Failed to update course")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Course updated successfully"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Course updated successfully"})
 }
 
 // HandleListCategories handles GET /api/v1/courses/categories
@@ -213,14 +213,14 @@ func (h *CourseHandler) HandleListCategories(w http.ResponseWriter, r *http.Requ
 	categories, total, err := h.svc.ListCategories(r.Context(), perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list course categories")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list course categories")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  categories,
 		"total": total,
 	})
@@ -251,14 +251,14 @@ func (h *CourseHandler) HandleListSchedules(w http.ResponseWriter, r *http.Reque
 	schedules, total, err := h.svc.ListSchedules(r.Context(), courseID, state, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list course schedules")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list course schedules")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  schedules,
 		"total": total,
 	})
@@ -280,21 +280,21 @@ func (h *CourseHandler) HandleListSchedules(w http.ResponseWriter, r *http.Reque
 func (h *CourseHandler) HandleGetSchedule(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid schedule ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid schedule ID")
 		return
 	}
 
 	schedule, err := h.svc.GetSchedule(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Schedule not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Schedule not found")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, schedule)
+	RespondJSON(w, http.StatusOK, schedule)
 }
 
 // HandleCreateSchedule handles POST /api/v1/courses/schedules
@@ -314,34 +314,34 @@ func (h *CourseHandler) HandleGetSchedule(w http.ResponseWriter, r *http.Request
 func (h *CourseHandler) HandleCreateSchedule(w http.ResponseWriter, r *http.Request) {
 	var req odoo.CourseScheduleCreateRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	if req.Name == "" {
-		respondError(w, http.StatusBadRequest, "name is required")
+		RespondError(w, http.StatusBadRequest, "validation_error", "name is required")
 		return
 	}
 	if req.CourseID <= 0 {
-		respondError(w, http.StatusBadRequest, "course_id is required")
+		RespondError(w, http.StatusBadRequest, "validation_error", "course_id is required")
 		return
 	}
 	if req.AuthorizedBy <= 0 {
-		respondError(w, http.StatusBadRequest, "authorized_by is required")
+		RespondError(w, http.StatusBadRequest, "validation_error", "authorized_by is required")
 		return
 	}
 
 	id, err := h.svc.CreateSchedule(r.Context(), req)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to create schedule")
+		RespondError(w, http.StatusInternalServerError, "create_failed", "Failed to create schedule")
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
+	RespondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }
 
 // HandleAdvanceSchedule handles POST /api/v1/courses/schedules/{id}/advance
@@ -360,30 +360,30 @@ func (h *CourseHandler) HandleCreateSchedule(w http.ResponseWriter, r *http.Requ
 func (h *CourseHandler) HandleAdvanceSchedule(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid schedule ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid schedule ID")
 		return
 	}
 
 	schedule, err := h.svc.GetSchedule(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Schedule not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Schedule not found")
 		return
 	}
 
 	if err := h.svc.AdvanceSchedule(r.Context(), id, schedule.State); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to advance schedule")
+		RespondError(w, http.StatusInternalServerError, "advance_failed", "Failed to advance schedule")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Schedule advanced to next state"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Schedule advanced to next state"})
 }
 
 // HandleResetSchedule handles POST /api/v1/courses/schedules/{id}/reset
@@ -402,20 +402,20 @@ func (h *CourseHandler) HandleAdvanceSchedule(w http.ResponseWriter, r *http.Req
 func (h *CourseHandler) HandleResetSchedule(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid schedule ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid schedule ID")
 		return
 	}
 
 	if err := h.svc.ResetSchedule(r.Context(), id); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to reset schedule")
+		RespondError(w, http.StatusInternalServerError, "reset_failed", "Failed to reset schedule")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Schedule reset to draft"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Schedule reset to draft"})
 }
 
 // HandleCancelSchedule handles POST /api/v1/courses/schedules/{id}/cancel
@@ -434,20 +434,20 @@ func (h *CourseHandler) HandleResetSchedule(w http.ResponseWriter, r *http.Reque
 func (h *CourseHandler) HandleCancelSchedule(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid schedule ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid schedule ID")
 		return
 	}
 
 	if err := h.svc.CancelSchedule(r.Context(), id); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to cancel schedule")
+		RespondError(w, http.StatusInternalServerError, "cancel_failed", "Failed to cancel schedule")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Schedule cancelled"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Schedule cancelled"})
 }
 
 // HandleListAttendees handles GET /api/v1/courses/schedules/{id}/attendees
@@ -468,7 +468,7 @@ func (h *CourseHandler) HandleCancelSchedule(w http.ResponseWriter, r *http.Requ
 func (h *CourseHandler) HandleListAttendees(w http.ResponseWriter, r *http.Request) {
 	scheduleID, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid schedule ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid schedule ID")
 		return
 	}
 
@@ -479,14 +479,14 @@ func (h *CourseHandler) HandleListAttendees(w http.ResponseWriter, r *http.Reque
 	attendees, total, err := h.svc.ListAttendees(r.Context(), scheduleID, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list attendees")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list attendees")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  attendees,
 		"total": total,
 	})
@@ -510,7 +510,7 @@ func (h *CourseHandler) HandleListAttendees(w http.ResponseWriter, r *http.Reque
 func (h *CourseHandler) HandleUpdateAttendeeResult(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid attendee ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid attendee ID")
 		return
 	}
 
@@ -518,23 +518,23 @@ func (h *CourseHandler) HandleUpdateAttendeeResult(w http.ResponseWriter, r *htt
 		Result string `json:"result"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	if req.Result == "" {
-		respondError(w, http.StatusBadRequest, "result is required")
+		RespondError(w, http.StatusBadRequest, "validation_error", "result is required")
 		return
 	}
 
 	if err := h.svc.UpdateAttendeeResult(r.Context(), id, req.Result); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to update attendee result")
+		RespondError(w, http.StatusInternalServerError, "update_failed", "Failed to update attendee result")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Attendee result updated"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Attendee result updated"})
 }

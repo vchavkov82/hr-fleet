@@ -58,14 +58,14 @@ func (h *FleetHandler) HandleListVehicles(w http.ResponseWriter, r *http.Request
 	vehicles, total, err := h.svc.ListVehicles(r.Context(), driverID, active, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list vehicles")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list vehicles")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  vehicles,
 		"total": total,
 	})
@@ -87,21 +87,21 @@ func (h *FleetHandler) HandleListVehicles(w http.ResponseWriter, r *http.Request
 func (h *FleetHandler) HandleGetVehicle(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid vehicle ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid vehicle ID")
 		return
 	}
 
 	vehicle, err := h.svc.GetVehicle(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Vehicle not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Vehicle not found")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, vehicle)
+	RespondJSON(w, http.StatusOK, vehicle)
 }
 
 // HandleListVehicleLogs handles GET /api/v1/fleet/vehicles/{id}/logs
@@ -122,7 +122,7 @@ func (h *FleetHandler) HandleGetVehicle(w http.ResponseWriter, r *http.Request) 
 func (h *FleetHandler) HandleListVehicleLogs(w http.ResponseWriter, r *http.Request) {
 	vehicleID, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid vehicle ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid vehicle ID")
 		return
 	}
 
@@ -133,14 +133,14 @@ func (h *FleetHandler) HandleListVehicleLogs(w http.ResponseWriter, r *http.Requ
 	logs, total, err := h.svc.ListVehicleLogs(r.Context(), vehicleID, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list vehicle logs")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list vehicle logs")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  logs,
 		"total": total,
 	})

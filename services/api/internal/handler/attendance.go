@@ -52,14 +52,14 @@ func (h *AttendanceHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	records, total, err := h.svc.List(r.Context(), employeeID, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list attendance records")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list attendance records")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  records,
 		"total": total,
 		"page":  page,
@@ -85,26 +85,26 @@ func (h *AttendanceHandler) HandleCheckIn(w http.ResponseWriter, r *http.Request
 		EmployeeID int64 `json:"employee_id"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	if req.EmployeeID <= 0 {
-		respondError(w, http.StatusBadRequest, "employee_id must be greater than 0")
+		RespondError(w, http.StatusBadRequest, "validation_error", "employee_id must be greater than 0")
 		return
 	}
 
 	id, err := h.svc.CheckIn(r.Context(), req.EmployeeID)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to check in")
+		RespondError(w, http.StatusInternalServerError, "checkin_failed", "Failed to check in")
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
+	RespondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }
 
 // HandleCheckOut handles POST /api/v1/attendance/{id}/check-out
@@ -123,18 +123,18 @@ func (h *AttendanceHandler) HandleCheckIn(w http.ResponseWriter, r *http.Request
 func (h *AttendanceHandler) HandleCheckOut(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid attendance ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid attendance ID")
 		return
 	}
 
 	if err := h.svc.CheckOut(r.Context(), id); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to check out")
+		RespondError(w, http.StatusInternalServerError, "checkout_failed", "Failed to check out")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	RespondJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }

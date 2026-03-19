@@ -128,12 +128,12 @@ func TestHandleList_Returns200WithPagination(t *testing.T) {
 		t.Errorf("expected 2 employees, got %v", resp["data"])
 	}
 
-	pag, ok := resp["pagination"].(map[string]any)
+	meta, ok := resp["meta"].(map[string]any)
 	if !ok {
-		t.Fatal("missing pagination")
+		t.Fatal("missing meta")
 	}
-	if pag["total"] != float64(50) {
-		t.Errorf("total = %v, want 50", pag["total"])
+	if meta["total"] != float64(50) {
+		t.Errorf("total = %v, want 50", meta["total"])
 	}
 }
 
@@ -307,7 +307,8 @@ func TestHandleList_ServiceUnavailable_Returns503(t *testing.T) {
 
 	var resp map[string]any
 	json.Unmarshal(w.Body.Bytes(), &resp)
-	if resp["error"] == nil || resp["error"] == "" {
+	errObj, ok := resp["error"].(map[string]any)
+	if !ok || errObj["message"] == nil || errObj["message"] == "" {
 		t.Error("expected error message in 503 response")
 	}
 }

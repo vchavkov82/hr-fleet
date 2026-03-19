@@ -312,3 +312,119 @@ export async function approveExpense(id: string): Promise<void> {
 export async function rejectExpense(id: string): Promise<void> {
   await api.post(`/expenses/${id}/reject`);
 }
+
+export async function getEmployee(id: string): Promise<Employee> {
+  const res = await api.get(`/employees/${id}`);
+  return res.data;
+}
+
+export async function createEmployee(data: Partial<Employee>): Promise<Employee> {
+  const res = await api.post('/employees', data);
+  return res.data;
+}
+
+export async function updateEmployee(id: string, data: Partial<Employee>): Promise<Employee> {
+  const res = await api.patch(`/employees/${id}`, data);
+  return res.data;
+}
+
+export async function deleteEmployee(id: string): Promise<void> {
+  await api.delete(`/employees/${id}`);
+}
+
+export async function getEmployeeContracts(employeeId: string): Promise<PaginatedResponse<Contract>> {
+  const res = await api.get('/contracts', { params: { employee_id: employeeId, per_page: 50 } });
+  return res.data;
+}
+
+export async function getEmployeeLeaves(employeeId: string): Promise<PaginatedResponse<LeaveRequest>> {
+  const res = await api.get('/leave/requests', { params: { employee_id: employeeId, per_page: 50 } });
+  return res.data;
+}
+
+export async function getEmployeeTimesheets(employeeId: string): Promise<PaginatedResponse<Timesheet>> {
+  const res = await api.get('/timesheets', { params: { employee_id: employeeId, per_page: 50 } });
+  return res.data;
+}
+
+export async function getEmployeePayslips(employeeId: string): Promise<PaginatedResponse<Payslip>> {
+  const res = await api.get('/payslips', { params: { employee_id: employeeId, per_page: 50 } });
+  return res.data;
+}
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  status: 'active' | 'inactive' | 'pending';
+  last_login_at?: string;
+  created_at: string;
+}
+
+export async function getUsers(params?: {
+  page?: number;
+  per_page?: number;
+  role?: string;
+}): Promise<PaginatedResponse<User>> {
+  const res = await api.get('/users', { params });
+  return res.data;
+}
+
+export interface OrgSettings {
+  company_name: string;
+  timezone: string;
+  currency: string;
+  date_format: string;
+  fiscal_year_start: string;
+}
+
+export async function getOrgSettings(): Promise<OrgSettings> {
+  const res = await api.get('/settings/organization');
+  return res.data;
+}
+
+export async function updateOrgSettings(data: Partial<OrgSettings>): Promise<OrgSettings> {
+  const res = await api.patch('/settings/organization', data);
+  return res.data;
+}
+
+export async function getDepartment(id: string): Promise<Department> {
+  const res = await api.get(`/departments/${id}`);
+  return res.data;
+}
+
+export async function createDepartment(data: Partial<Department>): Promise<Department> {
+  const res = await api.post('/departments', data);
+  return res.data;
+}
+
+export async function updateDepartment(id: string, data: Partial<Department>): Promise<Department> {
+  const res = await api.patch(`/departments/${id}`, data);
+  return res.data;
+}
+
+export async function deleteDepartment(id: string): Promise<void> {
+  await api.delete(`/departments/${id}`);
+}
+
+export async function getDepartmentEmployees(
+  departmentId: string,
+  params?: { page?: number; per_page?: number },
+): Promise<PaginatedResponse<Employee>> {
+  const res = await api.get('/employees', { params: { ...params, department_id: departmentId } });
+  return res.data;
+}
+
+export async function getPayrollRun(id: string): Promise<PayrollRun> {
+  const res = await api.get(`/payroll/runs/${id}`);
+  return res.data;
+}
+
+export async function getPayrollRunPayslips(
+  runId: string,
+  params?: { page?: number; per_page?: number },
+): Promise<PaginatedResponse<Payslip>> {
+  const res = await api.get('/payslips', { params: { ...params, payroll_run_id: runId } });
+  return res.data;
+}

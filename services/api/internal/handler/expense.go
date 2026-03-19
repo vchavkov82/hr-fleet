@@ -56,14 +56,14 @@ func (h *ExpenseHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	expenses, total, err := h.svc.List(r.Context(), employeeID, state, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list expenses")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list expenses")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  expenses,
 		"total": total,
 		"page":  page,
@@ -92,7 +92,7 @@ func (h *ExpenseHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 		Date       string  `json:"date"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
@@ -110,21 +110,21 @@ func (h *ExpenseHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 		errs = append(errs, "date is required")
 	}
 	if len(errs) > 0 {
-		respondError(w, http.StatusBadRequest, strings.Join(errs, "; "))
+		RespondError(w, http.StatusBadRequest, "validation_error", strings.Join(errs, "; "))
 		return
 	}
 
 	id, err := h.svc.Create(r.Context(), req.EmployeeID, req.Name, req.Amount, req.Date)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to create expense")
+		RespondError(w, http.StatusInternalServerError, "create_failed", "Failed to create expense")
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
+	RespondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }
 
 // HandleUpdate handles PATCH /api/v1/expenses/{id}
@@ -145,7 +145,7 @@ func (h *ExpenseHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 func (h *ExpenseHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid expense ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid expense ID")
 		return
 	}
 
@@ -153,7 +153,7 @@ func (h *ExpenseHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 		Action string `json:"action"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
@@ -161,25 +161,25 @@ func (h *ExpenseHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 	case "approve":
 		if err := h.svc.Approve(r.Context(), id); err != nil {
 			if errors.Is(err, service.ErrServiceUnavailable) {
-				respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+				RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 				return
 			}
-			respondError(w, http.StatusInternalServerError, "Failed to approve expense")
+			RespondError(w, http.StatusInternalServerError, "approve_failed", "Failed to approve expense")
 			return
 		}
 	case "refuse":
 		if err := h.svc.Refuse(r.Context(), id); err != nil {
 			if errors.Is(err, service.ErrServiceUnavailable) {
-				respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+				RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 				return
 			}
-			respondError(w, http.StatusInternalServerError, "Failed to refuse expense")
+			RespondError(w, http.StatusInternalServerError, "refuse_failed", "Failed to refuse expense")
 			return
 		}
 	default:
-		respondError(w, http.StatusBadRequest, "Invalid action, use approve or refuse")
+		RespondError(w, http.StatusBadRequest, "invalid_action", "Invalid action, use approve or refuse")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	RespondJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }

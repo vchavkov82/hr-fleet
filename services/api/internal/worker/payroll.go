@@ -31,13 +31,11 @@ type payrollPayload struct {
 
 // HandlePayrollProcess processes a payroll run: fetches employees, calculates tax, creates payslips.
 // Fails the entire batch if any employee calculation or insert fails.
-func (p *PayrollProcessor) HandlePayrollProcess(_ context.Context, t *asynq.Task) error {
+func (p *PayrollProcessor) HandlePayrollProcess(ctx context.Context, t *asynq.Task) error {
 	var payload payrollPayload
 	if err := json.Unmarshal(t.Payload(), &payload); err != nil {
 		return fmt.Errorf("unmarshal payload: %w", err)
 	}
-
-	ctx := context.Background()
 	runID := parseUUID(payload.RunID)
 	triggeredBy := parseUUID(payload.TriggeredBy)
 

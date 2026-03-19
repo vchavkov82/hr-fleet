@@ -59,14 +59,14 @@ func (h *AppraisalHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	appraisals, total, err := h.svc.ListAppraisals(r.Context(), employeeID, state, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list appraisals")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list appraisals")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  appraisals,
 		"total": total,
 	})
@@ -88,21 +88,21 @@ func (h *AppraisalHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 func (h *AppraisalHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid appraisal ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid appraisal ID")
 		return
 	}
 
 	appraisal, err := h.svc.GetAppraisal(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Appraisal not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Appraisal not found")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, appraisal)
+	RespondJSON(w, http.StatusOK, appraisal)
 }
 
 // HandleCreate handles POST /api/v1/appraisals
@@ -122,30 +122,30 @@ func (h *AppraisalHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 func (h *AppraisalHandler) HandleCreate(w http.ResponseWriter, r *http.Request) {
 	var req odoo.AppraisalCreateRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	if req.EmployeeID <= 0 {
-		respondError(w, http.StatusBadRequest, "employee_id is required")
+		RespondError(w, http.StatusBadRequest, "validation_error", "employee_id is required")
 		return
 	}
 	if req.DateClose == "" {
-		respondError(w, http.StatusBadRequest, "date_close is required")
+		RespondError(w, http.StatusBadRequest, "validation_error", "date_close is required")
 		return
 	}
 
 	id, err := h.svc.CreateAppraisal(r.Context(), req)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to create appraisal")
+		RespondError(w, http.StatusInternalServerError, "create_failed", "Failed to create appraisal")
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
+	RespondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }
 
 // HandleUpdate handles PUT /api/v1/appraisals/{id}
@@ -166,26 +166,26 @@ func (h *AppraisalHandler) HandleCreate(w http.ResponseWriter, r *http.Request) 
 func (h *AppraisalHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid appraisal ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid appraisal ID")
 		return
 	}
 
 	var vals map[string]any
 	if err := json.NewDecoder(r.Body).Decode(&vals); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
 	if err := h.svc.UpdateAppraisal(r.Context(), id, vals); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to update appraisal")
+		RespondError(w, http.StatusInternalServerError, "update_failed", "Failed to update appraisal")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Appraisal updated successfully"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Appraisal updated successfully"})
 }
 
 // HandleConfirm handles POST /api/v1/appraisals/{id}/confirm
@@ -204,20 +204,20 @@ func (h *AppraisalHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) 
 func (h *AppraisalHandler) HandleConfirm(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid appraisal ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid appraisal ID")
 		return
 	}
 
 	if err := h.svc.ConfirmAppraisal(r.Context(), id); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to confirm appraisal")
+		RespondError(w, http.StatusInternalServerError, "confirm_failed", "Failed to confirm appraisal")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Appraisal confirmed and sent to employee"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Appraisal confirmed and sent to employee"})
 }
 
 // HandleComplete handles POST /api/v1/appraisals/{id}/complete
@@ -236,20 +236,20 @@ func (h *AppraisalHandler) HandleConfirm(w http.ResponseWriter, r *http.Request)
 func (h *AppraisalHandler) HandleComplete(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid appraisal ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid appraisal ID")
 		return
 	}
 
 	if err := h.svc.CompleteAppraisal(r.Context(), id); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to complete appraisal")
+		RespondError(w, http.StatusInternalServerError, "complete_failed", "Failed to complete appraisal")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Appraisal completed"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Appraisal completed"})
 }
 
 // HandleReset handles POST /api/v1/appraisals/{id}/reset
@@ -268,20 +268,20 @@ func (h *AppraisalHandler) HandleComplete(w http.ResponseWriter, r *http.Request
 func (h *AppraisalHandler) HandleReset(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid appraisal ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid appraisal ID")
 		return
 	}
 
 	if err := h.svc.ResetAppraisal(r.Context(), id); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to reset appraisal")
+		RespondError(w, http.StatusInternalServerError, "reset_failed", "Failed to reset appraisal")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Appraisal reset to draft"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Appraisal reset to draft"})
 }
 
 // HandleListTemplates handles GET /api/v1/appraisals/templates
@@ -305,14 +305,14 @@ func (h *AppraisalHandler) HandleListTemplates(w http.ResponseWriter, r *http.Re
 	templates, total, err := h.svc.ListTemplates(r.Context(), perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list appraisal templates")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list appraisal templates")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  templates,
 		"total": total,
 	})

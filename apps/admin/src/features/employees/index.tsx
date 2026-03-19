@@ -3,7 +3,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import InputAdornment from '@mui/material/InputAdornment';
 import Paper from '@mui/material/Paper';
@@ -18,16 +17,26 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { getEmployees, type Employee, type PaginatedResponse } from '@/api/api';
+import { StatusChip } from '@/components/shared';
+import { formatDate } from '@/lib/format';
+
+import { EmployeeForm } from './EmployeeForm';
+
+export { EmployeeDetail } from './EmployeeDetail';
+export { EmployeeForm } from './EmployeeForm';
 
 export const EmployeeList: React.FC = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState<PaginatedResponse<Employee> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [search, setSearch] = useState('');
+  const [addOpen, setAddOpen] = useState(false);
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -50,15 +59,13 @@ export const EmployeeList: React.FC = () => {
     loadData();
   }, [loadData]);
 
-  const statusColor = (status: string): 'success' | 'default' | 'error' => {
-    switch (status) {
-      case 'active':
-        return 'success';
-      case 'terminated':
-        return 'error';
-      default:
-        return 'default';
-    }
+  const handleRowClick = (employee: Employee) => {
+    navigate(`/employees/${employee.id}`);
+  };
+
+  const handleAddSuccess = () => {
+    setAddOpen(false);
+    loadData();
   };
 
   return (
@@ -72,7 +79,7 @@ export const EmployeeList: React.FC = () => {
             Manage your workforce
           </Typography>
         </Box>
-        <Button variant="contained" startIcon={<AddIcon />}>
+        <Button variant="contained" startIcon={<AddIcon />} onClick={() => setAddOpen(true)}>
           Add Employee
         </Button>
       </Stack>
@@ -83,12 +90,14 @@ export const EmployeeList: React.FC = () => {
           size="small"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            },
           }}
           sx={{ minWidth: 300 }}
         />
@@ -121,7 +130,12 @@ export const EmployeeList: React.FC = () => {
               </TableHead>
               <TableBody>
                 {data?.data.map((employee) => (
-                  <TableRow key={employee.id} hover sx={{ cursor: 'pointer' }}>
+                  <TableRow
+                    key={employee.id}
+                    hover
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() => handleRowClick(employee)}
+                  >
                     <TableCell>{employee.employee_number}</TableCell>
                     <TableCell>
                       {employee.first_name} {employee.last_name}
@@ -130,9 +144,9 @@ export const EmployeeList: React.FC = () => {
                     <TableCell>{employee.department_name ?? '-'}</TableCell>
                     <TableCell>{employee.job_title}</TableCell>
                     <TableCell>
-                      <Chip label={employee.status} size="small" color={statusColor(employee.status)} />
+                      <StatusChip status={employee.status} />
                     </TableCell>
-                    <TableCell>{new Date(employee.hire_date).toLocaleDateString()}</TableCell>
+                    <TableCell>{formatDate(employee.hire_date)}</TableCell>
                   </TableRow>
                 ))}
                 {(!data?.data || data.data.length === 0) && (
@@ -158,6 +172,8 @@ export const EmployeeList: React.FC = () => {
           </>
         )}
       </TableContainer>
+
+      <EmployeeForm open={addOpen} onClose={() => setAddOpen(false)} onSuccess={handleAddSuccess} />
     </Stack>
   );
 };

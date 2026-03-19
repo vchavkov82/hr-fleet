@@ -10,6 +10,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
+	"github.com/vchavkov/hr/services/api/internal/middleware"
 	"github.com/vchavkov/hr/services/api/internal/service"
 )
 
@@ -189,14 +190,13 @@ func (h *PayrollHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 		statusFilter = pgtype.Text{String: statusStr, Valid: true}
 	}
 
-	runs, err := h.svc.List(r.Context(), statusFilter, int32(perPage), int32((page-1)*perPage))
+	runs, total, err := h.svc.List(r.Context(), statusFilter, int32(perPage), int32((page-1)*perPage))
 	if err != nil {
 		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list payroll runs")
 		return
 	}
 
-	// Use total = len(runs) as approximation; proper count query can be added later
-	RespondList(w, runs, int64(len(runs)), page, perPage)
+	RespondList(w, runs, total, page, perPage)
 }
 
 // HandleCancel handles POST /api/v1/payroll-runs/{id}/cancel.
@@ -268,11 +268,9 @@ func parsePathUUID(w http.ResponseWriter, r *http.Request, param string) (pgtype
 // userIDFromContext extracts the user ID from JWT claims in context.
 // Returns a zero UUID if not found (should be behind auth middleware).
 func userIDFromContext(ctx context.Context) pgtype.UUID {
-	// The auth middleware stores user_id in context via jwtauth.
-	// This is a simplified extraction; actual implementation depends on auth middleware.
 	var u pgtype.UUID
-	if claims, ok := ctx.Value("user_id").(string); ok {
-		_ = u.Scan(claims)
+	if userID, ok := ctx.Value(middleware.CtxUserID).(string); ok {
+		_ = u.Scan(userID)
 	}
 	return u
 }

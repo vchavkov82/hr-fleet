@@ -57,14 +57,14 @@ func (h *ProjectHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	projects, total, err := h.svc.ListProjects(r.Context(), active, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list projects")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list projects")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  projects,
 		"total": total,
 	})
@@ -86,21 +86,21 @@ func (h *ProjectHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 func (h *ProjectHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid project ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid project ID")
 		return
 	}
 
 	project, err := h.svc.GetProject(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Project not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Project not found")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, project)
+	RespondJSON(w, http.StatusOK, project)
 }
 
 // HandleListTasks handles GET /api/v1/projects/{id}/tasks
@@ -121,7 +121,7 @@ func (h *ProjectHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 func (h *ProjectHandler) HandleListTasks(w http.ResponseWriter, r *http.Request) {
 	projectID, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid project ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid project ID")
 		return
 	}
 
@@ -132,14 +132,14 @@ func (h *ProjectHandler) HandleListTasks(w http.ResponseWriter, r *http.Request)
 	tasks, total, err := h.svc.ListTasks(r.Context(), projectID, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list tasks")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list tasks")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  tasks,
 		"total": total,
 	})
@@ -161,19 +161,19 @@ func (h *ProjectHandler) HandleListTasks(w http.ResponseWriter, r *http.Request)
 func (h *ProjectHandler) HandleGetTask(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid task ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid task ID")
 		return
 	}
 
 	task, err := h.svc.GetTask(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusNotFound, "Task not found")
+		RespondError(w, http.StatusNotFound, "not_found", "Task not found")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, task)
+	RespondJSON(w, http.StatusOK, task)
 }

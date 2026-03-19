@@ -57,14 +57,14 @@ func (h *TimesheetHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 	entries, total, err := h.svc.List(r.Context(), employeeID, dateFrom, dateTo, perPage, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to list timesheets")
+		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list timesheets")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{
+	RespondJSON(w, http.StatusOK, map[string]any{
 		"data":  entries,
 		"total": total,
 		"page":  page,
@@ -95,7 +95,7 @@ func (h *TimesheetHandler) HandleCreate(w http.ResponseWriter, r *http.Request) 
 		TaskID     int64   `json:"task_id"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
@@ -110,21 +110,21 @@ func (h *TimesheetHandler) HandleCreate(w http.ResponseWriter, r *http.Request) 
 		errs = append(errs, "hours must be greater than 0 and at most 24")
 	}
 	if len(errs) > 0 {
-		respondError(w, http.StatusBadRequest, strings.Join(errs, "; "))
+		RespondError(w, http.StatusBadRequest, "validation_error", strings.Join(errs, "; "))
 		return
 	}
 
 	id, err := h.svc.Create(r.Context(), req.EmployeeID, req.Date, req.Name, req.Hours, req.ProjectID, req.TaskID)
 	if err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to create timesheet entry")
+		RespondError(w, http.StatusInternalServerError, "create_failed", "Failed to create timesheet entry")
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]any{"id": id})
+	RespondJSON(w, http.StatusCreated, map[string]any{"id": id})
 }
 
 // HandleUpdate handles PUT /api/v1/timesheets/{id}
@@ -146,7 +146,7 @@ func (h *TimesheetHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) 
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
 	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid timesheet ID")
+		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid timesheet ID")
 		return
 	}
 
@@ -158,7 +158,7 @@ func (h *TimesheetHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) 
 		TaskID    int64   `json:"task_id"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid request body")
+		RespondError(w, http.StatusBadRequest, "invalid_request", "Invalid request body")
 		return
 	}
 
@@ -171,7 +171,7 @@ func (h *TimesheetHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) 
 	}
 	if req.Hours != 0 {
 		if req.Hours <= 0 || req.Hours > 24 {
-			respondError(w, http.StatusBadRequest, "hours must be greater than 0 and at most 24")
+			RespondError(w, http.StatusBadRequest, "validation_error", "hours must be greater than 0 and at most 24")
 			return
 		}
 		vals["unit_amount"] = req.Hours
@@ -183,18 +183,18 @@ func (h *TimesheetHandler) HandleUpdate(w http.ResponseWriter, r *http.Request) 
 		vals["task_id"] = req.TaskID
 	}
 	if len(vals) == 0 {
-		respondError(w, http.StatusBadRequest, "No fields to update")
+		RespondError(w, http.StatusBadRequest, "validation_error", "No fields to update")
 		return
 	}
 
 	if err := h.svc.Update(r.Context(), id, vals); err != nil {
 		if errors.Is(err, service.ErrServiceUnavailable) {
-			respondError(w, http.StatusServiceUnavailable, "HR service temporarily unavailable. Please try again shortly.")
+			RespondError(w, http.StatusServiceUnavailable, "service_unavailable", "HR service temporarily unavailable. Please try again shortly.")
 			return
 		}
-		respondError(w, http.StatusInternalServerError, "Failed to update timesheet entry")
+		RespondError(w, http.StatusInternalServerError, "update_failed", "Failed to update timesheet entry")
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]any{"message": "Timesheet entry updated successfully"})
+	RespondJSON(w, http.StatusOK, map[string]any{"message": "Timesheet entry updated successfully"})
 }

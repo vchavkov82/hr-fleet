@@ -369,10 +369,10 @@ func runAPI(
 				r.Get("/vehicles/{id}", fleetHandler.HandleGetVehicle)
 				r.Get("/vehicles/{id}/logs", fleetHandler.HandleListVehicleLogs)
 			})
-
-			// Odoo Webhooks (no auth required for Odoo callbacks, uses token validation)
-			r.Post("/webhooks/odoo", handler.NewOdooWebhookHandler(asynqClient, cfg.OdooWebhookSecret).HandleWebhook)
 		})
+
+		// Odoo Webhooks - outside auth group, uses HMAC token validation
+		r.Post("/webhooks/odoo", handler.NewOdooWebhookHandler(asynqClient, cfg.OdooWebhookSecret).HandleWebhook)
 	})
 
 	addr := ":" + cfg.Port

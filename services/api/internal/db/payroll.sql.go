@@ -147,6 +147,19 @@ func (q *Queries) GetPayslip(ctx context.Context, id pgtype.UUID) (Payslip, erro
 	return i, err
 }
 
+const countPayrollRuns = `-- name: CountPayrollRuns :one
+SELECT count(*)::bigint
+FROM payroll_runs
+WHERE status = coalesce($1, status)
+`
+
+func (q *Queries) CountPayrollRuns(ctx context.Context, status pgtype.Text) (int64, error) {
+	row := q.db.QueryRow(ctx, countPayrollRuns, status)
+	var count int64
+	err := row.Scan(&count)
+	return count, err
+}
+
 const listPayrollRuns = `-- name: ListPayrollRuns :many
 SELECT id, period_start, period_end, status, created_by, approved_by, error_details, completed_at, created_at, updated_at
 FROM payroll_runs

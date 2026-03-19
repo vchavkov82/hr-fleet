@@ -15,6 +15,11 @@ WHERE status = coalesce(sqlc.narg('status'), status)
 ORDER BY created_at DESC
 LIMIT $1 OFFSET $2;
 
+-- name: CountPayrollRuns :one
+SELECT count(*)::bigint
+FROM payroll_runs
+WHERE status = coalesce(sqlc.narg('status'), status);
+
 -- name: UpdatePayrollRunStatus :exec
 UPDATE payroll_runs SET status = $2, updated_at = now() WHERE id = $1;
 

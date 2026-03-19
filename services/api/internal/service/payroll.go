@@ -157,12 +157,22 @@ func (s *PayrollService) GetStatus(ctx context.Context, runID pgtype.UUID) (db.P
 }
 
 // List retrieves payroll runs with optional status filter and pagination.
-func (s *PayrollService) List(ctx context.Context, status pgtype.Text, limit, offset int32) ([]db.PayrollRun, error) {
-	return s.queries.ListPayrollRuns(ctx, db.ListPayrollRunsParams{
+func (s *PayrollService) List(ctx context.Context, status pgtype.Text, limit, offset int32) ([]db.PayrollRun, int64, error) {
+	runs, err := s.queries.ListPayrollRuns(ctx, db.ListPayrollRunsParams{
 		Status: status,
 		Limit:  limit,
 		Offset: offset,
 	})
+	if err != nil {
+		return nil, 0, err
+	}
+
+	total, err := s.queries.CountPayrollRuns(ctx, status)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return runs, total, nil
 }
 
 // Cancel transitions a payroll run to cancelled status.
