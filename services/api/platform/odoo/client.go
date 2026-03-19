@@ -168,7 +168,7 @@ func (c *Client) Call(ctx context.Context, service, method string, args []any) (
 }
 
 // doCall performs a single JSON-RPC call without retry logic.
-func (c *Client) doCall(service, method string, args []any) (json.RawMessage, error) {
+func (c *Client) doCall(ctx context.Context, service, method string, args []any) (json.RawMessage, error) {
 	params := map[string]any{
 		"service": service,
 		"method":  method,
