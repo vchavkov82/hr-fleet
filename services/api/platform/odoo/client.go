@@ -274,8 +274,8 @@ func (c *Client) SearchRead(ctx context.Context, model string, domain []any, fie
 }
 
 // SearchCount returns the count of records matching the domain.
-func (c *Client) SearchCount(model string, domain []any) (int64, error) {
-	if err := c.EnsureAuthenticated(); err != nil {
+func (c *Client) SearchCount(ctx context.Context, model string, domain []any) (int64, error) {
+	if err := c.EnsureAuthenticated(ctx); err != nil {
 		return 0, err
 	}
 
