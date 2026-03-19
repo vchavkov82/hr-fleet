@@ -1,6 +1,7 @@
 package odoo
 
 import (
+	"context"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -57,8 +58,9 @@ func TestAuthenticate_ValidCredentials(t *testing.T) {
 	})
 	defer srv.Close()
 
+	ctx := context.Background()
 	c := NewClient(srv.URL, "testdb", "admin", "admin")
-	err := c.Authenticate()
+	err := c.Authenticate(ctx)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
@@ -74,8 +76,9 @@ func TestAuthenticate_InvalidCredentials(t *testing.T) {
 	})
 	defer srv.Close()
 
+	ctx := context.Background()
 	c := NewClient(srv.URL, "testdb", "admin", "wrong")
-	err := c.Authenticate()
+	err := c.Authenticate(ctx)
 	if err == nil {
 		t.Fatal("expected error for invalid credentials")
 	}
@@ -90,10 +93,11 @@ func TestCall_FormatsJSONRPC(t *testing.T) {
 	})
 	defer srv.Close()
 
+	ctx := context.Background()
 	c := NewClient(srv.URL, "testdb", "admin", "admin")
 	c.uid = 1 // pre-set to skip auth
 
-	_, err := c.Call("object", "execute", []interface{}{"testdb", 1, "admin", "hr.employee", "search_read"})
+	_, err := c.Call(ctx, "object", "execute", []interface{}{"testdb", 1, "admin", "hr.employee", "search_read"})
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -116,10 +120,11 @@ func TestCall_ParsesErrorResponse(t *testing.T) {
 	})
 	defer srv.Close()
 
+	ctx := context.Background()
 	c := NewClient(srv.URL, "testdb", "admin", "admin")
 	c.uid = 1
 
-	_, err := c.Call("object", "execute", []interface{}{})
+	_, err := c.Call(ctx, "object", "execute", []interface{}{})
 	if err == nil {
 		t.Fatal("expected error from RPC error response")
 	}
@@ -159,11 +164,12 @@ func TestCall_ReauthenticatesOnSessionExpiry(t *testing.T) {
 	})
 	defer srv.Close()
 
+	ctx := context.Background()
 	c := NewClient(srv.URL, "testdb", "admin", "admin")
 	c.uid = 1 // pre-set as if previously authenticated
 	c.sessionID = "old-session"
 
-	_, err := c.Call("object", "execute", []interface{}{})
+	_, err := c.Call(ctx, "object", "execute", []interface{}{})
 	if err != nil {
 		t.Fatalf("expected successful retry after re-auth, got: %v", err)
 	}
@@ -226,7 +232,8 @@ func TestListEmployees_ReturnsSlice(t *testing.T) {
 	})
 	defer srv.Close()
 
-	employees, total, err := c.ListEmployees(nil, 10, 0)
+	ctx := context.Background()
+	employees, total, err := c.ListEmployees(ctx, nil, 10, 0)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -269,12 +276,13 @@ func TestListEmployees_AppliesDomainFilters(t *testing.T) {
 	})
 	defer srv.Close()
 
+	ctx := context.Background()
 	domain := []interface{}{
 		[]interface{}{"department_id", "=", 5},
 		[]interface{}{"active", "=", true},
 	}
 
-	_, _, err := c.ListEmployees(domain, 10, 0)
+	_, _, err := c.ListEmployees(ctx, domain, 10, 0)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -309,7 +317,8 @@ func TestListEmployees_RespectsLimitOffset(t *testing.T) {
 	})
 	defer srv.Close()
 
-	employees, total, err := c.ListEmployees(nil, 5, 10)
+	ctx := context.Background()
+	employees, total, err := c.ListEmployees(ctx, nil, 5, 10)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -338,7 +347,8 @@ func TestGetEmployee_ReturnsSingle(t *testing.T) {
 	})
 	defer srv.Close()
 
-	emp, err := c.GetEmployee(42)
+	ctx := context.Background()
+	emp, err := c.GetEmployee(ctx, 42)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -371,6 +381,7 @@ func TestCreateEmployee_ReturnsNewID(t *testing.T) {
 	})
 	defer srv.Close()
 
+	ctx := context.Background()
 	req := EmployeeCreateRequest{
 		Name:         "New Employee",
 		WorkEmail:    "new@example.com",
@@ -379,7 +390,7 @@ func TestCreateEmployee_ReturnsNewID(t *testing.T) {
 		EmployeeType: "employee",
 	}
 
-	id, err := c.CreateEmployee(req)
+	id, err := c.CreateEmployee(ctx, req)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -419,12 +430,13 @@ func TestUpdateEmployee_SendsChangedFields(t *testing.T) {
 	})
 	defer srv.Close()
 
+	ctx := context.Background()
 	vals := map[string]interface{}{
-		"job_title": "Senior Dev",
+		"job_title":  "Senior Dev",
 		"work_phone": "+359888999000",
 	}
 
-	err := c.UpdateEmployee(42, vals)
+	err := c.UpdateEmployee(ctx, 42, vals)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
