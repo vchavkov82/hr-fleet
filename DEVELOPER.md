@@ -103,7 +103,7 @@ Odoo runs with OCA (Odoo Community Association) modules:
 
 | Setting | Value |
 |---------|-------|
-| URL | http://localhost:5012 or http://admin.hr.localhost:5090 |
+| URL | http://suse-06.lan.assistance.bg:5012 |
 | Email | `admin@test.com` |
 | Password | `password123` |
 
