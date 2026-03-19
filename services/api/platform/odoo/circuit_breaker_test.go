@@ -1,6 +1,7 @@
 package odoo
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -30,18 +31,19 @@ func TestCircuitBreakerOpensAfterConsecutiveFailures(t *testing.T) {
 	}))
 	defer srv.Close()
 
+	ctx := context.Background()
 	client := NewClient(srv.URL, "test", "admin", "admin")
-	if err := client.Authenticate(); err != nil {
+	if err := client.Authenticate(ctx); err != nil {
 		t.Fatalf("auth failed: %v", err)
 	}
 
 	// Make 5 consecutive failing calls to trip the breaker
 	for i := 0; i < 5; i++ {
-		_, _ = client.Call("object", "execute_kw", []any{"db", 1, "pass", "res.partner", "search_read", []any{}, map[string]any{}})
+		_, _ = client.Call(ctx, "object", "execute_kw", []any{"db", 1, "pass", "res.partner", "search_read", []any{}, map[string]any{}})
 	}
 
 	// 6th call should fail with circuit breaker open error
-	_, err := client.Call("object", "execute_kw", []any{"db", 1, "pass", "res.partner", "search_read", []any{}, map[string]any{}})
+	_, err := client.Call(ctx, "object", "execute_kw", []any{"db", 1, "pass", "res.partner", "search_read", []any{}, map[string]any{}})
 	if err == nil {
 		t.Fatal("expected circuit breaker error, got nil")
 	}
@@ -75,6 +77,7 @@ func TestConnectionPoolLimitsConcurrency(t *testing.T) {
 	}))
 	defer srv.Close()
 
+	ctx := context.Background()
 	client := NewClient(srv.URL, "test", "admin", "admin")
 	client.uid = 1 // skip auth
 
@@ -84,7 +87,7 @@ func TestConnectionPoolLimitsConcurrency(t *testing.T) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			_, _ = client.Call("object", "execute_kw", []any{"db", 1, "pass"})
+			_, _ = client.Call(ctx, "object", "execute_kw", []any{"db", 1, "pass"})
 		}()
 	}
 	wg.Wait()
@@ -118,6 +121,7 @@ func TestCircuitBreakerHalfOpen(t *testing.T) {
 	}))
 	defer srv.Close()
 
+	ctx := context.Background()
 	client := NewClientWithOptions(srv.URL, "test", "admin", "admin", ClientOptions{
 		MaxConcurrent:      20,
 		CBMaxRequests:      1,
@@ -125,17 +129,17 @@ func TestCircuitBreakerHalfOpen(t *testing.T) {
 		CBTimeoutSeconds:   1,
 		CBFailureThreshold: 5,
 	})
-	if err := client.Authenticate(); err != nil {
+	if err := client.Authenticate(ctx); err != nil {
 		t.Fatalf("auth: %v", err)
 	}
 
 	// Trip the breaker
 	for i := 0; i < 5; i++ {
-		_, _ = client.Call("object", "execute_kw", []any{"db", 1, "pass"})
+		_, _ = client.Call(ctx, "object", "execute_kw", []any{"db", 1, "pass"})
 	}
 
 	// Should be open
-	_, err := client.Call("object", "execute_kw", []any{"db", 1, "pass"})
+	_, err := client.Call(ctx, "object", "execute_kw", []any{"db", 1, "pass"})
 	if err == nil {
 		t.Fatal("expected error from open breaker")
 	}
