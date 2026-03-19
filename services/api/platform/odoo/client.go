@@ -260,7 +260,7 @@ func (c *Client) SearchRead(ctx context.Context, model string, domain []any, fie
 		kwargs,
 	}
 
-	result, err := c.Call("object", "execute_kw", args)
+	result, err := c.Call(ctx, "object", "execute_kw", args)
 	if err != nil {
 		return nil, fmt.Errorf("search_read %s: %w", model, err)
 	}
