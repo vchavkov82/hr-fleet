@@ -14,8 +14,11 @@ type Config struct {
 	OdooDB            string // ODOO_DB
 	OdooUser          string // ODOO_USER
 	OdooPassword      string // ODOO_PASSWORD, required
-	OdooWebhookSecret string // ODOO_WEBHOOK_SECRET, optional token for webhook validation
-	RedisURL          string // REDIS_URL
+	OdooWebhookSecret  string // ODOO_WEBHOOK_SECRET, optional token for webhook validation
+	OdooMaxConcurrent  int    // ODOO_MAX_CONCURRENT, default 20
+	OdooTimeoutSeconds int    // ODOO_TIMEOUT_SECONDS, default 30
+	OdooCBFailureThreshold int // ODOO_CB_FAILURE_THRESHOLD, default 5
+	RedisURL           string // REDIS_URL
 	JWTSecret         string // JWT_SECRET (legacy HS256, kept for backward compat)
 	JWTPrivateKey     string // JWT_PRIVATE_KEY_FILE, path to RSA private key PEM
 	JWTPublicKey      string // JWT_PUBLIC_KEY_FILE, path to RSA public key PEM
