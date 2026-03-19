@@ -54,3 +54,23 @@
 	path = deploy/odoo-addons/queue
 	url = https://github.com/OCA/queue.git
 	branch = 18.0
+[submodule "deploy/odoo-addons/contract"]
+	path = deploy/odoo-addons/contract
+	url = https://github.com/OCA/contract.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/partner-contact"]
+	path = deploy/odoo-addons/partner-contact
+	url = https://github.com/OCA/partner-contact.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/data-protection"]
+	path = deploy/odoo-addons/data-protection
+	url = https://github.com/OCA/data-protection.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/survey"]
+	path = deploy/odoo-addons/survey
+	url = https://github.com/OCA/survey.git
+	branch = 18.0
+[submodule "deploy/odoo-addons/server-ux"]
+	path = deploy/odoo-addons/server-ux
+	url = https://github.com/OCA/server-ux.git
+	branch = 18.0

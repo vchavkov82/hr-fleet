@@ -92,7 +92,7 @@ dev-admin: ## Start HR admin panel only in dev mode (port 5012)
 	cd apps/admin && pnpm dev
 
 dev-backend: ## Start Go backend in dev mode (port 5080)
-	cd services/api && go run ./cmd/server/
+	cd services/api && PORT=5080 go run ./cmd/server/
 
 odoo-init: ## Initialize Odoo HR modules (run once after first start)
 	bash deploy/odoo-init.sh
@@ -191,5 +191,7 @@ bootstrap: install ## Full setup from scratch
 	@echo "  HR site      http://localhost:5010"
 	@echo "  HR blog      http://localhost:5013"
 	@echo "  HR docs      http://localhost:5011"
+	@echo "  HR admin     http://localhost:5012"
+	@echo "  HR API       http://localhost:5080"
 
 .DEFAULT_GOAL := help

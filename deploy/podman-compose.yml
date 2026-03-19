@@ -171,6 +171,11 @@ services:
       - ./odoo-addons/account-financial-reporting:/mnt/extra-addons/account-financial-reporting:ro
       - ./odoo-addons/project:/mnt/extra-addons/project:ro
       - ./odoo-addons/fleet:/mnt/extra-addons/fleet:ro
+      - ./odoo-addons/contract:/mnt/extra-addons/contract:ro
+      - ./odoo-addons/partner-contact:/mnt/extra-addons/partner-contact:ro
+      - ./odoo-addons/data-protection:/mnt/extra-addons/data-protection:ro
+      - ./odoo-addons/survey:/mnt/extra-addons/survey:ro
+      - ./odoo-addons/server-ux:/mnt/extra-addons/server-ux:ro
     depends_on:
       hr-odoo-db:
         condition: service_healthy

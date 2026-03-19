@@ -14,6 +14,7 @@ C_HR='\033[35m'        # magenta
 C_HR_BLOG='\033[32m'   # green
 C_HR_DOCS='\033[37m'   # white
 C_HR_ADMIN='\033[36m'  # cyan
+C_HR_API='\033[33m'    # yellow
 
 prefix() {
   local color="$1"
@@ -59,6 +60,9 @@ PIDS+=($!)
 (cd apps/admin && pnpm dev           2>&1 | prefix "$C_HR_ADMIN"  "hr-admin" ) &
 PIDS+=($!)
 
+(cd services/api && PORT=5080 go run ./cmd/server/ 2>&1 | prefix "$C_HR_API" "hr-api" ) &
+PIDS+=($!)
+
 sleep 2
 
 echo ""
@@ -68,6 +72,7 @@ echo -e "  ${C_HR}HR site${C_RESET}          http://localhost:5010"
 echo -e "  ${C_HR_BLOG}HR blog${C_RESET}          http://localhost:5013"
 echo -e "  ${C_HR_DOCS}HR docs${C_RESET}          http://localhost:5011"
 echo -e "  ${C_HR_ADMIN}HR admin${C_RESET}         http://localhost:5012"
+echo -e "  ${C_HR_API}HR API${C_RESET}           http://localhost:5080"
 echo ""
 echo -e "Press ${C_BOLD}Ctrl+C${C_RESET} to stop all servers."
 echo ""

@@ -16,6 +16,9 @@ COPY odoo-addons/hr/requirements.txt /tmp/req-hr.txt
 COPY odoo-addons/timesheet/requirements.txt /tmp/req-timesheet.txt
 COPY odoo-addons/reporting-engine/requirements.txt /tmp/req-reporting-engine.txt
 COPY odoo-addons/web/requirements.txt /tmp/req-web.txt
+COPY odoo-addons/contract/requirements.txt /tmp/req-contract.txt
+COPY odoo-addons/partner-contact/requirements.txt /tmp/req-partner-contact.txt
+COPY odoo-addons/server-ux/requirements.txt /tmp/req-server-ux.txt
 
 RUN pip3 install --no-cache-dir --break-system-packages \
     -r /tmp/req-server-tools.txt \
@@ -23,6 +26,9 @@ RUN pip3 install --no-cache-dir --break-system-packages \
     -r /tmp/req-timesheet.txt \
     -r /tmp/req-reporting-engine.txt \
     -r /tmp/req-web.txt \
+    -r /tmp/req-contract.txt \
+    -r /tmp/req-partner-contact.txt \
+    -r /tmp/req-server-ux.txt \
     && rm -f /tmp/req-*.txt
 
 # Copy OCA addons into the image (prod)
@@ -39,6 +45,11 @@ COPY odoo-addons/reporting-engine /mnt/extra-addons/reporting-engine
 COPY odoo-addons/account-financial-reporting /mnt/extra-addons/account-financial-reporting
 COPY odoo-addons/project /mnt/extra-addons/project
 COPY odoo-addons/fleet /mnt/extra-addons/fleet
+COPY odoo-addons/contract /mnt/extra-addons/contract
+COPY odoo-addons/partner-contact /mnt/extra-addons/partner-contact
+COPY odoo-addons/data-protection /mnt/extra-addons/data-protection
+COPY odoo-addons/survey /mnt/extra-addons/survey
+COPY odoo-addons/server-ux /mnt/extra-addons/server-ux
 
 # Fix permissions
 RUN chown -R odoo:odoo /mnt/extra-addons
