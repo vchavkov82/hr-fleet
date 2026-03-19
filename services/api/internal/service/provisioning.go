@@ -35,7 +35,7 @@ func (s *ProvisioningService) ProvisionCompany(ctx context.Context, companyName,
 	}
 
 	// Create the admin user with the new company
-	userID, err = s.odoo.Create("res.users", map[string]any{
+	userID, err = s.odoo.Create(ctx, "res.users", map[string]any{
 		"name":       adminName,
 		"login":      adminEmail,
 		"email":      adminEmail,
