@@ -1,19 +1,22 @@
 package odoo
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
 // ListProjects retrieves project.project records from Odoo with optional domain filters.
-func (c *Client) ListProjects(domain []any, limit, offset int) ([]Project, int, error) {
+func (c *Client) ListProjects(ctx context.Context, domain []any, limit, offset int) ([]Project, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("project.project", domain)
+	count, err := c.SearchCount(ctx, "project.project", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list projects count: %w", err)
 	}
 
-	records, err := c.SearchRead("project.project", domain, projectFields, limit, offset)
+	records, err := c.SearchRead(ctx, "project.project", domain, projectFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list projects: %w", err)
 	}
@@ -27,8 +30,8 @@ func (c *Client) ListProjects(domain []any, limit, offset int) ([]Project, int, 
 }
 
 // GetProject retrieves a single project.project by ID.
-func (c *Client) GetProject(id int64) (*Project, error) {
-	records, err := c.Read("project.project", []int64{id}, projectFields)
+func (c *Client) GetProject(ctx context.Context, id int64) (*Project, error) {
+	records, err := c.Read(ctx, "project.project", []int64{id}, projectFields)
 	if err != nil {
 		return nil, fmt.Errorf("get project %d: %w", id, err)
 	}
@@ -42,18 +45,18 @@ func (c *Client) GetProject(id int64) (*Project, error) {
 }
 
 // ListProjectTasks retrieves project.task records for a project.
-func (c *Client) ListProjectTasks(projectID int64, limit, offset int) ([]ProjectTask, int, error) {
+func (c *Client) ListProjectTasks(ctx context.Context, projectID int64, limit, offset int) ([]ProjectTask, int, error) {
 	domain := []any{}
 	if projectID > 0 {
 		domain = append(domain, []any{"project_id", "=", projectID})
 	}
 
-	count, err := c.SearchCount("project.task", domain)
+	count, err := c.SearchCount(ctx, "project.task", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list project tasks count: %w", err)
 	}
 
-	records, err := c.SearchRead("project.task", domain, projectTaskFields, limit, offset)
+	records, err := c.SearchRead(ctx, "project.task", domain, projectTaskFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list project tasks: %w", err)
 	}
@@ -67,8 +70,8 @@ func (c *Client) ListProjectTasks(projectID int64, limit, offset int) ([]Project
 }
 
 // GetProjectTask retrieves a single project.task by ID.
-func (c *Client) GetProjectTask(id int64) (*ProjectTask, error) {
-	records, err := c.Read("project.task", []int64{id}, projectTaskFields)
+func (c *Client) GetProjectTask(ctx context.Context, id int64) (*ProjectTask, error) {
+	records, err := c.Read(ctx, "project.task", []int64{id}, projectTaskFields)
 	if err != nil {
 		return nil, fmt.Errorf("get project task %d: %w", id, err)
 	}
