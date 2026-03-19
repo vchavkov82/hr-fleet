@@ -150,3 +150,37 @@ func TestCircuitBreakerHalfOpen(t *testing.T) {
 	// We just verify the breaker was open and the concept works.
 	t.Log("circuit breaker correctly opened after failures")
 }
+
+func TestCallRespectsContextCancellation(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Slow server — waits longer than the context deadline
+		select {
+		case <-r.Context().Done():
+			return
+		case <-time.After(5 * time.Second):
+		}
+		resp := JSONRPCResponse{JSONRPC: "2.0", ID: 1, Result: json.RawMessage(`1`)}
+		json.NewEncoder(w).Encode(resp)
+	}))
+	defer srv.Close()
+
+	client := NewClient(srv.URL, "test", "admin", "admin")
+	client.uid = 1
+
+	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
+	defer cancel()
+
+	_, err := client.Call(ctx, "object", "execute_kw", []any{"db", 1, "pass"})
+	if err == nil {
+		t.Fatal("expected error from cancelled context")
+	}
+}
+
+func TestHTTPTimeoutIsSet(t *testing.T) {
+	opts := DefaultClientOptions()
+	opts.HTTPTimeoutSeconds = 5
+	client := NewClientWithOptions("http://localhost:9999", "test", "admin", "admin", opts, zerolog.Nop())
+	if client.client.Timeout != 5*time.Second {
+		t.Errorf("expected 5s timeout, got %v", client.client.Timeout)
+	}
+}
