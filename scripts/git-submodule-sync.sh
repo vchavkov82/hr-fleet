@@ -1,0 +1,1 @@
+/home/vchavkov/.config/brain/scripts/git-submodule-sync.sh
