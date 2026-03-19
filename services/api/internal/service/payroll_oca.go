@@ -10,14 +10,14 @@ import (
 
 // PayrollOCAOdooClient defines the Odoo interface for OCA payroll operations.
 type PayrollOCAOdooClient interface {
-	ListPayrollStructures(domain []any, limit, offset int) ([]odoo.PayrollStructure, int, error)
-	GetPayrollStructure(id int64) (*odoo.PayrollStructure, error)
-	ListSalaryRules(domain []any, limit, offset int) ([]odoo.SalaryRule, int, error)
-	ListPayslipsOCA(domain []any, limit, offset int) ([]odoo.PayslipOCA, int, error)
-	ListPayslipRuns(domain []any, limit, offset int) ([]odoo.PayslipRun, int, error)
-	CreatePayslipRun(vals map[string]any) (int64, error)
-	GeneratePayslips(runID int64) error
-	ConfirmPayslipRun(runID int64) error
+	ListPayrollStructures(ctx context.Context, domain []any, limit, offset int) ([]odoo.PayrollStructure, int, error)
+	GetPayrollStructure(ctx context.Context, id int64) (*odoo.PayrollStructure, error)
+	ListSalaryRules(ctx context.Context, domain []any, limit, offset int) ([]odoo.SalaryRule, int, error)
+	ListPayslipsOCA(ctx context.Context, domain []any, limit, offset int) ([]odoo.PayslipOCA, int, error)
+	ListPayslipRuns(ctx context.Context, domain []any, limit, offset int) ([]odoo.PayslipRun, int, error)
+	CreatePayslipRun(ctx context.Context, vals map[string]any) (int64, error)
+	GeneratePayslips(ctx context.Context, runID int64) error
+	ConfirmPayslipRun(ctx context.Context, runID int64) error
 }
 
 // PayrollOCAService provides business logic for OCA payroll operations.
@@ -33,7 +33,7 @@ func NewPayrollOCAService(odoo PayrollOCAOdooClient, cache *cache.Cache) *Payrol
 
 // ListStructures retrieves payroll structures.
 func (s *PayrollOCAService) ListStructures(ctx context.Context, limit, offset int) ([]odoo.PayrollStructure, int, error) {
-	structures, total, err := s.odoo.ListPayrollStructures(nil, limit, offset)
+	structures, total, err := s.odoo.ListPayrollStructures(ctx, nil, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list structures: %w", err)
 	}
@@ -42,7 +42,7 @@ func (s *PayrollOCAService) ListStructures(ctx context.Context, limit, offset in
 
 // GetStructure retrieves a single payroll structure.
 func (s *PayrollOCAService) GetStructure(ctx context.Context, id int64) (*odoo.PayrollStructure, error) {
-	structure, err := s.odoo.GetPayrollStructure(id)
+	structure, err := s.odoo.GetPayrollStructure(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("get structure: %w", err)
 	}
@@ -55,7 +55,7 @@ func (s *PayrollOCAService) ListRules(ctx context.Context, structID int64, limit
 	if structID > 0 {
 		domain = append(domain, []any{"struct_id", "=", structID})
 	}
-	rules, total, err := s.odoo.ListSalaryRules(domain, limit, offset)
+	rules, total, err := s.odoo.ListSalaryRules(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list rules: %w", err)
 	}
@@ -71,7 +71,7 @@ func (s *PayrollOCAService) ListPayslips(ctx context.Context, employeeID int64, 
 	if state != "" {
 		domain = append(domain, []any{"state", "=", state})
 	}
-	payslips, total, err := s.odoo.ListPayslipsOCA(domain, limit, offset)
+	payslips, total, err := s.odoo.ListPayslipsOCA(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list payslips: %w", err)
 	}
@@ -85,7 +85,7 @@ func (s *PayrollOCAService) CreatePayslipRun(ctx context.Context, name, dateFrom
 		"date_start": dateFrom,
 		"date_end":   dateTo,
 	}
-	id, err := s.odoo.CreatePayslipRun(vals)
+	id, err := s.odoo.CreatePayslipRun(ctx, vals)
 	if err != nil {
 		return 0, fmt.Errorf("create payslip run: %w", err)
 	}
@@ -94,7 +94,7 @@ func (s *PayrollOCAService) CreatePayslipRun(ctx context.Context, name, dateFrom
 
 // GeneratePayslips triggers payslip generation for a run.
 func (s *PayrollOCAService) GeneratePayslips(ctx context.Context, runID int64) error {
-	if err := s.odoo.GeneratePayslips(runID); err != nil {
+	if err := s.odoo.GeneratePayslips(ctx, runID); err != nil {
 		return fmt.Errorf("generate payslips: %w", err)
 	}
 	return nil
@@ -102,7 +102,7 @@ func (s *PayrollOCAService) GeneratePayslips(ctx context.Context, runID int64) e
 
 // ConfirmPayslipRun confirms/closes a payslip run.
 func (s *PayrollOCAService) ConfirmPayslipRun(ctx context.Context, runID int64) error {
-	if err := s.odoo.ConfirmPayslipRun(runID); err != nil {
+	if err := s.odoo.ConfirmPayslipRun(ctx, runID); err != nil {
 		return fmt.Errorf("confirm payslip run: %w", err)
 	}
 	return nil

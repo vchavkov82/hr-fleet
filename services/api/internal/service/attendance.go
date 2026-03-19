@@ -10,9 +10,9 @@ import (
 
 // AttendanceOdooClient defines the Odoo interface for attendance operations.
 type AttendanceOdooClient interface {
-	ListAttendance(domain []any, limit, offset int) ([]odoo.AttendanceRecord, int, error)
-	CheckIn(employeeID int64) (int64, error)
-	CheckOut(attendanceID int64) error
+	ListAttendance(ctx context.Context, domain []any, limit, offset int) ([]odoo.AttendanceRecord, int, error)
+	CheckIn(ctx context.Context, employeeID int64) (int64, error)
+	CheckOut(ctx context.Context, attendanceID int64) error
 }
 
 // AttendanceService provides business logic for attendance operations.
@@ -33,7 +33,7 @@ func (s *AttendanceService) List(ctx context.Context, employeeID int64, limit, o
 		domain = append(domain, []any{"employee_id", "=", employeeID})
 	}
 
-	records, total, err := s.odoo.ListAttendance(domain, limit, offset)
+	records, total, err := s.odoo.ListAttendance(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list attendance: %w", err)
 	}
@@ -42,7 +42,7 @@ func (s *AttendanceService) List(ctx context.Context, employeeID int64, limit, o
 
 // CheckIn records an employee check-in.
 func (s *AttendanceService) CheckIn(ctx context.Context, employeeID int64) (int64, error) {
-	id, err := s.odoo.CheckIn(employeeID)
+	id, err := s.odoo.CheckIn(ctx, employeeID)
 	if err != nil {
 		return 0, fmt.Errorf("check in: %w", err)
 	}
@@ -51,7 +51,7 @@ func (s *AttendanceService) CheckIn(ctx context.Context, employeeID int64) (int6
 
 // CheckOut records a check-out for an attendance record.
 func (s *AttendanceService) CheckOut(ctx context.Context, attendanceID int64) error {
-	if err := s.odoo.CheckOut(attendanceID); err != nil {
+	if err := s.odoo.CheckOut(ctx, attendanceID); err != nil {
 		return fmt.Errorf("check out: %w", err)
 	}
 	return nil

@@ -10,14 +10,14 @@ import (
 
 // AppraisalOdooClient defines the Odoo interface for appraisal operations.
 type AppraisalOdooClient interface {
-	ListAppraisals(domain []any, limit, offset int) ([]odoo.Appraisal, int, error)
-	GetAppraisal(id int64) (*odoo.Appraisal, error)
-	CreateAppraisal(req odoo.AppraisalCreateRequest) (int64, error)
-	UpdateAppraisal(id int64, vals map[string]any) error
-	ConfirmAppraisal(id int64) error
-	CompleteAppraisal(id int64) error
-	ResetAppraisal(id int64) error
-	ListAppraisalTemplates(limit, offset int) ([]odoo.AppraisalTemplate, int, error)
+	ListAppraisals(ctx context.Context, domain []any, limit, offset int) ([]odoo.Appraisal, int, error)
+	GetAppraisal(ctx context.Context, id int64) (*odoo.Appraisal, error)
+	CreateAppraisal(ctx context.Context, req odoo.AppraisalCreateRequest) (int64, error)
+	UpdateAppraisal(ctx context.Context, id int64, vals map[string]any) error
+	ConfirmAppraisal(ctx context.Context, id int64) error
+	CompleteAppraisal(ctx context.Context, id int64) error
+	ResetAppraisal(ctx context.Context, id int64) error
+	ListAppraisalTemplates(ctx context.Context, limit, offset int) ([]odoo.AppraisalTemplate, int, error)
 	Healthy() error
 }
 
@@ -46,7 +46,7 @@ func (s *AppraisalService) ListAppraisals(ctx context.Context, employeeID int64,
 		domain = append(domain, []any{"state", "=", state})
 	}
 
-	appraisals, total, err := s.odoo.ListAppraisals(domain, limit, offset)
+	appraisals, total, err := s.odoo.ListAppraisals(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list appraisals: %w", err)
 	}
@@ -59,7 +59,7 @@ func (s *AppraisalService) GetAppraisal(ctx context.Context, id int64) (*odoo.Ap
 		return nil, ErrServiceUnavailable
 	}
 
-	appraisal, err := s.odoo.GetAppraisal(id)
+	appraisal, err := s.odoo.GetAppraisal(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("get appraisal: %w", err)
 	}
@@ -72,7 +72,7 @@ func (s *AppraisalService) CreateAppraisal(ctx context.Context, req odoo.Apprais
 		return 0, ErrServiceUnavailable
 	}
 
-	id, err := s.odoo.CreateAppraisal(req)
+	id, err := s.odoo.CreateAppraisal(ctx, req)
 	if err != nil {
 		return 0, fmt.Errorf("create appraisal: %w", err)
 	}
@@ -85,7 +85,7 @@ func (s *AppraisalService) UpdateAppraisal(ctx context.Context, id int64, vals m
 		return ErrServiceUnavailable
 	}
 
-	if err := s.odoo.UpdateAppraisal(id, vals); err != nil {
+	if err := s.odoo.UpdateAppraisal(ctx, id, vals); err != nil {
 		return fmt.Errorf("update appraisal: %w", err)
 	}
 	return nil
@@ -97,7 +97,7 @@ func (s *AppraisalService) ConfirmAppraisal(ctx context.Context, id int64) error
 		return ErrServiceUnavailable
 	}
 
-	if err := s.odoo.ConfirmAppraisal(id); err != nil {
+	if err := s.odoo.ConfirmAppraisal(ctx, id); err != nil {
 		return fmt.Errorf("confirm appraisal: %w", err)
 	}
 	return nil
@@ -109,7 +109,7 @@ func (s *AppraisalService) CompleteAppraisal(ctx context.Context, id int64) erro
 		return ErrServiceUnavailable
 	}
 
-	if err := s.odoo.CompleteAppraisal(id); err != nil {
+	if err := s.odoo.CompleteAppraisal(ctx, id); err != nil {
 		return fmt.Errorf("complete appraisal: %w", err)
 	}
 	return nil
@@ -121,7 +121,7 @@ func (s *AppraisalService) ResetAppraisal(ctx context.Context, id int64) error {
 		return ErrServiceUnavailable
 	}
 
-	if err := s.odoo.ResetAppraisal(id); err != nil {
+	if err := s.odoo.ResetAppraisal(ctx, id); err != nil {
 		return fmt.Errorf("reset appraisal: %w", err)
 	}
 	return nil
@@ -133,7 +133,7 @@ func (s *AppraisalService) ListTemplates(ctx context.Context, limit, offset int)
 		return nil, 0, ErrServiceUnavailable
 	}
 
-	templates, total, err := s.odoo.ListAppraisalTemplates(limit, offset)
+	templates, total, err := s.odoo.ListAppraisalTemplates(ctx, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list appraisal templates: %w", err)
 	}

@@ -10,8 +10,8 @@ import (
 
 // DepartmentOdooClient defines the Odoo interface for department operations.
 type DepartmentOdooClient interface {
-	ListDepartments(domain []any, limit, offset int) ([]odoo.Department, int, error)
-	GetDepartment(id int64) (*odoo.Department, error)
+	ListDepartments(ctx context.Context, domain []any, limit, offset int) ([]odoo.Department, int, error)
+	GetDepartment(ctx context.Context, id int64) (*odoo.Department, error)
 }
 
 // DepartmentService provides business logic for department operations.
@@ -27,7 +27,7 @@ func NewDepartmentService(odoo DepartmentOdooClient, cache *cache.Cache) *Depart
 
 // List retrieves departments with optional filtering and pagination.
 func (s *DepartmentService) List(ctx context.Context, limit, offset int) ([]odoo.Department, int, error) {
-	depts, total, err := s.odoo.ListDepartments(nil, limit, offset)
+	depts, total, err := s.odoo.ListDepartments(ctx, nil, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list departments: %w", err)
 	}
@@ -36,7 +36,7 @@ func (s *DepartmentService) List(ctx context.Context, limit, offset int) ([]odoo
 
 // Get retrieves a single department by ID.
 func (s *DepartmentService) Get(ctx context.Context, id int64) (*odoo.Department, error) {
-	dept, err := s.odoo.GetDepartment(id)
+	dept, err := s.odoo.GetDepartment(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("get department: %w", err)
 	}

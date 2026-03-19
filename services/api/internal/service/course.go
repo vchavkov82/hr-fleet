@@ -10,23 +10,23 @@ import (
 
 // CourseOdooClient defines the Odoo interface for course operations.
 type CourseOdooClient interface {
-	ListCourses(domain []any, limit, offset int) ([]odoo.Course, int, error)
-	GetCourse(id int64) (*odoo.Course, error)
-	CreateCourse(req odoo.CourseCreateRequest) (int64, error)
-	UpdateCourse(id int64, vals map[string]any) error
-	ListCourseCategories(limit, offset int) ([]odoo.CourseCategory, int, error)
-	ListCourseSchedules(domain []any, limit, offset int) ([]odoo.CourseSchedule, int, error)
-	GetCourseSchedule(id int64) (*odoo.CourseSchedule, error)
-	CreateCourseSchedule(req odoo.CourseScheduleCreateRequest) (int64, error)
-	UpdateCourseSchedule(id int64, vals map[string]any) error
-	CourseScheduleDraft2Waiting(id int64) error
-	CourseScheduleWaiting2InProgress(id int64) error
-	CourseScheduleInProgress2Validation(id int64) error
-	CourseScheduleValidation2Complete(id int64) error
-	CourseScheduleBack2Draft(id int64) error
-	CourseScheduleCancel(id int64) error
-	ListCourseAttendees(scheduleID int64, limit, offset int) ([]odoo.CourseAttendee, int, error)
-	UpdateCourseAttendeeResult(id int64, result string) error
+	ListCourses(ctx context.Context, domain []any, limit, offset int) ([]odoo.Course, int, error)
+	GetCourse(ctx context.Context, id int64) (*odoo.Course, error)
+	CreateCourse(ctx context.Context, req odoo.CourseCreateRequest) (int64, error)
+	UpdateCourse(ctx context.Context, id int64, vals map[string]any) error
+	ListCourseCategories(ctx context.Context, limit, offset int) ([]odoo.CourseCategory, int, error)
+	ListCourseSchedules(ctx context.Context, domain []any, limit, offset int) ([]odoo.CourseSchedule, int, error)
+	GetCourseSchedule(ctx context.Context, id int64) (*odoo.CourseSchedule, error)
+	CreateCourseSchedule(ctx context.Context, req odoo.CourseScheduleCreateRequest) (int64, error)
+	UpdateCourseSchedule(ctx context.Context, id int64, vals map[string]any) error
+	CourseScheduleDraft2Waiting(ctx context.Context, id int64) error
+	CourseScheduleWaiting2InProgress(ctx context.Context, id int64) error
+	CourseScheduleInProgress2Validation(ctx context.Context, id int64) error
+	CourseScheduleValidation2Complete(ctx context.Context, id int64) error
+	CourseScheduleBack2Draft(ctx context.Context, id int64) error
+	CourseScheduleCancel(ctx context.Context, id int64) error
+	ListCourseAttendees(ctx context.Context, scheduleID int64, limit, offset int) ([]odoo.CourseAttendee, int, error)
+	UpdateCourseAttendeeResult(ctx context.Context, id int64, result string) error
 	Healthy() error
 }
 
@@ -52,7 +52,7 @@ func (s *CourseService) ListCourses(ctx context.Context, categoryID int64, limit
 		domain = append(domain, []any{"category_id", "=", categoryID})
 	}
 
-	courses, total, err := s.odoo.ListCourses(domain, limit, offset)
+	courses, total, err := s.odoo.ListCourses(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list courses: %w", err)
 	}
@@ -65,7 +65,7 @@ func (s *CourseService) GetCourse(ctx context.Context, id int64) (*odoo.Course, 
 		return nil, ErrServiceUnavailable
 	}
 
-	course, err := s.odoo.GetCourse(id)
+	course, err := s.odoo.GetCourse(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("get course: %w", err)
 	}
@@ -78,7 +78,7 @@ func (s *CourseService) CreateCourse(ctx context.Context, req odoo.CourseCreateR
 		return 0, ErrServiceUnavailable
 	}
 
-	id, err := s.odoo.CreateCourse(req)
+	id, err := s.odoo.CreateCourse(ctx, req)
 	if err != nil {
 		return 0, fmt.Errorf("create course: %w", err)
 	}
@@ -91,7 +91,7 @@ func (s *CourseService) UpdateCourse(ctx context.Context, id int64, vals map[str
 		return ErrServiceUnavailable
 	}
 
-	if err := s.odoo.UpdateCourse(id, vals); err != nil {
+	if err := s.odoo.UpdateCourse(ctx, id, vals); err != nil {
 		return fmt.Errorf("update course: %w", err)
 	}
 	return nil
@@ -103,7 +103,7 @@ func (s *CourseService) ListCategories(ctx context.Context, limit, offset int) (
 		return nil, 0, ErrServiceUnavailable
 	}
 
-	categories, total, err := s.odoo.ListCourseCategories(limit, offset)
+	categories, total, err := s.odoo.ListCourseCategories(ctx, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list course categories: %w", err)
 	}
@@ -124,7 +124,7 @@ func (s *CourseService) ListSchedules(ctx context.Context, courseID int64, state
 		domain = append(domain, []any{"state", "=", state})
 	}
 
-	schedules, total, err := s.odoo.ListCourseSchedules(domain, limit, offset)
+	schedules, total, err := s.odoo.ListCourseSchedules(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list course schedules: %w", err)
 	}
@@ -137,7 +137,7 @@ func (s *CourseService) GetSchedule(ctx context.Context, id int64) (*odoo.Course
 		return nil, ErrServiceUnavailable
 	}
 
-	schedule, err := s.odoo.GetCourseSchedule(id)
+	schedule, err := s.odoo.GetCourseSchedule(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("get course schedule: %w", err)
 	}
@@ -150,7 +150,7 @@ func (s *CourseService) CreateSchedule(ctx context.Context, req odoo.CourseSched
 		return 0, ErrServiceUnavailable
 	}
 
-	id, err := s.odoo.CreateCourseSchedule(req)
+	id, err := s.odoo.CreateCourseSchedule(ctx, req)
 	if err != nil {
 		return 0, fmt.Errorf("create course schedule: %w", err)
 	}
@@ -163,7 +163,7 @@ func (s *CourseService) UpdateSchedule(ctx context.Context, id int64, vals map[s
 		return ErrServiceUnavailable
 	}
 
-	if err := s.odoo.UpdateCourseSchedule(id, vals); err != nil {
+	if err := s.odoo.UpdateCourseSchedule(ctx, id, vals); err != nil {
 		return fmt.Errorf("update course schedule: %w", err)
 	}
 	return nil
@@ -178,13 +178,13 @@ func (s *CourseService) AdvanceSchedule(ctx context.Context, id int64, currentSt
 	var err error
 	switch currentState {
 	case "draft":
-		err = s.odoo.CourseScheduleDraft2Waiting(id)
+		err = s.odoo.CourseScheduleDraft2Waiting(ctx, id)
 	case "waiting_attendees":
-		err = s.odoo.CourseScheduleWaiting2InProgress(id)
+		err = s.odoo.CourseScheduleWaiting2InProgress(ctx, id)
 	case "in_progress":
-		err = s.odoo.CourseScheduleInProgress2Validation(id)
+		err = s.odoo.CourseScheduleInProgress2Validation(ctx, id)
 	case "in_validation":
-		err = s.odoo.CourseScheduleValidation2Complete(id)
+		err = s.odoo.CourseScheduleValidation2Complete(ctx, id)
 	default:
 		return fmt.Errorf("cannot advance from state: %s", currentState)
 	}
@@ -201,7 +201,7 @@ func (s *CourseService) ResetSchedule(ctx context.Context, id int64) error {
 		return ErrServiceUnavailable
 	}
 
-	if err := s.odoo.CourseScheduleBack2Draft(id); err != nil {
+	if err := s.odoo.CourseScheduleBack2Draft(ctx, id); err != nil {
 		return fmt.Errorf("reset schedule: %w", err)
 	}
 	return nil
@@ -213,7 +213,7 @@ func (s *CourseService) CancelSchedule(ctx context.Context, id int64) error {
 		return ErrServiceUnavailable
 	}
 
-	if err := s.odoo.CourseScheduleCancel(id); err != nil {
+	if err := s.odoo.CourseScheduleCancel(ctx, id); err != nil {
 		return fmt.Errorf("cancel schedule: %w", err)
 	}
 	return nil
@@ -225,7 +225,7 @@ func (s *CourseService) ListAttendees(ctx context.Context, scheduleID int64, lim
 		return nil, 0, ErrServiceUnavailable
 	}
 
-	attendees, total, err := s.odoo.ListCourseAttendees(scheduleID, limit, offset)
+	attendees, total, err := s.odoo.ListCourseAttendees(ctx, scheduleID, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list course attendees: %w", err)
 	}
@@ -243,7 +243,7 @@ func (s *CourseService) UpdateAttendeeResult(ctx context.Context, id int64, resu
 		return fmt.Errorf("invalid result: %s", result)
 	}
 
-	if err := s.odoo.UpdateCourseAttendeeResult(id, result); err != nil {
+	if err := s.odoo.UpdateCourseAttendeeResult(ctx, id, result); err != nil {
 		return fmt.Errorf("update attendee result: %w", err)
 	}
 	return nil

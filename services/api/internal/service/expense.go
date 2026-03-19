@@ -10,10 +10,10 @@ import (
 
 // ExpenseOdooClient defines the Odoo interface for expense operations.
 type ExpenseOdooClient interface {
-	ListExpenses(domain []any, limit, offset int) ([]odoo.ExpenseReport, int, error)
-	CreateExpense(vals map[string]any) (int64, error)
-	ApproveExpense(id int64) error
-	RefuseExpense(id int64) error
+	ListExpenses(ctx context.Context, domain []any, limit, offset int) ([]odoo.ExpenseReport, int, error)
+	CreateExpense(ctx context.Context, vals map[string]any) (int64, error)
+	ApproveExpense(ctx context.Context, id int64) error
+	RefuseExpense(ctx context.Context, id int64) error
 }
 
 // ExpenseService provides business logic for expense operations.
@@ -37,7 +37,7 @@ func (s *ExpenseService) List(ctx context.Context, employeeID int64, state strin
 		domain = append(domain, []any{"state", "=", state})
 	}
 
-	expenses, total, err := s.odoo.ListExpenses(domain, limit, offset)
+	expenses, total, err := s.odoo.ListExpenses(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list expenses: %w", err)
 	}
@@ -53,7 +53,7 @@ func (s *ExpenseService) Create(ctx context.Context, employeeID int64, name stri
 		"date":         date,
 	}
 
-	id, err := s.odoo.CreateExpense(vals)
+	id, err := s.odoo.CreateExpense(ctx, vals)
 	if err != nil {
 		return 0, fmt.Errorf("create expense: %w", err)
 	}
@@ -62,7 +62,7 @@ func (s *ExpenseService) Create(ctx context.Context, employeeID int64, name stri
 
 // Approve approves an expense report.
 func (s *ExpenseService) Approve(ctx context.Context, id int64) error {
-	if err := s.odoo.ApproveExpense(id); err != nil {
+	if err := s.odoo.ApproveExpense(ctx, id); err != nil {
 		return fmt.Errorf("approve expense: %w", err)
 	}
 	return nil
@@ -70,7 +70,7 @@ func (s *ExpenseService) Approve(ctx context.Context, id int64) error {
 
 // Refuse refuses an expense report.
 func (s *ExpenseService) Refuse(ctx context.Context, id int64) error {
-	if err := s.odoo.RefuseExpense(id); err != nil {
+	if err := s.odoo.RefuseExpense(ctx, id); err != nil {
 		return fmt.Errorf("refuse expense: %w", err)
 	}
 	return nil

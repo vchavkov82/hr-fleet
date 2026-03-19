@@ -20,10 +20,10 @@ const (
 
 // ContractOdooClient defines the interface for Odoo contract operations.
 type ContractOdooClient interface {
-	SearchContracts(domain []any, limit, offset int) ([]odoo.Contract, int, error)
-	GetContract(id int64) (*odoo.Contract, error)
-	CreateContract(vals map[string]any) (int64, error)
-	UpdateContract(id int64, vals map[string]any) error
+	SearchContracts(ctx context.Context, domain []any, limit, offset int) ([]odoo.Contract, int, error)
+	GetContract(ctx context.Context, id int64) (*odoo.Contract, error)
+	CreateContract(ctx context.Context, vals map[string]any) (int64, error)
+	UpdateContract(ctx context.Context, id int64, vals map[string]any) error
 }
 
 // ContractService provides business logic for contract operations.
@@ -59,7 +59,7 @@ func (s *ContractService) List(ctx context.Context, employeeID int64, page, perP
 		domain = append(domain, []any{"employee_id", "=", employeeID})
 	}
 
-	contracts, total, err := s.odoo.SearchContracts(domain, perPage, offset)
+	contracts, total, err := s.odoo.SearchContracts(ctx, domain, perPage, offset)
 	if err != nil {
 		var stale contractListResult
 		if staleErr := s.cache.GetStale(ctx, key, &stale); staleErr == nil {
@@ -81,7 +81,7 @@ func (s *ContractService) Get(ctx context.Context, id int64) (*odoo.Contract, er
 		return &cached, nil
 	}
 
-	contract, err := s.odoo.GetContract(id)
+	contract, err := s.odoo.GetContract(ctx, id)
 	if err != nil {
 		var stale odoo.Contract
 		if staleErr := s.cache.GetStale(ctx, key, &stale); staleErr == nil {
@@ -112,7 +112,7 @@ func (s *ContractService) Create(ctx context.Context, req odoo.ContractCreateReq
 		vals["department_id"] = req.DepartmentID
 	}
 
-	id, err := s.odoo.CreateContract(vals)
+	id, err := s.odoo.CreateContract(ctx, vals)
 	if err != nil {
 		return 0, fmt.Errorf("create contract: %w", err)
 	}
@@ -135,7 +135,7 @@ func (s *ContractService) Create(ctx context.Context, req odoo.ContractCreateReq
 
 // Update updates an existing contract via Odoo.
 func (s *ContractService) Update(ctx context.Context, id int64, vals map[string]any) error {
-	if err := s.odoo.UpdateContract(id, vals); err != nil {
+	if err := s.odoo.UpdateContract(ctx, id, vals); err != nil {
 		return fmt.Errorf("update contract %d: %w", id, err)
 	}
 

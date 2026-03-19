@@ -10,9 +10,9 @@ import (
 
 // TimesheetOdooClient defines the Odoo interface for timesheet operations.
 type TimesheetOdooClient interface {
-	ListTimesheets(domain []any, limit, offset int) ([]odoo.TimesheetEntry, int, error)
-	CreateTimesheet(vals map[string]any) (int64, error)
-	UpdateTimesheet(id int64, vals map[string]any) error
+	ListTimesheets(ctx context.Context, domain []any, limit, offset int) ([]odoo.TimesheetEntry, int, error)
+	CreateTimesheet(ctx context.Context, vals map[string]any) (int64, error)
+	UpdateTimesheet(ctx context.Context, id int64, vals map[string]any) error
 }
 
 // TimesheetService provides business logic for timesheet operations.
@@ -39,7 +39,7 @@ func (s *TimesheetService) List(ctx context.Context, employeeID int64, dateFrom,
 		domain = append(domain, []any{"date", "<=", dateTo})
 	}
 
-	entries, total, err := s.odoo.ListTimesheets(domain, limit, offset)
+	entries, total, err := s.odoo.ListTimesheets(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list timesheets: %w", err)
 	}
@@ -61,7 +61,7 @@ func (s *TimesheetService) Create(ctx context.Context, employeeID int64, date, n
 		vals["task_id"] = taskID
 	}
 
-	id, err := s.odoo.CreateTimesheet(vals)
+	id, err := s.odoo.CreateTimesheet(ctx, vals)
 	if err != nil {
 		return 0, fmt.Errorf("create timesheet: %w", err)
 	}
@@ -70,7 +70,7 @@ func (s *TimesheetService) Create(ctx context.Context, employeeID int64, date, n
 
 // Update updates an existing timesheet entry.
 func (s *TimesheetService) Update(ctx context.Context, id int64, vals map[string]any) error {
-	if err := s.odoo.UpdateTimesheet(id, vals); err != nil {
+	if err := s.odoo.UpdateTimesheet(ctx, id, vals); err != nil {
 		return fmt.Errorf("update timesheet %d: %w", id, err)
 	}
 	return nil

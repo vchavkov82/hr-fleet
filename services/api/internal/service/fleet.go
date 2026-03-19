@@ -10,9 +10,9 @@ import (
 
 // FleetOdooClient defines the Odoo interface for fleet operations.
 type FleetOdooClient interface {
-	ListFleetVehicles(domain []any, limit, offset int) ([]odoo.FleetVehicle, int, error)
-	GetFleetVehicle(id int64) (*odoo.FleetVehicle, error)
-	ListFleetVehicleLogs(vehicleID int64, limit, offset int) ([]odoo.FleetVehicleLog, int, error)
+	ListFleetVehicles(ctx context.Context, domain []any, limit, offset int) ([]odoo.FleetVehicle, int, error)
+	GetFleetVehicle(ctx context.Context, id int64) (*odoo.FleetVehicle, error)
+	ListFleetVehicleLogs(ctx context.Context, vehicleID int64, limit, offset int) ([]odoo.FleetVehicleLog, int, error)
 	Healthy() error
 }
 
@@ -41,7 +41,7 @@ func (s *FleetService) ListVehicles(ctx context.Context, driverID int64, active 
 		domain = append(domain, []any{"active", "=", *active})
 	}
 
-	vehicles, total, err := s.odoo.ListFleetVehicles(domain, limit, offset)
+	vehicles, total, err := s.odoo.ListFleetVehicles(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list fleet vehicles: %w", err)
 	}
@@ -54,7 +54,7 @@ func (s *FleetService) GetVehicle(ctx context.Context, id int64) (*odoo.FleetVeh
 		return nil, ErrServiceUnavailable
 	}
 
-	vehicle, err := s.odoo.GetFleetVehicle(id)
+	vehicle, err := s.odoo.GetFleetVehicle(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("get fleet vehicle: %w", err)
 	}
@@ -67,7 +67,7 @@ func (s *FleetService) ListVehicleLogs(ctx context.Context, vehicleID int64, lim
 		return nil, 0, ErrServiceUnavailable
 	}
 
-	logs, total, err := s.odoo.ListFleetVehicleLogs(vehicleID, limit, offset)
+	logs, total, err := s.odoo.ListFleetVehicleLogs(ctx, vehicleID, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list fleet vehicle logs: %w", err)
 	}

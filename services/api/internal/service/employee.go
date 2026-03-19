@@ -26,10 +26,10 @@ const (
 // OdooClient defines the interface for Odoo employee operations.
 // Using an interface allows mock injection for testing.
 type OdooClient interface {
-	ListEmployees(domain []any, limit, offset int) ([]odoo.Employee, int, error)
-	GetEmployee(id int64) (*odoo.Employee, error)
-	CreateEmployee(req odoo.EmployeeCreateRequest) (int64, error)
-	UpdateEmployee(id int64, vals map[string]any) error
+	ListEmployees(ctx context.Context, domain []any, limit, offset int) ([]odoo.Employee, int, error)
+	GetEmployee(ctx context.Context, id int64) (*odoo.Employee, error)
+	CreateEmployee(ctx context.Context, req odoo.EmployeeCreateRequest) (int64, error)
+	UpdateEmployee(ctx context.Context, id int64, vals map[string]any) error
 }
 
 // listResult is the cached structure for employee list responses.
@@ -67,7 +67,7 @@ func (s *EmployeeService) List(ctx context.Context, search string, departmentID 
 	// Build Odoo domain filters
 	domain := buildDomain(search, departmentID, activeOnly)
 
-	employees, total, err := s.odoo.ListEmployees(domain, limit, offset)
+	employees, total, err := s.odoo.ListEmployees(ctx, domain, limit, offset)
 	if err != nil {
 		// Graceful degradation: try stale cache
 		var stale listResult
@@ -93,7 +93,7 @@ func (s *EmployeeService) Get(ctx context.Context, id int64) (*odoo.Employee, er
 		return &cached, nil
 	}
 
-	emp, err := s.odoo.GetEmployee(id)
+	emp, err := s.odoo.GetEmployee(ctx, id)
 	if err != nil {
 		// Graceful degradation: try stale cache
 		var stale odoo.Employee
@@ -110,7 +110,7 @@ func (s *EmployeeService) Get(ctx context.Context, id int64) (*odoo.Employee, er
 // Create creates a new employee via Odoo and invalidates list caches.
 // No graceful degradation for writes -- returns error directly.
 func (s *EmployeeService) Create(ctx context.Context, req odoo.EmployeeCreateRequest) (int64, error) {
-	id, err := s.odoo.CreateEmployee(req)
+	id, err := s.odoo.CreateEmployee(ctx, req)
 	if err != nil {
 		return 0, fmt.Errorf("create employee: %w", err)
 	}
@@ -140,7 +140,7 @@ func (s *EmployeeService) Create(ctx context.Context, req odoo.EmployeeCreateReq
 // Update updates an employee via Odoo and invalidates relevant caches.
 // No graceful degradation for writes -- returns error directly.
 func (s *EmployeeService) Update(ctx context.Context, id int64, vals map[string]any) error {
-	if err := s.odoo.UpdateEmployee(id, vals); err != nil {
+	if err := s.odoo.UpdateEmployee(ctx, id, vals); err != nil {
 		return fmt.Errorf("update employee %d: %w", id, err)
 	}
 

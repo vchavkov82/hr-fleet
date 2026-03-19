@@ -8,7 +8,7 @@ import (
 
 // ProvisioningOdooClient defines the Odoo operations needed for provisioning.
 type ProvisioningOdooClient interface {
-	Create(model string, vals map[string]any) (int64, error)
+	Create(ctx context.Context, model string, vals map[string]any) (int64, error)
 }
 
 // ProvisioningService handles Odoo company and user auto-provisioning on sign-up.
@@ -27,7 +27,7 @@ func NewProvisioningService(odoo ProvisioningOdooClient) *ProvisioningService {
 // record remains (requires manual cleanup).
 func (s *ProvisioningService) ProvisionCompany(ctx context.Context, companyName, adminEmail, adminName string) (companyID int64, userID int64, err error) {
 	// Create the company
-	companyID, err = s.odoo.Create("res.company", map[string]any{
+	companyID, err = s.odoo.Create(ctx, "res.company", map[string]any{
 		"name": companyName,
 	})
 	if err != nil {

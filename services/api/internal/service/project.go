@@ -10,10 +10,10 @@ import (
 
 // ProjectOdooClient defines the Odoo interface for project operations.
 type ProjectOdooClient interface {
-	ListProjects(domain []any, limit, offset int) ([]odoo.Project, int, error)
-	GetProject(id int64) (*odoo.Project, error)
-	ListProjectTasks(projectID int64, limit, offset int) ([]odoo.ProjectTask, int, error)
-	GetProjectTask(id int64) (*odoo.ProjectTask, error)
+	ListProjects(ctx context.Context, domain []any, limit, offset int) ([]odoo.Project, int, error)
+	GetProject(ctx context.Context, id int64) (*odoo.Project, error)
+	ListProjectTasks(ctx context.Context, projectID int64, limit, offset int) ([]odoo.ProjectTask, int, error)
+	GetProjectTask(ctx context.Context, id int64) (*odoo.ProjectTask, error)
 	Healthy() error
 }
 
@@ -39,7 +39,7 @@ func (s *ProjectService) ListProjects(ctx context.Context, active *bool, limit, 
 		domain = append(domain, []any{"active", "=", *active})
 	}
 
-	projects, total, err := s.odoo.ListProjects(domain, limit, offset)
+	projects, total, err := s.odoo.ListProjects(ctx, domain, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list projects: %w", err)
 	}
@@ -52,7 +52,7 @@ func (s *ProjectService) GetProject(ctx context.Context, id int64) (*odoo.Projec
 		return nil, ErrServiceUnavailable
 	}
 
-	project, err := s.odoo.GetProject(id)
+	project, err := s.odoo.GetProject(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("get project: %w", err)
 	}
@@ -65,7 +65,7 @@ func (s *ProjectService) ListTasks(ctx context.Context, projectID int64, limit, 
 		return nil, 0, ErrServiceUnavailable
 	}
 
-	tasks, total, err := s.odoo.ListProjectTasks(projectID, limit, offset)
+	tasks, total, err := s.odoo.ListProjectTasks(ctx, projectID, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list project tasks: %w", err)
 	}
@@ -78,7 +78,7 @@ func (s *ProjectService) GetTask(ctx context.Context, id int64) (*odoo.ProjectTa
 		return nil, ErrServiceUnavailable
 	}
 
-	task, err := s.odoo.GetProjectTask(id)
+	task, err := s.odoo.GetProjectTask(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("get project task: %w", err)
 	}

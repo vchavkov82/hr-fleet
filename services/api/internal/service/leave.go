@@ -21,12 +21,12 @@ const (
 
 // LeaveOdooClient defines the interface for Odoo leave operations.
 type LeaveOdooClient interface {
-	SearchLeaveAllocations(domain []any, limit, offset int) ([]odoo.LeaveAllocation, int, error)
-	SearchLeaveRequests(domain []any, limit, offset int) ([]odoo.LeaveRequest, int, error)
-	CreateLeaveRequest(vals map[string]any) (int64, error)
-	ActionApproveLeave(leaveID int64) error
-	ActionRefuseLeave(leaveID int64) error
-	CancelLeaveRequest(id int64) error
+	SearchLeaveAllocations(ctx context.Context, domain []any, limit, offset int) ([]odoo.LeaveAllocation, int, error)
+	SearchLeaveRequests(ctx context.Context, domain []any, limit, offset int) ([]odoo.LeaveRequest, int, error)
+	CreateLeaveRequest(ctx context.Context, vals map[string]any) (int64, error)
+	ActionApproveLeave(ctx context.Context, leaveID int64) error
+	ActionRefuseLeave(ctx context.Context, leaveID int64) error
+	CancelLeaveRequest(ctx context.Context, id int64) error
 }
 
 // LeaveService provides business logic for leave management.
@@ -69,7 +69,7 @@ func (s *LeaveService) ListAllocations(ctx context.Context, employeeID int64, pa
 		domain = append(domain, []any{"employee_id", "=", employeeID})
 	}
 
-	allocs, total, err := s.odoo.SearchLeaveAllocations(domain, perPage, offset)
+	allocs, total, err := s.odoo.SearchLeaveAllocations(ctx, domain, perPage, offset)
 	if err != nil {
 		var stale leaveAllocResult
 		if staleErr := s.cache.GetStale(ctx, key, &stale); staleErr == nil {
@@ -100,7 +100,7 @@ func (s *LeaveService) ListRequests(ctx context.Context, employeeID int64, statu
 		domain = append(domain, []any{"state", "=", status})
 	}
 
-	requests, total, err := s.odoo.SearchLeaveRequests(domain, perPage, offset)
+	requests, total, err := s.odoo.SearchLeaveRequests(ctx, domain, perPage, offset)
 	if err != nil {
 		var stale leaveReqResult
 		if staleErr := s.cache.GetStale(ctx, key, &stale); staleErr == nil {
@@ -123,7 +123,7 @@ func (s *LeaveService) CreateRequest(ctx context.Context, req odoo.LeaveCreateRe
 		"name":              req.Name,
 	}
 
-	id, err := s.odoo.CreateLeaveRequest(vals)
+	id, err := s.odoo.CreateLeaveRequest(ctx, vals)
 	if err != nil {
 		return 0, fmt.Errorf("create leave request: %w", err)
 	}
@@ -134,7 +134,7 @@ func (s *LeaveService) CreateRequest(ctx context.Context, req odoo.LeaveCreateRe
 
 // ApproveRequest approves a leave request and records audit + webhook.
 func (s *LeaveService) ApproveRequest(ctx context.Context, leaveID int64, approverUserID string) error {
-	if err := s.odoo.ActionApproveLeave(leaveID); err != nil {
+	if err := s.odoo.ActionApproveLeave(ctx, leaveID); err != nil {
 		return fmt.Errorf("approve leave %d: %w", leaveID, err)
 	}
 
@@ -161,7 +161,7 @@ func (s *LeaveService) ApproveRequest(ctx context.Context, leaveID int64, approv
 
 // RejectRequest rejects a leave request and records audit + webhook.
 func (s *LeaveService) RejectRequest(ctx context.Context, leaveID int64, reason, rejecterUserID string) error {
-	if err := s.odoo.ActionRefuseLeave(leaveID); err != nil {
+	if err := s.odoo.ActionRefuseLeave(ctx, leaveID); err != nil {
 		return fmt.Errorf("reject leave %d: %w", leaveID, err)
 	}
 
@@ -188,7 +188,7 @@ func (s *LeaveService) RejectRequest(ctx context.Context, leaveID int64, reason,
 
 // CancelRequest cancels a leave request via Odoo.
 func (s *LeaveService) CancelRequest(ctx context.Context, leaveID int64) error {
-	if err := s.odoo.CancelLeaveRequest(leaveID); err != nil {
+	if err := s.odoo.CancelLeaveRequest(ctx, leaveID); err != nil {
 		return fmt.Errorf("cancel leave request %d: %w", leaveID, err)
 	}
 
