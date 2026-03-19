@@ -9,6 +9,8 @@ import (
 	"sync"
 	"sync/atomic"
 	"testing"
+
+	"github.com/rs/zerolog"
 )
 
 func TestCircuitBreakerOpensAfterConsecutiveFailures(t *testing.T) {
