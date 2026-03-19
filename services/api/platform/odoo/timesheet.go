@@ -1,20 +1,23 @@
 package odoo
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
 // ListTimesheets retrieves account.analytic.line records from Odoo with optional domain filters.
 // Returns the timesheet slice and total count for pagination.
-func (c *Client) ListTimesheets(domain []any, limit, offset int) ([]TimesheetEntry, int, error) {
+func (c *Client) ListTimesheets(ctx context.Context, domain []any, limit, offset int) ([]TimesheetEntry, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("account.analytic.line", domain)
+	count, err := c.SearchCount(ctx, "account.analytic.line", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list timesheets count: %w", err)
 	}
 
-	records, err := c.SearchRead("account.analytic.line", domain, timesheetFields, limit, offset)
+	records, err := c.SearchRead(ctx, "account.analytic.line", domain, timesheetFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list timesheets: %w", err)
 	}
@@ -28,8 +31,8 @@ func (c *Client) ListTimesheets(domain []any, limit, offset int) ([]TimesheetEnt
 }
 
 // CreateTimesheet creates a new account.analytic.line record in Odoo.
-func (c *Client) CreateTimesheet(vals map[string]any) (int64, error) {
-	id, err := c.Create("account.analytic.line", vals)
+func (c *Client) CreateTimesheet(ctx context.Context, vals map[string]any) (int64, error) {
+	id, err := c.Create(ctx, "account.analytic.line", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create timesheet: %w", err)
 	}
@@ -37,8 +40,8 @@ func (c *Client) CreateTimesheet(vals map[string]any) (int64, error) {
 }
 
 // UpdateTimesheet updates an existing account.analytic.line record in Odoo.
-func (c *Client) UpdateTimesheet(id int64, vals map[string]any) error {
-	if err := c.Write("account.analytic.line", id, vals); err != nil {
+func (c *Client) UpdateTimesheet(ctx context.Context, id int64, vals map[string]any) error {
+	if err := c.Write(ctx, "account.analytic.line", id, vals); err != nil {
 		return fmt.Errorf("update timesheet %d: %w", id, err)
 	}
 	return nil
