@@ -14,6 +14,14 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+api.interceptors.response.use(undefined, (error) => {
+  const apiError = error?.response?.data?.error;
+  if (apiError && typeof apiError === 'object' && apiError.message) {
+    error.message = apiError.message;
+  }
+  return Promise.reject(error);
+});
+
 export interface DashboardStats {
   active_employees: number;
   total_employees: number;
