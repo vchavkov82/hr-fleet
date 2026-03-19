@@ -1,21 +1,22 @@
 package odoo
 
 import (
+	"context"
 	"fmt"
 )
 
 // SearchContracts retrieves hr.contract records with optional domain filters.
-func (c *Client) SearchContracts(domain []any, limit, offset int) ([]Contract, int, error) {
+func (c *Client) SearchContracts(ctx context.Context, domain []any, limit, offset int) ([]Contract, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.contract", domain)
+	count, err := c.SearchCount(ctx, "hr.contract", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("search contracts count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.contract", domain, contractFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.contract", domain, contractFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("search contracts: %w", err)
 	}
@@ -33,8 +34,8 @@ func (c *Client) SearchContracts(domain []any, limit, offset int) ([]Contract, i
 }
 
 // GetContract retrieves a single hr.contract by ID.
-func (c *Client) GetContract(id int64) (*Contract, error) {
-	records, err := c.Read("hr.contract", []int64{id}, contractFields)
+func (c *Client) GetContract(ctx context.Context, id int64) (*Contract, error) {
+	records, err := c.Read(ctx, "hr.contract", []int64{id}, contractFields)
 	if err != nil {
 		return nil, fmt.Errorf("get contract %d: %w", id, err)
 	}
@@ -52,8 +53,8 @@ func (c *Client) GetContract(id int64) (*Contract, error) {
 }
 
 // CreateContract creates a new hr.contract record in Odoo.
-func (c *Client) CreateContract(vals map[string]any) (int64, error) {
-	id, err := c.Create("hr.contract", vals)
+func (c *Client) CreateContract(ctx context.Context, vals map[string]any) (int64, error) {
+	id, err := c.Create(ctx, "hr.contract", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create contract: %w", err)
 	}
@@ -61,8 +62,8 @@ func (c *Client) CreateContract(vals map[string]any) (int64, error) {
 }
 
 // UpdateContract updates an existing hr.contract record in Odoo.
-func (c *Client) UpdateContract(id int64, vals map[string]any) error {
-	if err := c.Write("hr.contract", id, vals); err != nil {
+func (c *Client) UpdateContract(ctx context.Context, id int64, vals map[string]any) error {
+	if err := c.Write(ctx, "hr.contract", id, vals); err != nil {
 		return fmt.Errorf("update contract %d: %w", id, err)
 	}
 	return nil
