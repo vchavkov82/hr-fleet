@@ -1,20 +1,23 @@
 package odoo
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
 // ListDepartments retrieves hr.department records from Odoo with optional domain filters.
 // Returns the department slice and total count for pagination.
-func (c *Client) ListDepartments(domain []any, limit, offset int) ([]Department, int, error) {
+func (c *Client) ListDepartments(ctx context.Context, domain []any, limit, offset int) ([]Department, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.department", domain)
+	count, err := c.SearchCount(ctx, "hr.department", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list departments count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.department", domain, departmentFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.department", domain, departmentFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list departments: %w", err)
 	}
@@ -28,8 +31,8 @@ func (c *Client) ListDepartments(domain []any, limit, offset int) ([]Department,
 }
 
 // GetDepartment retrieves a single hr.department by ID.
-func (c *Client) GetDepartment(id int64) (*Department, error) {
-	records, err := c.Read("hr.department", []int64{id}, departmentFields)
+func (c *Client) GetDepartment(ctx context.Context, id int64) (*Department, error) {
+	records, err := c.Read(ctx, "hr.department", []int64{id}, departmentFields)
 	if err != nil {
 		return nil, fmt.Errorf("get department %d: %w", id, err)
 	}
