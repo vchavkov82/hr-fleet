@@ -388,8 +388,8 @@ func (c *Client) CircuitBreakerState() string {
 }
 
 // Read fetches records by IDs from the given Odoo model.
-func (c *Client) Read(model string, ids []int64, fields []string) ([]map[string]any, error) {
-	if err := c.EnsureAuthenticated(); err != nil {
+func (c *Client) Read(ctx context.Context, model string, ids []int64, fields []string) ([]map[string]any, error) {
+	if err := c.EnsureAuthenticated(ctx); err != nil {
 		return nil, err
 	}
 
