@@ -51,6 +51,7 @@ type Client struct {
 	cb             *gobreaker.CircuitBreaker
 	sem            chan struct{}
 	maxConcurrent  int
+	logger         zerolog.Logger
 }
 
 // NewClient creates a new Odoo JSON-RPC client with default options.
