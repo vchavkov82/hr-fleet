@@ -1,6 +1,9 @@
 package odoo
 
-import "encoding/json"
+import (
+	"context"
+	"encoding/json"
+)
 
 // PayslipSearchParams defines filters for searching payslips in Odoo.
 type PayslipSearchParams struct {
@@ -22,13 +25,13 @@ type OdooPayslip struct {
 }
 
 // SearchPayslips searches hr.payslip records in Odoo.
-func (c *Client) SearchPayslips(filters []any, offset, limit int) ([]OdooPayslip, int, error) {
+func (c *Client) SearchPayslips(ctx context.Context, filters []any, offset, limit int) ([]OdooPayslip, int, error) {
 	domain := filters
 	if domain == nil {
 		domain = []any{}
 	}
 
-	countRaw, err := c.Call("hr.payslip", "search_count", []any{domain})
+	countRaw, err := c.Call(ctx, "hr.payslip", "search_count", []any{domain})
 	if err != nil {
 		return nil, 0, err
 	}
@@ -37,7 +40,7 @@ func (c *Client) SearchPayslips(filters []any, offset, limit int) ([]OdooPayslip
 		return nil, 0, err
 	}
 
-	raw, err := c.Call("hr.payslip", "search_read", []any{
+	raw, err := c.Call(ctx, "hr.payslip", "search_read", []any{
 		domain,
 		[]string{"id", "employee_id", "date_from", "date_to", "state", "name", "net_wage"},
 		offset,
