@@ -56,7 +56,7 @@ func (s *ProvisioningService) ProvisionDefaults(ctx context.Context, companyID i
 	// Default departments
 	departments := []string{"HR", "Engineering", "Sales", "Finance", "Operations"}
 	for _, name := range departments {
-		_, err := s.odoo.Create("hr.department", map[string]any{
+		_, err := s.odoo.Create(ctx, "hr.department", map[string]any{
 			"name":       name,
 			"company_id": companyID,
 		})
