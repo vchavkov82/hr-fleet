@@ -30,7 +30,7 @@ describe("useAuthStore", () => {
         btoa(
           JSON.stringify({
             sub: "user-1",
-            email: "admin@test.com",
+            email: "admin@hr.dev",
             name: "Admin",
             role: "super_admin",
             org_id: "org-1",
@@ -44,7 +44,7 @@ describe("useAuthStore", () => {
           access_token: fakeJwt,
           user: {
             id: "user-1",
-            email: "admin@test.com",
+            email: "admin@hr.dev",
             name: "Admin",
             role: "super_admin",
             organization_id: "org-1",
@@ -52,11 +52,11 @@ describe("useAuthStore", () => {
         }),
       });
 
-      await useAuthStore.getState().login("admin@test.com", "password123");
+      await useAuthStore.getState().login("admin@hr.dev", "HrDev2024!");
 
       const state = useAuthStore.getState();
       expect(state.isAuthenticated).toBe(true);
-      expect(state.user?.email).toBe("admin@test.com");
+      expect(state.user?.email).toBe("admin@hr.dev");
       expect(state.user?.role).toBe("super_admin");
       expect(state.accessToken).toBe(fakeJwt);
     });

@@ -70,6 +70,16 @@ Odoo runs with OCA (Odoo Community Association) modules:
 
 > **WARNING**: These credentials are for local development only. Never use in production.
 
+### Dev Admin User (HR API / Admin Panel)
+
+| Setting | Value |
+|---------|-------|
+| Email | `admin@hr.dev` |
+| Password | `HrDev2024!` |
+| Role | `super_admin` |
+
+This user is automatically created by the seed migration (`services/api/migrations/005_seed_dev_admin.sql`) when the database is initialized.
+
 ### PostgreSQL (API Database)
 
 | Setting | Value |
@@ -80,7 +90,7 @@ Odoo runs with OCA (Odoo Community Association) modules:
 | Password | `hr_dev_password` |
 | Connection String | `postgres://hr:hr_dev_password@localhost:5433/hr_platform?sslmode=disable` |
 
-### Odoo
+### Odoo ERP
 
 | Setting | Value |
 |---------|-------|
@@ -98,14 +108,6 @@ Odoo runs with OCA (Odoo Community Association) modules:
 |---------|-------|
 | URL | `redis://localhost:5380` |
 | Container URL | `redis://hr-redis:6379` |
-
-### Admin UI
-
-| Setting | Value |
-|---------|-------|
-| URL | http://suse-06.lan.assistance.bg:5012 |
-| Email | `admin@test.com` |
-| Password | `password123` |
 
 ### JWT Authentication
 

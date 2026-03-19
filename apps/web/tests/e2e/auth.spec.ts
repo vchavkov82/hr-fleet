@@ -34,8 +34,8 @@ test.describe('Auth - Login Page', () => {
 
     await page.goto('/en/auth/login')
 
-    await page.fill('input#email', 'test@example.com')
-    await page.fill('input#password', 'password123')
+    await page.fill('input#email', 'admin@hr.dev')
+    await page.fill('input#password', 'HrDev2024!')
     await page.click('button[type="submit"]')
 
     // Should redirect to dashboard
@@ -74,8 +74,8 @@ test.describe('Auth - Login Page', () => {
 
     await page.goto('/en/auth/login')
 
-    await page.fill('input#email', 'test@example.com')
-    await page.fill('input#password', 'password123')
+    await page.fill('input#email', 'admin@hr.dev')
+    await page.fill('input#password', 'HrDev2024!')
     await page.click('button[type="submit"]')
 
     // Network error message should appear
