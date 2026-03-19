@@ -324,8 +324,8 @@ func (c *Client) Create(ctx context.Context, model string, vals map[string]any) 
 }
 
 // Write updates an existing record in the given Odoo model.
-func (c *Client) Write(model string, id int64, vals map[string]any) error {
-	if err := c.EnsureAuthenticated(); err != nil {
+func (c *Client) Write(ctx context.Context, model string, id int64, vals map[string]any) error {
+	if err := c.EnsureAuthenticated(ctx); err != nil {
 		return err
 	}
 
