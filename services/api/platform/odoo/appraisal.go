@@ -1,19 +1,22 @@
 package odoo
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
 // ListAppraisals retrieves hr.appraisal records from Odoo with optional domain filters.
-func (c *Client) ListAppraisals(domain []any, limit, offset int) ([]Appraisal, int, error) {
+func (c *Client) ListAppraisals(ctx context.Context, domain []any, limit, offset int) ([]Appraisal, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.appraisal", domain)
+	count, err := c.SearchCount(ctx, "hr.appraisal", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list appraisals count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.appraisal", domain, appraisalFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.appraisal", domain, appraisalFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list appraisals: %w", err)
 	}
@@ -27,8 +30,8 @@ func (c *Client) ListAppraisals(domain []any, limit, offset int) ([]Appraisal, i
 }
 
 // GetAppraisal retrieves a single hr.appraisal by ID.
-func (c *Client) GetAppraisal(id int64) (*Appraisal, error) {
-	records, err := c.Read("hr.appraisal", []int64{id}, appraisalFields)
+func (c *Client) GetAppraisal(ctx context.Context, id int64) (*Appraisal, error) {
+	records, err := c.Read(ctx, "hr.appraisal", []int64{id}, appraisalFields)
 	if err != nil {
 		return nil, fmt.Errorf("get appraisal %d: %w", id, err)
 	}
@@ -42,7 +45,7 @@ func (c *Client) GetAppraisal(id int64) (*Appraisal, error) {
 }
 
 // CreateAppraisal creates a new hr.appraisal record in Odoo.
-func (c *Client) CreateAppraisal(req AppraisalCreateRequest) (int64, error) {
+func (c *Client) CreateAppraisal(ctx context.Context, req AppraisalCreateRequest) (int64, error) {
 	vals := map[string]any{
 		"employee_id": req.EmployeeID,
 		"date_close":  req.DateClose,
@@ -51,7 +54,7 @@ func (c *Client) CreateAppraisal(req AppraisalCreateRequest) (int64, error) {
 		vals["appraisal_template_id"] = req.TemplateID
 	}
 
-	id, err := c.Create("hr.appraisal", vals)
+	id, err := c.Create(ctx, "hr.appraisal", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create appraisal: %w", err)
 	}
@@ -59,36 +62,36 @@ func (c *Client) CreateAppraisal(req AppraisalCreateRequest) (int64, error) {
 }
 
 // UpdateAppraisal updates an existing hr.appraisal record.
-func (c *Client) UpdateAppraisal(id int64, vals map[string]any) error {
-	if err := c.Write("hr.appraisal", id, vals); err != nil {
+func (c *Client) UpdateAppraisal(ctx context.Context, id int64, vals map[string]any) error {
+	if err := c.Write(ctx, "hr.appraisal", id, vals); err != nil {
 		return fmt.Errorf("update appraisal %d: %w", id, err)
 	}
 	return nil
 }
 
 // ConfirmAppraisal triggers action_confirm on an hr.appraisal record.
-func (c *Client) ConfirmAppraisal(id int64) error {
-	return c.CallAction("hr.appraisal", []int64{id}, "action_confirm")
+func (c *Client) ConfirmAppraisal(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.appraisal", []int64{id}, "action_confirm")
 }
 
 // CompleteAppraisal triggers action_done on an hr.appraisal record.
-func (c *Client) CompleteAppraisal(id int64) error {
-	return c.CallAction("hr.appraisal", []int64{id}, "action_done")
+func (c *Client) CompleteAppraisal(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.appraisal", []int64{id}, "action_done")
 }
 
 // ResetAppraisal triggers action_back on an hr.appraisal record.
-func (c *Client) ResetAppraisal(id int64) error {
-	return c.CallAction("hr.appraisal", []int64{id}, "action_back")
+func (c *Client) ResetAppraisal(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.appraisal", []int64{id}, "action_back")
 }
 
 // ListAppraisalTemplates retrieves hr.appraisal.template records.
-func (c *Client) ListAppraisalTemplates(limit, offset int) ([]AppraisalTemplate, int, error) {
-	count, err := c.SearchCount("hr.appraisal.template", []any{})
+func (c *Client) ListAppraisalTemplates(ctx context.Context, limit, offset int) ([]AppraisalTemplate, int, error) {
+	count, err := c.SearchCount(ctx, "hr.appraisal.template", []any{})
 	if err != nil {
 		return nil, 0, fmt.Errorf("list appraisal templates count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.appraisal.template", []any{}, appraisalTemplateFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.appraisal.template", []any{}, appraisalTemplateFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list appraisal templates: %w", err)
 	}
@@ -132,4 +135,3 @@ func parseAppraisalTemplate(rec map[string]any) AppraisalTemplate {
 		ManagerFeedbackTmpl:  toString(rec["appraisal_manager_feedback_template"]),
 	}
 }
-
