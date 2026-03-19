@@ -355,7 +355,7 @@ func (c *Client) CallAction(ctx context.Context, model string, ids []int64, acti
 		[]any{ids},
 	}
 
-	_, err := c.Call("object", "execute_kw", args)
+	_, err := c.Call(ctx, "object", "execute_kw", args)
 	if err != nil {
 		return fmt.Errorf("%s %s/%v: %w", action, model, ids, err)
 	}
