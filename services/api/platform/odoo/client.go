@@ -56,7 +56,7 @@ type Client struct {
 
 // NewClient creates a new Odoo JSON-RPC client with default options.
 func NewClient(baseURL, db, username, password string) *Client {
-	return NewClientWithOptions(baseURL, db, username, password, DefaultClientOptions())
+	return NewClientWithOptions(baseURL, db, username, password, DefaultClientOptions(), zerolog.Nop())
 }
 
 // NewClientWithOptions creates a new Odoo JSON-RPC client with custom options.
