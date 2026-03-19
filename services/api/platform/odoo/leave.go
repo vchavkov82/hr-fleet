@@ -1,21 +1,22 @@
 package odoo
 
 import (
+	"context"
 	"fmt"
 )
 
 // SearchLeaveAllocations retrieves hr.leave.allocation records.
-func (c *Client) SearchLeaveAllocations(domain []any, limit, offset int) ([]LeaveAllocation, int, error) {
+func (c *Client) SearchLeaveAllocations(ctx context.Context, domain []any, limit, offset int) ([]LeaveAllocation, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.leave.allocation", domain)
+	count, err := c.SearchCount(ctx, "hr.leave.allocation", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("search leave allocations count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.leave.allocation", domain, leaveAllocationFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.leave.allocation", domain, leaveAllocationFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("search leave allocations: %w", err)
 	}
@@ -36,17 +37,17 @@ func (c *Client) SearchLeaveAllocations(domain []any, limit, offset int) ([]Leav
 }
 
 // SearchLeaveRequests retrieves hr.leave records.
-func (c *Client) SearchLeaveRequests(domain []any, limit, offset int) ([]LeaveRequest, int, error) {
+func (c *Client) SearchLeaveRequests(ctx context.Context, domain []any, limit, offset int) ([]LeaveRequest, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.leave", domain)
+	count, err := c.SearchCount(ctx, "hr.leave", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("search leave requests count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.leave", domain, leaveRequestFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.leave", domain, leaveRequestFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("search leave requests: %w", err)
 	}
@@ -70,8 +71,8 @@ func (c *Client) SearchLeaveRequests(domain []any, limit, offset int) ([]LeaveRe
 }
 
 // CreateLeaveRequest creates a new hr.leave record in Odoo.
-func (c *Client) CreateLeaveRequest(vals map[string]any) (int64, error) {
-	id, err := c.Create("hr.leave", vals)
+func (c *Client) CreateLeaveRequest(ctx context.Context, vals map[string]any) (int64, error) {
+	id, err := c.Create(ctx, "hr.leave", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create leave request: %w", err)
 	}
@@ -79,19 +80,19 @@ func (c *Client) CreateLeaveRequest(vals map[string]any) (int64, error) {
 }
 
 // CancelLeaveRequest cancels an hr.leave record by setting its state to "cancel".
-func (c *Client) CancelLeaveRequest(id int64) error {
-	if err := c.Write("hr.leave", id, map[string]any{"state": "cancel"}); err != nil {
+func (c *Client) CancelLeaveRequest(ctx context.Context, id int64) error {
+	if err := c.Write(ctx, "hr.leave", id, map[string]any{"state": "cancel"}); err != nil {
 		return fmt.Errorf("cancel leave request %d: %w", id, err)
 	}
 	return nil
 }
 
 // ActionApproveLeave calls action_approve on an hr.leave record.
-func (c *Client) ActionApproveLeave(leaveID int64) error {
-	return c.CallAction("hr.leave", []int64{leaveID}, "action_approve")
+func (c *Client) ActionApproveLeave(ctx context.Context, leaveID int64) error {
+	return c.CallAction(ctx, "hr.leave", []int64{leaveID}, "action_approve")
 }
 
 // ActionRefuseLeave calls action_refuse on an hr.leave record.
-func (c *Client) ActionRefuseLeave(leaveID int64) error {
-	return c.CallAction("hr.leave", []int64{leaveID}, "action_refuse")
+func (c *Client) ActionRefuseLeave(ctx context.Context, leaveID int64) error {
+	return c.CallAction(ctx, "hr.leave", []int64{leaveID}, "action_refuse")
 }
