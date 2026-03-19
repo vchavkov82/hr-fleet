@@ -4,7 +4,7 @@
 INSERT INTO users (email, password_hash, role, active)
 VALUES (
     'admin@hr.dev',
-    '$2b$12$a2UHDqw09Yqa.gk0rT2VcOHwNx3FeC7ejwLYGsfEpA1TWwjmF9YLy',
+    '$2a$12$MFcfBGkA4oHnX.EOz8Lg5OYqpqTA36KgNJGag4GLDYy66bTFkOjhm',
     'super_admin',
     true
 )
