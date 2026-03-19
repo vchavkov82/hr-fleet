@@ -242,8 +242,8 @@ func isSessionExpired(err error) bool {
 }
 
 // SearchRead performs a search_read operation on the given Odoo model.
-func (c *Client) SearchRead(model string, domain []any, fields []string, limit, offset int) ([]map[string]any, error) {
-	if err := c.EnsureAuthenticated(); err != nil {
+func (c *Client) SearchRead(ctx context.Context, model string, domain []any, fields []string, limit, offset int) ([]map[string]any, error) {
+	if err := c.EnsureAuthenticated(ctx); err != nil {
 		return nil, err
 	}
 
