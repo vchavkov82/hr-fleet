@@ -1,25 +1,26 @@
 package odoo
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 )
 
 // ListEmployees retrieves hr.employee records from Odoo with optional domain filters.
 // Returns the employee slice and total count for pagination.
-func (c *Client) ListEmployees(domain []any, limit, offset int) ([]Employee, int, error) {
+func (c *Client) ListEmployees(ctx context.Context, domain []any, limit, offset int) ([]Employee, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
 	// Get total count for pagination
-	count, err := c.SearchCount("hr.employee", domain)
+	count, err := c.SearchCount(ctx, "hr.employee", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list employees count: %w", err)
 	}
 
 	// Fetch records
-	records, err := c.SearchRead("hr.employee", domain, employeeFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.employee", domain, employeeFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list employees: %w", err)
 	}
@@ -37,8 +38,8 @@ func (c *Client) ListEmployees(domain []any, limit, offset int) ([]Employee, int
 }
 
 // GetEmployee retrieves a single hr.employee by ID.
-func (c *Client) GetEmployee(id int64) (*Employee, error) {
-	records, err := c.Read("hr.employee", []int64{id}, employeeFields)
+func (c *Client) GetEmployee(ctx context.Context, id int64) (*Employee, error) {
+	records, err := c.Read(ctx, "hr.employee", []int64{id}, employeeFields)
 	if err != nil {
 		return nil, fmt.Errorf("get employee %d: %w", id, err)
 	}
@@ -56,7 +57,7 @@ func (c *Client) GetEmployee(id int64) (*Employee, error) {
 }
 
 // CreateEmployee creates a new hr.employee record in Odoo.
-func (c *Client) CreateEmployee(req EmployeeCreateRequest) (int64, error) {
+func (c *Client) CreateEmployee(ctx context.Context, req EmployeeCreateRequest) (int64, error) {
 	vals := map[string]any{
 		"name":          req.Name,
 		"work_email":    req.WorkEmail,
@@ -67,7 +68,7 @@ func (c *Client) CreateEmployee(req EmployeeCreateRequest) (int64, error) {
 		vals["department_id"] = req.DepartmentID
 	}
 
-	id, err := c.Create("hr.employee", vals)
+	id, err := c.Create(ctx, "hr.employee", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create employee: %w", err)
 	}
@@ -77,8 +78,8 @@ func (c *Client) CreateEmployee(req EmployeeCreateRequest) (int64, error) {
 
 // UpdateEmployee updates an existing hr.employee record with the provided fields.
 // Only the fields present in vals are sent (partial update).
-func (c *Client) UpdateEmployee(id int64, vals map[string]any) error {
-	if err := c.Write("hr.employee", id, vals); err != nil {
+func (c *Client) UpdateEmployee(ctx context.Context, id int64, vals map[string]any) error {
+	if err := c.Write(ctx, "hr.employee", id, vals); err != nil {
 		return fmt.Errorf("update employee %d: %w", id, err)
 	}
 	return nil
