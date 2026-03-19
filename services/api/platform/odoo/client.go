@@ -310,7 +310,7 @@ func (c *Client) Create(ctx context.Context, model string, vals map[string]any) 
 		[]any{vals},
 	}
 
-	result, err := c.Call("object", "execute_kw", args)
+	result, err := c.Call(ctx, "object", "execute_kw", args)
 	if err != nil {
 		return 0, fmt.Errorf("create %s: %w", model, err)
 	}
