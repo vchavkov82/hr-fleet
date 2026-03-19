@@ -12,8 +12,6 @@ import (
 	"time"
 
 	"github.com/rs/zerolog"
-
-	"github.com/rs/zerolog"
 )
 
 func TestCircuitBreakerOpensAfterConsecutiveFailures(t *testing.T) {
