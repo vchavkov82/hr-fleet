@@ -1,19 +1,22 @@
 package odoo
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
 // ListFleetVehicles retrieves fleet.vehicle records from Odoo with optional domain filters.
-func (c *Client) ListFleetVehicles(domain []any, limit, offset int) ([]FleetVehicle, int, error) {
+func (c *Client) ListFleetVehicles(ctx context.Context, domain []any, limit, offset int) ([]FleetVehicle, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("fleet.vehicle", domain)
+	count, err := c.SearchCount(ctx, "fleet.vehicle", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list fleet vehicles count: %w", err)
 	}
 
-	records, err := c.SearchRead("fleet.vehicle", domain, fleetVehicleFields, limit, offset)
+	records, err := c.SearchRead(ctx, "fleet.vehicle", domain, fleetVehicleFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list fleet vehicles: %w", err)
 	}
@@ -27,8 +30,8 @@ func (c *Client) ListFleetVehicles(domain []any, limit, offset int) ([]FleetVehi
 }
 
 // GetFleetVehicle retrieves a single fleet.vehicle by ID.
-func (c *Client) GetFleetVehicle(id int64) (*FleetVehicle, error) {
-	records, err := c.Read("fleet.vehicle", []int64{id}, fleetVehicleFields)
+func (c *Client) GetFleetVehicle(ctx context.Context, id int64) (*FleetVehicle, error) {
+	records, err := c.Read(ctx, "fleet.vehicle", []int64{id}, fleetVehicleFields)
 	if err != nil {
 		return nil, fmt.Errorf("get fleet vehicle %d: %w", id, err)
 	}
@@ -42,15 +45,15 @@ func (c *Client) GetFleetVehicle(id int64) (*FleetVehicle, error) {
 }
 
 // ListFleetVehicleLogs retrieves fleet.vehicle.log.services records for a vehicle.
-func (c *Client) ListFleetVehicleLogs(vehicleID int64, limit, offset int) ([]FleetVehicleLog, int, error) {
+func (c *Client) ListFleetVehicleLogs(ctx context.Context, vehicleID int64, limit, offset int) ([]FleetVehicleLog, int, error) {
 	domain := []any{[]any{"vehicle_id", "=", vehicleID}}
 
-	count, err := c.SearchCount("fleet.vehicle.log.services", domain)
+	count, err := c.SearchCount(ctx, "fleet.vehicle.log.services", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list fleet logs count: %w", err)
 	}
 
-	records, err := c.SearchRead("fleet.vehicle.log.services", domain, fleetVehicleLogFields, limit, offset)
+	records, err := c.SearchRead(ctx, "fleet.vehicle.log.services", domain, fleetVehicleLogFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list fleet logs: %w", err)
 	}
