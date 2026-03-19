@@ -187,7 +187,7 @@ func (c *Client) doCall(ctx context.Context, service, method string, args []any)
 		return nil, fmt.Errorf("marshal request: %w", err)
 	}
 
-	httpReq, err := http.NewRequest("POST", c.baseURL+"/jsonrpc", bytes.NewReader(body))
+	httpReq, err := http.NewRequestWithContext(ctx, "POST", c.baseURL+"/jsonrpc", bytes.NewReader(body))
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
