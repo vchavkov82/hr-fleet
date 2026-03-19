@@ -130,7 +130,7 @@ func TestCircuitBreakerHalfOpen(t *testing.T) {
 		CBIntervalSeconds:  1,
 		CBTimeoutSeconds:   1,
 		CBFailureThreshold: 5,
-	})
+	}, zerolog.Nop())
 	if err := client.Authenticate(ctx); err != nil {
 		t.Fatalf("auth: %v", err)
 	}
