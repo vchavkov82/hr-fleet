@@ -20,6 +20,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	httpSwagger "github.com/swaggo/http-swagger/v2"
 
+	"github.com/rs/zerolog"
 	"github.com/vchavkov/hr/services/api/internal/cache"
 	"github.com/vchavkov/hr/services/api/internal/config"
 	"github.com/vchavkov/hr/services/api/internal/db"
