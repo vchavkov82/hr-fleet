@@ -1,18 +1,21 @@
 package odoo
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
 // ListEmployeeSkills retrieves hr.employee.skill records for a given employee.
 // Returns the skill slice and total count for pagination.
-func (c *Client) ListEmployeeSkills(employeeID int64, limit, offset int) ([]EmployeeSkill, int, error) {
+func (c *Client) ListEmployeeSkills(ctx context.Context, employeeID int64, limit, offset int) ([]EmployeeSkill, int, error) {
 	domain := []any{[]any{"employee_id", "=", employeeID}}
 
-	count, err := c.SearchCount("hr.employee.skill", domain)
+	count, err := c.SearchCount(ctx, "hr.employee.skill", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list employee skills count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.employee.skill", domain, employeeSkillFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.employee.skill", domain, employeeSkillFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list employee skills: %w", err)
 	}
@@ -26,14 +29,14 @@ func (c *Client) ListEmployeeSkills(employeeID int64, limit, offset int) ([]Empl
 }
 
 // CreateEmployeeSkill creates a new hr.employee.skill record in Odoo.
-func (c *Client) CreateEmployeeSkill(employeeID, skillID, skillLevelID int64) (int64, error) {
+func (c *Client) CreateEmployeeSkill(ctx context.Context, employeeID, skillID, skillLevelID int64) (int64, error) {
 	vals := map[string]any{
 		"employee_id":    employeeID,
 		"skill_id":       skillID,
 		"skill_level_id": skillLevelID,
 	}
 
-	id, err := c.Create("hr.employee.skill", vals)
+	id, err := c.Create(ctx, "hr.employee.skill", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create employee skill: %w", err)
 	}
@@ -42,8 +45,8 @@ func (c *Client) CreateEmployeeSkill(employeeID, skillID, skillLevelID int64) (i
 }
 
 // DeleteEmployeeSkill deletes an hr.employee.skill record from Odoo.
-func (c *Client) DeleteEmployeeSkill(id int64) error {
-	if err := c.CallAction("hr.employee.skill", []int64{id}, "unlink"); err != nil {
+func (c *Client) DeleteEmployeeSkill(ctx context.Context, id int64) error {
+	if err := c.CallAction(ctx, "hr.employee.skill", []int64{id}, "unlink"); err != nil {
 		return fmt.Errorf("delete employee skill %d: %w", id, err)
 	}
 	return nil
@@ -51,17 +54,17 @@ func (c *Client) DeleteEmployeeSkill(id int64) error {
 
 // ListSkills retrieves hr.skill records from Odoo with optional domain filters.
 // Returns the skill slice and total count for pagination.
-func (c *Client) ListSkills(domain []any, limit, offset int) ([]Skill, int, error) {
+func (c *Client) ListSkills(ctx context.Context, domain []any, limit, offset int) ([]Skill, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.skill", domain)
+	count, err := c.SearchCount(ctx, "hr.skill", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list skills count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.skill", domain, skillFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.skill", domain, skillFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list skills: %w", err)
 	}
