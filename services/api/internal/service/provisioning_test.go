@@ -8,12 +8,12 @@ import (
 
 // mockProvisioningOdoo implements ProvisioningOdooClient for testing.
 type mockProvisioningOdoo struct {
-	createFunc func(model string, vals map[string]any) (int64, error)
+	createFunc func(ctx context.Context, model string, vals map[string]any) (int64, error)
 }
 
-func (m *mockProvisioningOdoo) Create(model string, vals map[string]any) (int64, error) {
+func (m *mockProvisioningOdoo) Create(ctx context.Context, model string, vals map[string]any) (int64, error) {
 	if m.createFunc != nil {
-		return m.createFunc(model, vals)
+		return m.createFunc(ctx, model, vals)
 	}
 	return 0, nil
 }
@@ -21,7 +21,7 @@ func (m *mockProvisioningOdoo) Create(model string, vals map[string]any) (int64,
 func TestProvisionCompany_Success(t *testing.T) {
 	callOrder := []string{}
 	mock := &mockProvisioningOdoo{
-		createFunc: func(model string, vals map[string]any) (int64, error) {
+		createFunc: func(_ context.Context, model string, vals map[string]any) (int64, error) {
 			callOrder = append(callOrder, model)
 			switch model {
 			case "res.company":
@@ -53,7 +53,7 @@ func TestProvisionCompany_Success(t *testing.T) {
 
 func TestProvisionCompany_CompanyCreationFails(t *testing.T) {
 	mock := &mockProvisioningOdoo{
-		createFunc: func(model string, vals map[string]any) (int64, error) {
+		createFunc: func(_ context.Context, model string, vals map[string]any) (int64, error) {
 			if model == "res.company" {
 				return 0, errors.New("odoo error: company creation failed")
 			}
@@ -71,7 +71,7 @@ func TestProvisionCompany_CompanyCreationFails(t *testing.T) {
 
 func TestProvisionCompany_UserCreationFails(t *testing.T) {
 	mock := &mockProvisioningOdoo{
-		createFunc: func(model string, vals map[string]any) (int64, error) {
+		createFunc: func(_ context.Context, model string, vals map[string]any) (int64, error) {
 			if model == "res.company" {
 				return 10, nil
 			}
