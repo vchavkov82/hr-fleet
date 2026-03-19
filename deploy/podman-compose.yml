@@ -194,6 +194,7 @@ services:
     image: redis:7-alpine
     container_name: hr-redis
     hostname: hr-redis
+    command: redis-server --appendonly yes --save 60 1000
     ports:
       - "127.0.0.1:5380:6379"
     volumes:
