@@ -285,7 +285,7 @@ func (c *Client) SearchCount(ctx context.Context, model string, domain []any) (i
 		[]any{domain},
 	}
 
-	result, err := c.Call("object", "execute_kw", args)
+	result, err := c.Call(ctx, "object", "execute_kw", args)
 	if err != nil {
 		return 0, fmt.Errorf("search_count %s: %w", model, err)
 	}
