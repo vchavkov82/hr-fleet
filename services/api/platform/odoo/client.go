@@ -344,8 +344,8 @@ func (c *Client) Write(ctx context.Context, model string, id int64, vals map[str
 }
 
 // CallAction invokes a named action (e.g., action_approve) on a record.
-func (c *Client) CallAction(model string, ids []int64, action string) error {
-	if err := c.EnsureAuthenticated(); err != nil {
+func (c *Client) CallAction(ctx context.Context, model string, ids []int64, action string) error {
+	if err := c.EnsureAuthenticated(ctx); err != nil {
 		return err
 	}
 
