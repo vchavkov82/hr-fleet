@@ -1,19 +1,22 @@
 package odoo
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
 // ListCourses retrieves hr.course records from Odoo with optional domain filters.
-func (c *Client) ListCourses(domain []any, limit, offset int) ([]Course, int, error) {
+func (c *Client) ListCourses(ctx context.Context, domain []any, limit, offset int) ([]Course, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.course", domain)
+	count, err := c.SearchCount(ctx, "hr.course", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list courses count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.course", domain, courseFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.course", domain, courseFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list courses: %w", err)
 	}
@@ -27,8 +30,8 @@ func (c *Client) ListCourses(domain []any, limit, offset int) ([]Course, int, er
 }
 
 // GetCourse retrieves a single hr.course by ID.
-func (c *Client) GetCourse(id int64) (*Course, error) {
-	records, err := c.Read("hr.course", []int64{id}, courseFields)
+func (c *Client) GetCourse(ctx context.Context, id int64) (*Course, error) {
+	records, err := c.Read(ctx, "hr.course", []int64{id}, courseFields)
 	if err != nil {
 		return nil, fmt.Errorf("get course %d: %w", id, err)
 	}
@@ -42,7 +45,7 @@ func (c *Client) GetCourse(id int64) (*Course, error) {
 }
 
 // CreateCourse creates a new hr.course record in Odoo.
-func (c *Client) CreateCourse(req CourseCreateRequest) (int64, error) {
+func (c *Client) CreateCourse(ctx context.Context, req CourseCreateRequest) (int64, error) {
 	vals := map[string]any{
 		"name":        req.Name,
 		"category_id": req.CategoryID,
@@ -55,7 +58,7 @@ func (c *Client) CreateCourse(req CourseCreateRequest) (int64, error) {
 		vals["objective"] = req.Objective
 	}
 
-	id, err := c.Create("hr.course", vals)
+	id, err := c.Create(ctx, "hr.course", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create course: %w", err)
 	}
@@ -63,21 +66,21 @@ func (c *Client) CreateCourse(req CourseCreateRequest) (int64, error) {
 }
 
 // UpdateCourse updates an existing hr.course record.
-func (c *Client) UpdateCourse(id int64, vals map[string]any) error {
-	if err := c.Write("hr.course", id, vals); err != nil {
+func (c *Client) UpdateCourse(ctx context.Context, id int64, vals map[string]any) error {
+	if err := c.Write(ctx, "hr.course", id, vals); err != nil {
 		return fmt.Errorf("update course %d: %w", id, err)
 	}
 	return nil
 }
 
 // ListCourseCategories retrieves hr.course.category records.
-func (c *Client) ListCourseCategories(limit, offset int) ([]CourseCategory, int, error) {
-	count, err := c.SearchCount("hr.course.category", []any{})
+func (c *Client) ListCourseCategories(ctx context.Context, limit, offset int) ([]CourseCategory, int, error) {
+	count, err := c.SearchCount(ctx, "hr.course.category", []any{})
 	if err != nil {
 		return nil, 0, fmt.Errorf("list course categories count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.course.category", []any{}, courseCategoryFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.course.category", []any{}, courseCategoryFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list course categories: %w", err)
 	}
@@ -94,17 +97,17 @@ func (c *Client) ListCourseCategories(limit, offset int) ([]CourseCategory, int,
 }
 
 // ListCourseSchedules retrieves hr.course.schedule records with optional domain filters.
-func (c *Client) ListCourseSchedules(domain []any, limit, offset int) ([]CourseSchedule, int, error) {
+func (c *Client) ListCourseSchedules(ctx context.Context, domain []any, limit, offset int) ([]CourseSchedule, int, error) {
 	if domain == nil {
 		domain = []any{}
 	}
 
-	count, err := c.SearchCount("hr.course.schedule", domain)
+	count, err := c.SearchCount(ctx, "hr.course.schedule", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list course schedules count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.course.schedule", domain, courseScheduleFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.course.schedule", domain, courseScheduleFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list course schedules: %w", err)
 	}
@@ -118,8 +121,8 @@ func (c *Client) ListCourseSchedules(domain []any, limit, offset int) ([]CourseS
 }
 
 // GetCourseSchedule retrieves a single hr.course.schedule by ID.
-func (c *Client) GetCourseSchedule(id int64) (*CourseSchedule, error) {
-	records, err := c.Read("hr.course.schedule", []int64{id}, courseScheduleFields)
+func (c *Client) GetCourseSchedule(ctx context.Context, id int64) (*CourseSchedule, error) {
+	records, err := c.Read(ctx, "hr.course.schedule", []int64{id}, courseScheduleFields)
 	if err != nil {
 		return nil, fmt.Errorf("get course schedule %d: %w", id, err)
 	}
@@ -133,7 +136,7 @@ func (c *Client) GetCourseSchedule(id int64) (*CourseSchedule, error) {
 }
 
 // CreateCourseSchedule creates a new hr.course.schedule record.
-func (c *Client) CreateCourseSchedule(req CourseScheduleCreateRequest) (int64, error) {
+func (c *Client) CreateCourseSchedule(ctx context.Context, req CourseScheduleCreateRequest) (int64, error) {
 	vals := map[string]any{
 		"name":          req.Name,
 		"course_id":     req.CourseID,
@@ -149,7 +152,7 @@ func (c *Client) CreateCourseSchedule(req CourseScheduleCreateRequest) (int64, e
 		vals["place"] = req.Place
 	}
 
-	id, err := c.Create("hr.course.schedule", vals)
+	id, err := c.Create(ctx, "hr.course.schedule", vals)
 	if err != nil {
 		return 0, fmt.Errorf("create course schedule: %w", err)
 	}
@@ -157,53 +160,53 @@ func (c *Client) CreateCourseSchedule(req CourseScheduleCreateRequest) (int64, e
 }
 
 // UpdateCourseSchedule updates an existing hr.course.schedule record.
-func (c *Client) UpdateCourseSchedule(id int64, vals map[string]any) error {
-	if err := c.Write("hr.course.schedule", id, vals); err != nil {
+func (c *Client) UpdateCourseSchedule(ctx context.Context, id int64, vals map[string]any) error {
+	if err := c.Write(ctx, "hr.course.schedule", id, vals); err != nil {
 		return fmt.Errorf("update course schedule %d: %w", id, err)
 	}
 	return nil
 }
 
 // CourseScheduleDraft2Waiting moves schedule from draft to waiting_attendees state.
-func (c *Client) CourseScheduleDraft2Waiting(id int64) error {
-	return c.CallAction("hr.course.schedule", []int64{id}, "draft2waiting")
+func (c *Client) CourseScheduleDraft2Waiting(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.course.schedule", []int64{id}, "draft2waiting")
 }
 
 // CourseScheduleWaiting2InProgress moves schedule from waiting_attendees to in_progress.
-func (c *Client) CourseScheduleWaiting2InProgress(id int64) error {
-	return c.CallAction("hr.course.schedule", []int64{id}, "waiting2inprogress")
+func (c *Client) CourseScheduleWaiting2InProgress(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.course.schedule", []int64{id}, "waiting2inprogress")
 }
 
 // CourseScheduleInProgress2Validation moves schedule from in_progress to in_validation.
-func (c *Client) CourseScheduleInProgress2Validation(id int64) error {
-	return c.CallAction("hr.course.schedule", []int64{id}, "inprogress2validation")
+func (c *Client) CourseScheduleInProgress2Validation(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.course.schedule", []int64{id}, "inprogress2validation")
 }
 
 // CourseScheduleValidation2Complete moves schedule from in_validation to completed.
-func (c *Client) CourseScheduleValidation2Complete(id int64) error {
-	return c.CallAction("hr.course.schedule", []int64{id}, "validation2complete")
+func (c *Client) CourseScheduleValidation2Complete(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.course.schedule", []int64{id}, "validation2complete")
 }
 
 // CourseScheduleBack2Draft moves schedule back to draft state.
-func (c *Client) CourseScheduleBack2Draft(id int64) error {
-	return c.CallAction("hr.course.schedule", []int64{id}, "back2draft")
+func (c *Client) CourseScheduleBack2Draft(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.course.schedule", []int64{id}, "back2draft")
 }
 
 // CourseScheduleCancel cancels the course schedule.
-func (c *Client) CourseScheduleCancel(id int64) error {
-	return c.CallAction("hr.course.schedule", []int64{id}, "cancel_course")
+func (c *Client) CourseScheduleCancel(ctx context.Context, id int64) error {
+	return c.CallAction(ctx, "hr.course.schedule", []int64{id}, "cancel_course")
 }
 
 // ListCourseAttendees retrieves hr.course.attendee records for a schedule.
-func (c *Client) ListCourseAttendees(scheduleID int64, limit, offset int) ([]CourseAttendee, int, error) {
+func (c *Client) ListCourseAttendees(ctx context.Context, scheduleID int64, limit, offset int) ([]CourseAttendee, int, error) {
 	domain := []any{[]any{"course_schedule_id", "=", scheduleID}}
 
-	count, err := c.SearchCount("hr.course.attendee", domain)
+	count, err := c.SearchCount(ctx, "hr.course.attendee", domain)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list course attendees count: %w", err)
 	}
 
-	records, err := c.SearchRead("hr.course.attendee", domain, courseAttendeeFields, limit, offset)
+	records, err := c.SearchRead(ctx, "hr.course.attendee", domain, courseAttendeeFields, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("list course attendees: %w", err)
 	}
@@ -217,8 +220,8 @@ func (c *Client) ListCourseAttendees(scheduleID int64, limit, offset int) ([]Cou
 }
 
 // UpdateCourseAttendeeResult updates the result of a course attendee.
-func (c *Client) UpdateCourseAttendeeResult(id int64, result string) error {
-	if err := c.Write("hr.course.attendee", id, map[string]any{"result": result}); err != nil {
+func (c *Client) UpdateCourseAttendeeResult(ctx context.Context, id int64, result string) error {
+	if err := c.Write(ctx, "hr.course.attendee", id, map[string]any{"result": result}); err != nil {
 		return fmt.Errorf("update course attendee result %d: %w", id, err)
 	}
 	return nil
