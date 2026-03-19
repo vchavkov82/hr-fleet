@@ -1,19 +1,20 @@
 package odoo
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 )
 
 // Authenticate logs into Odoo via the common service login method.
 // On success, it stores the user ID (uid) and session cookie for subsequent calls.
-func (c *Client) Authenticate() error {
+func (c *Client) Authenticate(ctx context.Context) error {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
 	args := []any{c.db, c.username, c.password}
 
-	result, err := c.doCall("common", "login", args)
+	result, err := c.doCall(ctx, "common", "login", args)
 	if err != nil {
 		return fmt.Errorf("authenticate: %w", err)
 	}
@@ -39,9 +40,9 @@ func (c *Client) Authenticate() error {
 
 // EnsureAuthenticated checks if the client has a valid session.
 // If not authenticated, it performs authentication.
-func (c *Client) EnsureAuthenticated() error {
+func (c *Client) EnsureAuthenticated(ctx context.Context) error {
 	if c.uid > 0 {
 		return nil
 	}
-	return c.Authenticate()
+	return c.Authenticate(ctx)
 }
