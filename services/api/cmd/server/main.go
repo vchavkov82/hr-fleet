@@ -76,7 +76,12 @@ func main() {
 	defer asynqClient.Close()
 
 	// Odoo client
-	odooClient := odoo.NewClient(cfg.OdooURL, cfg.OdooDB, cfg.OdooUser, cfg.OdooPassword)
+	odooLogger := zerolog.New(os.Stderr).With().Timestamp().Logger()
+	odooOpts := odoo.DefaultClientOptions()
+	odooOpts.MaxConcurrent = cfg.OdooMaxConcurrent
+	odooOpts.HTTPTimeoutSeconds = cfg.OdooTimeoutSeconds
+	odooOpts.CBFailureThreshold = cfg.OdooCBFailureThreshold
+	odooClient := odoo.NewClientWithOptions(cfg.OdooURL, cfg.OdooDB, cfg.OdooUser, cfg.OdooPassword, odooOpts, odooLogger)
 
 	// JWT auth
 	tokenAuth, err := initJWTAuth(cfg)
