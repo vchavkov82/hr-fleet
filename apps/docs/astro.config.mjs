@@ -132,7 +132,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     server: {
       // Allow LAN access via hostname (e.g. suse-09.lan.assistance.bg:5011)
-      allowedHosts: ['localhost', 'suse-09.lan.assistance.bg', '.lan.assistance.bg'],
+      allowedHosts: ['localhost', 'suse-09.lan.assistance.bg', '.lan.assistance.bg', 'docs.hr.assistance.bg'],
     },
   },
 
