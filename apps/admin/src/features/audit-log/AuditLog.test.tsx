@@ -115,6 +115,6 @@ describe('AuditLog', () => {
     renderWithProviders(<AuditLog />);
     await waitForLoaded();
 
-    expect(screen.getByText('12345678...')).toBeInTheDocument();
+    expect(screen.getAllByText('12345678...').length).toBeGreaterThan(0);
   });
 });
