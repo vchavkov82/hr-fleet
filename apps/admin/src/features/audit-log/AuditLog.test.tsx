@@ -40,7 +40,7 @@ describe('AuditLog', () => {
     expect(screen.getByText('admin@example.com')).toBeInTheDocument();
     expect(screen.getByText('create_employee')).toBeInTheDocument();
     expect(screen.getAllByText('employee').length).toBeGreaterThan(0);
-    expect(screen.getByText('192.168.1.1')).toBeInTheDocument();
+    expect(screen.getAllByText('192.168.1.1').length).toBeGreaterThan(0);
   });
 
   it('shows loading spinner initially', () => {
