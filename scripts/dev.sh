@@ -76,7 +76,7 @@ $COMPOSE down -v --remove-orphans 2>/dev/null || true
 
 # Fallback cleanup for stubborn containers (by name pattern)
 sleep 1
-for container in hr-www hr-blog hr-docs hr-caddy; do
+for container in hr-www hr-blog hr-docs hr-admin; do
   podman rm -f "$container" 2>/dev/null || true
 done
 podman pod rm -f pod_deploy 2>/dev/null || true
