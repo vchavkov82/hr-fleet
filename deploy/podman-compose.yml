@@ -193,8 +193,6 @@ networks:
     driver: bridge
 
 volumes:
-  caddy_data:
-  caddy_config:
   odoo_data:
   odoo_db_data:
   hr_db_data:
