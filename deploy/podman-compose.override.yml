@@ -7,7 +7,6 @@ services:
   hr:
     volumes:
       - ../:/workspace
-      - hr_node_modules:/workspace/node_modules
     working_dir: /workspace/apps/web
     environment:
       - HR_BLOG_URL=http://hr-blog:3013
@@ -17,7 +16,6 @@ services:
   hr-blog:
     volumes:
       - ../:/workspace
-      - hr_blog_node_modules:/workspace/node_modules
     working_dir: /workspace/apps/blog
     environment:
       - ASTRO_TELEMETRY_DISABLED=1
@@ -28,7 +26,6 @@ services:
   hr-docs:
     volumes:
       - ../:/workspace
-      - hr_docs_node_modules:/workspace/node_modules
     working_dir: /workspace/apps/docs
     entrypoint: sh
     command: ["-c", "cd /workspace && npm i -g pnpm && pnpm install && cd apps/docs && pnpm dev"]
@@ -36,7 +33,6 @@ services:
   hr-admin:
     volumes:
       - ../:/workspace
-      - hr_admin_node_modules:/workspace/node_modules
     working_dir: /workspace/apps/admin
     environment:
       - VITE_API_URL=http://hr-api:8080
