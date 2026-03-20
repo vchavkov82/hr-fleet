@@ -59,7 +59,7 @@ services:
     container_name: hr-docs
     hostname: hr-docs
     ports:
-      - "127.0.0.1:5021:3011"
+      - "0.0.0.0:5021:3011"
     networks:
       - hr
     restart: unless-stopped
