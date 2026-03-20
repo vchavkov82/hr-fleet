@@ -142,7 +142,7 @@ describe('TimesheetList', () => {
     });
 
     const approveButton = screen.getByRole('button', { name: /approve/i });
-    await userEvent.click(approveButton);
+    fireEvent.click(approveButton);
 
     await waitFor(() => {
       expect(approveCalled).toBe(true);
@@ -161,7 +161,7 @@ describe('TimesheetList', () => {
     });
 
     const approveButton = screen.getByRole('button', { name: /approve/i });
-    await userEvent.click(approveButton);
+    fireEvent.click(approveButton);
 
     await waitFor(() => {
       expect(screen.getByText('Failed to approve timesheet.')).toBeInTheDocument();
