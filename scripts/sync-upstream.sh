@@ -34,17 +34,20 @@ for name in "${submodules[@]}"; do
   fi
 
   echo "── $name ──"
-  (
+  if (
     cd "$dir"
     git fetch upstream "$BRANCH" --quiet
     git merge upstream/"$BRANCH" --ff-only --quiet
     git push origin "$BRANCH" --quiet
+  ); then
     echo "   ✓ synced"
-  ) && ((ok++)) || {
+    ok=$((ok + 1))
+  else
     echo "   ✗ FAILED (non-fast-forward? resolve manually)"
-    ((fail++))
-  }
+    fail=$((fail + 1))
+  fi
 done
 
 echo ""
 echo "Done: $ok synced, $fail failed"
+[[ $fail -eq 0 ]]
