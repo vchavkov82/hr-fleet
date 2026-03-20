@@ -188,16 +188,12 @@ install: ## Install all HR dependencies
 bootstrap: install ## Full setup from scratch
 	@echo "Bootstrap complete!"
 	@echo ""
-	@echo "Via Caddy (add subdomains to /etc/hosts -> 127.0.0.1):"
-	@echo "  HR site      http://hr.localhost       -> hr:5010"
-	@echo "  HR blog      http://blog.hr.localhost  -> hr-blog:5013"
-	@echo "  HR docs      http://docs.localhost     -> hr-docs:5011"
-	@echo ""
-	@echo "Direct ports (dev only):"
-	@echo "  HR site      http://localhost:5010"
-	@echo "  HR blog      http://localhost:5013"
-	@echo "  HR docs      http://localhost:5011"
-	@echo "  HR admin     http://localhost:5012"
-	@echo "  HR API       http://localhost:5080"
+	@echo "Via Caddy:"
+	@echo "  HR site      https://hr.assistance.bg"
+	@echo "  HR blog      https://blog.hr.assistance.bg"
+	@echo "  HR docs      https://docs.hr.assistance.bg"
+	@echo "  HR admin     https://admin.hr.assistance.bg"
+	@echo "  HR odoo      https://odoo.hr.assistance.bg"
+	@echo "  HR API       https://hr.assistance.bg/api/v1/"
 
 .DEFAULT_GOAL := help
