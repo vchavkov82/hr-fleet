@@ -36,9 +36,7 @@ describe('Dashboard', () => {
   it('renders stats from mocked API', async () => {
     renderDashboard();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-    });
+    await waitForLoaded();
 
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Active Employees')).toBeInTheDocument();
