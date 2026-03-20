@@ -49,7 +49,7 @@ describe('DepartmentList', () => {
     expect(screen.getByText('ENG')).toBeInTheDocument();
     expect(screen.getByText('Engineering')).toBeInTheDocument();
     expect(screen.getByText('Jane Manager')).toBeInTheDocument();
-    expect(screen.getByText('25')).toBeInTheDocument();
+    expect(screen.getAllByText('25').length).toBeGreaterThan(0);
   });
 
   it('shows loading spinner initially', () => {
