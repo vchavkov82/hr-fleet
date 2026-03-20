@@ -1,14 +1,19 @@
 import type { Employee, EmployeeCreateInput, EmployeeListResponse } from './types/employee'
+import { apiBaseUrl } from './api-base'
 
 /**
  * API base URL:
- * - In browser: use relative path (Caddy proxy handles /api/v1/*)
- * - In SSR/dev without proxy: use NEXT_PUBLIC_API_URL or direct backend
+ * - In browser: use NEXT_PUBLIC_API_URL (or relative empty string when same-origin via proxy)
+ * - In SSR: NEXT_PUBLIC_API_URL or direct backend on localhost:5080
  */
+function serverApiBase(): string {
+  const fromEnv = apiBaseUrl()
+  if (fromEnv !== '') return fromEnv
+  return 'http://localhost:5080'
+}
+
 const API_BASE =
-  typeof window !== 'undefined'
-    ? (process.env.NEXT_PUBLIC_API_URL || '')
-    : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5080')
+  typeof window !== 'undefined' ? apiBaseUrl() : serverApiBase()
 
 export class ApiError extends Error {
   constructor(

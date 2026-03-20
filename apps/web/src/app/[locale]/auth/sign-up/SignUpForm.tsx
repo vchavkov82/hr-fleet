@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import Link from 'next/link'
 import { useRouter } from '@/navigation'
+import { apiBaseUrl } from '@/lib/api-base'
 
 const signUpSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -96,8 +97,7 @@ export default function SignUpForm({
   async function onSubmit(data: SignUpFormData) {
     setServerError(null)
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || ''
-      const res = await fetch(`${apiUrl}/api/v1/auth/register`, {
+      const res = await fetch(`${apiBaseUrl()}/api/v1/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

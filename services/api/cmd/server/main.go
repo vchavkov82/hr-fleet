@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -208,12 +209,28 @@ func runAPI(
 	r.Use(middleware.PublicRateLimit())
 	r.Use(middleware.Metrics())
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:5010", "http://localhost:5012", "https://hr.vchavkov.com"},
+		AllowedOrigins: []string{
+			"http://localhost:5010",
+			"http://localhost:5012",
+			"http://localhost:5020",
+			"https://hr.vchavkov.com",
+		},
 		AllowOriginFunc: func(r *http.Request, origin string) bool {
 			const lanSuffix = ".lan.assistance.bg:5012"
-			return len(origin) > 0 && (origin == "http://localhost:5010" || origin == "http://localhost:5012" ||
+			if origin == "" {
+				return false
+			}
+			// Dev: Next/Vite on hr.localhost (any port) or 127.0.0.1 — distinct origins from localhost hostname.
+			if strings.HasPrefix(origin, "http://hr.localhost:") {
+				return true
+			}
+			if strings.HasPrefix(origin, "http://127.0.0.1:") {
+				return true
+			}
+			return origin == "http://localhost:5010" || origin == "http://localhost:5012" ||
+				origin == "http://localhost:5020" ||
 				origin == "https://hr.vchavkov.com" ||
-				len(origin) > len(lanSuffix) && origin[len(origin)-len(lanSuffix):] == lanSuffix)
+				len(origin) > len(lanSuffix) && origin[len(origin)-len(lanSuffix):] == lanSuffix
 		},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-API-Key", "X-Organization-Id"},

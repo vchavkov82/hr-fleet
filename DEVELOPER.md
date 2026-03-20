@@ -140,6 +140,11 @@ JWT_SECRET=hr-dev-jwt-secret-change-me-in-production
 # API
 API_PORT=8080
 VITE_API_URL=http://hr.localhost:5090/api/v1
+
+# Next.js www (`apps/web`) — copy `apps/web/.env.example` to `apps/web/.env.local`
+# NEXT_PUBLIC_API_URL=http://localhost:5080
+# Use :5090 only if your Caddy gateway on that port is running; otherwise the browser
+# shows “CORS request did not succeed” with status (null) (connection refused).
 ```
 
 ## Common Commands
