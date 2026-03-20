@@ -29,6 +29,26 @@ func (q *Queries) CountPayrollRuns(ctx context.Context, arg CountPayrollRunsPara
 	return column_1, err
 }
 
+const countPayslips = `-- name: CountPayslips :one
+SELECT count(*)::bigint
+FROM payslips p
+JOIN payroll_runs r ON r.id = p.payroll_run_id
+WHERE r.organization_id = $1
+  AND ($2::uuid IS NULL OR p.payroll_run_id = $2)
+`
+
+type CountPayslipsParams struct {
+	OrganizationID pgtype.UUID
+	Column2        pgtype.UUID
+}
+
+func (q *Queries) CountPayslips(ctx context.Context, arg CountPayslipsParams) (int64, error) {
+	row := q.db.QueryRow(ctx, countPayslips, arg.OrganizationID, arg.Column2)
+	var column_1 int64
+	err := row.Scan(&column_1)
+	return column_1, err
+}
+
 const createPayrollRun = `-- name: CreatePayrollRun :one
 INSERT INTO payroll_runs (period_start, period_end, status, created_by, organization_id)
 VALUES ($1, $2, $3, $4, $5)
@@ -246,6 +266,85 @@ func (q *Queries) ListPayrollRuns(ctx context.Context, arg ListPayrollRunsParams
 			&i.CreatedAt,
 			&i.UpdatedAt,
 			&i.OrganizationID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const listPayslips = `-- name: ListPayslips :many
+SELECT p.id, p.payroll_run_id, p.employee_odoo_id, p.gross_salary_stotinki,
+       p.employer_social_stotinki, p.employee_social_stotinki,
+       p.employer_health_stotinki, p.employee_health_stotinki,
+       p.income_tax_stotinki, p.net_salary_stotinki,
+       p.calculation_details, p.created_at,
+       r.period_start, r.period_end
+FROM payslips p
+JOIN payroll_runs r ON r.id = p.payroll_run_id
+WHERE r.organization_id = $3
+  AND ($4::uuid IS NULL OR p.payroll_run_id = $4)
+ORDER BY p.created_at DESC
+LIMIT $1 OFFSET $2
+`
+
+type ListPayslipsParams struct {
+	Limit          int32
+	Offset         int32
+	OrganizationID pgtype.UUID
+	Column4        pgtype.UUID
+}
+
+type ListPayslipsRow struct {
+	ID                     pgtype.UUID
+	PayrollRunID           pgtype.UUID
+	EmployeeOdooID         int32
+	GrossSalaryStotinki    int64
+	EmployerSocialStotinki int64
+	EmployeeSocialStotinki int64
+	EmployerHealthStotinki int64
+	EmployeeHealthStotinki int64
+	IncomeTaxStotinki      int64
+	NetSalaryStotinki      int64
+	CalculationDetails     []byte
+	CreatedAt              pgtype.Timestamptz
+	PeriodStart            pgtype.Date
+	PeriodEnd              pgtype.Date
+}
+
+func (q *Queries) ListPayslips(ctx context.Context, arg ListPayslipsParams) ([]ListPayslipsRow, error) {
+	rows, err := q.db.Query(ctx, listPayslips,
+		arg.Limit,
+		arg.Offset,
+		arg.OrganizationID,
+		arg.Column4,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ListPayslipsRow
+	for rows.Next() {
+		var i ListPayslipsRow
+		if err := rows.Scan(
+			&i.ID,
+			&i.PayrollRunID,
+			&i.EmployeeOdooID,
+			&i.GrossSalaryStotinki,
+			&i.EmployerSocialStotinki,
+			&i.EmployeeSocialStotinki,
+			&i.EmployerHealthStotinki,
+			&i.EmployeeHealthStotinki,
+			&i.IncomeTaxStotinki,
+			&i.NetSalaryStotinki,
+			&i.CalculationDetails,
+			&i.CreatedAt,
+			&i.PeriodStart,
+			&i.PeriodEnd,
 		); err != nil {
 			return nil, err
 		}

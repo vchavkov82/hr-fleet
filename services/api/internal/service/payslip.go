@@ -38,6 +38,34 @@ func (s *PayslipService) Get(ctx context.Context, id pgtype.UUID) (db.Payslip, e
 	return p, nil
 }
 
+// List retrieves payslips with pagination, optionally filtered by payroll run.
+func (s *PayslipService) List(ctx context.Context, payrollRunID pgtype.UUID, limit, offset int) ([]db.ListPayslipsRow, int64, error) {
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return nil, 0, fmt.Errorf("tenant required")
+	}
+
+	count, err := s.queries.CountPayslips(ctx, db.CountPayslipsParams{
+		OrganizationID: orgID,
+		Column2:        payrollRunID,
+	})
+	if err != nil {
+		return nil, 0, fmt.Errorf("count payslips: %w", err)
+	}
+
+	rows, err := s.queries.ListPayslips(ctx, db.ListPayslipsParams{
+		Limit:          int32(limit),
+		Offset:         int32(offset),
+		OrganizationID: orgID,
+		Column4:        payrollRunID,
+	})
+	if err != nil {
+		return nil, 0, fmt.Errorf("list payslips: %w", err)
+	}
+
+	return rows, count, nil
+}
+
 // ListByRun retrieves all payslips for a given payroll run.
 func (s *PayslipService) ListByRun(ctx context.Context, payrollRunID pgtype.UUID) ([]db.Payslip, error) {
 	orgID, ok := tenant.OrganizationID(ctx)
