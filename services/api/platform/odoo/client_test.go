@@ -47,7 +47,7 @@ func newMockOdoo(t *testing.T, handler func(req JSONRPCRequest) (interface{}, *R
 		http.SetCookie(w, &http.Cookie{Name: "session_id", Value: "test-session-123"})
 
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(resp)
+		_ = json.NewEncoder(w).Encode(resp)
 	}))
 }
 

@@ -126,9 +126,14 @@ test.describe('Admin - Employee Directory', () => {
       // Submit the form if there's a submit button
       const submitButton = page.locator('button[type="submit"], button:has-text("Save"), button:has-text("Create")')
       if ((await submitButton.count()) > 0) {
+        const resp = page
+          .waitForResponse(
+            (r) => r.request().method() === 'POST' && r.url().includes('employee'),
+            { timeout: 8000 },
+          )
+          .catch(() => null)
         await submitButton.first().click()
-        // Give time for the POST to fire
-        await page.waitForTimeout(1000)
+        await resp
       }
     }
 

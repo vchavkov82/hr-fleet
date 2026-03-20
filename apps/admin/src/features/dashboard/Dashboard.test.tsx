@@ -1,0 +1,58 @@
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { render, screen, waitFor } from '@testing-library/react';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+
+import { Dashboard } from './index';
+
+const listMeta = (total: number) => ({
+  data: [],
+  meta: { total, page: 1, per_page: 1, total_pages: Math.max(1, total) },
+});
+
+const server = setupServer(
+  http.get('*/api/v1/employees', ({ request }) => {
+    const url = new URL(request.url);
+    if (url.searchParams.get('active') === 'true') {
+      return HttpResponse.json(listMeta(5));
+    }
+    return HttpResponse.json(listMeta(10));
+  }),
+  http.get('*/api/v1/leave/requests', () => HttpResponse.json(listMeta(2))),
+  http.get('*/api/v1/contracts', () => HttpResponse.json(listMeta(1))),
+);
+
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+function renderDashboard() {
+  const theme = createTheme();
+  return render(
+    <ThemeProvider theme={theme}>
+      <MemoryRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+        </Routes>
+      </MemoryRouter>
+    </ThemeProvider>,
+  );
+}
+
+describe('Dashboard', () => {
+  it('renders stats from mocked API', async () => {
+    renderDashboard();
+
+    await waitFor(() => {
+      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+    });
+
+    expect(screen.getByText('Dashboard')).toBeInTheDocument();
+    expect(screen.getByText('Active Employees')).toBeInTheDocument();
+    expect(screen.getByText('5')).toBeInTheDocument();
+    expect(screen.getByText('10')).toBeInTheDocument();
+    expect(screen.getByText('2')).toBeInTheDocument();
+  });
+});

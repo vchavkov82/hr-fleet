@@ -163,7 +163,9 @@ func TestLeaveHandleCreateRequest_Success(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	if resp["id"] != float64(77) {
 		t.Errorf("id = %v, want 77", resp["id"])
 	}

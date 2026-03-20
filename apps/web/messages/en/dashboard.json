@@ -4,7 +4,14 @@
     "employees": "Employees",
     "leave": "Leave",
     "recruitment": "Recruitment",
+    "billing": "Billing",
     "settings": "Settings"
+  },
+  "billing": {
+    "title": "Subscription & billing",
+    "intro": "Subscribe or update payment through Stripe Checkout. Your app calls the HR API with an authenticated session.",
+    "apiHint": "POST /api/v1/billing/checkout-session",
+    "envHint": "Configure STRIPE_SECRET_KEY, STRIPE_PRICE_ID, STRIPE_SUCCESS_URL, STRIPE_CANCEL_URL, and STRIPE_WEBHOOK_SECRET on the API. Point the Stripe webhook to /api/v1/webhooks/stripe."
   },
   "employees": {
     "title": "Employee Directory",

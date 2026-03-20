@@ -7,6 +7,7 @@ min_version = "2024.11.0"
 node = "22"
 go = "1.25.7"
 pnpm = "9"
+golangci-lint = "1.64"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "go", "pnpm"]

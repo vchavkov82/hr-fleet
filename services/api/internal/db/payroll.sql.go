@@ -11,17 +11,36 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+const countPayrollRuns = `-- name: CountPayrollRuns :one
+SELECT count(*)::bigint
+FROM payroll_runs
+WHERE organization_id = $1 AND status = coalesce($2, status)
+`
+
+type CountPayrollRunsParams struct {
+	OrganizationID pgtype.UUID
+	Status         pgtype.Text
+}
+
+func (q *Queries) CountPayrollRuns(ctx context.Context, arg CountPayrollRunsParams) (int64, error) {
+	row := q.db.QueryRow(ctx, countPayrollRuns, arg.OrganizationID, arg.Status)
+	var column_1 int64
+	err := row.Scan(&column_1)
+	return column_1, err
+}
+
 const createPayrollRun = `-- name: CreatePayrollRun :one
-INSERT INTO payroll_runs (period_start, period_end, status, created_by)
-VALUES ($1, $2, $3, $4)
-RETURNING id, period_start, period_end, status, created_by, approved_by, error_details, completed_at, created_at, updated_at
+INSERT INTO payroll_runs (period_start, period_end, status, created_by, organization_id)
+VALUES ($1, $2, $3, $4, $5)
+RETURNING id, period_start, period_end, status, created_by, approved_by, error_details, completed_at, created_at, updated_at, organization_id
 `
 
 type CreatePayrollRunParams struct {
-	PeriodStart pgtype.Date
-	PeriodEnd   pgtype.Date
-	Status      string
-	CreatedBy   pgtype.UUID
+	PeriodStart    pgtype.Date
+	PeriodEnd      pgtype.Date
+	Status         string
+	CreatedBy      pgtype.UUID
+	OrganizationID pgtype.UUID
 }
 
 func (q *Queries) CreatePayrollRun(ctx context.Context, arg CreatePayrollRunParams) (PayrollRun, error) {
@@ -30,6 +49,7 @@ func (q *Queries) CreatePayrollRun(ctx context.Context, arg CreatePayrollRunPara
 		arg.PeriodEnd,
 		arg.Status,
 		arg.CreatedBy,
+		arg.OrganizationID,
 	)
 	var i PayrollRun
 	err := row.Scan(
@@ -43,6 +63,7 @@ func (q *Queries) CreatePayrollRun(ctx context.Context, arg CreatePayrollRunPara
 		&i.CompletedAt,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.OrganizationID,
 	)
 	return i, err
 }
@@ -98,13 +119,18 @@ func (q *Queries) CreatePayslip(ctx context.Context, arg CreatePayslipParams) (P
 }
 
 const getPayrollRun = `-- name: GetPayrollRun :one
-SELECT id, period_start, period_end, status, created_by, approved_by, error_details, completed_at, created_at, updated_at
+SELECT id, period_start, period_end, status, created_by, approved_by, error_details, completed_at, created_at, updated_at, organization_id
 FROM payroll_runs
-WHERE id = $1
+WHERE id = $1 AND organization_id = $2
 `
 
-func (q *Queries) GetPayrollRun(ctx context.Context, id pgtype.UUID) (PayrollRun, error) {
-	row := q.db.QueryRow(ctx, getPayrollRun, id)
+type GetPayrollRunParams struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+}
+
+func (q *Queries) GetPayrollRun(ctx context.Context, arg GetPayrollRunParams) (PayrollRun, error) {
+	row := q.db.QueryRow(ctx, getPayrollRun, arg.ID, arg.OrganizationID)
 	var i PayrollRun
 	err := row.Scan(
 		&i.ID,
@@ -117,18 +143,50 @@ func (q *Queries) GetPayrollRun(ctx context.Context, id pgtype.UUID) (PayrollRun
 		&i.CompletedAt,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.OrganizationID,
+	)
+	return i, err
+}
+
+const getPayrollRunByID = `-- name: GetPayrollRunByID :one
+SELECT id, period_start, period_end, status, created_by, approved_by, error_details, completed_at, created_at, updated_at, organization_id
+FROM payroll_runs
+WHERE id = $1
+`
+
+func (q *Queries) GetPayrollRunByID(ctx context.Context, id pgtype.UUID) (PayrollRun, error) {
+	row := q.db.QueryRow(ctx, getPayrollRunByID, id)
+	var i PayrollRun
+	err := row.Scan(
+		&i.ID,
+		&i.PeriodStart,
+		&i.PeriodEnd,
+		&i.Status,
+		&i.CreatedBy,
+		&i.ApprovedBy,
+		&i.ErrorDetails,
+		&i.CompletedAt,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+		&i.OrganizationID,
 	)
 	return i, err
 }
 
 const getPayslip = `-- name: GetPayslip :one
-SELECT id, payroll_run_id, employee_odoo_id, gross_salary_stotinki, employer_social_stotinki, employee_social_stotinki, employer_health_stotinki, employee_health_stotinki, income_tax_stotinki, net_salary_stotinki, calculation_details, created_at
-FROM payslips
-WHERE id = $1
+SELECT p.id, p.payroll_run_id, p.employee_odoo_id, p.gross_salary_stotinki, p.employer_social_stotinki, p.employee_social_stotinki, p.employer_health_stotinki, p.employee_health_stotinki, p.income_tax_stotinki, p.net_salary_stotinki, p.calculation_details, p.created_at
+FROM payslips p
+JOIN payroll_runs r ON r.id = p.payroll_run_id
+WHERE p.id = $1 AND r.organization_id = $2
 `
 
-func (q *Queries) GetPayslip(ctx context.Context, id pgtype.UUID) (Payslip, error) {
-	row := q.db.QueryRow(ctx, getPayslip, id)
+type GetPayslipParams struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+}
+
+func (q *Queries) GetPayslip(ctx context.Context, arg GetPayslipParams) (Payslip, error) {
+	row := q.db.QueryRow(ctx, getPayslip, arg.ID, arg.OrganizationID)
 	var i Payslip
 	err := row.Scan(
 		&i.ID,
@@ -147,35 +205,28 @@ func (q *Queries) GetPayslip(ctx context.Context, id pgtype.UUID) (Payslip, erro
 	return i, err
 }
 
-const countPayrollRuns = `-- name: CountPayrollRuns :one
-SELECT count(*)::bigint
-FROM payroll_runs
-WHERE status = coalesce($1, status)
-`
-
-func (q *Queries) CountPayrollRuns(ctx context.Context, status pgtype.Text) (int64, error) {
-	row := q.db.QueryRow(ctx, countPayrollRuns, status)
-	var count int64
-	err := row.Scan(&count)
-	return count, err
-}
-
 const listPayrollRuns = `-- name: ListPayrollRuns :many
-SELECT id, period_start, period_end, status, created_by, approved_by, error_details, completed_at, created_at, updated_at
+SELECT id, period_start, period_end, status, created_by, approved_by, error_details, completed_at, created_at, updated_at, organization_id
 FROM payroll_runs
-WHERE status = coalesce($3, status)
+WHERE organization_id = $3 AND status = coalesce($4, status)
 ORDER BY created_at DESC
 LIMIT $1 OFFSET $2
 `
 
 type ListPayrollRunsParams struct {
-	Limit  int32
-	Offset int32
-	Status pgtype.Text
+	Limit          int32
+	Offset         int32
+	OrganizationID pgtype.UUID
+	Status         pgtype.Text
 }
 
 func (q *Queries) ListPayrollRuns(ctx context.Context, arg ListPayrollRunsParams) ([]PayrollRun, error) {
-	rows, err := q.db.Query(ctx, listPayrollRuns, arg.Limit, arg.Offset, arg.Status)
+	rows, err := q.db.Query(ctx, listPayrollRuns,
+		arg.Limit,
+		arg.Offset,
+		arg.OrganizationID,
+		arg.Status,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -194,6 +245,7 @@ func (q *Queries) ListPayrollRuns(ctx context.Context, arg ListPayrollRunsParams
 			&i.CompletedAt,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.OrganizationID,
 		); err != nil {
 			return nil, err
 		}
@@ -206,14 +258,20 @@ func (q *Queries) ListPayrollRuns(ctx context.Context, arg ListPayrollRunsParams
 }
 
 const listPayslipsByRun = `-- name: ListPayslipsByRun :many
-SELECT id, payroll_run_id, employee_odoo_id, gross_salary_stotinki, employer_social_stotinki, employee_social_stotinki, employer_health_stotinki, employee_health_stotinki, income_tax_stotinki, net_salary_stotinki, calculation_details, created_at
-FROM payslips
-WHERE payroll_run_id = $1
-ORDER BY employee_odoo_id
+SELECT p.id, p.payroll_run_id, p.employee_odoo_id, p.gross_salary_stotinki, p.employer_social_stotinki, p.employee_social_stotinki, p.employer_health_stotinki, p.employee_health_stotinki, p.income_tax_stotinki, p.net_salary_stotinki, p.calculation_details, p.created_at
+FROM payslips p
+JOIN payroll_runs r ON r.id = p.payroll_run_id
+WHERE p.payroll_run_id = $1 AND r.organization_id = $2
+ORDER BY p.employee_odoo_id
 `
 
-func (q *Queries) ListPayslipsByRun(ctx context.Context, payrollRunID pgtype.UUID) ([]Payslip, error) {
-	rows, err := q.db.Query(ctx, listPayslipsByRun, payrollRunID)
+type ListPayslipsByRunParams struct {
+	PayrollRunID   pgtype.UUID
+	OrganizationID pgtype.UUID
+}
+
+func (q *Queries) ListPayslipsByRun(ctx context.Context, arg ListPayslipsByRunParams) ([]Payslip, error) {
+	rows, err := q.db.Query(ctx, listPayslipsByRun, arg.PayrollRunID, arg.OrganizationID)
 	if err != nil {
 		return nil, err
 	}
@@ -246,38 +304,68 @@ func (q *Queries) ListPayslipsByRun(ctx context.Context, payrollRunID pgtype.UUI
 }
 
 const setPayrollRunCompleted = `-- name: SetPayrollRunCompleted :exec
+UPDATE payroll_runs SET status = 'completed', completed_at = now(), updated_at = now() WHERE id = $1 AND organization_id = $2
+`
+
+type SetPayrollRunCompletedParams struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+}
+
+func (q *Queries) SetPayrollRunCompleted(ctx context.Context, arg SetPayrollRunCompletedParams) error {
+	_, err := q.db.Exec(ctx, setPayrollRunCompleted, arg.ID, arg.OrganizationID)
+	return err
+}
+
+const setPayrollRunCompletedByRunID = `-- name: SetPayrollRunCompletedByRunID :exec
 UPDATE payroll_runs SET status = 'completed', completed_at = now(), updated_at = now() WHERE id = $1
 `
 
-func (q *Queries) SetPayrollRunCompleted(ctx context.Context, id pgtype.UUID) error {
-	_, err := q.db.Exec(ctx, setPayrollRunCompleted, id)
+func (q *Queries) SetPayrollRunCompletedByRunID(ctx context.Context, id pgtype.UUID) error {
+	_, err := q.db.Exec(ctx, setPayrollRunCompletedByRunID, id)
 	return err
 }
 
 const setPayrollRunError = `-- name: SetPayrollRunError :exec
-UPDATE payroll_runs SET status = 'failed', error_details = $2, updated_at = now() WHERE id = $1
+UPDATE payroll_runs SET status = 'failed', error_details = $2, updated_at = now() WHERE id = $1 AND organization_id = $3
 `
 
 type SetPayrollRunErrorParams struct {
+	ID             pgtype.UUID
+	ErrorDetails   []byte
+	OrganizationID pgtype.UUID
+}
+
+func (q *Queries) SetPayrollRunError(ctx context.Context, arg SetPayrollRunErrorParams) error {
+	_, err := q.db.Exec(ctx, setPayrollRunError, arg.ID, arg.ErrorDetails, arg.OrganizationID)
+	return err
+}
+
+const setPayrollRunErrorByRunID = `-- name: SetPayrollRunErrorByRunID :exec
+UPDATE payroll_runs SET status = 'failed', error_details = $2, updated_at = now() WHERE id = $1
+`
+
+type SetPayrollRunErrorByRunIDParams struct {
 	ID           pgtype.UUID
 	ErrorDetails []byte
 }
 
-func (q *Queries) SetPayrollRunError(ctx context.Context, arg SetPayrollRunErrorParams) error {
-	_, err := q.db.Exec(ctx, setPayrollRunError, arg.ID, arg.ErrorDetails)
+func (q *Queries) SetPayrollRunErrorByRunID(ctx context.Context, arg SetPayrollRunErrorByRunIDParams) error {
+	_, err := q.db.Exec(ctx, setPayrollRunErrorByRunID, arg.ID, arg.ErrorDetails)
 	return err
 }
 
 const updatePayrollRunStatus = `-- name: UpdatePayrollRunStatus :exec
-UPDATE payroll_runs SET status = $2, updated_at = now() WHERE id = $1
+UPDATE payroll_runs SET status = $2, updated_at = now() WHERE id = $1 AND organization_id = $3
 `
 
 type UpdatePayrollRunStatusParams struct {
-	ID     pgtype.UUID
-	Status string
+	ID             pgtype.UUID
+	Status         string
+	OrganizationID pgtype.UUID
 }
 
 func (q *Queries) UpdatePayrollRunStatus(ctx context.Context, arg UpdatePayrollRunStatusParams) error {
-	_, err := q.db.Exec(ctx, updatePayrollRunStatus, arg.ID, arg.Status)
+	_, err := q.db.Exec(ctx, updatePayrollRunStatus, arg.ID, arg.Status, arg.OrganizationID)
 	return err
 }

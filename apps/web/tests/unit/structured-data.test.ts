@@ -9,7 +9,7 @@ import {
 
 describe('structured-data', () => {
   it('organizationJsonLd returns valid Organization schema', () => {
-    const result = organizationJsonLd()
+    const result = organizationJsonLd() as unknown as Record<string, unknown>
     expect(result['@context']).toBe('https://schema.org')
     expect(result['@type']).toBe('Organization')
     expect(result.name).toBe('HR')
@@ -34,7 +34,7 @@ describe('structured-data', () => {
     const result = breadcrumbJsonLd(items)
     expect(result['@type']).toBe('BreadcrumbList')
     expect(result.itemListElement).toHaveLength(2)
-    const elements = result.itemListElement as Array<{
+    const elements = result.itemListElement as unknown as Array<{
       position: number
       name: string
       item: string

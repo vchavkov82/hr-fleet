@@ -22,6 +22,13 @@ type Config struct {
 	JWTSecret         string // JWT_SECRET (legacy HS256, kept for backward compat)
 	JWTPrivateKey     string // JWT_PRIVATE_KEY_FILE, path to RSA private key PEM
 	JWTPublicKey      string // JWT_PUBLIC_KEY_FILE, path to RSA public key PEM
+	// Stripe (optional SaaS billing)
+	StripeSecretKey      string // STRIPE_SECRET_KEY
+	StripeWebhookSecret  string // STRIPE_WEBHOOK_SECRET
+	StripePriceID        string // STRIPE_PRICE_ID (recurring price)
+	StripeSuccessURL     string // STRIPE_SUCCESS_URL
+	StripeCancelURL      string // STRIPE_CANCEL_URL
+	SubscriptionEnforce  bool   // SUBSCRIPTION_ENFORCE=true blocks writes when subscription is canceled
 }
 
 // Load reads configuration from environment variables.
@@ -41,6 +48,12 @@ func Load() (*Config, error) {
 		JWTSecret:         os.Getenv("JWT_SECRET"),
 		JWTPrivateKey:     envOrDefault("JWT_PRIVATE_KEY_FILE", ""),
 		JWTPublicKey:      envOrDefault("JWT_PUBLIC_KEY_FILE", ""),
+		StripeSecretKey:   os.Getenv("STRIPE_SECRET_KEY"),
+		StripeWebhookSecret: os.Getenv("STRIPE_WEBHOOK_SECRET"),
+		StripePriceID:     envOrDefault("STRIPE_PRICE_ID", ""),
+		StripeSuccessURL:  envOrDefault("STRIPE_SUCCESS_URL", ""),
+		StripeCancelURL:   envOrDefault("STRIPE_CANCEL_URL", ""),
+		SubscriptionEnforce: os.Getenv("SUBSCRIPTION_ENFORCE") == "true",
 	}
 
 	var errs []error

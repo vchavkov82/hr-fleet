@@ -30,7 +30,6 @@ type payrollPayload struct {
 }
 
 // HandlePayrollProcess processes a payroll run: fetches employees, calculates tax, creates payslips.
-// Fails the entire batch if any employee calculation or insert fails.
 func (p *PayrollProcessor) HandlePayrollProcess(ctx context.Context, t *asynq.Task) error {
 	var payload payrollPayload
 	if err := json.Unmarshal(t.Payload(), &payload); err != nil {
@@ -42,34 +41,36 @@ func (p *PayrollProcessor) HandlePayrollProcess(ctx context.Context, t *asynq.Ta
 	logger := log.With().Str("run_id", payload.RunID).Logger()
 	logger.Info().Msg("starting payroll processing")
 
-	// Fetch all active employees
+	run, err := p.queries.GetPayrollRunByID(ctx, runID)
+	if err != nil {
+		p.failRun(ctx, runID, triggeredBy, nil, fmt.Sprintf("load run: %v", err))
+		return fmt.Errorf("get payroll run: %w", err)
+	}
+
 	employees, err := p.queries.ListEmployees(ctx, db.ListEmployeesParams{
-		Limit:  1000,
-		Offset: 0,
-		Status: pgtype.Text{String: "active", Valid: true},
+		Limit:          1000,
+		Offset:         0,
+		OrganizationID: run.OrganizationID,
+		Status:         pgtype.Text{String: "active", Valid: true},
 	})
 	if err != nil {
-		p.failRun(ctx, runID, triggeredBy, fmt.Sprintf("fetch employees: %v", err))
+		p.failRun(ctx, runID, triggeredBy, &run.OrganizationID, fmt.Sprintf("fetch employees: %v", err))
 		return fmt.Errorf("fetch employees: %w", err)
 	}
 
 	if len(employees) == 0 {
-		p.failRun(ctx, runID, triggeredBy, "no active employees found")
+		p.failRun(ctx, runID, triggeredBy, &run.OrganizationID, "no active employees found")
 		return fmt.Errorf("no active employees found")
 	}
 
-	// Process each employee - fail entire batch on any error
 	for _, emp := range employees {
-		// For now, use a default gross salary. In production this would come from contracts.
-		// The payslip creation expects gross salary to be provided per employee.
 		grossStotinki := int64(0)
 		if emp.OdooID.Valid {
-			// Placeholder: actual salary would come from employee contract/Odoo
-			grossStotinki = 300_000 // default 3000 BGN for MVP
+			grossStotinki = 300_000
 		}
 
 		if grossStotinki <= 0 {
-			p.failRun(ctx, runID, triggeredBy, fmt.Sprintf("employee %d has no salary configured", emp.OdooID.Int32))
+			p.failRun(ctx, runID, triggeredBy, &run.OrganizationID, fmt.Sprintf("employee %d has no salary configured", emp.OdooID.Int32))
 			return fmt.Errorf("employee %d has no salary", emp.OdooID.Int32)
 		}
 
@@ -90,38 +91,42 @@ func (p *PayrollProcessor) HandlePayrollProcess(ctx context.Context, t *asynq.Ta
 			CalculationDetails:     detailsJSON,
 		})
 		if err != nil {
-			p.failRun(ctx, runID, triggeredBy, fmt.Sprintf("create payslip for employee %d: %v", emp.OdooID.Int32, err))
+			p.failRun(ctx, runID, triggeredBy, &run.OrganizationID, fmt.Sprintf("create payslip for employee %d: %v", emp.OdooID.Int32, err))
 			return fmt.Errorf("create payslip: %w", err)
 		}
 	}
 
-	// Mark run as completed
-	if err := p.queries.SetPayrollRunCompleted(ctx, runID); err != nil {
-		p.failRun(ctx, runID, triggeredBy, fmt.Sprintf("mark completed: %v", err))
+	if err := p.queries.SetPayrollRunCompletedByRunID(ctx, runID); err != nil {
+		p.failRun(ctx, runID, triggeredBy, &run.OrganizationID, fmt.Sprintf("mark completed: %v", err))
 		return fmt.Errorf("mark completed: %w", err)
 	}
 
-	p.auditLog(ctx, triggeredBy, "payroll.completed", "payroll_run", payload.RunID)
+	p.auditLog(ctx, triggeredBy, &run.OrganizationID, "payroll.completed", "payroll_run", payload.RunID)
 	logger.Info().Int("employees", len(employees)).Msg("payroll processing completed")
 	return nil
 }
 
-// failRun marks the payroll run as failed and writes an audit entry.
-func (p *PayrollProcessor) failRun(ctx context.Context, runID, userID pgtype.UUID, reason string) {
+func (p *PayrollProcessor) failRun(ctx context.Context, runID, userID pgtype.UUID, orgID *pgtype.UUID, reason string) {
 	errDetails, _ := json.Marshal(map[string]string{"error": reason})
-	_ = p.queries.SetPayrollRunError(ctx, db.SetPayrollRunErrorParams{
+	_ = p.queries.SetPayrollRunErrorByRunID(ctx, db.SetPayrollRunErrorByRunIDParams{
 		ID:           runID,
 		ErrorDetails: errDetails,
 	})
-	p.auditLog(ctx, userID, "payroll.failed", "payroll_run", uuidStr(runID))
+	p.auditLog(ctx, userID, orgID, "payroll.failed", "payroll_run", uuidStr(runID))
 }
 
-func (p *PayrollProcessor) auditLog(ctx context.Context, userID pgtype.UUID, action, resType, resID string) {
+func (p *PayrollProcessor) auditLog(ctx context.Context, userID pgtype.UUID, orgID *pgtype.UUID, action, resType, resID string) {
+	var o pgtype.UUID
+	if orgID != nil {
+		o = *orgID
+	}
 	_, _ = p.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
-		UserID:       userID,
-		Action:       action,
-		ResourceType: resType,
-		ResourceID:   resID,
+		UserID:         userID,
+		Action:         action,
+		ResourceType:   resType,
+		ResourceID:     resID,
+		Details:        nil,
+		OrganizationID: o,
 	})
 }
 

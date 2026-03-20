@@ -87,7 +87,9 @@ func TestContractHandleList_Success(t *testing.T) {
 	}
 
 	var resp ListResponse
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	if resp.Meta.Total != 30 {
 		t.Errorf("total = %d, want 30", resp.Meta.Total)
 	}
@@ -199,7 +201,9 @@ func TestContractHandleCreate_Success(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	if resp["id"] != float64(99) {
 		t.Errorf("id = %v, want 99", resp["id"])
 	}

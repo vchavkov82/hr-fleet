@@ -78,6 +78,9 @@
   "pricing": {
     "metaTitle": "Pricing | HR",
     "metaDescription": "HR platform pricing for Bulgarian companies. Start with employee management and add modules as they become available. Get a personalized quote.",
+    "saasBannerTitle": "HR as a service",
+    "saasBannerBody": "Create your organization, connect Odoo-backed HR, and invite your team. Self-service signup is available for new tenants.",
+    "saasStartTrial": "Create your organization",
     "sectionLabel": "Pricing",
     "heading": "Simple pricing for growing teams",
     "subheading": "Start with employee management. Add modules as we build them.",

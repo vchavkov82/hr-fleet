@@ -11,13 +11,15 @@ import (
 type Role string
 
 const (
-	SuperAdmin Role = "super_admin"
-	Admin      Role = "admin"
-	HRManager  Role = "hr_manager"
-	HROfficer  Role = "hr_officer"
-	Accountant Role = "accountant"
-	Employee   Role = "employee"
-	Viewer     Role = "viewer"
+	SuperAdmin      Role = "super_admin"
+	Admin           Role = "admin"
+	HRManager       Role = "hr_manager"
+	HROfficer       Role = "hr_officer"
+	PayrollManager  Role = "payroll_manager"
+	Recruiter       Role = "recruiter"
+	Accountant      Role = "accountant"
+	Employee        Role = "employee"
+	Viewer          Role = "viewer"
 )
 
 // Permission represents an action that can be performed.
@@ -55,6 +57,12 @@ var RolePermissions = map[Role][]Permission{
 	},
 	HROfficer: {
 		ManageEmployees, ManageLeave, ManageContracts, ViewReports,
+	},
+	PayrollManager: {
+		ManagePayroll, ApprovePayroll, ViewPayroll, ViewReports,
+	},
+	Recruiter: {
+		ManageEmployees, ManageContracts, ViewReports,
 	},
 	Accountant: {
 		ManagePayroll, ViewPayroll, ViewReports,
@@ -98,7 +106,7 @@ func RequireRole(roles ...Role) func(http.Handler) http.Handler {
 
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusForbidden)
-			json.NewEncoder(w).Encode(map[string]string{"error": "insufficient permissions"})
+			_ = json.NewEncoder(w).Encode(map[string]string{"error": "insufficient permissions"})
 		})
 	}
 }
@@ -113,7 +121,7 @@ func RequirePermission(perm Permission) func(http.Handler) http.Handler {
 			if !HasPermission(Role(roleStr), perm) {
 				w.Header().Set("Content-Type", "application/json")
 				w.WriteHeader(http.StatusForbidden)
-				json.NewEncoder(w).Encode(map[string]string{"error": "insufficient permissions"})
+				_ = json.NewEncoder(w).Encode(map[string]string{"error": "insufficient permissions"})
 				return
 			}
 

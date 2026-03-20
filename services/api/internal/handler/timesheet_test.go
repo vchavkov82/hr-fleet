@@ -72,7 +72,9 @@ func TestTimesheetHandleList_Success(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	data, ok := resp["data"].([]any)
 	if !ok || len(data) != 2 {
 		t.Errorf("expected 2 entries, got %v", resp["data"])
@@ -152,7 +154,9 @@ func TestTimesheetHandleCreate_Success(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	if resp["id"] != float64(42) {
 		t.Errorf("id = %v, want 42", resp["id"])
 	}

@@ -7,16 +7,18 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/jackc/pgx/v5/pgtype"
+
 	"github.com/vchavkov/hr/services/api/internal/cache"
+	"github.com/vchavkov/hr/services/api/internal/cachekeys"
 	"github.com/vchavkov/hr/services/api/internal/db"
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
 const (
-	leaveAllocCacheTTL  = 5 * time.Minute
-	leaveAllocKeyPfx    = "leave:alloc:"
-	leaveReqCacheTTL    = 5 * time.Minute
-	leaveReqKeyPfx      = "leave:req:"
+	leaveAllocCacheTTL = 5 * time.Minute
+	leaveReqCacheTTL   = 5 * time.Minute
 )
 
 // LeaveOdooClient defines the interface for Odoo leave operations.
@@ -57,17 +59,14 @@ type leaveReqResult struct {
 // ListAllocations retrieves leave allocations with optional employee filtering.
 func (s *LeaveService) ListAllocations(ctx context.Context, employeeID int64, page, perPage int) ([]odoo.LeaveAllocation, int, error) {
 	offset := (page - 1) * perPage
-	key := leaveAllocCacheKey(employeeID, perPage, offset)
+	key := leaveAllocCacheKey(ctx, employeeID, perPage, offset)
 
 	var cached leaveAllocResult
 	if err := s.cache.Get(ctx, key, &cached); err == nil {
 		return cached.Allocations, cached.Total, nil
 	}
 
-	var domain []any
-	if employeeID > 0 {
-		domain = append(domain, []any{"employee_id", "=", employeeID})
-	}
+	domain := leaveBaseDomain(ctx, employeeID)
 
 	allocs, total, err := s.odoo.SearchLeaveAllocations(ctx, domain, perPage, offset)
 	if err != nil {
@@ -85,17 +84,14 @@ func (s *LeaveService) ListAllocations(ctx context.Context, employeeID int64, pa
 // ListRequests retrieves leave requests with optional employee and status filtering.
 func (s *LeaveService) ListRequests(ctx context.Context, employeeID int64, status string, page, perPage int) ([]odoo.LeaveRequest, int, error) {
 	offset := (page - 1) * perPage
-	key := leaveReqCacheKey(employeeID, status, perPage, offset)
+	key := leaveReqCacheKey(ctx, employeeID, status, perPage, offset)
 
 	var cached leaveReqResult
 	if err := s.cache.Get(ctx, key, &cached); err == nil {
 		return cached.Requests, cached.Total, nil
 	}
 
-	var domain []any
-	if employeeID > 0 {
-		domain = append(domain, []any{"employee_id", "=", employeeID})
-	}
+	domain := leaveBaseDomain(ctx, employeeID)
 	if status != "" {
 		domain = append(domain, []any{"state", "=", status})
 	}
@@ -128,7 +124,7 @@ func (s *LeaveService) CreateRequest(ctx context.Context, req odoo.LeaveCreateRe
 		return 0, fmt.Errorf("create leave request: %w", err)
 	}
 
-	_ = s.cache.DeletePattern(ctx, leaveReqKeyPfx+"*")
+	_ = s.cache.DeletePattern(ctx, leaveReqInvalidatePattern(ctx))
 	return id, nil
 }
 
@@ -138,16 +134,18 @@ func (s *LeaveService) ApproveRequest(ctx context.Context, leaveID int64, approv
 		return fmt.Errorf("approve leave %d: %w", leaveID, err)
 	}
 
-	_ = s.cache.DeletePattern(ctx, leaveReqKeyPfx+"*")
+	_ = s.cache.DeletePattern(ctx, leaveReqInvalidatePattern(ctx))
 
-	// Audit log
 	if s.queries != nil {
 		details, _ := json.Marshal(map[string]any{"approver": approverUserID})
+		orgID, _ := tenant.OrganizationID(ctx)
 		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
-			Action:       "leave.approved",
-			ResourceType: "leave",
-			ResourceID:   fmt.Sprintf("%d", leaveID),
-			Details:      details,
+			UserID:         pgtype.UUID{},
+			Action:         "leave.approved",
+			ResourceType:   "leave",
+			ResourceID:     fmt.Sprintf("%d", leaveID),
+			Details:        details,
+			OrganizationID: orgID,
 		})
 	}
 
@@ -165,16 +163,18 @@ func (s *LeaveService) RejectRequest(ctx context.Context, leaveID int64, reason,
 		return fmt.Errorf("reject leave %d: %w", leaveID, err)
 	}
 
-	_ = s.cache.DeletePattern(ctx, leaveReqKeyPfx+"*")
+	_ = s.cache.DeletePattern(ctx, leaveReqInvalidatePattern(ctx))
 
-	// Audit log
 	if s.queries != nil {
 		details, _ := json.Marshal(map[string]any{"rejecter": rejecterUserID, "reason": reason})
+		orgID, _ := tenant.OrganizationID(ctx)
 		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
-			Action:       "leave.rejected",
-			ResourceType: "leave",
-			ResourceID:   fmt.Sprintf("%d", leaveID),
-			Details:      details,
+			UserID:         pgtype.UUID{},
+			Action:         "leave.rejected",
+			ResourceType:   "leave",
+			ResourceID:     fmt.Sprintf("%d", leaveID),
+			Details:        details,
+			OrganizationID: orgID,
 		})
 	}
 
@@ -192,16 +192,18 @@ func (s *LeaveService) CancelRequest(ctx context.Context, leaveID int64) error {
 		return fmt.Errorf("cancel leave request %d: %w", leaveID, err)
 	}
 
-	_ = s.cache.DeletePattern(ctx, leaveReqKeyPfx+"*")
+	_ = s.cache.DeletePattern(ctx, leaveReqInvalidatePattern(ctx))
 
-	// Audit log
 	if s.queries != nil {
 		details, _ := json.Marshal(map[string]any{"leave_id": leaveID})
+		orgID, _ := tenant.OrganizationID(ctx)
 		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
-			Action:       "leave.cancelled",
-			ResourceType: "leave",
-			ResourceID:   fmt.Sprintf("%d", leaveID),
-			Details:      details,
+			UserID:         pgtype.UUID{},
+			Action:         "leave.cancelled",
+			ResourceType:   "leave",
+			ResourceID:     fmt.Sprintf("%d", leaveID),
+			Details:        details,
+			OrganizationID: orgID,
 		})
 	}
 
@@ -213,14 +215,31 @@ func (s *LeaveService) CancelRequest(ctx context.Context, leaveID int64) error {
 	return nil
 }
 
-func leaveAllocCacheKey(employeeID int64, limit, offset int) string {
-	raw := fmt.Sprintf("e=%d&l=%d&o=%d", employeeID, limit, offset)
-	h := sha256.Sum256([]byte(raw))
-	return fmt.Sprintf("%s%x", leaveAllocKeyPfx, h[:8])
+func leaveBaseDomain(ctx context.Context, employeeID int64) []any {
+	var domain []any
+	if c := tenant.OdooCompanyID(ctx); c > 0 {
+		domain = append(domain, []any{"company_id", "=", c})
+	}
+	if employeeID > 0 {
+		domain = append(domain, []any{"employee_id", "=", employeeID})
+	}
+	return domain
 }
 
-func leaveReqCacheKey(employeeID int64, status string, limit, offset int) string {
-	raw := fmt.Sprintf("e=%d&s=%s&l=%d&o=%d", employeeID, status, limit, offset)
+func leaveAllocCacheKey(ctx context.Context, employeeID int64, limit, offset int) string {
+	c := tenant.OdooCompanyID(ctx)
+	raw := fmt.Sprintf("oc=%d&e=%d&l=%d&o=%d", c, employeeID, limit, offset)
 	h := sha256.Sum256([]byte(raw))
-	return fmt.Sprintf("%s%x", leaveReqKeyPfx, h[:8])
+	return fmt.Sprintf("%s%s%x", cachekeys.LeaveAllocPrefix, cachekeys.OdooCompanyShard(c), h[:8])
+}
+
+func leaveReqCacheKey(ctx context.Context, employeeID int64, status string, limit, offset int) string {
+	c := tenant.OdooCompanyID(ctx)
+	raw := fmt.Sprintf("oc=%d&e=%d&s=%s&l=%d&o=%d", c, employeeID, status, limit, offset)
+	h := sha256.Sum256([]byte(raw))
+	return fmt.Sprintf("%s%s%x", cachekeys.LeaveReqPrefix, cachekeys.OdooCompanyShard(c), h[:8])
+}
+
+func leaveReqInvalidatePattern(ctx context.Context) string {
+	return fmt.Sprintf("%s%s*", cachekeys.LeaveReqPrefix, cachekeys.OdooCompanyShard(tenant.OdooCompanyID(ctx)))
 }

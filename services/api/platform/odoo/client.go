@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"maps"
 	"net/http"
 	"strings"
 	"sync"
@@ -12,6 +13,8 @@ import (
 
 	"github.com/rs/zerolog"
 	"github.com/sony/gobreaker"
+
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 )
 
 // ClientOptions configures circuit breaker and connection pool settings.
@@ -247,11 +250,11 @@ func (c *Client) SearchRead(ctx context.Context, model string, domain []any, fie
 		return nil, err
 	}
 
-	kwargs := map[string]any{
+	kwargs := c.mergeKwargs(ctx, map[string]any{
 		"fields": fields,
 		"limit":  limit,
 		"offset": offset,
-	}
+	})
 
 	args := []any{
 		c.db, c.uid, c.password,
@@ -283,6 +286,7 @@ func (c *Client) SearchCount(ctx context.Context, model string, domain []any) (i
 		c.db, c.uid, c.password,
 		model, "search_count",
 		[]any{domain},
+		c.mergeKwargs(ctx, map[string]any{}),
 	}
 
 	result, err := c.Call(ctx, "object", "execute_kw", args)
@@ -308,6 +312,7 @@ func (c *Client) Create(ctx context.Context, model string, vals map[string]any) 
 		c.db, c.uid, c.password,
 		model, "create",
 		[]any{vals},
+		c.mergeKwargs(ctx, map[string]any{}),
 	}
 
 	result, err := c.Call(ctx, "object", "execute_kw", args)
@@ -333,6 +338,7 @@ func (c *Client) Write(ctx context.Context, model string, id int64, vals map[str
 		c.db, c.uid, c.password,
 		model, "write",
 		[]any{[]int64{id}, vals},
+		c.mergeKwargs(ctx, map[string]any{}),
 	}
 
 	_, err := c.Call(ctx, "object", "execute_kw", args)
@@ -353,6 +359,7 @@ func (c *Client) CallAction(ctx context.Context, model string, ids []int64, acti
 		c.db, c.uid, c.password,
 		model, action,
 		[]any{ids},
+		c.mergeKwargs(ctx, map[string]any{}),
 	}
 
 	_, err := c.Call(ctx, "object", "execute_kw", args)
@@ -361,6 +368,31 @@ func (c *Client) CallAction(ctx context.Context, model string, ids []int64, acti
 	}
 
 	return nil
+}
+
+// mergeKwargs injects Odoo multi-company context when tenant.OdooCompanyID is set on ctx.
+func (c *Client) mergeKwargs(ctx context.Context, kwargs map[string]any) map[string]any {
+	if kwargs == nil {
+		kwargs = map[string]any{}
+	}
+	companyID := tenant.OdooCompanyID(ctx)
+	if companyID <= 0 {
+		return kwargs
+	}
+	sub := map[string]any{
+		"allowed_company_ids": []int64{companyID},
+		"force_company":       companyID,
+	}
+	if existing, ok := kwargs["context"].(map[string]any); ok && existing != nil {
+		merged := maps.Clone(existing)
+		for k, v := range sub {
+			merged[k] = v
+		}
+		kwargs["context"] = merged
+	} else {
+		kwargs["context"] = sub
+	}
+	return kwargs
 }
 
 // Healthy checks if the Odoo client circuit breaker is in a healthy state.
@@ -397,7 +429,7 @@ func (c *Client) Read(ctx context.Context, model string, ids []int64, fields []s
 		c.db, c.uid, c.password,
 		model, "read",
 		[]any{ids},
-		map[string]any{"fields": fields},
+		c.mergeKwargs(ctx, map[string]any{"fields": fields}),
 	}
 
 	result, err := c.Call(ctx, "object", "execute_kw", args)

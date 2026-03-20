@@ -81,7 +81,9 @@ func TestSkillHandleListEmployeeSkills_Success(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	data, ok := resp["data"].([]any)
 	if !ok || len(data) != 2 {
 		t.Errorf("expected 2 skills, got %v", resp["data"])
@@ -122,7 +124,9 @@ func TestSkillHandleAddEmployeeSkill_Success(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	if resp["id"] != float64(55) {
 		t.Errorf("id = %v, want 55", resp["id"])
 	}
@@ -162,7 +166,9 @@ func TestSkillHandleListSkills_Success(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	data, ok := resp["data"].([]any)
 	if !ok || len(data) != 2 {
 		t.Errorf("expected 2 skills, got %v", resp["data"])

@@ -36,8 +36,9 @@ func NewJWTAuth(privateKeyPEM, publicKeyPEM []byte) (*jwtauth.JWTAuth, error) {
 }
 
 // GenerateAccessToken creates a signed RS256 JWT with 15-minute expiry.
-// If companyID > 0, it is included in the token claims for multi-tenancy scoping.
-func GenerateAccessToken(auth *jwtauth.JWTAuth, userID, email, role string, companyID int64) (string, error) {
+// If companyID > 0, it is included for Odoo multi-company RPC context.
+// If organizationID is non-empty, claim organization_id is set for app-level tenant scoping.
+func GenerateAccessToken(auth *jwtauth.JWTAuth, userID, email, role string, companyID int64, organizationID string) (string, error) {
 	claims := map[string]interface{}{
 		"sub":   userID,
 		"email": email,
@@ -45,6 +46,9 @@ func GenerateAccessToken(auth *jwtauth.JWTAuth, userID, email, role string, comp
 	}
 	if companyID > 0 {
 		claims["company_id"] = companyID
+	}
+	if organizationID != "" {
+		claims["organization_id"] = organizationID
 	}
 	jwtauth.SetExpiry(claims, time.Now().Add(15*time.Minute))
 	jwtauth.SetIssuedAt(claims, time.Now())

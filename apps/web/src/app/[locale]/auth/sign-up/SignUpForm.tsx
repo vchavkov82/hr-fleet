@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/navigation'
 
 const signUpSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -101,17 +101,19 @@ export default function SignUpForm({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: `${data.firstName} ${data.lastName}`.trim(),
-          email: data.email,
-          password: data.password,
-          company_name: data.company,
-          plan,
+          organization_name: data.company,
+          admin_email: data.email,
+          admin_password: data.password,
+          admin_name: `${data.firstName} ${data.lastName}`.trim(),
         }),
       })
 
       if (!res.ok) {
-        const body = await res.json().catch(() => ({}))
-        setServerError(body.error || 'Registration failed. Please try again.')
+        const body = (await res.json().catch(() => ({}))) as {
+          error?: { message?: string; code?: string }
+        }
+        const msg = body.error?.message || 'Registration failed. Please try again.'
+        setServerError(msg)
         return
       }
 

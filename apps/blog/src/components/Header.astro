@@ -1,6 +1,4 @@
 ---
-import { SITE } from "@/config";
-
 const { pathname } = Astro.url;
 const currentPath = pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
 

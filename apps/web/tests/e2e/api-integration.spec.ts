@@ -39,8 +39,9 @@ test.describe('API Integration - Calculator Forms', () => {
       const calcButton = page.locator('button:has-text("Calculate"), button:has-text("Изчисли"), button[type="submit"]')
       if ((await calcButton.count()) > 0) {
         await calcButton.first().click()
-        // Wait for results to appear
-        await page.waitForTimeout(1000)
+        await expect(page.locator('main .text-xl.font-bold').first()).toBeVisible({
+          timeout: 8000,
+        })
       }
     }
 
@@ -61,7 +62,9 @@ test.describe('API Integration - Calculator Forms', () => {
       const calcButton = page.locator('button:has-text("Calculate"), button:has-text("Изчисли"), button[type="submit"]')
       if ((await calcButton.count()) > 0) {
         await calcButton.first().click()
-        await page.waitForTimeout(1000)
+        await expect(page.locator('main .text-xl.font-bold').first()).toBeVisible({
+          timeout: 8000,
+        })
       }
     }
 

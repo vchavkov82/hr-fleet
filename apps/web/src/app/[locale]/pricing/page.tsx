@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
+import { Link } from '@/navigation'
 import { routing } from '@/i18n/routing'
 import { enhancedMetadata, BASE_URL } from '@/lib/seo'
 import { breadcrumbJsonLd, faqJsonLd, jsonLdScript } from '@/lib/structured-data'
@@ -202,6 +203,25 @@ export default async function PricingPage({
           <p className="text-lg text-blue-200 max-w-2xl mx-auto">
             {t('subheading')}
           </p>
+        </div>
+      </section>
+
+      <section className="border-b border-gray-200 bg-primary-50/60 py-12">
+        <div className="container-xl flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="max-w-2xl">
+            <h2 className="text-xl font-bold font-heading text-navy sm:text-2xl">
+              {t('saasBannerTitle')}
+            </h2>
+            <p className="mt-2 text-sm text-gray-700 sm:text-base">
+              {t('saasBannerBody')}
+            </p>
+          </div>
+          <Link
+            href="/auth/sign-up"
+            className="inline-flex shrink-0 items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+          >
+            {t('saasStartTrial')}
+          </Link>
         </div>
       </section>
 

@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -10,6 +11,7 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/vchavkov/hr/services/api/internal/db"
 	"github.com/vchavkov/hr/services/api/internal/service"
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 )
 
 // AuthHandler handles authentication HTTP requests.
@@ -37,6 +39,13 @@ type tokenResponse struct {
 
 type refreshRequest struct {
 	RefreshToken string `json:"refresh_token"`
+}
+
+type registerRequest struct {
+	OrganizationName string `json:"organization_name"`
+	AdminEmail       string `json:"admin_email"`
+	AdminPassword    string `json:"admin_password"`
+	AdminName        string `json:"admin_name"`
 }
 
 type createAPIKeyRequest struct {
@@ -70,13 +79,65 @@ func (h *AuthHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	ip := r.RemoteAddr
 	ua := r.UserAgent()
 
-	access, refresh, expiresIn, err := h.authSvc.Login(r.Context(), req.Email, req.Password, ip, ua)
+	var preferredOrg pgtype.UUID
+	if orgHdr := r.Header.Get("X-Organization-Id"); orgHdr != "" {
+		if err := preferredOrg.Scan(orgHdr); err != nil {
+			RespondError(w, http.StatusBadRequest, "VALIDATION_ERROR", "Invalid X-Organization-Id")
+			return
+		}
+	}
+
+	access, refresh, expiresIn, err := h.authSvc.Login(r.Context(), req.Email, req.Password, ip, ua, preferredOrg)
 	if err != nil {
-		RespondError(w, http.StatusUnauthorized, "UNAUTHORIZED", "Invalid email or password")
+		switch {
+		case errors.Is(err, service.ErrNoOrganization), errors.Is(err, service.ErrNotOrgMember):
+			RespondError(w, http.StatusForbidden, "ORG_ACCESS", err.Error())
+		default:
+			RespondError(w, http.StatusUnauthorized, "UNAUTHORIZED", "Invalid email or password")
+		}
 		return
 	}
 
 	RespondJSON(w, http.StatusOK, tokenResponse{
+		AccessToken:  access,
+		RefreshToken: refresh,
+		ExpiresIn:    expiresIn,
+		TokenType:    "Bearer",
+	})
+}
+
+// HandleRegister handles POST /auth/register (public SaaS signup).
+func (h *AuthHandler) HandleRegister(w http.ResponseWriter, r *http.Request) {
+	var req registerRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		RespondError(w, http.StatusBadRequest, "INVALID_BODY", "Invalid request body")
+		return
+	}
+	if req.OrganizationName == "" || req.AdminEmail == "" || req.AdminPassword == "" || req.AdminName == "" {
+		RespondError(w, http.StatusBadRequest, "VALIDATION_ERROR", "organization_name, admin_email, admin_password, and admin_name are required")
+		return
+	}
+	if len(req.AdminPassword) < 8 {
+		RespondError(w, http.StatusBadRequest, "VALIDATION_ERROR", "Password must be at least 8 characters")
+		return
+	}
+
+	ip := r.RemoteAddr
+	ua := r.UserAgent()
+	access, refresh, expiresIn, err := h.authSvc.RegisterOrganization(r.Context(), req.OrganizationName, req.AdminEmail, req.AdminPassword, req.AdminName, ip, ua)
+	if err != nil {
+		switch {
+		case errors.Is(err, service.ErrEmailTaken):
+			RespondError(w, http.StatusConflict, "EMAIL_TAKEN", "Email is already registered")
+		case errors.Is(err, service.ErrProvisioning):
+			RespondError(w, http.StatusServiceUnavailable, "PROVISIONING_FAILED", err.Error())
+		default:
+			RespondError(w, http.StatusInternalServerError, "INTERNAL_ERROR", "Registration failed")
+		}
+		return
+	}
+
+	RespondJSON(w, http.StatusCreated, tokenResponse{
 		AccessToken:  access,
 		RefreshToken: refresh,
 		ExpiresIn:    expiresIn,
@@ -152,8 +213,14 @@ func (h *AuthHandler) HandleCreateAPIKey(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	orgID, ok := tenant.OrganizationID(r.Context())
+	if !ok || !orgID.Valid {
+		RespondError(w, http.StatusBadRequest, "TENANT_REQUIRED", "Organization context required")
+		return
+	}
+
 	userID := parseUUID(userIDStr)
-	plainKey, apiKey, err := h.authSvc.CreateAPIKey(r.Context(), userID, req.Name, req.Scopes)
+	plainKey, apiKey, err := h.authSvc.CreateAPIKey(r.Context(), userID, orgID, req.Name, req.Scopes)
 	if err != nil {
 		RespondError(w, http.StatusInternalServerError, "INTERNAL_ERROR", "Failed to create API key")
 		return
@@ -186,8 +253,17 @@ func (h *AuthHandler) HandleListAPIKeys(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
+	orgID, ok := tenant.OrganizationID(r.Context())
+	if !ok || !orgID.Valid {
+		RespondError(w, http.StatusBadRequest, "TENANT_REQUIRED", "Organization context required")
+		return
+	}
+
 	userID := parseUUID(userIDStr)
-	keys, err := h.queries.ListAPIKeysByUser(r.Context(), userID)
+	keys, err := h.queries.ListAPIKeysByUser(r.Context(), db.ListAPIKeysByUserParams{
+		UserID:         userID,
+		OrganizationID: orgID,
+	})
 	if err != nil {
 		RespondError(w, http.StatusInternalServerError, "INTERNAL_ERROR", "Failed to list API keys")
 		return
@@ -233,10 +309,19 @@ func (h *AuthHandler) HandleListAPIKeys(w http.ResponseWriter, r *http.Request) 
 // @Security BearerAuth
 // @Router /auth/api-keys/{id} [delete]
 func (h *AuthHandler) HandleDeleteAPIKey(w http.ResponseWriter, r *http.Request) {
+	orgID, ok := tenant.OrganizationID(r.Context())
+	if !ok || !orgID.Valid {
+		RespondError(w, http.StatusBadRequest, "TENANT_REQUIRED", "Organization context required")
+		return
+	}
+
 	idStr := chi.URLParam(r, "id")
 	id := parseUUID(idStr)
 
-	if err := h.queries.DeactivateAPIKey(r.Context(), id); err != nil {
+	if err := h.queries.DeactivateAPIKey(r.Context(), db.DeactivateAPIKeyParams{
+		ID:             id,
+		OrganizationID: orgID,
+	}); err != nil {
 		RespondError(w, http.StatusInternalServerError, "INTERNAL_ERROR", "Failed to deactivate API key")
 		return
 	}

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/navigation'
 
 const loginSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Invalid email address'),
@@ -59,8 +59,10 @@ export default function LoginForm({
       })
 
       if (!res.ok) {
-        const body = await res.json().catch(() => ({}))
-        setServerError(body.error || 'Invalid email or password.')
+        const body = (await res.json().catch(() => ({}))) as {
+          error?: { message?: string }
+        }
+        setServerError(body.error?.message || 'Invalid email or password.')
         return
       }
 

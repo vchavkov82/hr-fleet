@@ -7,16 +7,16 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/jackc/pgx/v5/pgtype"
+
 	"github.com/vchavkov/hr/services/api/internal/cache"
+	"github.com/vchavkov/hr/services/api/internal/cachekeys"
 	"github.com/vchavkov/hr/services/api/internal/db"
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
-const (
-	contractListCacheTTL = 5 * time.Minute
-	contractListKeyPfx   = "contracts:list:"
-	contractDetailKeyPfx = "contracts:detail:"
-)
+const contractListCacheTTL = 5 * time.Minute
 
 // ContractOdooClient defines the interface for Odoo contract operations.
 type ContractOdooClient interface {
@@ -47,7 +47,7 @@ type contractListResult struct {
 // List retrieves contracts with optional employee filtering and pagination.
 func (s *ContractService) List(ctx context.Context, employeeID int64, page, perPage int) ([]odoo.Contract, int, error) {
 	offset := (page - 1) * perPage
-	key := contractListCacheKey(employeeID, perPage, offset)
+	key := contractListCacheKey(ctx, employeeID, perPage, offset)
 
 	var cached contractListResult
 	if err := s.cache.Get(ctx, key, &cached); err == nil {
@@ -55,6 +55,9 @@ func (s *ContractService) List(ctx context.Context, employeeID int64, page, perP
 	}
 
 	var domain []any
+	if c := tenant.OdooCompanyID(ctx); c > 0 {
+		domain = append(domain, []any{"company_id", "=", c})
+	}
 	if employeeID > 0 {
 		domain = append(domain, []any{"employee_id", "=", employeeID})
 	}
@@ -74,7 +77,7 @@ func (s *ContractService) List(ctx context.Context, employeeID int64, page, perP
 
 // Get retrieves a single contract by ID.
 func (s *ContractService) Get(ctx context.Context, id int64) (*odoo.Contract, error) {
-	key := fmt.Sprintf("%s%d", contractDetailKeyPfx, id)
+	key := fmt.Sprintf("%s%s%d", cachekeys.ContractsDetailPrefix, cachekeys.OdooCompanyShard(tenant.OdooCompanyID(ctx)), id)
 
 	var cached odoo.Contract
 	if err := s.cache.Get(ctx, key, &cached); err == nil {
@@ -117,16 +120,18 @@ func (s *ContractService) Create(ctx context.Context, req odoo.ContractCreateReq
 		return 0, fmt.Errorf("create contract: %w", err)
 	}
 
-	_ = s.cache.DeletePattern(ctx, contractListKeyPfx+"*")
+	_ = s.cache.DeletePattern(ctx, fmt.Sprintf("%s%s*", cachekeys.ContractsListPrefix, cachekeys.OdooCompanyShard(tenant.OdooCompanyID(ctx))))
 
-	// Audit log
 	if s.queries != nil {
 		details, _ := json.Marshal(map[string]any{"employee_id": req.EmployeeID, "name": req.Name})
+		orgID, _ := tenant.OrganizationID(ctx)
 		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
-			Action:       "contract.created",
-			ResourceType: "contract",
-			ResourceID:   fmt.Sprintf("%d", id),
-			Details:      details,
+			UserID:         pgtype.UUID{},
+			Action:         "contract.created",
+			ResourceType:   "contract",
+			ResourceID:     fmt.Sprintf("%d", id),
+			Details:        details,
+			OrganizationID: orgID,
 		})
 	}
 
@@ -139,26 +144,28 @@ func (s *ContractService) Update(ctx context.Context, id int64, vals map[string]
 		return fmt.Errorf("update contract %d: %w", id, err)
 	}
 
-	// Invalidate caches
-	_ = s.cache.DeletePattern(ctx, contractListKeyPfx+"*")
-	_ = s.cache.DeletePattern(ctx, fmt.Sprintf("%s%d", contractDetailKeyPfx, id))
+	_ = s.cache.DeletePattern(ctx, fmt.Sprintf("%s%s*", cachekeys.ContractsListPrefix, cachekeys.OdooCompanyShard(tenant.OdooCompanyID(ctx))))
+	_ = s.cache.DeletePattern(ctx, fmt.Sprintf("%s%s%d*", cachekeys.ContractsDetailPrefix, cachekeys.OdooCompanyShard(tenant.OdooCompanyID(ctx)), id))
 
-	// Audit log
 	if s.queries != nil {
 		details, _ := json.Marshal(map[string]any{"contract_id": id, "fields": vals})
+		orgID, _ := tenant.OrganizationID(ctx)
 		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
-			Action:       "contract.updated",
-			ResourceType: "contract",
-			ResourceID:   fmt.Sprintf("%d", id),
-			Details:      details,
+			UserID:         pgtype.UUID{},
+			Action:         "contract.updated",
+			ResourceType:   "contract",
+			ResourceID:     fmt.Sprintf("%d", id),
+			Details:        details,
+			OrganizationID: orgID,
 		})
 	}
 
 	return nil
 }
 
-func contractListCacheKey(employeeID int64, limit, offset int) string {
-	raw := fmt.Sprintf("e=%d&l=%d&o=%d", employeeID, limit, offset)
+func contractListCacheKey(ctx context.Context, employeeID int64, limit, offset int) string {
+	c := tenant.OdooCompanyID(ctx)
+	raw := fmt.Sprintf("oc=%d&e=%d&l=%d&o=%d", c, employeeID, limit, offset)
 	h := sha256.Sum256([]byte(raw))
-	return fmt.Sprintf("%s%x", contractListKeyPfx, h[:8])
+	return fmt.Sprintf("%s%s%x", cachekeys.ContractsListPrefix, cachekeys.OdooCompanyShard(c), h[:8])
 }

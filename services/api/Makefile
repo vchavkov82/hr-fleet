@@ -26,6 +26,14 @@ test:
 test-race:
 	go test -race ./... -short -count=1
 
+test-coverage:
+	go test ./... -short -count=1 -coverprofile=coverage.out -covermode=atomic
+	go tool cover -html=coverage.out -o coverage.html
+	@go tool cover -func=coverage.out | tail -1
+
+test-coverage-report:
+	@go tool cover -func=coverage.out | tail -1
+
 lint:
 	golangci-lint run ./...
 

@@ -12,33 +12,50 @@ import (
 )
 
 const createAPIKey = `-- name: CreateAPIKey :one
-INSERT INTO api_keys (user_id, name, key_hash, key_prefix, scopes, expires_at)
-VALUES ($1, $2, $3, $4, $5, $6)
-RETURNING id, user_id, name, key_hash, key_prefix, scopes, active, last_used_at, expires_at, created_at
+INSERT INTO api_keys (user_id, organization_id, name, key_hash, key_prefix, scopes, expires_at)
+VALUES ($1, $2, $3, $4, $5, $6, $7)
+RETURNING id, user_id, organization_id, name, key_hash, key_prefix, scopes, active, last_used_at, expires_at, created_at
 `
 
 type CreateAPIKeyParams struct {
-	UserID    pgtype.UUID
-	Name      string
-	KeyHash   string
-	KeyPrefix string
-	Scopes    []string
-	ExpiresAt pgtype.Timestamptz
+	UserID         pgtype.UUID
+	OrganizationID pgtype.UUID
+	Name           string
+	KeyHash        string
+	KeyPrefix      string
+	Scopes         []string
+	ExpiresAt      pgtype.Timestamptz
 }
 
-func (q *Queries) CreateAPIKey(ctx context.Context, arg CreateAPIKeyParams) (ApiKey, error) {
+type CreateAPIKeyRow struct {
+	ID             pgtype.UUID
+	UserID         pgtype.UUID
+	OrganizationID pgtype.UUID
+	Name           string
+	KeyHash        string
+	KeyPrefix      string
+	Scopes         []string
+	Active         bool
+	LastUsedAt     pgtype.Timestamptz
+	ExpiresAt      pgtype.Timestamptz
+	CreatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) CreateAPIKey(ctx context.Context, arg CreateAPIKeyParams) (CreateAPIKeyRow, error) {
 	row := q.db.QueryRow(ctx, createAPIKey,
 		arg.UserID,
+		arg.OrganizationID,
 		arg.Name,
 		arg.KeyHash,
 		arg.KeyPrefix,
 		arg.Scopes,
 		arg.ExpiresAt,
 	)
-	var i ApiKey
+	var i CreateAPIKeyRow
 	err := row.Scan(
 		&i.ID,
 		&i.UserID,
+		&i.OrganizationID,
 		&i.Name,
 		&i.KeyHash,
 		&i.KeyPrefix,
@@ -52,19 +69,25 @@ func (q *Queries) CreateAPIKey(ctx context.Context, arg CreateAPIKeyParams) (Api
 }
 
 const createRefreshToken = `-- name: CreateRefreshToken :one
-INSERT INTO refresh_tokens (user_id, token_hash, expires_at)
-VALUES ($1, $2, $3)
-RETURNING id, user_id, token_hash, expires_at, created_at
+INSERT INTO refresh_tokens (user_id, token_hash, expires_at, organization_id)
+VALUES ($1, $2, $3, $4)
+RETURNING id, user_id, token_hash, expires_at, created_at, organization_id
 `
 
 type CreateRefreshTokenParams struct {
-	UserID    pgtype.UUID
-	TokenHash string
-	ExpiresAt pgtype.Timestamptz
+	UserID         pgtype.UUID
+	TokenHash      string
+	ExpiresAt      pgtype.Timestamptz
+	OrganizationID pgtype.UUID
 }
 
 func (q *Queries) CreateRefreshToken(ctx context.Context, arg CreateRefreshTokenParams) (RefreshToken, error) {
-	row := q.db.QueryRow(ctx, createRefreshToken, arg.UserID, arg.TokenHash, arg.ExpiresAt)
+	row := q.db.QueryRow(ctx, createRefreshToken,
+		arg.UserID,
+		arg.TokenHash,
+		arg.ExpiresAt,
+		arg.OrganizationID,
+	)
 	var i RefreshToken
 	err := row.Scan(
 		&i.ID,
@@ -72,6 +95,7 @@ func (q *Queries) CreateRefreshToken(ctx context.Context, arg CreateRefreshToken
 		&i.TokenHash,
 		&i.ExpiresAt,
 		&i.CreatedAt,
+		&i.OrganizationID,
 	)
 	return i, err
 }
@@ -104,11 +128,16 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 }
 
 const deactivateAPIKey = `-- name: DeactivateAPIKey :exec
-UPDATE api_keys SET active = false WHERE id = $1
+UPDATE api_keys SET active = false WHERE id = $1 AND organization_id = $2
 `
 
-func (q *Queries) DeactivateAPIKey(ctx context.Context, id pgtype.UUID) error {
-	_, err := q.db.Exec(ctx, deactivateAPIKey, id)
+type DeactivateAPIKeyParams struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+}
+
+func (q *Queries) DeactivateAPIKey(ctx context.Context, arg DeactivateAPIKeyParams) error {
+	_, err := q.db.Exec(ctx, deactivateAPIKey, arg.ID, arg.OrganizationID)
 	return err
 }
 
@@ -140,17 +169,32 @@ func (q *Queries) DeleteRefreshToken(ctx context.Context, tokenHash string) erro
 }
 
 const getAPIKeyByHash = `-- name: GetAPIKeyByHash :one
-SELECT id, user_id, name, key_hash, key_prefix, scopes, active, last_used_at, expires_at, created_at
+SELECT id, user_id, organization_id, name, key_hash, key_prefix, scopes, active, last_used_at, expires_at, created_at
 FROM api_keys
 WHERE key_hash = $1
 `
 
-func (q *Queries) GetAPIKeyByHash(ctx context.Context, keyHash string) (ApiKey, error) {
+type GetAPIKeyByHashRow struct {
+	ID             pgtype.UUID
+	UserID         pgtype.UUID
+	OrganizationID pgtype.UUID
+	Name           string
+	KeyHash        string
+	KeyPrefix      string
+	Scopes         []string
+	Active         bool
+	LastUsedAt     pgtype.Timestamptz
+	ExpiresAt      pgtype.Timestamptz
+	CreatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) GetAPIKeyByHash(ctx context.Context, keyHash string) (GetAPIKeyByHashRow, error) {
 	row := q.db.QueryRow(ctx, getAPIKeyByHash, keyHash)
-	var i ApiKey
+	var i GetAPIKeyByHashRow
 	err := row.Scan(
 		&i.ID,
 		&i.UserID,
+		&i.OrganizationID,
 		&i.Name,
 		&i.KeyHash,
 		&i.KeyPrefix,
@@ -164,7 +208,7 @@ func (q *Queries) GetAPIKeyByHash(ctx context.Context, keyHash string) (ApiKey, 
 }
 
 const getRefreshToken = `-- name: GetRefreshToken :one
-SELECT id, user_id, token_hash, expires_at, created_at
+SELECT id, user_id, token_hash, expires_at, created_at, organization_id
 FROM refresh_tokens
 WHERE token_hash = $1
 `
@@ -178,6 +222,7 @@ func (q *Queries) GetRefreshToken(ctx context.Context, tokenHash string) (Refres
 		&i.TokenHash,
 		&i.ExpiresAt,
 		&i.CreatedAt,
+		&i.OrganizationID,
 	)
 	return i, err
 }
@@ -225,24 +270,44 @@ func (q *Queries) GetUserByID(ctx context.Context, id pgtype.UUID) (User, error)
 }
 
 const listAPIKeysByUser = `-- name: ListAPIKeysByUser :many
-SELECT id, user_id, name, key_hash, key_prefix, scopes, active, last_used_at, expires_at, created_at
+SELECT id, user_id, organization_id, name, key_hash, key_prefix, scopes, active, last_used_at, expires_at, created_at
 FROM api_keys
-WHERE user_id = $1
+WHERE user_id = $1 AND organization_id = $2
 ORDER BY created_at DESC
 `
 
-func (q *Queries) ListAPIKeysByUser(ctx context.Context, userID pgtype.UUID) ([]ApiKey, error) {
-	rows, err := q.db.Query(ctx, listAPIKeysByUser, userID)
+type ListAPIKeysByUserParams struct {
+	UserID         pgtype.UUID
+	OrganizationID pgtype.UUID
+}
+
+type ListAPIKeysByUserRow struct {
+	ID             pgtype.UUID
+	UserID         pgtype.UUID
+	OrganizationID pgtype.UUID
+	Name           string
+	KeyHash        string
+	KeyPrefix      string
+	Scopes         []string
+	Active         bool
+	LastUsedAt     pgtype.Timestamptz
+	ExpiresAt      pgtype.Timestamptz
+	CreatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) ListAPIKeysByUser(ctx context.Context, arg ListAPIKeysByUserParams) ([]ListAPIKeysByUserRow, error) {
+	rows, err := q.db.Query(ctx, listAPIKeysByUser, arg.UserID, arg.OrganizationID)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []ApiKey
+	var items []ListAPIKeysByUserRow
 	for rows.Next() {
-		var i ApiKey
+		var i ListAPIKeysByUserRow
 		if err := rows.Scan(
 			&i.ID,
 			&i.UserID,
+			&i.OrganizationID,
 			&i.Name,
 			&i.KeyHash,
 			&i.KeyPrefix,

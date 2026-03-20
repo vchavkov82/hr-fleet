@@ -60,7 +60,7 @@ function decodeJWTPayload(token: string): Record<string, unknown> {
   return JSON.parse(atob(base64));
 }
 
-function userFromToken(accessToken: string): User {
+export function userFromToken(accessToken: string): User {
   const claims = decodeJWTPayload(accessToken);
   return {
     id: claims.sub as string,
@@ -69,6 +69,16 @@ function userFromToken(accessToken: string): User {
     role: claims.role as Role,
     organization_id: String(claims.company_id ?? ''),
   };
+}
+
+// checkPermission is pure logic shared with tests and the auth context.
+export function checkPermission(user: User | null, permission: string): boolean {
+  if (!user) return false;
+  if (!permission) return true;
+  if (user.role === 'super_admin' || user.role === 'org_admin') {
+    return true;
+  }
+  return user.permissions?.includes(permission) ?? false;
 }
 
 function storeTokens(accessToken: string, refreshToken: string) {
@@ -147,16 +157,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const hasPermission = useCallback(
-    (permission: string) => {
-      if (!state.user) return false;
-      if (!permission) return true;
-
-      if (state.user.role === 'super_admin' || state.user.role === 'org_admin') {
-        return true;
-      }
-
-      return state.user.permissions?.includes(permission) ?? false;
-    },
+    (permission: string) => checkPermission(state.user, permission),
     [state.user],
   );
 

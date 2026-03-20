@@ -7,9 +7,10 @@
     "dev": "vite --port 5012",
     "build": "tsc -b && vite build",
     "preview": "vite preview --port 5012",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "generate-api": "bash scripts/generate-api.sh",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -30,6 +31,10 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react-swc": "^4.0.1",
+    "eslint": "^9.22.0",
+    "@eslint/js": "^9.22.0",
+    "typescript-eslint": "^8.0.0",
+    "globals": "^16.0.0",
     "jsdom": "^26.1.0",
     "msw": "^2.8.4",
     "typescript": "~5.7.0",

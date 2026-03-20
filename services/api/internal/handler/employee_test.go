@@ -121,7 +121,9 @@ func TestHandleList_Returns200WithPagination(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 
 	data, ok := resp["data"].([]any)
 	if !ok || len(data) != 2 {
@@ -203,7 +205,9 @@ func TestHandleCreate_ValidBody_Returns201(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	if resp["id"] != float64(42) {
 		t.Errorf("id = %v, want 42", resp["id"])
 	}
@@ -306,7 +310,9 @@ func TestHandleList_ServiceUnavailable_Returns503(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	errObj, ok := resp["error"].(map[string]any)
 	if !ok || errObj["message"] == nil || errObj["message"] == "" {
 		t.Error("expected error message in 503 response")

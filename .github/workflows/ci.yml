@@ -1,0 +1,116 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint & typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.7"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: golangci-lint (API)
+        uses: golangci/golangci-lint-action@v6
+        with:
+          working-directory: services/api
+
+      - name: golangci-lint (worker)
+        uses: golangci/golangci-lint-action@v6
+        with:
+          working-directory: services/worker
+
+      - name: Turbo lint (JS — Go services use golangci above)
+        run: pnpm exec turbo run lint --cache-workers=4 --filter='!@hr/api' --filter='!@hr/worker'
+
+      - name: Turbo typecheck
+        run: pnpm exec turbo run typecheck --cache-workers=4
+
+  unit:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.7"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Turbo test (www, admin, api, worker)
+        run: pnpm exec turbo run test --cache-workers=4
+
+      - name: Go coverage (API)
+        working-directory: services/api
+        run: go test ./... -short -count=1 -coverprofile=coverage.out
+
+      - name: Vitest coverage (www)
+        working-directory: apps/web
+        run: pnpm run test:coverage
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: |
+            services/api/coverage.out
+            apps/web/coverage/lcov.info
+          if-no-files-found: warn
+
+  e2e:
+    name: E2E (Chromium)
+    runs-on: ubuntu-latest
+    needs: [quality]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        working-directory: apps/web
+        run: pnpm exec playwright install chromium --with-deps
+
+      - name: Run Playwright
+        working-directory: apps/web
+        env:
+          CI: "1"
+        run: pnpm exec playwright test --project=chromium

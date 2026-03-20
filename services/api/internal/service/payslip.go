@@ -3,10 +3,12 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/jackc/pgx/v5/pgtype"
 
 	"github.com/vchavkov/hr/services/api/internal/db"
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 )
 
 var (
@@ -25,7 +27,11 @@ func NewPayslipService(queries *db.Queries) *PayslipService {
 
 // Get retrieves a single payslip by ID.
 func (s *PayslipService) Get(ctx context.Context, id pgtype.UUID) (db.Payslip, error) {
-	p, err := s.queries.GetPayslip(ctx, id)
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return db.Payslip{}, fmt.Errorf("tenant required")
+	}
+	p, err := s.queries.GetPayslip(ctx, db.GetPayslipParams{ID: id, OrganizationID: orgID})
 	if err != nil {
 		return db.Payslip{}, ErrPayslipNotFound
 	}
@@ -34,5 +40,12 @@ func (s *PayslipService) Get(ctx context.Context, id pgtype.UUID) (db.Payslip, e
 
 // ListByRun retrieves all payslips for a given payroll run.
 func (s *PayslipService) ListByRun(ctx context.Context, payrollRunID pgtype.UUID) ([]db.Payslip, error) {
-	return s.queries.ListPayslipsByRun(ctx, payrollRunID)
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return nil, fmt.Errorf("tenant required")
+	}
+	return s.queries.ListPayslipsByRun(ctx, db.ListPayslipsByRunParams{
+		PayrollRunID:   payrollRunID,
+		OrganizationID: orgID,
+	})
 }

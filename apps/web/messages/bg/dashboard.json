@@ -4,7 +4,14 @@
     "employees": "Служители",
     "leave": "Отпуски",
     "recruitment": "Подбор",
+    "billing": "Абонамент",
     "settings": "Настройки"
+  },
+  "billing": {
+    "title": "Абонамент и плащания",
+    "intro": "Абонирайте се или обновете плащането през Stripe Checkout. Приложението извиква HR API с автентикирана сесия.",
+    "apiHint": "POST /api/v1/billing/checkout-session",
+    "envHint": "Конфигурирайте STRIPE_SECRET_KEY, STRIPE_PRICE_ID, STRIPE_SUCCESS_URL, STRIPE_CANCEL_URL и STRIPE_WEBHOOK_SECRET в API. Webhook към /api/v1/webhooks/stripe."
   },
   "employees": {
     "title": "Списък служители",

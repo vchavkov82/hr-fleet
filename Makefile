@@ -92,8 +92,8 @@ dev-docs: ## Start HR docs only in dev mode (port 5011)
 dev-admin: ## Start HR admin panel only in dev mode (port 5012)
 	cd apps/admin && pnpm dev
 
-dev-backend: ## Start Go backend in dev mode (port 5080)
-	cd services/api && PORT=5080 go run ./cmd/server/
+dev-backend: ## Start Go backend in dev mode (port 5080, API + Asynq worker)
+	cd services/api && PORT=5080 go run ./cmd/server/ --mode=both
 
 odoo-init: ## Initialize Odoo HR modules (run once after first start)
 	bash deploy/odoo-init.sh
@@ -138,8 +138,8 @@ check: ## Run typecheck + lint in parallel via turbo
 
 # ── Test ──────────────────────────────────────────────────────────────
 
-test: ## Run unit tests
-	cd apps/web && pnpm run test
+test: ## Run unit tests (web, admin, api, worker via turbo)
+	pnpm run test
 
 test-watch: ## Run unit tests in watch mode
 	cd apps/web && pnpm run test:watch
@@ -147,8 +147,8 @@ test-watch: ## Run unit tests in watch mode
 test-e2e: ## Run e2e tests (Playwright, needs running dev server)
 	cd apps/web && pnpm run test:e2e
 
-test-backend: ## Run Go backend tests
-	cd services/api && go test ./...
+test-backend: ## Run Go backend tests (short mode; omit -short for integration)
+	cd services/api && go test ./... -short -count=1
 
 lint: ## Lint all workspaces
 	node_modules/.bin/turbo run lint

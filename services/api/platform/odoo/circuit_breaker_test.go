@@ -25,12 +25,12 @@ func TestCircuitBreakerOpensAfterConsecutiveFailures(t *testing.T) {
 				ID:      1,
 				Result:  json.RawMessage(`1`),
 			}
-			json.NewEncoder(w).Encode(resp)
+			_ = json.NewEncoder(w).Encode(resp)
 			return
 		}
 		// All other calls fail with server error
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("server error"))
+		_, _ = w.Write([]byte("server error"))
 	}))
 	defer srv.Close()
 
@@ -76,7 +76,7 @@ func TestConnectionPoolLimitsConcurrency(t *testing.T) {
 			ID:      1,
 			Result:  json.RawMessage(`1`),
 		}
-		json.NewEncoder(w).Encode(resp)
+		_ = json.NewEncoder(w).Encode(resp)
 	}))
 	defer srv.Close()
 
@@ -109,13 +109,13 @@ func TestCircuitBreakerHalfOpen(t *testing.T) {
 		if callCount == 1 {
 			// Auth succeeds
 			resp := JSONRPCResponse{JSONRPC: "2.0", ID: 1, Result: json.RawMessage(`1`)}
-			json.NewEncoder(w).Encode(resp)
+			_ = json.NewEncoder(w).Encode(resp)
 			return
 		}
 		// After breaker resets, succeed
 		if callCount > 7 {
 			resp := JSONRPCResponse{JSONRPC: "2.0", ID: 1, Result: json.RawMessage(`[]`)}
-			json.NewEncoder(w).Encode(resp)
+			_ = json.NewEncoder(w).Encode(resp)
 			return
 		}
 		// Fail to trip breaker
@@ -161,7 +161,7 @@ func TestCallRespectsContextCancellation(t *testing.T) {
 		case <-time.After(5 * time.Second):
 		}
 		resp := JSONRPCResponse{JSONRPC: "2.0", ID: 1, Result: json.RawMessage(`1`)}
-		json.NewEncoder(w).Encode(resp)
+		_ = json.NewEncoder(w).Encode(resp)
 	}))
 	defer srv.Close()
 

@@ -9,16 +9,21 @@ import (
 	"github.com/vchavkov/hr/services/api/internal/worker"
 )
 
+// OdooSyncEnqueuer is satisfied by *asynq.Client for tests and production.
+type OdooSyncEnqueuer interface {
+	Enqueue(task *asynq.Task, opts ...asynq.Option) (*asynq.TaskInfo, error)
+}
+
 // OdooWebhookHandler handles incoming webhook callbacks from Odoo.
 type OdooWebhookHandler struct {
-	asynqClient *asynq.Client
+	enqueuer    OdooSyncEnqueuer
 	secretToken string
 }
 
 // NewOdooWebhookHandler creates a new OdooWebhookHandler.
-func NewOdooWebhookHandler(asynqClient *asynq.Client, secretToken string) *OdooWebhookHandler {
+func NewOdooWebhookHandler(enqueuer OdooSyncEnqueuer, secretToken string) *OdooWebhookHandler {
 	return &OdooWebhookHandler{
-		asynqClient: asynqClient,
+		enqueuer:    enqueuer,
 		secretToken: secretToken,
 	}
 }
@@ -27,8 +32,11 @@ func NewOdooWebhookHandler(asynqClient *asynq.Client, secretToken string) *OdooW
 type OdooWebhookPayload struct {
 	Model     string  `json:"model"`
 	RecordIDs []int64 `json:"record_ids"`
+	IDs       []int64 `json:"ids"`       // alias for record_ids when easier to emit from Odoo
 	Operation string  `json:"operation"` // create, write, unlink
 	Token     string  `json:"token"`
+	// CompanyID is Odoo res.company id; when set, cache invalidation is scoped to that company only.
+	CompanyID int64 `json:"company_id"`
 }
 
 // HandleWebhook handles POST /api/v1/webhooks/odoo
@@ -57,8 +65,13 @@ func (h *OdooWebhookHandler) HandleWebhook(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	if payload.Model == "" || len(payload.RecordIDs) == 0 {
-		RespondError(w, http.StatusBadRequest, "validation_error", "model and record_ids are required")
+	recordIDs := payload.RecordIDs
+	if len(recordIDs) == 0 {
+		recordIDs = payload.IDs
+	}
+
+	if payload.Model == "" || len(recordIDs) == 0 {
+		RespondError(w, http.StatusBadRequest, "validation_error", "model and record_ids (or ids) are required")
 		return
 	}
 
@@ -66,14 +79,14 @@ func (h *OdooWebhookHandler) HandleWebhook(w http.ResponseWriter, r *http.Reques
 		payload.Operation = "write"
 	}
 
-	task, err := worker.NewOdooSyncTask(payload.Model, payload.Operation, payload.RecordIDs)
+	task, err := worker.NewOdooSyncTask(payload.Model, payload.Operation, recordIDs, payload.CompanyID)
 	if err != nil {
 		log.Error().Err(err).Msg("failed to create sync task")
 		RespondError(w, http.StatusInternalServerError, "task_creation_failed", "Failed to queue sync task")
 		return
 	}
 
-	_, err = h.asynqClient.Enqueue(task)
+	_, err = h.enqueuer.Enqueue(task)
 	if err != nil {
 		log.Error().Err(err).Msg("failed to enqueue sync task")
 		RespondError(w, http.StatusInternalServerError, "enqueue_failed", "Failed to queue sync task")
@@ -83,12 +96,12 @@ func (h *OdooWebhookHandler) HandleWebhook(w http.ResponseWriter, r *http.Reques
 	log.Info().
 		Str("model", payload.Model).
 		Str("operation", payload.Operation).
-		Ints64("ids", payload.RecordIDs).
+		Ints64("ids", recordIDs).
 		Msg("queued Odoo sync task")
 
 	RespondJSON(w, http.StatusOK, map[string]any{
 		"message": "Sync task queued",
 		"model":   payload.Model,
-		"ids":     payload.RecordIDs,
+		"ids":     recordIDs,
 	})
 }

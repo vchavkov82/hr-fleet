@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "build": "go build -o bin/worker ./cmd/worker",
-    "test": "go test ./...",
-    "lint": "golangci-lint run ./...",
+    "test": "go test ./... -short -count=1",
+    "lint": "golangci-lint run --allow-parallel-runners ./...",
     "dev": "go run ./cmd/worker"
   }
 }

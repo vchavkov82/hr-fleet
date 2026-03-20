@@ -1,6 +1,6 @@
 ---
-import type { GetStaticPathsOptions } from "astro";
-import { getCollection } from "astro:content";
+import type { GetStaticPathsOptions, Page } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -29,7 +29,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 
 const { category } = Astro.params;
 const { page, category: cat } = Astro.props as {
-  page: any;
+  page: Page<CollectionEntry<"blog">>;
   category: Category;
 };
 ---
@@ -50,8 +50,8 @@ const { page, category: cat } = Astro.props as {
     {
       page.data.length > 0 ? (
         <ul class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {page.data.map((data: any) => (
-            <Card display="card" variant="h3" {...data} />
+          {page.data.map((entry) => (
+            <Card display="card" variant="h3" {...entry} />
           ))}
         </ul>
       ) : (

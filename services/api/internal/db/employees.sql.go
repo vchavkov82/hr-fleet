@@ -12,22 +12,37 @@ import (
 )
 
 const createEmployee = `-- name: CreateEmployee :one
-INSERT INTO employees (odoo_id, name, email, department, job_title, status)
-VALUES ($1, $2, $3, $4, $5, $6)
-RETURNING id, odoo_id, name, email, department, job_title, status, created_at, updated_at
+INSERT INTO employees (organization_id, odoo_id, name, email, department, job_title, status)
+VALUES ($1, $2, $3, $4, $5, $6, $7)
+RETURNING id, organization_id, odoo_id, name, email, department, job_title, status, created_at, updated_at
 `
 
 type CreateEmployeeParams struct {
-	OdooID     pgtype.Int4
-	Name       string
-	Email      string
-	Department string
-	JobTitle   string
-	Status     string
+	OrganizationID pgtype.UUID
+	OdooID         pgtype.Int4
+	Name           string
+	Email          string
+	Department     string
+	JobTitle       string
+	Status         string
 }
 
-func (q *Queries) CreateEmployee(ctx context.Context, arg CreateEmployeeParams) (Employee, error) {
+type CreateEmployeeRow struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+	OdooID         pgtype.Int4
+	Name           string
+	Email          string
+	Department     string
+	JobTitle       string
+	Status         string
+	CreatedAt      pgtype.Timestamptz
+	UpdatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) CreateEmployee(ctx context.Context, arg CreateEmployeeParams) (CreateEmployeeRow, error) {
 	row := q.db.QueryRow(ctx, createEmployee,
+		arg.OrganizationID,
 		arg.OdooID,
 		arg.Name,
 		arg.Email,
@@ -35,9 +50,10 @@ func (q *Queries) CreateEmployee(ctx context.Context, arg CreateEmployeeParams) 
 		arg.JobTitle,
 		arg.Status,
 	)
-	var i Employee
+	var i CreateEmployeeRow
 	err := row.Scan(
 		&i.ID,
+		&i.OrganizationID,
 		&i.OdooID,
 		&i.Name,
 		&i.Email,
@@ -51,16 +67,35 @@ func (q *Queries) CreateEmployee(ctx context.Context, arg CreateEmployeeParams) 
 }
 
 const getEmployee = `-- name: GetEmployee :one
-SELECT id, odoo_id, name, email, department, job_title, status, created_at, updated_at
+SELECT id, organization_id, odoo_id, name, email, department, job_title, status, created_at, updated_at
 FROM employees
-WHERE id = $1
+WHERE id = $1 AND organization_id = $2
 `
 
-func (q *Queries) GetEmployee(ctx context.Context, id pgtype.UUID) (Employee, error) {
-	row := q.db.QueryRow(ctx, getEmployee, id)
-	var i Employee
+type GetEmployeeParams struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+}
+
+type GetEmployeeRow struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+	OdooID         pgtype.Int4
+	Name           string
+	Email          string
+	Department     string
+	JobTitle       string
+	Status         string
+	CreatedAt      pgtype.Timestamptz
+	UpdatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) GetEmployee(ctx context.Context, arg GetEmployeeParams) (GetEmployeeRow, error) {
+	row := q.db.QueryRow(ctx, getEmployee, arg.ID, arg.OrganizationID)
+	var i GetEmployeeRow
 	err := row.Scan(
 		&i.ID,
+		&i.OrganizationID,
 		&i.OdooID,
 		&i.Name,
 		&i.Email,
@@ -74,16 +109,35 @@ func (q *Queries) GetEmployee(ctx context.Context, id pgtype.UUID) (Employee, er
 }
 
 const getEmployeeByOdooID = `-- name: GetEmployeeByOdooID :one
-SELECT id, odoo_id, name, email, department, job_title, status, created_at, updated_at
+SELECT id, organization_id, odoo_id, name, email, department, job_title, status, created_at, updated_at
 FROM employees
-WHERE odoo_id = $1
+WHERE odoo_id = $1 AND organization_id = $2
 `
 
-func (q *Queries) GetEmployeeByOdooID(ctx context.Context, odooID pgtype.Int4) (Employee, error) {
-	row := q.db.QueryRow(ctx, getEmployeeByOdooID, odooID)
-	var i Employee
+type GetEmployeeByOdooIDParams struct {
+	OdooID         pgtype.Int4
+	OrganizationID pgtype.UUID
+}
+
+type GetEmployeeByOdooIDRow struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+	OdooID         pgtype.Int4
+	Name           string
+	Email          string
+	Department     string
+	JobTitle       string
+	Status         string
+	CreatedAt      pgtype.Timestamptz
+	UpdatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) GetEmployeeByOdooID(ctx context.Context, arg GetEmployeeByOdooIDParams) (GetEmployeeByOdooIDRow, error) {
+	row := q.db.QueryRow(ctx, getEmployeeByOdooID, arg.OdooID, arg.OrganizationID)
+	var i GetEmployeeByOdooIDRow
 	err := row.Scan(
 		&i.ID,
+		&i.OrganizationID,
 		&i.OdooID,
 		&i.Name,
 		&i.Email,
@@ -97,30 +151,50 @@ func (q *Queries) GetEmployeeByOdooID(ctx context.Context, odooID pgtype.Int4) (
 }
 
 const listEmployees = `-- name: ListEmployees :many
-SELECT id, odoo_id, name, email, department, job_title, status, created_at, updated_at
+SELECT id, organization_id, odoo_id, name, email, department, job_title, status, created_at, updated_at
 FROM employees
-WHERE status = coalesce($3, status)
+WHERE organization_id = $3 AND status = coalesce($4, status)
 ORDER BY name
 LIMIT $1 OFFSET $2
 `
 
 type ListEmployeesParams struct {
-	Limit  int32
-	Offset int32
-	Status pgtype.Text
+	Limit          int32
+	Offset         int32
+	OrganizationID pgtype.UUID
+	Status         pgtype.Text
 }
 
-func (q *Queries) ListEmployees(ctx context.Context, arg ListEmployeesParams) ([]Employee, error) {
-	rows, err := q.db.Query(ctx, listEmployees, arg.Limit, arg.Offset, arg.Status)
+type ListEmployeesRow struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+	OdooID         pgtype.Int4
+	Name           string
+	Email          string
+	Department     string
+	JobTitle       string
+	Status         string
+	CreatedAt      pgtype.Timestamptz
+	UpdatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) ListEmployees(ctx context.Context, arg ListEmployeesParams) ([]ListEmployeesRow, error) {
+	rows, err := q.db.Query(ctx, listEmployees,
+		arg.Limit,
+		arg.Offset,
+		arg.OrganizationID,
+		arg.Status,
+	)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Employee
+	var items []ListEmployeesRow
 	for rows.Next() {
-		var i Employee
+		var i ListEmployeesRow
 		if err := rows.Scan(
 			&i.ID,
+			&i.OrganizationID,
 			&i.OdooID,
 			&i.Name,
 			&i.Email,
@@ -143,20 +217,34 @@ func (q *Queries) ListEmployees(ctx context.Context, arg ListEmployeesParams) ([
 const updateEmployee = `-- name: UpdateEmployee :one
 UPDATE employees
 SET name = $2, email = $3, department = $4, job_title = $5, status = $6, updated_at = now()
-WHERE id = $1
-RETURNING id, odoo_id, name, email, department, job_title, status, created_at, updated_at
+WHERE id = $1 AND organization_id = $7
+RETURNING id, organization_id, odoo_id, name, email, department, job_title, status, created_at, updated_at
 `
 
 type UpdateEmployeeParams struct {
-	ID         pgtype.UUID
-	Name       string
-	Email      string
-	Department string
-	JobTitle   string
-	Status     string
+	ID             pgtype.UUID
+	Name           string
+	Email          string
+	Department     string
+	JobTitle       string
+	Status         string
+	OrganizationID pgtype.UUID
 }
 
-func (q *Queries) UpdateEmployee(ctx context.Context, arg UpdateEmployeeParams) (Employee, error) {
+type UpdateEmployeeRow struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+	OdooID         pgtype.Int4
+	Name           string
+	Email          string
+	Department     string
+	JobTitle       string
+	Status         string
+	CreatedAt      pgtype.Timestamptz
+	UpdatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) UpdateEmployee(ctx context.Context, arg UpdateEmployeeParams) (UpdateEmployeeRow, error) {
 	row := q.db.QueryRow(ctx, updateEmployee,
 		arg.ID,
 		arg.Name,
@@ -164,10 +252,12 @@ func (q *Queries) UpdateEmployee(ctx context.Context, arg UpdateEmployeeParams) 
 		arg.Department,
 		arg.JobTitle,
 		arg.Status,
+		arg.OrganizationID,
 	)
-	var i Employee
+	var i UpdateEmployeeRow
 	err := row.Scan(
 		&i.ID,
+		&i.OrganizationID,
 		&i.OdooID,
 		&i.Name,
 		&i.Email,

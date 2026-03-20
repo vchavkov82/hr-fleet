@@ -32,6 +32,23 @@ type readinessResponse struct {
 	Checks map[string]checkResult `json:"checks"`
 }
 
+// computeReadinessStatus maps failed dependency counts to HTTP status (used by tests and HandleReady).
+func computeReadinessStatus(failures, totalChecks int) (status string, httpStatus int) {
+	status = "ok"
+	httpStatus = http.StatusOK
+	if totalChecks <= 0 {
+		return status, httpStatus
+	}
+	if failures > 0 && failures < totalChecks {
+		status = "degraded"
+		httpStatus = http.StatusServiceUnavailable
+	} else if failures == totalChecks {
+		status = "unavailable"
+		httpStatus = http.StatusServiceUnavailable
+	}
+	return status, httpStatus
+}
+
 // HandleReady checks Odoo, Redis, and PostgreSQL connectivity.
 func (h *HealthHandler) HandleReady(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -56,15 +73,7 @@ func (h *HealthHandler) HandleReady(w http.ResponseWriter, r *http.Request) {
 		failures++
 	}
 
-	status := "ok"
-	httpStatus := http.StatusOK
-	if failures > 0 && failures < 3 {
-		status = "degraded"
-		httpStatus = http.StatusServiceUnavailable
-	} else if failures == 3 {
-		status = "unavailable"
-		httpStatus = http.StatusServiceUnavailable
-	}
+	status, httpStatus := computeReadinessStatus(failures, len(checks))
 
 	RespondJSON(w, httpStatus, readinessResponse{
 		Status: status,

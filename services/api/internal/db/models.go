@@ -9,51 +9,74 @@ import (
 )
 
 type ApiKey struct {
-	ID         pgtype.UUID
-	UserID     pgtype.UUID
-	Name       string
-	KeyHash    string
-	KeyPrefix  string
-	Scopes     []string
-	Active     bool
-	LastUsedAt pgtype.Timestamptz
-	ExpiresAt  pgtype.Timestamptz
-	CreatedAt  pgtype.Timestamptz
+	ID             pgtype.UUID
+	UserID         pgtype.UUID
+	Name           string
+	KeyHash        string
+	KeyPrefix      string
+	Scopes         []string
+	Active         bool
+	LastUsedAt     pgtype.Timestamptz
+	ExpiresAt      pgtype.Timestamptz
+	CreatedAt      pgtype.Timestamptz
+	OrganizationID pgtype.UUID
 }
 
 type AuditLog struct {
-	ID           int64
-	UserID       pgtype.UUID
-	Action       string
-	ResourceType string
-	ResourceID   string
-	Details      []byte
-	CreatedAt    pgtype.Timestamptz
+	ID             int64
+	UserID         pgtype.UUID
+	Action         string
+	ResourceType   string
+	ResourceID     string
+	Details        []byte
+	CreatedAt      pgtype.Timestamptz
+	OrganizationID pgtype.UUID
 }
 
 type Employee struct {
-	ID         pgtype.UUID
-	OdooID     pgtype.Int4
-	Name       string
-	Email      string
-	Department string
-	JobTitle   string
-	Status     string
-	CreatedAt  pgtype.Timestamptz
-	UpdatedAt  pgtype.Timestamptz
+	ID             pgtype.UUID
+	OdooID         pgtype.Int4
+	Name           string
+	Email          string
+	Department     string
+	JobTitle       string
+	Status         string
+	CreatedAt      pgtype.Timestamptz
+	UpdatedAt      pgtype.Timestamptz
+	OrganizationID pgtype.UUID
+}
+
+type Organization struct {
+	ID                 pgtype.UUID
+	Name               string
+	Slug               string
+	OdooCompanyID      int64
+	Status             string
+	StripeCustomerID   pgtype.Text
+	SubscriptionStatus string
+	CreatedAt          pgtype.Timestamptz
+	UpdatedAt          pgtype.Timestamptz
+}
+
+type OrganizationMember struct {
+	OrganizationID pgtype.UUID
+	UserID         pgtype.UUID
+	Role           string
+	CreatedAt      pgtype.Timestamptz
 }
 
 type PayrollRun struct {
-	ID           pgtype.UUID
-	PeriodStart  pgtype.Date
-	PeriodEnd    pgtype.Date
-	Status       string
-	CreatedBy    pgtype.UUID
-	ApprovedBy   pgtype.UUID
-	ErrorDetails []byte
-	CompletedAt  pgtype.Timestamptz
-	CreatedAt    pgtype.Timestamptz
-	UpdatedAt    pgtype.Timestamptz
+	ID             pgtype.UUID
+	PeriodStart    pgtype.Date
+	PeriodEnd      pgtype.Date
+	Status         string
+	CreatedBy      pgtype.UUID
+	ApprovedBy     pgtype.UUID
+	ErrorDetails   []byte
+	CompletedAt    pgtype.Timestamptz
+	CreatedAt      pgtype.Timestamptz
+	UpdatedAt      pgtype.Timestamptz
+	OrganizationID pgtype.UUID
 }
 
 type Payslip struct {
@@ -72,11 +95,12 @@ type Payslip struct {
 }
 
 type RefreshToken struct {
-	ID        pgtype.UUID
-	UserID    pgtype.UUID
-	TokenHash string
-	ExpiresAt pgtype.Timestamptz
-	CreatedAt pgtype.Timestamptz
+	ID             pgtype.UUID
+	UserID         pgtype.UUID
+	TokenHash      string
+	ExpiresAt      pgtype.Timestamptz
+	CreatedAt      pgtype.Timestamptz
+	OrganizationID pgtype.UUID
 }
 
 type User struct {
@@ -102,11 +126,12 @@ type WebhookDelivery struct {
 }
 
 type WebhookRegistration struct {
-	ID        pgtype.UUID
-	Url       string
-	Events    []string
-	Secret    string
-	Active    bool
-	CreatedBy pgtype.UUID
-	CreatedAt pgtype.Timestamptz
+	ID             pgtype.UUID
+	Url            string
+	Events         []string
+	Secret         string
+	Active         bool
+	CreatedBy      pgtype.UUID
+	CreatedAt      pgtype.Timestamptz
+	OrganizationID pgtype.UUID
 }

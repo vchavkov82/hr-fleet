@@ -12,6 +12,7 @@ import (
 	"github.com/hibiken/asynq"
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/vchavkov/hr/services/api/internal/db"
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 )
 
 const (
@@ -68,11 +69,17 @@ func (s *WebhookService) Register(ctx context.Context, url string, events []stri
 		return nil, "", fmt.Errorf("generate secret: %w", err)
 	}
 
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return nil, "", fmt.Errorf("tenant required")
+	}
+
 	reg, err := s.queries.CreateWebhookRegistration(ctx, db.CreateWebhookRegistrationParams{
-		Url:       url,
-		Events:    events,
-		Secret:    secret,
-		CreatedBy: createdBy,
+		Url:            url,
+		Events:         events,
+		Secret:         secret,
+		CreatedBy:      createdBy,
+		OrganizationID: orgID,
 	})
 	if err != nil {
 		return nil, "", fmt.Errorf("create webhook registration: %w", err)
@@ -89,9 +96,13 @@ func (s *WebhookService) Register(ctx context.Context, url string, events []stri
 	return resp, secret, nil
 }
 
-// List returns all active webhook registrations with secrets masked.
+// List returns active webhook registrations for the current tenant.
 func (s *WebhookService) List(ctx context.Context) ([]WebhookRegistrationResponse, error) {
-	regs, err := s.queries.ListWebhookRegistrations(ctx)
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return nil, fmt.Errorf("tenant required")
+	}
+	regs, err := s.queries.ListWebhookRegistrations(ctx, orgID)
 	if err != nil {
 		return nil, fmt.Errorf("list webhook registrations: %w", err)
 	}
@@ -112,12 +123,23 @@ func (s *WebhookService) List(ctx context.Context) ([]WebhookRegistrationRespons
 
 // Deactivate disables a webhook registration.
 func (s *WebhookService) Deactivate(ctx context.Context, webhookID pgtype.UUID) error {
-	return s.queries.DeactivateWebhook(ctx, webhookID)
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return fmt.Errorf("tenant required")
+	}
+	return s.queries.DeactivateWebhook(ctx, db.DeactivateWebhookParams{
+		ID:             webhookID,
+		OrganizationID: orgID,
+	})
 }
 
 // Dispatch finds active registrations matching the event and enqueues delivery tasks.
 func (s *WebhookService) Dispatch(ctx context.Context, event string, payload any) error {
-	regs, err := s.queries.ListWebhookRegistrations(ctx)
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return nil
+	}
+	regs, err := s.queries.ListWebhookRegistrations(ctx, orgID)
 	if err != nil {
 		return fmt.Errorf("list registrations: %w", err)
 	}
@@ -170,6 +192,16 @@ func (s *WebhookService) Dispatch(ctx context.Context, event string, payload any
 
 // ListDeliveries returns delivery history for a webhook.
 func (s *WebhookService) ListDeliveries(ctx context.Context, webhookID pgtype.UUID, limit, offset int32) ([]db.WebhookDelivery, error) {
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return nil, fmt.Errorf("tenant required")
+	}
+	if _, err := s.queries.GetWebhookRegistration(ctx, db.GetWebhookRegistrationParams{
+		ID:             webhookID,
+		OrganizationID: orgID,
+	}); err != nil {
+		return nil, err
+	}
 	return s.queries.ListDeliveriesByWebhook(ctx, db.ListDeliveriesByWebhookParams{
 		WebhookID: webhookID,
 		Limit:     limit,

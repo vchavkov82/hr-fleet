@@ -12,28 +12,41 @@ import (
 )
 
 const createAuditEntry = `-- name: CreateAuditEntry :one
-INSERT INTO audit_log (user_id, action, resource_type, resource_id, details)
-VALUES ($1, $2, $3, $4, $5)
-RETURNING id, user_id, action, resource_type, resource_id, details, created_at
+INSERT INTO audit_log (user_id, action, resource_type, resource_id, details, organization_id)
+VALUES ($1, $2, $3, $4, $5, $6)
+RETURNING id, user_id, action, resource_type, resource_id, details, organization_id, created_at
 `
 
 type CreateAuditEntryParams struct {
-	UserID       pgtype.UUID
-	Action       string
-	ResourceType string
-	ResourceID   string
-	Details      []byte
+	UserID         pgtype.UUID
+	Action         string
+	ResourceType   string
+	ResourceID     string
+	Details        []byte
+	OrganizationID pgtype.UUID
 }
 
-func (q *Queries) CreateAuditEntry(ctx context.Context, arg CreateAuditEntryParams) (AuditLog, error) {
+type CreateAuditEntryRow struct {
+	ID             int64
+	UserID         pgtype.UUID
+	Action         string
+	ResourceType   string
+	ResourceID     string
+	Details        []byte
+	OrganizationID pgtype.UUID
+	CreatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) CreateAuditEntry(ctx context.Context, arg CreateAuditEntryParams) (CreateAuditEntryRow, error) {
 	row := q.db.QueryRow(ctx, createAuditEntry,
 		arg.UserID,
 		arg.Action,
 		arg.ResourceType,
 		arg.ResourceID,
 		arg.Details,
+		arg.OrganizationID,
 	)
-	var i AuditLog
+	var i CreateAuditEntryRow
 	err := row.Scan(
 		&i.ID,
 		&i.UserID,
@@ -41,34 +54,56 @@ func (q *Queries) CreateAuditEntry(ctx context.Context, arg CreateAuditEntryPara
 		&i.ResourceType,
 		&i.ResourceID,
 		&i.Details,
+		&i.OrganizationID,
 		&i.CreatedAt,
 	)
 	return i, err
 }
 
 const listAuditEntries = `-- name: ListAuditEntries :many
-SELECT id, user_id, action, resource_type, resource_id, details, created_at
+SELECT id, user_id, action, resource_type, resource_id, details, organization_id, created_at
 FROM audit_log
 WHERE resource_type = coalesce($3, resource_type)
+  AND (
+    $4::uuid IS NULL
+    OR organization_id = $4::uuid
+  )
 ORDER BY created_at DESC
 LIMIT $1 OFFSET $2
 `
 
 type ListAuditEntriesParams struct {
-	Limit        int32
-	Offset       int32
-	ResourceType pgtype.Text
+	Limit          int32
+	Offset         int32
+	ResourceType   pgtype.Text
+	OrganizationID pgtype.UUID
 }
 
-func (q *Queries) ListAuditEntries(ctx context.Context, arg ListAuditEntriesParams) ([]AuditLog, error) {
-	rows, err := q.db.Query(ctx, listAuditEntries, arg.Limit, arg.Offset, arg.ResourceType)
+type ListAuditEntriesRow struct {
+	ID             int64
+	UserID         pgtype.UUID
+	Action         string
+	ResourceType   string
+	ResourceID     string
+	Details        []byte
+	OrganizationID pgtype.UUID
+	CreatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) ListAuditEntries(ctx context.Context, arg ListAuditEntriesParams) ([]ListAuditEntriesRow, error) {
+	rows, err := q.db.Query(ctx, listAuditEntries,
+		arg.Limit,
+		arg.Offset,
+		arg.ResourceType,
+		arg.OrganizationID,
+	)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []AuditLog
+	var items []ListAuditEntriesRow
 	for rows.Next() {
-		var i AuditLog
+		var i ListAuditEntriesRow
 		if err := rows.Scan(
 			&i.ID,
 			&i.UserID,
@@ -76,6 +111,7 @@ func (q *Queries) ListAuditEntries(ctx context.Context, arg ListAuditEntriesPara
 			&i.ResourceType,
 			&i.ResourceID,
 			&i.Details,
+			&i.OrganizationID,
 			&i.CreatedAt,
 		); err != nil {
 			return nil, err

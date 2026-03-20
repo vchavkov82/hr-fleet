@@ -91,7 +91,8 @@ func main() {
 
 	// Services
 	webhookSvc := service.NewWebhookService(queries, asynqClient)
-	authSvc := service.NewAuthService(queries, tokenAuth)
+	provisionSvc := service.NewProvisioningService(odooClient)
+	authSvc := service.NewAuthService(queries, tokenAuth, provisionSvc)
 	employeeSvc := service.NewEmployeeService(odooClient, redisCache, queries, webhookSvc)
 	contractSvc := service.NewContractService(odooClient, redisCache, queries)
 	leaveSvc := service.NewLeaveService(odooClient, redisCache, queries, webhookSvc)
@@ -117,13 +118,13 @@ func main() {
 
 	switch *mode {
 	case "api":
-		runAPI(cfg, pool, redisCache, odooClient, tokenAuth, asynqClient, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
+		runAPI(cfg, pool, queries, redisCache, odooClient, tokenAuth, asynqClient, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
 			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, appraisalSvc, courseSvc, projectSvc, fleetSvc, sigCh)
 	case "worker":
 		runWorker(cfg, queries, sigCh)
 	case "both":
 		go runWorker(cfg, queries, sigCh)
-		runAPI(cfg, pool, redisCache, odooClient, tokenAuth, asynqClient, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
+		runAPI(cfg, pool, queries, redisCache, odooClient, tokenAuth, asynqClient, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
 			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, appraisalSvc, courseSvc, projectSvc, fleetSvc, sigCh)
 	default:
 		log.Fatalf("unknown mode: %s (use api, worker, or both)", *mode)
@@ -133,6 +134,7 @@ func main() {
 func runAPI(
 	cfg *config.Config,
 	pool *pgxpool.Pool,
+	queries *db.Queries,
 	redisCache *cache.Cache,
 	odooClient *odoo.Client,
 	tokenAuth *jwtauth.JWTAuth,
@@ -158,7 +160,7 @@ func runAPI(
 	sigCh <-chan os.Signal,
 ) {
 	// Handlers
-	authHandler := handler.NewAuthHandler(authSvc, nil)
+	authHandler := handler.NewAuthHandler(authSvc, queries)
 	employeeHandler := handler.NewEmployeeHandler(employeeSvc)
 	contractHandler := handler.NewContractHandler(contractSvc)
 	leaveHandler := handler.NewLeaveHandler(leaveSvc)
@@ -166,6 +168,7 @@ func runAPI(
 	payslipHandler := handler.NewPayslipHandler(payslipSvc)
 	reportHandler := handler.NewReportHandler(reportSvc)
 	webhookHandler := handler.NewWebhookHandler(webhookSvc)
+	billingHandler := handler.NewBillingHandler(queries, cfg.StripeSecretKey, cfg.StripePriceID, cfg.StripeSuccessURL, cfg.StripeCancelURL, cfg.StripeWebhookSecret)
 
 	// OCA handlers
 	departmentHandler := handler.NewDepartmentHandler(departmentSvc)
@@ -197,7 +200,7 @@ func runAPI(
 				len(origin) > 22 && origin[len(origin)-22:] == ".lan.assistance.bg:5012")
 		},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-API-Key"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-API-Key", "X-Organization-Id"},
 		ExposedHeaders:   []string{"Link"},
 		AllowCredentials: true,
 		MaxAge:           300,
@@ -207,7 +210,7 @@ func runAPI(
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+		_ = json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 	})
 
 	// Readiness check (public) — verifies Odoo, Redis, and PostgreSQL
@@ -222,16 +225,23 @@ func runAPI(
 
 	// API v1 routes
 	r.Route("/api/v1", func(r chi.Router) {
+		r.Post("/webhooks/stripe", billingHandler.HandleStripeWebhook)
+
 		// Public auth routes
 		r.Group(func(r chi.Router) {
 			r.Post("/auth/login", authHandler.HandleLogin)
 			r.Post("/auth/refresh", authHandler.HandleRefresh)
+			r.Post("/auth/register", authHandler.HandleRegister)
 		})
 
 		// Protected routes (API key or JWT)
 		r.Group(func(r chi.Router) {
 			r.Use(middleware.APIKeyOrJWT(tokenAuth, authSvc))
+			r.Use(middleware.RequireTenant())
+			r.Use(middleware.RequireWritableSubscription(queries, cfg.SubscriptionEnforce))
 			r.Use(middleware.AuthenticatedRateLimit())
+
+			r.Post("/billing/checkout-session", billingHandler.HandleCreateCheckoutSession)
 
 			// Auth - API key management
 			r.Post("/auth/api-keys", authHandler.HandleCreateAPIKey)
@@ -383,7 +393,7 @@ func runAPI(
 			})
 		})
 
-		// Odoo Webhooks - outside auth group, uses HMAC token validation
+		// Odoo webhooks — outside auth group; optional shared secret in JSON body (token)
 		r.Post("/webhooks/odoo", handler.NewOdooWebhookHandler(asynqClient, cfg.OdooWebhookSecret).HandleWebhook)
 	})
 
@@ -414,14 +424,21 @@ func runAPI(
 
 func runWorker(cfg *config.Config, queries *db.Queries, sigCh <-chan os.Signal) {
 	redisAddr := redisAddrFromURL(cfg.RedisURL)
+
+	redisCache, err := cache.NewCache(cfg.RedisURL)
+	if err != nil {
+		log.Fatalf("worker redis cache: %v", err)
+	}
+
 	srv := asynq.NewServer(
 		asynq.RedisClientOpt{Addr: redisAddr},
 		asynq.Config{
 			Concurrency: 10,
 			Queues: map[string]int{
-				"default":  6,
-				"critical": 3,
-				"low":      1,
+				"default":   5,
+				"critical":  3,
+				"low":       1,
+				"webhooks":  2,
 			},
 			RetryDelayFunc: asynq.DefaultRetryDelayFunc,
 		},
@@ -429,7 +446,7 @@ func runWorker(cfg *config.Config, queries *db.Queries, sigCh <-chan os.Signal) 
 
 	payrollProcessor := worker.NewPayrollProcessor(queries)
 	webhookDeliverHandler := worker.NewWebhookDeliverHandler()
-	odooSyncHandler := worker.NewOdooSyncHandler()
+	odooSyncHandler := worker.NewOdooSyncHandler(redisCache)
 
 	mux := asynq.NewServeMux()
 	mux.HandleFunc(service.TaskTypePayrollProcess, payrollProcessor.HandlePayrollProcess)

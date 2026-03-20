@@ -9,6 +9,7 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/vchavkov/hr/services/api/internal/auth"
 	"github.com/vchavkov/hr/services/api/internal/service"
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 )
 
 type contextKey string
@@ -58,22 +59,24 @@ func GetUserFromContext(r *http.Request) *UserClaims {
 func APIKeyOrJWT(jwtAuth *jwtauth.JWTAuth, authSvc *service.AuthService) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			// Check API key first
 			apiKey := r.Header.Get("X-API-Key")
 			if apiKey != "" {
-				userID, role, err := authSvc.ValidateAPIKey(r.Context(), apiKey)
+				p, err := authSvc.ValidateAPIKeyPrincipal(r.Context(), apiKey)
 				if err != nil {
 					http.Error(w, `{"error":{"code":"UNAUTHORIZED","message":"Invalid API key"}}`, http.StatusUnauthorized)
 					return
 				}
-				userIDStr := pgUUIDToString(userID)
-				ctx := context.WithValue(r.Context(), CtxUserID, userIDStr)
-				ctx = context.WithValue(ctx, CtxRole, role)
+				userIDStr := pgUUIDToString(p.UserID)
+				ctx := r.Context()
+				ctx = context.WithValue(ctx, CtxUserID, userIDStr)
+				ctx = context.WithValue(ctx, CtxRole, p.Role)
+				ctx = context.WithValue(ctx, CtxCompanyID, p.OdooCompanyID)
+				ctx = tenant.WithOrganizationID(ctx, p.OrganizationID)
+				ctx = tenant.WithOdooCompanyID(ctx, p.OdooCompanyID)
 				next.ServeHTTP(w, r.WithContext(ctx))
 				return
 			}
 
-			// Fall through to JWT
 			jwtauth.Verifier(jwtAuth)(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				token, claims, err := jwtauth.FromContext(r.Context())
 				if err != nil || token == nil {
@@ -89,10 +92,18 @@ func APIKeyOrJWT(jwtAuth *jwtauth.JWTAuth, authSvc *service.AuthService) func(ht
 				ctx = context.WithValue(ctx, CtxEmail, email)
 				ctx = context.WithValue(ctx, CtxRole, role)
 
-				// Extract company_id if present in claims (JSON numbers decode as float64).
+				var odooCompany int64
 				if cid, ok := claims["company_id"].(float64); ok {
-					ctx = context.WithValue(ctx, CtxCompanyID, int64(cid))
+					odooCompany = int64(cid)
+					ctx = context.WithValue(ctx, CtxCompanyID, odooCompany)
 				}
+
+				var orgUUID pgtype.UUID
+				if orgStr, ok := claims["organization_id"].(string); ok && orgStr != "" {
+					_ = orgUUID.Scan(orgStr)
+				}
+				ctx = tenant.WithOrganizationID(ctx, orgUUID)
+				ctx = tenant.WithOdooCompanyID(ctx, odooCompany)
 
 				next.ServeHTTP(w, r.WithContext(ctx))
 			})).ServeHTTP(w, r)
@@ -100,8 +111,23 @@ func APIKeyOrJWT(jwtAuth *jwtauth.JWTAuth, authSvc *service.AuthService) func(ht
 	}
 }
 
+// RequireTenant ensures Odoo company and organization are present (after APIKeyOrJWT).
+func RequireTenant() func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			orgID, ok := tenant.OrganizationID(r.Context())
+			if !ok || !orgID.Valid || tenant.OdooCompanyID(r.Context()) <= 0 {
+				w.Header().Set("Content-Type", "application/json")
+				w.WriteHeader(http.StatusBadRequest)
+				_, _ = w.Write([]byte(`{"error":{"code":"TENANT_REQUIRED","message":"Organization context required. Use X-Organization-Id on login if you belong to multiple organizations."}}`))
+				return
+			}
+			next.ServeHTTP(w, r)
+		})
+	}
+}
+
 // CompanyIDFromContext extracts the company_id from the request context.
-// Returns 0 if not set (e.g. user has no company association).
 func CompanyIDFromContext(ctx context.Context) int64 {
 	id, _ := ctx.Value(CtxCompanyID).(int64)
 	return id

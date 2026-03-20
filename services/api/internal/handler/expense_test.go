@@ -79,7 +79,9 @@ func TestExpenseHandleList_Success(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	data, ok := resp["data"].([]any)
 	if !ok || len(data) != 2 {
 		t.Errorf("expected 2 expenses, got %v", resp["data"])
@@ -134,7 +136,9 @@ func TestExpenseHandleCreate_Success(t *testing.T) {
 	}
 
 	var resp map[string]any
-	json.Unmarshal(w.Body.Bytes(), &resp)
+	if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
 	if resp["id"] != float64(10) {
 		t.Errorf("id = %v, want 10", resp["id"])
 	}

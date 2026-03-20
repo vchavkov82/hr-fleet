@@ -8,8 +8,12 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/jackc/pgx/v5/pgtype"
+
 	"github.com/vchavkov/hr/services/api/internal/cache"
+	"github.com/vchavkov/hr/services/api/internal/cachekeys"
 	"github.com/vchavkov/hr/services/api/internal/db"
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
@@ -19,8 +23,6 @@ var ErrServiceUnavailable = errors.New("hr service temporarily unavailable")
 const (
 	listCacheTTL   = 5 * time.Minute
 	detailCacheTTL = 5 * time.Minute
-	listKeyPrefix  = "employees:list:"
-	detailKeyPfx   = "employees:detail:"
 )
 
 // OdooClient defines the interface for Odoo employee operations.
@@ -56,7 +58,7 @@ func NewEmployeeService(odoo OdooClient, cache *cache.Cache, queries *db.Queries
 // On Odoo failure, it falls back to stale cache data. Returns ErrServiceUnavailable
 // if Odoo is down and no cache exists.
 func (s *EmployeeService) List(ctx context.Context, search string, departmentID int64, activeOnly bool, limit, offset int) ([]odoo.Employee, int, error) {
-	key := listCacheKey(search, departmentID, activeOnly, limit, offset)
+	key := employeeListCacheKey(ctx, search, departmentID, activeOnly, limit, offset)
 
 	// Check primary cache
 	var cached listResult
@@ -64,8 +66,7 @@ func (s *EmployeeService) List(ctx context.Context, search string, departmentID 
 		return cached.Employees, cached.Total, nil
 	}
 
-	// Build Odoo domain filters
-	domain := buildDomain(search, departmentID, activeOnly)
+	domain := buildEmployeeDomain(ctx, search, departmentID, activeOnly)
 
 	employees, total, err := s.odoo.ListEmployees(ctx, domain, limit, offset)
 	if err != nil {
@@ -85,7 +86,7 @@ func (s *EmployeeService) List(ctx context.Context, search string, departmentID 
 
 // Get retrieves a single employee by ID with caching and graceful degradation.
 func (s *EmployeeService) Get(ctx context.Context, id int64) (*odoo.Employee, error) {
-	key := fmt.Sprintf("%s%d", detailKeyPfx, id)
+	key := fmt.Sprintf("%s%s%d", cachekeys.EmployeesDetailPrefix, cachekeys.OdooCompanyShard(tenant.OdooCompanyID(ctx)), id)
 
 	// Check primary cache
 	var cached odoo.Employee
@@ -115,17 +116,18 @@ func (s *EmployeeService) Create(ctx context.Context, req odoo.EmployeeCreateReq
 		return 0, fmt.Errorf("create employee: %w", err)
 	}
 
-	// Invalidate list caches
-	_ = s.cache.DeletePattern(ctx, listKeyPrefix+"*")
+	_ = s.cache.DeletePattern(ctx, employeeListInvalidatePattern(ctx))
 
-	// Audit log
 	if s.queries != nil {
 		details, _ := json.Marshal(map[string]any{"name": req.Name, "email": req.WorkEmail})
+		orgID, _ := tenant.OrganizationID(ctx)
 		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
-			Action:       "employee.created",
-			ResourceType: "employee",
-			ResourceID:   fmt.Sprintf("%d", id),
-			Details:      details,
+			UserID:         pgtype.UUID{},
+			Action:         "employee.created",
+			ResourceType:   "employee",
+			ResourceID:     fmt.Sprintf("%d", id),
+			Details:        details,
+			OrganizationID: orgID,
 		})
 	}
 
@@ -144,18 +146,19 @@ func (s *EmployeeService) Update(ctx context.Context, id int64, vals map[string]
 		return fmt.Errorf("update employee %d: %w", id, err)
 	}
 
-	// Invalidate both list and detail caches
-	_ = s.cache.DeletePattern(ctx, listKeyPrefix+"*")
-	_ = s.cache.DeletePattern(ctx, fmt.Sprintf("%s%d*", detailKeyPfx, id))
+	_ = s.cache.DeletePattern(ctx, employeeListInvalidatePattern(ctx))
+	_ = s.cache.DeletePattern(ctx, fmt.Sprintf("%s%s%d*", cachekeys.EmployeesDetailPrefix, cachekeys.OdooCompanyShard(tenant.OdooCompanyID(ctx)), id))
 
-	// Audit log
 	if s.queries != nil {
 		details, _ := json.Marshal(vals)
+		orgID, _ := tenant.OrganizationID(ctx)
 		_, _ = s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
-			Action:       "employee.updated",
-			ResourceType: "employee",
-			ResourceID:   fmt.Sprintf("%d", id),
-			Details:      details,
+			UserID:         pgtype.UUID{},
+			Action:         "employee.updated",
+			ResourceType:   "employee",
+			ResourceID:     fmt.Sprintf("%d", id),
+			Details:        details,
+			OrganizationID: orgID,
 		})
 	}
 
@@ -172,10 +175,11 @@ func (s *EmployeeService) Deactivate(ctx context.Context, id int64) error {
 	return s.Update(ctx, id, map[string]any{"active": false})
 }
 
-// buildDomain constructs an Odoo domain filter from search parameters.
-func buildDomain(search string, departmentID int64, activeOnly bool) []any {
+func buildEmployeeDomain(ctx context.Context, search string, departmentID int64, activeOnly bool) []any {
 	var domain []any
-
+	if c := tenant.OdooCompanyID(ctx); c > 0 {
+		domain = append(domain, []any{"company_id", "=", c})
+	}
 	if search != "" {
 		domain = append(domain, []any{"name", "ilike", search})
 	}
@@ -185,13 +189,16 @@ func buildDomain(search string, departmentID int64, activeOnly bool) []any {
 	if activeOnly {
 		domain = append(domain, []any{"active", "=", true})
 	}
-
 	return domain
 }
 
-// listCacheKey generates a deterministic cache key from list parameters.
-func listCacheKey(search string, departmentID int64, activeOnly bool, limit, offset int) string {
-	raw := fmt.Sprintf("s=%s&d=%d&a=%t&l=%d&o=%d", search, departmentID, activeOnly, limit, offset)
+func employeeListCacheKey(ctx context.Context, search string, departmentID int64, activeOnly bool, limit, offset int) string {
+	c := tenant.OdooCompanyID(ctx)
+	raw := fmt.Sprintf("oc=%d&s=%s&d=%d&a=%t&l=%d&o=%d", c, search, departmentID, activeOnly, limit, offset)
 	h := sha256.Sum256([]byte(raw))
-	return fmt.Sprintf("%s%x", listKeyPrefix, h[:8])
+	return fmt.Sprintf("%s%s%x", cachekeys.EmployeesListPrefix, cachekeys.OdooCompanyShard(c), h[:8])
+}
+
+func employeeListInvalidatePattern(ctx context.Context) string {
+	return fmt.Sprintf("%s%s*", cachekeys.EmployeesListPrefix, cachekeys.OdooCompanyShard(tenant.OdooCompanyID(ctx)))
 }

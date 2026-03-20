@@ -1,21 +1,21 @@
 -- name: CreateWebhookRegistration :one
-INSERT INTO webhook_registrations (url, events, secret, created_by)
-VALUES ($1, $2, $3, $4)
-RETURNING id, url, events, secret, active, created_by, created_at;
+INSERT INTO webhook_registrations (url, events, secret, created_by, organization_id)
+VALUES ($1, $2, $3, $4, $5)
+RETURNING id, url, events, secret, active, created_by, organization_id, created_at;
 
 -- name: ListWebhookRegistrations :many
-SELECT id, url, events, secret, active, created_by, created_at
+SELECT id, url, events, secret, active, created_by, organization_id, created_at
 FROM webhook_registrations
-WHERE active = true
+WHERE active = true AND organization_id = $1
 ORDER BY created_at DESC;
 
 -- name: GetWebhookRegistration :one
-SELECT id, url, events, secret, active, created_by, created_at
+SELECT id, url, events, secret, active, created_by, organization_id, created_at
 FROM webhook_registrations
-WHERE id = $1;
+WHERE id = $1 AND organization_id = $2;
 
 -- name: DeactivateWebhook :exec
-UPDATE webhook_registrations SET active = false WHERE id = $1;
+UPDATE webhook_registrations SET active = false WHERE id = $1 AND organization_id = $2;
 
 -- name: CreateWebhookDelivery :one
 INSERT INTO webhook_deliveries (webhook_id, event, payload)

@@ -11,6 +11,7 @@ import (
 	"github.com/rs/zerolog/log"
 
 	"github.com/vchavkov/hr/services/api/internal/db"
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 )
 
 // Payroll run statuses.
@@ -28,9 +29,9 @@ const TaskTypePayrollProcess = "payroll:process"
 
 // Payroll errors.
 var (
-	ErrPayrollNotFound       = errors.New("payroll run not found")
-	ErrPayrollInvalidStatus  = errors.New("invalid status transition")
-	ErrPayrollImmutable      = errors.New("completed payroll runs are immutable")
+	ErrPayrollNotFound      = errors.New("payroll run not found")
+	ErrPayrollInvalidStatus = errors.New("invalid status transition")
+	ErrPayrollImmutable     = errors.New("completed payroll runs are immutable")
 )
 
 // validTransitions defines the payroll state machine.
@@ -54,7 +55,6 @@ func NewPayrollService(queries *db.Queries, asynqClient *asynq.Client) *PayrollS
 	}
 }
 
-// canTransition checks if a status transition is valid.
 func canTransition(from, to string) bool {
 	allowed, ok := validTransitions[from]
 	if !ok {
@@ -68,13 +68,27 @@ func canTransition(from, to string) bool {
 	return false
 }
 
+func (s *PayrollService) orgID(ctx context.Context) (pgtype.UUID, error) {
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return pgtype.UUID{}, fmt.Errorf("tenant required")
+	}
+	return orgID, nil
+}
+
 // Create creates a new payroll run in draft status.
 func (s *PayrollService) Create(ctx context.Context, periodStart, periodEnd pgtype.Date, createdBy pgtype.UUID) (db.PayrollRun, error) {
+	orgID, err := s.orgID(ctx)
+	if err != nil {
+		return db.PayrollRun{}, err
+	}
+
 	run, err := s.queries.CreatePayrollRun(ctx, db.CreatePayrollRunParams{
-		PeriodStart: periodStart,
-		PeriodEnd:   periodEnd,
-		Status:      PayrollStatusDraft,
-		CreatedBy:   createdBy,
+		PeriodStart:    periodStart,
+		PeriodEnd:      periodEnd,
+		Status:         PayrollStatusDraft,
+		CreatedBy:      createdBy,
+		OrganizationID: orgID,
 	})
 	if err != nil {
 		return db.PayrollRun{}, fmt.Errorf("create payroll run: %w", err)
@@ -86,7 +100,12 @@ func (s *PayrollService) Create(ctx context.Context, periodStart, periodEnd pgty
 
 // Approve transitions a payroll run from draft to approved.
 func (s *PayrollService) Approve(ctx context.Context, runID, approvedBy pgtype.UUID) error {
-	run, err := s.queries.GetPayrollRun(ctx, runID)
+	orgID, err := s.orgID(ctx)
+	if err != nil {
+		return err
+	}
+
+	run, err := s.queries.GetPayrollRun(ctx, db.GetPayrollRunParams{ID: runID, OrganizationID: orgID})
 	if err != nil {
 		return ErrPayrollNotFound
 	}
@@ -98,8 +117,9 @@ func (s *PayrollService) Approve(ctx context.Context, runID, approvedBy pgtype.U
 	}
 
 	if err := s.queries.UpdatePayrollRunStatus(ctx, db.UpdatePayrollRunStatusParams{
-		ID:     runID,
-		Status: PayrollStatusApproved,
+		ID:             runID,
+		Status:         PayrollStatusApproved,
+		OrganizationID: orgID,
 	}); err != nil {
 		return fmt.Errorf("approve payroll run: %w", err)
 	}
@@ -110,7 +130,12 @@ func (s *PayrollService) Approve(ctx context.Context, runID, approvedBy pgtype.U
 
 // TriggerProcessing transitions from approved to processing and enqueues the async task.
 func (s *PayrollService) TriggerProcessing(ctx context.Context, runID, triggeredBy pgtype.UUID) error {
-	run, err := s.queries.GetPayrollRun(ctx, runID)
+	orgID, err := s.orgID(ctx)
+	if err != nil {
+		return err
+	}
+
+	run, err := s.queries.GetPayrollRun(ctx, db.GetPayrollRunParams{ID: runID, OrganizationID: orgID})
 	if err != nil {
 		return ErrPayrollNotFound
 	}
@@ -122,23 +147,23 @@ func (s *PayrollService) TriggerProcessing(ctx context.Context, runID, triggered
 	}
 
 	if err := s.queries.UpdatePayrollRunStatus(ctx, db.UpdatePayrollRunStatusParams{
-		ID:     runID,
-		Status: PayrollStatusProcessing,
+		ID:             runID,
+		Status:         PayrollStatusProcessing,
+		OrganizationID: orgID,
 	}); err != nil {
 		return fmt.Errorf("update payroll status: %w", err)
 	}
 
-	// Enqueue async processing task
 	payload, _ := json.Marshal(map[string]string{
 		"run_id":       uuidToString(runID),
 		"triggered_by": uuidToString(triggeredBy),
 	})
 	task := asynq.NewTask(TaskTypePayrollProcess, payload)
 	if _, err := s.asynqClient.Enqueue(task); err != nil {
-		// Rollback status on enqueue failure
 		_ = s.queries.UpdatePayrollRunStatus(ctx, db.UpdatePayrollRunStatusParams{
-			ID:     runID,
-			Status: PayrollStatusApproved,
+			ID:             runID,
+			Status:         PayrollStatusApproved,
+			OrganizationID: orgID,
 		})
 		return fmt.Errorf("enqueue payroll task: %w", err)
 	}
@@ -149,7 +174,11 @@ func (s *PayrollService) TriggerProcessing(ctx context.Context, runID, triggered
 
 // GetStatus retrieves a payroll run by ID.
 func (s *PayrollService) GetStatus(ctx context.Context, runID pgtype.UUID) (db.PayrollRun, error) {
-	run, err := s.queries.GetPayrollRun(ctx, runID)
+	orgID, err := s.orgID(ctx)
+	if err != nil {
+		return db.PayrollRun{}, err
+	}
+	run, err := s.queries.GetPayrollRun(ctx, db.GetPayrollRunParams{ID: runID, OrganizationID: orgID})
 	if err != nil {
 		return db.PayrollRun{}, ErrPayrollNotFound
 	}
@@ -158,16 +187,25 @@ func (s *PayrollService) GetStatus(ctx context.Context, runID pgtype.UUID) (db.P
 
 // List retrieves payroll runs with optional status filter and pagination.
 func (s *PayrollService) List(ctx context.Context, status pgtype.Text, limit, offset int32) ([]db.PayrollRun, int64, error) {
+	orgID, err := s.orgID(ctx)
+	if err != nil {
+		return nil, 0, err
+	}
+
 	runs, err := s.queries.ListPayrollRuns(ctx, db.ListPayrollRunsParams{
-		Status: status,
-		Limit:  limit,
-		Offset: offset,
+		Status:         status,
+		Limit:          limit,
+		Offset:         offset,
+		OrganizationID: orgID,
 	})
 	if err != nil {
 		return nil, 0, err
 	}
 
-	total, err := s.queries.CountPayrollRuns(ctx, status)
+	total, err := s.queries.CountPayrollRuns(ctx, db.CountPayrollRunsParams{
+		Status:         status,
+		OrganizationID: orgID,
+	})
 	if err != nil {
 		return nil, 0, err
 	}
@@ -177,7 +215,12 @@ func (s *PayrollService) List(ctx context.Context, status pgtype.Text, limit, of
 
 // Cancel transitions a payroll run to cancelled status.
 func (s *PayrollService) Cancel(ctx context.Context, runID, cancelledBy pgtype.UUID) error {
-	run, err := s.queries.GetPayrollRun(ctx, runID)
+	orgID, err := s.orgID(ctx)
+	if err != nil {
+		return err
+	}
+
+	run, err := s.queries.GetPayrollRun(ctx, db.GetPayrollRunParams{ID: runID, OrganizationID: orgID})
 	if err != nil {
 		return ErrPayrollNotFound
 	}
@@ -189,8 +232,9 @@ func (s *PayrollService) Cancel(ctx context.Context, runID, cancelledBy pgtype.U
 	}
 
 	if err := s.queries.UpdatePayrollRunStatus(ctx, db.UpdatePayrollRunStatusParams{
-		ID:     runID,
-		Status: PayrollStatusCancelled,
+		ID:             runID,
+		Status:         PayrollStatusCancelled,
+		OrganizationID: orgID,
 	}); err != nil {
 		return fmt.Errorf("cancel payroll run: %w", err)
 	}
@@ -199,21 +243,23 @@ func (s *PayrollService) Cancel(ctx context.Context, runID, cancelledBy pgtype.U
 	return nil
 }
 
-// audit writes an audit log entry, logging errors but not failing the operation.
 func (s *PayrollService) audit(ctx context.Context, userID pgtype.UUID, action, resourceType, resourceID string, details map[string]any) {
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok {
+		orgID = pgtype.UUID{}
+	}
 	var detailsJSON []byte
 	if details != nil {
 		detailsJSON, _ = json.Marshal(details)
 	}
 	if _, err := s.queries.CreateAuditEntry(ctx, db.CreateAuditEntryParams{
-		UserID:       userID,
-		Action:       action,
-		ResourceType: resourceType,
-		ResourceID:   resourceID,
-		Details:      detailsJSON,
+		UserID:         userID,
+		Action:         action,
+		ResourceType:   resourceType,
+		ResourceID:     resourceID,
+		Details:        detailsJSON,
+		OrganizationID: orgID,
 	}); err != nil {
 		log.Error().Err(err).Str("action", action).Msg("failed to write audit log")
 	}
 }
-
-// uuidToString is defined in auth.go — removed duplicate to avoid redeclaration.

@@ -6,6 +6,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/vchavkov/hr/services/api/internal/db"
+	"github.com/vchavkov/hr/services/api/internal/tenant"
 )
 
 // PayrollSummaryReport contains aggregated payroll data for a period.
@@ -51,10 +52,15 @@ func NewReportService(queries *db.Queries) *ReportService {
 
 // PayrollSummary aggregates payroll data across all completed runs in a period.
 func (s *ReportService) PayrollSummary(ctx context.Context, periodStart, periodEnd pgtype.Date) (*PayrollSummaryReport, error) {
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return nil, fmt.Errorf("tenant required")
+	}
 	runs, err := s.queries.ListPayrollRuns(ctx, db.ListPayrollRunsParams{
-		Limit:  1000,
-		Offset: 0,
-		Status: pgtype.Text{String: "completed", Valid: true},
+		Limit:          1000,
+		Offset:         0,
+		OrganizationID: orgID,
+		Status:         pgtype.Text{String: "completed", Valid: true},
 	})
 	if err != nil {
 		return nil, fmt.Errorf("list payroll runs: %w", err)
@@ -72,7 +78,10 @@ func (s *ReportService) PayrollSummary(ctx context.Context, periodStart, periodE
 			continue
 		}
 
-		payslips, err := s.queries.ListPayslipsByRun(ctx, run.ID)
+		payslips, err := s.queries.ListPayslipsByRun(ctx, db.ListPayslipsByRunParams{
+			PayrollRunID:   run.ID,
+			OrganizationID: orgID,
+		})
 		if err != nil {
 			return nil, fmt.Errorf("list payslips for run: %w", err)
 		}
@@ -95,10 +104,15 @@ func (s *ReportService) PayrollSummary(ctx context.Context, periodStart, periodE
 
 // TaxLiabilities returns a breakdown of tax obligations for a period.
 func (s *ReportService) TaxLiabilities(ctx context.Context, periodStart, periodEnd pgtype.Date) (*TaxLiabilityReport, error) {
+	orgID, ok := tenant.OrganizationID(ctx)
+	if !ok || !orgID.Valid {
+		return nil, fmt.Errorf("tenant required")
+	}
 	runs, err := s.queries.ListPayrollRuns(ctx, db.ListPayrollRunsParams{
-		Limit:  1000,
-		Offset: 0,
-		Status: pgtype.Text{String: "completed", Valid: true},
+		Limit:          1000,
+		Offset:         0,
+		OrganizationID: orgID,
+		Status:         pgtype.Text{String: "completed", Valid: true},
 	})
 	if err != nil {
 		return nil, fmt.Errorf("list payroll runs: %w", err)
@@ -118,7 +132,10 @@ func (s *ReportService) TaxLiabilities(ctx context.Context, periodStart, periodE
 			continue
 		}
 
-		payslips, err := s.queries.ListPayslipsByRun(ctx, run.ID)
+		payslips, err := s.queries.ListPayslipsByRun(ctx, db.ListPayslipsByRunParams{
+			PayrollRunID:   run.ID,
+			OrganizationID: orgID,
+		})
 		if err != nil {
 			return nil, fmt.Errorf("list payslips for run: %w", err)
 		}

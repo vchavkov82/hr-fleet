@@ -41,26 +41,39 @@ func (q *Queries) CreateWebhookDelivery(ctx context.Context, arg CreateWebhookDe
 }
 
 const createWebhookRegistration = `-- name: CreateWebhookRegistration :one
-INSERT INTO webhook_registrations (url, events, secret, created_by)
-VALUES ($1, $2, $3, $4)
-RETURNING id, url, events, secret, active, created_by, created_at
+INSERT INTO webhook_registrations (url, events, secret, created_by, organization_id)
+VALUES ($1, $2, $3, $4, $5)
+RETURNING id, url, events, secret, active, created_by, organization_id, created_at
 `
 
 type CreateWebhookRegistrationParams struct {
-	Url       string
-	Events    []string
-	Secret    string
-	CreatedBy pgtype.UUID
+	Url            string
+	Events         []string
+	Secret         string
+	CreatedBy      pgtype.UUID
+	OrganizationID pgtype.UUID
 }
 
-func (q *Queries) CreateWebhookRegistration(ctx context.Context, arg CreateWebhookRegistrationParams) (WebhookRegistration, error) {
+type CreateWebhookRegistrationRow struct {
+	ID             pgtype.UUID
+	Url            string
+	Events         []string
+	Secret         string
+	Active         bool
+	CreatedBy      pgtype.UUID
+	OrganizationID pgtype.UUID
+	CreatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) CreateWebhookRegistration(ctx context.Context, arg CreateWebhookRegistrationParams) (CreateWebhookRegistrationRow, error) {
 	row := q.db.QueryRow(ctx, createWebhookRegistration,
 		arg.Url,
 		arg.Events,
 		arg.Secret,
 		arg.CreatedBy,
+		arg.OrganizationID,
 	)
-	var i WebhookRegistration
+	var i CreateWebhookRegistrationRow
 	err := row.Scan(
 		&i.ID,
 		&i.Url,
@@ -68,29 +81,51 @@ func (q *Queries) CreateWebhookRegistration(ctx context.Context, arg CreateWebho
 		&i.Secret,
 		&i.Active,
 		&i.CreatedBy,
+		&i.OrganizationID,
 		&i.CreatedAt,
 	)
 	return i, err
 }
 
 const deactivateWebhook = `-- name: DeactivateWebhook :exec
-UPDATE webhook_registrations SET active = false WHERE id = $1
+UPDATE webhook_registrations SET active = false WHERE id = $1 AND organization_id = $2
 `
 
-func (q *Queries) DeactivateWebhook(ctx context.Context, id pgtype.UUID) error {
-	_, err := q.db.Exec(ctx, deactivateWebhook, id)
+type DeactivateWebhookParams struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+}
+
+func (q *Queries) DeactivateWebhook(ctx context.Context, arg DeactivateWebhookParams) error {
+	_, err := q.db.Exec(ctx, deactivateWebhook, arg.ID, arg.OrganizationID)
 	return err
 }
 
 const getWebhookRegistration = `-- name: GetWebhookRegistration :one
-SELECT id, url, events, secret, active, created_by, created_at
+SELECT id, url, events, secret, active, created_by, organization_id, created_at
 FROM webhook_registrations
-WHERE id = $1
+WHERE id = $1 AND organization_id = $2
 `
 
-func (q *Queries) GetWebhookRegistration(ctx context.Context, id pgtype.UUID) (WebhookRegistration, error) {
-	row := q.db.QueryRow(ctx, getWebhookRegistration, id)
-	var i WebhookRegistration
+type GetWebhookRegistrationParams struct {
+	ID             pgtype.UUID
+	OrganizationID pgtype.UUID
+}
+
+type GetWebhookRegistrationRow struct {
+	ID             pgtype.UUID
+	Url            string
+	Events         []string
+	Secret         string
+	Active         bool
+	CreatedBy      pgtype.UUID
+	OrganizationID pgtype.UUID
+	CreatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) GetWebhookRegistration(ctx context.Context, arg GetWebhookRegistrationParams) (GetWebhookRegistrationRow, error) {
+	row := q.db.QueryRow(ctx, getWebhookRegistration, arg.ID, arg.OrganizationID)
+	var i GetWebhookRegistrationRow
 	err := row.Scan(
 		&i.ID,
 		&i.Url,
@@ -98,6 +133,7 @@ func (q *Queries) GetWebhookRegistration(ctx context.Context, id pgtype.UUID) (W
 		&i.Secret,
 		&i.Active,
 		&i.CreatedBy,
+		&i.OrganizationID,
 		&i.CreatedAt,
 	)
 	return i, err
@@ -186,21 +222,32 @@ func (q *Queries) ListPendingDeliveries(ctx context.Context, limit int32) ([]Web
 }
 
 const listWebhookRegistrations = `-- name: ListWebhookRegistrations :many
-SELECT id, url, events, secret, active, created_by, created_at
+SELECT id, url, events, secret, active, created_by, organization_id, created_at
 FROM webhook_registrations
-WHERE active = true
+WHERE active = true AND organization_id = $1
 ORDER BY created_at DESC
 `
 
-func (q *Queries) ListWebhookRegistrations(ctx context.Context) ([]WebhookRegistration, error) {
-	rows, err := q.db.Query(ctx, listWebhookRegistrations)
+type ListWebhookRegistrationsRow struct {
+	ID             pgtype.UUID
+	Url            string
+	Events         []string
+	Secret         string
+	Active         bool
+	CreatedBy      pgtype.UUID
+	OrganizationID pgtype.UUID
+	CreatedAt      pgtype.Timestamptz
+}
+
+func (q *Queries) ListWebhookRegistrations(ctx context.Context, organizationID pgtype.UUID) ([]ListWebhookRegistrationsRow, error) {
+	rows, err := q.db.Query(ctx, listWebhookRegistrations, organizationID)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []WebhookRegistration
+	var items []ListWebhookRegistrationsRow
 	for rows.Next() {
-		var i WebhookRegistration
+		var i ListWebhookRegistrationsRow
 		if err := rows.Scan(
 			&i.ID,
 			&i.Url,
@@ -208,6 +255,7 @@ func (q *Queries) ListWebhookRegistrations(ctx context.Context) ([]WebhookRegist
 			&i.Secret,
 			&i.Active,
 			&i.CreatedBy,
+			&i.OrganizationID,
 			&i.CreatedAt,
 		); err != nil {
 			return nil, err

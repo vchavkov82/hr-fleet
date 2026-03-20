@@ -93,7 +93,7 @@ export const AdminLayout: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout, hasPermission } = useAuth();
-  const { mode, toggleMode } = useColorMode();
+  const { toggleMode } = useColorMode();
   const theme = useTheme();
   const isDark = theme.palette.mode === 'dark';
   const [flashPath, setFlashPath] = React.useState<string | null>(null);

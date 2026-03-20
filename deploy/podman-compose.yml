@@ -51,6 +51,8 @@ services:
     networks:
       - hr
     restart: unless-stopped
+    # API + Asynq worker (Odoo webhooks, payroll, outbound webhook delivery)
+    command: ["/server", "-mode=both"]
 
   # ── Frontend apps (host ports 5020/5021/5023 to avoid conflict with dev-apps on 5010/5011/5013) ──
   hr:
