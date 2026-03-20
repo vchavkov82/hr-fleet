@@ -52,6 +52,27 @@ JOIN payroll_runs r ON r.id = p.payroll_run_id
 WHERE p.payroll_run_id = $1 AND r.organization_id = $2
 ORDER BY p.employee_odoo_id;
 
+-- name: ListPayslips :many
+SELECT p.id, p.payroll_run_id, p.employee_odoo_id, p.gross_salary_stotinki,
+       p.employer_social_stotinki, p.employee_social_stotinki,
+       p.employer_health_stotinki, p.employee_health_stotinki,
+       p.income_tax_stotinki, p.net_salary_stotinki,
+       p.calculation_details, p.created_at,
+       r.period_start, r.period_end
+FROM payslips p
+JOIN payroll_runs r ON r.id = p.payroll_run_id
+WHERE r.organization_id = $3
+  AND ($4::uuid IS NULL OR p.payroll_run_id = $4)
+ORDER BY p.created_at DESC
+LIMIT $1 OFFSET $2;
+
+-- name: CountPayslips :one
+SELECT count(*)::bigint
+FROM payslips p
+JOIN payroll_runs r ON r.id = p.payroll_run_id
+WHERE r.organization_id = $1
+  AND ($2::uuid IS NULL OR p.payroll_run_id = $2);
+
 -- name: GetPayslip :one
 SELECT p.id, p.payroll_run_id, p.employee_odoo_id, p.gross_salary_stotinki, p.employer_social_stotinki, p.employee_social_stotinki, p.employer_health_stotinki, p.employee_health_stotinki, p.income_tax_stotinki, p.net_salary_stotinki, p.calculation_details, p.created_at
 FROM payslips p
