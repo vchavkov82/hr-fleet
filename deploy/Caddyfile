@@ -120,7 +120,7 @@
 }
 
 # ── Odoo ERP Backend ─────────────────────────────────────────────────────────
-{$HR_ODOO_DOMAIN:odoo.hr.localhost} {
+{$HR_ODOO_DOMAIN:odoo.hr.assistance.bg} {
 	encode gzip zstd
 
 	# Odoo-specific headers (relaxed CSP for Odoo's dynamic content)
