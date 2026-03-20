@@ -76,7 +76,7 @@ dev: ## Start everything (infra + check + frontend dev servers in parallel)
 dev-apps: ## Start all frontend dev servers (www, blog, docs)
 	scripts/dev-apps.sh
 
-infra: ## Start infrastructure only (PostgreSQL, Redis, Caddy, etc.)
+infra: ## Start infrastructure only (PostgreSQL, Redis, Odoo, etc.)
 	scripts/dev.sh
 
 infra-down: ## Stop infrastructure
