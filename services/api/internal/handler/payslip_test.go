@@ -16,6 +16,7 @@ import (
 
 type mockPayslipService struct {
 	getFunc       func(ctx context.Context, id pgtype.UUID) (db.Payslip, error)
+	listFunc      func(ctx context.Context, payrollRunID pgtype.UUID, limit, offset int) ([]db.ListPayslipsRow, int64, error)
 	listByRunFunc func(ctx context.Context, payrollRunID pgtype.UUID) ([]db.Payslip, error)
 }
 
@@ -24,6 +25,13 @@ func (m *mockPayslipService) Get(ctx context.Context, id pgtype.UUID) (db.Paysli
 		return m.getFunc(ctx, id)
 	}
 	return db.Payslip{ID: id}, nil
+}
+
+func (m *mockPayslipService) List(ctx context.Context, payrollRunID pgtype.UUID, limit, offset int) ([]db.ListPayslipsRow, int64, error) {
+	if m.listFunc != nil {
+		return m.listFunc(ctx, payrollRunID, limit, offset)
+	}
+	return []db.ListPayslipsRow{}, 0, nil
 }
 
 func (m *mockPayslipService) ListByRun(ctx context.Context, payrollRunID pgtype.UUID) ([]db.Payslip, error) {
@@ -93,16 +101,30 @@ func TestPayslipHandler_HandleGet_NotFound(t *testing.T) {
 	testutil.AssertErrorCode(t, w, "not_found")
 }
 
-func TestPayslipHandler_HandleList_MissingPayrollRunID(t *testing.T) {
-	mock := &mockPayslipService{}
-	router := setupPayslipRouter(mock)
+func TestPayslipHandler_HandleList_NoFilter(t *testing.T) {
+	mock := &mockPayslipService{
+		listFunc: func(ctx context.Context, payrollRunID pgtype.UUID, limit, offset int) ([]db.ListPayslipsRow, int64, error) {
+			return []db.ListPayslipsRow{
+				{ID: testutil.TestUUID(1), EmployeeOdooID: 100},
+				{ID: testutil.TestUUID(2), EmployeeOdooID: 101},
+			}, 2, nil
+		},
+	}
 
+	router := setupPayslipRouter(mock)
 	req := httptest.NewRequest(http.MethodGet, "/payslips", nil)
 	w := httptest.NewRecorder()
 	router.ServeHTTP(w, req)
 
-	testutil.AssertStatus(t, w, http.StatusBadRequest)
-	testutil.AssertErrorCode(t, w, "missing_param")
+	testutil.AssertStatus(t, w, http.StatusOK)
+	resp := testutil.AssertJSONResponse(t, w)
+	testutil.AssertHasField(t, resp, "data")
+	testutil.AssertHasField(t, resp, "meta")
+
+	meta, _ := resp["meta"].(map[string]any)
+	if meta["total"] != float64(2) {
+		t.Errorf("total = %v, want 2", meta["total"])
+	}
 }
 
 func TestPayslipHandler_HandleList_InvalidPayrollRunID(t *testing.T) {
@@ -117,13 +139,15 @@ func TestPayslipHandler_HandleList_InvalidPayrollRunID(t *testing.T) {
 	testutil.AssertErrorCode(t, w, "invalid_id")
 }
 
-func TestPayslipHandler_HandleList_Success(t *testing.T) {
+func TestPayslipHandler_HandleList_WithPayrollRunID(t *testing.T) {
 	mock := &mockPayslipService{
-		listByRunFunc: func(ctx context.Context, payrollRunID pgtype.UUID) ([]db.Payslip, error) {
-			return []db.Payslip{
+		listFunc: func(ctx context.Context, payrollRunID pgtype.UUID, limit, offset int) ([]db.ListPayslipsRow, int64, error) {
+			if !payrollRunID.Valid {
+				t.Error("expected valid payroll_run_id")
+			}
+			return []db.ListPayslipsRow{
 				{ID: testutil.TestUUID(1), EmployeeOdooID: 100},
-				{ID: testutil.TestUUID(2), EmployeeOdooID: 101},
-			}, nil
+			}, 1, nil
 		},
 	}
 
@@ -135,10 +159,9 @@ func TestPayslipHandler_HandleList_Success(t *testing.T) {
 	testutil.AssertStatus(t, w, http.StatusOK)
 	resp := testutil.AssertJSONResponse(t, w)
 	testutil.AssertHasField(t, resp, "data")
-	testutil.AssertHasField(t, resp, "total")
-
-	if resp["total"] != float64(2) {
-		t.Errorf("total = %v, want 2", resp["total"])
+	meta, _ := resp["meta"].(map[string]any)
+	if meta["total"] != float64(1) {
+		t.Errorf("total = %v, want 1", meta["total"])
 	}
 }
 
