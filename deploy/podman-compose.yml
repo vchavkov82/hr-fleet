@@ -3,29 +3,6 @@
 
 services:
 
-  # ── Reverse proxy ──────────────────────────────────────────────────────────
-  caddy:
-    image: caddy:2-alpine
-    container_name: hr-caddy
-    hostname: hr-caddy
-    # Ports defined in override files only — dev uses 8080/8443, prod uses 80/443
-    env_file:
-      - ../.env
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - hr
-      - hr-api
-      - hr-blog
-      - hr-docs
-      - hr-admin
-      - odoo
-    networks:
-      - hr
-    restart: unless-stopped
-
   # ── Go backend API ───────────────────────────────────────────────────────
   hr-api:
     build:
