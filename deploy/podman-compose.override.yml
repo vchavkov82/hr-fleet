@@ -51,8 +51,3 @@ services:
     # deploy:
     #   replicas: 3
 
-volumes:
-  hr_node_modules:
-  hr_blog_node_modules:
-  hr_docs_node_modules:
-  hr_admin_node_modules:
