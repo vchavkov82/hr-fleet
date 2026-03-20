@@ -97,7 +97,6 @@ describe('AuditLog', () => {
     expect(screen.getByText('page1@example.com')).toBeInTheDocument();
 
     const nextPageButton = screen.getByRole('button', { name: /next page/i });
-    const { fireEvent } = await import('@testing-library/react');
     fireEvent.click(nextPageButton);
 
     await waitFor(() => {
