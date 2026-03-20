@@ -115,9 +115,7 @@ describe('TimesheetList', () => {
 
     renderTimesheets();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-    });
+    await waitForLoaded();
 
     const approveButton = screen.getByRole('button', { name: /approve/i });
     fireEvent.click(approveButton);
