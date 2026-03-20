@@ -194,10 +194,10 @@ func runAPI(
 	r.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:5010", "http://localhost:5012", "https://hr.vchavkov.com"},
 		AllowOriginFunc: func(r *http.Request, origin string) bool {
-			// Allow any *.lan.assistance.bg origin in dev
+			const lanSuffix = ".lan.assistance.bg:5012"
 			return len(origin) > 0 && (origin == "http://localhost:5010" || origin == "http://localhost:5012" ||
 				origin == "https://hr.vchavkov.com" ||
-				len(origin) > 22 && origin[len(origin)-22:] == ".lan.assistance.bg:5012")
+				len(origin) > len(lanSuffix) && origin[len(origin)-len(lanSuffix):] == lanSuffix)
 		},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-API-Key", "X-Organization-Id"},
