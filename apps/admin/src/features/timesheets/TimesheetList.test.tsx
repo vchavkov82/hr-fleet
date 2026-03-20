@@ -62,9 +62,7 @@ describe('TimesheetList', () => {
   it('renders status chips with correct labels', async () => {
     renderTimesheets();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-    });
+    await waitForLoaded();
 
     expect(screen.getByText('submitted')).toBeInTheDocument();
     expect(screen.getByText('approved')).toBeInTheDocument();
