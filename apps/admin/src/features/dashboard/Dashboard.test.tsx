@@ -29,16 +29,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 function renderDashboard() {
-  const theme = createTheme();
-  return render(
-    <ThemeProvider theme={theme}>
-      <MemoryRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-        </Routes>
-      </MemoryRouter>
-    </ThemeProvider>,
-  );
+  return renderWithProviders(<Dashboard />);
 }
 
 describe('Dashboard', () => {
