@@ -1,5 +1,6 @@
 #!/bin/bash
-# Start HR development environment with all services
+# Thin wrapper around podman-compose for the HR stack.
+# Usage: scripts/dev.sh [up|down|restart|logs|ps]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -9,113 +10,55 @@ cd "$ROOT_DIR"
 
 COMPOSE="podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml"
 
-# Cleanup on interrupt
-cleanup() {
-  trap - INT TERM EXIT
-  echo ""
-  echo "Shutting down services..."
-  $COMPOSE down 2>/dev/null || true
-  exit 0
-}
-trap cleanup INT TERM EXIT
-
-# Handle subcommands before doing anything else
 CMD="${1:-up}"
+shift 2>/dev/null || true
 
 case "$CMD" in
+  up|start)
+    # Check if .env exists
+    if [ ! -f .env ]; then
+      echo "Creating .env from .env.example..."
+      cp .env.example .env
+    fi
+
+    # Kill processes on HR ports (if any)
+    "$SCRIPT_DIR/kill-ports.sh" 2>/dev/null || true
+
+    # Clean up existing containers to avoid name conflicts
+    $COMPOSE down --remove-orphans 2>/dev/null || true
+    for c in hr-www hr-blog hr-docs hr-admin; do
+      podman rm -f "$c" 2>/dev/null || true
+    done
+
+    $COMPOSE up -d
+    sleep 3
+    $COMPOSE ps
+
+    echo ""
+    echo "Services (via remote Caddy gateway):"
+    echo "  HR site      https://hr.assistance.bg         -> localhost:5020"
+    echo "  HR blog      https://blog.hr.assistance.bg    -> localhost:5023"
+    echo "  HR docs      https://docs.hr.assistance.bg    -> localhost:5021"
+    echo "  HR admin     https://admin.hr.assistance.bg   -> localhost:5014"
+    echo "  HR API       https://api.hr.assistance.bg     -> localhost:5080"
+    echo "  HR Odoo      https://odoo.hr.assistance.bg    -> localhost:8069"
+    ;;
   stop|down)
-    echo "Stopping all services..."
-    $COMPOSE down
-    echo "Services stopped."
-    exit 0
+    $COMPOSE down "$@"
     ;;
   restart)
-    echo "Restarting all services..."
-    echo "Killing processes on ports (if any)..."
-    "$SCRIPT_DIR/kill-ports.sh" || echo "No conflicting ports found"
+    "$SCRIPT_DIR/kill-ports.sh" 2>/dev/null || true
     $COMPOSE down
     $COMPOSE up -d
-    echo "Services restarted."
-    exit 0
     ;;
   logs)
-    if [ -n "${2:-}" ]; then
-      $COMPOSE logs -f "$2"
-    else
-      $COMPOSE logs -f
-    fi
-    exit 0
+    $COMPOSE logs -f "$@"
     ;;
   ps|status)
     $COMPOSE ps
-    exit 0
     ;;
-  up|start)
-    ;; # fall through to startup logic below
   *)
-    echo "Usage: scripts/dev.sh [up|stop|restart|logs|ps]"
-    exit 1
+    # Pass anything else straight through to podman-compose
+    $COMPOSE "$CMD" "$@"
     ;;
 esac
-
-# --- Startup ---
-
-# Check if .env exists
-if [ ! -f .env ]; then
-  echo "Creating .env from .env.example..."
-  cp .env.example .env
-fi
-
-# Kill processes on HR ports (if any)
-echo "Killing processes on ports (if any)..."
-"$SCRIPT_DIR/kill-ports.sh" || echo "No conflicting ports found"
-
-# Tear down existing containers/pods to avoid name conflicts
-echo "Cleaning up existing containers..."
-$COMPOSE down -v --remove-orphans 2>/dev/null || true
-
-# Fallback cleanup for stubborn containers (by name pattern)
-sleep 1
-for container in hr-www hr-blog hr-docs hr-admin; do
-  podman rm -f "$container" 2>/dev/null || true
-done
-podman pod rm -f pod_deploy 2>/dev/null || true
-
-echo ""
-echo "Starting HR development environment..."
-echo ""
-
-# Start all services
-if ! $COMPOSE up -d; then
-  echo "Error: Failed to start services" >&2
-  exit 1
-fi
-
-echo ""
-echo "Waiting for services to start..."
-sleep 3
-
-# Verify services started
-echo ""
-if ! $COMPOSE ps; then
-  echo "Warning: Could not verify service status" >&2
-fi
-
-echo ""
-echo "Development environment is ready!"
-echo ""
-echo "Services (via remote Caddy gateway):"
-echo "  HR site      https://hr.assistance.bg         -> localhost:5020"
-echo "  HR blog      https://blog.hr.assistance.bg    -> localhost:5023"
-echo "  HR docs      https://docs.hr.assistance.bg    -> localhost:5021"
-echo "  HR admin     https://admin.hr.assistance.bg   -> localhost:5014"
-echo "  HR API       https://api.hr.assistance.bg     -> localhost:5080"
-echo "  HR Odoo      https://odoo.hr.assistance.bg    -> localhost:8069"
-echo ""
-echo "Run 'make dev-apps' to start frontend dev servers."
-echo ""
-echo "Commands:"
-echo "  make infra-down  Stop all services"
-echo "  make infra       Restart all services"
-echo "  make infra-logs  Follow all logs"
-echo "  make ps          Show service status"
