@@ -18,6 +18,8 @@
     "resources": {
       "label": "Resources",
       "blog": "Blog",
+      "docs": "Docs",
+      "admin": "Admin Portal",
       "hrTools": "HR Tools",
       "helpCenter": "Help Center"
     },
