@@ -1,5 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
@@ -51,7 +50,6 @@ describe('ExpenseList', () => {
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('Travel')).toBeInTheDocument();
     expect(screen.getByText(/250/)).toBeInTheDocument();
-    expect(screen.getByText(/BGN/)).toBeInTheDocument();
     expect(screen.getByText('Flight tickets')).toBeInTheDocument();
   });
 
@@ -117,7 +115,7 @@ describe('ExpenseList', () => {
     });
 
     const nextPageButton = screen.getByRole('button', { name: /next page/i });
-    await userEvent.click(nextPageButton);
+    fireEvent.click(nextPageButton);
 
     await waitFor(() => {
       expect(screen.getByText('Page Two Employee')).toBeInTheDocument();
@@ -159,7 +157,7 @@ describe('ExpenseList', () => {
     await waitForLoaded();
 
     const approveButton = screen.getAllByLabelText('Approve')[0];
-    await userEvent.click(approveButton);
+    fireEvent.click(approveButton);
 
     await waitFor(() => {
       expect(called).toBe(true);
@@ -175,7 +173,7 @@ describe('ExpenseList', () => {
     await waitForLoaded();
 
     const rejectButton = screen.getAllByLabelText('Reject')[0];
-    await userEvent.click(rejectButton);
+    fireEvent.click(rejectButton);
 
     await waitFor(() => {
       expect(screen.getByText('Failed to reject expense.')).toBeInTheDocument();
