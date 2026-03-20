@@ -37,7 +37,7 @@ services:
     container_name: hr-www
     hostname: hr-www
     ports:
-      - "0.0.0.0:5020:3010"
+      - "0.0.0.0:5020:5010"
     env_file:
       - ../.env
     networks:
