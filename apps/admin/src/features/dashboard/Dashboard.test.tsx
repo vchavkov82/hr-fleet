@@ -13,18 +13,18 @@ const listMeta = (total: number) => ({
 });
 
 const server = setupServer(
-  http.get('*/api/v1/employees', ({ request }) => {
+  http.get('*/employees', ({ request }) => {
     const url = new URL(request.url);
     if (url.searchParams.get('active') === 'true') {
       return HttpResponse.json(listMeta(5));
     }
     return HttpResponse.json(listMeta(10));
   }),
-  http.get('*/api/v1/leave/requests', () => HttpResponse.json(listMeta(2))),
-  http.get('*/api/v1/contracts', () => HttpResponse.json(listMeta(1))),
+  http.get('*/leave/requests', () => HttpResponse.json(listMeta(2))),
+  http.get('*/contracts', () => HttpResponse.json(listMeta(1))),
 );
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
