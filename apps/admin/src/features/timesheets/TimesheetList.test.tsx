@@ -193,7 +193,7 @@ describe('TimesheetList', () => {
     });
 
     const nextPageButton = screen.getByRole('button', { name: /next page/i });
-    await userEvent.click(nextPageButton);
+    fireEvent.click(nextPageButton);
 
     await waitFor(() => {
       expect(screen.getByText('Page Two Employee')).toBeInTheDocument();
