@@ -36,16 +36,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 function renderTimesheets() {
-  const theme = createTheme();
-  return render(
-    <ThemeProvider theme={theme}>
-      <MemoryRouter>
-        <Routes>
-          <Route path="/" element={<TimesheetList />} />
-        </Routes>
-      </MemoryRouter>
-    </ThemeProvider>,
-  );
+  return renderWithProviders(<TimesheetList />);
 }
 
 describe('TimesheetList', () => {
