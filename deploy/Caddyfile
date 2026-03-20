@@ -13,7 +13,7 @@
 #   admin.hr.assistance.bg, odoo.hr.assistance.bg
 
 {
-	email {$ACME_EMAIL:admin@hr.example.com}
+	email {$ACME_EMAIL:admin@assistance.bg}
 }
 
 # ── Shared snippet for common security headers ─────────────────────────────
