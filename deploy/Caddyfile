@@ -62,7 +62,7 @@
 }
 
 # ── HR blog (Astro) ─────────────────────────────────────────────────────────
-{$HR_BLOG_DOMAIN:blog.hr.localhost} {
+{$HR_BLOG_DOMAIN:blog.hr.assistance.bg} {
 	encode gzip zstd
 	import common_headers
 
