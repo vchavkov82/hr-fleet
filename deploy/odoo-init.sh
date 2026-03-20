@@ -56,8 +56,8 @@ install_modules() {
   
   # Run Odoo in initialization mode
   podman run --rm \
-    --network deploy_hr \
-    -v deploy_odoo_data:/var/lib/odoo \
+    --network hr_hr \
+    -v hr_odoo_data:/var/lib/odoo \
     -v "$(pwd)/deploy/odoo.conf:/etc/odoo/odoo.conf:ro" \
     -v "$(pwd)/deploy/odoo-addons/web:/mnt/extra-addons/web:ro" \
     -v "$(pwd)/deploy/odoo-addons/server-tools:/mnt/extra-addons/server-tools:ro" \
