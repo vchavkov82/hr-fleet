@@ -36,12 +36,12 @@ case "$CMD" in
 
     echo ""
     echo "Services (via remote Caddy gateway):"
-    echo "  HR site      https://hr.assistance.bg         -> localhost:5020"
-    echo "  HR blog      https://blog.hr.assistance.bg    -> localhost:5023"
-    echo "  HR docs      https://docs.hr.assistance.bg    -> localhost:5021"
-    echo "  HR admin     https://admin.hr.assistance.bg   -> localhost:5014"
-    echo "  HR API       https://api.hr.assistance.bg     -> localhost:5080"
-    echo "  HR Odoo      https://odoo.hr.assistance.bg    -> localhost:8069"
+    echo "  HR site      https://hr.svc.assistance.bg         -> localhost:5020"
+    echo "  HR blog      https://blog.hr.svc.assistance.bg    -> localhost:5023"
+    echo "  HR docs      https://docs.hr.svc.assistance.bg    -> localhost:5021"
+    echo "  HR admin     https://admin.hr.svc.assistance.bg   -> localhost:5014"
+    echo "  HR API       https://api.hr.svc.assistance.bg     -> localhost:5080"
+    echo "  HR Odoo      https://odoo.hr.svc.assistance.bg    -> localhost:8069"
     ;;
   stop|down)
     $COMPOSE down "$@"
