@@ -6,25 +6,25 @@ services:
 
   hr:
     volumes:
-      - ../apps/web:/app
-      - hr_node_modules:/app/node_modules
-    working_dir: /app
+      - ../:/workspace
+      - hr_node_modules:/workspace/node_modules
+    working_dir: /workspace/apps/web
     environment:
-      - PORT=5010
-      - HR_BLOG_URL=http://hr-blog:5013
-    entrypoint: ["/app/docker-entrypoint.sh"]
-    command: []
+      - PORT=3010
+      - HR_BLOG_URL=http://hr-blog:3013
+    entrypoint: sh
+    command: ["-c", "cd /workspace && npm i -g pnpm && pnpm install && cd apps/web && pnpm dev"]
 
   hr-blog:
     volumes:
-      - ../apps/blog:/app
-      - hr_blog_node_modules:/app/node_modules
-    working_dir: /app
+      - ../:/workspace
+      - hr_blog_node_modules:/workspace/node_modules
+    working_dir: /workspace/apps/blog
     environment:
       - ASTRO_TELEMETRY_DISABLED=1
       - HOST=0.0.0.0
     entrypoint: sh
-    command: ["-c", "npm i -g pnpm && pnpm install && pnpm build && npx serve -l 5013 dist"]
+    command: ["-c", "cd /workspace && npm i -g pnpm && pnpm install && cd apps/blog && pnpm build && npx serve -l 3013 dist"]
 
   hr-docs:
     volumes:
@@ -36,13 +36,13 @@ services:
 
   hr-admin:
     volumes:
-      - ../apps/admin:/app
-      - hr_admin_node_modules:/app/node_modules
-    working_dir: /app
+      - ../:/workspace
+      - hr_admin_node_modules:/workspace/node_modules
+    working_dir: /workspace/apps/admin
     environment:
       - VITE_API_URL=http://hr-api:8080
     entrypoint: sh
-    command: ["-c", "npm i -g pnpm && pnpm install && pnpm dev --host 0.0.0.0 --port 5014"]
+    command: ["-c", "cd /workspace && npm i -g pnpm && pnpm install && cd apps/admin && pnpm dev --host 0.0.0.0 --port 5014"]
 
   # NFR-04: API service healthcheck for load balancer routing and auto-restart
   hr-api:
