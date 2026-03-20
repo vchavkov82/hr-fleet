@@ -1,9 +1,9 @@
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+
+import { paginated, renderWithProviders, waitForLoaded } from '@/test/utils';
 
 import { TimesheetList } from './index';
 
@@ -16,11 +16,6 @@ const makeTimesheet = (overrides: Record<string, unknown> = {}) => ({
   total_hours: 40,
   status: 'submitted',
   ...overrides,
-});
-
-const paginated = (data: unknown[], total?: number) => ({
-  data,
-  meta: { total: total ?? data.length, page: 1, per_page: 25, total_pages: 1 },
 });
 
 const server = setupServer(
