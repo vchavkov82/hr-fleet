@@ -71,7 +71,7 @@ dev: ## Start everything (infra + check + frontend dev servers in parallel)
 	@echo "HR docs:  https://docs.hr.svc.assistance.bg"
 	@echo "HR admin: https://admin.hr.svc.assistance.bg"
 	@echo "HR odoo:  https://odoo.hr.svc.assistance.bg"
-	@echo "HR API:   https://hr.svc.assistance.bg/api/v1/"
+	@echo "HR API:   https://api.hr.svc.assistance.bg"
 
 dev-apps: ## Start all frontend dev servers (www, blog, docs)
 	scripts/dev-apps.sh
