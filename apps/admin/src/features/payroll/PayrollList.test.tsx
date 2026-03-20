@@ -47,7 +47,7 @@ describe('PayrollList', () => {
     await waitForLoaded();
 
     expect(screen.getByText('50')).toBeInTheDocument();
-    expect(screen.getByText('completed')).toBeInTheDocument();
+    expect(screen.getByText('Completed')).toBeInTheDocument();
   });
 
   it('shows loading spinner initially', () => {
