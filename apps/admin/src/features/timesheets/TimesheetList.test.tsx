@@ -72,9 +72,7 @@ describe('TimesheetList', () => {
   it('shows approve button only for submitted timesheets', async () => {
     renderTimesheets();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-    });
+    await waitForLoaded();
 
     const approveButtons = screen.getAllByRole('button', { name: /approve/i });
     expect(approveButtons).toHaveLength(1);
