@@ -66,12 +66,12 @@ dev: ## Start everything (infra + check + frontend dev servers in parallel)
 	sleep 2 && \
 	scripts/dev-apps.sh
 	@echo ""
-	@echo "HR site:  https://hr.assistance.bg"
-	@echo "HR blog:  https://blog.hr.assistance.bg"
-	@echo "HR docs:  https://docs.hr.assistance.bg"
-	@echo "HR admin: https://admin.hr.assistance.bg"
-	@echo "HR odoo:  https://odoo.hr.assistance.bg"
-	@echo "HR API:   https://hr.assistance.bg/api/v1/"
+	@echo "HR site:  https://hr.svc.assistance.bg"
+	@echo "HR blog:  https://blog.hr.svc.assistance.bg"
+	@echo "HR docs:  https://docs.hr.svc.assistance.bg"
+	@echo "HR admin: https://admin.hr.svc.assistance.bg"
+	@echo "HR odoo:  https://odoo.hr.svc.assistance.bg"
+	@echo "HR API:   https://hr.svc.assistance.bg/api/v1/"
 
 dev-apps: ## Start all frontend dev servers (www, blog, docs)
 	scripts/dev-apps.sh
@@ -189,11 +189,11 @@ bootstrap: install ## Full setup from scratch
 	@echo "Bootstrap complete!"
 	@echo ""
 	@echo "Services (via remote Caddy gateway):"
-	@echo "  HR site      https://hr.assistance.bg"
-	@echo "  HR blog      https://blog.hr.assistance.bg"
-	@echo "  HR docs      https://docs.hr.assistance.bg"
-	@echo "  HR admin     https://admin.hr.assistance.bg"
-	@echo "  HR API       https://api.hr.assistance.bg"
-	@echo "  HR Odoo      https://odoo.hr.assistance.bg"
+	@echo "  HR site      https://hr.svc.assistance.bg"
+	@echo "  HR blog      https://blog.hr.svc.assistance.bg"
+	@echo "  HR docs      https://docs.hr.svc.assistance.bg"
+	@echo "  HR admin     https://admin.hr.svc.assistance.bg"
+	@echo "  HR API       https://api.hr.svc.assistance.bg"
+	@echo "  HR Odoo      https://odoo.hr.svc.assistance.bg"
 
 .DEFAULT_GOAL := help
