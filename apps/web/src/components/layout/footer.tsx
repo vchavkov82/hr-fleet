@@ -19,7 +19,7 @@ export default async function Footer() {
       label: t('columns.company.label'),
       links: [
         { label: t('columns.company.about'), href: '/about' },
-        { label: t('columns.resources.blog'), href: 'https://blog.hr.assistance.bg', isExternal: true },
+        { label: t('columns.resources.blog'), href: 'https://blog.hr.svc.assistance.bg', isExternal: true },
         { label: t('columns.resources.docs'), href: 'https://docs.hr.assistance.bg', isExternal: true },
         { label: t('columns.resources.admin'), href: 'https://admin.hr.assistance.bg', isExternal: true },
         { label: t('columns.resources.helpCenter'), href: '/help-center' },
