@@ -35,6 +35,7 @@ services:
       - ../:/workspace
     working_dir: /workspace/apps/admin
     environment:
+      - VITE_API_URL=
       - VITE_API_PROXY_TARGET=http://hr-api:8080
     entrypoint: sh
     command: ["-c", "cd /workspace && npm i -g pnpm && pnpm install && cd apps/admin && pnpm dev --host 0.0.0.0 --port 5014"]
