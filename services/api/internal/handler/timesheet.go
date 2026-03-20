@@ -64,11 +64,7 @@ func (h *TimesheetHandler) HandleList(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	RespondJSON(w, http.StatusOK, map[string]any{
-		"data":  entries,
-		"total": total,
-		"page":  page,
-	})
+	RespondList(w, entries, int64(total), page, perPage)
 }
 
 // HandleCreate handles POST /api/v1/timesheets
