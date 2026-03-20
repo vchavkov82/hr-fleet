@@ -29,6 +29,9 @@ type Config struct {
 	StripeSuccessURL     string // STRIPE_SUCCESS_URL
 	StripeCancelURL      string // STRIPE_CANCEL_URL
 	SubscriptionEnforce  bool   // SUBSCRIPTION_ENFORCE=true blocks writes when subscription is canceled
+	// Cloudflare DNS management (optional)
+	CloudflareAPIToken string // CF_API_TOKEN — scoped API token for DNS edits
+	CloudflareZoneID   string // CF_ZONE_ID — zone ID for the managed domain
 }
 
 // Load reads configuration from environment variables.
@@ -54,6 +57,8 @@ func Load() (*Config, error) {
 		StripeSuccessURL:  envOrDefault("STRIPE_SUCCESS_URL", ""),
 		StripeCancelURL:   envOrDefault("STRIPE_CANCEL_URL", ""),
 		SubscriptionEnforce: os.Getenv("SUBSCRIPTION_ENFORCE") == "true",
+		CloudflareAPIToken:  os.Getenv("CF_API_TOKEN"),
+		CloudflareZoneID:    os.Getenv("CF_ZONE_ID"),
 	}
 
 	var errs []error

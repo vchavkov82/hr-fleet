@@ -29,6 +29,7 @@ import (
 	"github.com/vchavkov/hr/services/api/internal/middleware"
 	"github.com/vchavkov/hr/services/api/internal/service"
 	"github.com/vchavkov/hr/services/api/internal/worker"
+	cfclient "github.com/vchavkov/hr/services/api/platform/cloudflare"
 	"github.com/vchavkov/hr/services/api/platform/odoo"
 )
 
@@ -112,6 +113,14 @@ func main() {
 	projectSvc := service.NewProjectService(odooClient, redisCache)
 	fleetSvc := service.NewFleetService(odooClient, redisCache)
 
+	// Cloudflare DNS (optional — only initialized when both token and zone are set)
+	var dnsSvc *service.DNSService
+	if cfg.CloudflareAPIToken != "" && cfg.CloudflareZoneID != "" {
+		cfClient := cfclient.NewClient(cfg.CloudflareAPIToken, cfg.CloudflareZoneID)
+		dnsSvc = service.NewDNSService(cfClient)
+		log.Println("cloudflare: DNS management enabled for zone", cfg.CloudflareZoneID)
+	}
+
 	// Signal handling
 	sigCh := make(chan os.Signal, 1)
 	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
@@ -119,13 +128,13 @@ func main() {
 	switch *mode {
 	case "api":
 		runAPI(cfg, pool, queries, redisCache, odooClient, tokenAuth, asynqClient, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
-			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, appraisalSvc, courseSvc, projectSvc, fleetSvc, sigCh)
+			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, appraisalSvc, courseSvc, projectSvc, fleetSvc, dnsSvc, sigCh)
 	case "worker":
 		runWorker(cfg, queries, sigCh)
 	case "both":
 		go runWorker(cfg, queries, sigCh)
 		runAPI(cfg, pool, queries, redisCache, odooClient, tokenAuth, asynqClient, authSvc, employeeSvc, contractSvc, leaveSvc, payrollSvc, payslipSvc, reportSvc, webhookSvc,
-			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, appraisalSvc, courseSvc, projectSvc, fleetSvc, sigCh)
+			departmentSvc, skillSvc, payrollOCASvc, timesheetSvc, attendanceSvc, expenseSvc, appraisalSvc, courseSvc, projectSvc, fleetSvc, dnsSvc, sigCh)
 	default:
 		log.Fatalf("unknown mode: %s (use api, worker, or both)", *mode)
 	}
@@ -157,6 +166,7 @@ func runAPI(
 	courseSvc *service.CourseService,
 	projectSvc *service.ProjectService,
 	fleetSvc *service.FleetService,
+	dnsSvc *service.DNSService,
 	sigCh <-chan os.Signal,
 ) {
 	// Handlers
@@ -169,6 +179,12 @@ func runAPI(
 	reportHandler := handler.NewReportHandler(reportSvc)
 	webhookHandler := handler.NewWebhookHandler(webhookSvc)
 	billingHandler := handler.NewBillingHandler(queries, cfg.StripeSecretKey, cfg.StripePriceID, cfg.StripeSuccessURL, cfg.StripeCancelURL, cfg.StripeWebhookSecret)
+
+	// DNS handler (optional — nil-safe, routes only registered when service is configured)
+	var dnsHandler *handler.DNSHandler
+	if dnsSvc != nil {
+		dnsHandler = handler.NewDNSHandler(dnsSvc)
+	}
 
 	// OCA handlers
 	departmentHandler := handler.NewDepartmentHandler(departmentSvc)
@@ -391,6 +407,19 @@ func runAPI(
 				r.Get("/vehicles/{id}", fleetHandler.HandleGetVehicle)
 				r.Get("/vehicles/{id}/logs", fleetHandler.HandleListVehicleLogs)
 			})
+
+			// Cloudflare DNS management (only when CF_API_TOKEN + CF_ZONE_ID are set)
+			if dnsHandler != nil {
+				r.Route("/dns", func(r chi.Router) {
+					r.Use(middleware.RequireRole("admin"))
+					r.Get("/zone", dnsHandler.HandleGetZone)
+					r.Get("/records", dnsHandler.HandleListRecords)
+					r.Post("/records", dnsHandler.HandleCreateRecord)
+					r.Get("/records/{id}", dnsHandler.HandleGetRecord)
+					r.Put("/records/{id}", dnsHandler.HandleUpdateRecord)
+					r.Delete("/records/{id}", dnsHandler.HandleDeleteRecord)
+				})
+			}
 		})
 
 		// Odoo webhooks — outside auth group; optional shared secret in JSON body (token)
