@@ -34,13 +34,16 @@ const STATUS_MAP: Record<string, StatusConfig> = {
 };
 
 interface StatusChipProps {
-  status: string;
+  status?: string | null;
   size?: 'small' | 'medium';
 }
 
 export const StatusChip: React.FC<StatusChipProps> = ({ status, size = 'small' }) => {
-  const config = STATUS_MAP[status] || { color: 'default' as StatusType };
-  const label = config.label || status.charAt(0).toUpperCase() + status.slice(1).replace(/_/g, ' ');
+  const key = (status ?? '').trim();
+  const config = STATUS_MAP[key] || { color: 'default' as StatusType };
+  const label =
+    config.label ||
+    (key ? key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ') : '—');
 
   return <Chip label={label} size={size} color={config.color} />;
 };

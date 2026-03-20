@@ -122,7 +122,7 @@ export const ContractList: React.FC = () => {
             </Table>
             <TablePagination
               component="div"
-              count={data?.meta.total ?? 0}
+              count={data?.meta?.total ?? 0}
               page={page}
               onPageChange={(_, newPage) => setPage(newPage)}
               rowsPerPage={rowsPerPage}
