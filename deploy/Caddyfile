@@ -31,7 +31,7 @@
 }
 
 # ── HR marketing site (Next.js) ─────────────────────────────────────────────
-{$HR_DOMAIN:hr.localhost} {
+{$HR_DOMAIN:hr.assistance.bg} {
 	encode gzip zstd
 	import common_headers
 
