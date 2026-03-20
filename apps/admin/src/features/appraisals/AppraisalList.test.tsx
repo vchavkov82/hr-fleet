@@ -62,7 +62,7 @@ describe('AppraisalList', () => {
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('Jane Smith')).toBeInTheDocument();
     expect(screen.getByText('Bob Wilson')).toBeInTheDocument();
-    expect(screen.getByText('Jane Manager')).toBeInTheDocument();
+    expect(screen.getAllByText('Jane Manager').length).toBeGreaterThan(0);
   });
 
   it('shows loading spinner initially', () => {
