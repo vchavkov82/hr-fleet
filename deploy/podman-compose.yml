@@ -69,7 +69,7 @@ services:
     container_name: hr-admin
     hostname: hr-admin
     ports:
-      - "127.0.0.1:5014:5014"
+      - "0.0.0.0:5014:5014"
     env_file:
       - ../.env
     networks:
