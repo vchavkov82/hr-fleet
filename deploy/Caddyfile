@@ -99,7 +99,7 @@
 }
 
 # ── HR docs (Astro Starlight) ───────────────────────────────────────────────
-{$HR_DOCS_DOMAIN:docs.localhost} {
+{$HR_DOCS_DOMAIN:docs.hr.assistance.bg} {
 	encode gzip zstd
 	import common_headers
 
