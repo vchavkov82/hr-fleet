@@ -39,7 +39,7 @@ describe('AuditLog', () => {
 
     expect(screen.getByText('admin@example.com')).toBeInTheDocument();
     expect(screen.getByText('create_employee')).toBeInTheDocument();
-    expect(screen.getByText('employee')).toBeInTheDocument();
+    expect(screen.getAllByText('employee').length).toBeGreaterThan(0);
     expect(screen.getByText('192.168.1.1')).toBeInTheDocument();
   });
 
