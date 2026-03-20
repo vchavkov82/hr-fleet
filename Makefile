@@ -188,12 +188,12 @@ install: ## Install all HR dependencies
 bootstrap: install ## Full setup from scratch
 	@echo "Bootstrap complete!"
 	@echo ""
-	@echo "Via Caddy:"
+	@echo "Services (via remote Caddy gateway):"
 	@echo "  HR site      https://hr.assistance.bg"
 	@echo "  HR blog      https://blog.hr.assistance.bg"
 	@echo "  HR docs      https://docs.hr.assistance.bg"
 	@echo "  HR admin     https://admin.hr.assistance.bg"
-	@echo "  HR odoo      https://odoo.hr.assistance.bg"
-	@echo "  HR API       https://hr.assistance.bg/api/v1/"
+	@echo "  HR API       https://api.hr.assistance.bg"
+	@echo "  HR Odoo      https://odoo.hr.assistance.bg"
 
 .DEFAULT_GOAL := help
