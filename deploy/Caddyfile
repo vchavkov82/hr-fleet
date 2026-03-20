@@ -2,18 +2,15 @@
 # All app services sit behind Caddy; users only ever see port 80/443.
 #
 # Environment variables (set in .env or container env):
-#   HR_DOMAIN       HR marketing site      e.g. hr.example.com
-#   HR_BLOG_DOMAIN  HR blog subdomain      e.g. blog.hr.example.com
-#   HR_DOCS_DOMAIN  HR docs subdomain      e.g. docs.hr.example.com
-#   HR_ADMIN_DOMAIN HR admin panel         e.g. admin.hr.example.com
-#   HR_ODOO_DOMAIN  Odoo ERP backend       e.g. odoo.hr.example.com
-#   ACME_EMAIL      Let's Encrypt contact  e.g. admin@hr.example.com
+#   HR_DOMAIN       HR marketing site      e.g. hr.assistance.bg
+#   HR_BLOG_DOMAIN  HR blog subdomain      e.g. blog.hr.assistance.bg
+#   HR_DOCS_DOMAIN  HR docs subdomain      e.g. docs.hr.assistance.bg
+#   HR_ADMIN_DOMAIN HR admin panel         e.g. admin.hr.assistance.bg
+#   HR_ODOO_DOMAIN  Odoo ERP backend       e.g. odoo.hr.assistance.bg
+#   ACME_EMAIL      Let's Encrypt contact  e.g. admin@assistance.bg
 #
-# Local dev defaults:
-#   hr.localhost, blog.hr.localhost, docs.localhost, admin.hr.localhost, odoo.hr.localhost
-#
-# To test subdomains locally, add to /etc/hosts:
-#   127.0.0.1  hr.localhost blog.hr.localhost docs.localhost admin.hr.localhost odoo.hr.localhost
+# Default domains: hr.assistance.bg, blog.hr.assistance.bg, docs.hr.assistance.bg,
+#   admin.hr.assistance.bg, odoo.hr.assistance.bg
 
 {
 	email {$ACME_EMAIL:admin@hr.example.com}
