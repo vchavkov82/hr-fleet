@@ -66,7 +66,12 @@ dev: ## Start everything (infra + check + frontend dev servers in parallel)
 	sleep 2 && \
 	scripts/dev-apps.sh
 	@echo ""
-	@echo "HR docs dev: http://$$(hostname -f 2>/dev/null || hostname):5011"
+	@echo "HR site:  https://hr.assistance.bg"
+	@echo "HR blog:  https://blog.hr.assistance.bg"
+	@echo "HR docs:  https://docs.hr.assistance.bg"
+	@echo "HR admin: https://admin.hr.assistance.bg"
+	@echo "HR odoo:  https://odoo.hr.assistance.bg"
+	@echo "HR API:   https://hr.assistance.bg/api/v1/"
 
 dev-apps: ## Start all frontend dev servers (www, blog, docs)
 	scripts/dev-apps.sh
