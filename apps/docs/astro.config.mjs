@@ -12,7 +12,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   server: { host: true, port: 5011 },
-  site: 'https://docs.jobshr.com',
+  site: 'https://docs.hr.assistance.bg',
 
   integrations: [
     starlight({
