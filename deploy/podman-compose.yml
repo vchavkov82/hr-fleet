@@ -11,7 +11,7 @@ services:
     container_name: hr-api
     hostname: hr-api
     ports:
-      - "127.0.0.1:5080:8080"
+      - "0.0.0.0:5080:8080"
     env_file:
       - ../.env
     environment:
