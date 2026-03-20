@@ -1,17 +1,8 @@
 # HR Product — Development Overrides
 # Source mounts for hot-reload, dev commands, and dev-only env vars.
-#
-# Caddy uses ports 5090/5453 instead of 80/443 to avoid conflicting with
-# ../jobs which occupies 80/443 and port 8080 (Go API).
-# Access locally via:  http://hr.localhost:5090  /  https://hr.localhost:5453
+# Remote Caddy gateway at ~/src/registry/caddy/ handles TLS + routing.
 
 services:
-
-  caddy:
-    ports:
-      - "0.0.0.0:5090:80"
-      - "0.0.0.0:5453:443"
-      - "0.0.0.0:5453:443/udp"
 
   hr:
     volumes:
