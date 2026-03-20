@@ -1,76 +1,76 @@
 [submodule "deploy/odoo-addons/server-tools"]
 	path = deploy/odoo-addons/server-tools
-	url = https://github.com/OCA/server-tools.git
+	url = git@github.com:vchavkov82/hr-server-tools.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/payroll"]
 	path = deploy/odoo-addons/payroll
-	url = https://github.com/OCA/payroll.git
+	url = git@github.com:vchavkov82/hr-payroll.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/hr"]
 	path = deploy/odoo-addons/hr
-	url = https://github.com/OCA/hr.git
+	url = git@github.com:vchavkov82/hr-hr.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/hr-holidays"]
 	path = deploy/odoo-addons/hr-holidays
-	url = https://github.com/OCA/hr-holidays.git
+	url = git@github.com:vchavkov82/hr-hr-holidays.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/hr-attendance"]
 	path = deploy/odoo-addons/hr-attendance
-	url = https://github.com/OCA/hr-attendance.git
+	url = git@github.com:vchavkov82/hr-hr-attendance.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/hr-expense"]
 	path = deploy/odoo-addons/hr-expense
-	url = https://github.com/OCA/hr-expense.git
+	url = git@github.com:vchavkov82/hr-hr-expense.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/timesheet"]
 	path = deploy/odoo-addons/timesheet
-	url = https://github.com/OCA/timesheet.git
+	url = git@github.com:vchavkov82/hr-timesheet.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/reporting-engine"]
 	path = deploy/odoo-addons/reporting-engine
-	url = https://github.com/OCA/reporting-engine.git
+	url = git@github.com:vchavkov82/hr-reporting-engine.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/account-financial-reporting"]
 	path = deploy/odoo-addons/account-financial-reporting
-	url = https://github.com/OCA/account-financial-reporting.git
+	url = git@github.com:vchavkov82/hr-account-financial-reporting.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/web"]
 	path = deploy/odoo-addons/web
-	url = https://github.com/OCA/web.git
+	url = git@github.com:vchavkov82/hr-web.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/project"]
 	path = deploy/odoo-addons/project
-	url = https://github.com/OCA/project.git
+	url = git@github.com:vchavkov82/hr-project.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/fleet"]
 	path = deploy/odoo-addons/fleet
-	url = https://github.com/OCA/fleet.git
+	url = git@github.com:vchavkov82/hr-fleet.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/rest-framework"]
 	path = deploy/odoo-addons/rest-framework
-	url = https://github.com/OCA/rest-framework.git
+	url = git@github.com:vchavkov82/hr-rest-framework.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/queue"]
 	path = deploy/odoo-addons/queue
-	url = https://github.com/OCA/queue.git
+	url = git@github.com:vchavkov82/hr-queue.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/contract"]
 	path = deploy/odoo-addons/contract
-	url = https://github.com/OCA/contract.git
+	url = git@github.com:vchavkov82/hr-contract.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/partner-contact"]
 	path = deploy/odoo-addons/partner-contact
-	url = https://github.com/OCA/partner-contact.git
+	url = git@github.com:vchavkov82/hr-partner-contact.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/data-protection"]
 	path = deploy/odoo-addons/data-protection
-	url = https://github.com/OCA/data-protection.git
+	url = git@github.com:vchavkov82/hr-data-protection.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/survey"]
 	path = deploy/odoo-addons/survey
-	url = https://github.com/OCA/survey.git
+	url = git@github.com:vchavkov82/hr-survey.git
 	branch = 18.0
 [submodule "deploy/odoo-addons/server-ux"]
 	path = deploy/odoo-addons/server-ux
-	url = https://github.com/OCA/server-ux.git
+	url = git@github.com:vchavkov82/hr-server-ux.git
 	branch = 18.0
