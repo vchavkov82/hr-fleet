@@ -43,9 +43,7 @@ describe('TimesheetList', () => {
   it('renders timesheets from API', async () => {
     renderTimesheets();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-    });
+    await waitForLoaded();
 
     expect(screen.getByText('Timesheets')).toBeInTheDocument();
     expect(screen.getByText('John Doe')).toBeInTheDocument();
