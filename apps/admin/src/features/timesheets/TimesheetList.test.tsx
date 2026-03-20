@@ -85,9 +85,7 @@ describe('TimesheetList', () => {
 
     renderTimesheets();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-    });
+    await waitForLoaded();
 
     expect(screen.getByText('No timesheets found')).toBeInTheDocument();
   });
