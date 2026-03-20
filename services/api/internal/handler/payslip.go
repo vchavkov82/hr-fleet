@@ -14,6 +14,7 @@ import (
 // PayslipServicer defines the interface for payslip operations.
 type PayslipServicer interface {
 	Get(ctx context.Context, id pgtype.UUID) (db.Payslip, error)
+	List(ctx context.Context, payrollRunID pgtype.UUID, limit, offset int) ([]db.ListPayslipsRow, int64, error)
 	ListByRun(ctx context.Context, payrollRunID pgtype.UUID) ([]db.Payslip, error)
 }
 
@@ -58,12 +59,14 @@ func (h *PayslipHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	RespondJSON(w, http.StatusOK, payslip)
 }
 
-// HandleList handles GET /api/v1/payslips?payroll_run_id=.
+// HandleList handles GET /api/v1/payslips.
 // @Summary List payslips
-// @Description List payslips for a specific payroll run
+// @Description List payslips with pagination, optionally filtered by payroll run
 // @Tags Payslips
 // @Produce json
-// @Param payroll_run_id query string true "Payroll run ID (UUID)"
+// @Param payroll_run_id query string false "Filter by payroll run ID (UUID)"
+// @Param page query integer false "Page number (default 1)"
+// @Param per_page query integer false "Items per page (default 25)"
 // @Success 200 {object} map[string]any
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
@@ -71,28 +74,25 @@ func (h *PayslipHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 // @Security APIKeyAuth
 // @Router /payslips [get]
 func (h *PayslipHandler) HandleList(w http.ResponseWriter, r *http.Request) {
-	runIDStr := r.URL.Query().Get("payroll_run_id")
-	if runIDStr == "" {
-		RespondError(w, http.StatusBadRequest, "missing_param", "payroll_run_id query parameter is required")
-		return
-	}
+	page := intQueryParam(r, "page", 1)
+	perPage := intQueryParam(r, "per_page", 25)
+	offset := (page - 1) * perPage
 
 	var runID pgtype.UUID
-	if err := runID.Scan(runIDStr); err != nil || !runID.Valid {
-		RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid payroll_run_id UUID")
-		return
+	if runIDStr := r.URL.Query().Get("payroll_run_id"); runIDStr != "" {
+		if err := runID.Scan(runIDStr); err != nil || !runID.Valid {
+			RespondError(w, http.StatusBadRequest, "invalid_id", "Invalid payroll_run_id UUID")
+			return
+		}
 	}
 
-	payslips, err := h.svc.ListByRun(r.Context(), runID)
+	payslips, total, err := h.svc.List(r.Context(), runID, perPage, offset)
 	if err != nil {
 		RespondError(w, http.StatusInternalServerError, "list_failed", "Failed to list payslips")
 		return
 	}
 
-	RespondJSON(w, http.StatusOK, map[string]any{
-		"data":  payslips,
-		"total": len(payslips),
-	})
+	RespondList(w, payslips, total, page, perPage)
 }
 
 // HandleConfirm handles POST /api/v1/payslips/{id}/confirm.
