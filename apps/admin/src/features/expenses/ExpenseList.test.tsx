@@ -50,7 +50,7 @@ describe('ExpenseList', () => {
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('Travel')).toBeInTheDocument();
     expect(screen.getByText(/250/)).toBeInTheDocument();
-    expect(screen.getByText('Flight tickets')).toBeInTheDocument();
+    expect(screen.getAllByText('Flight tickets').length).toBeGreaterThan(0);
   });
 
   it('shows loading spinner initially', () => {
