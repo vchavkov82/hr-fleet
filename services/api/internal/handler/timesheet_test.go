@@ -79,8 +79,9 @@ func TestTimesheetHandleList_Success(t *testing.T) {
 	if !ok || len(data) != 2 {
 		t.Errorf("expected 2 entries, got %v", resp["data"])
 	}
-	if resp["total"] != float64(10) {
-		t.Errorf("total = %v, want 10", resp["total"])
+	meta, _ := resp["meta"].(map[string]any)
+	if meta["total"] != float64(10) {
+		t.Errorf("total = %v, want 10", meta["total"])
 	}
 }
 
