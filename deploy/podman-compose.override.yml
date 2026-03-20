@@ -10,8 +10,6 @@ services:
       - hr_node_modules:/workspace/node_modules
     working_dir: /workspace/apps/web
     environment:
-      - PORT=3010
-      - HOSTNAME=0.0.0.0
       - HR_BLOG_URL=http://hr-blog:3013
     entrypoint: sh
     command: ["-c", "cd /workspace && npm i -g pnpm && pnpm install && cd apps/web && pnpm dev"]
