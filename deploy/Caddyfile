@@ -86,7 +86,7 @@
 }
 
 # ── Admin panel (Vite SPA) ──────────────────────────────────────────────────
-{$HR_ADMIN_DOMAIN:admin.hr.localhost} {
+{$HR_ADMIN_DOMAIN:admin.hr.assistance.bg} {
 	encode gzip zstd
 	import common_headers
 
