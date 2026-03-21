@@ -2,6 +2,7 @@
   "name": "@hr/blog",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "prettier": "@hr/prettier-config",
   "scripts": {
     "dev": "next dev -p 5013",
