@@ -1,23 +1,25 @@
 @import "tailwindcss";
+@import "@hr/design-system/styles/globals.css";
 @import "./typography.css";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root,
 html[data-theme="light"] {
-  --background: #ffffff;
-  --foreground: #111827;
-  --accent: #1B4DDB;
-  --surface: #f9fafb;
-  --surface-strong: #f3f4f6;
-  --muted: #e5e7eb;
-  --border: #e5e7eb;
+  /* Map blog theme variables to design-system tokens */
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
+  --accent: var(--color-primary);
+  --surface: var(--color-gray-50);
+  --surface-strong: var(--color-gray-100);
+  --muted: var(--color-gray-200);
+  --border: var(--color-border);
 }
 
 html[data-theme="dark"] {
   --background: #111827;
   --foreground: #f9fafb;
-  --accent: #3B6EF0;
+  --accent: var(--color-primary-light);
   --surface: #1f2937;
   --surface-strong: #374151;
   --muted: #374151;
