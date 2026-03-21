@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "prettier": "@hr/prettier-config",
   "scripts": {
     "dev": "vite --port 5012",
     "build": "tsc -b && vite build",
@@ -26,6 +27,7 @@
     "zod": "^3.25.3"
   },
   "devDependencies": {
+    "@hr/prettier-config": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.0.0",
