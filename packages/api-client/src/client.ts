@@ -48,17 +48,15 @@ export interface ApiClientOptions {
   getToken?: () => string | null | undefined | Promise<string | null | undefined>
 }
 
-type ParamsRecord = Record<string, string | number | boolean | undefined | null>
+type ParamsRecord = Record<string, string | number | boolean | null | undefined>
 
-type RequestOptions = {
+interface RequestOptions {
   params?: ParamsRecord
   body?: unknown
   signal?: AbortSignal
 }
 
-function buildQuery(
-  params: Record<string, string | number | boolean | undefined | null>,
-): string {
+function buildQuery(params: ParamsRecord): string {
   const qs = new URLSearchParams()
   for (const [key, value] of Object.entries(params)) {
     if (value !== undefined && value !== null) {
@@ -67,6 +65,12 @@ function buildQuery(
   }
   const str = qs.toString()
   return str ? `?${str}` : ''
+}
+
+/** Wraps optional list params into a RequestOptions object. */
+function withParams(params: ParamsRecord | undefined): RequestOptions {
+  if (params === undefined) return {}
+  return { params }
 }
 
 export class ApiClient {
@@ -84,7 +88,7 @@ export class ApiClient {
     options: RequestOptions = {},
   ): Promise<T> {
     const token = await this.getToken()
-    const query = options.params ? buildQuery(options.params) : ''
+    const query = options.params !== undefined ? buildQuery(options.params) : ''
     const url = `${this.baseUrl}/api/v1${path}${query}`
 
     const headers: Record<string, string> = {
@@ -100,21 +104,24 @@ export class ApiClient {
     const res = await fetch(url, init)
 
     if (!res.ok) {
-      const body = await res.text().catch(() => 'Unknown error')
-      // Try to extract message from JSON error envelope { "error": { "message": "..." } }
-      let message = body
+      const rawBody = await res.text().catch(() => 'Unknown error')
+      let message: string = rawBody
       try {
-        const parsed = JSON.parse(body) as unknown
+        const parsed: unknown = JSON.parse(rawBody)
         if (
           parsed !== null &&
           typeof parsed === 'object' &&
-          'error' in parsed &&
-          parsed.error !== null &&
-          typeof parsed.error === 'object' &&
-          'message' in parsed.error &&
-          typeof (parsed.error as Record<string, unknown>).message === 'string'
+          'error' in parsed
         ) {
-          message = (parsed.error as Record<string, string>).message
+          const errField = (parsed as Record<string, unknown>)['error']
+          if (
+            errField !== null &&
+            typeof errField === 'object' &&
+            'message' in errField
+          ) {
+            const msg = (errField as Record<string, unknown>)['message']
+            if (typeof msg === 'string') message = msg
+          }
         }
       } catch {
         // leave message as raw body text
@@ -182,9 +189,11 @@ export class ApiClient {
   getEmployees(
     params?: EmployeeListParams,
   ): Promise<PaginatedResponse<Employee>> {
-    return this.request<PaginatedResponse<Employee>>('GET', '/employees', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<Employee>>(
+      'GET',
+      '/employees',
+      withParams(params),
+    )
   }
 
   getEmployee(id: string): Promise<Employee> {
@@ -248,9 +257,11 @@ export class ApiClient {
   getDepartments(
     params?: DepartmentListParams,
   ): Promise<PaginatedResponse<Department>> {
-    return this.request<PaginatedResponse<Department>>('GET', '/departments', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<Department>>(
+      'GET',
+      '/departments',
+      withParams(params),
+    )
   }
 
   getDepartment(id: string): Promise<Department> {
@@ -293,7 +304,7 @@ export class ApiClient {
     return this.request<PaginatedResponse<LeaveRequest>>(
       'GET',
       '/leave/requests',
-      { params: params as RequestOptions['params'] },
+      withParams(params),
     )
   }
 
@@ -316,9 +327,11 @@ export class ApiClient {
   getContracts(
     params?: ContractListParams,
   ): Promise<PaginatedResponse<Contract>> {
-    return this.request<PaginatedResponse<Contract>>('GET', '/contracts', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<Contract>>(
+      'GET',
+      '/contracts',
+      withParams(params),
+    )
   }
 
   // ---------------------------------------------------------------------------
@@ -328,9 +341,11 @@ export class ApiClient {
   getTimesheets(
     params?: TimesheetListParams,
   ): Promise<PaginatedResponse<Timesheet>> {
-    return this.request<PaginatedResponse<Timesheet>>('GET', '/timesheets', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<Timesheet>>(
+      'GET',
+      '/timesheets',
+      withParams(params),
+    )
   }
 
   approveTimesheet(id: string): Promise<void> {
@@ -344,9 +359,11 @@ export class ApiClient {
   getAttendance(
     params?: AttendanceListParams,
   ): Promise<PaginatedResponse<Attendance>> {
-    return this.request<PaginatedResponse<Attendance>>('GET', '/attendance', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<Attendance>>(
+      'GET',
+      '/attendance',
+      withParams(params),
+    )
   }
 
   // ---------------------------------------------------------------------------
@@ -356,9 +373,11 @@ export class ApiClient {
   getPayrollRuns(
     params?: PayrollRunListParams,
   ): Promise<PaginatedResponse<PayrollRun>> {
-    return this.request<PaginatedResponse<PayrollRun>>('GET', '/payroll/runs', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<PayrollRun>>(
+      'GET',
+      '/payroll/runs',
+      withParams(params),
+    )
   }
 
   getPayrollRun(id: string): Promise<PayrollRun> {
@@ -368,9 +387,11 @@ export class ApiClient {
   getPayslips(
     params?: PayslipListParams,
   ): Promise<PaginatedResponse<Payslip>> {
-    return this.request<PaginatedResponse<Payslip>>('GET', '/payslips', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<Payslip>>(
+      'GET',
+      '/payslips',
+      withParams(params),
+    )
   }
 
   getPayrollRunPayslips(
@@ -389,9 +410,11 @@ export class ApiClient {
   getExpenses(
     params?: ExpenseListParams,
   ): Promise<PaginatedResponse<Expense>> {
-    return this.request<PaginatedResponse<Expense>>('GET', '/expenses', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<Expense>>(
+      'GET',
+      '/expenses',
+      withParams(params),
+    )
   }
 
   approveExpense(id: string): Promise<void> {
@@ -409,9 +432,11 @@ export class ApiClient {
   getAppraisals(
     params?: AppraisalListParams,
   ): Promise<PaginatedResponse<Appraisal>> {
-    return this.request<PaginatedResponse<Appraisal>>('GET', '/appraisals', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<Appraisal>>(
+      'GET',
+      '/appraisals',
+      withParams(params),
+    )
   }
 
   // ---------------------------------------------------------------------------
@@ -419,9 +444,11 @@ export class ApiClient {
   // ---------------------------------------------------------------------------
 
   getCourses(params?: CourseListParams): Promise<PaginatedResponse<Course>> {
-    return this.request<PaginatedResponse<Course>>('GET', '/training/courses', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<Course>>(
+      'GET',
+      '/training/courses',
+      withParams(params),
+    )
   }
 
   // ---------------------------------------------------------------------------
@@ -429,13 +456,15 @@ export class ApiClient {
   // ---------------------------------------------------------------------------
 
   getUsers(params?: UserListParams): Promise<PaginatedResponse<User>> {
-    return this.request<PaginatedResponse<User>>('GET', '/users', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<User>>(
+      'GET',
+      '/users',
+      withParams(params),
+    )
   }
 
   // ---------------------------------------------------------------------------
-  // Org Settings
+  // Org settings
   // ---------------------------------------------------------------------------
 
   getOrgSettings(): Promise<OrgSettings> {
@@ -455,8 +484,10 @@ export class ApiClient {
   getAuditLog(
     params?: AuditLogListParams,
   ): Promise<PaginatedResponse<AuditLogEntry>> {
-    return this.request<PaginatedResponse<AuditLogEntry>>('GET', '/audit-log', {
-      params: params as RequestOptions['params'],
-    })
+    return this.request<PaginatedResponse<AuditLogEntry>>(
+      'GET',
+      '/audit-log',
+      withParams(params),
+    )
   }
 }
