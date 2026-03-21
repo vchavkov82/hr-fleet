@@ -22,7 +22,7 @@ const nextConfig = {
   // Type checking runs as a separate turbo task (typecheck) for better parallelism
   typescript: { ignoreBuildErrors: true },
   serverExternalPackages: ['remark-gfm'],
-  allowedDevOrigins: ['hr.svc.chavkov.com', 'suse-06.lan.assistance.bg', 'suse-09.lan.assistance.bg'],
+  allowedDevOrigins: ['www.hr.svc.assistance.bg', 'hr.svc.chavkov.com', 'suse-06.lan.assistance.bg', 'suse-09.lan.assistance.bg'],
 
   // CDN asset prefix only in production; in dev this can cause stale chunk/runtime mismatches.
   assetPrefix: process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_CDN_URL || undefined : undefined,
