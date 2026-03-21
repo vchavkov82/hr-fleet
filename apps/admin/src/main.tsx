@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { App } from './App';
+import { ApiProvider } from './api/provider';
 import { AuthProvider } from './auth/AuthProvider';
 import { ColorModeProvider } from './theme/ColorMode';
 
@@ -10,7 +11,9 @@ createRoot(container!).render(
   <React.StrictMode>
     <ColorModeProvider>
       <AuthProvider>
-        <App />
+        <ApiProvider>
+          <App />
+        </ApiProvider>
       </AuthProvider>
     </ColorModeProvider>
   </React.StrictMode>,
