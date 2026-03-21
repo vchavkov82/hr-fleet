@@ -32,7 +32,7 @@ async function loadGoogleFont(
 }
 
 async function loadGoogleFonts(text: string) {
-  const fontsConfig = [
+  const fontsConfig: Array<{ name: string; font: string; weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900; style: string }> = [
     { name: 'IBM Plex Mono', font: 'IBM+Plex+Mono', weight: 400, style: 'normal' },
     { name: 'IBM Plex Mono', font: 'IBM+Plex+Mono', weight: 700, style: 'bold' },
   ]
