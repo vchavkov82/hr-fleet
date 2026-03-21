@@ -9,11 +9,11 @@ function buildQuery(params) {
     const str = qs.toString();
     return str ? `?${str}` : '';
 }
-/** Wraps optional list params into a RequestOptions object. */
+/** Wraps optional typed list params into a RequestOptions object. */
 function withParams(params) {
     if (params === undefined)
         return {};
-    return { params };
+    return { params: params };
 }
 export class ApiClient {
     baseUrl;

@@ -18,6 +18,8 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
+    "@hr/api-client": "workspace:*",
+    "@tanstack/react-query": "^5.80.0",
     "axios": "~1.9.0",
     "date-fns": "^4.1.0",
     "react": "^19.0.0",
