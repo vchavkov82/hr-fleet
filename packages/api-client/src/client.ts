@@ -94,12 +94,10 @@ export class ApiClient {
       headers['Authorization'] = `Bearer ${token}`
     }
 
-    const res = await fetch(url, {
-      method,
-      headers,
-      body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
-      signal: options.signal,
-    })
+    const init: RequestInit = { method, headers }
+    if (options.body !== undefined) init.body = JSON.stringify(options.body)
+    if (options.signal !== undefined) init.signal = options.signal
+    const res = await fetch(url, init)
 
     if (!res.ok) {
       const body = await res.text().catch(() => 'Unknown error')
