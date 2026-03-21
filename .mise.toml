@@ -84,7 +84,7 @@ node_modules/.bin/turbo run typecheck lint --cache-workers=4 &
 sleep 2
 scripts/dev-apps.sh
 echo ""
-echo "HR site:  https://hr.svc.assistance.bg"
+echo "HR site:  https://www.hr.svc.assistance.bg"
 echo "HR blog:  https://blog.hr.svc.assistance.bg"
 echo "HR docs:  https://docs.hr.svc.assistance.bg"
 echo "HR admin: https://admin.hr.svc.assistance.bg"
