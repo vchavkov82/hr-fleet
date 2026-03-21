@@ -49,7 +49,7 @@ services:
     container_name: hr-blog
     hostname: hr-blog
     ports:
-      - "0.0.0.0:5023:3013"
+      - "0.0.0.0:5023:5013"
     networks:
       - hr
     restart: unless-stopped
