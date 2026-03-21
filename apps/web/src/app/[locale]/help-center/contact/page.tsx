@@ -34,7 +34,7 @@ export default async function ContactPage({
     const { locale } = await params
 
     setRequestLocale(locale)
-    const t = await getTranslations('helpCenter')
+    await getTranslations('helpCenter')
 
     return (
         <div className="min-h-screen bg-white">
