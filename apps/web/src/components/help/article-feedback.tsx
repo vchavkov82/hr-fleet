@@ -7,7 +7,7 @@ interface ArticleFeedbackProps {
     className?: string
 }
 
-export function ArticleFeedback({ articleId, className = '' }: ArticleFeedbackProps) {
+export function ArticleFeedback({ articleId: _articleId, className = '' }: ArticleFeedbackProps) {
     const [feedback, setFeedback] = useState<'helpful' | 'not-helpful' | null>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [showThankYou, setShowThankYou] = useState(false)
