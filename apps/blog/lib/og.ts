@@ -56,6 +56,7 @@ export type OgPostData = {
 }
 
 export async function generateOgImageForPost(post: OgPostData): Promise<Buffer> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const svg = await satori(
     {
       type: 'div',
