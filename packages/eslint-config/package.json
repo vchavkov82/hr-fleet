@@ -1,0 +1,31 @@
+{
+  "name": "@hr/eslint-config",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./next": "./next.js",
+    "./astro": "./astro.js",
+    "./react": "./react.js"
+  },
+  "files": [
+    "index.js",
+    "next.js",
+    "astro.js",
+    "react.js"
+  ],
+  "dependencies": {
+    "@eslint/js": "^9.0.0",
+    "globals": "^16.0.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript-eslint": {
+      "optional": true
+    }
+  }
+}
