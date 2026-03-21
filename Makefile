@@ -66,7 +66,7 @@ dev: ## Start everything (infra + check + frontend dev servers in parallel)
 	sleep 2 && \
 	scripts/dev-apps.sh
 	@echo ""
-	@echo "HR site:  https://hr.svc.assistance.bg"
+	@echo "HR site:  https://www.hr.svc.assistance.bg"
 	@echo "HR blog:  https://blog.hr.svc.assistance.bg"
 	@echo "HR docs:  https://docs.hr.svc.assistance.bg"
 	@echo "HR admin: https://admin.hr.svc.assistance.bg"
