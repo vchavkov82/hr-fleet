@@ -48,8 +48,10 @@ export interface ApiClientOptions {
   getToken?: () => string | null | undefined | Promise<string | null | undefined>
 }
 
+type ParamsRecord = Record<string, string | number | boolean | undefined | null>
+
 type RequestOptions = {
-  params?: Record<string, string | number | boolean | undefined | null>
+  params?: ParamsRecord
   body?: unknown
   signal?: AbortSignal
 }
