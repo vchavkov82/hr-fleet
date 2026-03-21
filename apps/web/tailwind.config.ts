@@ -46,8 +46,8 @@ export default {
         'cta-gradient': `linear-gradient(135deg, ${colors.primary.DEFAULT} 0%, ${colors.primary[700]} 100%)`,
       },
       fontFamily: {
-        sans: typography.fontFamily.sans,
-        heading: typography.fontFamily.heading,
+        sans: [...typography.fontFamily.sans],
+        heading: [...typography.fontFamily.heading],
       },
       fontWeight: {
         extralight: `${typography.fontWeight.extralight}`,
