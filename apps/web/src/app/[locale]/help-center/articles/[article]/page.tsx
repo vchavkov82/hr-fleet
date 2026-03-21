@@ -2349,7 +2349,7 @@ After setting up your pipeline:
     return articles[articleId]
 }
 
-function getRelatedArticles(currentArticleId: string, category: string) {
+function getRelatedArticles(currentArticleId: string, _category: string) {
     const allArticles = [
         'getting-started', 'dashboard-overview', 'company-setup', 'notification-settings',
         'employee-directory', 'employee-data', 'employee-documents',
