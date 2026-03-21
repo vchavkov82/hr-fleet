@@ -64,6 +64,30 @@
 	}
 }
 
+# ── Go API (dedicated subdomain) ──────────────────────────────────────────────
+{$HR_API_DOMAIN} {
+	log {
+		output file /var/log/caddy/api-access.log {
+			roll_size 100mb
+			roll_keep 10
+		}
+	}
+
+	encode gzip zstd
+	import common_headers
+
+	header {
+		Access-Control-Allow-Origin "{$HR_CORS_ORIGIN:*}"
+		Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+		Access-Control-Allow-Headers "Content-Type, Authorization"
+		Access-Control-Max-Age "3600"
+	}
+
+	handle {
+		reverse_proxy hr-api:8080
+	}
+}
+
 # ── HR blog (Astro) ─────────────────────────────────────────────────────────
 {$HR_BLOG_DOMAIN} {
 	log {
