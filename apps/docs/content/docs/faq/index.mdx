@@ -1,0 +1,58 @@
+---
+title: Frequently Asked Questions
+description: Answers to common questions about the HR platform, covering setup, pricing, integrations, security, and Bulgarian compliance.
+sidebar:
+  order: 1
+---
+
+## General
+
+### What is HR and who is it for?
+
+HR is a cloud-native human resources management platform designed specifically for Bulgarian small and medium businesses. It provides employee management, leave tracking, payroll processing, and compliance reporting aligned with Bulgarian labor law and NRA requirements.
+
+### What languages does the platform support?
+
+The platform is Bulgarian-first with full English support. All user interfaces, documentation, and HR tools are available in both languages. The salary calculators and compliance features use Bulgarian tax tables and social security rates.
+
+### Is there a free trial?
+
+Yes. You can sign up for a free trial instantly without providing a credit card. The trial gives you access to all enabled modules so you can evaluate the platform with your own data before committing to a subscription.
+
+## Technical
+
+### What technology stack does HR use?
+
+The platform is a monorepo with Next.js 15 (React 19) for the marketing site, Vite 6 (React 19) for the admin panel, Astro 5 for the blog, a Go REST API with Chi router and PostgreSQL, and Odoo 18 for ERP functionality. Infrastructure runs on Podman containers with Caddy as the reverse proxy.
+
+### Can I self-host the platform?
+
+The platform is designed for cloud deployment but can be self-hosted using Podman Compose. You will need PostgreSQL 16 (application database), PostgreSQL 17 (Odoo database), Redis, and an Odoo 18 instance. See the [architecture documentation](/docs/core-concepts/architecture) for the full infrastructure requirements.
+
+### Does the API have rate limiting?
+
+Yes. Authentication endpoints are rate-limited to prevent brute-force attacks. API key endpoints have configurable rate limits based on the subscription tier.
+
+## Integrations
+
+### How does the Odoo integration work?
+
+The Go API communicates with Odoo 18 through a custom JSON-RPC client. Employee data, leave management, and accounting entries synchronize between the HR platform and Odoo. A two-layer cache (in-memory Ristretto + Redis) reduces load on the Odoo server, and a circuit breaker prevents cascading failures if Odoo becomes temporarily unavailable.
+
+### Can I integrate with other systems?
+
+Yes. The REST API with OpenAPI documentation allows integration with any system that can make HTTP requests. You can generate API keys with scoped permissions for server-to-server communication. The webhook system sends HMAC-SHA256 signed event notifications to your endpoints for real-time data synchronization.
+
+### Does HR integrate with Bulgarian payroll systems?
+
+The platform includes built-in Bulgarian payroll calculations covering social security contributions (DOO, DZPO, ZO), income tax, and net salary computation. All monetary values are stored as integers in stotinki to avoid floating-point rounding errors.
+
+## Security
+
+### How is my data protected?
+
+The platform implements multiple security layers: RS256 JWT authentication, seven-role RBAC with eleven granular permissions, tenant-level data isolation, audit logging on sensitive operations, and HTTPS encryption via Caddy's automatic TLS. API keys are stored as bcrypt hashes and webhook payloads are signed with HMAC-SHA256.
+
+### Where is my data stored?
+
+All data is stored in PostgreSQL databases within the deployment infrastructure. Employee data is isolated per tenant through tenant ID foreign keys on all core tables.
