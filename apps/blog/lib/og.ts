@@ -181,7 +181,7 @@ export async function generateOgImageForPost(post: OgPostData): Promise<Buffer> 
           },
         ],
       },
-    },
+    }) as ReactNode,
     {
       width: 1200,
       height: 630,
