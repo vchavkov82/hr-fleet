@@ -4,6 +4,7 @@ import slugify from "slugify";
 /**
  * Check if string contains non-Latin characters
  */
+// eslint-disable-next-line no-control-regex
 const hasNonLatin = (str: string): boolean => /[^\x00-\x7F]/.test(str);
 
 /**
