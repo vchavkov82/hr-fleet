@@ -73,7 +73,9 @@ export const designTokens = {
 export default {
   content: [
     '../../apps/web/src/**/*.{js,ts,jsx,tsx,mdx}',
-    '../../apps/blog/src/**/*.{js,ts,jsx,tsx,astro,md}',
+    '../../apps/blog/app/**/*.{js,ts,jsx,tsx,mdx}',
+    '../../apps/blog/components/**/*.{js,ts,jsx,tsx}',
+    '../../apps/blog/content/**/*.{md,mdx}',
     '../../apps/docs/src/**/*.{js,ts,jsx,tsx,astro,md}',
   ],
   darkMode: 'class',
