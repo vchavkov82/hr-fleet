@@ -1,6 +1,8 @@
 import nextConfig from '@hr/eslint-config/next'
 
-export default [
+const config = [
   ...nextConfig,
-  { ignores: ['.next/**', 'node_modules/**'] },
+  { ignores: ['.next/**', 'node_modules/**', 'public/**', 'next-env.d.ts'] },
 ]
+
+export default config
