@@ -1,23 +1,6 @@
-import js from '@eslint/js'
-import tseslint from 'typescript-eslint'
-import globals from 'globals'
+import reactConfig from "@hr/eslint-config/react";
 
-export default tseslint.config(
-  { ignores: ['dist', 'node_modules'] },
-  {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: 'module',
-      globals: {
-        ...globals.browser,
-        ...globals.es2022,
-      },
-    },
-    rules: {
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/no-explicit-any': 'warn',
-    },
-  }
-)
+export default [
+  ...reactConfig,
+  { ignores: ["dist/**"] },
+];
