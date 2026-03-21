@@ -57,10 +57,10 @@ export type OgPostData = {
 }
 
 export async function generateOgImageForPost(post: OgPostData): Promise<Buffer> {
-  // satori accepts virtual DOM objects; cast to satisfy React.ReactNode typing
+  // satori accepts virtual DOM objects but types them as ReactNode
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const svg = await satori(
-    {
+    ({
       type: 'div',
       props: {
         style: {
