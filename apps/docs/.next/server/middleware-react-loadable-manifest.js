@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST='{"components/Header.tsx -> @docsearch/react":{"id":6413,"files":["static/chunks/413.869f7ee9f958ecad.js"]}}';
