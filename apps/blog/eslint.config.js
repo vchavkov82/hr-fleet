@@ -1,6 +1,6 @@
-import astroConfig from "@hr/eslint-config/astro";
+import nextConfig from '@hr/eslint-config/next'
 
 export default [
-  ...astroConfig,
-  { ignores: ["dist/**", ".astro/**", "public/pagefind/**"] },
-];
+  ...nextConfig,
+  { ignores: ['.next/**', 'node_modules/**'] },
+]
