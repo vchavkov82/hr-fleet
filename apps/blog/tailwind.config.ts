@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import typography from '@tailwindcss/typography'
 import { designTokens } from '@hr/design-system/tailwind'
 
 const config: Config = {
