@@ -1,0 +1,35 @@
+---
+title: Multi-Tenancy
+description: How the HR platform isolates tenant data, manages per-tenant configuration, and supports multiple organizations on a single deployment.
+sidebar:
+  order: 3
+---
+
+## Tenant Isolation Model
+
+The HR platform uses a **shared PostgreSQL database** with **row-level isolation**: each customer is an `organizations` row, and app-owned data that must not leak across customers carries an `organization_id` foreign key (or is resolved through `organization_members`). There is no per-tenant database schema; isolation is enforced in application queries and middleware, not separate schemas.
+
+When a request hits the Go API, JWTs include **`organization_id`** (app UUID) and **`company_id`** (Odoo `res.company` id used for RPC context). Middleware loads membership and attaches tenant values to `context`. Handlers pass that context into services; sqlc queries that are tenant-scoped take `organization_id` (or equivalent) as appropriate.
+
+## Per-Organization Configuration
+
+Each organization can configure the following independently:
+
+- **Enabled modules** — Organizations choose which HR modules (Core HR, Leave, Payroll, Onboarding) are active for their subscription.
+- **Leave policies** — Custom leave types, accrual rules, and approval workflows per organization.
+- **Payroll settings** — Tax configuration, social security contribution rates, and payment schedules aligned with Bulgarian NRA requirements.
+- **API keys** — Each tenant can generate scoped API keys for integrations, with configurable permissions and expiration dates.
+
+## Role-Based Access Within Tenants
+
+**Global `users.role`** can mark platform operators (for example `super_admin`). **Tenant access** is modeled in **`organization_members`**: each row is `(organization_id, user_id, role)` with roles such as `admin`, `hr_manager`, `payroll_manager`, `recruiter`, `employee`, and `viewer`.
+
+A single user can belong to multiple organizations with different roles in each. For routes that act on tenant data, the effective permission set should come from the **membership role for the JWT's active organization**, with global super-admin treated as an explicit exception where product policy allows it.
+
+## Cache and Background Invalidation
+
+Redis keys for Odoo-backed reads are prefixed with a per-Odoo-company shard (for example `employees:list:oc:{id}:…`) so two organizations on the same deployment do not share cache entries.
+
+## Data Residency
+
+All tenant data is stored in PostgreSQL instances deployed within the same infrastructure region. The platform does not currently support cross-region data residency, but the architecture allows for future sharding by tenant if regulatory requirements demand geographic data isolation.
