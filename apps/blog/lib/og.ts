@@ -32,9 +32,9 @@ async function loadGoogleFont(
 }
 
 async function loadGoogleFonts(text: string) {
-  const fontsConfig: Array<{ name: string; font: string; weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900; style: string }> = [
+  const fontsConfig: Array<{ name: string; font: string; weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900; style: 'normal' | 'italic' }> = [
     { name: 'IBM Plex Mono', font: 'IBM+Plex+Mono', weight: 400, style: 'normal' },
-    { name: 'IBM Plex Mono', font: 'IBM+Plex+Mono', weight: 700, style: 'bold' },
+    { name: 'IBM Plex Mono', font: 'IBM+Plex+Mono', weight: 700, style: 'normal' },
   ]
 
   return Promise.all(
