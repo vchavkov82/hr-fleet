@@ -82,7 +82,7 @@ Be friendly, professional, and helpful. Always prioritize employee wellbeing and
           .optional()
           .describe("Optional reason for the request"),
       }),
-      execute: async ({ startDate, endDate, type, _reason }) => {
+      execute: async ({ startDate, endDate, type, reason: _reason }) => {
         return {
           content: [
             {
