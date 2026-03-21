@@ -1,4 +1,5 @@
 import satori from 'satori'
+import type { ReactNode } from 'react'
 import { Resvg } from '@resvg/resvg-js'
 import { SITE } from './config'
 
