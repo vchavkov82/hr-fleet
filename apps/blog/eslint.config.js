@@ -1,18 +1,6 @@
-import eslintPluginAstro from "eslint-plugin-astro";
-import globals from "globals";
-import tseslint from "typescript-eslint";
+import astroConfig from "@hr/eslint-config/astro";
 
 export default [
-  ...tseslint.configs.recommended,
-  ...eslintPluginAstro.configs.recommended,
-  {
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-    },
-  },
-  { rules: { "no-console": "error" } },
-  { ignores: ["dist/**", ".astro", "public/pagefind/**", "src/components/Card.astro"] },
+  ...astroConfig,
+  { ignores: ["dist/**", ".astro/**", "public/pagefind/**"] },
 ];
