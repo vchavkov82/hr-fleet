@@ -58,7 +58,7 @@ export function ContactForm({ className = '' }: ContactFormProps) {
                 articleReference: '',
                 message: ''
             })
-        } catch (_err) {
+        } catch {
             setError('Failed to send message. Please try again.')
         } finally {
             setIsSubmitting(false)
