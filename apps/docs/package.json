@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p 5011",
     "typecheck": "tsc --noEmit",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@docsearch/css": "^3.8.2",
