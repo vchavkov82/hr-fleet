@@ -11,3 +11,303 @@ golangci-lint = "1.64"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "go", "pnpm"]
+
+# ── Container management ─────────────────────────────────────────────────────
+
+[tasks.up]
+description = "Start all services"
+run = "podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml up -d"
+
+[tasks.down]
+description = "Stop all services"
+run = "podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml down"
+
+[tasks.restart]
+description = "Restart all services"
+run = "podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml restart"
+
+[tasks.logs]
+description = "Follow logs for all services"
+run = "podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml logs -f"
+
+[tasks.ps]
+description = "Show running containers"
+run = "podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml ps"
+
+[tasks.clean]
+description = "Remove containers and networks (keeps volumes)"
+run = "podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml down"
+
+[tasks."clean:all"]
+description = "Remove containers, networks, and volumes (WARNING: deletes data)"
+run = "podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml down -v"
+
+[tasks."clean:cache"]
+description = "Clear all build caches (.next, .astro, dist, .turbo)"
+run = "rm -rf apps/web/.next apps/web/.next/cache apps/blog/dist apps/blog/.astro apps/docs/dist apps/docs/.astro .turbo"
+
+[tasks."clean:webpack"]
+description = "Clear webpack dev cache only (faster than full clean)"
+run = "rm -rf apps/web/.next/cache/webpack"
+
+[tasks."clean:www"]
+description = "Clear www build cache and restart container"
+run = """
+rm -rf apps/web/.next
+podman restart hr-www 2>/dev/null || true
+"""
+
+[tasks."clean:blog"]
+description = "Clear blog build cache"
+run = "rm -rf apps/blog/dist apps/blog/.astro"
+
+[tasks."clean:docs"]
+description = "Clear docs build cache"
+run = "rm -rf apps/docs/dist apps/docs/.astro"
+
+[tasks.nuke]
+description = "Full clean: containers, volumes, caches, node_modules"
+run = """
+podman-compose --project-name hr -f deploy/podman-compose.yml -f deploy/podman-compose.override.yml down -v 2>/dev/null || true
+podman pod rm -f --all 2>/dev/null || true
+rm -rf node_modules apps/web/node_modules apps/blog/node_modules apps/docs/node_modules
+rm -rf apps/web/.next apps/blog/dist apps/blog/.astro apps/docs/dist apps/docs/.astro .turbo
+"""
+
+# ── Development ──────────────────────────────────────────────────────────────
+
+[tasks.dev]
+description = "Start everything (infra + check + frontend dev servers in parallel)"
+run = """
+scripts/dev.sh up &
+node_modules/.bin/turbo run typecheck lint --cache-workers=4 &
+sleep 2
+scripts/dev-apps.sh
+echo ""
+echo "HR site:  https://hr.svc.assistance.bg"
+echo "HR blog:  https://blog.hr.svc.assistance.bg"
+echo "HR docs:  https://docs.hr.svc.assistance.bg"
+echo "HR admin: https://admin.hr.svc.assistance.bg"
+echo "HR odoo:  https://odoo.hr.svc.assistance.bg"
+echo "HR API:   https://api.hr.svc.assistance.bg"
+"""
+
+[tasks."dev:apps"]
+description = "Start all frontend dev servers (www, blog, docs)"
+run = "scripts/dev-apps.sh"
+
+[tasks.infra]
+description = "Start infrastructure only (PostgreSQL, Redis, Odoo, etc.)"
+run = "scripts/dev.sh"
+
+[tasks."infra:down"]
+description = "Stop infrastructure"
+run = "scripts/dev.sh stop"
+
+[tasks."infra:logs"]
+description = "Follow infrastructure logs"
+run = "scripts/dev.sh logs"
+
+[tasks."dev:www"]
+description = "Start HR site only in dev mode (port 5010)"
+run = "cd apps/web && PORT=5010 pnpm dev"
+
+[tasks."dev:blog"]
+description = "Start HR blog only in dev mode (port 5013)"
+run = "cd apps/blog && pnpm dev"
+
+[tasks."dev:docs"]
+description = "Start HR docs only in dev mode (port 5011)"
+run = "cd apps/docs && pnpm dev"
+
+[tasks."dev:admin"]
+description = "Start HR admin panel only in dev mode (port 5012)"
+run = "cd apps/admin && pnpm dev"
+
+[tasks."dev:backend"]
+description = "Start Go backend in dev mode (port 5080, API + Asynq worker)"
+run = "cd services/api && PORT=5080 go run ./cmd/server/ --mode=both"
+
+[tasks."odoo:init"]
+description = "Initialize Odoo HR modules (run once after first start)"
+run = "bash deploy/odoo-init.sh"
+
+[tasks."odoo:build"]
+description = "Build custom Odoo image with OCA modules"
+run = "cd deploy && podman build -f Dockerfile.odoo -t hr-odoo:18.0-oca ."
+
+[tasks."oca:update"]
+description = "Update all OCA submodules to latest 18.0"
+run = """
+git submodule update --remote deploy/odoo-addons/server-tools
+git submodule update --remote deploy/odoo-addons/payroll
+git submodule update --remote deploy/odoo-addons/hr
+git submodule update --remote deploy/odoo-addons/hr-holidays
+git submodule update --remote deploy/odoo-addons/hr-attendance
+git submodule update --remote deploy/odoo-addons/hr-expense
+git submodule update --remote deploy/odoo-addons/timesheet
+git submodule update --remote deploy/odoo-addons/reporting-engine
+git submodule update --remote deploy/odoo-addons/account-financial-reporting
+"""
+
+[tasks."oca:init"]
+description = "Build Odoo image + install all OCA modules"
+depends = ["odoo:build", "odoo:init"]
+run = ""
+
+# ── Build ────────────────────────────────────────────────────────────────────
+
+[tasks.build]
+description = "Build www + blog via turbo"
+run = """
+node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4
+node_modules/.bin/turbo run build --filter=@hr/blog --cache-workers=4
+"""
+
+[tasks."build:www"]
+description = "Build HR site only"
+run = "node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4"
+
+[tasks."build:blog"]
+description = "Build HR blog only"
+run = "node_modules/.bin/turbo run build --filter=@hr/blog --cache-workers=4"
+
+[tasks."build:docs"]
+description = "Build HR docs only"
+run = "node_modules/.bin/turbo run build --filter=@hr/docs --cache-workers=4"
+
+[tasks."build:all"]
+description = "Build all packages (www, blog, docs)"
+run = """
+node_modules/.bin/turbo run build --filter=@hr/www --cache-workers=4
+node_modules/.bin/turbo run build --filter=@hr/blog --filter=@hr/docs --cache-workers=4
+"""
+
+# ── Test ─────────────────────────────────────────────────────────────────────
+
+[tasks.test]
+description = "Run unit tests (web, admin, api, worker via turbo)"
+run = "pnpm run test"
+
+[tasks."test:watch"]
+description = "Run unit tests in watch mode"
+run = "cd apps/web && pnpm run test:watch"
+
+[tasks."test:e2e"]
+description = "Run e2e tests (Playwright, needs running dev server)"
+run = "cd apps/web && pnpm run test:e2e"
+
+[tasks."test:backend"]
+description = "Run Go backend tests (short mode)"
+run = "cd services/api && go test ./... -short -count=1"
+
+# ── Quality ───────────────────────────────────────────────────────────────────
+
+[tasks.check]
+description = "Run typecheck + lint in parallel via turbo"
+run = "node_modules/.bin/turbo run typecheck lint --cache-workers=4"
+
+[tasks.lint]
+description = "Lint all workspaces"
+run = "node_modules/.bin/turbo run lint"
+
+[tasks.typecheck]
+description = "Type-check all workspaces"
+run = "node_modules/.bin/turbo run typecheck"
+
+[tasks."check:links"]
+description = "Check for broken links on all sites (requires servers running)"
+run = "scripts/check-broken-links.sh"
+
+[tasks."check:links:www"]
+description = "Check broken links on HR site only"
+run = "scripts/check-broken-links.sh --site www"
+
+[tasks."check:links:blog"]
+description = "Check broken links on blog only"
+run = "scripts/check-broken-links.sh --site blog"
+
+[tasks."check:links:docs"]
+description = "Check broken links on docs only"
+run = "scripts/check-broken-links.sh --site docs"
+
+# ── Go API (services/api/) ────────────────────────────────────────────────────
+
+[tasks."api:build"]
+description = "Build Go API server binary → services/api/bin/server"
+run = "cd services/api && go build -o bin/server ./cmd/server"
+
+[tasks."api:worker"]
+description = "Build Go worker binary → services/api/bin/worker"
+run = "cd services/api && go build -o bin/worker ./cmd/worker"
+
+[tasks."api:dev"]
+description = "Run Go API in dual mode (API + worker, port 5080)"
+run = "cd services/api && go run ./cmd/server --mode=both"
+
+[tasks."api:swagger"]
+description = "Regenerate OpenAPI spec"
+run = "cd services/api && swag init -g cmd/server/main.go -o docs/"
+
+[tasks."api:sqlc"]
+description = "Regenerate sqlc queries"
+run = "cd services/api && sqlc generate"
+
+[tasks."api:keys"]
+description = "Generate RS256 JWT keypair"
+run = """
+cd services/api
+openssl genrsa -out jwt-private.pem 4096
+openssl rsa -in jwt-private.pem -pubout -out jwt-public.pem
+echo "Keys generated: jwt-private.pem, jwt-public.pem"
+"""
+
+[tasks."api:test"]
+description = "Run Go backend tests (short mode)"
+run = "cd services/api && go test ./... -short -count=1"
+
+[tasks."api:test:race"]
+description = "Run Go backend tests with race detector"
+run = "cd services/api && go test -race ./... -short -count=1"
+
+[tasks."api:test:coverage"]
+description = "Run Go backend tests with coverage report"
+run = """
+cd services/api
+go test ./... -short -count=1 -coverprofile=coverage.out -covermode=atomic
+go tool cover -html=coverage.out -o coverage.html
+go tool cover -func=coverage.out | tail -1
+"""
+
+[tasks."api:lint"]
+description = "Lint Go API"
+run = "cd services/api && golangci-lint run ./..."
+
+[tasks."api:podman-build"]
+description = "Build Go API container image"
+run = "cd services/api && podman build -t hr-api:latest ."
+
+# ── Setup ─────────────────────────────────────────────────────────────────────
+
+[tasks.install]
+description = "Install all HR dependencies"
+run = """
+mise trust --quiet 2>/dev/null || true
+mise install
+pnpm install
+"""
+
+[tasks.bootstrap]
+description = "Full setup from scratch"
+depends = ["install"]
+run = """
+echo "Bootstrap complete!"
+echo ""
+echo "Services (via remote Caddy gateway):"
+echo "  HR site      https://hr.svc.assistance.bg"
+echo "  HR blog      https://blog.hr.svc.assistance.bg"
+echo "  HR docs      https://docs.hr.svc.assistance.bg"
+echo "  HR admin     https://admin.hr.svc.assistance.bg"
+echo "  HR API       https://api.hr.svc.assistance.bg"
+echo "  HR Odoo      https://odoo.hr.svc.assistance.bg"
+"""
