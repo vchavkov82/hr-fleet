@@ -2,6 +2,7 @@
   "name": "@hr/www",
   "version": "0.1.0",
   "private": true,
+  "prettier": "@hr/prettier-config",
   "scripts": {
     "dev": "sh -c 'pids=$(ss -ltnp \"sport = :5010\" 2>/dev/null | sed -n \"s/.*pid=\\([0-9]\\+\\).*/\\1/p\" | sort -u); if [ -n \"$pids\" ]; then kill -9 $pids >/dev/null 2>&1; fi; NEXT_DISABLE_FAST_REFRESH=1 next dev -H 0.0.0.0 -p 5010'",
     "dev:webpack": "NEXT_DISABLE_FAST_REFRESH=1 next dev -H 0.0.0.0 -p 5010",
@@ -53,6 +54,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@hr/prettier-config": "workspace:*",
     "@next/bundle-analyzer": "^16.1.6",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/forms": "^0.5.9",
