@@ -67,10 +67,10 @@ function buildQuery(params: ParamsRecord): string {
   return str ? `?${str}` : ''
 }
 
-/** Wraps optional list params into a RequestOptions object. */
-function withParams(params: ParamsRecord | undefined): RequestOptions {
+/** Wraps optional typed list params into a RequestOptions object. */
+function withParams<T extends object>(params: T | undefined): RequestOptions {
   if (params === undefined) return {}
-  return { params }
+  return { params: params as unknown as ParamsRecord }
 }
 
 export class ApiClient {

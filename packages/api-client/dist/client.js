@@ -9,6 +9,12 @@ function buildQuery(params) {
     const str = qs.toString();
     return str ? `?${str}` : '';
 }
+/** Wraps optional list params into a RequestOptions object. */
+function withParams(params) {
+    if (params === undefined)
+        return {};
+    return { params };
+}
 export class ApiClient {
     baseUrl;
     getToken;
@@ -18,7 +24,7 @@ export class ApiClient {
     }
     async request(method, path, options = {}) {
         const token = await this.getToken();
-        const query = options.params ? buildQuery(options.params) : '';
+        const query = options.params !== undefined ? buildQuery(options.params) : '';
         const url = `${this.baseUrl}/api/v1${path}${query}`;
         const headers = {
             'Content-Type': 'application/json',
@@ -26,26 +32,28 @@ export class ApiClient {
         if (token) {
             headers['Authorization'] = `Bearer ${token}`;
         }
-        const res = await fetch(url, {
-            method,
-            headers,
-            body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
-            signal: options.signal,
-        });
+        const init = { method, headers };
+        if (options.body !== undefined)
+            init.body = JSON.stringify(options.body);
+        if (options.signal !== undefined)
+            init.signal = options.signal;
+        const res = await fetch(url, init);
         if (!res.ok) {
-            const body = await res.text().catch(() => 'Unknown error');
-            // Try to extract message from JSON error envelope { "error": { "message": "..." } }
-            let message = body;
+            const rawBody = await res.text().catch(() => 'Unknown error');
+            let message = rawBody;
             try {
-                const parsed = JSON.parse(body);
+                const parsed = JSON.parse(rawBody);
                 if (parsed !== null &&
                     typeof parsed === 'object' &&
-                    'error' in parsed &&
-                    parsed.error !== null &&
-                    typeof parsed.error === 'object' &&
-                    'message' in parsed.error &&
-                    typeof parsed.error.message === 'string') {
-                    message = parsed.error.message;
+                    'error' in parsed) {
+                    const errField = parsed['error'];
+                    if (errField !== null &&
+                        typeof errField === 'object' &&
+                        'message' in errField) {
+                        const msg = errField['message'];
+                        if (typeof msg === 'string')
+                            message = msg;
+                    }
                 }
             }
             catch {
@@ -102,9 +110,7 @@ export class ApiClient {
     // Employees
     // ---------------------------------------------------------------------------
     getEmployees(params) {
-        return this.request('GET', '/employees', {
-            params: params,
-        });
+        return this.request('GET', '/employees', withParams(params));
     }
     getEmployee(id) {
         return this.request('GET', `/employees/${id}`);
@@ -140,9 +146,7 @@ export class ApiClient {
     // Departments
     // ---------------------------------------------------------------------------
     getDepartments(params) {
-        return this.request('GET', '/departments', {
-            params: params,
-        });
+        return this.request('GET', '/departments', withParams(params));
     }
     getDepartment(id) {
         return this.request('GET', `/departments/${id}`);
@@ -167,7 +171,7 @@ export class ApiClient {
     // Leave requests
     // ---------------------------------------------------------------------------
     getLeaveRequests(params) {
-        return this.request('GET', '/leave/requests', { params: params });
+        return this.request('GET', '/leave/requests', withParams(params));
     }
     createLeaveRequest(data) {
         return this.request('POST', '/leave/requests', { body: data });
@@ -182,17 +186,13 @@ export class ApiClient {
     // Contracts
     // ---------------------------------------------------------------------------
     getContracts(params) {
-        return this.request('GET', '/contracts', {
-            params: params,
-        });
+        return this.request('GET', '/contracts', withParams(params));
     }
     // ---------------------------------------------------------------------------
     // Timesheets
     // ---------------------------------------------------------------------------
     getTimesheets(params) {
-        return this.request('GET', '/timesheets', {
-            params: params,
-        });
+        return this.request('GET', '/timesheets', withParams(params));
     }
     approveTimesheet(id) {
         return this.request('POST', `/timesheets/${id}/approve`);
@@ -201,25 +201,19 @@ export class ApiClient {
     // Attendance
     // ---------------------------------------------------------------------------
     getAttendance(params) {
-        return this.request('GET', '/attendance', {
-            params: params,
-        });
+        return this.request('GET', '/attendance', withParams(params));
     }
     // ---------------------------------------------------------------------------
     // Payroll
     // ---------------------------------------------------------------------------
     getPayrollRuns(params) {
-        return this.request('GET', '/payroll/runs', {
-            params: params,
-        });
+        return this.request('GET', '/payroll/runs', withParams(params));
     }
     getPayrollRun(id) {
         return this.request('GET', `/payroll/runs/${id}`);
     }
     getPayslips(params) {
-        return this.request('GET', '/payslips', {
-            params: params,
-        });
+        return this.request('GET', '/payslips', withParams(params));
     }
     getPayrollRunPayslips(runId, params) {
         return this.request('GET', '/payslips', {
@@ -230,9 +224,7 @@ export class ApiClient {
     // Expenses
     // ---------------------------------------------------------------------------
     getExpenses(params) {
-        return this.request('GET', '/expenses', {
-            params: params,
-        });
+        return this.request('GET', '/expenses', withParams(params));
     }
     approveExpense(id) {
         return this.request('POST', `/expenses/${id}/approve`);
@@ -244,28 +236,22 @@ export class ApiClient {
     // Appraisals
     // ---------------------------------------------------------------------------
     getAppraisals(params) {
-        return this.request('GET', '/appraisals', {
-            params: params,
-        });
+        return this.request('GET', '/appraisals', withParams(params));
     }
     // ---------------------------------------------------------------------------
     // Training
     // ---------------------------------------------------------------------------
     getCourses(params) {
-        return this.request('GET', '/training/courses', {
-            params: params,
-        });
+        return this.request('GET', '/training/courses', withParams(params));
     }
     // ---------------------------------------------------------------------------
     // Users
     // ---------------------------------------------------------------------------
     getUsers(params) {
-        return this.request('GET', '/users', {
-            params: params,
-        });
+        return this.request('GET', '/users', withParams(params));
     }
     // ---------------------------------------------------------------------------
-    // Org Settings
+    // Org settings
     // ---------------------------------------------------------------------------
     getOrgSettings() {
         return this.request('GET', '/settings/organization');
@@ -279,9 +265,7 @@ export class ApiClient {
     // Audit log
     // ---------------------------------------------------------------------------
     getAuditLog(params) {
-        return this.request('GET', '/audit-log', {
-            params: params,
-        });
+        return this.request('GET', '/audit-log', withParams(params));
     }
 }
 //# sourceMappingURL=client.js.map
