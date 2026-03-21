@@ -2,5 +2,5 @@ import nextConfig from '@hr/eslint-config/next'
 
 export default [
   ...nextConfig,
-  { ignores: ['.next/**', 'node_modules/**', 'public/**'] },
+  { ignores: ['.next/**', 'node_modules/**', 'public/**', 'dist/**', 'scripts/**', 'next-env.d.ts', '*.py'] },
 ]
