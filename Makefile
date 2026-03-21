@@ -189,7 +189,7 @@ bootstrap: install ## Full setup from scratch
 	@echo "Bootstrap complete!"
 	@echo ""
 	@echo "Services (via remote Caddy gateway):"
-	@echo "  HR site      https://hr.svc.assistance.bg"
+	@echo "  HR site      https://www.hr.svc.assistance.bg"
 	@echo "  HR blog      https://blog.hr.svc.assistance.bg"
 	@echo "  HR docs      https://docs.hr.svc.assistance.bg"
 	@echo "  HR admin     https://admin.hr.svc.assistance.bg"
