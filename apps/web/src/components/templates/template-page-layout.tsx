@@ -11,7 +11,7 @@ interface TemplateData {
   seoContent: string
 }
 
-interface TemplatePageLabels {
+export interface TemplatePageLabels {
   downloadCard: {
     format: string
     pdf: string

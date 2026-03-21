@@ -27,6 +27,7 @@ export function ArticleFeedback({ articleId: _articleId, className = '' }: Artic
             // Hide thank you message after 3 seconds
             setTimeout(() => setShowThankYou(false), 3000)
         } catch (error) {
+            // eslint-disable-next-line no-console -- client feedback failure path
             console.error('Failed to submit feedback:', error)
         } finally {
             setIsSubmitting(false)

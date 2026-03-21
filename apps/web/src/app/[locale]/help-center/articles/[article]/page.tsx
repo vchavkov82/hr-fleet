@@ -41,9 +41,21 @@ export async function generateMetadata({
     }
 }
 
+type HelpArticle = {
+    id: string
+    title: string
+    description: string
+    category: string
+    categoryName: string
+    readTime: string
+    lastUpdated: string
+    content: string
+    tags: string[]
+}
+
 // Mock article data - in a real app, this would come from a CMS or database
-function getArticleData(articleId: string) {
-    const articles: Record<string, any> = {
+function getArticleData(articleId: string): HelpArticle | undefined {
+    const articles: Record<string, HelpArticle> = {
         'getting-started': {
             id: 'getting-started',
             title: 'Getting Started with HR',

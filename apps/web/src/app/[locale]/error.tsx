@@ -10,6 +10,7 @@ export default function Error({
   reset: () => void
 }) {
   useEffect(() => {
+    // eslint-disable-next-line no-console -- surface client errors in devtools
     console.error('Page error:', error)
   }, [error])
 

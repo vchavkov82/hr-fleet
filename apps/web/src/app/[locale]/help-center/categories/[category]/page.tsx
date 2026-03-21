@@ -236,7 +236,7 @@ function getCategoryArticles(category: string, articles: typeof MOCK_ARTICLES) {
     return articles.filter(article => article.category === category)
 }
 
-function getCategoryInfo(category: string, t: any) {
+function getCategoryInfo(category: string, t: (key: string) => string) {
     const canonicalCategory = category === 'user-guide' ? 'getting-started' : category
     const categoryMap: Record<string, { title: string; description: string; icon: string }> = {
         'getting-started': {

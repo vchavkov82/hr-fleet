@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 
 type BlogImageProps = {
@@ -27,13 +28,16 @@ export function BlogImage({ src, alt, className = '', loading = 'lazy', aspectCl
   }
 
   return (
-    <img
-      src={src}
-      alt={alt}
-      loading={loading}
-      decoding="async"
-      className={className}
-      onError={() => setFailed(true)}
-    />
+    <div className={`relative ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+        className="object-cover"
+        loading={loading}
+        onError={() => setFailed(true)}
+      />
+    </div>
   )
 }

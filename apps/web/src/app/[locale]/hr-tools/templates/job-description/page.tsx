@@ -2,7 +2,10 @@ import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
-import { TemplatePageLayout } from '@/components/templates/template-page-layout'
+import {
+  TemplatePageLayout,
+  type TemplatePageLabels,
+} from '@/components/templates/template-page-layout'
 
 const SLUG = 'job-description'
 
@@ -42,9 +45,9 @@ export default async function JobDescriptionPage({
     seoContent: string
   }>
   const template = allTemplates.find((t) => t.slug === SLUG)!
-  const labels = {
-    downloadCard: t.raw('downloadCard') as any,
-    emailGate: t.raw('emailGate') as any,
+  const labels: TemplatePageLabels = {
+    downloadCard: t.raw('downloadCard') as TemplatePageLabels['downloadCard'],
+    emailGate: t.raw('emailGate') as TemplatePageLabels['emailGate'],
     relatedTitle: t('relatedTitle'),
   }
 
