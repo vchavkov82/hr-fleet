@@ -14,7 +14,7 @@ const config: Config = {
       ...designTokens,
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [typography],
 }
 
 export default config
