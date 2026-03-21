@@ -6,6 +6,7 @@ bun.lock
 .env
 .env.local
 .env.*.local
+.env.production
 
 # mise local overrides
 .mise.local.toml
