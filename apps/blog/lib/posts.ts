@@ -66,7 +66,7 @@ export function getPostBySlug(slug: string): Post | undefined {
 
 export function getAllTags(): string[] {
   const posts = getAllPosts()
-  return [...new Set(posts.flatMap(p => p.tags))].sort()
+  return Array.from(new Set(posts.flatMap(p => p.tags))).sort()
 }
 
 export function getPostsByTag(tag: string): Post[] {
